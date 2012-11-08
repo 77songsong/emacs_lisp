@@ -1,0 +1,334 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Narrowing & Widening, car cdr & cons, More Complex, Top\
+@comment  node-name,  next,  previous,  up\
+@chapter Narrowing and Widening\
+@cindex Focusing attention (narrowing)\
+@cindex Narrowing\
+@cindex Widening\
+\
+Narrowing is a feature of Emacs that makes it possible for you to focus\
+on a specific part of a buffer, and work without accidentally changing\
+other parts.  Narrowing is normally disabled since it can confuse\
+novices.\
+\
+@menu\
+* Narrowing advantages::        The advantages of narrowing\
+* save-restriction::            The @code\{save-restriction\} special form.\
+* what-line::                   The number of the line that point is on.\
+* narrow Exercise::\
+@end menu\
+\
+@node Narrowing advantages, save-restriction, Narrowing & Widening, Narrowing & Widening\
+@ifnottex\
+@unnumberedsec The Advantages of Narrowing\
+@end ifnottex\
+\
+With narrowing, the rest of a buffer is made invisible, as if it weren't\
+there.  This is an advantage if, for example, you want to replace a word\
+in one part of a buffer but not in another: you narrow to the part you want\
+and the replacement is carried out only in that section, not in the rest\
+of the buffer.  Searches will only work within a narrowed region, not\
+outside of one, so if you are fixing a part of a document, you can keep\
+yourself from accidentally finding parts you do not need to fix by\
+narrowing just to the region you want.\
+(The key binding for @code\{narrow-to-region\} is @kbd\{C-x n n\}.)\
+\
+However, narrowing does make the rest of the buffer invisible, which\
+can scare people who inadvertently invoke narrowing and think they\
+have deleted a part of their file.  Moreover, the @code\{undo\} command\
+(which is usually bound to @kbd\{C-x u\}) does not turn off narrowing\
+(nor should it), so people can become quite desperate if they do not\
+know that they can return the rest of a buffer to visibility with the\
+@code\{widen\} command.\
+(The key binding for @code\{widen\} is @kbd\{C-x n w\}.)\
+\
+Narrowing is just as useful to the Lisp interpreter as to a human.\
+Often, an Emacs Lisp function is designed to work on just part of a\
+buffer; or conversely, an Emacs Lisp function needs to work on all of a\
+buffer that has been narrowed.  The @code\{what-line\} function, for\
+example, removes the narrowing from a buffer, if it has any narrowing\
+and when it has finished its job, restores the narrowing to what it was.\
+On the other hand, the @code\{count-lines\} function, which is called by\
+@code\{what-line\}, uses narrowing to restrict itself to just that portion\
+of the buffer in which it is interested and then restores the previous\
+situation.\
+\
+@node save-restriction, what-line, Narrowing advantages, Narrowing & Widening\
+@comment  node-name,  next,  previous,  up\
+@section The @code\{save-restriction\} Special Form\
+@findex save-restriction\
+\
+In Emacs Lisp, you can use the @code\{save-restriction\} special form to\
+keep track of whatever narrowing is in effect, if any.  When the Lisp\
+interpreter meets with @code\{save-restriction\}, it executes the code\
+in the body of the @code\{save-restriction\} expression, and then undoes\
+any changes to narrowing that the code caused.  If, for example, the\
+buffer is narrowed and the code that follows @code\{save-restriction\}\
+gets rid of the narrowing, @code\{save-restriction\} returns the buffer\
+to its narrowed region afterwards.  In the @code\{what-line\} command,\
+any narrowing the buffer may have is undone by the @code\{widen\}\
+command that immediately follows the @code\{save-restriction\} command.\
+Any original narrowing is restored just before the completion of the\
+function.\
+\
+@need 1250\
+The template for a @code\{save-restriction\} expression is simple:\
+\
+@smallexample\
+@group\
+(save-restriction\
+  @var\{body\}@dots\{\} )\
+@end group\
+@end smallexample\
+\
+@noindent\
+The body of the @code\{save-restriction\} is one or more expressions that\
+will be evaluated in sequence by the Lisp interpreter.\
+\
+Finally, a point to note: when you use both @code\{save-excursion\} and\
+@code\{save-restriction\}, one right after the other, you should use\
+@code\{save-excursion\} outermost.  If you write them in reverse order,\
+you may fail to record narrowing in the buffer to which Emacs switches\
+after calling @code\{save-excursion\}.  Thus, when written together,\
+@code\{save-excursion\} and @code\{save-restriction\} should be written\
+like this:\
+\
+@smallexample\
+@group\
+(save-excursion\
+  (save-restriction\
+    @var\{body\}@dots\{\}))\
+@end group\
+@end smallexample\
+\
+In other circumstances, when not written together, the\
+@code\{save-excursion\} and @code\{save-restriction\} special forms must\
+be written in the order appropriate to the function.\
+\
+@need 1250\
+For example,\
+\
+@smallexample\
+@group\
+  (save-restriction\
+    (widen)\
+    (save-excursion\
+    @var\{body\}@dots\{\}))\
+@end group\
+@end smallexample\
+\
+@ignore\
+Emacs 22\
+/usr/local/src/emacs/lisp/simple.el\
+\
+(defun what-line ()\
+  "Print the current buffer line number and narrowed line number of point."\
+  (interactive)\
+  (let ((start (point-min))\
+        (n (line-number-at-pos)))\
+    (if (= start 1)\
+        (message "Line %d" n)\
+      (save-excursion\
+        (save-restriction\
+          (widen)\
+          (message "line %d (narrowed line %d)"\
+                   (+ n (line-number-at-pos start) -1) n))))))\
+\
+(defun line-number-at-pos (&optional pos)\
+  "Return (narrowed) buffer line number at position POS.\
+If POS is nil, use current buffer location.\
+Counting starts at (point-min), so the value refers\
+to the contents of the accessible portion of the buffer."\
+  (let ((opoint (or pos (point))) start)\
+    (save-excursion\
+      (goto-char (point-min))\
+      (setq start (point))\
+      (goto-char opoint)\
+      (forward-line 0)\
+      (1+ (count-lines start (point))))))\
+\
+(defun count-lines (start end)\
+  "Return number of lines between START and END.\
+This is usually the number of newlines between them,\
+but can be one more if START is not equal to END\
+and the greater of them is not at the start of a line."\
+  (save-excursion\
+    (save-restriction\
+      (narrow-to-region start end)\
+      (goto-char (point-min))\
+      (if (eq selective-display t)\
+          (save-match-data\
+            (let ((done 0))\
+              (while (re-search-forward "[\\n\\C-m]" nil t 40)\
+                (setq done (+ 40 done)))\
+              (while (re-search-forward "[\\n\\C-m]" nil t 1)\
+                (setq done (+ 1 done)))\
+              (goto-char (point-max))\
+              (if (and (/= start end)\
+                       (not (bolp)))\
+                  (1+ done)\
+                done)))\
+        (- (buffer-size) (forward-line (buffer-size)))))))\
+@end ignore\
+\
+@node what-line, narrow Exercise, save-restriction, Narrowing & Widening\
+@comment  node-name,  next,  previous,  up\
+@section @code\{what-line\}\
+@findex what-line\
+@cindex Widening, example of\
+\
+The @code\{what-line\} command tells you the number of the line in which\
+the cursor is located.  The function illustrates the use of the\
+@code\{save-restriction\} and @code\{save-excursion\} commands.  Here is the\
+original text of the function:\
+\
+@smallexample\
+@group\
+(defun what-line ()\
+  "Print the current line number (in the buffer) of point."\
+  (interactive)\
+  (save-restriction\
+    (widen)\
+    (save-excursion\
+      (beginning-of-line)\
+      (message "Line %d"\
+               (1+ (count-lines 1 (point)))))))\
+@end group\
+@end smallexample\
+\
+(In recent versions of GNU Emacs, the @code\{what-line\} function has\
+been expanded to tell you your line number in a narrowed buffer as\
+well as your line number in a widened buffer.  The recent version is\
+more complex than the version shown here.  If you feel adventurous,\
+you might want to look at it after figuring out how this version\
+works.  You will probably need to use @kbd\{C-h f\}\
+(@code\{describe-function\}).  The newer version uses a conditional to\
+determine whether the buffer has been narrowed.\
+\
+(Also, it uses @code\{line-number-at-pos\}, which among other simple\
+expressions, such as @code\{(goto-char (point-min))\}, moves point to\
+the beginning of the current line with @code\{(forward-line 0)\} rather\
+than @code\{beginning-of-line\}.)\
+\
+The @code\{what-line\} function as shown here has a documentation line\
+and is interactive, as you would expect.  The next two lines use the\
+functions @code\{save-restriction\} and @code\{widen\}.\
+\
+The @code\{save-restriction\} special form notes whatever narrowing is in\
+effect, if any, in the current buffer and restores that narrowing after\
+the code in the body of the @code\{save-restriction\} has been evaluated.\
+\
+The @code\{save-restriction\} special form is followed by @code\{widen\}.\
+This function undoes any narrowing the current buffer may have had\
+when @code\{what-line\} was called.  (The narrowing that was there is\
+the narrowing that @code\{save-restriction\} remembers.)  This widening\
+makes it possible for the line counting commands to count from the\
+beginning of the buffer.  Otherwise, they would have been limited to\
+counting within the accessible region.  Any original narrowing is\
+restored just before the completion of the function by the\
+@code\{save-restriction\} special form.\
+\
+The call to @code\{widen\} is followed by @code\{save-excursion\}, which\
+saves the location of the cursor (i.e., of point) and of the mark, and\
+restores them after the code in the body of the @code\{save-excursion\}\
+uses the @code\{beginning-of-line\} function to move point.\
+\
+(Note that the @code\{(widen)\} expression comes between the\
+@code\{save-restriction\} and @code\{save-excursion\} special forms.  When\
+you write the two @code\{save- @dots\{\}\} expressions in sequence, write\
+@code\{save-excursion\} outermost.)\
+\
+@need 1200\
+The last two lines of the @code\{what-line\} function are functions to\
+count the number of lines in the buffer and then print the number in the\
+echo area.\
+\
+@smallexample\
+@group\
+(message "Line %d"\
+         (1+ (count-lines 1 (point)))))))\
+@end group\
+@end smallexample\
+\
+The @code\{message\} function prints a one-line message at the bottom of\
+the Emacs screen.  The first argument is inside of quotation marks and\
+is printed as a string of characters.  However, it may contain a\
+@samp\{%d\} expression to print a following argument.  @samp\{%d\} prints\
+the argument as a decimal, so the message will say something such as\
+@samp\{Line 243\}.\
+\
+@need 1200\
+The number that is printed in place of the @samp\{%d\} is computed by the\
+last line of the function:\
+\
+@smallexample\
+(1+ (count-lines 1 (point)))\
+@end smallexample\
+\
+@ignore\
+GNU Emacs 22\
+\
+(defun count-lines (start end)\
+  "Return number of lines between START and END.\
+This is usually the number of newlines between them,\
+but can be one more if START is not equal to END\
+and the greater of them is not at the start of a line."\
+  (save-excursion\
+    (save-restriction\
+      (narrow-to-region start end)\
+      (goto-char (point-min))\
+      (if (eq selective-display t)\
+          (save-match-data\
+            (let ((done 0))\
+              (while (re-search-forward "[\\n\\C-m]" nil t 40)\
+                (setq done (+ 40 done)))\
+              (while (re-search-forward "[\\n\\C-m]" nil t 1)\
+                (setq done (+ 1 done)))\
+              (goto-char (point-max))\
+              (if (and (/= start end)\
+                       (not (bolp)))\
+                  (1+ done)\
+                done)))\
+        (- (buffer-size) (forward-line (buffer-size)))))))\
+@end ignore\
+\
+@noindent\
+What this does is count the lines from the first position of the\
+buffer, indicated by the @code\{1\}, up to @code\{(point)\}, and then add\
+one to that number.  (The @code\{1+\} function adds one to its\
+argument.)  We add one to it because line 2 has only one line before\
+it, and @code\{count-lines\} counts only the lines @emph\{before\} the\
+current line.\
+\
+After @code\{count-lines\} has done its job, and the message has been\
+printed in the echo area, the @code\{save-excursion\} restores point and\
+mark to their original positions; and @code\{save-restriction\} restores\
+the original narrowing, if any.\
+\
+@node narrow Exercise,  , what-line, Narrowing & Widening\
+@section Exercise with Narrowing\
+\
+Write a function that will display the first 60 characters of the\
+current buffer, even if you have narrowed the buffer to its latter\
+half so that the first line is inaccessible.  Restore point, mark, and\
+narrowing.  For this exercise, you need to use a whole potpourri of\
+functions, including @code\{save-restriction\}, @code\{widen\},\
+@code\{goto-char\}, @code\{point-min\}, @code\{message\}, and\
+@code\{buffer-substring\}.\
+\
+@cindex Properties, mention of @code\{buffer-substring-no-properties\}\
+(@code\{buffer-substring\} is a previously unmentioned function you will\
+have to investigate yourself; or perhaps you will have to use\
+@code\{buffer-substring-no-properties\} or\
+@code\{filter-buffer-substring\} @dots\{\}, yet other functions.  Text\
+properties are a feature otherwise not discussed here.  @xref\{Text\
+Properties, , Text Properties, elisp, The GNU Emacs Lisp Reference\
+Manual\}.)\
+\
+Additionally, do you really need @code\{goto-char\} or @code\{point-min\}?\
+Or can you write the function without them?}

@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<ScrivenerProject Version="1.0" Creator="SCRMAC-2.3.1-20025">
+    <Binder>
+        <BinderItem ID="0" Type="DraftFolder" Created="2012-11-09 00:23:50 +0900" Modified="2012-11-09 00:23:50 +0900">
+            <Title>Draft</Title>
+            <MetaData>
+                <IncludeInCompile>Yes</IncludeInCompile>
+            </MetaData>
+            <CorkboardAndOutliner>
+                <OutlinerExpandedState>
+                    <ItemID>6</ItemID>
+                </OutlinerExpandedState>
+            </CorkboardAndOutliner>
+            <Children>
+                <BinderItem ID="5" Type="Text" Created="2012-11-09 00:18:17 +0900" Modified="2012-11-09 00:56:25 +0900">
+                    <Title>An Introduction to Programming in Emacs Lisp</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                        <NotesTextSelection>0,0</NotesTextSelection>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>10058,0</TextSelection>
+                    </TextSettings>
+                    <Children>
+                        <BinderItem ID="24" Type="Text" Created="2012-11-09 00:44:38 +0900" Modified="2012-11-09 00:56:25 +0900">
+                            <Title>Preface</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                                <NotesTextSelection>0,0</NotesTextSelection>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>497,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                    </Children>
+                </BinderItem>
+                <BinderItem ID="6" Type="Text" Created="2012-11-09 00:32:02 +0900" Modified="2012-11-09 00:56:25 +0900">
+                    <Title>List Processing</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                        <NotesTextSelection>0,0</NotesTextSelection>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>877,0</TextSelection>
+                    </TextSettings>
+                    <Children>
+                        <BinderItem ID="25" Type="Text" Created="2012-11-09 00:46:03 +0900" Modified="2012-11-09 00:56:25 +0900">
+                            <Title>Lisp Lists</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                                <NotesTextSelection>0,0</NotesTextSelection>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>8658,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem ID="26" Type="Text" Created="2012-11-09 00:47:42 +0900" Modified="2012-11-09 00:56:25 +0900">
+                            <Title>Run a Program</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                                <NotesTextSelection>0,0</NotesTextSelection>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>2800,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem ID="27" Type="Text" Created="2012-11-09 00:47:48 +0900" Modified="2012-11-09 00:56:25 +0900">
+                            <Title>Generate an Error Message</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                                <NotesTextSelection>0,0</NotesTextSelection>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>5395,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem ID="28" Type="Text" Created="2012-11-09 00:47:54 +0900" Modified="2012-11-09 00:56:25 +0900">
+                            <Title>Symbol Names and Function Definition</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                                <NotesTextSelection>0,0</NotesTextSelection>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>1885,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem ID="29" Type="Text" Created="2012-11-09 00:48:00 +0900" Modified="2012-11-09 00:56:25 +0900">
+                            <Title>The Lisp Interpreter</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                                <NotesTextSelection>0,0</NotesTextSelection>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>3878,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem ID="30" Type="Text" Created="2012-11-09 00:48:10 +0900" Modified="2012-11-09 00:56:25 +0900">
+                            <Title>Evaluation</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                                <NotesTextSelection>0,0</NotesTextSelection>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>4688,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem ID="31" Type="Text" Created="2012-11-09 00:48:16 +0900" Modified="2012-11-09 00:56:25 +0900">
+                            <Title>Variables</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                                <NotesTextSelection>0,0</NotesTextSelection>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>7070,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem ID="32" Type="Text" Created="2012-11-09 00:48:30 +0900" Modified="2012-11-09 00:56:25 +0900">
+                            <Title>Arguments</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                                <NotesTextSelection>0,0</NotesTextSelection>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>0,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem ID="33" Type="Text" Created="2012-11-09 00:48:45 +0900" Modified="2012-11-09 00:56:25 +0900">
+                            <Title>Setting the Value of a Variable</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                                <NotesTextSelection>0,0</NotesTextSelection>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>7765,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem ID="34" Type="Text" Created="2012-11-09 00:48:51 +0900" Modified="2012-11-09 00:56:25 +0900">
+                            <Title>Summary</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                                <NotesTextSelection>0,0</NotesTextSelection>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>1818,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem ID="35" Type="Text" Created="2012-11-09 00:48:56 +0900" Modified="2012-11-09 00:56:25 +0900">
+                            <Title>Excercises</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                                <NotesTextSelection>0,0</NotesTextSelection>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>426,0</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                    </Children>
+                </BinderItem>
+                <BinderItem ID="7" Type="Text" Created="2012-11-09 00:32:51 +0900" Modified="2012-11-09 00:56:25 +0900">
+                    <Title>Practicing Evaluation</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                        <NotesTextSelection>0,0</NotesTextSelection>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>18913,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem ID="8" Type="Text" Created="2012-11-09 00:33:37 +0900" Modified="2012-11-09 00:56:25 +0900">
+                    <Title>How To Write  Function Definition</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                        <NotesTextSelection>0,0</NotesTextSelection>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>62723,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem ID="9" Type="Text" Created="2012-11-09 00:34:50 +0900" Modified="2012-11-09 00:56:25 +0900">
+                    <Title>A Few Buffer -- Related Functions</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                        <NotesTextSelection>0,0</NotesTextSelection>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>33623,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem ID="10" Type="Text" Created="2012-11-09 00:35:15 +0900" Modified="2012-11-09 00:56:25 +0900">
+                    <Title>A Few More Complex Functions</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                        <NotesTextSelection>0,0</NotesTextSelection>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>0,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem ID="11" Type="Text" Created="2012-11-09 00:36:00 +0900" Modified="2012-11-09 00:56:25 +0900">
+                    <Title>Narrowing and Widening</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                        <NotesTextSelection>0,0</NotesTextSelection>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>12846,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem ID="12" Type="Text" Created="2012-11-09 00:36:59 +0900" Modified="2012-11-09 00:56:25 +0900">
+                    <Title>car, cdr, cons: Fundamental Functions</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                        <NotesTextSelection>0,0</NotesTextSelection>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>21402,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem ID="13" Type="Text" Created="2012-11-09 00:37:29 +0900" Modified="2012-11-09 00:56:25 +0900">
+                    <Title>Cutting and Storing Text</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                        <NotesTextSelection>0,0</NotesTextSelection>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>74603,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem ID="14" Type="Text" Created="2012-11-09 00:39:42 +0900" Modified="2012-11-09 00:56:25 +0900">
+                    <Title>How Lists are Implemented</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                        <NotesTextSelection>0,0</NotesTextSelection>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>15065,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem ID="15" Type="Text" Created="2012-11-09 00:40:00 +0900" Modified="2012-11-09 00:56:25 +0900">
+                    <Title>Yanking Text Back</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                        <NotesTextSelection>0,0</NotesTextSelection>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>8845,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem ID="16" Type="Text" Created="2012-11-09 00:40:19 +0900" Modified="2012-11-09 01:02:04 +0900">
+                    <Title>Loops and Recursion</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                        <NotesTextSelection>0,0</NotesTextSelection>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>71643,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem ID="17" Type="Text" Created="2012-11-09 00:41:03 +0900" Modified="2012-11-09 00:56:25 +0900">
+                    <Title>Regular Expression Searches</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                        <NotesTextSelection>0,0</NotesTextSelection>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>55456,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem ID="18" Type="Text" Created="2012-11-09 00:41:20 +0900" Modified="2012-11-09 00:56:25 +0900">
+                    <Title>Counting: Repeitition and Regexps</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                        <NotesTextSelection>0,0</NotesTextSelection>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>32670,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem ID="19" Type="Text" Created="2012-11-09 00:41:42 +0900" Modified="2012-11-09 00:56:25 +0900">
+                    <Title>Counting Words in a defun</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                        <NotesTextSelection>0,0</NotesTextSelection>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>0,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem ID="20" Type="Text" Created="2012-11-09 00:42:02 +0900" Modified="2012-11-09 00:56:25 +0900">
+                    <Title>Readying a Graph</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                        <NotesTextSelection>0,0</NotesTextSelection>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>23955,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem ID="21" Type="Text" Created="2012-11-09 00:42:26 +0900" Modified="2012-11-09 00:56:25 +0900">
+                    <Title>Your .emacs File</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                        <NotesTextSelection>0,0</NotesTextSelection>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>0,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem ID="22" Type="Text" Created="2012-11-09 00:42:31 +0900" Modified="2012-11-09 00:56:25 +0900">
+                    <Title>Debugging</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                        <NotesTextSelection>0,0</NotesTextSelection>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>502,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem ID="23" Type="Text" Created="2012-11-09 00:42:46 +0900" Modified="2012-11-09 00:56:25 +0900">
+                    <Title>Conclusion</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                        <NotesTextSelection>0,0</NotesTextSelection>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>580,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+            </Children>
+        </BinderItem>
+        <BinderItem ID="1" Type="ResearchFolder" Created="2012-11-09 00:23:50 +0900" Modified="2012-11-09 00:23:50 +0900">
+            <Title>Research</Title>
+            <MetaData>
+                <IncludeInCompile>Yes</IncludeInCompile>
+            </MetaData>
+        </BinderItem>
+        <BinderItem ID="2" Type="TrashFolder" Created="2012-11-09 00:23:50 +0900" Modified="2012-11-09 00:23:50 +0900">
+            <Title>Trash</Title>
+            <MetaData>
+                <IncludeInCompile>Yes</IncludeInCompile>
+            </MetaData>
+            <Children>
+                <BinderItem ID="3" Type="Text" Created="2012-11-09 00:23:50 +0900" Modified="2012-11-09 00:23:50 +0900">
+                    <Title>Untitled</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                        <NotesTextSelection>0,0</NotesTextSelection>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>0,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+                <BinderItem ID="4" Type="Text" Created="2012-11-09 00:23:57 +0900" Modified="2012-11-09 00:23:57 +0900">
+                    <Title>Untitled</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                        <NotesTextSelection>0,0</NotesTextSelection>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>0,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+            </Children>
+        </BinderItem>
+    </Binder>
+    <Collections>
+        <Collection Type="RecentSearch" ID="3C0ED32A-C83E-43E1-A2FA-5DC36F47A530" Color="0.922 0.91 0.98">
+            <Title>Search Results</Title>
+            <SearchSettings Operator="Exact" Type="All" CaseSensitive="No">chapter</SearchSettings>
+        </Collection>
+        <Collection Type="Binder" ID="34781EE2-4A42-45D5-B5AF-56CA6DE211D0" Color="0.784753 0.815752 0.848702">
+            <Title>Binder</Title>
+        </Collection>
+    </Collections>
+    <LabelSettings>
+        <Title>Label</Title>
+        <DefaultLabelID>-1</DefaultLabelID>
+        <Labels>
+            <Label ID="-1">No Label</Label>
+            <Label ID="0" Color="0.9 0.92 0.95">Concept</Label>
+            <Label ID="1" Color="0.985 0.875 0.85">Chapter</Label>
+        </Labels>
+    </LabelSettings>
+    <StatusSettings>
+        <Title>Status</Title>
+        <DefaultStatusID>-1</DefaultStatusID>
+        <StatusItems>
+            <Status ID="-1">No Status</Status>
+            <Status ID="0">To Do</Status>
+            <Status ID="1">First Draft</Status>
+            <Status ID="2">Revised Draft</Status>
+            <Status ID="3">Final Draft</Status>
+            <Status ID="4">Done</Status>
+        </StatusItems>
+    </StatusSettings>
+    <ProjectTargets Notify="No">
+        <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2012-11-09 00:23:48 +0900" IgnoreDeadline="Yes">0</DraftTarget>
+        <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" ResetType="Midnight" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
+        <PreviousSession Words="0" Characters="1" Date="2012-11-09 00:23:48 +0900"></PreviousSession>
+    </ProjectTargets>
+    <PrintSettings PaperSize="595.0,842.0" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="iso-a4" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
+</ScrivenerProject>

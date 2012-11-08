@@ -1,0 +1,666 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node car cdr & cons, Cutting & Storing Text, Narrowing & Widening, Top\
+@comment  node-name,  next,  previous,  up\
+@chapter @code\{car\}, @code\{cdr\}, @code\{cons\}: Fundamental Functions\
+@findex car, @r\{introduced\}\
+@findex cdr, @r\{introduced\}\
+\
+In Lisp, @code\{car\}, @code\{cdr\}, and @code\{cons\} are fundamental\
+functions.  The @code\{cons\} function is used to construct lists, and\
+the @code\{car\} and @code\{cdr\} functions are used to take them apart.\
+\
+In the walk through of the @code\{copy-region-as-kill\} function, we\
+will see @code\{cons\} as well as two variants on @code\{cdr\},\
+namely, @code\{setcdr\} and @code\{nthcdr\}.  (@xref\{copy-region-as-kill\}.)\
+\
+@menu\
+* Strange Names::               An historical aside: why the strange names?\
+* car & cdr::                   Functions for extracting part of a list.\
+* cons::                        Constructing a list.\
+* nthcdr::                      Calling @code\{cdr\} repeatedly.\
+* nth::\
+* setcar::                      Changing the first element of a list.\
+* setcdr::                      Changing the rest of a list.\
+* cons Exercise::\
+@end menu\
+\
+@node Strange Names, car & cdr, car cdr & cons, car cdr & cons\
+@ifnottex\
+@unnumberedsec Strange Names\
+@end ifnottex\
+\
+The name of the @code\{cons\} function is not unreasonable: it is an\
+abbreviation of the word `construct'.  The origins of the names for\
+@code\{car\} and @code\{cdr\}, on the other hand, are esoteric: @code\{car\}\
+is an acronym from the phrase `Contents of the Address part of the\
+Register'; and @code\{cdr\} (pronounced `could-er') is an acronym from\
+the phrase `Contents of the Decrement part of the Register'.  These\
+phrases refer to specific pieces of hardware on the very early\
+computer on which the original Lisp was developed.  Besides being\
+obsolete, the phrases have been completely irrelevant for more than 25\
+years to anyone thinking about Lisp.  Nonetheless, although a few\
+brave scholars have begun to use more reasonable names for these\
+functions, the old terms are still in use.  In particular, since the\
+terms are used in the Emacs Lisp source code, we will use them in this\
+introduction.\
+\
+@node car & cdr, cons, Strange Names, car cdr & cons\
+@comment  node-name,  next,  previous,  up\
+@section @code\{car\} and @code\{cdr\}\
+\
+The @sc\{car\} of a list is, quite simply, the first item in the list.\
+Thus the @sc\{car\} of the list @code\{(rose violet daisy buttercup)\} is\
+@code\{rose\}.\
+\
+@need 1200\
+If you are reading this in Info in GNU Emacs, you can see this by\
+evaluating the following:\
+\
+@smallexample\
+(car '(rose violet daisy buttercup))\
+@end smallexample\
+\
+@noindent\
+After evaluating the expression, @code\{rose\} will appear in the echo\
+area.\
+\
+Clearly, a more reasonable name for the @code\{car\} function would be\
+@code\{first\} and this is often suggested.\
+\
+@code\{car\} does not remove the first item from the list; it only reports\
+what it is.  After @code\{car\} has been applied to a list, the list is\
+still the same as it was.  In the jargon, @code\{car\} is\
+`non-destructive'.  This feature turns out to be important.\
+\
+The @sc\{cdr\} of a list is the rest of the list, that is, the\
+@code\{cdr\} function returns the part of the list that follows the\
+first item.  Thus, while the @sc\{car\} of the list @code\{'(rose violet\
+daisy buttercup)\} is @code\{rose\}, the rest of the list, the value\
+returned by the @code\{cdr\} function, is @code\{(violet daisy\
+buttercup)\}.\
+\
+@need 800\
+You can see this by evaluating the following in the usual way:\
+\
+@smallexample\
+(cdr '(rose violet daisy buttercup))\
+@end smallexample\
+\
+@noindent\
+When you evaluate this, @code\{(violet daisy buttercup)\} will appear in\
+the echo area.\
+\
+Like @code\{car\}, @code\{cdr\} does not remove any elements from the\
+list---it just returns a report of what the second and subsequent\
+elements are.\
+\
+Incidentally, in the example, the list of flowers is quoted.  If it were\
+not, the Lisp interpreter would try to evaluate the list by calling\
+@code\{rose\} as a function.  In this example, we do not want to do that.\
+\
+Clearly, a more reasonable name for @code\{cdr\} would be @code\{rest\}.\
+\
+(There is a lesson here: when you name new functions, consider very\
+carefully what you are doing, since you may be stuck with the names\
+for far longer than you expect.  The reason this document perpetuates\
+these names is that the Emacs Lisp source code uses them, and if I did\
+not use them, you would have a hard time reading the code; but do,\
+please, try to avoid using these terms yourself.  The people who come\
+after you will be grateful to you.)\
+\
+When @code\{car\} and @code\{cdr\} are applied to a list made up of symbols,\
+such as the list @code\{(pine fir oak maple)\}, the element of the list\
+returned by the function @code\{car\} is the symbol @code\{pine\} without\
+any parentheses around it.  @code\{pine\} is the first element in the\
+list.  However, the @sc\{cdr\} of the list is a list itself, @code\{(fir\
+oak maple)\}, as you can see by evaluating the following expressions in\
+the usual way:\
+\
+@smallexample\
+@group\
+(car '(pine fir oak maple))\
+\
+(cdr '(pine fir oak maple))\
+@end group\
+@end smallexample\
+\
+On the other hand, in a list of lists, the first element is itself a\
+list.  @code\{car\} returns this first element as a list.  For example,\
+the following list contains three sub-lists, a list of carnivores, a\
+list of herbivores and a list of sea mammals:\
+\
+@smallexample\
+@group\
+(car '((lion tiger cheetah)\
+       (gazelle antelope zebra)\
+       (whale dolphin seal)))\
+@end group\
+@end smallexample\
+\
+@noindent\
+In this example, the first element or @sc\{car\} of the list is the list of\
+carnivores, @code\{(lion tiger cheetah)\}, and the rest of the list is\
+@code\{((gazelle antelope zebra) (whale dolphin seal))\}.\
+\
+@smallexample\
+@group\
+(cdr '((lion tiger cheetah)\
+       (gazelle antelope zebra)\
+       (whale dolphin seal)))\
+@end group\
+@end smallexample\
+\
+It is worth saying again that @code\{car\} and @code\{cdr\} are\
+non-destructive---that is, they do not modify or change lists to which\
+they are applied.  This is very important for how they are used.\
+\
+Also, in the first chapter, in the discussion about atoms, I said that\
+in Lisp, ``certain kinds of atom, such as an array, can be separated\
+into parts; but the mechanism for doing this is different from the\
+mechanism for splitting a list.  As far as Lisp is concerned, the\
+atoms of a list are unsplittable.''  (@xref\{Lisp Atoms\}.)  The\
+@code\{car\} and @code\{cdr\} functions are used for splitting lists and\
+are considered fundamental to Lisp.  Since they cannot split or gain\
+access to the parts of an array, an array is considered an atom.\
+Conversely, the other fundamental function, @code\{cons\}, can put\
+together or construct a list, but not an array.  (Arrays are handled\
+by array-specific functions.  @xref\{Arrays, , Arrays, elisp, The GNU\
+Emacs Lisp Reference Manual\}.)\
+\
+@node cons, nthcdr, car & cdr, car cdr & cons\
+@comment  node-name,  next,  previous,  up\
+@section @code\{cons\}\
+@findex cons, @r\{introduced\}\
+\
+The @code\{cons\} function constructs lists; it is the inverse of\
+@code\{car\} and @code\{cdr\}.  For example, @code\{cons\} can be used to make\
+a four element list from the three element list, @code\{(fir oak maple)\}:\
+\
+@smallexample\
+(cons 'pine '(fir oak maple))\
+@end smallexample\
+\
+@need 800\
+@noindent\
+After evaluating this list, you will see\
+\
+@smallexample\
+(pine fir oak maple)\
+@end smallexample\
+\
+@noindent\
+appear in the echo area.  @code\{cons\} causes the creation of a new\
+list in which the element is followed by the elements of the original\
+list.\
+\
+We often say that `@code\{cons\} puts a new element at the beginning of\
+a list; it attaches or pushes elements onto the list', but this\
+phrasing can be misleading, since @code\{cons\} does not change an\
+existing list, but creates a new one.\
+\
+Like @code\{car\} and @code\{cdr\}, @code\{cons\} is non-destructive.\
+\
+@menu\
+* Build a list::\
+* length::                      How to find the length of a list.\
+@end menu\
+\
+@node Build a list, length, cons, cons\
+@ifnottex\
+@unnumberedsubsec Build a list\
+@end ifnottex\
+\
+@code\{cons\} must have a list to attach to.@footnote\{Actually, you can\
+@code\{cons\} an element to an atom to produce a dotted pair.  Dotted\
+pairs are not discussed here; see @ref\{Dotted Pair Notation, , Dotted\
+Pair Notation, elisp, The GNU Emacs Lisp Reference Manual\}.\}  You\
+cannot start from absolutely nothing.  If you are building a list, you\
+need to provide at least an empty list at the beginning.  Here is a\
+series of @code\{cons\} expressions that build up a list of flowers.  If\
+you are reading this in Info in GNU Emacs, you can evaluate each of\
+the expressions in the usual way; the value is printed in this text\
+after @samp\{@result\{\}\}, which you may read as `evaluates to'.\
+\
+@smallexample\
+@group\
+(cons 'buttercup ())\
+     @result\{\} (buttercup)\
+@end group\
+\
+@group\
+(cons 'daisy '(buttercup))\
+     @result\{\} (daisy buttercup)\
+@end group\
+\
+@group\
+(cons 'violet '(daisy buttercup))\
+     @result\{\} (violet daisy buttercup)\
+@end group\
+\
+@group\
+(cons 'rose '(violet daisy buttercup))\
+     @result\{\} (rose violet daisy buttercup)\
+@end group\
+@end smallexample\
+\
+@noindent\
+In the first example, the empty list is shown as @code\{()\} and a list\
+made up of @code\{buttercup\} followed by the empty list is constructed.\
+As you can see, the empty list is not shown in the list that was\
+constructed.  All that you see is @code\{(buttercup)\}.  The empty list is\
+not counted as an element of a list because there is nothing in an empty\
+list.  Generally speaking, an empty list is invisible.\
+\
+The second example, @code\{(cons 'daisy '(buttercup))\} constructs a new,\
+two element list by putting @code\{daisy\} in front of @code\{buttercup\};\
+and the third example constructs a three element list by putting\
+@code\{violet\} in front of @code\{daisy\} and @code\{buttercup\}.\
+\
+@node length,  , Build a list, cons\
+@comment  node-name,  next,  previous,  up\
+@subsection Find the Length of a List: @code\{length\}\
+@findex length\
+\
+You can find out how many elements there are in a list by using the Lisp\
+function @code\{length\}, as in the following examples:\
+\
+@smallexample\
+@group\
+(length '(buttercup))\
+     @result\{\} 1\
+@end group\
+\
+@group\
+(length '(daisy buttercup))\
+     @result\{\} 2\
+@end group\
+\
+@group\
+(length (cons 'violet '(daisy buttercup)))\
+     @result\{\} 3\
+@end group\
+@end smallexample\
+\
+@noindent\
+In the third example, the @code\{cons\} function is used to construct a\
+three element list which is then passed to the @code\{length\} function as\
+its argument.\
+\
+@need 1200\
+We can also use @code\{length\} to count the number of elements in an\
+empty list:\
+\
+@smallexample\
+@group\
+(length ())\
+     @result\{\} 0\
+@end group\
+@end smallexample\
+\
+@noindent\
+As you would expect, the number of elements in an empty list is zero.\
+\
+An interesting experiment is to find out what happens if you try to find\
+the length of no list at all; that is, if you try to call @code\{length\}\
+without giving it an argument, not even an empty list:\
+\
+@smallexample\
+(length )\
+@end smallexample\
+\
+@need 800\
+@noindent\
+What you see, if you evaluate this, is the error message\
+\
+@smallexample\
+Lisp error: (wrong-number-of-arguments length 0)\
+@end smallexample\
+\
+@noindent\
+This means that the function receives the wrong number of\
+arguments, zero, when it expects some other number of arguments.  In\
+this case, one argument is expected, the argument being a list whose\
+length the function is measuring.  (Note that @emph\{one\} list is\
+@emph\{one\} argument, even if the list has many elements inside it.)\
+\
+The part of the error message that says @samp\{length\} is the name of\
+the function.\
+\
+@ignore\
+@code\{length\} is still a subroutine, but you need C-h f to discover that.\
+\
+In an earlier version:\
+    This is written with a special notation, @samp\{#<subr\},\
+    that indicates that the function @code\{length\} is one of the primitive\
+    functions written in C rather than in Emacs Lisp.  (@samp\{subr\} is an\
+    abbreviation for `subroutine'.)  @xref\{What Is a Function, , What Is a\
+    Function?, elisp , The GNU Emacs Lisp Reference Manual\}, for more\
+    about subroutines.\
+@end ignore\
+\
+@node nthcdr, nth, cons, car cdr & cons\
+@comment  node-name,  next,  previous,  up\
+@section @code\{nthcdr\}\
+@findex nthcdr\
+\
+The @code\{nthcdr\} function is associated with the @code\{cdr\} function.\
+What it does is take the @sc\{cdr\} of a list repeatedly.\
+\
+If you take the @sc\{cdr\} of the list @code\{(pine fir\
+oak maple)\}, you will be returned the list @code\{(fir oak maple)\}.  If you\
+repeat this on what was returned, you will be returned the list\
+@code\{(oak maple)\}.  (Of course, repeated @sc\{cdr\}ing on the original\
+list will just give you the original @sc\{cdr\} since the function does\
+not change the list.  You need to evaluate the @sc\{cdr\} of the\
+@sc\{cdr\} and so on.)  If you continue this, eventually you will be\
+returned an empty list, which in this case, instead of being shown as\
+@code\{()\} is shown as @code\{nil\}.\
+\
+@need 1200\
+For review, here is a series of repeated @sc\{cdr\}s, the text following\
+the @samp\{@result\{\}\} shows what is returned.\
+\
+@smallexample\
+@group\
+(cdr '(pine fir oak maple))\
+     @result\{\}(fir oak maple)\
+@end group\
+\
+@group\
+(cdr '(fir oak maple))\
+     @result\{\} (oak maple)\
+@end group\
+\
+@group\
+(cdr '(oak maple))\
+     @result\{\}(maple)\
+@end group\
+\
+@group\
+(cdr '(maple))\
+     @result\{\} nil\
+@end group\
+\
+@group\
+(cdr 'nil)\
+     @result\{\} nil\
+@end group\
+\
+@group\
+(cdr ())\
+     @result\{\} nil\
+@end group\
+@end smallexample\
+\
+@need 1200\
+You can also do several @sc\{cdr\}s without printing the values in\
+between, like this:\
+\
+@smallexample\
+@group\
+(cdr (cdr '(pine fir oak maple)))\
+     @result\{\} (oak maple)\
+@end group\
+@end smallexample\
+\
+@noindent\
+In this example, the Lisp interpreter evaluates the innermost list first.\
+The innermost list is quoted, so it just passes the list as it is to the\
+innermost @code\{cdr\}.  This @code\{cdr\} passes a list made up of the\
+second and subsequent elements of the list to the outermost @code\{cdr\},\
+which produces a list composed of the third and subsequent elements of\
+the original list.  In this example, the @code\{cdr\} function is repeated\
+and returns a list that consists of the original list without its\
+first two elements.\
+\
+The @code\{nthcdr\} function does the same as repeating the call to\
+@code\{cdr\}.  In the following example, the argument 2 is passed to the\
+function @code\{nthcdr\}, along with the list, and the value returned is\
+the list without its first two items, which is exactly the same\
+as repeating @code\{cdr\} twice on the list:\
+\
+@smallexample\
+@group\
+(nthcdr 2 '(pine fir oak maple))\
+     @result\{\} (oak maple)\
+@end group\
+@end smallexample\
+\
+@need 1200\
+Using the original four element list, we can see what happens when\
+various numeric arguments are passed to @code\{nthcdr\}, including 0, 1,\
+and 5:\
+\
+@smallexample\
+@group\
+;; @r\{Leave the list as it was.\}\
+(nthcdr 0 '(pine fir oak maple))\
+     @result\{\} (pine fir oak maple)\
+@end group\
+\
+@group\
+;; @r\{Return a copy without the first element.\}\
+(nthcdr 1 '(pine fir oak maple))\
+     @result\{\} (fir oak maple)\
+@end group\
+\
+@group\
+;; @r\{Return a copy of the list without three elements.\}\
+(nthcdr 3 '(pine fir oak maple))\
+     @result\{\} (maple)\
+@end group\
+\
+@group\
+;; @r\{Return a copy lacking all four elements.\}\
+(nthcdr 4 '(pine fir oak maple))\
+     @result\{\} nil\
+@end group\
+\
+@group\
+;; @r\{Return a copy lacking all elements.\}\
+(nthcdr 5 '(pine fir oak maple))\
+     @result\{\} nil\
+@end group\
+@end smallexample\
+\
+@node nth, setcar, nthcdr, car cdr & cons\
+@comment  node-name,  next,  previous,  up\
+@section @code\{nth\}\
+@findex nth\
+\
+The @code\{nthcdr\} function takes the @sc\{cdr\} of a list repeatedly.\
+The @code\{nth\} function takes the @sc\{car\} of the result returned by\
+@code\{nthcdr\}.  It returns the Nth element of the list.\
+\
+@need 1500\
+Thus, if it were not defined in C for speed, the definition of\
+@code\{nth\} would be:\
+\
+@smallexample\
+@group\
+(defun nth (n list)\
+  "Returns the Nth element of LIST.\
+N counts from zero.  If LIST is not that long, nil is returned."\
+  (car (nthcdr n list)))\
+@end group\
+@end smallexample\
+\
+@noindent\
+(Originally, @code\{nth\} was defined in Emacs Lisp in @file\{subr.el\},\
+but its definition was redone in C in the 1980s.)\
+\
+The @code\{nth\} function returns a single element of a list.\
+This can be very convenient.\
+\
+Note that the elements are numbered from zero, not one.  That is to\
+say, the first element of a list, its @sc\{car\} is the zeroth element.\
+This is called `zero-based' counting and often bothers people who\
+are accustomed to the first element in a list being number one, which\
+is `one-based'.\
+\
+@need 1250\
+For example:\
+\
+@smallexample\
+@group\
+(nth 0 '("one" "two" "three"))\
+    @result\{\} "one"\
+\
+(nth 1 '("one" "two" "three"))\
+    @result\{\} "two"\
+@end group\
+@end smallexample\
+\
+It is worth mentioning that @code\{nth\}, like @code\{nthcdr\} and\
+@code\{cdr\}, does not change the original list---the function is\
+non-destructive.  This is in sharp contrast to the @code\{setcar\} and\
+@code\{setcdr\} functions.\
+\
+@node setcar, setcdr, nth, car cdr & cons\
+@comment  node-name,  next,  previous,  up\
+@section @code\{setcar\}\
+@findex setcar\
+\
+As you might guess from their names, the @code\{setcar\} and @code\{setcdr\}\
+functions set the @sc\{car\} or the @sc\{cdr\} of a list to a new value.\
+They actually change the original list, unlike @code\{car\} and @code\{cdr\}\
+which leave the original list as it was.  One way to find out how this\
+works is to experiment.  We will start with the @code\{setcar\} function.\
+\
+@need 1200\
+First, we can make a list and then set the value of a variable to the\
+list, using the @code\{setq\} function.  Here is a list of animals:\
+\
+@smallexample\
+(setq animals '(antelope giraffe lion tiger))\
+@end smallexample\
+\
+@noindent\
+If you are reading this in Info inside of GNU Emacs, you can evaluate\
+this expression in the usual fashion, by positioning the cursor after\
+the expression and typing @kbd\{C-x C-e\}.  (I'm doing this right here\
+as I write this.  This is one of the advantages of having the\
+interpreter built into the computing environment.  Incidentally, when\
+there is nothing on the line after the final parentheses, such as a\
+comment, point can be on the next line.  Thus, if your cursor is in\
+the first column of the next line, you do not need to move it.\
+Indeed, Emacs permits any amount of white space after the final\
+parenthesis.)\
+\
+@need 1200\
+When we evaluate the variable @code\{animals\}, we see that it is bound to\
+the list @code\{(antelope giraffe lion tiger)\}:\
+\
+@smallexample\
+@group\
+animals\
+     @result\{\} (antelope giraffe lion tiger)\
+@end group\
+@end smallexample\
+\
+@noindent\
+Put another way, the variable @code\{animals\} points to the list\
+@code\{(antelope giraffe lion tiger)\}.\
+\
+Next, evaluate the function @code\{setcar\} while passing it two\
+arguments, the variable @code\{animals\} and the quoted symbol\
+@code\{hippopotamus\}; this is done by writing the three element list\
+@code\{(setcar animals 'hippopotamus)\} and then evaluating it in the\
+usual fashion:\
+\
+@smallexample\
+(setcar animals 'hippopotamus)\
+@end smallexample\
+\
+@need 1200\
+@noindent\
+After evaluating this expression, evaluate the variable @code\{animals\}\
+again.  You will see that the list of animals has changed:\
+\
+@smallexample\
+@group\
+animals\
+     @result\{\} (hippopotamus giraffe lion tiger)\
+@end group\
+@end smallexample\
+\
+@noindent\
+The first element on the list, @code\{antelope\} is replaced by\
+@code\{hippopotamus\}.\
+\
+So we can see that @code\{setcar\} did not add a new element to the list\
+as @code\{cons\} would have; it replaced @code\{antelope\} with\
+@code\{hippopotamus\}; it @emph\{changed\} the list.\
+\
+@node setcdr, cons Exercise, setcar, car cdr & cons\
+@comment  node-name,  next,  previous,  up\
+@section @code\{setcdr\}\
+@findex setcdr\
+\
+The @code\{setcdr\} function is similar to the @code\{setcar\} function,\
+except that the function replaces the second and subsequent elements of\
+a list rather than the first element.\
+\
+(To see how to change the last element of a list, look ahead to\
+@ref\{kill-new function, , The @code\{kill-new\} function\}, which uses\
+the @code\{nthcdr\} and @code\{setcdr\} functions.)\
+\
+@need 1200\
+To see how this works, set the value of the variable to a list of\
+domesticated animals by evaluating the following expression:\
+\
+@smallexample\
+(setq domesticated-animals '(horse cow sheep goat))\
+@end smallexample\
+\
+@need 1200\
+@noindent\
+If you now evaluate the list, you will be returned the list\
+@code\{(horse cow sheep goat)\}:\
+\
+@smallexample\
+@group\
+domesticated-animals\
+     @result\{\} (horse cow sheep goat)\
+@end group\
+@end smallexample\
+\
+@need 1200\
+Next, evaluate @code\{setcdr\} with two arguments, the name of the\
+variable which has a list as its value, and the list to which the\
+@sc\{cdr\} of the first list will be set;\
+\
+@smallexample\
+(setcdr domesticated-animals '(cat dog))\
+@end smallexample\
+\
+@noindent\
+If you evaluate this expression, the list @code\{(cat dog)\} will appear\
+in the echo area.  This is the value returned by the function.  The\
+result we are interested in is the ``side effect'', which we can see by\
+evaluating the variable @code\{domesticated-animals\}:\
+\
+@smallexample\
+@group\
+domesticated-animals\
+     @result\{\} (horse cat dog)\
+@end group\
+@end smallexample\
+\
+@noindent\
+Indeed, the list is changed from @code\{(horse cow sheep goat)\} to\
+@code\{(horse cat dog)\}.  The @sc\{cdr\} of the list is changed from\
+@code\{(cow sheep goat)\} to @code\{(cat dog)\}.\
+\
+@node cons Exercise,  , setcdr, car cdr & cons\
+@section Exercise\
+\
+Construct a list of four birds by evaluating several expressions with\
+@code\{cons\}.  Find out what happens when you @code\{cons\} a list onto\
+itself.  Replace the first element of the list of four birds with a\
+fish.  Replace the rest of that list with a list of other fish.}

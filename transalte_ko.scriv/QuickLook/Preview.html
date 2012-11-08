@@ -1,0 +1,542 @@
+<html>
+
+<head>
+<title>transalte_ko</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+	body {background-color: #bac0c7}
+    p.binderItem {margin: 10.0px 0.0px 0.0px 05.0px; font-family:Apple SD Gothic Neo, Cochin, Times, Courier, Arial, serif; font-size:14.0px;}
+    .page {border: 1px solid #727272; background: #fff}
+    hr {
+      border-top: 1px dashed #000;
+      border-bottom: 0px solid #fff;
+      color: #fff;
+      background-color: #fff;
+      height: 0px;
+  </style>
+</head>
+
+<body>
+
+<table border="0" width="100%" cellspacing="3">
+<tr>
+<td>
+
+<table class="page" width="100%" cellspacing="10" cellpadding="2">
+<tr>
+<td valign="top">
+
+<ul>
+<li>
+<p class="binderItem"><strong>An Introduction to Programming in Emacs Lisp</strong><br/>\input texinfo                                      @c -*-texinfo-*-<br/>
+@comment %**start of header<br/>
+@setfilename ../../info/eintr<br/>
+@c setfilename emacs-lisp-intro.info<br/>
+@c sethtmlfilename emacs-lisp-intro.html<br/>
+@settitle Programming in Emacs Lisp<br/>
+@syncodeindex vr cp<br/>
+@syncodeindex fn cp<br/>
+@finalout<br/>
+<br/>
+@c ---------<br/>
+@c <<<< For hard copy printing, this file is now<br/>
+@c      set for smallbook, which works for all sizes<br/>
+@c      of paper, and with Postscript figures >>>><br/>
+@set smallbook<br/>
+@ifset smallbook<br/>
+@smallbook...</p>
+</li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>Preface</strong><br/><br/>
+@node Preface, List Processing, Top, Top<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@unnumbered Preface<br/>
+<br/>
+Most of the GNU Emacs integrated environment is written in the programming<br/>
+language called Emacs Lisp.  The code written in this programming<br/>
+language is the software---the sets of instructions---that tell the<br/>
+computer what to do when you give it commands.  Emacs is designed so<br/>
+that you can write new code in Emacs Lisp and easily install it as an<br/>
+extension to the editor.<br/>
+<br/>
+(GNU Emacs is someti...</p>
+</li>
+</ul>
+<hr/>
+<li>
+<p class="binderItem"><strong>List Processing</strong><br/><br/>
+@node List Processing, Practicing Evaluation, Preface, Top<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@chapter List Processing<br/>
+<br/>
+To the untutored eye, Lisp is a strange programming language.  In Lisp<br/>
+code there are parentheses everywhere.  Some people even claim that<br/>
+the name stands for `Lots of Isolated Silly Parentheses'.  But the<br/>
+claim is unwarranted.  Lisp stands for LISt Processing, and the<br/>
+programming language handles @emph{lists} (and lists of lists) by<br/>
+putting them between parentheses.  ...</p>
+</li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>Lisp Lists</strong><br/><br/>
+@node Lisp Lists, Run a Program, List Processing, List Processing<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Lisp Lists<br/>
+@cindex Lisp Lists<br/>
+<br/>
+In Lisp, a list looks like this: @code{'(rose violet daisy buttercup)}.<br/>
+This list is preceded by a single apostrophe.  It could just as well be<br/>
+written as follows, which looks more like the kind of list you are likely<br/>
+to be familiar with:<br/>
+<br/>
+@smallexample<br/>
+@group<br/>
+'(rose<br/>
+  violet<br/>
+  daisy<br/>
+  buttercup)<br/>
+@end group<br/>
+@end smallexample<br/>
+<br/>
+@noindent<br/>
+The elements...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Run a Program</strong><br/><br/>
+@node Run a Program, Making Errors, Lisp Lists, List Processing<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Run a Program<br/>
+@cindex Run a program<br/>
+@cindex Program, running one<br/>
+<br/>
+@cindex @samp{evaluate} defined<br/>
+A list in Lisp---any list---is a program ready to run.  If you run it<br/>
+(for which the Lisp jargon is @dfn{evaluate}), the computer will do one<br/>
+of three things: do nothing except return to you the list itself; send<br/>
+you an error message; or, treat the first symbol in the list as a<br/>
+comman...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Generate an Error Message</strong><br/><br/>
+@node Making Errors, Names & Definitions, Run a Program, List Processing<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Generate an Error Message<br/>
+@cindex Generate an error message<br/>
+@cindex Error message generation<br/>
+<br/>
+Partly so you won't worry if you do it accidentally, we will now give<br/>
+a command to the Lisp interpreter that generates an error message.<br/>
+This is a harmless activity; and indeed, we will often try to generate<br/>
+error messages intentionally.  Once you understand the jargon, error<br/>
+mes...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Symbol Names and Function Definition</strong><br/><br/>
+@node Names & Definitions, Lisp Interpreter, Making Errors, List Processing<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Symbol Names and Function Definitions<br/>
+@cindex Symbol names<br/>
+<br/>
+We can articulate another characteristic of Lisp based on what we have<br/>
+discussed so far---an important characteristic: a symbol, like<br/>
+@code{+}, is not itself the set of instructions for the computer to<br/>
+carry out.  Instead, the symbol is used, perhaps temporarily, as a way<br/>
+of locating the definition or set of i...</p>
+</li>
+<li>
+<p class="binderItem"><strong>The Lisp Interpreter</strong><br/><br/>
+@node Lisp Interpreter, Evaluation, Names & Definitions, List Processing<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section The Lisp Interpreter<br/>
+@cindex Lisp interpreter, what it does<br/>
+@cindex Interpreter, what it does<br/>
+<br/>
+Based on what we have seen, we can now start to figure out what the<br/>
+Lisp interpreter does when we command it to evaluate a list.<br/>
+First, it looks to see whether there is a quote before the list; if<br/>
+there is, the interpreter just gives us the list.  On the other<br/>
+hand, if there is ...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Evaluation</strong><br/><br/>
+@node Evaluation, Variables, Lisp Interpreter, List Processing<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Evaluation<br/>
+@cindex Evaluation<br/>
+<br/>
+When the Lisp interpreter works on an expression, the term for the<br/>
+activity is called @dfn{evaluation}.  We say that the interpreter<br/>
+`evaluates the expression'.  I've used this term several times before.<br/>
+The word comes from its use in everyday language, `to ascertain the<br/>
+value or amount of; to appraise', according to @cite{Webster's New<br/>
+Collegiate Dic...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Variables</strong><br/><br/>
+@node Variables, Arguments, Evaluation, List Processing<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Variables<br/>
+@cindex Variables<br/>
+<br/>
+In Emacs Lisp, a symbol can have a value attached to it just as it can<br/>
+have a function definition attached to it.  The two are different.<br/>
+The function definition is a set of instructions that a computer will<br/>
+obey.  A value, on the other hand, is something, such as number or a<br/>
+name, that can vary (which is why such a symbol is called a variable).<br/>
+The value of a...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Arguments</strong><br/><br/>
+@node Arguments, set & setq, Variables, List Processing<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Arguments<br/>
+@cindex Arguments<br/>
+@cindex Passing information to functions<br/>
+<br/>
+To see how information is passed to functions, let's look again at<br/>
+our old standby, the addition of two plus two.  In Lisp, this is written<br/>
+as follows:<br/>
+<br/>
+@smallexample<br/>
+(+ 2 2)<br/>
+@end smallexample<br/>
+<br/>
+If you evaluate this expression, the number 4 will appear in your echo<br/>
+area.  What the Lisp interpreter does is add the numbers...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Setting the Value of a Variable</strong><br/><br/>
+@node set & setq, Summary, Arguments, List Processing<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Setting the Value of a Variable<br/>
+@cindex Variable, setting value<br/>
+@cindex Setting value of variable<br/>
+<br/>
+@cindex @samp{bind} defined<br/>
+There are several ways by which a variable can be given a value.  One of<br/>
+the ways is to use either the function @code{set} or the function<br/>
+@code{setq}.  Another way is to use @code{let} (@pxref{let}).  (The<br/>
+jargon for this process is to @dfn{bind} a variable to a va...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Summary</strong><br/><br/>
+@node Summary, Error Message Exercises, set & setq, List Processing<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Summary<br/>
+<br/>
+Learning Lisp is like climbing a hill in which the first part is the<br/>
+steepest.  You have now climbed the most difficult part; what remains<br/>
+becomes easier as you progress onwards.<br/>
+<br/>
+@need 1000<br/>
+In summary,<br/>
+<br/>
+@itemize @bullet<br/>
+<br/>
+@item<br/>
+Lisp programs are made up of expressions, which are lists or single atoms.<br/>
+<br/>
+@item<br/>
+Lists are made up of zero or more atoms or inner lists, sepa...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Excercises</strong><br/><br/>
+@node Error Message Exercises,  , Summary, List Processing<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Exercises<br/>
+<br/>
+A few simple exercises:<br/>
+<br/>
+@itemize @bullet<br/>
+@item<br/>
+Generate an error message by evaluating an appropriate symbol that is<br/>
+not within parentheses.<br/>
+<br/>
+@item<br/>
+Generate an error message by evaluating an appropriate symbol that is<br/>
+between parentheses.<br/>
+<br/>
+@item<br/>
+Create a counter that increments by two rather than one.<br/>
+<br/>
+@item<br/>
+Write an expression that prints a message in the echo area when<br/>
+ev...</p>
+</li>
+</ul>
+<hr/>
+<li>
+<p class="binderItem"><strong>Practicing Evaluation</strong><br/><br/>
+@node Practicing Evaluation, Writing Defuns, List Processing, Top<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@chapter Practicing Evaluation<br/>
+@cindex Practicing evaluation<br/>
+@cindex Evaluation practice<br/>
+<br/>
+Before learning how to write a function definition in Emacs Lisp, it is<br/>
+useful to spend a little time evaluating various expressions that have<br/>
+already been written.  These expressions will be lists with the<br/>
+functions as their first (and often only) element.  Since some of the<br/>
+functions associated wi...</p>
+</li>
+<li>
+<p class="binderItem"><strong>How To Write  Function Definition</strong><br/><br/>
+@node Writing Defuns, Buffer Walk Through, Practicing Evaluation, Top<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@chapter How To Write Function Definitions<br/>
+@cindex Definition writing<br/>
+@cindex Function definition writing<br/>
+@cindex Writing a function definition<br/>
+<br/>
+When the Lisp interpreter evaluates a list, it looks to see whether the<br/>
+first symbol on the list has a function definition attached to it; or,<br/>
+put another way, whether the symbol points to a function definition.  If<br/>
+it does, the computer car...</p>
+</li>
+<li>
+<p class="binderItem"><strong>A Few Buffer -- Related Functions</strong><br/><br/>
+@node Buffer Walk Through, More Complex, Writing Defuns, Top<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@chapter A Few Buffer--Related Functions<br/>
+<br/>
+In this chapter we study in detail several of the functions used in GNU<br/>
+Emacs.  This is called a ``walk-through''.  These functions are used as<br/>
+examples of Lisp code, but are not imaginary examples; with the<br/>
+exception of the first, simplified function definition, these functions<br/>
+show the actual code used in GNU Emacs.  You can learn a great deal from<br/>
+...</p>
+</li>
+<li>
+<p class="binderItem"><strong>A Few More Complex Functions</strong><br/><br/>
+@node More Complex, Narrowing & Widening, Buffer Walk Through, Top<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@chapter A Few More Complex Functions<br/>
+<br/>
+In this chapter, we build on what we have learned in previous chapters<br/>
+by looking at more complex functions.  The @code{copy-to-buffer}<br/>
+function illustrates use of two @code{save-excursion} expressions in<br/>
+one definition, while the @code{insert-buffer} function illustrates<br/>
+use of an asterisk in an @code{interactive} expression, use of<br/>
+@code{or}, and...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Narrowing and Widening</strong><br/><br/>
+@node Narrowing & Widening, car cdr & cons, More Complex, Top<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@chapter Narrowing and Widening<br/>
+@cindex Focusing attention (narrowing)<br/>
+@cindex Narrowing<br/>
+@cindex Widening<br/>
+<br/>
+Narrowing is a feature of Emacs that makes it possible for you to focus<br/>
+on a specific part of a buffer, and work without accidentally changing<br/>
+other parts.  Narrowing is normally disabled since it can confuse<br/>
+novices.<br/>
+<br/>
+@menu<br/>
+* Narrowing advantages::        The advantages of narrowing<br/>
+* ...</p>
+</li>
+<li>
+<p class="binderItem"><strong>car, cdr, cons: Fundamental Functions</strong><br/><br/>
+@node car cdr & cons, Cutting & Storing Text, Narrowing & Widening, Top<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@chapter @code{car}, @code{cdr}, @code{cons}: Fundamental Functions<br/>
+@findex car, @r{introduced}<br/>
+@findex cdr, @r{introduced}<br/>
+<br/>
+In Lisp, @code{car}, @code{cdr}, and @code{cons} are fundamental<br/>
+functions.  The @code{cons} function is used to construct lists, and<br/>
+the @code{car} and @code{cdr} functions are used to take them apart.<br/>
+<br/>
+In the walk through of the @code{copy-region-as-kill} f...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Cutting and Storing Text</strong><br/><br/>
+@node Cutting & Storing Text, List Implementation, car cdr & cons, Top<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@chapter Cutting and Storing Text<br/>
+@cindex Cutting and storing text<br/>
+@cindex Storing and cutting text<br/>
+@cindex Killing text<br/>
+@cindex Clipping text<br/>
+@cindex Erasing text<br/>
+@cindex Deleting text<br/>
+<br/>
+Whenever you cut or clip text out of a buffer with a `kill' command in<br/>
+GNU Emacs, it is stored in a list and you can bring it back with a<br/>
+`yank' command.<br/>
+<br/>
+(The use of the word `kill' in Emacs for pr...</p>
+</li>
+<li>
+<p class="binderItem"><strong>How Lists are Implemented</strong><br/><br/>
+@node List Implementation, Yanking, Cutting & Storing Text, Top<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@chapter How Lists are Implemented<br/>
+@cindex Lists in a computer<br/>
+<br/>
+In Lisp, atoms are recorded in a straightforward fashion; if the<br/>
+implementation is not straightforward in practice, it is, nonetheless,<br/>
+straightforward in theory.  The atom @samp{rose}, for example, is<br/>
+recorded as the four contiguous letters @samp{r}, @samp{o}, @samp{s},<br/>
+@samp{e}.  A list, on the other hand, is kept differentl...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Yanking Text Back</strong><br/><br/>
+@node Yanking, Loops & Recursion, List Implementation, Top<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@chapter Yanking Text Back<br/>
+@findex yank<br/>
+@cindex Text retrieval<br/>
+@cindex Retrieving text<br/>
+@cindex Pasting text<br/>
+<br/>
+Whenever you cut text out of a buffer with a `kill' command in GNU Emacs,<br/>
+you can bring it back with a `yank' command.  The text that is cut out of<br/>
+the buffer is put in the kill ring and the yank commands insert the<br/>
+appropriate contents of the kill ring back into a buffer (not necessaril...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Loops and Recursion</strong><br/><br/>
+@node Loops & Recursion, Regexp Search, Yanking, Top<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@chapter Loops and Recursion<br/>
+@cindex Loops and recursion<br/>
+@cindex Recursion and loops<br/>
+@cindex Repetition (loops)<br/>
+<br/>
+Emacs Lisp has two primary ways to cause an expression, or a series of<br/>
+expressions, to be evaluated repeatedly: one uses a @code{while}<br/>
+loop, and the other uses @dfn{recursion}.<br/>
+<br/>
+Repetition can be very valuable.  For example, to move forward four<br/>
+sentences, you need only write a program th...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Regular Expression Searches</strong><br/><br/>
+@node Regexp Search, Counting Words, Loops & Recursion, Top<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@chapter Regular Expression Searches<br/>
+@cindex Searches, illustrating<br/>
+@cindex Regular expression searches<br/>
+@cindex Patterns, searching for<br/>
+@cindex Motion by sentence and paragraph<br/>
+@cindex Sentences, movement by<br/>
+@cindex Paragraphs, movement by<br/>
+<br/>
+Regular expression searches are used extensively in GNU Emacs.  The<br/>
+two functions, @code{forward-sentence} and @code{forward-paragraph},<br/>
+illustrate these s...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Counting: Repeitition and Regexps</strong><br/><br/>
+@node Counting Words, Words in a defun, Regexp Search, Top<br/>
+@chapter Counting: Repetition and Regexps<br/>
+@cindex Repetition for word counting<br/>
+@cindex Regular expressions for word counting<br/>
+<br/>
+Repetition and regular expression searches are powerful tools that you<br/>
+often use when you write code in Emacs Lisp.  This chapter illustrates<br/>
+the use of regular expression searches through the construction of<br/>
+word count commands using @code{while} loops and recursion.<br/>
+<br/>
+@menu<br/>
+* Why Count Words::<br/>
+* count-words-regi...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Counting Words in a defun</strong><br/><br/>
+@node Words in a defun, Readying a Graph, Counting Words, Top<br/>
+@chapter Counting Words in a @code{defun}<br/>
+@cindex Counting words in a @code{defun}<br/>
+@cindex Word counting in a @code{defun}<br/>
+<br/>
+Our next project is to count the number of words in a function<br/>
+definition.  Clearly, this can be done using some variant of<br/>
+@code{count-word-region}.  @xref{Counting Words, , Counting Words:<br/>
+Repetition and Regexps}.  If we are just going to count the words in<br/>
+one definition, it is easy enough to mark the definit...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Readying a Graph</strong><br/><br/>
+@c The next step is to turn this numbers' list into a graph.<br/>
+@node Readying a Graph, Emacs Initialization, Words in a defun, Top<br/>
+@chapter Readying a Graph<br/>
+@cindex Readying a graph<br/>
+@cindex Graph prototype<br/>
+@cindex Prototype graph<br/>
+@cindex Body of graph<br/>
+<br/>
+Our goal is to construct a graph showing the numbers of function<br/>
+definitions of various lengths in the Emacs lisp sources.<br/>
+<br/>
+As a practical matter, if you were creating a graph, you would<br/>
+probably use a program such as @code{gnuplot} to do the job.<br/>
+...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Your .emacs File</strong><br/><br/>
+@node Emacs Initialization, Debugging, Readying a Graph, Top<br/>
+@chapter Your @file{.emacs} File<br/>
+@cindex @file{.emacs} file<br/>
+@cindex Customizing your @file{.emacs} file<br/>
+@cindex Initialization file<br/>
+<br/>
+``You don't have to like Emacs to like it'' -- this seemingly<br/>
+paradoxical statement is the secret of GNU Emacs.  The plain, `out of<br/>
+the box' Emacs is a generic tool.  Most people who use it, customize<br/>
+it to suit themselves.<br/>
+<br/>
+GNU Emacs is mostly written in Emacs Lisp; this means that by writing<br/>
+expression...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Debugging</strong><br/><br/>
+@node Debugging, Conclusion, Emacs Initialization, Top<br/>
+@chapter Debugging<br/>
+@cindex debugging<br/>
+<br/>
+GNU Emacs has two debuggers, @code{debug} and @code{edebug}.  The<br/>
+first is built into the internals of Emacs and is always with you;<br/>
+the second requires that you instrument a function before you can use it.<br/>
+<br/>
+Both debuggers are described extensively in @ref{Debugging, ,<br/>
+Debugging Lisp Programs, elisp, The GNU Emacs Lisp Reference Manual}.<br/>
+In this chapter, I will walk through a short example of each.<br/>
+<br/>
+@me...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Conclusion</strong><br/><br/>
+@node Conclusion, the-the, Debugging, Top<br/>
+@chapter Conclusion<br/>
+<br/>
+We have now reached the end of this Introduction.  You have now<br/>
+learned enough about programming in Emacs Lisp to set values, to write<br/>
+simple @file{.emacs} files for yourself and your friends, and write<br/>
+simple customizations and extensions to Emacs.<br/>
+<br/>
+This is a place to stop.  Or, if you wish, you can now go onward, and<br/>
+teach yourself.<br/>
+<br/>
+You have learned some of the basic nuts and bolts of programming.  But<br/>
+only some.  There are a gre...</p>
+</li>
+</ul>
+
+</td>
+<td width="8">
+</td>
+</tr>
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

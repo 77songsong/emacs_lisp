@@ -1,0 +1,211 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Lisp Lists, Run a Program, List Processing, List Processing\
+@comment  node-name,  next,  previous,  up\
+@section Lisp Lists\
+@cindex Lisp Lists\
+\
+In Lisp, a list looks like this: @code\{'(rose violet daisy buttercup)\}.\
+This list is preceded by a single apostrophe.  It could just as well be\
+written as follows, which looks more like the kind of list you are likely\
+to be familiar with:\
+\
+@smallexample\
+@group\
+'(rose\
+  violet\
+  daisy\
+  buttercup)\
+@end group\
+@end smallexample\
+\
+@noindent\
+The elements of this list are the names of the four different flowers,\
+separated from each other by whitespace and surrounded by parentheses,\
+like flowers in a field with a stone wall around them.\
+@cindex Flowers in a field\
+\
+@menu\
+* Numbers Lists::               List have numbers, other lists, in them.\
+* Lisp Atoms::                  Elemental entities.\
+* Whitespace in Lists::         Formatting lists to be readable.\
+* Typing Lists::                How GNU Emacs helps you type lists.\
+@end menu\
+\
+@node Numbers Lists, Lisp Atoms, Lisp Lists, Lisp Lists\
+@ifnottex\
+@unnumberedsubsec Numbers, Lists inside of Lists\
+@end ifnottex\
+\
+Lists can also have numbers in them, as in this list: @code\{(+ 2 2)\}.\
+This list has a plus-sign, @samp\{+\}, followed by two @samp\{2\}s, each\
+separated by whitespace.\
+\
+In Lisp, both data and programs are represented the same way; that is,\
+they are both lists of words, numbers, or other lists, separated by\
+whitespace and surrounded by parentheses.  (Since a program looks like\
+data, one program may easily serve as data for another; this is a very\
+powerful feature of Lisp.)  (Incidentally, these two parenthetical\
+remarks are @emph\{not\} Lisp lists, because they contain @samp\{;\} and\
+@samp\{.\} as punctuation marks.)\
+\
+@need 1200\
+Here is another list, this time with a list inside of it:\
+\
+@smallexample\
+'(this list has (a list inside of it))\
+@end smallexample\
+\
+The components of this list are the words @samp\{this\}, @samp\{list\},\
+@samp\{has\}, and the list @samp\{(a list inside of it)\}.  The interior\
+list is made up of the words @samp\{a\}, @samp\{list\}, @samp\{inside\},\
+@samp\{of\}, @samp\{it\}.\
+\
+@node Lisp Atoms, Whitespace in Lists, Numbers Lists, Lisp Lists\
+@comment  node-name,  next,  previous,  up\
+@subsection Lisp Atoms\
+@cindex Lisp Atoms\
+\
+In Lisp, what we have been calling words are called @dfn\{atoms\}.  This\
+term comes from the historical meaning of the word atom, which means\
+`indivisible'.  As far as Lisp is concerned, the words we have been\
+using in the lists cannot be divided into any smaller parts and still\
+mean the same thing as part of a program; likewise with numbers and\
+single character symbols like @samp\{+\}.  On the other hand, unlike an\
+ancient atom, a list can be split into parts.  (@xref\{car cdr & cons,\
+, @code\{car\} @code\{cdr\} & @code\{cons\} Fundamental Functions\}.)\
+\
+In a list, atoms are separated from each other by whitespace.  They can be\
+right next to a parenthesis.\
+\
+@cindex @samp\{empty list\} defined\
+Technically speaking, a list in Lisp consists of parentheses surrounding\
+atoms separated by whitespace or surrounding other lists or surrounding\
+both atoms and other lists.  A list can have just one atom in it or\
+have nothing in it at all.  A list with nothing in it looks like this:\
+@code\{()\}, and is called the @dfn\{empty list\}.  Unlike anything else, an\
+empty list is considered both an atom and a list at the same time.\
+\
+@cindex Symbolic expressions, introduced\
+@cindex @samp\{expression\} defined\
+@cindex @samp\{form\} defined\
+The printed representation of both atoms and lists are called\
+@dfn\{symbolic expressions\} or, more concisely, @dfn\{s-expressions\}.\
+The word @dfn\{expression\} by itself can refer to either the printed\
+representation, or to the atom or list as it is held internally in the\
+computer.  Often, people use the term @dfn\{expression\}\
+indiscriminately.  (Also, in many texts, the word @dfn\{form\} is used\
+as a synonym for expression.)\
+\
+Incidentally, the atoms that make up our universe were named such when\
+they were thought to be indivisible; but it has been found that physical\
+atoms are not indivisible.  Parts can split off an atom or it can\
+fission into two parts of roughly equal size.  Physical atoms were named\
+prematurely, before their truer nature was found.  In Lisp, certain\
+kinds of atom, such as an array, can be separated into parts; but the\
+mechanism for doing this is different from the mechanism for splitting a\
+list.  As far as list operations are concerned, the atoms of a list are\
+unsplittable.\
+\
+As in English, the meanings of the component letters of a Lisp atom\
+are different from the meaning the letters make as a word.  For\
+example, the word for the South American sloth, the @samp\{ai\}, is\
+completely different from the two words, @samp\{a\}, and @samp\{i\}.\
+\
+There are many kinds of atom in nature but only a few in Lisp: for\
+example, @dfn\{numbers\}, such as 37, 511, or 1729, and @dfn\{symbols\}, such\
+as @samp\{+\}, @samp\{foo\}, or @samp\{forward-line\}.  The words we have\
+listed in the examples above are all symbols.  In everyday Lisp\
+conversation, the word ``atom'' is not often used, because programmers\
+usually try to be more specific about what kind of atom they are dealing\
+with.  Lisp programming is mostly about symbols (and sometimes numbers)\
+within lists.  (Incidentally, the preceding three word parenthetical\
+remark is a proper list in Lisp, since it consists of atoms, which in\
+this case are symbols, separated by whitespace and enclosed by\
+parentheses, without any non-Lisp punctuation.)\
+\
+@need 1250\
+Text between double quotation marks---even sentences or\
+paragraphs---is also an atom.  Here is an example:\
+@cindex Text between double quotation marks\
+\
+@smallexample\
+'(this list includes "text between quotation marks.")\
+@end smallexample\
+\
+@cindex @samp\{string\} defined\
+@noindent\
+In Lisp, all of the quoted text including the punctuation mark and the\
+blank spaces is a single atom.  This kind of atom is called a\
+@dfn\{string\} (for `string of characters') and is the sort of thing that\
+is used for messages that a computer can print for a human to read.\
+Strings are a different kind of atom than numbers or symbols and are\
+used differently.\
+\
+@node Whitespace in Lists, Typing Lists, Lisp Atoms, Lisp Lists\
+@comment  node-name,  next,  previous,  up\
+@subsection Whitespace in Lists\
+@cindex Whitespace in lists\
+\
+@need 1200\
+The amount of whitespace in a list does not matter.  From the point of view\
+of the Lisp language,\
+\
+@smallexample\
+@group\
+'(this list\
+   looks like this)\
+@end group\
+@end smallexample\
+\
+@need 800\
+@noindent\
+is exactly the same as this:\
+\
+@smallexample\
+'(this list looks like this)\
+@end smallexample\
+\
+Both examples show what to Lisp is the same list, the list made up of\
+the symbols @samp\{this\}, @samp\{list\}, @samp\{looks\}, @samp\{like\}, and\
+@samp\{this\} in that order.\
+\
+Extra whitespace and newlines are designed to make a list more readable\
+by humans.  When Lisp reads the expression, it gets rid of all the extra\
+whitespace (but it needs to have at least one space between atoms in\
+order to tell them apart.)\
+\
+Odd as it seems, the examples we have seen cover almost all of what Lisp\
+lists look like!  Every other list in Lisp looks more or less like one\
+of these examples, except that the list may be longer and more complex.\
+In brief, a list is between parentheses, a string is between quotation\
+marks, a symbol looks like a word, and a number looks like a number.\
+(For certain situations, square brackets, dots and a few other special\
+characters may be used; however, we will go quite far without them.)\
+\
+@node Typing Lists,  , Whitespace in Lists, Lisp Lists\
+@comment  node-name,  next,  previous,  up\
+@subsection GNU Emacs Helps You Type Lists\
+@cindex Help typing lists\
+@cindex Formatting help\
+\
+When you type a Lisp expression in GNU Emacs using either Lisp\
+Interaction mode or Emacs Lisp mode, you have available to you several\
+commands to format the Lisp expression so it is easy to read.  For\
+example, pressing the @key\{TAB\} key automatically indents the line the\
+cursor is on by the right amount.  A command to properly indent the\
+code in a region is customarily bound to @kbd\{M-C-\\\}.  Indentation is\
+designed so that you can see which elements of a list belong to which\
+list---elements of a sub-list are indented more than the elements of\
+the enclosing list.\
+\
+In addition, when you type a closing parenthesis, Emacs momentarily\
+jumps the cursor back to the matching opening parenthesis, so you can\
+see which one it is.  This is very useful, since every list you type\
+in Lisp must have its closing parenthesis match its opening\
+parenthesis.  (@xref\{Major Modes, , Major Modes, emacs, The GNU Emacs\
+Manual\}, for more information about Emacs' modes.)}

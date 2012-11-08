@@ -1,0 +1,410 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Arguments, set & setq, Variables, List Processing\
+@comment  node-name,  next,  previous,  up\
+@section Arguments\
+@cindex Arguments\
+@cindex Passing information to functions\
+\
+To see how information is passed to functions, let's look again at\
+our old standby, the addition of two plus two.  In Lisp, this is written\
+as follows:\
+\
+@smallexample\
+(+ 2 2)\
+@end smallexample\
+\
+If you evaluate this expression, the number 4 will appear in your echo\
+area.  What the Lisp interpreter does is add the numbers that follow\
+the @code\{+\}.\
+\
+@cindex @samp\{argument\} defined\
+The numbers added by @code\{+\} are called the @dfn\{arguments\} of the\
+function @code\{+\}.  These numbers are the information that is given to\
+or @dfn\{passed\} to the function.\
+\
+The word `argument' comes from the way it is used in mathematics and\
+does not refer to a disputation between two people; instead it refers to\
+the information presented to the function, in this case, to the\
+@code\{+\}.  In Lisp, the arguments to a function are the atoms or lists\
+that follow the function.  The values returned by the evaluation of\
+these atoms or lists are passed to the function.  Different functions\
+require different numbers of arguments; some functions require none at\
+all.@footnote\{It is curious to track the path by which the word `argument'\
+came to have two different meanings, one in mathematics and the other in\
+everyday English.  According to the @cite\{Oxford English Dictionary\},\
+the word derives from the Latin for @samp\{to make clear, prove\}; thus it\
+came to mean, by one thread of derivation, `the evidence offered as\
+proof', which is to say, `the information offered', which led to its\
+meaning in Lisp.  But in the other thread of derivation, it came to mean\
+`to assert in a manner against which others may make counter\
+assertions', which led to the meaning of the word as a disputation.\
+(Note here that the English word has two different definitions attached\
+to it at the same time.  By contrast, in Emacs Lisp, a symbol cannot\
+have two different function definitions at the same time.)\}\
+\
+@menu\
+* Data types::                  Types of data passed to a function.\
+* Args as Variable or List::    An argument can be the value\
+                                  of a variable or list.\
+* Variable Number of Arguments::  Some functions may take a\
+                                  variable number of arguments.\
+* Wrong Type of Argument::      Passing an argument of the wrong type\
+                                  to a function.\
+* message::                     A useful function for sending messages.\
+@end menu\
+\
+@node Data types, Args as Variable or List, Arguments, Arguments\
+@comment  node-name,  next,  previous,  up\
+@subsection Arguments' Data Types\
+@cindex Data types\
+@cindex Types of data\
+@cindex Arguments' data types\
+\
+The type of data that should be passed to a function depends on what\
+kind of information it uses.  The arguments to a function such as\
+@code\{+\} must have values that are numbers, since @code\{+\} adds numbers.\
+Other functions use different kinds of data for their arguments.\
+\
+@need 1250\
+@findex concat\
+For example, the @code\{concat\} function links together or unites two or\
+more strings of text to produce a string.  The arguments are strings.\
+Concatenating the two character strings @code\{abc\}, @code\{def\} produces\
+the single string @code\{abcdef\}.  This can be seen by evaluating the\
+following:\
+\
+@smallexample\
+(concat "abc" "def")\
+@end smallexample\
+\
+@noindent\
+The value produced by evaluating this expression is @code\{"abcdef"\}.\
+\
+A function such as @code\{substring\} uses both a string and numbers as\
+arguments.  The function returns a part of the string, a substring of\
+the first argument.  This function takes three arguments.  Its first\
+argument is the string of characters, the second and third arguments are\
+numbers that indicate the beginning and end of the substring.  The\
+numbers are a count of the number of characters (including spaces and\
+punctuations) from the beginning of the string.\
+\
+@need 800\
+For example, if you evaluate the following:\
+\
+@smallexample\
+(substring "The quick brown fox jumped." 16 19)\
+@end smallexample\
+\
+@noindent\
+you will see @code\{"fox"\} appear in the echo area.  The arguments are the\
+string and the two numbers.\
+\
+Note that the string passed to @code\{substring\} is a single atom even\
+though it is made up of several words separated by spaces.  Lisp counts\
+everything between the two quotation marks as part of the string,\
+including the spaces.  You can think of the @code\{substring\} function as\
+a kind of `atom smasher' since it takes an otherwise indivisible atom\
+and extracts a part.  However, @code\{substring\} is only able to extract\
+a substring from an argument that is a string, not from another type of\
+atom such as a number or symbol.\
+\
+@node Args as Variable or List, Variable Number of Arguments, Data types, Arguments\
+@comment  node-name,  next,  previous,  up\
+@subsection An Argument as the Value of a Variable or List\
+\
+An argument can be a symbol that returns a value when it is evaluated.\
+For example, when the symbol @code\{fill-column\} by itself is evaluated,\
+it returns a number.  This number can be used in an addition.\
+\
+@need 1250\
+Position the cursor after the following expression and type @kbd\{C-x\
+C-e\}:\
+\
+@smallexample\
+(+ 2 fill-column)\
+@end smallexample\
+\
+@noindent\
+The value will be a number two more than what you get by evaluating\
+@code\{fill-column\} alone.  For me, this is 74, because my value of\
+@code\{fill-column\} is 72.\
+\
+As we have just seen, an argument can be a symbol that returns a value\
+when evaluated.  In addition, an argument can be a list that returns a\
+value when it is evaluated.  For example, in the following expression,\
+the arguments to the function @code\{concat\} are the strings\
+@w\{@code\{"The "\}\} and @w\{@code\{" red foxes."\}\} and the list\
+@code\{(number-to-string (+ 2 fill-column))\}.\
+\
+@c For GNU Emacs 22, need number-to-string\
+@smallexample\
+(concat "The " (number-to-string (+ 2 fill-column)) " red foxes.")\
+@end smallexample\
+\
+@noindent\
+If you evaluate this expression---and if, as with my Emacs,\
+@code\{fill-column\} evaluates to 72---@code\{"The 74 red foxes."\} will\
+appear in the echo area.  (Note that you must put spaces after the\
+word @samp\{The\} and before the word @samp\{red\} so they will appear in\
+the final string.  The function @code\{number-to-string\} converts the\
+integer that the addition function returns to a string.\
+@code\{number-to-string\} is also known as @code\{int-to-string\}.)\
+\
+@node Variable Number of Arguments, Wrong Type of Argument, Args as Variable or List, Arguments\
+@comment  node-name,  next,  previous,  up\
+@subsection Variable Number of Arguments\
+@cindex Variable number of arguments\
+@cindex Arguments, variable number of\
+\
+Some functions, such as @code\{concat\}, @code\{+\} or @code\{*\}, take any\
+number of arguments.  (The @code\{*\} is the symbol for multiplication.)\
+This can be seen by evaluating each of the following expressions in\
+the usual way.  What you will see in the echo area is printed in this\
+text after @samp\{@result\{\}\}, which you may read as `evaluates to'.\
+\
+@need 1250\
+In the first set, the functions have no arguments:\
+\
+@smallexample\
+@group\
+(+)       @result\{\} 0\
+\
+(*)       @result\{\} 1\
+@end group\
+@end smallexample\
+\
+@need 1250\
+In this set, the functions have one argument each:\
+\
+@smallexample\
+@group\
+(+ 3)     @result\{\} 3\
+\
+(* 3)     @result\{\} 3\
+@end group\
+@end smallexample\
+\
+@need 1250\
+In this set, the functions have three arguments each:\
+\
+@smallexample\
+@group\
+(+ 3 4 5) @result\{\} 12\
+\
+(* 3 4 5) @result\{\} 60\
+@end group\
+@end smallexample\
+\
+@node Wrong Type of Argument, message, Variable Number of Arguments, Arguments\
+@comment  node-name,  next,  previous,  up\
+@subsection Using the Wrong Type Object as an Argument\
+@cindex Wrong type of argument\
+@cindex Argument, wrong type of\
+\
+When a function is passed an argument of the wrong type, the Lisp\
+interpreter produces an error message.  For example, the @code\{+\}\
+function expects the values of its arguments to be numbers.  As an\
+experiment we can pass it the quoted symbol @code\{hello\} instead of a\
+number.  Position the cursor after the following expression and type\
+@kbd\{C-x C-e\}:\
+\
+@smallexample\
+(+ 2 'hello)\
+@end smallexample\
+\
+@noindent\
+When you do this you will generate an error message.  What has happened\
+is that @code\{+\} has tried to add the 2 to the value returned by\
+@code\{'hello\}, but the value returned by @code\{'hello\} is the symbol\
+@code\{hello\}, not a number.  Only numbers can be added.  So @code\{+\}\
+could not carry out its addition.\
+\
+@need 1250\
+In GNU Emacs version 22, you will create and enter a\
+@file\{*Backtrace*\} buffer that says:\
+\
+@noindent\
+@smallexample\
+@group\
+---------- Buffer: *Backtrace* ----------\
+Debugger entered--Lisp error:\
+         (wrong-type-argument number-or-marker-p hello)\
+  +(2 hello)\
+  eval((+ 2 (quote hello)))\
+  eval-last-sexp-1(nil)\
+  eval-last-sexp(nil)\
+  call-interactively(eval-last-sexp)\
+---------- Buffer: *Backtrace* ----------\
+@end group\
+@end smallexample\
+\
+@need 1250\
+As usual, the error message tries to be helpful and makes sense after you\
+learn how to read it.@footnote\{@code\{(quote hello)\} is an expansion of\
+the abbreviation @code\{'hello\}.\}\
+\
+The first part of the error message is straightforward; it says\
+@samp\{wrong type argument\}.  Next comes the mysterious jargon word\
+@w\{@samp\{number-or-marker-p\}\}.  This word is trying to tell you what\
+kind of argument the @code\{+\} expected.\
+\
+The symbol @code\{number-or-marker-p\} says that the Lisp interpreter is\
+trying to determine whether the information presented it (the value of\
+the argument) is a number or a marker (a special object representing a\
+buffer position).  What it does is test to see whether the @code\{+\} is\
+being given numbers to add.  It also tests to see whether the\
+argument is something called a marker, which is a specific feature of\
+Emacs Lisp.  (In Emacs, locations in a buffer are recorded as markers.\
+When the mark is set with the @kbd\{C-@@\} or @kbd\{C-@key\{SPC\}\} command,\
+its position is kept as a marker.  The mark can be considered a\
+number---the number of characters the location is from the beginning\
+of the buffer.)  In Emacs Lisp, @code\{+\} can be used to add the\
+numeric value of marker positions as numbers.\
+\
+The @samp\{p\} of @code\{number-or-marker-p\} is the embodiment of a\
+practice started in the early days of Lisp programming.  The @samp\{p\}\
+stands for `predicate'.  In the jargon used by the early Lisp\
+researchers, a predicate refers to a function to determine whether some\
+property is true or false.  So the @samp\{p\} tells us that\
+@code\{number-or-marker-p\} is the name of a function that determines\
+whether it is true or false that the argument supplied is a number or\
+a marker.  Other Lisp symbols that end in @samp\{p\} include @code\{zerop\},\
+a function that tests whether its argument has the value of zero, and\
+@code\{listp\}, a function that tests whether its argument is a list.\
+\
+Finally, the last part of the error message is the symbol @code\{hello\}.\
+This is the value of the argument that was passed to @code\{+\}.  If the\
+addition had been passed the correct type of object, the value passed\
+would have been a number, such as 37, rather than a symbol like\
+@code\{hello\}.  But then you would not have got the error message.\
+\
+@ignore\
+@need 1250\
+In GNU Emacs version 20 and before, the echo area displays an error\
+message that says:\
+\
+@smallexample\
+Wrong type argument:@: number-or-marker-p, hello\
+@end smallexample\
+\
+This says, in different words, the same as the top line of the\
+@file\{*Backtrace*\} buffer.\
+@end ignore\
+\
+@node message,  , Wrong Type of Argument, Arguments\
+@comment  node-name,  next,  previous,  up\
+@subsection The @code\{message\} Function\
+@findex message\
+\
+Like @code\{+\}, the @code\{message\} function takes a variable number of\
+arguments.  It is used to send messages to the user and is so useful\
+that we will describe it here.\
+\
+@need 1250\
+A message is printed in the echo area.  For example, you can print a\
+message in your echo area by evaluating the following list:\
+\
+@smallexample\
+(message "This message appears in the echo area!")\
+@end smallexample\
+\
+The whole string between double quotation marks is a single argument\
+and is printed @i\{in toto\}.  (Note that in this example, the message\
+itself will appear in the echo area within double quotes; that is\
+because you see the value returned by the @code\{message\} function.  In\
+most uses of @code\{message\} in programs that you write, the text will\
+be printed in the echo area as a side-effect, without the quotes.\
+@xref\{multiply-by-seven in detail, , @code\{multiply-by-seven\} in\
+detail\}, for an example of this.)\
+\
+However, if there is a @samp\{%s\} in the quoted string of characters, the\
+@code\{message\} function does not print the @samp\{%s\} as such, but looks\
+to the argument that follows the string.  It evaluates the second\
+argument and prints the value at the location in the string where the\
+@samp\{%s\} is.\
+\
+@need 1250\
+You can see this by positioning the cursor after the following\
+expression and typing @kbd\{C-x C-e\}:\
+\
+@smallexample\
+(message "The name of this buffer is: %s." (buffer-name))\
+@end smallexample\
+\
+@noindent\
+In Info, @code\{"The name of this buffer is: *info*."\} will appear in the\
+echo area.  The function @code\{buffer-name\} returns the name of the\
+buffer as a string, which the @code\{message\} function inserts in place\
+of @code\{%s\}.\
+\
+To print a value as an integer, use @samp\{%d\} in the same way as\
+@samp\{%s\}.  For example, to print a message in the echo area that\
+states the value of the @code\{fill-column\}, evaluate the following:\
+\
+@smallexample\
+(message "The value of fill-column is %d." fill-column)\
+@end smallexample\
+\
+@noindent\
+On my system, when I evaluate this list, @code\{"The value of\
+fill-column is 72."\} appears in my echo area@footnote\{Actually, you\
+can use @code\{%s\} to print a number.  It is non-specific.  @code\{%d\}\
+prints only the part of a number left of a decimal point, and not\
+anything that is not a number.\}.\
+\
+If there is more than one @samp\{%s\} in the quoted string, the value of\
+the first argument following the quoted string is printed at the\
+location of the first @samp\{%s\} and the value of the second argument is\
+printed at the location of the second @samp\{%s\}, and so on.\
+\
+@need 1250\
+For example, if you evaluate the following,\
+\
+@smallexample\
+@group\
+(message "There are %d %s in the office!"\
+         (- fill-column 14) "pink elephants")\
+@end group\
+@end smallexample\
+\
+@noindent\
+a rather whimsical message will appear in your echo area.  On my system\
+it says, @code\{"There are 58 pink elephants in the office!"\}.\
+\
+The expression @code\{(- fill-column 14)\} is evaluated and the resulting\
+number is inserted in place of the @samp\{%d\}; and the string in double\
+quotes, @code\{"pink elephants"\}, is treated as a single argument and\
+inserted in place of the @samp\{%s\}.  (That is to say, a string between\
+double quotes evaluates to itself, like a number.)\
+\
+Finally, here is a somewhat complex example that not only illustrates\
+the computation of a number, but also shows how you can use an\
+expression within an expression to generate the text that is substituted\
+for @samp\{%s\}:\
+\
+@smallexample\
+@group\
+(message "He saw %d %s"\
+         (- fill-column 32)\
+         (concat "red "\
+                 (substring\
+                  "The quick brown foxes jumped." 16 21)\
+                 " leaping."))\
+@end group\
+@end smallexample\
+\
+In this example, @code\{message\} has three arguments: the string,\
+@code\{"He saw %d %s"\}, the expression, @code\{(- fill-column 32)\}, and\
+the expression beginning with the function @code\{concat\}.  The value\
+resulting from the evaluation of @code\{(- fill-column 32)\} is inserted\
+in place of the @samp\{%d\}; and the value returned by the expression\
+beginning with @code\{concat\} is inserted in place of the @samp\{%s\}.\
+\
+When your fill column is 70 and you evaluate the expression, the\
+message @code\{"He saw 38 red foxes leaping."\} appears in your echo\
+area.}

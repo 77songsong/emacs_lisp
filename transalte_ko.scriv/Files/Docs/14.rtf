@@ -1,0 +1,479 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node List Implementation, Yanking, Cutting & Storing Text, Top\
+@comment  node-name,  next,  previous,  up\
+@chapter How Lists are Implemented\
+@cindex Lists in a computer\
+\
+In Lisp, atoms are recorded in a straightforward fashion; if the\
+implementation is not straightforward in practice, it is, nonetheless,\
+straightforward in theory.  The atom @samp\{rose\}, for example, is\
+recorded as the four contiguous letters @samp\{r\}, @samp\{o\}, @samp\{s\},\
+@samp\{e\}.  A list, on the other hand, is kept differently.  The mechanism\
+is equally simple, but it takes a moment to get used to the idea.  A\
+list is kept using a series of pairs of pointers.  In the series, the\
+first pointer in each pair points to an atom or to another list, and the\
+second pointer in each pair points to the next pair, or to the symbol\
+@code\{nil\}, which marks the end of the list.\
+\
+A pointer itself is quite simply the electronic address of what is\
+pointed to.  Hence, a list is kept as a series of electronic addresses.\
+\
+@menu\
+* Lists diagrammed::\
+* Symbols as Chest::            Exploring a powerful metaphor.\
+* List Exercise::\
+@end menu\
+\
+@node Lists diagrammed, Symbols as Chest, List Implementation, List Implementation\
+@ifnottex\
+@unnumberedsec Lists diagrammed\
+@end ifnottex\
+\
+For example, the list @code\{(rose violet buttercup)\} has three elements,\
+@samp\{rose\}, @samp\{violet\}, and @samp\{buttercup\}.  In the computer, the\
+electronic address of @samp\{rose\} is recorded in a segment of computer\
+memory along with the address that gives the electronic address of where\
+the atom @samp\{violet\} is located; and that address (the one that tells\
+where @samp\{violet\} is located) is kept along with an address that tells\
+where the address for the atom @samp\{buttercup\} is located.\
+\
+@need 1200\
+This sounds more complicated than it is and is easier seen in a diagram:\
+\
+@c clear print-postscript-figures\
+@c !!! cons-cell-diagram #1\
+@ifnottex\
+@smallexample\
+@group\
+    ___ ___      ___ ___      ___ ___\
+   |___|___|--> |___|___|--> |___|___|--> nil\
+     |            |            |\
+     |            |            |\
+      --> rose     --> violet   --> buttercup\
+@end group\
+@end smallexample\
+@end ifnottex\
+@ifset print-postscript-figures\
+@sp 1\
+@tex\
+@center @image\{cons-1\}\
+%%%% old method of including an image\
+% \\input /usr/local/lib/tex/inputs/psfig.tex\
+% \\centerline\{\\psfig\{figure=/usr/local/lib/emacs/man/cons-1.eps\}\}\
+% \\catcode`\\@=0 %\
+@end tex\
+@sp 1\
+@end ifset\
+@ifclear print-postscript-figures\
+@iftex\
+@smallexample\
+@group\
+    ___ ___      ___ ___      ___ ___\
+   |___|___|--> |___|___|--> |___|___|--> nil\
+     |            |            |\
+     |            |            |\
+      --> rose     --> violet   --> buttercup\
+@end group\
+@end smallexample\
+@end iftex\
+@end ifclear\
+\
+@noindent\
+In the diagram, each box represents a word of computer memory that\
+holds a Lisp object, usually in the form of a memory address.  The boxes,\
+i.e.@: the addresses, are in pairs.  Each arrow points to what the address\
+is the address of, either an atom or another pair of addresses.  The\
+first box is the electronic address of @samp\{rose\} and the arrow points\
+to @samp\{rose\}; the second box is the address of the next pair of boxes,\
+the first part of which is the address of @samp\{violet\} and the second\
+part of which is the address of the next pair.  The very last box\
+points to the symbol @code\{nil\}, which marks the end of the list.\
+\
+@need 1200\
+When a variable is set to a list with a function such as @code\{setq\},\
+it stores the address of the first box in the variable.  Thus,\
+evaluation of the expression\
+\
+@smallexample\
+(setq bouquet '(rose violet buttercup))\
+@end smallexample\
+\
+@need 1250\
+@noindent\
+creates a situation like this:\
+\
+@c cons-cell-diagram #2\
+@ifnottex\
+@smallexample\
+@group\
+bouquet\
+     |\
+     |     ___ ___      ___ ___      ___ ___\
+      --> |___|___|--> |___|___|--> |___|___|--> nil\
+            |            |            |\
+            |            |            |\
+             --> rose     --> violet   --> buttercup\
+@end group\
+@end smallexample\
+@end ifnottex\
+@ifset print-postscript-figures\
+@sp 1\
+@tex\
+@center @image\{cons-2\}\
+%%%% old method of including an image\
+% \\input /usr/local/lib/tex/inputs/psfig.tex\
+% \\centerline\{\\psfig\{figure=/usr/local/lib/emacs/man/cons-2.eps\}\}\
+% \\catcode`\\@=0 %\
+@end tex\
+@sp 1\
+@end ifset\
+@ifclear print-postscript-figures\
+@iftex\
+@smallexample\
+@group\
+bouquet\
+     |\
+     |     ___ ___      ___ ___      ___ ___\
+      --> |___|___|--> |___|___|--> |___|___|--> nil\
+            |            |            |\
+            |            |            |\
+             --> rose     --> violet   --> buttercup\
+@end group\
+@end smallexample\
+@end iftex\
+@end ifclear\
+\
+@noindent\
+In this example, the symbol @code\{bouquet\} holds the address of the first\
+pair of boxes.\
+\
+@need 1200\
+This same list can be illustrated in a different sort of box notation\
+like this:\
+\
+@c cons-cell-diagram #2a\
+@ifnottex\
+@smallexample\
+@group\
+bouquet\
+ |\
+ |    --------------       ---------------       ----------------\
+ |   | car   | cdr  |     | car    | cdr  |     | car     | cdr  |\
+  -->| rose  |   o------->| violet |   o------->| butter- |  nil |\
+     |       |      |     |        |      |     | cup     |      |\
+      --------------       ---------------       ----------------\
+@end group\
+@end smallexample\
+@end ifnottex\
+@ifset print-postscript-figures\
+@sp 1\
+@tex\
+@center @image\{cons-2a\}\
+%%%% old method of including an image\
+% \\input /usr/local/lib/tex/inputs/psfig.tex\
+% \\centerline\{\\psfig\{figure=/usr/local/lib/emacs/man/cons-2a.eps\}\}\
+% \\catcode`\\@=0 %\
+@end tex\
+@sp 1\
+@end ifset\
+@ifclear print-postscript-figures\
+@iftex\
+@smallexample\
+@group\
+bouquet\
+ |\
+ |    --------------       ---------------       ----------------\
+ |   | car   | cdr  |     | car    | cdr  |     | car     | cdr  |\
+  -->| rose  |   o------->| violet |   o------->| butter- |  nil |\
+     |       |      |     |        |      |     | cup     |      |\
+      --------------       ---------------       ----------------\
+@end group\
+@end smallexample\
+@end iftex\
+@end ifclear\
+\
+(Symbols consist of more than pairs of addresses, but the structure of\
+a symbol is made up of addresses.  Indeed, the symbol @code\{bouquet\}\
+consists of a group of address-boxes, one of which is the address of\
+the printed word @samp\{bouquet\}, a second of which is the address of a\
+function definition attached to the symbol, if any, a third of which\
+is the address of the first pair of address-boxes for the list\
+@code\{(rose violet buttercup)\}, and so on.  Here we are showing that\
+the symbol's third address-box points to the first pair of\
+address-boxes for the list.)\
+\
+If a symbol is set to the @sc\{cdr\} of a list, the list itself is not\
+changed; the symbol simply has an address further down the list.  (In\
+the jargon, @sc\{car\} and @sc\{cdr\} are `non-destructive'.)  Thus,\
+evaluation of the following expression\
+\
+@smallexample\
+(setq flowers (cdr bouquet))\
+@end smallexample\
+\
+@need 800\
+@noindent\
+produces this:\
+\
+@c cons-cell-diagram #3\
+@ifnottex\
+@sp 1\
+@smallexample\
+@group\
+bouquet        flowers\
+  |              |\
+  |     ___ ___  |     ___ ___      ___ ___\
+   --> |   |   |  --> |   |   |    |   |   |\
+       |___|___|----> |___|___|--> |___|___|--> nil\
+         |              |            |\
+         |              |            |\
+          --> rose       --> violet   --> buttercup\
+@end group\
+@end smallexample\
+@sp 1\
+@end ifnottex\
+@ifset print-postscript-figures\
+@sp 1\
+@tex\
+@center @image\{cons-3\}\
+%%%% old method of including an image\
+% \\input /usr/local/lib/tex/inputs/psfig.tex\
+% \\centerline\{\\psfig\{figure=/usr/local/lib/emacs/man/cons-3.eps\}\}\
+% \\catcode`\\@=0 %\
+@end tex\
+@sp 1\
+@end ifset\
+@ifclear print-postscript-figures\
+@iftex\
+@sp 1\
+@smallexample\
+@group\
+bouquet        flowers\
+  |              |\
+  |     ___ ___  |     ___ ___      ___ ___\
+   --> |   |   |  --> |   |   |    |   |   |\
+       |___|___|----> |___|___|--> |___|___|--> nil\
+         |              |            |\
+         |              |            |\
+          --> rose       --> violet   --> buttercup\
+@end group\
+@end smallexample\
+@sp 1\
+@end iftex\
+@end ifclear\
+\
+@noindent\
+The value of @code\{flowers\} is @code\{(violet buttercup)\}, which is\
+to say, the symbol @code\{flowers\} holds the address of the pair of\
+address-boxes, the first of which holds the address of @code\{violet\},\
+and the second of which holds the address of @code\{buttercup\}.\
+\
+A pair of address-boxes is called a @dfn\{cons cell\} or @dfn\{dotted\
+pair\}.  @xref\{Cons Cell Type, , Cons Cell and List Types, elisp, The GNU Emacs Lisp\
+Reference Manual\}, and @ref\{Dotted Pair Notation, , Dotted Pair\
+Notation, elisp, The GNU Emacs Lisp Reference Manual\}, for more\
+information about cons cells and dotted pairs.\
+\
+@need 1200\
+The function @code\{cons\} adds a new pair of addresses to the front of\
+a series of addresses like that shown above.  For example, evaluating\
+the expression\
+\
+@smallexample\
+(setq bouquet (cons 'lily bouquet))\
+@end smallexample\
+\
+@need 1500\
+@noindent\
+produces:\
+\
+@c cons-cell-diagram #4\
+@ifnottex\
+@sp 1\
+@smallexample\
+@group\
+bouquet                       flowers\
+  |                             |\
+  |     ___ ___        ___ ___  |     ___ ___       ___ ___\
+   --> |   |   |      |   |   |  --> |   |   |     |   |   |\
+       |___|___|----> |___|___|----> |___|___|---->|___|___|--> nil\
+         |              |              |             |\
+         |              |              |             |\
+          --> lily      --> rose       --> violet    --> buttercup\
+@end group\
+@end smallexample\
+@sp 1\
+@end ifnottex\
+@ifset print-postscript-figures\
+@sp 1\
+@tex\
+@center @image\{cons-4\}\
+%%%% old method of including an image\
+% \\input /usr/local/lib/tex/inputs/psfig.tex\
+% \\centerline\{\\psfig\{figure=/usr/local/lib/emacs/man/cons-4.eps\}\}\
+% \\catcode`\\@=0 %\
+@end tex\
+@sp 1\
+@end ifset\
+@ifclear print-postscript-figures\
+@iftex\
+@sp 1\
+@smallexample\
+@group\
+bouquet                       flowers\
+  |                             |\
+  |     ___ ___        ___ ___  |     ___ ___       ___ ___\
+   --> |   |   |      |   |   |  --> |   |   |     |   |   |\
+       |___|___|----> |___|___|----> |___|___|---->|___|___|--> nil\
+         |              |              |             |\
+         |              |              |             |\
+          --> lily      --> rose       --> violet    --> buttercup\
+@end group\
+@end smallexample\
+@sp 1\
+@end iftex\
+@end ifclear\
+\
+@need 1200\
+@noindent\
+However, this does not change the value of the symbol\
+@code\{flowers\}, as you can see by evaluating the following,\
+\
+@smallexample\
+(eq (cdr (cdr bouquet)) flowers)\
+@end smallexample\
+\
+@noindent\
+which returns @code\{t\} for true.\
+\
+Until it is reset, @code\{flowers\} still has the value\
+@code\{(violet buttercup)\}; that is, it has the address of the cons\
+cell whose first address is of @code\{violet\}.  Also, this does not\
+alter any of the pre-existing cons cells; they are all still there.\
+\
+Thus, in Lisp, to get the @sc\{cdr\} of a list, you just get the address\
+of the next cons cell in the series; to get the @sc\{car\} of a list,\
+you get the address of the first element of the list; to @code\{cons\} a\
+new element on a list, you add a new cons cell to the front of the list.\
+That is all there is to it!  The underlying structure of Lisp is\
+brilliantly simple!\
+\
+And what does the last address in a series of cons cells refer to?  It\
+is the address of the empty list, of @code\{nil\}.\
+\
+In summary, when a Lisp variable is set to a value, it is provided with\
+the address of the list to which the variable refers.\
+\
+@node Symbols as Chest, List Exercise, Lists diagrammed, List Implementation\
+@section Symbols as a Chest of Drawers\
+@cindex Symbols as a Chest of Drawers\
+@cindex Chest of Drawers, metaphor for a symbol\
+@cindex Drawers, Chest of, metaphor for a symbol\
+\
+In an earlier section, I suggested that you might imagine a symbol as\
+being a chest of drawers.  The function definition is put in one\
+drawer, the value in another, and so on.  What is put in the drawer\
+holding the value can be changed without affecting the contents of the\
+drawer holding the function definition, and vice-verse.\
+\
+Actually, what is put in each drawer is the address of the value or\
+function definition.  It is as if you found an old chest in the attic,\
+and in one of its drawers you found a map giving you directions to\
+where the buried treasure lies.\
+\
+(In addition to its name, symbol definition, and variable value, a\
+symbol has a `drawer' for a @dfn\{property list\} which can be used to\
+record other information.  Property lists are not discussed here; see\
+@ref\{Property Lists, , Property Lists, elisp, The GNU Emacs Lisp\
+Reference Manual\}.)\
+\
+@need 1500\
+Here is a fanciful representation:\
+\
+@c chest-of-drawers diagram\
+@ifnottex\
+@sp 1\
+@smallexample\
+@group\
+            Chest of Drawers            Contents of Drawers\
+\
+            __   o0O0o   __\
+          /                 \\\
+         ---------------------\
+        |    directions to    |            [map to]\
+        |     symbol name     |             bouquet\
+        |                     |\
+        +---------------------+\
+        |    directions to    |\
+        |  symbol definition  |             [none]\
+        |                     |\
+        +---------------------+\
+        |    directions to    |            [map to]\
+        |    variable value   |             (rose violet buttercup)\
+        |                     |\
+        +---------------------+\
+        |    directions to    |\
+        |    property list    |             [not described here]\
+        |                     |\
+        +---------------------+\
+        |/                   \\|\
+@end group\
+@end smallexample\
+@sp 1\
+@end ifnottex\
+@ifset print-postscript-figures\
+@sp 1\
+@tex\
+@center @image\{drawers\}\
+%%%% old method of including an image\
+% \\input /usr/local/lib/tex/inputs/psfig.tex\
+% \\centerline\{\\psfig\{figure=/usr/local/lib/emacs/man/drawers.eps\}\}\
+% \\catcode`\\@=0 %\
+@end tex\
+@sp 1\
+@end ifset\
+@ifclear print-postscript-figures\
+@iftex\
+@sp 1\
+@smallexample\
+@group\
+            Chest of Drawers            Contents of Drawers\
+\
+            __   o0O0o   __\
+          /                 \\\
+         ---------------------\
+        |    directions to    |            [map to]\
+        |     symbol name     |             bouquet\
+        |                     |\
+        +---------------------+\
+        |    directions to    |\
+        |  symbol definition  |             [none]\
+        |                     |\
+        +---------------------+\
+        |    directions to    |            [map to]\
+        |    variable value   |             (rose violet buttercup)\
+        |                     |\
+        +---------------------+\
+        |    directions to    |\
+        |    property list    |             [not described here]\
+        |                     |\
+        +---------------------+\
+        |/                   \\|\
+@end group\
+@end smallexample\
+@sp 1\
+@end iftex\
+@end ifclear\
+\
+@node List Exercise,  , Symbols as Chest, List Implementation\
+@section Exercise\
+\
+Set @code\{flowers\} to @code\{violet\} and @code\{buttercup\}.  Cons two\
+more flowers on to this list and set this new list to\
+@code\{more-flowers\}.  Set the @sc\{car\} of @code\{flowers\} to a fish.\
+What does the @code\{more-flowers\} list now contain?}

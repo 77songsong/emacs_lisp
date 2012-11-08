@@ -1,0 +1,86 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Lisp Interpreter, Evaluation, Names & Definitions, List Processing\
+@comment  node-name,  next,  previous,  up\
+@section The Lisp Interpreter\
+@cindex Lisp interpreter, what it does\
+@cindex Interpreter, what it does\
+\
+Based on what we have seen, we can now start to figure out what the\
+Lisp interpreter does when we command it to evaluate a list.\
+First, it looks to see whether there is a quote before the list; if\
+there is, the interpreter just gives us the list.  On the other\
+hand, if there is no quote, the interpreter looks at the first element\
+in the list and sees whether it has a function definition.  If it does,\
+the interpreter carries out the instructions in the function definition.\
+Otherwise, the interpreter prints an error message.\
+\
+This is how Lisp works.  Simple.  There are added complications which we\
+will get to in a minute, but these are the fundamentals.  Of course, to\
+write Lisp programs, you need to know how to write function definitions\
+and attach them to names, and how to do this without confusing either\
+yourself or the computer.\
+\
+@menu\
+* Complications::               Variables, Special forms, Lists within.\
+* Byte Compiling::              Specially processing code for speed.\
+@end menu\
+\
+@node Complications, Byte Compiling, Lisp Interpreter, Lisp Interpreter\
+@ifnottex\
+@unnumberedsubsec Complications\
+@end ifnottex\
+\
+Now, for the first complication.  In addition to lists, the Lisp\
+interpreter can evaluate a symbol that is not quoted and does not have\
+parentheses around it.  The Lisp interpreter will attempt to determine\
+the symbol's value as a @dfn\{variable\}.  This situation is described\
+in the section on variables.  (@xref\{Variables\}.)\
+\
+@cindex Special form\
+The second complication occurs because some functions are unusual and do\
+not work in the usual manner.  Those that don't are called @dfn\{special\
+forms\}.  They are used for special jobs, like defining a function, and\
+there are not many of them.  In the next few chapters, you will be\
+introduced to several of the more important special forms.\
+\
+The third and final complication is this: if the function that the\
+Lisp interpreter is looking at is not a special form, and if it is part\
+of a list, the Lisp interpreter looks to see whether the list has a list\
+inside of it.  If there is an inner list, the Lisp interpreter first\
+figures out what it should do with the inside list, and then it works on\
+the outside list.  If there is yet another list embedded inside the\
+inner list, it works on that one first, and so on.  It always works on\
+the innermost list first.  The interpreter works on the innermost list\
+first, to evaluate the result of that list.  The result may be\
+used by the enclosing expression.\
+\
+Otherwise, the interpreter works left to right, from one expression to\
+the next.\
+\
+@node Byte Compiling,  , Complications, Lisp Interpreter\
+@subsection Byte Compiling\
+@cindex Byte compiling\
+\
+One other aspect of interpreting: the Lisp interpreter is able to\
+interpret two kinds of entity: humanly readable code, on which we will\
+focus exclusively, and specially processed code, called @dfn\{byte\
+compiled\} code, which is not humanly readable.  Byte compiled code\
+runs faster than humanly readable code.\
+\
+You can transform humanly readable code into byte compiled code by\
+running one of the compile commands such as @code\{byte-compile-file\}.\
+Byte compiled code is usually stored in a file that ends with a\
+@file\{.elc\} extension rather than a @file\{.el\} extension.  You will\
+see both kinds of file in the @file\{emacs/lisp\} directory; the files\
+to read are those with @file\{.el\} extensions.\
+\
+As a practical matter, for most things you might do to customize or\
+extend Emacs, you do not need to byte compile; and I will not discuss\
+the topic here.  @xref\{Byte Compilation, , Byte Compilation, elisp,\
+The GNU Emacs Lisp Reference Manual\}, for a full description of byte\
+compilation.}

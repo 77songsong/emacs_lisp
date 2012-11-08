@@ -1,0 +1,40 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Names & Definitions, Lisp Interpreter, Making Errors, List Processing\
+@comment  node-name,  next,  previous,  up\
+@section Symbol Names and Function Definitions\
+@cindex Symbol names\
+\
+We can articulate another characteristic of Lisp based on what we have\
+discussed so far---an important characteristic: a symbol, like\
+@code\{+\}, is not itself the set of instructions for the computer to\
+carry out.  Instead, the symbol is used, perhaps temporarily, as a way\
+of locating the definition or set of instructions.  What we see is the\
+name through which the instructions can be found.  Names of people\
+work the same way.  I can be referred to as @samp\{Bob\}; however, I am\
+not the letters @samp\{B\}, @samp\{o\}, @samp\{b\} but am, or was, the\
+consciousness consistently associated with a particular life-form.\
+The name is not me, but it can be used to refer to me.\
+\
+In Lisp, one set of instructions can be attached to several names.\
+For example, the computer instructions for adding numbers can be\
+linked to the symbol @code\{plus\} as well as to the symbol @code\{+\}\
+(and are in some dialects of Lisp).  Among humans, I can be referred\
+to as @samp\{Robert\} as well as @samp\{Bob\} and by other words as well.\
+\
+On the other hand, a symbol can have only one function definition\
+attached to it at a time.  Otherwise, the computer would be confused as\
+to which definition to use.  If this were the case among people, only\
+one person in the world could be named @samp\{Bob\}.  However, the function\
+definition to which the name refers can be changed readily.\
+(@xref\{Install, , Install a Function Definition\}.)\
+\
+Since Emacs Lisp is large, it is customary to name symbols in a way\
+that identifies the part of Emacs to which the function belongs.\
+Thus, all the names for functions that deal with Texinfo start with\
+@samp\{texinfo-\} and those for functions that deal with reading mail\
+start with @samp\{rmail-\}.}

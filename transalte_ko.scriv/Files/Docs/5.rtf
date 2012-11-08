@@ -1,0 +1,834 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \\input texinfo                                      @c -*-texinfo-*-\
+@comment %**start of header\
+@setfilename ../../info/eintr\
+@c setfilename emacs-lisp-intro.info\
+@c sethtmlfilename emacs-lisp-intro.html\
+@settitle Programming in Emacs Lisp\
+@syncodeindex vr cp\
+@syncodeindex fn cp\
+@finalout\
+\
+@c ---------\
+@c <<<< For hard copy printing, this file is now\
+@c      set for smallbook, which works for all sizes\
+@c      of paper, and with Postscript figures >>>>\
+@set smallbook\
+@ifset smallbook\
+@smallbook\
+@clear  largebook\
+@end ifset\
+@set print-postscript-figures\
+@c set largebook\
+@c clear print-postscript-figures\
+@c ---------\
+\
+@comment %**end of header\
+\
+@c per rms and peterb, use 10pt fonts for the main text, mostly to\
+@c save on paper cost.\
+@c Do this inside @tex for now, so current makeinfo does not complain.\
+@tex\
+@ifset smallbook\
+@fonttextsize 10\
+\
+@end ifset\
+\\global\\hbadness=6666 % don't worry about not-too-underfull boxes\
+@end tex\
+\
+@set edition-number 3.10\
+@set update-date 28 October 2009\
+\
+@ignore\
+ ## Summary of shell commands to create various output formats:\
+\
+    pushd /usr/local/src/emacs/lispintro/\
+    ## pushd /u/intro/\
+\
+    ## Info output\
+    makeinfo --paragraph-indent=0 --verbose emacs-lisp-intro.texi\
+\
+      ## ;; (progn (when (bufferp (get-buffer "*info*")) (kill-buffer "*info*")) (info "/usr/local/src/emacs/info/eintr"))\
+\
+    ## DVI output\
+    texi2dvi emacs-lisp-intro.texi\
+\
+      ## xdvi -margins 24pt -topmargin 4pt -offsets 24pt -geometry 760x1140 -s 5 -useTeXpages -mousemode 1 emacs-lisp-intro.dvi &\
+\
+    ## HTML output\
+    makeinfo --html --no-split --verbose emacs-lisp-intro.texi\
+\
+      ## galeon emacs-lisp-intro.html\
+\
+    ## Plain text output\
+    makeinfo --fill-column=70 --no-split --paragraph-indent=0 \\\
+    --verbose --no-headers --output=emacs-lisp-intro.txt emacs-lisp-intro.texi\
+\
+    popd\
+\
+# as user `root'\
+# insert thumbdrive\
+  mtusb       #   mount -v -t ext3 /dev/sda /mnt\
+  cp -v /u/intro/emacs-lisp-intro.texi /mnt/backup/intro/emacs-lisp-intro.texi\
+  umtusb      #   umount -v /mnt\
+# remove thumbdrive\
+\
+    ## Other shell commands\
+\
+    pushd /usr/local/src/emacs/lispintro/\
+    ## pushd /u/intro/\
+\
+    ## PDF\
+    texi2dvi --pdf emacs-lisp-intro.texi\
+       # xpdf emacs-lisp-intro.pdf &\
+\
+    ## DocBook                    -- note file extension\
+    makeinfo --docbook --no-split --paragraph-indent=0 \\\
+    --verbose --output=emacs-lisp-intro.docbook emacs-lisp-intro.texi\
+\
+    ## XML with a Texinfo DTD     -- note file extension\
+    makeinfo --xml --no-split --paragraph-indent=0 \\\
+    --verbose --output=emacs-lisp-intro.texinfoxml emacs-lisp-intro.texi\
+\
+    ## PostScript (needs DVI)\
+        #     gv emacs-lisp-intro.ps &\
+        # Create DVI if we lack it\
+        # texi2dvi emacs-lisp-intro.texi\
+    dvips emacs-lisp-intro.dvi -o emacs-lisp-intro.ps\
+\
+    ## RTF (needs HTML)\
+        # Use OpenOffice to view RTF\
+        # Create HTML if we lack it\
+        # makeinfo --no-split --html emacs-lisp-intro.texi\
+    /usr/local/src/html2rtf.pl emacs-lisp-intro.html\
+\
+    ## LaTeX (needs RTF)\
+    /usr/bin/rtf2latex emacs-lisp-intro.rtf\
+\
+    popd\
+\
+@end ignore\
+\
+@c ================ Included Figures ================\
+\
+@c Set  print-postscript-figures  if you print PostScript figures.\
+@c If you clear this, the ten figures will be printed as ASCII diagrams.\
+@c (This is not relevant to Info, since Info only handles ASCII.)\
+@c Your site may require editing changes to print PostScript; in this\
+@c case, search for `print-postscript-figures' and make appropriate changes.\
+\
+@c ================ How to Create an Info file ================\
+\
+@c If you have `makeinfo' installed, run the following command\
+\
+@c     makeinfo emacs-lisp-intro.texi\
+\
+@c or, if you want a single, large Info file, and no paragraph indents:\
+@c     makeinfo --no-split --paragraph-indent=0 --verbose emacs-lisp-intro.texi\
+\
+@c After creating the Info file, edit your Info `dir' file, if the\
+@c `dircategory' section below does not enable your system to\
+@c install the manual automatically.\
+@c (The `dir' file is often in the `/usr/local/share/info/' directory.)\
+\
+@c ================ How to Create an HTML file ================\
+\
+@c To convert to HTML format\
+@c     makeinfo --html --no-split --verbose emacs-lisp-intro.texi\
+\
+@c ================ How to Print a Book in Various Sizes ================\
+\
+@c This book can be printed in any of three different sizes.\
+@c In the above header, set @-commands appropriately.\
+\
+@c     7 by 9.25 inches:\
+@c              @smallbook\
+@c              @clear largebook\
+\
+@c     8.5 by 11 inches:\
+@c              @c smallbook\
+@c              @set largebook\
+\
+@c     European A4 size paper:\
+@c              @c smallbook\
+@c              @afourpaper\
+@c              @set largebook\
+\
+@c ================ How to Typeset and Print ================\
+\
+@c If you do not include PostScript figures, run either of the\
+@c following command sequences, or similar commands suited to your\
+@c system:\
+\
+@c     texi2dvi emacs-lisp-intro.texi\
+@c     lpr -d emacs-lisp-intro.dvi\
+\
+@c or else:\
+\
+@c     tex emacs-lisp-intro.texi\
+@c     texindex emacs-lisp-intro.??\
+@c     tex emacs-lisp-intro.texi\
+@c     lpr -d emacs-lisp-intro.dvi\
+\
+@c If you include the PostScript figures, and you have old software,\
+@c you may need to convert the .dvi file to a .ps file before\
+@c printing.  Run either of the following command sequences, or one\
+@c similar:\
+@c\
+@c     dvips -f < emacs-lisp-intro.dvi > emacs-lisp-intro.ps\
+@c\
+@c or else:\
+@c\
+@c     postscript -p < emacs-lisp-intro.dvi > emacs-lisp-intro.ps\
+@c\
+\
+@c (Note: if you edit the book so as to change the length of the\
+@c table of contents, you may have to change the value of `pageno' below.)\
+\
+@c ================ End of Formatting Sections ================\
+\
+@c For next or subsequent edition:\
+@c   create function using with-output-to-temp-buffer\
+@c   create a major mode, with keymaps\
+@c   run an asynchronous process, like grep or diff\
+\
+@c For 8.5 by 11 inch format: do not use such a small amount of\
+@c whitespace between paragraphs as smallbook format\
+@ifset largebook\
+@tex\
+\\global\\parskip 6pt plus 1pt\
+@end tex\
+@end ifset\
+\
+@c For all sized formats:  print within-book cross\
+@c reference with ``...''  rather than [...]\
+\
+@c This works with the texinfo.tex file, version 2003-05-04.08,\
+@c in the Texinfo version 4.6 of the 2003 Jun 13 distribution.\
+\
+@tex\
+\\if \\xrefprintnodename\
+ \\global\\def\\xrefprintnodename#1\{\\unskip, ``#1''\}\
+ \\else\
+ \\global\\def\\xrefprintnodename#1\{ ``#1''\}\
+\\fi\
+% \\global\\def\\xrefprintnodename#1\{, ``#1''\}\
+@end tex\
+\
+@c ----------------------------------------------------\
+\
+@dircategory Emacs\
+@direntry\
+* Emacs Lisp Intro: (eintr).\
+                          A simple introduction to Emacs Lisp programming.\
+@end direntry\
+\
+@copying\
+This is an @cite\{Introduction to Programming in Emacs Lisp\}, for\
+people who are not programmers.\
+@sp 1\
+Edition @value\{edition-number\}, @value\{update-date\}\
+@sp 1\
+Copyright @copyright\{\} 1990, 1991, 1992, 1993, 1994, 1995, 1997, 2001,\
+   2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010\
+   Free Software Foundation, Inc.\
+@sp 1\
+\
+@iftex\
+Published by the:@*\
+\
+GNU Press,                      @hfill  @uref\{http://www.gnupress.org\}@*\
+a division of the               @hfill General: @email\{press@@gnu.org\}@*\
+Free Software Foundation, Inc.  @hfill Orders:@w\{ \}  @email\{sales@@gnu.org\}@*\
+51 Franklin Street, Fifth Floor @hfill Tel: +1 (617) 542-5942@*\
+Boston, MA 02110-1301 USA       @hfill Fax: +1 (617) 542-2652@*\
+@end iftex\
+\
+@ifnottex\
+Published by the:\
+\
+@example\
+GNU Press,                          Website: http://www.gnupress.org\
+a division of the                   General: press@@gnu.org\
+Free Software Foundation, Inc.      Orders:  sales@@gnu.org\
+51 Franklin Street, Fifth Floor     Tel: +1 (617) 542-5942\
+Boston, MA 02110-1301 USA           Fax: +1 (617) 542-2652\
+@end example\
+@end ifnottex\
+\
+@sp 1\
+@c Printed copies are available for $30 each.@*\
+ISBN 1-882114-43-4\
+\
+Permission is granted to copy, distribute and/or modify this document\
+under the terms of the GNU Free Documentation License, Version 1.3 or\
+any later version published by the Free Software Foundation; there\
+being no Invariant Section, with the Front-Cover Texts being ``A GNU\
+Manual'', and with the Back-Cover Texts as in (a) below.  A copy of\
+the license is included in the section entitled ``GNU Free\
+Documentation License''.\
+\
+(a) The FSF's Back-Cover Text is: ``You have the freedom to\
+copy and modify this GNU manual.  Buying copies from the FSF\
+supports it in developing GNU and promoting software freedom.''\
+@end copying\
+\
+@c half title; two lines here, so do not use `shorttitlepage'\
+@tex\
+\{\\begingroup%\
+    \\hbox\{\}\\vskip 1.5in \\chaprm \\centerline\{An Introduction to\}%\
+        \\endgroup\}%\
+\{\\begingroup\\hbox\{\}\\vskip 0.25in \\chaprm%\
+        \\centerline\{Programming in Emacs Lisp\}%\
+        \\endgroup\\page\\hbox\{\}\\page\}\
+@end tex\
+\
+@titlepage\
+@sp 6\
+@center @titlefont\{An Introduction to\}\
+@sp 2\
+@center @titlefont\{Programming in Emacs Lisp\}\
+@sp 2\
+@center Revised Third Edition\
+@sp 4\
+@center by Robert J. Chassell\
+\
+@page\
+@vskip 0pt plus 1filll\
+@insertcopying\
+@end titlepage\
+\
+@iftex\
+@headings off\
+@evenheading @thispage @| @| @thischapter\
+@oddheading @thissection @| @| @thispage\
+@end iftex\
+\
+@ifnothtml\
+@c     Keep T.O.C. short by tightening up for largebook\
+@ifset largebook\
+@tex\
+\\global\\parskip 2pt plus 1pt\
+\\global\\advance\\baselineskip by -1pt\
+@end tex\
+@end ifset\
+@end ifnothtml\
+\
+@shortcontents\
+@contents\
+\
+@ifnottex\
+@node Top, Preface, (dir), (dir)\
+@top An Introduction to Programming in Emacs Lisp\
+\
+@insertcopying\
+\
+This master menu first lists each chapter and index; then it lists\
+every node in every chapter.\
+@end ifnottex\
+\
+@c >>>> Set pageno appropriately <<<<\
+\
+@c The first page of the Preface is a roman numeral; it is the first\
+@c right handed page after the Table of Contents; hence the following\
+@c setting must be for an odd negative number.\
+\
+@c iftex\
+@c global@pageno = -11\
+@c end iftex\
+\
+@menu\
+* Preface::                     What to look for.\
+* List Processing::             What is Lisp?\
+* Practicing Evaluation::       Running several programs.\
+* Writing Defuns::              How to write function definitions.\
+* Buffer Walk Through::         Exploring a few buffer-related functions.\
+* More Complex::                A few, even more complex functions.\
+* Narrowing & Widening::        Restricting your and Emacs attention to\
+                                    a region.\
+* car cdr & cons::              Fundamental functions in Lisp.\
+* Cutting & Storing Text::      Removing text and saving it.\
+* List Implementation::         How lists are implemented in the computer.\
+* Yanking::                     Pasting stored text.\
+* Loops & Recursion::           How to repeat a process.\
+* Regexp Search::               Regular expression searches.\
+* Counting Words::              A review of repetition and regexps.\
+* Words in a defun::            Counting words in a @code\{defun\}.\
+* Readying a Graph::            A prototype graph printing function.\
+* Emacs Initialization::        How to write a @file\{.emacs\} file.\
+* Debugging::                   How to run the Emacs Lisp debuggers.\
+* Conclusion::                  Now you have the basics.\
+* the-the::                     An appendix: how to find reduplicated words.\
+* Kill Ring::                   An appendix: how the kill ring works.\
+* Full Graph::                  How to create a graph with labelled axes.\
+* Free Software and Free Manuals::\
+* GNU Free Documentation License::\
+* Index::\
+* About the Author::\
+\
+@detailmenu\
+ --- The Detailed Node Listing ---\
+\
+Preface\
+\
+* Why::                         Why learn Emacs Lisp?\
+* On Reading this Text::        Read, gain familiarity, pick up habits....\
+* Who You Are::                 For whom this is written.\
+* Lisp History::\
+* Note for Novices::            You can read this as a novice.\
+* Thank You::\
+\
+List Processing\
+\
+* Lisp Lists::                  What are lists?\
+* Run a Program::               Any list in Lisp is a program ready to run.\
+* Making Errors::               Generating an error message.\
+* Names & Definitions::         Names of symbols and function definitions.\
+* Lisp Interpreter::            What the Lisp interpreter does.\
+* Evaluation::                  Running a program.\
+* Variables::                   Returning a value from a variable.\
+* Arguments::                   Passing information to a function.\
+* set & setq::                  Setting the value of a variable.\
+* Summary::                     The major points.\
+* Error Message Exercises::\
+\
+Lisp Lists\
+\
+* Numbers Lists::               List have numbers, other lists, in them.\
+* Lisp Atoms::                  Elemental entities.\
+* Whitespace in Lists::         Formatting lists to be readable.\
+* Typing Lists::                How GNU Emacs helps you type lists.\
+\
+The Lisp Interpreter\
+\
+* Complications::               Variables, Special forms, Lists within.\
+* Byte Compiling::              Specially processing code for speed.\
+\
+Evaluation\
+\
+* How the Interpreter Acts::    Returns and Side Effects...\
+* Evaluating Inner Lists::      Lists within lists...\
+\
+Variables\
+\
+* fill-column Example::\
+* Void Function::               The error message for a symbol\
+                                  without a function.\
+* Void Variable::               The error message for a symbol without a value.\
+\
+Arguments\
+\
+* Data types::                  Types of data passed to a function.\
+* Args as Variable or List::    An argument can be the value\
+                                  of a variable or list.\
+* Variable Number of Arguments::  Some functions may take a\
+                                  variable number of arguments.\
+* Wrong Type of Argument::      Passing an argument of the wrong type\
+                                  to a function.\
+* message::                     A useful function for sending messages.\
+\
+Setting the Value of a Variable\
+\
+* Using set::                  Setting values.\
+* Using setq::                 Setting a quoted value.\
+* Counting::                   Using @code\{setq\} to count.\
+\
+Practicing Evaluation\
+\
+* How to Evaluate::            Typing editing commands or @kbd\{C-x C-e\}\
+                                 causes evaluation.\
+* Buffer Names::               Buffers and files are different.\
+* Getting Buffers::            Getting a buffer itself, not merely its name.\
+* Switching Buffers::          How to change to another buffer.\
+* Buffer Size & Locations::    Where point is located and the size of\
+                               the buffer.\
+* Evaluation Exercise::\
+\
+How To Write Function Definitions\
+\
+* Primitive Functions::\
+* defun::                        The @code\{defun\} special form.\
+* Install::                      Install a function definition.\
+* Interactive::                  Making a function interactive.\
+* Interactive Options::          Different options for @code\{interactive\}.\
+* Permanent Installation::       Installing code permanently.\
+* let::                          Creating and initializing local variables.\
+* if::                           What if?\
+* else::                         If--then--else expressions.\
+* Truth & Falsehood::            What Lisp considers false and true.\
+* save-excursion::               Keeping track of point, mark, and buffer.\
+* Review::\
+* defun Exercises::\
+\
+Install a Function Definition\
+\
+* Effect of installation::\
+* Change a defun::              How to change a function definition.\
+\
+Make a Function Interactive\
+\
+* Interactive multiply-by-seven::  An overview.\
+* multiply-by-seven in detail::    The interactive version.\
+\
+@code\{let\}\
+\
+* Prevent confusion::\
+* Parts of let Expression::\
+* Sample let Expression::\
+* Uninitialized let Variables::\
+\
+The @code\{if\} Special Form\
+\
+* if in more detail::\
+* type-of-animal in detail::    An example of an @code\{if\} expression.\
+\
+Truth and Falsehood in Emacs Lisp\
+\
+* nil explained::               @code\{nil\} has two meanings.\
+\
+@code\{save-excursion\}\
+\
+* Point and mark::              A review of various locations.\
+* Template for save-excursion::\
+\
+A Few Buffer--Related Functions\
+\
+* Finding More::                How to find more information.\
+* simplified-beginning-of-buffer::  Shows @code\{goto-char\},\
+                                @code\{point-min\}, and @code\{push-mark\}.\
+* mark-whole-buffer::           Almost the same as @code\{beginning-of-buffer\}.\
+* append-to-buffer::            Uses @code\{save-excursion\} and\
+                                @code\{insert-buffer-substring\}.\
+* Buffer Related Review::       Review.\
+* Buffer Exercises::\
+\
+The Definition of @code\{mark-whole-buffer\}\
+\
+* mark-whole-buffer overview::\
+* Body of mark-whole-buffer::   Only three lines of code.\
+\
+The Definition of @code\{append-to-buffer\}\
+\
+* append-to-buffer overview::\
+* append interactive::          A two part interactive expression.\
+* append-to-buffer body::       Incorporates a @code\{let\} expression.\
+* append save-excursion::       How the @code\{save-excursion\} works.\
+\
+A Few More Complex Functions\
+\
+* copy-to-buffer::              With @code\{set-buffer\}, @code\{get-buffer-create\}.\
+* insert-buffer::               Read-only, and with @code\{or\}.\
+* beginning-of-buffer::         Shows @code\{goto-char\},\
+                                @code\{point-min\}, and @code\{push-mark\}.\
+* Second Buffer Related Review::\
+* optional Exercise::\
+\
+The Definition of @code\{insert-buffer\}\
+\
+* insert-buffer code::\
+* insert-buffer interactive::   When you can read, but not write.\
+* insert-buffer body::          The body has an @code\{or\} and a @code\{let\}.\
+* if & or::                     Using an @code\{if\} instead of an @code\{or\}.\
+* Insert or::                   How the @code\{or\} expression works.\
+* Insert let::                  Two @code\{save-excursion\} expressions.\
+* New insert-buffer::\
+\
+The Interactive Expression in @code\{insert-buffer\}\
+\
+* Read-only buffer::            When a buffer cannot be modified.\
+* b for interactive::           An existing buffer or else its name.\
+\
+Complete Definition of @code\{beginning-of-buffer\}\
+\
+* Optional Arguments::\
+* beginning-of-buffer opt arg::  Example with optional argument.\
+* beginning-of-buffer complete::\
+\
+@code\{beginning-of-buffer\} with an Argument\
+\
+* Disentangle beginning-of-buffer::\
+* Large buffer case::\
+* Small buffer case::\
+\
+Narrowing and Widening\
+\
+* Narrowing advantages::        The advantages of narrowing\
+* save-restriction::            The @code\{save-restriction\} special form.\
+* what-line::                   The number of the line that point is on.\
+* narrow Exercise::\
+\
+@code\{car\}, @code\{cdr\}, @code\{cons\}: Fundamental Functions\
+\
+* Strange Names::               An historical aside: why the strange names?\
+* car & cdr::                   Functions for extracting part of a list.\
+* cons::                        Constructing a list.\
+* nthcdr::                      Calling @code\{cdr\} repeatedly.\
+* nth::\
+* setcar::                      Changing the first element of a list.\
+* setcdr::                      Changing the rest of a list.\
+* cons Exercise::\
+\
+@code\{cons\}\
+\
+* Build a list::\
+* length::                      How to find the length of a list.\
+\
+Cutting and Storing Text\
+\
+* Storing Text::                Text is stored in a list.\
+* zap-to-char::                 Cutting out text up to a character.\
+* kill-region::                 Cutting text out of a region.\
+* copy-region-as-kill::         A definition for copying text.\
+* Digression into C::           Minor note on C programming language macros.\
+* defvar::                      How to give a variable an initial value.\
+* cons & search-fwd Review::\
+* search Exercises::\
+\
+@code\{zap-to-char\}\
+\
+* Complete zap-to-char::        The complete implementation.\
+* zap-to-char interactive::     A three part interactive expression.\
+* zap-to-char body::            A short overview.\
+* search-forward::              How to search for a string.\
+* progn::                       The @code\{progn\} special form.\
+* Summing up zap-to-char::      Using @code\{point\} and @code\{search-forward\}.\
+\
+@code\{kill-region\}\
+\
+* Complete kill-region::        The function definition.\
+* condition-case::              Dealing with a problem.\
+* Lisp macro::\
+\
+@code\{copy-region-as-kill\}\
+\
+* Complete copy-region-as-kill::  The complete function definition.\
+* copy-region-as-kill body::      The body of @code\{copy-region-as-kill\}.\
+\
+The Body of @code\{copy-region-as-kill\}\
+\
+* last-command & this-command::\
+* kill-append function::\
+* kill-new function::\
+\
+Initializing a Variable with @code\{defvar\}\
+\
+* See variable current value::\
+* defvar and asterisk::\
+\
+How Lists are Implemented\
+\
+* Lists diagrammed::\
+* Symbols as Chest::            Exploring a powerful metaphor.\
+* List Exercise::\
+\
+Yanking Text Back\
+\
+* Kill Ring Overview::\
+* kill-ring-yank-pointer::      The kill ring is a list.\
+* yank nthcdr Exercises::       The @code\{kill-ring-yank-pointer\} variable.\
+\
+Loops and Recursion\
+\
+* while::                       Causing a stretch of code to repeat.\
+* dolist dotimes::\
+* Recursion::                   Causing a function to call itself.\
+* Looping exercise::\
+\
+@code\{while\}\
+\
+* Looping with while::          Repeat so long as test returns true.\
+* Loop Example::                A @code\{while\} loop that uses a list.\
+* print-elements-of-list::      Uses @code\{while\}, @code\{car\}, @code\{cdr\}.\
+* Incrementing Loop::           A loop with an incrementing counter.\
+* Incrementing Loop Details::\
+* Decrementing Loop::           A loop with a decrementing counter.\
+\
+Details of an Incrementing Loop\
+\
+* Incrementing Example::        Counting pebbles in a triangle.\
+* Inc Example parts::           The parts of the function definition.\
+* Inc Example altogether::      Putting the function definition together.\
+\
+Loop with a Decrementing Counter\
+\
+* Decrementing Example::        More pebbles on the beach.\
+* Dec Example parts::           The parts of the function definition.\
+* Dec Example altogether::      Putting the function definition together.\
+\
+Save your time: @code\{dolist\} and @code\{dotimes\}\
+\
+* dolist::\
+* dotimes::\
+\
+Recursion\
+\
+* Building Robots::             Same model, different serial number ...\
+* Recursive Definition Parts::  Walk until you stop ...\
+* Recursion with list::         Using a list as the test whether to recurse.\
+* Recursive triangle function::\
+* Recursion with cond::\
+* Recursive Patterns::          Often used templates.\
+* No Deferment::                Don't store up work ...\
+* No deferment solution::\
+\
+Recursion in Place of a Counter\
+\
+* Recursive Example arg of 1 or 2::\
+* Recursive Example arg of 3 or 4::\
+\
+Recursive Patterns\
+\
+* Every::\
+* Accumulate::\
+* Keep::\
+\
+Regular Expression Searches\
+\
+* sentence-end::                The regular expression for @code\{sentence-end\}.\
+* re-search-forward::           Very similar to @code\{search-forward\}.\
+* forward-sentence::            A straightforward example of regexp search.\
+* forward-paragraph::           A somewhat complex example.\
+* etags::                       How to create your own @file\{TAGS\} table.\
+* Regexp Review::\
+* re-search Exercises::\
+\
+@code\{forward-sentence\}\
+\
+* Complete forward-sentence::\
+* fwd-sentence while loops::    Two @code\{while\} loops.\
+* fwd-sentence re-search::      A regular expression search.\
+\
+@code\{forward-paragraph\}: a Goldmine of Functions\
+\
+* forward-paragraph in brief::  Key parts of the function definition.\
+* fwd-para let::                The @code\{let*\} expression.\
+* fwd-para while::              The forward motion @code\{while\} loop.\
+\
+Counting: Repetition and Regexps\
+\
+* Why Count Words::\
+* count-words-region::          Use a regexp, but find a problem.\
+* recursive-count-words::       Start with case of no words in region.\
+* Counting Exercise::\
+\
+The @code\{count-words-region\} Function\
+\
+* Design count-words-region::   The definition using a @code\{while\} loop.\
+* Whitespace Bug::              The Whitespace Bug in @code\{count-words-region\}.\
+\
+Counting Words in a @code\{defun\}\
+\
+* Divide and Conquer::\
+* Words and Symbols::           What to count?\
+* Syntax::                      What constitutes a word or symbol?\
+* count-words-in-defun::        Very like @code\{count-words\}.\
+* Several defuns::              Counting several defuns in a file.\
+* Find a File::                 Do you want to look at a file?\
+* lengths-list-file::           A list of the lengths of many definitions.\
+* Several files::               Counting in definitions in different files.\
+* Several files recursively::   Recursively counting in different files.\
+* Prepare the data::            Prepare the data for display in a graph.\
+\
+Count Words in @code\{defuns\} in Different Files\
+\
+* lengths-list-many-files::     Return a list of the lengths of defuns.\
+* append::                      Attach one list to another.\
+\
+Prepare the Data for Display in a Graph\
+\
+* Data for Display in Detail::\
+* Sorting::                     Sorting lists.\
+* Files List::                  Making a list of files.\
+* Counting function definitions::\
+\
+Readying a Graph\
+\
+* Columns of a graph::\
+* graph-body-print::            How to print the body of a graph.\
+* recursive-graph-body-print::\
+* Printed Axes::\
+* Line Graph Exercise::\
+\
+Your @file\{.emacs\} File\
+\
+* Default Configuration::\
+* Site-wide Init::              You can write site-wide init files.\
+* defcustom::                   Emacs will write code for you.\
+* Beginning a .emacs File::     How to write a @code\{.emacs file\}.\
+* Text and Auto-fill::          Automatically wrap lines.\
+* Mail Aliases::                Use abbreviations for email addresses.\
+* Indent Tabs Mode::            Don't use tabs with @TeX\{\}\
+* Keybindings::                 Create some personal keybindings.\
+* Keymaps::                     More about key binding.\
+* Loading Files::               Load (i.e., evaluate) files automatically.\
+* Autoload::                    Make functions available.\
+* Simple Extension::            Define a function; bind it to a key.\
+* X11 Colors::                  Colors in X.\
+* Miscellaneous::\
+* Mode Line::                   How to customize your mode line.\
+\
+Debugging\
+\
+* debug::                       How to use the built-in debugger.\
+* debug-on-entry::              Start debugging when you call a function.\
+* debug-on-quit::               Start debugging when you quit with @kbd\{C-g\}.\
+* edebug::                      How to use Edebug, a source level debugger.\
+* Debugging Exercises::\
+\
+Handling the Kill Ring\
+\
+* What the Kill Ring Does::\
+* current-kill::\
+* yank::                        Paste a copy of a clipped element.\
+* yank-pop::                    Insert element pointed to.\
+* ring file::\
+\
+The @code\{current-kill\} Function\
+\
+* Code for current-kill::\
+* Understanding current-kill::\
+\
+@code\{current-kill\} in Outline\
+\
+* Body of current-kill::\
+* Digression concerning error::  How to mislead humans, but not computers.\
+* Determining the Element::\
+\
+A Graph with Labelled Axes\
+\
+* Labelled Example::\
+* print-graph Varlist::         @code\{let\} expression in @code\{print-graph\}.\
+* print-Y-axis::                Print a label for the vertical axis.\
+* print-X-axis::                Print a horizontal label.\
+* Print Whole Graph::           The function to print a complete graph.\
+\
+The @code\{print-Y-axis\} Function\
+\
+* print-Y-axis in Detail::\
+* Height of label::             What height for the Y axis?\
+* Compute a Remainder::         How to compute the remainder of a division.\
+* Y Axis Element::              Construct a line for the Y axis.\
+* Y-axis-column::               Generate a list of Y axis labels.\
+* print-Y-axis Penultimate::    A not quite final version.\
+\
+The @code\{print-X-axis\} Function\
+\
+* Similarities differences::    Much like @code\{print-Y-axis\}, but not exactly.\
+* X Axis Tic Marks::            Create tic marks for the horizontal axis.\
+\
+Printing the Whole Graph\
+\
+* The final version::           A few changes.\
+* Test print-graph::            Run a short test.\
+* Graphing words in defuns::    Executing the final code.\
+* lambda::                      How to write an anonymous function.\
+* mapcar::                      Apply a function to elements of a list.\
+* Another Bug::                 Yet another bug @dots\{\} most insidious.\
+* Final printed graph::         The graph itself!\
+\
+@end detailmenu\
+@end menu}

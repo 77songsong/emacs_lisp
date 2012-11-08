@@ -1,0 +1,113 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Evaluation, Variables, Lisp Interpreter, List Processing\
+@comment  node-name,  next,  previous,  up\
+@section Evaluation\
+@cindex Evaluation\
+\
+When the Lisp interpreter works on an expression, the term for the\
+activity is called @dfn\{evaluation\}.  We say that the interpreter\
+`evaluates the expression'.  I've used this term several times before.\
+The word comes from its use in everyday language, `to ascertain the\
+value or amount of; to appraise', according to @cite\{Webster's New\
+Collegiate Dictionary\}.\
+\
+@menu\
+* How the Interpreter Acts::    Returns and Side Effects...\
+* Evaluating Inner Lists::      Lists within lists...\
+@end menu\
+\
+@node How the Interpreter Acts, Evaluating Inner Lists, Evaluation, Evaluation\
+@ifnottex\
+@unnumberedsubsec How the Lisp Interpreter Acts\
+@end ifnottex\
+\
+@cindex @samp\{returned value\} explained\
+After evaluating an expression, the Lisp interpreter will most likely\
+@dfn\{return\} the value that the computer produces by carrying out the\
+instructions it found in the function definition, or perhaps it will\
+give up on that function and produce an error message.  (The interpreter\
+may also find itself tossed, so to speak, to a different function or it\
+may attempt to repeat continually what it is doing for ever and ever in\
+what is called an `infinite loop'.  These actions are less common; and\
+we can ignore them.)  Most frequently, the interpreter returns a value.\
+\
+@cindex @samp\{side effect\} defined\
+At the same time the interpreter returns a value, it may do something\
+else as well, such as move a cursor or copy a file; this other kind of\
+action is called a @dfn\{side effect\}.  Actions that we humans think are\
+important, such as printing results, are often ``side effects'' to the\
+Lisp interpreter.  The jargon can sound peculiar, but it turns out that\
+it is fairly easy to learn to use side effects.\
+\
+In summary, evaluating a symbolic expression most commonly causes the\
+Lisp interpreter to return a value and perhaps carry out a side effect;\
+or else produce an error.\
+\
+@node Evaluating Inner Lists,  , How the Interpreter Acts, Evaluation\
+@comment  node-name,  next,  previous,  up\
+@subsection Evaluating Inner Lists\
+@cindex Inner list evaluation\
+@cindex Evaluating inner lists\
+\
+If evaluation applies to a list that is inside another list, the outer\
+list may use the value returned by the first evaluation as information\
+when the outer list is evaluated.  This explains why inner expressions\
+are evaluated first: the values they return are used by the outer\
+expressions.\
+\
+@need 1250\
+We can investigate this process by evaluating another addition example.\
+Place your cursor after the following expression and type @kbd\{C-x C-e\}:\
+\
+@smallexample\
+(+ 2 (+ 3 3))\
+@end smallexample\
+\
+@noindent\
+The number 8 will appear in the echo area.\
+\
+What happens is that the Lisp interpreter first evaluates the inner\
+expression, @code\{(+ 3 3)\}, for which the value 6 is returned; then it\
+evaluates the outer expression as if it were written @code\{(+ 2 6)\}, which\
+returns the value 8.  Since there are no more enclosing expressions to\
+evaluate, the interpreter prints that value in the echo area.\
+\
+Now it is easy to understand the name of the command invoked by the\
+keystrokes @kbd\{C-x C-e\}: the name is @code\{eval-last-sexp\}.  The\
+letters @code\{sexp\} are an abbreviation for `symbolic expression', and\
+@code\{eval\} is an abbreviation for `evaluate'.  The command means\
+`evaluate last symbolic expression'.\
+\
+As an experiment, you can try evaluating the expression by putting the\
+cursor at the beginning of the next line immediately following the\
+expression, or inside the expression.\
+\
+@need 800\
+Here is another copy of the expression:\
+\
+@smallexample\
+(+ 2 (+ 3 3))\
+@end smallexample\
+\
+@noindent\
+If you place the cursor at the beginning of the blank line that\
+immediately follows the expression and type @kbd\{C-x C-e\}, you will\
+still get the value 8 printed in the echo area.  Now try putting the\
+cursor inside the expression.  If you put it right after the next to\
+last parenthesis (so it appears to sit on top of the last parenthesis),\
+you will get a 6 printed in the echo area!  This is because the command\
+evaluates the expression @code\{(+ 3 3)\}.\
+\
+Now put the cursor immediately after a number.  Type @kbd\{C-x C-e\} and\
+you will get the number itself.  In Lisp, if you evaluate a number, you\
+get the number itself---this is how numbers differ from symbols.  If you\
+evaluate a list starting with a symbol like @code\{+\}, you will get a\
+value returned that is the result of the computer carrying out the\
+instructions in the function definition attached to that name.  If a\
+symbol by itself is evaluated, something different happens, as we will\
+see in the next section.}

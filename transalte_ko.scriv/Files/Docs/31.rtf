@@ -1,0 +1,204 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Variables, Arguments, Evaluation, List Processing\
+@comment  node-name,  next,  previous,  up\
+@section Variables\
+@cindex Variables\
+\
+In Emacs Lisp, a symbol can have a value attached to it just as it can\
+have a function definition attached to it.  The two are different.\
+The function definition is a set of instructions that a computer will\
+obey.  A value, on the other hand, is something, such as number or a\
+name, that can vary (which is why such a symbol is called a variable).\
+The value of a symbol can be any expression in Lisp, such as a symbol,\
+number, list, or string.  A symbol that has a value is often called a\
+@dfn\{variable\}.\
+\
+A symbol can have both a function definition and a value attached to\
+it at the same time.  Or it can have just one or the other.\
+The two are separate.  This is somewhat similar\
+to the way the name Cambridge can refer to the city in Massachusetts\
+and have some information attached to the name as well, such as\
+``great programming center''.\
+\
+@ignore\
+(Incidentally, in Emacs Lisp, a symbol can have two\
+other things attached to it, too: a property list and a documentation\
+string; these are discussed later.)\
+@end ignore\
+\
+Another way to think about this is to imagine a symbol as being a chest\
+of drawers.  The function definition is put in one drawer, the value in\
+another, and so on.  What is put in the drawer holding the value can be\
+changed without affecting the contents of the drawer holding the\
+function definition, and vice-verse.\
+\
+@menu\
+* fill-column Example::\
+* Void Function::               The error message for a symbol\
+                                  without a function.\
+* Void Variable::               The error message for a symbol without a value.\
+@end menu\
+\
+@node fill-column Example, Void Function, Variables, Variables\
+@ifnottex\
+@unnumberedsubsec @code\{fill-column\}, an Example Variable\
+@end ifnottex\
+\
+@findex fill-column, @r\{an example variable\}\
+@cindex Example variable, @code\{fill-column\}\
+@cindex Variable, example of, @code\{fill-column\}\
+The variable @code\{fill-column\} illustrates a symbol with a value\
+attached to it: in every GNU Emacs buffer, this symbol is set to some\
+value, usually 72 or 70, but sometimes to some other value.  To find the\
+value of this symbol, evaluate it by itself.  If you are reading this in\
+Info inside of GNU Emacs, you can do this by putting the cursor after\
+the symbol and typing @kbd\{C-x C-e\}:\
+\
+@smallexample\
+fill-column\
+@end smallexample\
+\
+@noindent\
+After I typed @kbd\{C-x C-e\}, Emacs printed the number 72 in my echo\
+area.  This is the value for which @code\{fill-column\} is set for me as I\
+write this.  It may be different for you in your Info buffer.  Notice\
+that the value returned as a variable is printed in exactly the same way\
+as the value returned by a function carrying out its instructions.  From\
+the point of view of the Lisp interpreter, a value returned is a value\
+returned.  What kind of expression it came from ceases to matter once\
+the value is known.\
+\
+A symbol can have any value attached to it or, to use the jargon, we can\
+@dfn\{bind\} the variable to a value: to a number, such as 72; to a\
+string, @code\{"such as this"\}; to a list, such as @code\{(spruce pine\
+oak)\}; we can even bind a variable to a function definition.\
+\
+A symbol can be bound to a value in several ways.  @xref\{set & setq, ,\
+Setting the Value of a Variable\}, for information about one way to do\
+this.\
+\
+@node Void Function, Void Variable, fill-column Example, Variables\
+@comment  node-name,  next,  previous,  up\
+@subsection Error Message for a Symbol Without a Function\
+@cindex Symbol without function error\
+@cindex Error for symbol without function\
+\
+When we evaluated @code\{fill-column\} to find its value as a variable,\
+we did not place parentheses around the word.  This is because we did\
+not intend to use it as a function name.\
+\
+If @code\{fill-column\} were the first or only element of a list, the\
+Lisp interpreter would attempt to find the function definition\
+attached to it.  But @code\{fill-column\} has no function definition.\
+Try evaluating this:\
+\
+@smallexample\
+(fill-column)\
+@end smallexample\
+\
+@need 1250\
+@noindent\
+In GNU Emacs version 22, you will create a @file\{*Backtrace*\} buffer\
+that says:\
+\
+@smallexample\
+@group\
+---------- Buffer: *Backtrace* ----------\
+Debugger entered--Lisp error: (void-function fill-column)\
+  (fill-column)\
+  eval((fill-column))\
+  eval-last-sexp-1(nil)\
+  eval-last-sexp(nil)\
+  call-interactively(eval-last-sexp)\
+---------- Buffer: *Backtrace* ----------\
+@end group\
+@end smallexample\
+\
+@noindent\
+(Remember, to quit the debugger and make the debugger window go away,\
+type @kbd\{q\} in the @file\{*Backtrace*\} buffer.)\
+\
+@ignore\
+@need 800\
+In GNU Emacs 20 and before, you will produce an error message that says:\
+\
+@smallexample\
+Symbol's function definition is void:@: fill-column\
+@end smallexample\
+\
+@noindent\
+(The message will go away as soon as you move the cursor or type\
+another key.)\
+@end ignore\
+\
+@node Void Variable,  , Void Function, Variables\
+@comment  node-name,  next,  previous,  up\
+@subsection Error Message for a Symbol Without a Value\
+@cindex Symbol without value error\
+@cindex Error for symbol without value\
+\
+If you attempt to evaluate a symbol that does not have a value bound to\
+it, you will receive an error message.  You can see this by\
+experimenting with our 2 plus 2 addition.  In the following expression,\
+put your cursor right after the @code\{+\}, before the first number 2,\
+type @kbd\{C-x C-e\}:\
+\
+@smallexample\
+(+ 2 2)\
+@end smallexample\
+\
+@need 1500\
+@noindent\
+In GNU Emacs 22, you will create a @file\{*Backtrace*\} buffer that\
+says:\
+\
+@smallexample\
+@group\
+---------- Buffer: *Backtrace* ----------\
+Debugger entered--Lisp error: (void-variable +)\
+  eval(+)\
+  eval-last-sexp-1(nil)\
+  eval-last-sexp(nil)\
+  call-interactively(eval-last-sexp)\
+---------- Buffer: *Backtrace* ----------\
+@end group\
+@end smallexample\
+\
+@noindent\
+(As with the other times we entered the debugger, you can quit by\
+typing @kbd\{q\} in the @file\{*Backtrace*\} buffer.)\
+\
+This backtrace is different from the very first error message we saw,\
+which said, @samp\{Debugger entered--Lisp error: (void-function this)\}.\
+In this case, the function does not have a value as a variable; while\
+in the other error message, the function (the word `this') did not\
+have a definition.\
+\
+In this experiment with the @code\{+\}, what we did was cause the Lisp\
+interpreter to evaluate the @code\{+\} and look for the value of the\
+variable instead of the function definition.  We did this by placing the\
+cursor right after the symbol rather than after the parenthesis of the\
+enclosing list as we did before.  As a consequence, the Lisp interpreter\
+evaluated the preceding s-expression, which in this case was the\
+@code\{+\} by itself.\
+\
+Since @code\{+\} does not have a value bound to it, just the function\
+definition, the error message reported that the symbol's value as a\
+variable was void.\
+\
+@ignore\
+@need 800\
+In GNU Emacs version 20 and before, your error message will say:\
+\
+@example\
+Symbol's value as variable is void:@: +\
+@end example\
+\
+@noindent\
+The meaning is the same as in GNU Emacs 22.\
+@end ignore}

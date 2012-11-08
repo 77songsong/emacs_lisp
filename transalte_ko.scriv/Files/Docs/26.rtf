@@ -1,0 +1,68 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Run a Program, Making Errors, Lisp Lists, List Processing\
+@comment  node-name,  next,  previous,  up\
+@section Run a Program\
+@cindex Run a program\
+@cindex Program, running one\
+\
+@cindex @samp\{evaluate\} defined\
+A list in Lisp---any list---is a program ready to run.  If you run it\
+(for which the Lisp jargon is @dfn\{evaluate\}), the computer will do one\
+of three things: do nothing except return to you the list itself; send\
+you an error message; or, treat the first symbol in the list as a\
+command to do something.  (Usually, of course, it is the last of these\
+three things that you really want!)\
+\
+@c use code for the single apostrophe, not samp.\
+The single apostrophe, @code\{'\}, that I put in front of some of the\
+example lists in preceding sections is called a @dfn\{quote\}; when it\
+precedes a list, it tells Lisp to do nothing with the list, other than\
+take it as it is written.  But if there is no quote preceding a list,\
+the first item of the list is special: it is a command for the computer\
+to obey.  (In Lisp, these commands are called @emph\{functions\}.)  The list\
+@code\{(+ 2 2)\} shown above did not have a quote in front of it, so Lisp\
+understands that the @code\{+\} is an instruction to do something with the\
+rest of the list: add the numbers that follow.\
+\
+@need 1250\
+If you are reading this inside of GNU Emacs in Info, here is how you can\
+evaluate such a list:  place your cursor immediately after the right\
+hand parenthesis of the following list and then type @kbd\{C-x C-e\}:\
+\
+@smallexample\
+(+ 2 2)\
+@end smallexample\
+\
+@c use code for the number four, not samp.\
+@noindent\
+You will see the number @code\{4\} appear in the echo area.  (In the\
+jargon, what you have just done is ``evaluate the list.''  The echo area\
+is the line at the bottom of the screen that displays or ``echoes''\
+text.)  Now try the same thing with a quoted list:  place the cursor\
+right after the following list and type @kbd\{C-x C-e\}:\
+\
+@smallexample\
+'(this is a quoted list)\
+@end smallexample\
+\
+@noindent\
+You will see @code\{(this is a quoted list)\} appear in the echo area.\
+\
+@cindex Lisp interpreter, explained\
+@cindex Interpreter, Lisp, explained\
+In both cases, what you are doing is giving a command to the program\
+inside of GNU Emacs called the @dfn\{Lisp interpreter\}---giving the\
+interpreter a command to evaluate the expression.  The name of the Lisp\
+interpreter comes from the word for the task done by a human who comes\
+up with the meaning of an expression---who ``interprets'' it.\
+\
+You can also evaluate an atom that is not part of a list---one that is\
+not surrounded by parentheses; again, the Lisp interpreter translates\
+from the humanly readable expression to the language of the computer.\
+But before discussing this (@pxref\{Variables\}), we will discuss what the\
+Lisp interpreter does when you make an error.}
