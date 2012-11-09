@@ -1,0 +1,54 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Permanent Installation, let, Interactive Options, Writing Defuns\
+@comment  node-name,  next,  previous,  up\
+@section Install Code Permanently\
+@cindex Install code permanently\
+@cindex Permanent code installation\
+@cindex Code installation\
+\
+When you install a function definition by evaluating it, it will stay\
+installed until you quit Emacs.  The next time you start a new session\
+of Emacs, the function will not be installed unless you evaluate the\
+function definition again.\
+\
+At some point, you may want to have code installed automatically\
+whenever you start a new session of Emacs.  There are several ways of\
+doing this:\
+\
+@itemize @bullet\
+@item\
+If you have code that is just for yourself, you can put the code for the\
+function definition in your @file\{.emacs\} initialization file.  When you\
+start Emacs, your @file\{.emacs\} file is automatically evaluated and all\
+the function definitions within it are installed.\
+@xref\{Emacs Initialization, , Your @file\{.emacs\} File\}.\
+\
+@item\
+Alternatively, you can put the function definitions that you want\
+installed in one or more files of their own and use the @code\{load\}\
+function to cause Emacs to evaluate and thereby install each of the\
+functions in the files.\
+@xref\{Loading Files, , Loading Files\}.\
+\
+@item\
+Thirdly, if you have code that your whole site will use, it is usual\
+to put it in a file called @file\{site-init.el\} that is loaded when\
+Emacs is built.  This makes the code available to everyone who uses\
+your machine.  (See the @file\{INSTALL\} file that is part of the Emacs\
+distribution.)\
+@end itemize\
+\
+Finally, if you have code that everyone who uses Emacs may want, you\
+can post it on a computer network or send a copy to the Free Software\
+Foundation.  (When you do this, please license the code and its\
+documentation under a license that permits other people to run, copy,\
+study, modify, and redistribute the code and which protects you from\
+having your work taken from you.)  If you send a copy of your code to\
+the Free Software Foundation, and properly protect yourself and\
+others, it may be included in the next release of Emacs.  In large\
+part, this is how Emacs has grown over the past years, by donations.}

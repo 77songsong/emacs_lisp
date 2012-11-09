@@ -1,0 +1,131 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Buffer Names, Getting Buffers, How to Evaluate, Practicing Evaluation\
+@comment  node-name,  next,  previous,  up\
+@section Buffer Names\
+@findex buffer-name\
+@findex buffer-file-name\
+\
+The two functions, @code\{buffer-name\} and @code\{buffer-file-name\}, show\
+the difference between a file and a buffer.  When you evaluate the\
+following expression, @code\{(buffer-name)\}, the name of the buffer\
+appears in the echo area.  When you evaluate @code\{(buffer-file-name)\},\
+the name of the file to which the buffer refers appears in the echo\
+area.  Usually, the name returned by @code\{(buffer-name)\} is the same as\
+the name of the file to which it refers, and the name returned by\
+@code\{(buffer-file-name)\} is the full path-name of the file.\
+\
+A file and a buffer are two different entities.  A file is information\
+recorded permanently in the computer (unless you delete it).  A buffer,\
+on the other hand, is information inside of Emacs that will vanish at\
+the end of the editing session (or when you kill the buffer).  Usually,\
+a buffer contains information that you have copied from a file; we say\
+the buffer is @dfn\{visiting\} that file.  This copy is what you work on\
+and modify.  Changes to the buffer do not change the file, until you\
+save the buffer.  When you save the buffer, the buffer is copied to the file\
+and is thus saved permanently.\
+\
+@need 1250\
+If you are reading this in Info inside of GNU Emacs, you can evaluate\
+each of the following expressions by positioning the cursor after it and\
+typing @kbd\{C-x C-e\}.\
+\
+@example\
+@group\
+(buffer-name)\
+\
+(buffer-file-name)\
+@end group\
+@end example\
+\
+@noindent\
+When I do this in Info, the value returned by evaluating\
+@code\{(buffer-name)\} is @file\{"*info*"\}, and the value returned by\
+evaluating @code\{(buffer-file-name)\} is @file\{nil\}.\
+\
+On the other hand, while I am writing this document, the value\
+returned by evaluating @code\{(buffer-name)\} is\
+@file\{"introduction.texinfo"\}, and the value returned by evaluating\
+@code\{(buffer-file-name)\} is\
+@file\{"/gnu/work/intro/introduction.texinfo"\}.\
+\
+@cindex @code\{nil\}, history of word\
+The former is the name of the buffer and the latter is the name of the\
+file.  In Info, the buffer name is @file\{"*info*"\}.  Info does not\
+point to any file, so the result of evaluating\
+@code\{(buffer-file-name)\} is @file\{nil\}.  The symbol @code\{nil\} is\
+from the Latin word for `nothing'; in this case, it means that the\
+buffer is not associated with any file.  (In Lisp, @code\{nil\} is also\
+used to mean `false' and is a synonym for the empty list, @code\{()\}.)\
+\
+When I am writing, the name of my buffer is\
+@file\{"introduction.texinfo"\}.  The name of the file to which it\
+points is @file\{"/gnu/work/intro/introduction.texinfo"\}.\
+\
+(In the expressions, the parentheses tell the Lisp interpreter to\
+treat @w\{@code\{buffer-name\}\} and @w\{@code\{buffer-file-name\}\} as\
+functions; without the parentheses, the interpreter would attempt to\
+evaluate the symbols as variables.  @xref\{Variables\}.)\
+\
+In spite of the distinction between files and buffers, you will often\
+find that people refer to a file when they mean a buffer and vice-verse.\
+Indeed, most people say, ``I am editing a file,'' rather than saying,\
+``I am editing a buffer which I will soon save to a file.''  It is\
+almost always clear from context what people mean.  When dealing with\
+computer programs, however, it is important to keep the distinction in mind,\
+since the computer is not as smart as a person.\
+\
+@cindex Buffer, history of word\
+The word `buffer', by the way, comes from the meaning of the word as a\
+cushion that deadens the force of a collision.  In early computers, a\
+buffer cushioned the interaction between files and the computer's\
+central processing unit.  The drums or tapes that held a file and the\
+central processing unit were pieces of equipment that were very\
+different from each other, working at their own speeds, in spurts.  The\
+buffer made it possible for them to work together effectively.\
+Eventually, the buffer grew from being an intermediary, a temporary\
+holding place, to being the place where work is done.  This\
+transformation is rather like that of a small seaport that grew into a\
+great city: once it was merely the place where cargo was warehoused\
+temporarily before being loaded onto ships; then it became a business\
+and cultural center in its own right.\
+\
+Not all buffers are associated with files.  For example, a\
+@file\{*scratch*\} buffer does not visit any file.  Similarly, a\
+@file\{*Help*\} buffer is not associated with any file.\
+\
+In the old days, when you lacked a @file\{~/.emacs\} file and started an\
+Emacs session by typing the command @code\{emacs\} alone, without naming\
+any files, Emacs started with the @file\{*scratch*\} buffer visible.\
+Nowadays, you will see a splash screen.  You can follow one of the\
+commands suggested on the splash screen, visit a file, or press the\
+spacebar to reach the @file\{*scratch*\} buffer.\
+\
+If you switch to the @file\{*scratch*\} buffer, type\
+@code\{(buffer-name)\}, position the cursor after it, and then type\
+@kbd\{C-x C-e\} to evaluate the expression.  The name @code\{"*scratch*"\}\
+will be returned and will appear in the echo area.  @code\{"*scratch*"\}\
+is the name of the buffer.  When you type @code\{(buffer-file-name)\} in\
+the @file\{*scratch*\} buffer and evaluate that, @code\{nil\} will appear\
+in the echo area, just as it does when you evaluate\
+@code\{(buffer-file-name)\} in Info.\
+\
+Incidentally, if you are in the @file\{*scratch*\} buffer and want the\
+value returned by an expression to appear in the @file\{*scratch*\}\
+buffer itself rather than in the echo area, type @kbd\{C-u C-x C-e\}\
+instead of @kbd\{C-x C-e\}.  This causes the value returned to appear\
+after the expression.  The buffer will look like this:\
+\
+@smallexample\
+(buffer-name)"*scratch*"\
+@end smallexample\
+\
+@noindent\
+You cannot do this in Info since Info is read-only and it will not allow\
+you to change the contents of the buffer.  But you can do this in any\
+buffer you can edit; and when you write code or documentation (such as\
+this book), this feature is very useful.}

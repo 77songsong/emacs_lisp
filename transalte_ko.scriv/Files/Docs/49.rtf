@@ -1,0 +1,93 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Truth & Falsehood, save-excursion, else, Writing Defuns\
+@comment  node-name,  next,  previous,  up\
+@section Truth and Falsehood in Emacs Lisp\
+@cindex Truth and falsehood in Emacs Lisp\
+@cindex Falsehood and truth in Emacs Lisp\
+@findex nil\
+\
+There is an important aspect to the truth test in an @code\{if\}\
+expression.  So far, we have spoken of `true' and `false' as values of\
+predicates as if they were new kinds of Emacs Lisp objects.  In fact,\
+`false' is just our old friend @code\{nil\}.  Anything else---anything\
+at all---is `true'.\
+\
+The expression that tests for truth is interpreted as @dfn\{true\}\
+if the result of evaluating it is a value that is not @code\{nil\}.  In\
+other words, the result of the test is considered true if the value\
+returned is a number such as 47, a string such as @code\{"hello"\}, or a\
+symbol (other than @code\{nil\}) such as @code\{flowers\}, or a list (so\
+long as it is not empty), or even a buffer!\
+\
+@menu\
+* nil explained::               @code\{nil\} has two meanings.\
+@end menu\
+\
+@node nil explained,  , Truth & Falsehood, Truth & Falsehood\
+@ifnottex\
+@unnumberedsubsec An explanation of @code\{nil\}\
+@end ifnottex\
+\
+Before illustrating a test for truth, we need an explanation of @code\{nil\}.\
+\
+In Emacs Lisp, the symbol @code\{nil\} has two meanings.  First, it means the\
+empty list.  Second, it means false and is the value returned when a\
+true-or-false-test tests false.  @code\{nil\} can be written as an empty\
+list, @code\{()\}, or as @code\{nil\}.  As far as the Lisp interpreter is\
+concerned, @code\{()\} and @code\{nil\} are the same.  Humans, however, tend\
+to use @code\{nil\} for false and @code\{()\} for the empty list.\
+\
+In Emacs Lisp, any value that is not @code\{nil\}---is not the empty\
+list---is considered true.  This means that if an evaluation returns\
+something that is not an empty list, an @code\{if\} expression will test\
+true.  For example, if a number is put in the slot for the test, it\
+will be evaluated and will return itself, since that is what numbers\
+do when evaluated.  In this conditional, the @code\{if\} expression will\
+test true.  The expression tests false only when @code\{nil\}, an empty\
+list, is returned by evaluating the expression.\
+\
+You can see this by evaluating the two expressions in the following examples.\
+\
+In the first example, the number 4 is evaluated as the test in the\
+@code\{if\} expression and returns itself; consequently, the then-part\
+of the expression is evaluated and returned: @samp\{true\} appears in\
+the echo area.  In the second example, the @code\{nil\} indicates false;\
+consequently, the else-part of the expression is evaluated and\
+returned: @samp\{false\} appears in the echo area.\
+\
+@smallexample\
+@group\
+(if 4\
+    'true\
+  'false)\
+@end group\
+\
+@group\
+(if nil\
+    'true\
+  'false)\
+@end group\
+@end smallexample\
+\
+@need 1250\
+Incidentally, if some other useful value is not available for a test that\
+returns true, then the Lisp interpreter will return the symbol @code\{t\}\
+for true.  For example, the expression @code\{(> 5 4)\} returns @code\{t\}\
+when evaluated, as you can see by evaluating it in the usual way:\
+\
+@smallexample\
+(> 5 4)\
+@end smallexample\
+\
+@need 1250\
+@noindent\
+On the other hand, this function returns @code\{nil\} if the test is false.\
+\
+@smallexample\
+(> 4 5)\
+@end smallexample}

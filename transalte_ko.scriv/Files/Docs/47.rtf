@@ -1,0 +1,207 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node if, else, let, Writing Defuns\
+@comment  node-name,  next,  previous,  up\
+@section The @code\{if\} Special Form\
+@findex if\
+@cindex Conditional with @code\{if\}\
+\
+A third special form, in addition to @code\{defun\} and @code\{let\}, is the\
+conditional @code\{if\}.  This form is used to instruct the computer to\
+make decisions.  You can write function definitions without using\
+@code\{if\}, but it is used often enough, and is important enough, to be\
+included here.  It is used, for example, in the code for the\
+function @code\{beginning-of-buffer\}.\
+\
+The basic idea behind an @code\{if\}, is that ``@emph\{if\} a test is true,\
+@emph\{then\} an expression is evaluated.''  If the test is not true, the\
+expression is not evaluated.  For example, you might make a decision\
+such as, ``if it is warm and sunny, then go to the beach!''\
+\
+@menu\
+* if in more detail::\
+* type-of-animal in detail::    An example of an @code\{if\} expression.\
+@end menu\
+\
+@node if in more detail, type-of-animal in detail, if, if\
+@ifnottex\
+@unnumberedsubsec @code\{if\} in more detail\
+@end ifnottex\
+\
+@cindex @samp\{if-part\} defined\
+@cindex @samp\{then-part\} defined\
+An @code\{if\} expression written in Lisp does not use the word `then';\
+the test and the action are the second and third elements of the list\
+whose first element is @code\{if\}.  Nonetheless, the test part of an\
+@code\{if\} expression is often called the @dfn\{if-part\} and the second\
+argument is often called the @dfn\{then-part\}.\
+\
+Also, when an @code\{if\} expression is written, the true-or-false-test\
+is usually written on the same line as the symbol @code\{if\}, but the\
+action to carry out if the test is true, the ``then-part'', is written\
+on the second and subsequent lines.  This makes the @code\{if\}\
+expression easier to read.\
+\
+@smallexample\
+@group\
+(if @var\{true-or-false-test\}\
+    @var\{action-to-carry-out-if-test-is-true\})\
+@end group\
+@end smallexample\
+\
+@noindent\
+The true-or-false-test will be an expression that\
+is evaluated by the Lisp interpreter.\
+\
+Here is an example that you can evaluate in the usual manner.  The test\
+is whether the number 5 is greater than the number 4.  Since it is, the\
+message @samp\{5 is greater than 4!\} will be printed.\
+\
+@smallexample\
+@group\
+(if (> 5 4)                             ; @r\{if-part\}\
+    (message "5 is greater than 4!"))   ; @r\{then-part\}\
+@end group\
+@end smallexample\
+\
+@noindent\
+(The function @code\{>\} tests whether its first argument is greater than\
+its second argument and returns true if it is.)\
+@findex > (greater than)\
+\
+Of course, in actual use, the test in an @code\{if\} expression will not\
+be fixed for all time as it is by the expression @code\{(> 5 4)\}.\
+Instead, at least one of the variables used in the test will be bound to\
+a value that is not known ahead of time.  (If the value were known ahead\
+of time, we would not need to run the test!)\
+\
+For example, the value may be bound to an argument of a function\
+definition.  In the following function definition, the character of the\
+animal is a value that is passed to the function.  If the value bound to\
+@code\{characteristic\} is @code\{fierce\}, then the message, @samp\{It's a\
+tiger!\} will be printed; otherwise, @code\{nil\} will be returned.\
+\
+@smallexample\
+@group\
+(defun type-of-animal (characteristic)\
+  "Print message in echo area depending on CHARACTERISTIC.\
+If the CHARACTERISTIC is the symbol `fierce',\
+then warn of a tiger."\
+  (if (equal characteristic 'fierce)\
+      (message "It's a tiger!")))\
+@end group\
+@end smallexample\
+\
+@need 1500\
+@noindent\
+If you are reading this inside of GNU Emacs, you can evaluate the\
+function definition in the usual way to install it in Emacs, and then you\
+can evaluate the following two expressions to see the results:\
+\
+@smallexample\
+@group\
+(type-of-animal 'fierce)\
+\
+(type-of-animal 'zebra)\
+\
+@end group\
+@end smallexample\
+\
+@c Following sentences rewritten to prevent overfull hbox.\
+@noindent\
+When you evaluate @code\{(type-of-animal 'fierce)\}, you will see the\
+following message printed in the echo area: @code\{"It's a tiger!"\}; and\
+when you evaluate @code\{(type-of-animal 'zebra)\} you will see @code\{nil\}\
+printed in the echo area.\
+\
+@node type-of-animal in detail,  , if in more detail, if\
+@comment  node-name,  next,  previous,  up\
+@subsection The @code\{type-of-animal\} Function in Detail\
+\
+Let's look at the @code\{type-of-animal\} function in detail.\
+\
+The function definition for @code\{type-of-animal\} was written by filling\
+the slots of two templates, one for a function definition as a whole, and\
+a second for an @code\{if\} expression.\
+\
+@need 1250\
+The template for every function that is not interactive is:\
+\
+@smallexample\
+@group\
+(defun @var\{name-of-function\} (@var\{argument-list\})\
+  "@var\{documentation\}@dots\{\}"\
+  @var\{body\}@dots\{\})\
+@end group\
+@end smallexample\
+\
+@need 800\
+The parts of the function that match this template look like this:\
+\
+@smallexample\
+@group\
+(defun type-of-animal (characteristic)\
+  "Print message in echo area depending on CHARACTERISTIC.\
+If the CHARACTERISTIC is the symbol `fierce',\
+then warn of a tiger."\
+  @var\{body: the\} @code\{if\} @var\{expression\})\
+@end group\
+@end smallexample\
+\
+The name of function is @code\{type-of-animal\}; it is passed the value\
+of one argument.  The argument list is followed by a multi-line\
+documentation string.  The documentation string is included in the\
+example because it is a good habit to write documentation string for\
+every function definition.  The body of the function definition\
+consists of the @code\{if\} expression.\
+\
+@need 800\
+The template for an @code\{if\} expression looks like this:\
+\
+@smallexample\
+@group\
+(if @var\{true-or-false-test\}\
+    @var\{action-to-carry-out-if-the-test-returns-true\})\
+@end group\
+@end smallexample\
+\
+@need 1250\
+In the @code\{type-of-animal\} function, the code for the @code\{if\}\
+looks like this:\
+\
+@smallexample\
+@group\
+(if (equal characteristic 'fierce)\
+    (message "It's a tiger!")))\
+@end group\
+@end smallexample\
+\
+@need 800\
+Here, the true-or-false-test is the expression:\
+\
+@smallexample\
+(equal characteristic 'fierce)\
+@end smallexample\
+\
+@noindent\
+In Lisp, @code\{equal\} is a function that determines whether its first\
+argument is equal to its second argument.  The second argument is the\
+quoted symbol @code\{'fierce\} and the first argument is the value of the\
+symbol @code\{characteristic\}---in other words, the argument passed to\
+this function.\
+\
+In the first exercise of @code\{type-of-animal\}, the argument\
+@code\{fierce\} is passed to @code\{type-of-animal\}.  Since @code\{fierce\}\
+is equal to @code\{fierce\}, the expression, @code\{(equal characteristic\
+'fierce)\}, returns a value of true.  When this happens, the @code\{if\}\
+evaluates the second argument or then-part of the @code\{if\}:\
+@code\{(message "It's tiger!")\}.\
+\
+On the other hand, in the second exercise of @code\{type-of-animal\}, the\
+argument @code\{zebra\} is passed to @code\{type-of-animal\}.  @code\{zebra\}\
+is not equal to @code\{fierce\}, so the then-part is not evaluated and\
+@code\{nil\} is returned by the @code\{if\} expression.}

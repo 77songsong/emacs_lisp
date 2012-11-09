@@ -1,0 +1,176 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node cons, nthcdr, car & cdr, car cdr & cons\
+@comment  node-name,  next,  previous,  up\
+@section @code\{cons\}\
+@findex cons, @r\{introduced\}\
+\
+The @code\{cons\} function constructs lists; it is the inverse of\
+@code\{car\} and @code\{cdr\}.  For example, @code\{cons\} can be used to make\
+a four element list from the three element list, @code\{(fir oak maple)\}:\
+\
+@smallexample\
+(cons 'pine '(fir oak maple))\
+@end smallexample\
+\
+@need 800\
+@noindent\
+After evaluating this list, you will see\
+\
+@smallexample\
+(pine fir oak maple)\
+@end smallexample\
+\
+@noindent\
+appear in the echo area.  @code\{cons\} causes the creation of a new\
+list in which the element is followed by the elements of the original\
+list.\
+\
+We often say that `@code\{cons\} puts a new element at the beginning of\
+a list; it attaches or pushes elements onto the list', but this\
+phrasing can be misleading, since @code\{cons\} does not change an\
+existing list, but creates a new one.\
+\
+Like @code\{car\} and @code\{cdr\}, @code\{cons\} is non-destructive.\
+\
+@menu\
+* Build a list::\
+* length::                      How to find the length of a list.\
+@end menu\
+\
+@node Build a list, length, cons, cons\
+@ifnottex\
+@unnumberedsubsec Build a list\
+@end ifnottex\
+\
+@code\{cons\} must have a list to attach to.@footnote\{Actually, you can\
+@code\{cons\} an element to an atom to produce a dotted pair.  Dotted\
+pairs are not discussed here; see @ref\{Dotted Pair Notation, , Dotted\
+Pair Notation, elisp, The GNU Emacs Lisp Reference Manual\}.\}  You\
+cannot start from absolutely nothing.  If you are building a list, you\
+need to provide at least an empty list at the beginning.  Here is a\
+series of @code\{cons\} expressions that build up a list of flowers.  If\
+you are reading this in Info in GNU Emacs, you can evaluate each of\
+the expressions in the usual way; the value is printed in this text\
+after @samp\{@result\{\}\}, which you may read as `evaluates to'.\
+\
+@smallexample\
+@group\
+(cons 'buttercup ())\
+     @result\{\} (buttercup)\
+@end group\
+\
+@group\
+(cons 'daisy '(buttercup))\
+     @result\{\} (daisy buttercup)\
+@end group\
+\
+@group\
+(cons 'violet '(daisy buttercup))\
+     @result\{\} (violet daisy buttercup)\
+@end group\
+\
+@group\
+(cons 'rose '(violet daisy buttercup))\
+     @result\{\} (rose violet daisy buttercup)\
+@end group\
+@end smallexample\
+\
+@noindent\
+In the first example, the empty list is shown as @code\{()\} and a list\
+made up of @code\{buttercup\} followed by the empty list is constructed.\
+As you can see, the empty list is not shown in the list that was\
+constructed.  All that you see is @code\{(buttercup)\}.  The empty list is\
+not counted as an element of a list because there is nothing in an empty\
+list.  Generally speaking, an empty list is invisible.\
+\
+The second example, @code\{(cons 'daisy '(buttercup))\} constructs a new,\
+two element list by putting @code\{daisy\} in front of @code\{buttercup\};\
+and the third example constructs a three element list by putting\
+@code\{violet\} in front of @code\{daisy\} and @code\{buttercup\}.\
+\
+@node length,  , Build a list, cons\
+@comment  node-name,  next,  previous,  up\
+@subsection Find the Length of a List: @code\{length\}\
+@findex length\
+\
+You can find out how many elements there are in a list by using the Lisp\
+function @code\{length\}, as in the following examples:\
+\
+@smallexample\
+@group\
+(length '(buttercup))\
+     @result\{\} 1\
+@end group\
+\
+@group\
+(length '(daisy buttercup))\
+     @result\{\} 2\
+@end group\
+\
+@group\
+(length (cons 'violet '(daisy buttercup)))\
+     @result\{\} 3\
+@end group\
+@end smallexample\
+\
+@noindent\
+In the third example, the @code\{cons\} function is used to construct a\
+three element list which is then passed to the @code\{length\} function as\
+its argument.\
+\
+@need 1200\
+We can also use @code\{length\} to count the number of elements in an\
+empty list:\
+\
+@smallexample\
+@group\
+(length ())\
+     @result\{\} 0\
+@end group\
+@end smallexample\
+\
+@noindent\
+As you would expect, the number of elements in an empty list is zero.\
+\
+An interesting experiment is to find out what happens if you try to find\
+the length of no list at all; that is, if you try to call @code\{length\}\
+without giving it an argument, not even an empty list:\
+\
+@smallexample\
+(length )\
+@end smallexample\
+\
+@need 800\
+@noindent\
+What you see, if you evaluate this, is the error message\
+\
+@smallexample\
+Lisp error: (wrong-number-of-arguments length 0)\
+@end smallexample\
+\
+@noindent\
+This means that the function receives the wrong number of\
+arguments, zero, when it expects some other number of arguments.  In\
+this case, one argument is expected, the argument being a list whose\
+length the function is measuring.  (Note that @emph\{one\} list is\
+@emph\{one\} argument, even if the list has many elements inside it.)\
+\
+The part of the error message that says @samp\{length\} is the name of\
+the function.\
+\
+@ignore\
+@code\{length\} is still a subroutine, but you need C-h f to discover that.\
+\
+In an earlier version:\
+    This is written with a special notation, @samp\{#<subr\},\
+    that indicates that the function @code\{length\} is one of the primitive\
+    functions written in C rather than in Emacs Lisp.  (@samp\{subr\} is an\
+    abbreviation for `subroutine'.)  @xref\{What Is a Function, , What Is a\
+    Function?, elisp , The GNU Emacs Lisp Reference Manual\}, for more\
+    about subroutines.\
+@end ignore}

@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <style type="text/css">
 	body {background-color: #bac0c7}
-    p.binderItem {margin: 10.0px 0.0px 0.0px 05.0px; font-family:Apple SD Gothic Neo, Cochin, Times, Courier, Arial, serif; font-size:14.0px;}
+    p.binderItem {margin: 10.0px 0.0px 0.0px 05.0px; font-family:Cochin, Times, Courier, Arial, serif; font-size:14.0px;}
     .page {border: 1px solid #727272; background: #fff}
     hr {
       border-top: 1px dashed #000;
@@ -282,6 +282,81 @@ already been written.  These expressions will be lists with the<br/>
 functions as their first (and often only) element.  Since some of the<br/>
 functions associated wi...</p>
 </li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>Buffer Names</strong><br/><br/>
+@node Buffer Names, Getting Buffers, How to Evaluate, Practicing Evaluation<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Buffer Names<br/>
+@findex buffer-name<br/>
+@findex buffer-file-name<br/>
+<br/>
+The two functions, @code{buffer-name} and @code{buffer-file-name}, show<br/>
+the difference between a file and a buffer.  When you evaluate the<br/>
+following expression, @code{(buffer-name)}, the name of the buffer<br/>
+appears in the echo area.  When you evaluate @code{(buffer-file-name)},<br/>
+the name of the file to which the ...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Getting Buffers</strong><br/><br/>
+@node Getting Buffers, Switching Buffers, Buffer Names, Practicing Evaluation<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Getting Buffers<br/>
+@findex current-buffer<br/>
+@findex other-buffer<br/>
+@cindex Getting a buffer<br/>
+<br/>
+The @code{buffer-name} function returns the @emph{name} of the buffer;<br/>
+to get the buffer @emph{itself}, a different function is needed: the<br/>
+@code{current-buffer} function.  If you use this function in code, what<br/>
+you get is the buffer itself.<br/>
+<br/>
+A name and the object or entity to which...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Switching Buffers</strong><br/><br/>
+@node Switching Buffers, Buffer Size & Locations, Getting Buffers, Practicing Evaluation<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Switching Buffers<br/>
+@findex switch-to-buffer<br/>
+@findex set-buffer<br/>
+@cindex Switching to a buffer<br/>
+<br/>
+The @code{other-buffer} function actually provides a buffer when it is<br/>
+used as an argument to a function that requires one.  We can see this<br/>
+by using @code{other-buffer} and @code{switch-to-buffer} to switch to a<br/>
+different buffer.<br/>
+<br/>
+But first, a brief introduction t...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Buffer Size and the Location of Point</strong><br/><br/>
+@node Buffer Size & Locations, Evaluation Exercise, Switching Buffers, Practicing Evaluation<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Buffer Size and the Location of Point<br/>
+@cindex Size of buffer<br/>
+@cindex Buffer size<br/>
+@cindex Point location<br/>
+@cindex Location of point<br/>
+<br/>
+Finally, let's look at several rather simple functions,<br/>
+@code{buffer-size}, @code{point}, @code{point-min}, and<br/>
+@code{point-max}.  These give information about the size of a buffer and<br/>
+the location of point within it.<br/>
+<br/>
+The ...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Excercise</strong><br/><br/>
+@node Evaluation Exercise,  , Buffer Size & Locations, Practicing Evaluation<br/>
+@section Exercise<br/>
+<br/>
+Find a file with which you are working and move towards its middle.<br/>
+Find its buffer name, file name, length, and your position in the file.</p>
+</li>
+</ul>
+<hr/>
 <li>
 <p class="binderItem"><strong>How To Write  Function Definition</strong><br/><br/>
 @node Writing Defuns, Buffer Walk Through, Practicing Evaluation, Top<br/>
@@ -296,6 +371,190 @@ first symbol on the list has a function definition attached to it; or,<br/>
 put another way, whether the symbol points to a function definition.  If<br/>
 it does, the computer car...</p>
 </li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>The defun Special Form</strong><br/><br/>
+@node defun, Install, Primitive Functions, Writing Defuns<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section The @code{defun} Special Form<br/>
+@findex defun<br/>
+@cindex Special form of @code{defun}<br/>
+<br/>
+@cindex @samp{function definition} defined<br/>
+In Lisp, a symbol such as @code{mark-whole-buffer} has code attached to<br/>
+it that tells the computer what to do when the function is called.<br/>
+This code is called the @dfn{function definition} and is created by<br/>
+evaluating a Lisp expression that starts with the symbol ...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Install a Function Definition</strong><br/><br/>
+@node Install, Interactive, defun, Writing Defuns<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Install a Function Definition<br/>
+@cindex Install a Function Definition<br/>
+@cindex Definition installation<br/>
+@cindex Function definition installation<br/>
+<br/>
+If you are reading this inside of Info in Emacs, you can try out the<br/>
+@code{multiply-by-seven} function by first evaluating the function<br/>
+definition and then evaluating @code{(multiply-by-seven 3)}.  A copy of<br/>
+the function definition follows.  Place the cur...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Make a Function interactive</strong><br/><br/>
+@node Interactive, Interactive Options, Install, Writing Defuns<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Make a Function Interactive<br/>
+@cindex Interactive functions<br/>
+@findex interactive<br/>
+<br/>
+You make a function interactive by placing a list that begins with<br/>
+the special form @code{interactive} immediately after the<br/>
+documentation.  A user can invoke an interactive function by typing<br/>
+@kbd{M-x} and then the name of the function; or by typing the keys to<br/>
+which it is bound, for example, by typing...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Different Options for interactive</strong><br/><br/>
+@node Interactive Options, Permanent Installation, Interactive, Writing Defuns<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Different Options for @code{interactive}<br/>
+@cindex Options for @code{interactive}<br/>
+@cindex Interactive options<br/>
+<br/>
+In the example, @code{multiply-by-seven} used @code{"p"} as the<br/>
+argument to @code{interactive}.  This argument told Emacs to interpret<br/>
+your typing either @kbd{C-u} followed by a number or @key{META}<br/>
+followed by a number as a command to pass that number to the...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Install Code Permanently</strong><br/><br/>
+@node Permanent Installation, let, Interactive Options, Writing Defuns<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Install Code Permanently<br/>
+@cindex Install code permanently<br/>
+@cindex Permanent code installation<br/>
+@cindex Code installation<br/>
+<br/>
+When you install a function definition by evaluating it, it will stay<br/>
+installed until you quit Emacs.  The next time you start a new session<br/>
+of Emacs, the function will not be installed unless you evaluate the<br/>
+function definition again.<br/>
+<br/>
+At some point, yo...</p>
+</li>
+<li>
+<p class="binderItem"><strong>let</strong><br/><br/>
+@node let, if, Permanent Installation, Writing Defuns<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section @code{let}<br/>
+@findex let<br/>
+<br/>
+The @code{let} expression is a special form in Lisp that you will need<br/>
+to use in most function definitions.<br/>
+<br/>
+@code{let} is used to attach or bind a symbol to a value in such a way<br/>
+that the Lisp interpreter will not confuse the variable with a<br/>
+variable of the same name that is not part of the function.<br/>
+<br/>
+To understand why the @code{let} special form is necessary, consi...</p>
+</li>
+<li>
+<p class="binderItem"><strong>The if Special Form</strong><br/><br/>
+@node if, else, let, Writing Defuns<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section The @code{if} Special Form<br/>
+@findex if<br/>
+@cindex Conditional with @code{if}<br/>
+<br/>
+A third special form, in addition to @code{defun} and @code{let}, is the<br/>
+conditional @code{if}.  This form is used to instruct the computer to<br/>
+make decisions.  You can write function definitions without using<br/>
+@code{if}, but it is used often enough, and is important enough, to be<br/>
+included here.  It is used, for example, in the code for ...</p>
+</li>
+<li>
+<p class="binderItem"><strong>if--then--else Expressions</strong><br/><br/>
+@node else, Truth & Falsehood, if, Writing Defuns<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section If--then--else Expressions<br/>
+@cindex Else<br/>
+<br/>
+An @code{if} expression may have an optional third argument, called<br/>
+the @dfn{else-part}, for the case when the true-or-false-test returns<br/>
+false.  When this happens, the second argument or then-part of the<br/>
+overall @code{if} expression is @emph{not} evaluated, but the third or<br/>
+else-part @emph{is} evaluated.  You might think of this as the cloudy<br/>
+day altern...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Truth and Falsehood in Emacs Lisp</strong><br/><br/>
+@node Truth & Falsehood, save-excursion, else, Writing Defuns<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Truth and Falsehood in Emacs Lisp<br/>
+@cindex Truth and falsehood in Emacs Lisp<br/>
+@cindex Falsehood and truth in Emacs Lisp<br/>
+@findex nil<br/>
+<br/>
+There is an important aspect to the truth test in an @code{if}<br/>
+expression.  So far, we have spoken of `true' and `false' as values of<br/>
+predicates as if they were new kinds of Emacs Lisp objects.  In fact,<br/>
+`false' is just our old friend @code{nil}.  Anythi...</p>
+</li>
+<li>
+<p class="binderItem"><strong>save-excursion</strong><br/><br/>
+@node save-excursion, Review, Truth & Falsehood, Writing Defuns<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section @code{save-excursion}<br/>
+@findex save-excursion<br/>
+@cindex Region, what it is<br/>
+@cindex Preserving point, mark, and buffer<br/>
+@cindex Point, mark, buffer preservation<br/>
+@findex point<br/>
+@findex mark<br/>
+<br/>
+The @code{save-excursion} function is the fourth and final special form<br/>
+that we will discuss in this chapter.<br/>
+<br/>
+In Emacs Lisp programs used for editing, the @code{save-excursion}<br/>
+function is very comm...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Review</strong><br/><br/>
+@node Review, defun Exercises, save-excursion, Writing Defuns<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Review<br/>
+<br/>
+In the last few chapters we have introduced a fair number of functions<br/>
+and special forms.  Here they are described in brief, along with a few<br/>
+similar functions that have not been mentioned yet.<br/>
+<br/>
+@table @code<br/>
+@item eval-last-sexp<br/>
+Evaluate the last symbolic expression before the current location of<br/>
+point.  The value is printed in the echo area unless the function is<br/>
+invoked wi...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Excercises</strong><br/><br/>
+@need 1500<br/>
+@node defun Exercises,  , Review, Writing Defuns<br/>
+@section Exercises<br/>
+<br/>
+@itemize @bullet<br/>
+@item<br/>
+Write a non-interactive function that doubles the value of its<br/>
+argument, a number.  Make that function interactive.<br/>
+<br/>
+@item<br/>
+Write a function that tests whether the current value of<br/>
+@code{fill-column} is greater than the argument passed to the function,<br/>
+and if so, prints an appropriate message.<br/>
+@end itemize</p>
+</li>
+</ul>
+<hr/>
 <li>
 <p class="binderItem"><strong>A Few Buffer -- Related Functions</strong><br/><br/>
 @node Buffer Walk Through, More Complex, Writing Defuns, Top<br/>
@@ -309,6 +568,103 @@ exception of the first, simplified function definition, these functions<br/>
 show the actual code used in GNU Emacs.  You can learn a great deal from<br/>
 ...</p>
 </li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>Finding More Information</strong><br/><br/>
+@node Finding More, simplified-beginning-of-buffer, Buffer Walk Through, Buffer Walk Through<br/>
+@section Finding More Information<br/>
+<br/>
+@findex describe-function, @r{introduced}<br/>
+@cindex Find function documentation<br/>
+In this walk-through, I will describe each new function as we come to<br/>
+it, sometimes in detail and sometimes briefly.  If you are interested,<br/>
+you can get the full documentation of any Emacs Lisp function at any<br/>
+time by typing @kbd{C-h f} and then the name of the function (and then<br/>
+@key{RET}). ...</p>
+</li>
+<li>
+<p class="binderItem"><strong>A Simplified beginning-of-buffer Definition</strong><br/><br/>
+@node simplified-beginning-of-buffer, mark-whole-buffer, Finding More, Buffer Walk Through<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section A Simplified @code{beginning-of-buffer} Definition<br/>
+@findex simplified-beginning-of-buffer<br/>
+<br/>
+The @code{beginning-of-buffer} command is a good function to start with<br/>
+since you are likely to be familiar with it and it is easy to<br/>
+understand.  Used as an interactive command, @code{beginning-of-buffer}<br/>
+moves the cursor to the beginning of the buffer, leaving th...</p>
+</li>
+<li>
+<p class="binderItem"><strong>The Definition of mark-whole-buffer</strong><br/><br/>
+@node mark-whole-buffer, append-to-buffer, simplified-beginning-of-buffer, Buffer Walk Through<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section The Definition of @code{mark-whole-buffer}<br/>
+@findex mark-whole-buffer<br/>
+<br/>
+The @code{mark-whole-buffer} function is no harder to understand than the<br/>
+@code{simplified-beginning-of-buffer} function.  In this case, however,<br/>
+we will look at the complete function, not a shortened version.<br/>
+<br/>
+The @code{mark-whole-buffer} function is not as commonly used as the<br/>
+@c...</p>
+</li>
+<li>
+<p class="binderItem"><strong>The Definition of append-to-buffer</strong><br/><br/>
+@node append-to-buffer, Buffer Related Review, mark-whole-buffer, Buffer Walk Through<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section The Definition of @code{append-to-buffer}<br/>
+@findex append-to-buffer<br/>
+<br/>
+The @code{append-to-buffer} command is more complex than the<br/>
+@code{mark-whole-buffer} command.  What it does is copy the region<br/>
+(that is, the part of the buffer between point and mark) from the<br/>
+current buffer to a specified buffer.<br/>
+<br/>
+@menu<br/>
+* append-to-buffer overview::<br/>
+* append interactive::  ...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Review</strong><br/><br/>
+@node Buffer Related Review, Buffer Exercises, append-to-buffer, Buffer Walk Through<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Review<br/>
+<br/>
+Here is a brief summary of the various functions discussed in this chapter.<br/>
+<br/>
+@table @code<br/>
+@item describe-function<br/>
+@itemx describe-variable<br/>
+Print the documentation for a function or variable.<br/>
+Conventionally bound to @kbd{C-h f} and @kbd{C-h v}.<br/>
+<br/>
+@item find-tag<br/>
+Find the file containing the source for a function or variable and<br/>
+switch buffers to it, posit...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Exercises</strong><br/><br/>
+@need 1500<br/>
+@node Buffer Exercises,  , Buffer Related Review, Buffer Walk Through<br/>
+@section Exercises<br/>
+<br/>
+@itemize @bullet<br/>
+@item<br/>
+Write your own @code{simplified-end-of-buffer} function definition;<br/>
+then test it to see whether it works.<br/>
+<br/>
+@item<br/>
+Use @code{if} and @code{get-buffer} to write a function that prints a<br/>
+message telling you whether a buffer exists.<br/>
+<br/>
+@item<br/>
+Using @code{find-tag}, find the source for the @code{copy-to-buffer}<br/>
+function.<br/>
+@end itemize</p>
+</li>
+</ul>
+<hr/>
 <li>
 <p class="binderItem"><strong>A Few More Complex Functions</strong><br/><br/>
 @node More Complex, Narrowing & Widening, Buffer Walk Through, Top<br/>
@@ -322,6 +678,81 @@ one definition, while the @code{insert-buffer} function illustrates<br/>
 use of an asterisk in an @code{interactive} expression, use of<br/>
 @code{or}, and...</p>
 </li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>The Definition of copy-to-buffer</strong><br/><br/>
+@node copy-to-buffer, insert-buffer, More Complex, More Complex<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section The Definition of @code{copy-to-buffer}<br/>
+@findex copy-to-buffer<br/>
+<br/>
+After understanding how @code{append-to-buffer} works, it is easy to<br/>
+understand @code{copy-to-buffer}.  This function copies text into a<br/>
+buffer, but instead of adding to the second buffer, it replaces all the<br/>
+previous text in the second buffer.<br/>
+<br/>
+@need 800<br/>
+The body of @code{copy-to-buffer} looks like this,<br/>
+<br/>
+@smallexamp...</p>
+</li>
+<li>
+<p class="binderItem"><strong>The Definition of insert-buffer</strong><br/><br/>
+@node insert-buffer, beginning-of-buffer, copy-to-buffer, More Complex<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section The Definition of @code{insert-buffer}<br/>
+@findex insert-buffer<br/>
+<br/>
+@code{insert-buffer} is yet another buffer-related function.  This<br/>
+command copies another buffer @emph{into} the current buffer.  It is the<br/>
+reverse of @code{append-to-buffer} or @code{copy-to-buffer}, since they<br/>
+copy a region of text @emph{from} the current buffer to another buffer.<br/>
+<br/>
+Here is a discussion based on...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Complete Definition of beginning-of-buffer</strong><br/><br/>
+@node beginning-of-buffer, Second Buffer Related Review, insert-buffer, More Complex<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Complete Definition of @code{beginning-of-buffer}<br/>
+@findex beginning-of-buffer<br/>
+<br/>
+The basic structure of the @code{beginning-of-buffer} function has<br/>
+already been discussed.  (@xref{simplified-beginning-of-buffer, , A<br/>
+Simplified @code{beginning-of-buffer} Definition}.)<br/>
+This section describes the complex part of the definition.<br/>
+<br/>
+As previously described, when invoke...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Review</strong><br/><br/>
+@node Second Buffer Related Review, optional Exercise, beginning-of-buffer, More Complex<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Review<br/>
+<br/>
+Here is a brief summary of some of the topics covered in this chapter.<br/>
+<br/>
+@table @code<br/>
+@item or<br/>
+Evaluate each argument in sequence, and return the value of the first<br/>
+argument that is not @code{nil}; if none return a value that is not<br/>
+@code{nil}, return @code{nil}.  In brief, return the first true value<br/>
+of the arguments; return a true value if one @em...</p>
+</li>
+<li>
+<p class="binderItem"><strong>optional Argument Exercise</strong><br/><br/>
+@node optional Exercise,  , Second Buffer Related Review, More Complex<br/>
+@section @code{optional} Argument Exercise<br/>
+<br/>
+Write an interactive function with an optional argument that tests<br/>
+whether its argument, a number, is greater than or equal to, or else,<br/>
+less than the value of @code{fill-column}, and tells you which, in a<br/>
+message.  However, if you do not pass an argument to the function, use<br/>
+56 as a default value.</p>
+</li>
+</ul>
+<hr/>
 <li>
 <p class="binderItem"><strong>Narrowing and Widening</strong><br/><br/>
 @node Narrowing & Widening, car cdr & cons, More Complex, Top<br/>
@@ -340,6 +771,54 @@ novices.<br/>
 * Narrowing advantages::        The advantages of narrowing<br/>
 * ...</p>
 </li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>The save-restriction Special Form</strong><br/><br/>
+@node save-restriction, what-line, Narrowing advantages, Narrowing & Widening<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section The @code{save-restriction} Special Form<br/>
+@findex save-restriction<br/>
+<br/>
+In Emacs Lisp, you can use the @code{save-restriction} special form to<br/>
+keep track of whatever narrowing is in effect, if any.  When the Lisp<br/>
+interpreter meets with @code{save-restriction}, it executes the code<br/>
+in the body of the @code{save-restriction} expression, and then undoes<br/>
+any changes to narrow...</p>
+</li>
+<li>
+<p class="binderItem"><strong>what-line</strong><br/><br/>
+@node what-line, narrow Exercise, save-restriction, Narrowing & Widening<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section @code{what-line}<br/>
+@findex what-line<br/>
+@cindex Widening, example of<br/>
+<br/>
+The @code{what-line} command tells you the number of the line in which<br/>
+the cursor is located.  The function illustrates the use of the<br/>
+@code{save-restriction} and @code{save-excursion} commands.  Here is the<br/>
+original text of the function:<br/>
+<br/>
+@smallexample<br/>
+@group<br/>
+(defun what-line ()<br/>
+  "Print the current line nu...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Exercise with Narrowing</strong><br/><br/>
+@node narrow Exercise,  , what-line, Narrowing & Widening<br/>
+@section Exercise with Narrowing<br/>
+<br/>
+Write a function that will display the first 60 characters of the<br/>
+current buffer, even if you have narrowed the buffer to its latter<br/>
+half so that the first line is inaccessible.  Restore point, mark, and<br/>
+narrowing.  For this exercise, you need to use a whole potpourri of<br/>
+functions, including @code{save-restriction}, @code{widen},<br/>
+@code{goto-char}, @code{point-min}, @code{message}, and<br/>
+@code{buffer-substr...</p>
+</li>
+</ul>
+<hr/>
 <li>
 <p class="binderItem"><strong>car, cdr, cons: Fundamental Functions</strong><br/><br/>
 @node car cdr & cons, Cutting & Storing Text, Narrowing & Widening, Top<br/>
@@ -354,6 +833,132 @@ the @code{car} and @code{cdr} functions are used to take them apart.<br/>
 <br/>
 In the walk through of the @code{copy-region-as-kill} f...</p>
 </li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>car and cdr</strong><br/><br/>
+@node car & cdr, cons, Strange Names, car cdr & cons<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section @code{car} and @code{cdr}<br/>
+<br/>
+The @sc{car} of a list is, quite simply, the first item in the list.<br/>
+Thus the @sc{car} of the list @code{(rose violet daisy buttercup)} is<br/>
+@code{rose}.<br/>
+<br/>
+@need 1200<br/>
+If you are reading this in Info in GNU Emacs, you can see this by<br/>
+evaluating the following:<br/>
+<br/>
+@smallexample<br/>
+(car '(rose violet daisy buttercup))<br/>
+@end smallexample<br/>
+<br/>
+@noindent<br/>
+After evaluating the expressio...</p>
+</li>
+<li>
+<p class="binderItem"><strong>cons</strong><br/><br/>
+@node cons, nthcdr, car & cdr, car cdr & cons<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section @code{cons}<br/>
+@findex cons, @r{introduced}<br/>
+<br/>
+The @code{cons} function constructs lists; it is the inverse of<br/>
+@code{car} and @code{cdr}.  For example, @code{cons} can be used to make<br/>
+a four element list from the three element list, @code{(fir oak maple)}:<br/>
+<br/>
+@smallexample<br/>
+(cons 'pine '(fir oak maple))<br/>
+@end smallexample<br/>
+<br/>
+@need 800<br/>
+@noindent<br/>
+After evaluating this list, you will see<br/>
+<br/>
+@smallexample<br/>
+(pine fir...</p>
+</li>
+<li>
+<p class="binderItem"><strong>nthcdr</strong><br/><br/>
+@node nthcdr, nth, cons, car cdr & cons<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section @code{nthcdr}<br/>
+@findex nthcdr<br/>
+<br/>
+The @code{nthcdr} function is associated with the @code{cdr} function.<br/>
+What it does is take the @sc{cdr} of a list repeatedly.<br/>
+<br/>
+If you take the @sc{cdr} of the list @code{(pine fir<br/>
+oak maple)}, you will be returned the list @code{(fir oak maple)}.  If you<br/>
+repeat this on what was returned, you will be returned the list<br/>
+@code{(oak maple)}.  (Of course, repeated @sc{cdr}ing on ...</p>
+</li>
+<li>
+<p class="binderItem"><strong>nth</strong><br/><br/>
+@node nth, setcar, nthcdr, car cdr & cons<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section @code{nth}<br/>
+@findex nth<br/>
+<br/>
+The @code{nthcdr} function takes the @sc{cdr} of a list repeatedly.<br/>
+The @code{nth} function takes the @sc{car} of the result returned by<br/>
+@code{nthcdr}.  It returns the Nth element of the list.<br/>
+<br/>
+@need 1500<br/>
+Thus, if it were not defined in C for speed, the definition of<br/>
+@code{nth} would be:<br/>
+<br/>
+@smallexample<br/>
+@group<br/>
+(defun nth (n list)<br/>
+  "Returns the Nth element of LIST.<br/>
+N counts from ...</p>
+</li>
+<li>
+<p class="binderItem"><strong>setcar</strong><br/><br/>
+@node setcar, setcdr, nth, car cdr & cons<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section @code{setcar}<br/>
+@findex setcar<br/>
+<br/>
+As you might guess from their names, the @code{setcar} and @code{setcdr}<br/>
+functions set the @sc{car} or the @sc{cdr} of a list to a new value.<br/>
+They actually change the original list, unlike @code{car} and @code{cdr}<br/>
+which leave the original list as it was.  One way to find out how this<br/>
+works is to experiment.  We will start with the @code{setcar} function.<br/>
+<br/>
+@need 1200<br/>
+First...</p>
+</li>
+<li>
+<p class="binderItem"><strong>setcdr</strong><br/><br/>
+@node setcdr, cons Exercise, setcar, car cdr & cons<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section @code{setcdr}<br/>
+@findex setcdr<br/>
+<br/>
+The @code{setcdr} function is similar to the @code{setcar} function,<br/>
+except that the function replaces the second and subsequent elements of<br/>
+a list rather than the first element.<br/>
+<br/>
+(To see how to change the last element of a list, look ahead to<br/>
+@ref{kill-new function, , The @code{kill-new} function}, which uses<br/>
+the @code{nthcdr} and @code{setcdr} functions.)<br/>
+<br/>
+@nee...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Exercise</strong><br/><br/>
+@node cons Exercise,  , setcdr, car cdr & cons<br/>
+@section Exercise<br/>
+<br/>
+Construct a list of four birds by evaluating several expressions with<br/>
+@code{cons}.  Find out what happens when you @code{cons} a list onto<br/>
+itself.  Replace the first element of the list of four birds with a<br/>
+fish.  Replace the rest of that list with a list of other fish.</p>
+</li>
+</ul>
+<hr/>
 <li>
 <p class="binderItem"><strong>Cutting and Storing Text</strong><br/><br/>
 @node Cutting & Storing Text, List Implementation, car cdr & cons, Top<br/>

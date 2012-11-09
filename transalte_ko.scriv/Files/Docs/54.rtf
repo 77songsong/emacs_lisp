@@ -1,0 +1,134 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node simplified-beginning-of-buffer, mark-whole-buffer, Finding More, Buffer Walk Through\
+@comment  node-name,  next,  previous,  up\
+@section A Simplified @code\{beginning-of-buffer\} Definition\
+@findex simplified-beginning-of-buffer\
+\
+The @code\{beginning-of-buffer\} command is a good function to start with\
+since you are likely to be familiar with it and it is easy to\
+understand.  Used as an interactive command, @code\{beginning-of-buffer\}\
+moves the cursor to the beginning of the buffer, leaving the mark at the\
+previous position.  It is generally bound to @kbd\{M-<\}.\
+\
+In this section, we will discuss a shortened version of the function\
+that shows how it is most frequently used.  This shortened function\
+works as written, but it does not contain the code for a complex option.\
+In another section, we will describe the entire function.\
+(@xref\{beginning-of-buffer, , Complete Definition of\
+@code\{beginning-of-buffer\}\}.)\
+\
+Before looking at the code, let's consider what the function\
+definition has to contain: it must include an expression that makes\
+the function interactive so it can be called by typing @kbd\{M-x\
+beginning-of-buffer\} or by typing a keychord such as @kbd\{M-<\}; it\
+must include code to leave a mark at the original position in the\
+buffer; and it must include code to move the cursor to the beginning\
+of the buffer.\
+\
+@need 1250\
+Here is the complete text of the shortened version of the function:\
+\
+@smallexample\
+@group\
+(defun simplified-beginning-of-buffer ()\
+  "Move point to the beginning of the buffer;\
+leave mark at previous position."\
+  (interactive)\
+  (push-mark)\
+  (goto-char (point-min)))\
+@end group\
+@end smallexample\
+\
+Like all function definitions, this definition has five parts following\
+the special form @code\{defun\}:\
+\
+@enumerate\
+@item\
+The name: in this example, @code\{simplified-beginning-of-buffer\}.\
+\
+@item\
+A list of the arguments: in this example, an empty list, @code\{()\},\
+\
+@item\
+The documentation string.\
+\
+@item\
+The interactive expression.\
+\
+@item\
+The body.\
+@end enumerate\
+\
+@noindent\
+In this function definition, the argument list is empty; this means that\
+this function does not require any arguments.  (When we look at the\
+definition for the complete function, we will see that it may be passed\
+an optional argument.)\
+\
+The interactive expression tells Emacs that the function is intended to\
+be used interactively.  In this example, @code\{interactive\} does not have\
+an argument because @code\{simplified-beginning-of-buffer\} does not\
+require one.\
+\
+@need 800\
+The body of the function consists of the two lines:\
+\
+@smallexample\
+@group\
+(push-mark)\
+(goto-char (point-min))\
+@end group\
+@end smallexample\
+\
+The first of these lines is the expression, @code\{(push-mark)\}.  When\
+this expression is evaluated by the Lisp interpreter, it sets a mark at\
+the current position of the cursor, wherever that may be.  The position\
+of this mark is saved in the mark ring.\
+\
+The next line is @code\{(goto-char (point-min))\}.  This expression\
+jumps the cursor to the minimum point in the buffer, that is, to the\
+beginning of the buffer (or to the beginning of the accessible portion\
+of the buffer if it is narrowed.  @xref\{Narrowing & Widening, ,\
+Narrowing and Widening\}.)\
+\
+The @code\{push-mark\} command sets a mark at the place where the cursor\
+was located before it was moved to the beginning of the buffer by the\
+@code\{(goto-char (point-min))\} expression.  Consequently, you can, if\
+you wish, go back to where you were originally by typing @kbd\{C-x C-x\}.\
+\
+That is all there is to the function definition!\
+\
+@findex describe-function\
+When you are reading code such as this and come upon an unfamiliar\
+function, such as @code\{goto-char\}, you can find out what it does by\
+using the @code\{describe-function\} command.  To use this command, type\
+@kbd\{C-h f\} and then type in the name of the function and press\
+@key\{RET\}.  The @code\{describe-function\} command will print the\
+function's documentation string in a @file\{*Help*\} window.  For\
+example, the documentation for @code\{goto-char\} is:\
+\
+@smallexample\
+@group\
+Set point to POSITION, a number or marker.\
+Beginning of buffer is position (point-min), end is (point-max).\
+@end group\
+@end smallexample\
+\
+@noindent\
+The function's one argument is the desired position.\
+\
+@noindent\
+(The prompt for @code\{describe-function\} will offer you the symbol\
+under or preceding the cursor, so you can save typing by positioning\
+the cursor right over or after the function and then typing @kbd\{C-h f\
+@key\{RET\}\}.)\
+\
+The @code\{end-of-buffer\} function definition is written in the same way as\
+the @code\{beginning-of-buffer\} definition except that the body of the\
+function contains the expression @code\{(goto-char (point-max))\} in place\
+of @code\{(goto-char (point-min))\}.}

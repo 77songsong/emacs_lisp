@@ -1,0 +1,74 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Getting Buffers, Switching Buffers, Buffer Names, Practicing Evaluation\
+@comment  node-name,  next,  previous,  up\
+@section Getting Buffers\
+@findex current-buffer\
+@findex other-buffer\
+@cindex Getting a buffer\
+\
+The @code\{buffer-name\} function returns the @emph\{name\} of the buffer;\
+to get the buffer @emph\{itself\}, a different function is needed: the\
+@code\{current-buffer\} function.  If you use this function in code, what\
+you get is the buffer itself.\
+\
+A name and the object or entity to which the name refers are different\
+from each other.  You are not your name.  You are a person to whom\
+others refer by name.  If you ask to speak to George and someone hands you\
+a card with the letters @samp\{G\}, @samp\{e\}, @samp\{o\}, @samp\{r\},\
+@samp\{g\}, and @samp\{e\} written on it, you might be amused, but you would\
+not be satisfied.  You do not want to speak to the name, but to the\
+person to whom the name refers.  A buffer is similar: the name of the\
+scratch buffer is @file\{*scratch*\}, but the name is not the buffer.  To\
+get a buffer itself, you need to use a function such as\
+@code\{current-buffer\}.\
+\
+However, there is a slight complication: if you evaluate\
+@code\{current-buffer\} in an expression on its own, as we will do here,\
+what you see is a printed representation of the name of the buffer\
+without the contents of the buffer.  Emacs works this way for two\
+reasons: the buffer may be thousands of lines long---too long to be\
+conveniently displayed; and, another buffer may have the same contents\
+but a different name, and it is important to distinguish between them.\
+\
+@need 800\
+Here is an expression containing the function:\
+\
+@smallexample\
+(current-buffer)\
+@end smallexample\
+\
+@noindent\
+If you evaluate this expression in Info in Emacs in the usual way,\
+@file\{#<buffer *info*>\} will appear in the echo area.  The special\
+format indicates that the buffer itself is being returned, rather than\
+just its name.\
+\
+Incidentally, while you can type a number or symbol into a program, you\
+cannot do that with the printed representation of a buffer: the only way\
+to get a buffer itself is with a function such as @code\{current-buffer\}.\
+\
+A related function is @code\{other-buffer\}.  This returns the most\
+recently selected buffer other than the one you are in currently, not\
+a printed representation of its name.  If you have recently switched\
+back and forth from the @file\{*scratch*\} buffer, @code\{other-buffer\}\
+will return that buffer.\
+\
+@need 800\
+You can see this by evaluating the expression:\
+\
+@smallexample\
+(other-buffer)\
+@end smallexample\
+\
+@noindent\
+You should see @file\{#<buffer *scratch*>\} appear in the echo area, or\
+the name of whatever other buffer you switched back from most\
+recently@footnote\{Actually, by default, if the buffer from which you\
+just switched is visible to you in another window, @code\{other-buffer\}\
+will choose the most recent buffer that you cannot see; this is a\
+subtlety that I often forget.\}.}

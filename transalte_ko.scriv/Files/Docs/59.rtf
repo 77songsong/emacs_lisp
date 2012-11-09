@@ -1,0 +1,84 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node copy-to-buffer, insert-buffer, More Complex, More Complex\
+@comment  node-name,  next,  previous,  up\
+@section The Definition of @code\{copy-to-buffer\}\
+@findex copy-to-buffer\
+\
+After understanding how @code\{append-to-buffer\} works, it is easy to\
+understand @code\{copy-to-buffer\}.  This function copies text into a\
+buffer, but instead of adding to the second buffer, it replaces all the\
+previous text in the second buffer.\
+\
+@need 800\
+The body of @code\{copy-to-buffer\} looks like this,\
+\
+@smallexample\
+@group\
+@dots\{\}\
+(interactive "BCopy to buffer: \\nr")\
+(let ((oldbuf (current-buffer)))\
+  (with-current-buffer (get-buffer-create buffer)\
+    (barf-if-buffer-read-only)\
+    (erase-buffer)\
+    (save-excursion\
+      (insert-buffer-substring oldbuf start end)))))\
+@end group\
+@end smallexample\
+\
+The @code\{copy-to-buffer\} function has a simpler @code\{interactive\}\
+expression than @code\{append-to-buffer\}.\
+\
+@need 800\
+The definition then says\
+\
+@smallexample\
+(with-current-buffer (get-buffer-create buffer) @dots\{\}\
+@end smallexample\
+\
+First, look at the earliest inner expression; that is evaluated first.\
+That expression starts with @code\{get-buffer-create buffer\}.  The\
+function tells the computer to use the buffer with the name specified\
+as the one to which you are copying, or if such a buffer does not\
+exist, to create it.  Then, the @code\{with-current-buffer\} function\
+evaluates its body with that buffer temporarily current.\
+\
+(This demonstrates another way to shift the computer's attention but\
+not the user's.  The @code\{append-to-buffer\} function showed how to do\
+the same with @code\{save-excursion\} and @code\{set-buffer\}.\
+@code\{with-current-buffer\} is a newer, and arguably easier,\
+mechanism.)\
+\
+The @code\{barf-if-buffer-read-only\} function sends you an error\
+message saying the buffer is read-only if you cannot modify it.\
+\
+The next line has the @code\{erase-buffer\} function as its sole\
+contents.  That function erases the buffer.\
+\
+Finally, the last two lines contain the @code\{save-excursion\}\
+expression with @code\{insert-buffer-substring\} as its body.\
+The  @code\{insert-buffer-substring\} expression copies the text from\
+the buffer you are in (and you have not seen the computer shift its\
+attention, so you don't know that that buffer is now called\
+@code\{oldbuf\}).\
+\
+Incidentally, this is what is meant by `replacement'.  To replace text,\
+Emacs erases the previous text and then inserts new text.\
+\
+@need 1250\
+In outline, the body of @code\{copy-to-buffer\} looks like this:\
+\
+@smallexample\
+@group\
+(let (@var\{bind-\}@code\{oldbuf\}@var\{-to-value-of-\}@code\{current-buffer\})\
+    (@var\{with-the-buffer-you-are-copying-to\}\
+      (@var\{but-do-not-erase-or-copy-to-a-read-only-buffer\})\
+      (erase-buffer)\
+      (save-excursion\
+        @var\{insert-substring-from-\}@code\{oldbuf\}@var\{-into-buffer\})))\
+@end group\
+@end smallexample}

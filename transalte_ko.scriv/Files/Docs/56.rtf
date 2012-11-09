@@ -1,0 +1,450 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node append-to-buffer, Buffer Related Review, mark-whole-buffer, Buffer Walk Through\
+@comment  node-name,  next,  previous,  up\
+@section The Definition of @code\{append-to-buffer\}\
+@findex append-to-buffer\
+\
+The @code\{append-to-buffer\} command is more complex than the\
+@code\{mark-whole-buffer\} command.  What it does is copy the region\
+(that is, the part of the buffer between point and mark) from the\
+current buffer to a specified buffer.\
+\
+@menu\
+* append-to-buffer overview::\
+* append interactive::          A two part interactive expression.\
+* append-to-buffer body::       Incorporates a @code\{let\} expression.\
+* append save-excursion::       How the @code\{save-excursion\} works.\
+@end menu\
+\
+@node append-to-buffer overview, append interactive, append-to-buffer, append-to-buffer\
+@ifnottex\
+@unnumberedsubsec An Overview of @code\{append-to-buffer\}\
+@end ifnottex\
+\
+@findex insert-buffer-substring\
+The @code\{append-to-buffer\} command uses the\
+@code\{insert-buffer-substring\} function to copy the region.\
+@code\{insert-buffer-substring\} is described by its name: it takes a\
+string of characters from part of a buffer, a ``substring'', and\
+inserts them into another buffer.\
+\
+Most of @code\{append-to-buffer\} is\
+concerned with setting up the conditions for\
+@code\{insert-buffer-substring\} to work: the code must specify both the\
+buffer to which the text will go, the window it comes from and goes\
+to, and the region that will be copied.\
+\
+@need 1250\
+Here is the complete text of the function:\
+\
+@smallexample\
+@group\
+(defun append-to-buffer (buffer start end)\
+  "Append to specified buffer the text of the region.\
+It is inserted into that buffer before its point.\
+@end group\
+\
+@group\
+When calling from a program, give three arguments:\
+BUFFER (or buffer name), START and END.\
+START and END specify the portion of the current buffer to be copied."\
+  (interactive\
+   (list (read-buffer "Append to buffer: " (other-buffer\
+                                            (current-buffer) t))\
+         (region-beginning) (region-end)))\
+@end group\
+@group\
+  (let ((oldbuf (current-buffer)))\
+    (save-excursion\
+      (let* ((append-to (get-buffer-create buffer))\
+             (windows (get-buffer-window-list append-to t t))\
+             point)\
+        (set-buffer append-to)\
+        (setq point (point))\
+        (barf-if-buffer-read-only)\
+        (insert-buffer-substring oldbuf start end)\
+        (dolist (window windows)\
+          (when (= (window-point window) point)\
+            (set-window-point window (point))))))))\
+@end group\
+@end smallexample\
+\
+The function can be understood by looking at it as a series of\
+filled-in templates.\
+\
+The outermost template is for the function definition.  In this\
+function, it looks like this (with several slots filled in):\
+\
+@smallexample\
+@group\
+(defun append-to-buffer (buffer start end)\
+  "@var\{documentation\}@dots\{\}"\
+  (interactive @dots\{\})\
+  @var\{body\}@dots\{\})\
+@end group\
+@end smallexample\
+\
+The first line of the function includes its name and three arguments.\
+The arguments are the @code\{buffer\} to which the text will be copied, and\
+the @code\{start\} and @code\{end\} of the region in the current buffer that\
+will be copied.\
+\
+The next part of the function is the documentation, which is clear and\
+complete.  As is conventional, the three arguments are written in\
+upper case so you will notice them easily.  Even better, they are\
+described in the same order as in the argument list.\
+\
+Note that the documentation distinguishes between a buffer and its\
+name.  (The function can handle either.)\
+\
+@node append interactive, append-to-buffer body, append-to-buffer overview, append-to-buffer\
+@comment  node-name,  next,  previous,  up\
+@subsection The @code\{append-to-buffer\} Interactive Expression\
+\
+Since the @code\{append-to-buffer\} function will be used interactively,\
+the function must have an @code\{interactive\} expression.  (For a\
+review of @code\{interactive\}, see @ref\{Interactive, , Making a\
+Function Interactive\}.)  The expression reads as follows:\
+\
+@smallexample\
+@group\
+(interactive\
+ (list (read-buffer\
+        "Append to buffer: "\
+        (other-buffer (current-buffer) t))\
+       (region-beginning)\
+       (region-end)))\
+@end group\
+@end smallexample\
+\
+@noindent\
+This expression is not one with letters standing for parts, as\
+described earlier.  Instead, it starts a list with these parts:\
+\
+The first part of the list is an expression to read the name of a\
+buffer and return it as a string.  That is @code\{read-buffer\}.  The\
+function requires a prompt as its first argument, @samp\{"Append to\
+buffer: "\}.  Its second argument tells the command what value to\
+provide if you don't specify anything.\
+\
+In this case that second argument is an expression containing the\
+function @code\{other-buffer\}, an exception, and a @samp\{t\}, standing\
+for true.\
+\
+The first argument to @code\{other-buffer\}, the exception, is yet\
+another function, @code\{current-buffer\}.  That is not going to be\
+returned.  The second argument is the symbol for true, @code\{t\}. that\
+tells @code\{other-buffer\} that it may show visible buffers (except in\
+this case, it will not show the current buffer, which makes sense).\
+\
+@need 1250\
+The expression looks like this:\
+\
+@smallexample\
+(other-buffer (current-buffer) t)\
+@end smallexample\
+\
+The second and third arguments to the @code\{list\} expression are\
+@code\{(region-beginning)\} and @code\{(region-end)\}.  These two\
+functions specify the beginning and end of the text to be appended.\
+\
+@need 1250\
+Originally, the command used the letters @samp\{B\} and @samp\{r\}.\
+The whole @code\{interactive\} expression looked like this:\
+\
+@smallexample\
+(interactive "BAppend to buffer:@: \\nr")\
+@end smallexample\
+\
+@noindent\
+But when that was done, the default value of the buffer switched to\
+was invisible.  That was not wanted.\
+\
+(The prompt was separated from the second argument with a newline,\
+@samp\{\\n\}.  It was followed by an @samp\{r\} that told Emacs to bind the\
+two arguments that follow the symbol @code\{buffer\} in the function's\
+argument list (that is, @code\{start\} and @code\{end\}) to the values of\
+point and mark.  That argument worked fine.)\
+\
+@node append-to-buffer body, append save-excursion, append interactive, append-to-buffer\
+@comment  node-name,  next,  previous,  up\
+@subsection The Body of @code\{append-to-buffer\}\
+\
+@ignore\
+in GNU Emacs 22   in    /usr/local/src/emacs/lisp/simple.el\
+\
+(defun append-to-buffer (buffer start end)\
+  "Append to specified buffer the text of the region.\
+It is inserted into that buffer before its point.\
+\
+When calling from a program, give three arguments:\
+BUFFER (or buffer name), START and END.\
+START and END specify the portion of the current buffer to be copied."\
+  (interactive\
+   (list (read-buffer "Append to buffer: " (other-buffer (current-buffer) t))\
+         (region-beginning) (region-end)))\
+  (let ((oldbuf (current-buffer)))\
+    (save-excursion\
+      (let* ((append-to (get-buffer-create buffer))\
+             (windows (get-buffer-window-list append-to t t))\
+             point)\
+        (set-buffer append-to)\
+        (setq point (point))\
+        (barf-if-buffer-read-only)\
+        (insert-buffer-substring oldbuf start end)\
+        (dolist (window windows)\
+          (when (= (window-point window) point)\
+            (set-window-point window (point))))))))\
+@end ignore\
+\
+The body of the @code\{append-to-buffer\} function begins with @code\{let\}.\
+\
+As we have seen before (@pxref\{let, , @code\{let\}\}), the purpose of a\
+@code\{let\} expression is to create and give initial values to one or\
+more variables that will only be used within the body of the\
+@code\{let\}.  This means that such a variable will not be confused with\
+any variable of the same name outside the @code\{let\} expression.\
+\
+We can see how the @code\{let\} expression fits into the function as a\
+whole by showing a template for @code\{append-to-buffer\} with the\
+@code\{let\} expression in outline:\
+\
+@smallexample\
+@group\
+(defun append-to-buffer (buffer start end)\
+  "@var\{documentation\}@dots\{\}"\
+  (interactive @dots\{\})\
+  (let ((@var\{variable\} @var\{value\}))\
+        @var\{body\}@dots\{\})\
+@end group\
+@end smallexample\
+\
+The @code\{let\} expression has three elements:\
+\
+@enumerate\
+@item\
+The symbol @code\{let\};\
+\
+@item\
+A varlist containing, in this case, a single two-element list,\
+@code\{(@var\{variable\} @var\{value\})\};\
+\
+@item\
+The body of the @code\{let\} expression.\
+@end enumerate\
+\
+@need 800\
+In the @code\{append-to-buffer\} function, the varlist looks like this:\
+\
+@smallexample\
+(oldbuf (current-buffer))\
+@end smallexample\
+\
+@noindent\
+In this part of the @code\{let\} expression, the one variable,\
+@code\{oldbuf\}, is bound to the value returned by the\
+@code\{(current-buffer)\} expression.  The variable, @code\{oldbuf\}, is\
+used to keep track of the buffer in which you are working and from\
+which you will copy.\
+\
+The element or elements of a varlist are surrounded by a set of\
+parentheses so the Lisp interpreter can distinguish the varlist from\
+the body of the @code\{let\}.  As a consequence, the two-element list\
+within the varlist is surrounded by a circumscribing set of parentheses.\
+The line looks like this:\
+\
+@smallexample\
+@group\
+(let ((oldbuf (current-buffer)))\
+  @dots\{\} )\
+@end group\
+@end smallexample\
+\
+@noindent\
+The two parentheses before @code\{oldbuf\} might surprise you if you did\
+not realize that the first parenthesis before @code\{oldbuf\} marks the\
+boundary of the varlist and the second parenthesis marks the beginning\
+of the two-element list, @code\{(oldbuf (current-buffer))\}.\
+\
+@node append save-excursion,  , append-to-buffer body, append-to-buffer\
+@comment  node-name,  next,  previous,  up\
+@subsection @code\{save-excursion\} in @code\{append-to-buffer\}\
+\
+The body of the @code\{let\} expression in @code\{append-to-buffer\}\
+consists of a @code\{save-excursion\} expression.\
+\
+The @code\{save-excursion\} function saves the locations of point and\
+mark, and restores them to those positions after the expressions in the\
+body of the @code\{save-excursion\} complete execution.  In addition,\
+@code\{save-excursion\} keeps track of the original buffer, and\
+restores it.  This is how @code\{save-excursion\} is used in\
+@code\{append-to-buffer\}.\
+\
+@need 1500\
+@cindex Indentation for formatting\
+@cindex Formatting convention\
+Incidentally, it is worth noting here that a Lisp function is normally\
+formatted so that everything that is enclosed in a multi-line spread is\
+indented more to the right than the first symbol.  In this function\
+definition, the @code\{let\} is indented more than the @code\{defun\}, and\
+the @code\{save-excursion\} is indented more than the @code\{let\}, like\
+this:\
+\
+@smallexample\
+@group\
+(defun @dots\{\}\
+  @dots\{\}\
+  @dots\{\}\
+  (let@dots\{\}\
+    (save-excursion\
+      @dots\{\}\
+@end group\
+@end smallexample\
+\
+@need 1500\
+@noindent\
+This formatting convention makes it easy to see that the lines in\
+the body of the @code\{save-excursion\} are enclosed by the parentheses\
+associated with @code\{save-excursion\}, just as the\
+@code\{save-excursion\} itself is enclosed by the parentheses associated\
+with the @code\{let\}:\
+\
+@smallexample\
+@group\
+(let ((oldbuf (current-buffer)))\
+  (save-excursion\
+    @dots\{\}\
+    (set-buffer @dots\{\})\
+    (insert-buffer-substring oldbuf start end)\
+    @dots\{\}))\
+@end group\
+@end smallexample\
+\
+@need 1200\
+The use of the @code\{save-excursion\} function can be viewed as a process\
+of filling in the slots of a template:\
+\
+@smallexample\
+@group\
+(save-excursion\
+  @var\{first-expression-in-body\}\
+  @var\{second-expression-in-body\}\
+   @dots\{\}\
+  @var\{last-expression-in-body\})\
+@end group\
+@end smallexample\
+\
+@need 1200\
+@noindent\
+In this function, the body of the @code\{save-excursion\} contains only\
+one expression, the @code\{let*\} expression.  You know about a\
+@code\{let\} function.  The @code\{let*\} function is different.  It has a\
+@samp\{*\} in its name.  It enables Emacs to set each variable in its\
+varlist in sequence, one after another.\
+\
+Its critical feature is that variables later in the varlist can make\
+use of the values to which Emacs set variables earlier in the varlist.\
+@xref\{fwd-para let, , The @code\{let*\} expression\}.\
+\
+We will skip functions like @code\{let*\} and focus on two: the\
+@code\{set-buffer\} function and the @code\{insert-buffer-substring\}\
+function.\
+\
+@need 1250\
+In the old days, the @code\{set-buffer\} expression was simply\
+\
+@smallexample\
+(set-buffer (get-buffer-create buffer))\
+@end smallexample\
+\
+@need 1250\
+@noindent\
+but now it is\
+\
+@smallexample\
+(set-buffer append-to)\
+@end smallexample\
+\
+@noindent\
+@code\{append-to\} is bound to @code\{(get-buffer-create buffer)\} earlier\
+on in the @code\{let*\} expression.  That extra binding would not be\
+necessary except for that @code\{append-to\} is used later in the\
+varlist as an argument to @code\{get-buffer-window-list\}.\
+\
+@ignore\
+in GNU Emacs 22\
+\
+  (let ((oldbuf (current-buffer)))\
+    (save-excursion\
+      (let* ((append-to (get-buffer-create buffer))\
+             (windows (get-buffer-window-list append-to t t))\
+             point)\
+        (set-buffer append-to)\
+        (setq point (point))\
+        (barf-if-buffer-read-only)\
+        (insert-buffer-substring oldbuf start end)\
+        (dolist (window windows)\
+          (when (= (window-point window) point)\
+            (set-window-point window (point))))))))\
+@end ignore\
+\
+The @code\{append-to-buffer\} function definition inserts text from the\
+buffer in which you are currently to a named buffer.  It happens that\
+@code\{insert-buffer-substring\} copies text from another buffer to the\
+current buffer, just the reverse---that is why the\
+@code\{append-to-buffer\} definition starts out with a @code\{let\} that\
+binds the local symbol @code\{oldbuf\} to the value returned by\
+@code\{current-buffer\}.\
+\
+@need 1250\
+The @code\{insert-buffer-substring\} expression looks like this:\
+\
+@smallexample\
+(insert-buffer-substring oldbuf start end)\
+@end smallexample\
+\
+@noindent\
+The @code\{insert-buffer-substring\} function copies a string\
+@emph\{from\} the buffer specified as its first argument and inserts the\
+string into the present buffer.  In this case, the argument to\
+@code\{insert-buffer-substring\} is the value of the variable created\
+and bound by the @code\{let\}, namely the value of @code\{oldbuf\}, which\
+was the current buffer when you gave the @code\{append-to-buffer\}\
+command.\
+\
+After @code\{insert-buffer-substring\} has done its work,\
+@code\{save-excursion\} will restore the action to the original buffer\
+and @code\{append-to-buffer\} will have done its job.\
+\
+@need 800\
+Written in skeletal form, the workings of the body look like this:\
+\
+@smallexample\
+@group\
+(let (@var\{bind-\}@code\{oldbuf\}@var\{-to-value-of-\}@code\{current-buffer\})\
+  (save-excursion                       ; @r\{Keep track of buffer.\}\
+    @var\{change-buffer\}\
+    @var\{insert-substring-from-\}@code\{oldbuf\}@var\{-into-buffer\})\
+\
+  @var\{change-back-to-original-buffer-when-finished\}\
+@var\{let-the-local-meaning-of-\}@code\{oldbuf\}@var\{-disappear-when-finished\}\
+@end group\
+@end smallexample\
+\
+In summary, @code\{append-to-buffer\} works as follows: it saves the\
+value of the current buffer in the variable called @code\{oldbuf\}.  It\
+gets the new buffer (creating one if need be) and switches Emacs'\
+attention to it.  Using the value of @code\{oldbuf\}, it inserts the\
+region of text from the old buffer into the new buffer; and then using\
+@code\{save-excursion\}, it brings you back to your original buffer.\
+\
+In looking at @code\{append-to-buffer\}, you have explored a fairly\
+complex function.  It shows how to use @code\{let\} and\
+@code\{save-excursion\}, and how to change to and come back from another\
+buffer.  Many function definitions use @code\{let\},\
+@code\{save-excursion\}, and @code\{set-buffer\} this way.}

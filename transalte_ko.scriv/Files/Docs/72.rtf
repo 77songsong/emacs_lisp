@@ -1,0 +1,81 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node setcar, setcdr, nth, car cdr & cons\
+@comment  node-name,  next,  previous,  up\
+@section @code\{setcar\}\
+@findex setcar\
+\
+As you might guess from their names, the @code\{setcar\} and @code\{setcdr\}\
+functions set the @sc\{car\} or the @sc\{cdr\} of a list to a new value.\
+They actually change the original list, unlike @code\{car\} and @code\{cdr\}\
+which leave the original list as it was.  One way to find out how this\
+works is to experiment.  We will start with the @code\{setcar\} function.\
+\
+@need 1200\
+First, we can make a list and then set the value of a variable to the\
+list, using the @code\{setq\} function.  Here is a list of animals:\
+\
+@smallexample\
+(setq animals '(antelope giraffe lion tiger))\
+@end smallexample\
+\
+@noindent\
+If you are reading this in Info inside of GNU Emacs, you can evaluate\
+this expression in the usual fashion, by positioning the cursor after\
+the expression and typing @kbd\{C-x C-e\}.  (I'm doing this right here\
+as I write this.  This is one of the advantages of having the\
+interpreter built into the computing environment.  Incidentally, when\
+there is nothing on the line after the final parentheses, such as a\
+comment, point can be on the next line.  Thus, if your cursor is in\
+the first column of the next line, you do not need to move it.\
+Indeed, Emacs permits any amount of white space after the final\
+parenthesis.)\
+\
+@need 1200\
+When we evaluate the variable @code\{animals\}, we see that it is bound to\
+the list @code\{(antelope giraffe lion tiger)\}:\
+\
+@smallexample\
+@group\
+animals\
+     @result\{\} (antelope giraffe lion tiger)\
+@end group\
+@end smallexample\
+\
+@noindent\
+Put another way, the variable @code\{animals\} points to the list\
+@code\{(antelope giraffe lion tiger)\}.\
+\
+Next, evaluate the function @code\{setcar\} while passing it two\
+arguments, the variable @code\{animals\} and the quoted symbol\
+@code\{hippopotamus\}; this is done by writing the three element list\
+@code\{(setcar animals 'hippopotamus)\} and then evaluating it in the\
+usual fashion:\
+\
+@smallexample\
+(setcar animals 'hippopotamus)\
+@end smallexample\
+\
+@need 1200\
+@noindent\
+After evaluating this expression, evaluate the variable @code\{animals\}\
+again.  You will see that the list of animals has changed:\
+\
+@smallexample\
+@group\
+animals\
+     @result\{\} (hippopotamus giraffe lion tiger)\
+@end group\
+@end smallexample\
+\
+@noindent\
+The first element on the list, @code\{antelope\} is replaced by\
+@code\{hippopotamus\}.\
+\
+So we can see that @code\{setcar\} did not add a new element to the list\
+as @code\{cons\} would have; it replaced @code\{antelope\} with\
+@code\{hippopotamus\}; it @emph\{changed\} the list.}

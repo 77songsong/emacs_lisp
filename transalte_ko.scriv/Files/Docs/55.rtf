@@ -1,0 +1,146 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node mark-whole-buffer, append-to-buffer, simplified-beginning-of-buffer, Buffer Walk Through\
+@comment  node-name,  next,  previous,  up\
+@section The Definition of @code\{mark-whole-buffer\}\
+@findex mark-whole-buffer\
+\
+The @code\{mark-whole-buffer\} function is no harder to understand than the\
+@code\{simplified-beginning-of-buffer\} function.  In this case, however,\
+we will look at the complete function, not a shortened version.\
+\
+The @code\{mark-whole-buffer\} function is not as commonly used as the\
+@code\{beginning-of-buffer\} function, but is useful nonetheless: it\
+marks a whole buffer as a region by putting point at the beginning and\
+a mark at the end of the buffer.  It is generally bound to @kbd\{C-x\
+h\}.\
+\
+@menu\
+* mark-whole-buffer overview::\
+* Body of mark-whole-buffer::   Only three lines of code.\
+@end menu\
+\
+@node mark-whole-buffer overview, Body of mark-whole-buffer, mark-whole-buffer, mark-whole-buffer\
+@ifnottex\
+@unnumberedsubsec An overview of @code\{mark-whole-buffer\}\
+@end ifnottex\
+\
+@need 1250\
+In GNU Emacs 22, the code for the complete function looks like this:\
+\
+@smallexample\
+@group\
+(defun mark-whole-buffer ()\
+  "Put point at beginning and mark at end of buffer.\
+You probably should not use this function in Lisp programs;\
+it is usually a mistake for a Lisp function to use any subroutine\
+that uses or sets the mark."\
+  (interactive)\
+  (push-mark (point))\
+  (push-mark (point-max) nil t)\
+  (goto-char (point-min)))\
+@end group\
+@end smallexample\
+\
+@need 1250\
+Like all other functions, the @code\{mark-whole-buffer\} function fits\
+into the template for a function definition.  The template looks like\
+this:\
+\
+@smallexample\
+@group\
+(defun @var\{name-of-function\} (@var\{argument-list\})\
+  "@var\{documentation\}@dots\{\}"\
+  (@var\{interactive-expression\}@dots\{\})\
+  @var\{body\}@dots\{\})\
+@end group\
+@end smallexample\
+\
+Here is how the function works: the name of the function is\
+@code\{mark-whole-buffer\}; it is followed by an empty argument list,\
+@samp\{()\}, which means that the function does not require arguments.\
+The documentation comes next.\
+\
+The next line is an @code\{(interactive)\} expression that tells Emacs\
+that the function will be used interactively.  These details are similar\
+to the @code\{simplified-beginning-of-buffer\} function described in the\
+previous section.\
+\
+@need 1250\
+@node Body of mark-whole-buffer,  , mark-whole-buffer overview, mark-whole-buffer\
+@comment  node-name,  next,  previous,  up\
+@subsection Body of @code\{mark-whole-buffer\}\
+\
+The body of the @code\{mark-whole-buffer\} function consists of three\
+lines of code:\
+\
+@c GNU Emacs 22\
+@smallexample\
+@group\
+(push-mark (point))\
+(push-mark (point-max) nil t)\
+(goto-char (point-min))\
+@end group\
+@end smallexample\
+\
+The first of these lines is the expression, @code\{(push-mark (point))\}.\
+\
+This line does exactly the same job as the first line of the body of\
+the @code\{simplified-beginning-of-buffer\} function, which is written\
+@code\{(push-mark)\}.  In both cases, the Lisp interpreter sets a mark\
+at the current position of the cursor.\
+\
+I don't know why the expression in @code\{mark-whole-buffer\} is written\
+@code\{(push-mark (point))\} and the expression in\
+@code\{beginning-of-buffer\} is written @code\{(push-mark)\}.  Perhaps\
+whoever wrote the code did not know that the arguments for\
+@code\{push-mark\} are optional and that if @code\{push-mark\} is not\
+passed an argument, the function automatically sets mark at the\
+location of point by default.  Or perhaps the expression was written\
+so as to parallel the structure of the next line.  In any case, the\
+line causes Emacs to determine the position of point and set a mark\
+there.\
+\
+In earlier versions of GNU Emacs, the next line of\
+@code\{mark-whole-buffer\} was @code\{(push-mark (point-max))\}.  This\
+expression sets a mark at the point in the buffer that has the highest\
+number.  This will be the end of the buffer (or, if the buffer is\
+narrowed, the end of the accessible portion of the buffer.\
+@xref\{Narrowing & Widening, , Narrowing and Widening\}, for more about\
+narrowing.)  After this mark has been set, the previous mark, the one\
+set at point, is no longer set, but Emacs remembers its position, just\
+as all other recent marks are always remembered.  This means that you\
+can, if you wish, go back to that position by typing @kbd\{C-u\
+C-@key\{SPC\}\} twice.\
+\
+@need 1250\
+In GNU Emacs 22, the @code\{(point-max)\} is slightly more complicated.\
+The line reads\
+\
+@smallexample\
+(push-mark (point-max) nil t)\
+@end smallexample\
+\
+@noindent\
+The expression works nearly the same as before.  It sets a mark at the\
+highest numbered place in the buffer that it can.  However, in this\
+version, @code\{push-mark\} has two additional arguments.  The second\
+argument to @code\{push-mark\} is @code\{nil\}.  This tells the function\
+it @emph\{should\} display a message that says `Mark set' when it pushes\
+the mark.  The third argument is @code\{t\}.  This tells\
+@code\{push-mark\} to activate the mark when Transient Mark mode is\
+turned on.  Transient Mark mode highlights the currently active\
+region.  It is often turned off.\
+\
+Finally, the last line of the function is @code\{(goto-char\
+(point-min)))\}.  This is written exactly the same way as it is written\
+in @code\{beginning-of-buffer\}.  The expression moves the cursor to\
+the minimum point in the buffer, that is, to the beginning of the buffer\
+(or to the beginning of the accessible portion of the buffer).  As a\
+result of this, point is placed at the beginning of the buffer and mark\
+is set at the end of the buffer.  The whole buffer is, therefore, the\
+region.}

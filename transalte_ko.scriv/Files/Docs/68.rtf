@@ -1,0 +1,128 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node car & cdr, cons, Strange Names, car cdr & cons\
+@comment  node-name,  next,  previous,  up\
+@section @code\{car\} and @code\{cdr\}\
+\
+The @sc\{car\} of a list is, quite simply, the first item in the list.\
+Thus the @sc\{car\} of the list @code\{(rose violet daisy buttercup)\} is\
+@code\{rose\}.\
+\
+@need 1200\
+If you are reading this in Info in GNU Emacs, you can see this by\
+evaluating the following:\
+\
+@smallexample\
+(car '(rose violet daisy buttercup))\
+@end smallexample\
+\
+@noindent\
+After evaluating the expression, @code\{rose\} will appear in the echo\
+area.\
+\
+Clearly, a more reasonable name for the @code\{car\} function would be\
+@code\{first\} and this is often suggested.\
+\
+@code\{car\} does not remove the first item from the list; it only reports\
+what it is.  After @code\{car\} has been applied to a list, the list is\
+still the same as it was.  In the jargon, @code\{car\} is\
+`non-destructive'.  This feature turns out to be important.\
+\
+The @sc\{cdr\} of a list is the rest of the list, that is, the\
+@code\{cdr\} function returns the part of the list that follows the\
+first item.  Thus, while the @sc\{car\} of the list @code\{'(rose violet\
+daisy buttercup)\} is @code\{rose\}, the rest of the list, the value\
+returned by the @code\{cdr\} function, is @code\{(violet daisy\
+buttercup)\}.\
+\
+@need 800\
+You can see this by evaluating the following in the usual way:\
+\
+@smallexample\
+(cdr '(rose violet daisy buttercup))\
+@end smallexample\
+\
+@noindent\
+When you evaluate this, @code\{(violet daisy buttercup)\} will appear in\
+the echo area.\
+\
+Like @code\{car\}, @code\{cdr\} does not remove any elements from the\
+list---it just returns a report of what the second and subsequent\
+elements are.\
+\
+Incidentally, in the example, the list of flowers is quoted.  If it were\
+not, the Lisp interpreter would try to evaluate the list by calling\
+@code\{rose\} as a function.  In this example, we do not want to do that.\
+\
+Clearly, a more reasonable name for @code\{cdr\} would be @code\{rest\}.\
+\
+(There is a lesson here: when you name new functions, consider very\
+carefully what you are doing, since you may be stuck with the names\
+for far longer than you expect.  The reason this document perpetuates\
+these names is that the Emacs Lisp source code uses them, and if I did\
+not use them, you would have a hard time reading the code; but do,\
+please, try to avoid using these terms yourself.  The people who come\
+after you will be grateful to you.)\
+\
+When @code\{car\} and @code\{cdr\} are applied to a list made up of symbols,\
+such as the list @code\{(pine fir oak maple)\}, the element of the list\
+returned by the function @code\{car\} is the symbol @code\{pine\} without\
+any parentheses around it.  @code\{pine\} is the first element in the\
+list.  However, the @sc\{cdr\} of the list is a list itself, @code\{(fir\
+oak maple)\}, as you can see by evaluating the following expressions in\
+the usual way:\
+\
+@smallexample\
+@group\
+(car '(pine fir oak maple))\
+\
+(cdr '(pine fir oak maple))\
+@end group\
+@end smallexample\
+\
+On the other hand, in a list of lists, the first element is itself a\
+list.  @code\{car\} returns this first element as a list.  For example,\
+the following list contains three sub-lists, a list of carnivores, a\
+list of herbivores and a list of sea mammals:\
+\
+@smallexample\
+@group\
+(car '((lion tiger cheetah)\
+       (gazelle antelope zebra)\
+       (whale dolphin seal)))\
+@end group\
+@end smallexample\
+\
+@noindent\
+In this example, the first element or @sc\{car\} of the list is the list of\
+carnivores, @code\{(lion tiger cheetah)\}, and the rest of the list is\
+@code\{((gazelle antelope zebra) (whale dolphin seal))\}.\
+\
+@smallexample\
+@group\
+(cdr '((lion tiger cheetah)\
+       (gazelle antelope zebra)\
+       (whale dolphin seal)))\
+@end group\
+@end smallexample\
+\
+It is worth saying again that @code\{car\} and @code\{cdr\} are\
+non-destructive---that is, they do not modify or change lists to which\
+they are applied.  This is very important for how they are used.\
+\
+Also, in the first chapter, in the discussion about atoms, I said that\
+in Lisp, ``certain kinds of atom, such as an array, can be separated\
+into parts; but the mechanism for doing this is different from the\
+mechanism for splitting a list.  As far as Lisp is concerned, the\
+atoms of a list are unsplittable.''  (@xref\{Lisp Atoms\}.)  The\
+@code\{car\} and @code\{cdr\} functions are used for splitting lists and\
+are considered fundamental to Lisp.  Since they cannot split or gain\
+access to the parts of an array, an array is considered an atom.\
+Conversely, the other fundamental function, @code\{cons\}, can put\
+together or construct a list, but not an array.  (Arrays are handled\
+by array-specific functions.  @xref\{Arrays, , Arrays, elisp, The GNU\
+Emacs Lisp Reference Manual\}.)}

@@ -1,0 +1,444 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node insert-buffer, beginning-of-buffer, copy-to-buffer, More Complex\
+@comment  node-name,  next,  previous,  up\
+@section The Definition of @code\{insert-buffer\}\
+@findex insert-buffer\
+\
+@code\{insert-buffer\} is yet another buffer-related function.  This\
+command copies another buffer @emph\{into\} the current buffer.  It is the\
+reverse of @code\{append-to-buffer\} or @code\{copy-to-buffer\}, since they\
+copy a region of text @emph\{from\} the current buffer to another buffer.\
+\
+Here is a discussion based on the original code.  The code was\
+simplified in 2003 and is harder to understand.\
+\
+(@xref\{New insert-buffer, , New Body for @code\{insert-buffer\}\}, to see\
+a discussion of the new body.)\
+\
+In addition, this code illustrates the use of @code\{interactive\} with a\
+buffer that might be @dfn\{read-only\} and the important distinction\
+between the name of an object and the object actually referred to.\
+\
+@menu\
+* insert-buffer code::\
+* insert-buffer interactive::   When you can read, but not write.\
+* insert-buffer body::          The body has an @code\{or\} and a @code\{let\}.\
+* if & or::                     Using an @code\{if\} instead of an @code\{or\}.\
+* Insert or::                   How the @code\{or\} expression works.\
+* Insert let::                  Two @code\{save-excursion\} expressions.\
+* New insert-buffer::\
+@end menu\
+\
+@node insert-buffer code, insert-buffer interactive, insert-buffer, insert-buffer\
+@ifnottex\
+@unnumberedsubsec The Code for @code\{insert-buffer\}\
+@end ifnottex\
+\
+@need 800\
+Here is the earlier code:\
+\
+@smallexample\
+@group\
+(defun insert-buffer (buffer)\
+  "Insert after point the contents of BUFFER.\
+Puts mark after the inserted text.\
+BUFFER may be a buffer or a buffer name."\
+  (interactive "*bInsert buffer:@: ")\
+@end group\
+@group\
+  (or (bufferp buffer)\
+      (setq buffer (get-buffer buffer)))\
+  (let (start end newmark)\
+    (save-excursion\
+      (save-excursion\
+        (set-buffer buffer)\
+        (setq start (point-min) end (point-max)))\
+@end group\
+@group\
+      (insert-buffer-substring buffer start end)\
+      (setq newmark (point)))\
+    (push-mark newmark)))\
+@end group\
+@end smallexample\
+\
+@need 1200\
+As with other function definitions, you can use a template to see an\
+outline of the function:\
+\
+@smallexample\
+@group\
+(defun insert-buffer (buffer)\
+  "@var\{documentation\}@dots\{\}"\
+  (interactive "*bInsert buffer:@: ")\
+  @var\{body\}@dots\{\})\
+@end group\
+@end smallexample\
+\
+@node insert-buffer interactive, insert-buffer body, insert-buffer code, insert-buffer\
+@comment  node-name,  next,  previous,  up\
+@subsection The Interactive Expression in @code\{insert-buffer\}\
+@findex interactive, @r\{example use of\}\
+\
+In @code\{insert-buffer\}, the argument to the @code\{interactive\}\
+declaration has two parts, an asterisk, @samp\{*\}, and @samp\{bInsert\
+buffer:@: \}.\
+\
+@menu\
+* Read-only buffer::            When a buffer cannot be modified.\
+* b for interactive::           An existing buffer or else its name.\
+@end menu\
+\
+@node Read-only buffer, b for interactive, insert-buffer interactive, insert-buffer interactive\
+@comment  node-name,  next,  previous,  up\
+@unnumberedsubsubsec A Read-only Buffer\
+@cindex Read-only buffer\
+@cindex Asterisk for read-only buffer\
+@findex * @r\{for read-only buffer\}\
+\
+The asterisk is for the situation when the current buffer is a\
+read-only buffer---a buffer that cannot be modified.  If\
+@code\{insert-buffer\} is called when the current buffer is read-only, a\
+message to this effect is printed in the echo area and the terminal\
+may beep or blink at you; you will not be permitted to insert anything\
+into current buffer.  The asterisk does not need to be followed by a\
+newline to separate it from the next argument.\
+\
+@node b for interactive,  , Read-only buffer, insert-buffer interactive\
+@comment  node-name,  next,  previous,  up\
+@unnumberedsubsubsec @samp\{b\} in an Interactive Expression\
+\
+The next argument in the interactive expression starts with a lower\
+case @samp\{b\}.  (This is different from the code for\
+@code\{append-to-buffer\}, which uses an upper-case @samp\{B\}.\
+@xref\{append-to-buffer, , The Definition of @code\{append-to-buffer\}\}.)\
+The lower-case @samp\{b\} tells the Lisp interpreter that the argument\
+for @code\{insert-buffer\} should be an existing buffer or else its\
+name.  (The upper-case @samp\{B\} option provides for the possibility\
+that the buffer does not exist.)  Emacs will prompt you for the name\
+of the buffer, offering you a default buffer, with name completion\
+enabled.  If the buffer does not exist, you receive a message that\
+says ``No match''; your terminal may beep at you as well.\
+\
+The new and simplified code generates a list for @code\{interactive\}.\
+It uses the @code\{barf-if-buffer-read-only\} and @code\{read-buffer\}\
+functions with which we are already familiar and the @code\{progn\}\
+special form with which we are not.  (It will be described later.)\
+\
+@node insert-buffer body, if & or, insert-buffer interactive, insert-buffer\
+@comment  node-name,  next,  previous,  up\
+@subsection The Body of the @code\{insert-buffer\} Function\
+\
+The body of the @code\{insert-buffer\} function has two major parts: an\
+@code\{or\} expression and a @code\{let\} expression.  The purpose of the\
+@code\{or\} expression is to ensure that the argument @code\{buffer\} is\
+bound to a buffer and not just the name of a buffer.  The body of the\
+@code\{let\} expression contains the code which copies the other buffer\
+into the current buffer.\
+\
+@need 1250\
+In outline, the two expressions fit into the @code\{insert-buffer\}\
+function like this:\
+\
+@smallexample\
+@group\
+(defun insert-buffer (buffer)\
+  "@var\{documentation\}@dots\{\}"\
+  (interactive "*bInsert buffer:@: ")\
+  (or @dots\{\}\
+      @dots\{\}\
+@end group\
+@group\
+  (let (@var\{varlist\})\
+      @var\{body-of-\}@code\{let\}@dots\{\} )\
+@end group\
+@end smallexample\
+\
+To understand how the @code\{or\} expression ensures that the argument\
+@code\{buffer\} is bound to a buffer and not to the name of a buffer, it\
+is first necessary to understand the @code\{or\} function.\
+\
+Before doing this, let me rewrite this part of the function using\
+@code\{if\} so that you can see what is done in a manner that will be familiar.\
+\
+@node if & or, Insert or, insert-buffer body, insert-buffer\
+@comment  node-name,  next,  previous,  up\
+@subsection @code\{insert-buffer\} With an @code\{if\} Instead of an @code\{or\}\
+\
+The job to be done is to make sure the value of @code\{buffer\} is a\
+buffer itself and not the name of a buffer.  If the value is the name,\
+then the buffer itself must be got.\
+\
+You can imagine yourself at a conference where an usher is wandering\
+around holding a list with your name on it and looking for you: the\
+usher is ``bound'' to your name, not to you; but when the usher finds\
+you and takes your arm, the usher becomes ``bound'' to you.\
+\
+@need 800\
+In Lisp, you might describe this situation like this:\
+\
+@smallexample\
+@group\
+(if (not (holding-on-to-guest))\
+    (find-and-take-arm-of-guest))\
+@end group\
+@end smallexample\
+\
+We want to do the same thing with a buffer---if we do not have the\
+buffer itself, we want to get it.\
+\
+@need 1200\
+Using a predicate called @code\{bufferp\} that tells us whether we have a\
+buffer (rather than its name), we can write the code like this:\
+\
+@smallexample\
+@group\
+(if (not (bufferp buffer))              ; @r\{if-part\}\
+    (setq buffer (get-buffer buffer)))  ; @r\{then-part\}\
+@end group\
+@end smallexample\
+\
+@noindent\
+Here, the true-or-false-test of the @code\{if\} expression is\
+@w\{@code\{(not (bufferp buffer))\}\}; and the then-part is the expression\
+@w\{@code\{(setq buffer (get-buffer buffer))\}\}.\
+\
+In the test, the function @code\{bufferp\} returns true if its argument is\
+a buffer---but false if its argument is the name of the buffer.  (The\
+last character of the function name @code\{bufferp\} is the character\
+@samp\{p\}; as we saw earlier, such use of @samp\{p\} is a convention that\
+indicates that the function is a predicate, which is a term that means\
+that the function will determine whether some property is true or false.\
+@xref\{Wrong Type of Argument, , Using the Wrong Type Object as an\
+Argument\}.)\
+\
+@need 1200\
+The function @code\{not\} precedes the expression @code\{(bufferp buffer)\},\
+so the true-or-false-test looks like this:\
+\
+@smallexample\
+(not (bufferp buffer))\
+@end smallexample\
+\
+@noindent\
+@code\{not\} is a function that returns true if its argument is false\
+and false if its argument is true.  So if @code\{(bufferp buffer)\}\
+returns true, the @code\{not\} expression returns false and vice-verse:\
+what is ``not true'' is false and what is ``not false'' is true.\
+\
+Using this test, the @code\{if\} expression works as follows: when the\
+value of the variable @code\{buffer\} is actually a buffer rather than\
+its name, the true-or-false-test returns false and the @code\{if\}\
+expression does not evaluate the then-part.  This is fine, since we do\
+not need to do anything to the variable @code\{buffer\} if it really is\
+a buffer.\
+\
+On the other hand, when the value of @code\{buffer\} is not a buffer\
+itself, but the name of a buffer, the true-or-false-test returns true\
+and the then-part of the expression is evaluated.  In this case, the\
+then-part is @code\{(setq buffer (get-buffer buffer))\}.  This\
+expression uses the @code\{get-buffer\} function to return an actual\
+buffer itself, given its name.  The @code\{setq\} then sets the variable\
+@code\{buffer\} to the value of the buffer itself, replacing its previous\
+value (which was the name of the buffer).\
+\
+@node Insert or, Insert let, if & or, insert-buffer\
+@comment  node-name,  next,  previous,  up\
+@subsection The @code\{or\} in the Body\
+\
+The purpose of the @code\{or\} expression in the @code\{insert-buffer\}\
+function is to ensure that the argument @code\{buffer\} is bound to a\
+buffer and not just to the name of a buffer.  The previous section shows\
+how the job could have been done using an @code\{if\} expression.\
+However, the @code\{insert-buffer\} function actually uses @code\{or\}.\
+To understand this, it is necessary to understand how @code\{or\} works.\
+\
+@findex or\
+An @code\{or\} function can have any number of arguments.  It evaluates\
+each argument in turn and returns the value of the first of its\
+arguments that is not @code\{nil\}.  Also, and this is a crucial feature\
+of @code\{or\}, it does not evaluate any subsequent arguments after\
+returning the first non-@code\{nil\} value.\
+\
+@need 800\
+The @code\{or\} expression looks like this:\
+\
+@smallexample\
+@group\
+(or (bufferp buffer)\
+    (setq buffer (get-buffer buffer)))\
+@end group\
+@end smallexample\
+\
+@noindent\
+The first argument to @code\{or\} is the expression @code\{(bufferp buffer)\}.\
+This expression returns true (a non-@code\{nil\} value) if the buffer is\
+actually a buffer, and not just the name of a buffer.  In the @code\{or\}\
+expression, if this is the case, the @code\{or\} expression returns this\
+true value and does not evaluate the next expression---and this is fine\
+with us, since we do not want to do anything to the value of\
+@code\{buffer\} if it really is a buffer.\
+\
+On the other hand, if the value of @code\{(bufferp buffer)\} is @code\{nil\},\
+which it will be if the value of @code\{buffer\} is the name of a buffer,\
+the Lisp interpreter evaluates the next element of the @code\{or\}\
+expression.  This is the expression @code\{(setq buffer (get-buffer\
+buffer))\}.  This expression returns a non-@code\{nil\} value, which\
+is the value to which it sets the variable @code\{buffer\}---and this\
+value is a buffer itself, not the name of a buffer.\
+\
+The result of all this is that the symbol @code\{buffer\} is always\
+bound to a buffer itself rather than to the name of a buffer.  All\
+this is necessary because the @code\{set-buffer\} function in a\
+following line only works with a buffer itself, not with the name to a\
+buffer.\
+\
+@need 1250\
+Incidentally, using @code\{or\}, the situation with the usher would be\
+written like this:\
+\
+@smallexample\
+(or (holding-on-to-guest) (find-and-take-arm-of-guest))\
+@end smallexample\
+\
+@node Insert let, New insert-buffer, Insert or, insert-buffer\
+@comment  node-name,  next,  previous,  up\
+@subsection The @code\{let\} Expression in @code\{insert-buffer\}\
+\
+After ensuring that the variable @code\{buffer\} refers to a buffer itself\
+and not just to the name of a buffer, the @code\{insert-buffer function\}\
+continues with a @code\{let\} expression.  This specifies three local\
+variables, @code\{start\}, @code\{end\}, and @code\{newmark\} and binds them\
+to the initial value @code\{nil\}.  These variables are used inside the\
+remainder of the @code\{let\} and temporarily hide any other occurrence of\
+variables of the same name in Emacs until the end of the @code\{let\}.\
+\
+@need 1200\
+The body of the @code\{let\} contains two @code\{save-excursion\}\
+expressions.  First, we will look at the inner @code\{save-excursion\}\
+expression in detail.  The expression looks like this:\
+\
+@smallexample\
+@group\
+(save-excursion\
+  (set-buffer buffer)\
+  (setq start (point-min) end (point-max)))\
+@end group\
+@end smallexample\
+\
+@noindent\
+The expression @code\{(set-buffer buffer)\} changes Emacs' attention\
+from the current buffer to the one from which the text will copied.\
+In that buffer, the variables @code\{start\} and @code\{end\} are set to\
+the beginning and end of the buffer, using the commands\
+@code\{point-min\} and @code\{point-max\}.  Note that we have here an\
+illustration of how @code\{setq\} is able to set two variables in the\
+same expression.  The first argument of @code\{setq\} is set to the\
+value of its second, and its third argument is set to the value of its\
+fourth.\
+\
+After the body of the inner @code\{save-excursion\} is evaluated, the\
+@code\{save-excursion\} restores the original buffer, but @code\{start\} and\
+@code\{end\} remain set to the values of the beginning and end of the\
+buffer from which the text will be copied.\
+\
+@need 1250\
+The outer @code\{save-excursion\} expression looks like this:\
+\
+@smallexample\
+@group\
+(save-excursion\
+  (@var\{inner-\}@code\{save-excursion\}@var\{-expression\}\
+     (@var\{go-to-new-buffer-and-set-\}@code\{start\}@var\{-and-\}@code\{end\})\
+  (insert-buffer-substring buffer start end)\
+  (setq newmark (point)))\
+@end group\
+@end smallexample\
+\
+@noindent\
+The @code\{insert-buffer-substring\} function copies the text\
+@emph\{into\} the current buffer @emph\{from\} the region indicated by\
+@code\{start\} and @code\{end\} in @code\{buffer\}.  Since the whole of the\
+second buffer lies between @code\{start\} and @code\{end\}, the whole of\
+the second buffer is copied into the buffer you are editing.  Next,\
+the value of point, which will be at the end of the inserted text, is\
+recorded in the variable @code\{newmark\}.\
+\
+After the body of the outer @code\{save-excursion\} is evaluated, point\
+and mark are relocated to their original places.\
+\
+However, it is convenient to locate a mark at the end of the newly\
+inserted text and locate point at its beginning.  The @code\{newmark\}\
+variable records the end of the inserted text.  In the last line of\
+the @code\{let\} expression, the @code\{(push-mark newmark)\} expression\
+function sets a mark to this location.  (The previous location of the\
+mark is still accessible; it is recorded on the mark ring and you can\
+go back to it with @kbd\{C-u C-@key\{SPC\}\}.)  Meanwhile, point is\
+located at the beginning of the inserted text, which is where it was\
+before you called the insert function, the position of which was saved\
+by the first @code\{save-excursion\}.\
+\
+@need 1250\
+The whole @code\{let\} expression looks like this:\
+\
+@smallexample\
+@group\
+(let (start end newmark)\
+  (save-excursion\
+    (save-excursion\
+      (set-buffer buffer)\
+      (setq start (point-min) end (point-max)))\
+    (insert-buffer-substring buffer start end)\
+    (setq newmark (point)))\
+  (push-mark newmark))\
+@end group\
+@end smallexample\
+\
+Like the @code\{append-to-buffer\} function, the @code\{insert-buffer\}\
+function uses @code\{let\}, @code\{save-excursion\}, and\
+@code\{set-buffer\}.  In addition, the function illustrates one way to\
+use @code\{or\}.  All these functions are building blocks that we will\
+find and use again and again.\
+\
+@node New insert-buffer,  , Insert let, insert-buffer\
+@comment  node-name,  next,  previous,  up\
+@subsection New Body for @code\{insert-buffer\}\
+@findex insert-buffer, new version body\
+@findex new version body for insert-buffer\
+\
+The body in the GNU Emacs 22 version is more confusing than the original.\
+\
+@need 1250\
+It consists of two expressions,\
+\
+@smallexample\
+@group\
+  (push-mark\
+   (save-excursion\
+     (insert-buffer-substring (get-buffer buffer))\
+     (point)))\
+\
+   nil\
+@end group\
+@end smallexample\
+\
+@noindent\
+except, and this is what confuses novices, very important work is done\
+inside the @code\{push-mark\} expression.\
+\
+The @code\{get-buffer\} function returns a buffer with the name\
+provided.  You will note that the function is @emph\{not\} called\
+@code\{get-buffer-create\}; it does not create a buffer if one does not\
+already exist.  The buffer returned by @code\{get-buffer\}, an existing\
+buffer, is passed to @code\{insert-buffer-substring\}, which inserts the\
+whole of the buffer (since you did not specify anything else).\
+\
+The location into which the buffer is inserted is recorded by\
+@code\{push-mark\}.  Then the function returns @code\{nil\}, the value of\
+its last command.  Put another way, the @code\{insert-buffer\} function\
+exists only to produce a side effect, inserting another buffer, not to\
+return any value.}

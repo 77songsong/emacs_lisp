@@ -1,0 +1,101 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Finding More, simplified-beginning-of-buffer, Buffer Walk Through, Buffer Walk Through\
+@section Finding More Information\
+\
+@findex describe-function, @r\{introduced\}\
+@cindex Find function documentation\
+In this walk-through, I will describe each new function as we come to\
+it, sometimes in detail and sometimes briefly.  If you are interested,\
+you can get the full documentation of any Emacs Lisp function at any\
+time by typing @kbd\{C-h f\} and then the name of the function (and then\
+@key\{RET\}).  Similarly, you can get the full documentation for a\
+variable by typing @kbd\{C-h v\} and then the name of the variable (and\
+then @key\{RET\}).\
+\
+@cindex Find source of function\
+@c In version 22, tells location both of C and of Emacs Lisp\
+Also, @code\{describe-function\} will tell you the location of the\
+function definition.\
+\
+Put point into the name of the file that contains the function and\
+press the @key\{RET\} key.  In this case, @key\{RET\} means\
+@code\{push-button\} rather than `return' or `enter'.  Emacs will take\
+you directly to the function definition.\
+\
+@ignore\
+Not In version 22\
+\
+If you move point over the file name and press\
+the @key\{RET\} key, which in this case means @code\{help-follow\} rather\
+than `return' or `enter', Emacs will take you directly to the function\
+definition.\
+@end ignore\
+\
+More generally, if you want to see a function in its original source\
+file, you can use the @code\{find-tag\} function to jump to it.\
+@code\{find-tag\} works with a wide variety of languages, not just\
+Lisp, and C, and it works with non-programming text as well.  For\
+example, @code\{find-tag\} will jump to the various nodes in the\
+Texinfo source file of this document.\
+The @code\{find-tag\} function depends on `tags tables' that record\
+the locations of the functions, variables, and other items to which\
+@code\{find-tag\} jumps.\
+\
+To use the @code\{find-tag\} command, type @kbd\{M-.\}  (i.e., press the\
+period key while holding down the @key\{META\} key, or else type the\
+@key\{ESC\} key and then type the period key), and then, at the prompt,\
+type in the name of the function whose source code you want to see,\
+such as @code\{mark-whole-buffer\}, and then type @key\{RET\}.  Emacs will\
+switch buffers and display the source code for the function on your\
+screen.  To switch back to your current buffer, type @kbd\{C-x b\
+@key\{RET\}\}.  (On some keyboards, the @key\{META\} key is labelled\
+@key\{ALT\}.)\
+\
+@c !!! 22.1.1 tags table location in this paragraph\
+@cindex TAGS table, specifying\
+@findex find-tag\
+Depending on how the initial default values of your copy of Emacs are\
+set, you may also need to specify the location of your `tags table',\
+which is a file called @file\{TAGS\}.  For example, if you are\
+interested in Emacs sources, the tags table you will most likely want,\
+if it has already been created for you, will be in a subdirectory of\
+the @file\{/usr/local/share/emacs/\} directory; thus you would use the\
+@code\{M-x visit-tags-table\} command and specify a pathname such as\
+@file\{/usr/local/share/emacs/22.1.1/lisp/TAGS\}.  If the tags table\
+has not already been created, you will have to create it yourself.  It\
+will be in a file such as @file\{/usr/local/src/emacs/src/TAGS\}.\
+\
+@need 1250\
+To create a @file\{TAGS\} file in a specific directory, switch to that\
+directory in Emacs using @kbd\{M-x cd\} command, or list the directory\
+with @kbd\{C-x d\} (@code\{dired\}).  Then run the compile command, with\
+@w\{@code\{etags *.el\}\} as the command to execute:\
+\
+@smallexample\
+M-x compile RET etags *.el RET\
+@end smallexample\
+\
+For more information, see @ref\{etags, , Create Your Own @file\{TAGS\} File\}.\
+\
+After you become more familiar with Emacs Lisp, you will find that you will\
+frequently use @code\{find-tag\} to navigate your way around source code;\
+and you will create your own @file\{TAGS\} tables.\
+\
+@cindex Library, as term for `file'\
+Incidentally, the files that contain Lisp code are conventionally\
+called @dfn\{libraries\}.  The metaphor is derived from that of a\
+specialized library, such as a law library or an engineering library,\
+rather than a general library.  Each library, or file, contains\
+functions that relate to a particular topic or activity, such as\
+@file\{abbrev.el\} for handling abbreviations and other typing\
+shortcuts, and @file\{help.el\} for on-line help.  (Sometimes several\
+libraries provide code for a single activity, as the various\
+@file\{rmail@dots\{\}\} files provide code for reading electronic mail.)\
+In @cite\{The GNU Emacs Manual\}, you will see sentences such as ``The\
+@kbd\{C-h p\} command lets you search the standard Emacs Lisp libraries\
+by topic keywords.''}

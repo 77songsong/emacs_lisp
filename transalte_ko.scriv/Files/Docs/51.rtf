@@ -1,0 +1,258 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Review, defun Exercises, save-excursion, Writing Defuns\
+@comment  node-name,  next,  previous,  up\
+@section Review\
+\
+In the last few chapters we have introduced a fair number of functions\
+and special forms.  Here they are described in brief, along with a few\
+similar functions that have not been mentioned yet.\
+\
+@table @code\
+@item eval-last-sexp\
+Evaluate the last symbolic expression before the current location of\
+point.  The value is printed in the echo area unless the function is\
+invoked with an argument; in that case, the output is printed in the\
+current buffer.  This command is normally bound to @kbd\{C-x C-e\}.\
+\
+@item defun\
+Define function.  This special form has up to five parts: the name,\
+a template for the arguments that will be passed to the function,\
+documentation, an optional interactive declaration, and the body of the\
+definition.\
+\
+@need 1250\
+For example, in an early version of Emacs, the function definition was\
+as follows.  (It is slightly more complex now that it seeks the first\
+non-whitespace character rather than the first visible character.)\
+\
+@smallexample\
+@group\
+(defun back-to-indentation ()\
+  "Move point to first visible character on line."\
+  (interactive)\
+  (beginning-of-line 1)\
+  (skip-chars-forward " \\t"))\
+@end group\
+@end smallexample\
+\
+@ignore\
+In GNU Emacs 22,\
+\
+(defun backward-to-indentation (&optional arg)\
+  "Move backward ARG lines and position at first nonblank character."\
+  (interactive "p")\
+  (forward-line (- (or arg 1)))\
+  (skip-chars-forward " \\t"))\
+\
+(defun back-to-indentation ()\
+  "Move point to the first non-whitespace character on this line."\
+  (interactive)\
+  (beginning-of-line 1)\
+  (skip-syntax-forward " " (line-end-position))\
+  ;; Move back over chars that have whitespace syntax but have the p flag.\
+  (backward-prefix-chars))\
+@end ignore\
+\
+@item interactive\
+Declare to the interpreter that the function can be used\
+interactively.  This special form may be followed by a string with one\
+or more parts that pass the information to the arguments of the\
+function, in sequence.  These parts may also tell the interpreter to\
+prompt for information.  Parts of the string are separated by\
+newlines, @samp\{\\n\}.\
+\
+@need 1000\
+Common code characters are:\
+\
+@table @code\
+@item b\
+The name of an existing buffer.\
+\
+@item f\
+The name of an existing file.\
+\
+@item p\
+The numeric prefix argument.  (Note that this `p' is lower case.)\
+\
+@item r\
+Point and the mark, as two numeric arguments, smallest first.  This\
+is the only code letter that specifies two successive arguments\
+rather than one.\
+@end table\
+\
+@xref\{Interactive Codes, , Code Characters for @samp\{interactive\},\
+elisp, The GNU Emacs Lisp Reference Manual\}, for a complete list of\
+code characters.\
+\
+@item let\
+Declare that a list of variables is for use within the body of the\
+@code\{let\} and give them an initial value, either @code\{nil\} or a\
+specified value; then evaluate the rest of the expressions in the body\
+of the @code\{let\} and return the value of the last one.  Inside the\
+body of the @code\{let\}, the Lisp interpreter does not see the values of\
+the variables of the same names that are bound outside of the\
+@code\{let\}.\
+\
+@need 1250\
+For example,\
+\
+@smallexample\
+@group\
+(let ((foo (buffer-name))\
+      (bar (buffer-size)))\
+  (message\
+   "This buffer is %s and has %d characters."\
+   foo bar))\
+@end group\
+@end smallexample\
+\
+@item save-excursion\
+Record the values of point and mark and the current buffer before\
+evaluating the body of this special form.  Restore the values of point\
+and mark and buffer afterward.\
+\
+@need 1250\
+For example,\
+\
+@smallexample\
+@group\
+(message "We are %d characters into this buffer."\
+         (- (point)\
+            (save-excursion\
+              (goto-char (point-min)) (point))))\
+@end group\
+@end smallexample\
+\
+@item if\
+Evaluate the first argument to the function; if it is true, evaluate\
+the second argument; else evaluate the third argument, if there is one.\
+\
+The @code\{if\} special form is called a @dfn\{conditional\}.  There are\
+other conditionals in Emacs Lisp, but @code\{if\} is perhaps the most\
+commonly used.\
+\
+@need 1250\
+For example,\
+\
+@smallexample\
+@group\
+(if (= 22 emacs-major-version)\
+    (message "This is version 22 Emacs")\
+  (message "This is not version 22 Emacs"))\
+@end group\
+@end smallexample\
+\
+@need 1250\
+@item <\
+@itemx >\
+@itemx <=\
+@itemx >=\
+The @code\{<\} function tests whether its first argument is smaller than\
+its second argument.  A corresponding function, @code\{>\}, tests whether\
+the first argument is greater than the second.  Likewise, @code\{<=\}\
+tests whether the first argument is less than or equal to the second and\
+@code\{>=\} tests whether the first argument is greater than or equal to\
+the second.  In all cases, both arguments must be numbers or markers\
+(markers indicate positions in buffers).\
+\
+@need 800\
+@item =\
+The @code\{=\} function tests whether two arguments, both numbers or\
+markers, are equal.\
+\
+@need 1250\
+@item equal\
+@itemx eq\
+Test whether two objects are the same.  @code\{equal\} uses one meaning\
+of the word `same' and @code\{eq\} uses another:  @code\{equal\} returns\
+true if the two objects have a similar structure and contents, such as\
+two copies of the same book.  On the other hand, @code\{eq\}, returns\
+true if both arguments are actually the same object.\
+@findex equal\
+@findex eq\
+\
+@need 1250\
+@item string<\
+@itemx string-lessp\
+@itemx string=\
+@itemx string-equal\
+The @code\{string-lessp\} function tests whether its first argument is\
+smaller than the second argument.  A shorter, alternative name for the\
+same function (a @code\{defalias\}) is @code\{string<\}.\
+\
+The arguments to @code\{string-lessp\} must be strings or symbols; the\
+ordering is lexicographic, so case is significant.  The print names of\
+symbols are used instead of the symbols themselves.\
+\
+@cindex @samp\{empty string\} defined\
+An empty string, @samp\{""\}, a string with no characters in it, is\
+smaller than any string of characters.\
+\
+@code\{string-equal\} provides the corresponding test for equality.  Its\
+shorter, alternative name is @code\{string=\}.  There are no string test\
+functions that correspond to @var\{>\}, @code\{>=\}, or @code\{<=\}.\
+\
+@item message\
+Print a message in the echo area. The first argument is a string that\
+can contain @samp\{%s\}, @samp\{%d\}, or @samp\{%c\} to print the value of\
+arguments that follow the string.  The argument used by @samp\{%s\} must\
+be a string or a symbol; the argument used by @samp\{%d\} must be a\
+number.  The argument used by @samp\{%c\} must be an @sc\{ascii\} code\
+number; it will be printed as the character with that @sc\{ascii\} code.\
+(Various other %-sequences have not been mentioned.)\
+\
+@item setq\
+@itemx set\
+The @code\{setq\} function sets the value of its first argument to the\
+value of the second argument.  The first argument is automatically\
+quoted by @code\{setq\}.  It does the same for succeeding pairs of\
+arguments.  Another function, @code\{set\}, takes only two arguments and\
+evaluates both of them before setting the value returned by its first\
+argument to the value returned by its second argument.\
+\
+@item buffer-name\
+Without an argument, return the name of the buffer, as a string.\
+\
+@itemx buffer-file-name\
+Without an argument, return the name of the file the buffer is\
+visiting.\
+\
+@item current-buffer\
+Return the buffer in which Emacs is active; it may not be\
+the buffer that is visible on the screen.\
+\
+@item other-buffer\
+Return the most recently selected buffer (other than the buffer passed\
+to @code\{other-buffer\} as an argument and other than the current\
+buffer).\
+\
+@item switch-to-buffer\
+Select a buffer for Emacs to be active in and display it in the current\
+window so users can look at it.  Usually bound to @kbd\{C-x b\}.\
+\
+@item set-buffer\
+Switch Emacs' attention to a buffer on which programs will run.  Don't\
+alter what the window is showing.\
+\
+@item buffer-size\
+Return the number of characters in the current buffer.\
+\
+@item point\
+Return the value of the current position of the cursor, as an\
+integer counting the number of characters from the beginning of the\
+buffer.\
+\
+@item point-min\
+Return the minimum permissible value of point in\
+the current buffer.  This is 1, unless narrowing is in effect.\
+\
+@item point-max\
+Return the value of the maximum permissible value of point in the\
+current buffer.  This is the end of the buffer, unless narrowing is in\
+effect.\
+@end table}

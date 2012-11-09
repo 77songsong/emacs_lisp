@@ -1,0 +1,57 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Buffer Related Review, Buffer Exercises, append-to-buffer, Buffer Walk Through\
+@comment  node-name,  next,  previous,  up\
+@section Review\
+\
+Here is a brief summary of the various functions discussed in this chapter.\
+\
+@table @code\
+@item describe-function\
+@itemx describe-variable\
+Print the documentation for a function or variable.\
+Conventionally bound to @kbd\{C-h f\} and @kbd\{C-h v\}.\
+\
+@item find-tag\
+Find the file containing the source for a function or variable and\
+switch buffers to it, positioning point at the beginning of the item.\
+Conventionally bound to @kbd\{M-.\} (that's a period following the\
+@key\{META\} key).\
+\
+@item save-excursion\
+Save the location of point and mark and restore their values after the\
+arguments to @code\{save-excursion\} have been evaluated.  Also, remember\
+the current buffer and return to it.\
+\
+@item push-mark\
+Set mark at a location and record the value of the previous mark on the\
+mark ring.  The mark is a location in the buffer that will keep its\
+relative position even if text is added to or removed from the buffer.\
+\
+@item goto-char\
+Set point to the location specified by the value of the argument, which\
+can be a number, a marker,  or an expression that returns the number of\
+a position, such as @code\{(point-min)\}.\
+\
+@item insert-buffer-substring\
+Copy a region of text from a buffer that is passed to the function as\
+an argument and insert the region into the current buffer.\
+\
+@item mark-whole-buffer\
+Mark the whole buffer as a region.  Normally bound to @kbd\{C-x h\}.\
+\
+@item set-buffer\
+Switch the attention of Emacs to another buffer, but do not change the\
+window being displayed.  Used when the program rather than a human is\
+to work on a different buffer.\
+\
+@item get-buffer-create\
+@itemx get-buffer\
+Find a named buffer or create one if a buffer of that name does not\
+exist.  The @code\{get-buffer\} function returns @code\{nil\} if the named\
+buffer does not exist.\
+@end table}

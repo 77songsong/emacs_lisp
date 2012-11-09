@@ -1,0 +1,28 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node narrow Exercise,  , what-line, Narrowing & Widening\
+@section Exercise with Narrowing\
+\
+Write a function that will display the first 60 characters of the\
+current buffer, even if you have narrowed the buffer to its latter\
+half so that the first line is inaccessible.  Restore point, mark, and\
+narrowing.  For this exercise, you need to use a whole potpourri of\
+functions, including @code\{save-restriction\}, @code\{widen\},\
+@code\{goto-char\}, @code\{point-min\}, @code\{message\}, and\
+@code\{buffer-substring\}.\
+\
+@cindex Properties, mention of @code\{buffer-substring-no-properties\}\
+(@code\{buffer-substring\} is a previously unmentioned function you will\
+have to investigate yourself; or perhaps you will have to use\
+@code\{buffer-substring-no-properties\} or\
+@code\{filter-buffer-substring\} @dots\{\}, yet other functions.  Text\
+properties are a feature otherwise not discussed here.  @xref\{Text\
+Properties, , Text Properties, elisp, The GNU Emacs Lisp Reference\
+Manual\}.)\
+\
+Additionally, do you really need @code\{goto-char\} or @code\{point-min\}?\
+Or can you write the function without them?}

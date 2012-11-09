@@ -1,0 +1,450 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node beginning-of-buffer, Second Buffer Related Review, insert-buffer, More Complex\
+@comment  node-name,  next,  previous,  up\
+@section Complete Definition of @code\{beginning-of-buffer\}\
+@findex beginning-of-buffer\
+\
+The basic structure of the @code\{beginning-of-buffer\} function has\
+already been discussed.  (@xref\{simplified-beginning-of-buffer, , A\
+Simplified @code\{beginning-of-buffer\} Definition\}.)\
+This section describes the complex part of the definition.\
+\
+As previously described, when invoked without an argument,\
+@code\{beginning-of-buffer\} moves the cursor to the beginning of the\
+buffer (in truth, the beginning of the accessible portion of the\
+buffer), leaving the mark at the previous position.  However, when the\
+command is invoked with a number between one and ten, the function\
+considers that number to be a fraction of the length of the buffer,\
+measured in tenths, and Emacs moves the cursor that fraction of the\
+way from the beginning of the buffer.  Thus, you can either call this\
+function with the key command @kbd\{M-<\}, which will move the cursor to\
+the beginning of the buffer, or with a key command such as @kbd\{C-u 7\
+M-<\} which will move the cursor to a point 70% of the way through the\
+buffer.  If a number bigger than ten is used for the argument, it\
+moves to the end of the buffer.\
+\
+The @code\{beginning-of-buffer\} function can be called with or without an\
+argument.  The use of the argument is optional.\
+\
+@menu\
+* Optional Arguments::\
+* beginning-of-buffer opt arg::  Example with optional argument.\
+* beginning-of-buffer complete::\
+@end menu\
+\
+@node Optional Arguments, beginning-of-buffer opt arg, beginning-of-buffer, beginning-of-buffer\
+@subsection Optional Arguments\
+\
+Unless told otherwise, Lisp expects that a function with an argument in\
+its function definition will be called with a value for that argument.\
+If that does not happen, you get an error and a message that says\
+@samp\{Wrong number of arguments\}.\
+\
+@cindex Optional arguments\
+@cindex Keyword\
+@findex optional\
+However, optional arguments are a feature of Lisp: a particular\
+@dfn\{keyword\} is used to tell the Lisp interpreter that an argument is\
+optional.  The keyword is @code\{&optional\}.  (The @samp\{&\} in front of\
+@samp\{optional\} is part of the keyword.)  In a function definition, if\
+an argument follows the keyword @code\{&optional\}, no value need be\
+passed to that argument when the function is called.\
+\
+@need 1200\
+The first line of the function definition of @code\{beginning-of-buffer\}\
+therefore looks like this:\
+\
+@smallexample\
+(defun beginning-of-buffer (&optional arg)\
+@end smallexample\
+\
+@need 1250\
+In outline, the whole function looks like this:\
+\
+@smallexample\
+@group\
+(defun beginning-of-buffer (&optional arg)\
+  "@var\{documentation\}@dots\{\}"\
+  (interactive "P")\
+  (or (@var\{is-the-argument-a-cons-cell\} arg)\
+      (and @var\{are-both-transient-mark-mode-and-mark-active-true\})\
+      (push-mark))\
+  (let (@var\{determine-size-and-set-it\})\
+  (goto-char\
+    (@var\{if-there-is-an-argument\}\
+        @var\{figure-out-where-to-go\}\
+      @var\{else-go-to\}\
+      (point-min))))\
+   @var\{do-nicety\}\
+@end group\
+@end smallexample\
+\
+The function is similar to the @code\{simplified-beginning-of-buffer\}\
+function except that the @code\{interactive\} expression has @code\{"P"\}\
+as an argument and the @code\{goto-char\} function is followed by an\
+if-then-else expression that figures out where to put the cursor if\
+there is an argument that is not a cons cell.\
+\
+(Since I do not explain a cons cell for many more chapters, please\
+consider ignoring the function @code\{consp\}.  @xref\{List\
+Implementation, , How Lists are Implemented\}, and @ref\{Cons Cell Type,\
+, Cons Cell and List Types, elisp, The GNU Emacs Lisp Reference\
+Manual\}.)\
+\
+The @code\{"P"\} in the @code\{interactive\} expression tells Emacs to\
+pass a prefix argument, if there is one, to the function in raw form.\
+A prefix argument is made by typing the @key\{META\} key followed by a\
+number, or by typing @kbd\{C-u\} and then a number.  (If you don't type\
+a number, @kbd\{C-u\} defaults to a cons cell with a 4.  A lowercase\
+@code\{"p"\} in the @code\{interactive\} expression causes the function to\
+convert a prefix arg to a number.)\
+\
+The true-or-false-test of the @code\{if\} expression looks complex, but\
+it is not: it checks whether @code\{arg\} has a value that is not\
+@code\{nil\} and whether it is a cons cell.  (That is what @code\{consp\}\
+does; it checks whether its argument is a cons cell.)  If @code\{arg\}\
+has a value that is not @code\{nil\} (and is not a cons cell), which\
+will be the case if @code\{beginning-of-buffer\} is called with a\
+numeric argument, then this true-or-false-test will return true and\
+the then-part of the @code\{if\} expression will be evaluated.  On the\
+other hand, if @code\{beginning-of-buffer\} is not called with an\
+argument, the value of @code\{arg\} will be @code\{nil\} and the else-part\
+of the @code\{if\} expression will be evaluated.  The else-part is\
+simply @code\{point-min\}, and when this is the outcome, the whole\
+@code\{goto-char\} expression is @code\{(goto-char (point-min))\}, which\
+is how we saw the @code\{beginning-of-buffer\} function in its\
+simplified form.\
+\
+@node beginning-of-buffer opt arg, beginning-of-buffer complete, Optional Arguments, beginning-of-buffer\
+@subsection @code\{beginning-of-buffer\} with an Argument\
+\
+When @code\{beginning-of-buffer\} is called with an argument, an\
+expression is evaluated which calculates what value to pass to\
+@code\{goto-char\}.  This expression is rather complicated at first sight.\
+It includes an inner @code\{if\} expression and much arithmetic.  It looks\
+like this:\
+\
+@smallexample\
+@group\
+(if (> (buffer-size) 10000)\
+    ;; @r\{Avoid overflow for large buffer sizes!\}\
+                          (* (prefix-numeric-value arg)\
+                             (/ size 10))\
+  (/\
+   (+ 10\
+      (*\
+       size (prefix-numeric-value arg))) 10)))\
+@end group\
+@end smallexample\
+\
+@menu\
+* Disentangle beginning-of-buffer::\
+* Large buffer case::\
+* Small buffer case::\
+@end menu\
+\
+@node Disentangle beginning-of-buffer, Large buffer case, beginning-of-buffer opt arg, beginning-of-buffer opt arg\
+@ifnottex\
+@unnumberedsubsubsec Disentangle @code\{beginning-of-buffer\}\
+@end ifnottex\
+\
+Like other complex-looking expressions, the conditional expression\
+within @code\{beginning-of-buffer\} can be disentangled by looking at it\
+as parts of a template, in this case, the template for an if-then-else\
+expression.  In skeletal form, the expression looks like this:\
+\
+@smallexample\
+@group\
+(if (@var\{buffer-is-large\}\
+    @var\{divide-buffer-size-by-10-and-multiply-by-arg\}\
+  @var\{else-use-alternate-calculation\}\
+@end group\
+@end smallexample\
+\
+The true-or-false-test of this inner @code\{if\} expression checks the\
+size of the buffer.  The reason for this is that the old version 18\
+Emacs used numbers that are no bigger than eight million or so and in\
+the computation that followed, the programmer feared that Emacs might\
+try to use over-large numbers if the buffer were large.  The term\
+`overflow', mentioned in the comment, means numbers that are over\
+large.  More recent versions of Emacs use larger numbers, but this\
+code has not been touched, if only because people now look at buffers\
+that are far, far larger than ever before.\
+\
+There are two cases:  if the buffer is large and if it is not.\
+\
+@node Large buffer case, Small buffer case, Disentangle beginning-of-buffer, beginning-of-buffer opt arg\
+@comment  node-name,  next,  previous,  up\
+@unnumberedsubsubsec What happens in a large buffer\
+\
+In @code\{beginning-of-buffer\}, the inner @code\{if\} expression tests\
+whether the size of the buffer is greater than 10,000 characters.  To do\
+this, it uses the @code\{>\} function and the computation of @code\{size\}\
+that comes from the let expression.\
+\
+In the old days, the function @code\{buffer-size\} was used.  Not only\
+was that function called several times, it gave the size of the whole\
+buffer, not the accessible part.  The computation makes much more\
+sense when it handles just the accessible part.  (@xref\{Narrowing &\
+Widening, , Narrowing and Widening\}, for more information on focusing\
+attention to an `accessible' part.)\
+\
+@need 800\
+The line looks like this:\
+\
+@smallexample\
+(if (> size 10000)\
+@end smallexample\
+\
+@need 1200\
+@noindent\
+When the buffer is large, the then-part of the @code\{if\} expression is\
+evaluated.  It reads like this (after formatting for easy reading):\
+\
+@smallexample\
+@group\
+(*\
+  (prefix-numeric-value arg)\
+  (/ size 10))\
+@end group\
+@end smallexample\
+\
+@noindent\
+This expression is a multiplication, with two arguments to the function\
+@code\{*\}.\
+\
+The first argument is @code\{(prefix-numeric-value arg)\}.  When\
+@code\{"P"\} is used as the argument for @code\{interactive\}, the value\
+passed to the function as its argument is passed a ``raw prefix\
+argument'', and not a number.  (It is a number in a list.)  To perform\
+the arithmetic, a conversion is necessary, and\
+@code\{prefix-numeric-value\} does the job.\
+\
+@findex / @r\{(division)\}\
+@cindex Division\
+The second argument is @code\{(/ size 10)\}.  This expression divides\
+the numeric value by ten --- the numeric value of the size of the\
+accessible portion of the buffer.  This produces a number that tells\
+how many characters make up one tenth of the buffer size.  (In Lisp,\
+@code\{/\} is used for division, just as @code\{*\} is used for\
+multiplication.)\
+\
+@need 1200\
+In the multiplication expression as a whole, this amount is multiplied\
+by the value of the prefix argument---the multiplication looks like this:\
+\
+@smallexample\
+@group\
+(* @var\{numeric-value-of-prefix-arg\}\
+   @var\{number-of-characters-in-one-tenth-of-the-accessible-buffer\})\
+@end group\
+@end smallexample\
+\
+@noindent\
+If, for example, the prefix argument is @samp\{7\}, the one-tenth value\
+will be multiplied by 7 to give a position 70% of the way through.\
+\
+@need 1200\
+The result of all this is that if the accessible portion of the buffer\
+is large, the @code\{goto-char\} expression reads like this:\
+\
+@smallexample\
+@group\
+(goto-char (* (prefix-numeric-value arg)\
+              (/ size 10)))\
+@end group\
+@end smallexample\
+\
+This puts the cursor where we want it.\
+\
+@node Small buffer case,  , Large buffer case, beginning-of-buffer opt arg\
+@comment  node-name,  next,  previous,  up\
+@unnumberedsubsubsec What happens in a small buffer\
+\
+If the buffer contains fewer than 10,000 characters, a slightly\
+different computation is performed.  You might think this is not\
+necessary, since the first computation could do the job.  However, in\
+a small buffer, the first method may not put the cursor on exactly the\
+desired line; the second method does a better job.\
+\
+@need 800\
+The code looks like this:\
+\
+@c Keep this on one line.\
+@smallexample\
+(/ (+ 10 (* size (prefix-numeric-value arg))) 10))\
+@end smallexample\
+\
+@need 1200\
+@noindent\
+This is code in which you figure out what happens by discovering how the\
+functions are embedded in parentheses.  It is easier to read if you\
+reformat it with each expression indented more deeply than its\
+enclosing expression:\
+\
+@smallexample\
+@group\
+  (/\
+   (+ 10\
+      (*\
+       size\
+       (prefix-numeric-value arg)))\
+   10))\
+@end group\
+@end smallexample\
+\
+@need 1200\
+@noindent\
+Looking at parentheses, we see that the innermost operation is\
+@code\{(prefix-numeric-value arg)\}, which converts the raw argument to\
+a number.  In the following expression, this number is multiplied by\
+the size of the accessible portion of the buffer:\
+\
+@smallexample\
+(* size (prefix-numeric-value arg))\
+@end smallexample\
+\
+@noindent\
+This multiplication creates a number that may be larger than the size of\
+the buffer---seven times larger if the argument is 7, for example.  Ten\
+is then added to this number and finally the large number is divided by\
+ten to provide a value that is one character larger than the percentage\
+position in the buffer.\
+\
+The number that results from all this is passed to @code\{goto-char\} and\
+the cursor is moved to that point.\
+\
+@need 1500\
+@node beginning-of-buffer complete,  , beginning-of-buffer opt arg, beginning-of-buffer\
+@comment  node-name,  next,  previous,  up\
+@subsection The Complete @code\{beginning-of-buffer\}\
+\
+@need 1000\
+Here is the complete text of the @code\{beginning-of-buffer\} function:\
+@sp 1\
+\
+@c In GNU Emacs 22\
+@smallexample\
+@group\
+(defun beginning-of-buffer (&optional arg)\
+  "Move point to the beginning of the buffer;\
+leave mark at previous position.\
+With \\\\[universal-argument] prefix,\
+do not set mark at previous position.\
+With numeric arg N,\
+put point N/10 of the way from the beginning.\
+\
+If the buffer is narrowed,\
+this command uses the beginning and size\
+of the accessible part of the buffer.\
+@end group\
+\
+@group\
+Don't use this command in Lisp programs!\
+\\(goto-char (point-min)) is faster\
+and avoids clobbering the mark."\
+  (interactive "P")\
+  (or (consp arg)\
+      (and transient-mark-mode mark-active)\
+      (push-mark))\
+@end group\
+@group\
+  (let ((size (- (point-max) (point-min))))\
+    (goto-char (if (and arg (not (consp arg)))\
+                   (+ (point-min)\
+                      (if (> size 10000)\
+                          ;; Avoid overflow for large buffer sizes!\
+                          (* (prefix-numeric-value arg)\
+                             (/ size 10))\
+                        (/ (+ 10 (* size (prefix-numeric-value arg)))\
+                           10)))\
+                 (point-min))))\
+  (if arg (forward-line 1)))\
+@end group\
+@end smallexample\
+\
+@ignore\
+From before GNU Emacs 22\
+@smallexample\
+@group\
+(defun beginning-of-buffer (&optional arg)\
+  "Move point to the beginning of the buffer;\
+leave mark at previous position.\
+With arg N, put point N/10 of the way\
+from the true beginning.\
+@end group\
+@group\
+Don't use this in Lisp programs!\
+\\(goto-char (point-min)) is faster\
+and does not set the mark."\
+  (interactive "P")\
+  (push-mark)\
+@end group\
+@group\
+  (goto-char\
+   (if arg\
+       (if (> (buffer-size) 10000)\
+           ;; @r\{Avoid overflow for large buffer sizes!\}\
+           (* (prefix-numeric-value arg)\
+              (/ (buffer-size) 10))\
+@end group\
+@group\
+         (/ (+ 10 (* (buffer-size)\
+                     (prefix-numeric-value arg)))\
+            10))\
+     (point-min)))\
+  (if arg (forward-line 1)))\
+@end group\
+@end smallexample\
+@end ignore\
+\
+@noindent\
+Except for two small points, the previous discussion shows how this\
+function works.  The first point deals with a detail in the\
+documentation string, and the second point concerns the last line of\
+the function.\
+\
+@need 800\
+In the documentation string, there is reference to an expression:\
+\
+@smallexample\
+\\\\[universal-argument]\
+@end smallexample\
+\
+@noindent\
+A @samp\{\\\\\} is used before the first square bracket of this\
+expression.  This @samp\{\\\\\} tells the Lisp interpreter to substitute\
+whatever key is currently bound to the @samp\{[@dots\{\}]\}.  In the case\
+of @code\{universal-argument\}, that is usually @kbd\{C-u\}, but it might\
+be different.  (@xref\{Documentation Tips, , Tips for Documentation\
+Strings, elisp, The GNU Emacs Lisp Reference Manual\}, for more\
+information.)\
+\
+@need 1200\
+Finally, the last line of the @code\{beginning-of-buffer\} command says\
+to move point to the beginning of the next line if the command is\
+invoked with an argument:\
+\
+@smallexample\
+(if arg (forward-line 1)))\
+@end smallexample\
+\
+@noindent\
+This puts the cursor at the beginning of the first line after the\
+appropriate tenths position in the buffer.  This is a flourish that\
+means that the cursor is always located @emph\{at least\} the requested\
+tenths of the way through the buffer, which is a nicety that is,\
+perhaps, not necessary, but which, if it did not occur, would be sure\
+to draw complaints.\
+\
+On the other hand, it also means that if you specify the command with\
+a @kbd\{C-u\}, but without a number, that is to say, if the `raw prefix\
+argument' is simply a cons cell, then the command puts you at the\
+beginning of the second line @dots\{\}  I don't know whether this is\
+intended or whether no one has dealt with the code to avoid this\
+happening.}

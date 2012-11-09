@@ -1,0 +1,49 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Second Buffer Related Review, optional Exercise, beginning-of-buffer, More Complex\
+@comment  node-name,  next,  previous,  up\
+@section Review\
+\
+Here is a brief summary of some of the topics covered in this chapter.\
+\
+@table @code\
+@item or\
+Evaluate each argument in sequence, and return the value of the first\
+argument that is not @code\{nil\}; if none return a value that is not\
+@code\{nil\}, return @code\{nil\}.  In brief, return the first true value\
+of the arguments; return a true value if one @emph\{or\} any of the\
+others are true.\
+\
+@item and\
+Evaluate each argument in sequence, and if any are @code\{nil\}, return\
+@code\{nil\}; if none are @code\{nil\}, return the value of the last\
+argument.  In brief, return a true value only if all the arguments are\
+true; return a true value if one @emph\{and\} each of the others is\
+true.\
+\
+@item &optional\
+A keyword used to indicate that an argument to a function definition\
+is optional; this means that the function can be evaluated without the\
+argument, if desired.\
+\
+@item prefix-numeric-value\
+Convert the `raw prefix argument' produced by @code\{(interactive\
+"P")\} to a numeric value.\
+\
+@item forward-line\
+Move point forward to the beginning of the next line, or if the argument\
+is greater than one, forward that many lines.  If it can't move as far\
+forward as it is supposed to, @code\{forward-line\} goes forward as far as\
+it can and then returns a count of the number of additional lines it was\
+supposed to move but couldn't.\
+\
+@item erase-buffer\
+Delete the entire contents of the current buffer.\
+\
+@item bufferp\
+Return @code\{t\} if its argument is a buffer; otherwise return @code\{nil\}.\
+@end table}
