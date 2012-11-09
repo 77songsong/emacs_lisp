@@ -2,16 +2,23 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>SCRSelectedCompileOptionsInfoSaveName</key>
+	<dict>
+		<key>Tag</key>
+		<integer>1</integer>
+		<key>Title</key>
+		<string>Original</string>
+	</dict>
 	<key>binderIsCollapsed</key>
 	<false/>
 	<key>binderSelection</key>
 	<array>
-		<integer>128</integer>
+		<integer>0</integer>
 	</array>
 	<key>binderSplitFrames</key>
 	<array>
 		<string>{{0, 0}, {191, 843}}</string>
-		<string>{{192, 0}, {785, 843}}</string>
+		<string>{{192, 0}, {825, 843}}</string>
 	</array>
 	<key>binderState</key>
 	<array>
@@ -105,7 +112,7 @@
 		</dict>
 	</dict>
 	<key>inspectorSelectedDataTab</key>
-	<integer>1</integer>
+	<integer>4</integer>
 	<key>inspectorSplitFrames</key>
 	<array>
 		<string>{{0, 0}, {557, 817}}</string>
@@ -115,10 +122,10 @@
 	<real>227</real>
 	<key>mainDocumentEditor.binderDocuments</key>
 	<array>
-		<integer>133</integer>
+		<integer>0</integer>
 	</array>
 	<key>mainDocumentEditor.currentEditorViewMode</key>
-	<integer>0</integer>
+	<integer>1</integer>
 	<key>mainDocumentEditor.editorGroupsViewMode</key>
 	<integer>1</integer>
 	<key>mainDocumentEditor.lockedInPlace</key>
@@ -126,7 +133,7 @@
 	<key>mainDocumentEditor.navigationHistory</key>
 	<dict>
 		<key>CurrentIndex</key>
-		<integer>387</integer>
+		<integer>390</integer>
 		<key>NavigationHistoryArray</key>
 		<array>
 			<dict>
@@ -3245,6 +3252,30 @@
 				<key>ViewMode</key>
 				<integer>0</integer>
 			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>25</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>6</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>0</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>1</integer>
+			</dict>
 		</array>
 	</dict>
 	<key>mainDocumentEditor.outlinerColumnsState</key>
@@ -3254,66 +3285,21 @@
 			<string>title</string>
 			<string>label</string>
 			<string>status</string>
-			<string>createdDate</string>
-			<string>modifiedDate</string>
-			<string>words</string>
-			<string>characters</string>
-			<string>includeInExport</string>
-			<string>pageBreakBefore</string>
-			<string>compileAsIs</string>
-			<string>targetCount</string>
-			<string>targetCountType</string>
-			<string>progress</string>
-			<string>totalWords</string>
-			<string>totalCharacters</string>
-			<string>allKeywords</string>
-			<string>totalTargetCount</string>
-			<string>totalProgress</string>
 		</array>
 		<key>widths</key>
 		<dict>
-			<key>allKeywords</key>
-			<real>64</real>
-			<key>characters</key>
-			<real>46</real>
-			<key>compileAsIs</key>
-			<real>110.841796875</real>
-			<key>createdDate</key>
-			<real>53</real>
-			<key>includeInExport</key>
-			<real>20</real>
 			<key>label</key>
 			<real>56</real>
-			<key>modifiedDate</key>
-			<real>50</real>
-			<key>pageBreakBefore</key>
-			<real>66</real>
-			<key>progress</key>
-			<real>50.041019439697266</real>
 			<key>status</key>
 			<real>49</real>
-			<key>targetCount</key>
-			<real>50</real>
-			<key>targetCountType</key>
-			<real>50</real>
 			<key>title</key>
 			<real>252</real>
-			<key>totalCharacters</key>
-			<real>96</real>
-			<key>totalProgress</key>
-			<real>64</real>
-			<key>totalTargetCount</key>
-			<real>64</real>
-			<key>totalWords</key>
-			<real>72</real>
-			<key>words</key>
-			<real>40</real>
 		</dict>
 	</dict>
 	<key>mainDocumentEditor.scrollRect</key>
-	<string>{{0, 962}, {557, 771}}</string>
+	<string>{{0, 0}, {597, 771}}</string>
 	<key>mainDocumentEditor.selectedRanges</key>
-	<string>{451, 0}</string>
+	<string>{457, 0}</string>
 	<key>mainDocumentEditor.textEditorState</key>
 	<dict>
 		<key>hasMultiplePages</key>
@@ -3324,7 +3310,7 @@
 		<false/>
 	</dict>
 	<key>mainWindowFrame</key>
-	<string>882 202 977 865 0 0 1920 1178 </string>
+	<string>715 431 1017 865 0 0 2560 1418 </string>
 	<key>searchResultsTable</key>
 	<dict>
 		<key>order</key>

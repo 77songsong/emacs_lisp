@@ -34,14 +34,14 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="6" Type="Text" Created="2012-11-09 00:32:02 +0900" Modified="2012-11-09 00:56:25 +0900">
+                <BinderItem ID="6" Type="Text" Created="2012-11-09 00:32:02 +0900" Modified="2012-11-10 00:40:09 +0900">
                     <Title>List Processing</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
                         <NotesTextSelection>0,0</NotesTextSelection>
                     </MetaData>
                     <TextSettings>
-                        <TextSelection>877,0</TextSelection>
+                        <TextSelection>311,0</TextSelection>
                     </TextSettings>
                     <Children>
                         <BinderItem ID="25" Type="Text" Created="2012-11-09 00:46:03 +0900" Modified="2012-11-09 00:56:25 +0900">
@@ -1376,7 +1376,7 @@
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2012-11-09 00:23:48 +0900" IgnoreDeadline="Yes">0</DraftTarget>
         <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" ResetType="Midnight" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="0" Characters="3" Date="2012-11-09 13:29:55 +0900"></PreviousSession>
+        <PreviousSession Words="-30" Characters="-295" Date="2012-11-10 00:32:39 +0900"></PreviousSession>
     </ProjectTargets>
-    <PrintSettings PaperSize="595.0,842.0" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="iso-a4" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
+    <PrintSettings PaperSize="595.289978,841.890015" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="iso-a4" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
 </ScrivenerProject>

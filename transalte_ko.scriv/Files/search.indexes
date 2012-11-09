@@ -3311,6 +3311,136 @@ more flowers on to this list and set this new list to
 @code{more-flowers}.  Set the @sc{car} of @code{flowers} to a fish.
 What does the @code{more-flowers} list now contain?</Text>
         </Document>
+        <Document ID="125">
+            <Title>debug</Title>
+            <Text>
+@node debug, debug-on-entry, Debugging, Debugging
+@section @code{debug}
+@findex debug
+
+Suppose you have written a function definition that is intended to
+return the sum of the numbers 1 through a given number.  (This is the
+@code{triangle} function discussed earlier.  @xref{Decrementing
+Example, , Example with Decrementing Counter}, for a discussion.)
+@c xref{Decrementing Loop,, Loop with a Decrementing Counter}, for a discussion.)
+
+However, your function definition has a bug.  You have mistyped
+@samp{1=} for @samp{1-}.  Here is the broken definition:
+
+@findex triangle-bugged
+@smallexample
+@group
+(defun triangle-bugged (number)
+  "Return sum of numbers 1 through NUMBER inclusive."
+  (let ((total 0))
+    (while (> number 0)
+      (setq total (+ total number))
+      (setq number (1= number)))      ; @r{Error here.}
+    total))
+@end group
+@end smallexample
+
+If you are reading this in Info, you can evaluate this definition in
+the normal fashion.  You will see @code{triangle-bugged} appear in the
+echo area.
+
+@need 1250
+Now evaluate the @code{triangle-bugged} function with an
+argument of 4:
+
+@smallexample
+(triangle-bugged 4)
+@end smallexample
+
+@noindent
+In a recent GNU Emacs, you will create and enter a @file{*Backtrace*}
+buffer that says:
+
+@noindent
+@smallexample
+@group
+---------- Buffer: *Backtrace* ----------
+Debugger entered--Lisp error: (void-function 1=)
+  (1= number)
+  (setq number (1= number))
+  (while (> number 0) (setq total (+ total number))
+        (setq number (1= number)))
+  (let ((total 0)) (while (> number 0) (setq total ...)
+    (setq number ...)) total)
+  triangle-bugged(4)
+@end group
+@group
+  eval((triangle-bugged 4))
+  eval-last-sexp-1(nil)
+  eval-last-sexp(nil)
+  call-interactively(eval-last-sexp)
+---------- Buffer: *Backtrace* ----------
+@end group
+@end smallexample
+
+@noindent
+(I have reformatted this example slightly; the debugger does not fold
+long lines.  As usual, you can quit the debugger by typing @kbd{q} in
+the @file{*Backtrace*} buffer.)
+
+In practice, for a bug as simple as this, the `Lisp error' line will
+tell you what you need to know to correct the definition.  The
+function @code{1=} is `void'.
+
+@ignore
+@need 800
+In GNU Emacs 20 and before, you will see:
+
+@smallexample
+Symbol's function definition is void:@: 1=
+@end smallexample
+
+@noindent
+which has the same meaning as the @file{*Backtrace*} buffer line in
+version 21.
+@end ignore
+
+However, suppose you are not quite certain what is going on?
+You can read the complete backtrace.
+
+In this case, you need to run a recent GNU Emacs, which automatically
+starts the debugger that puts you in the @file{*Backtrace*} buffer; or
+else, you need to start the debugger manually as described below.
+
+Read the @file{*Backtrace*} buffer from the bottom up; it tells you
+what Emacs did that led to the error.  Emacs made an interactive call
+to @kbd{C-x C-e} (@code{eval-last-sexp}), which led to the evaluation
+of the @code{triangle-bugged} expression.  Each line above tells you
+what the Lisp interpreter evaluated next.
+
+@need 1250
+The third line from the top of the buffer is
+
+@smallexample
+(setq number (1= number))
+@end smallexample
+
+@noindent
+Emacs tried to evaluate this expression; in order to do so, it tried
+to evaluate the inner expression shown on the second line from the
+top:
+
+@smallexample
+(1= number)
+@end smallexample
+
+@need 1250
+@noindent
+This is where the error occurred; as the top line says:
+
+@smallexample
+Debugger entered--Lisp error: (void-function 1=)
+@end smallexample
+
+@noindent
+You can correct the mistake, re-evaluate the function definition, and
+then run your test again.</Text>
+        </Document>
         <Document ID="79">
             <Title>Initializing a Variable with defvar</Title>
             <Text>
@@ -3461,136 +3591,6 @@ readily.  Fortunately, you can press @key{TAB} after calling the
 (@xref{Examining, , Examining and Setting Variables, emacs,
 The GNU Emacs Manual}.)</Text>
         </Document>
-        <Document ID="125">
-            <Title>debug</Title>
-            <Text>
-@node debug, debug-on-entry, Debugging, Debugging
-@section @code{debug}
-@findex debug
-
-Suppose you have written a function definition that is intended to
-return the sum of the numbers 1 through a given number.  (This is the
-@code{triangle} function discussed earlier.  @xref{Decrementing
-Example, , Example with Decrementing Counter}, for a discussion.)
-@c xref{Decrementing Loop,, Loop with a Decrementing Counter}, for a discussion.)
-
-However, your function definition has a bug.  You have mistyped
-@samp{1=} for @samp{1-}.  Here is the broken definition:
-
-@findex triangle-bugged
-@smallexample
-@group
-(defun triangle-bugged (number)
-  "Return sum of numbers 1 through NUMBER inclusive."
-  (let ((total 0))
-    (while (> number 0)
-      (setq total (+ total number))
-      (setq number (1= number)))      ; @r{Error here.}
-    total))
-@end group
-@end smallexample
-
-If you are reading this in Info, you can evaluate this definition in
-the normal fashion.  You will see @code{triangle-bugged} appear in the
-echo area.
-
-@need 1250
-Now evaluate the @code{triangle-bugged} function with an
-argument of 4:
-
-@smallexample
-(triangle-bugged 4)
-@end smallexample
-
-@noindent
-In a recent GNU Emacs, you will create and enter a @file{*Backtrace*}
-buffer that says:
-
-@noindent
-@smallexample
-@group
----------- Buffer: *Backtrace* ----------
-Debugger entered--Lisp error: (void-function 1=)
-  (1= number)
-  (setq number (1= number))
-  (while (> number 0) (setq total (+ total number))
-        (setq number (1= number)))
-  (let ((total 0)) (while (> number 0) (setq total ...)
-    (setq number ...)) total)
-  triangle-bugged(4)
-@end group
-@group
-  eval((triangle-bugged 4))
-  eval-last-sexp-1(nil)
-  eval-last-sexp(nil)
-  call-interactively(eval-last-sexp)
----------- Buffer: *Backtrace* ----------
-@end group
-@end smallexample
-
-@noindent
-(I have reformatted this example slightly; the debugger does not fold
-long lines.  As usual, you can quit the debugger by typing @kbd{q} in
-the @file{*Backtrace*} buffer.)
-
-In practice, for a bug as simple as this, the `Lisp error' line will
-tell you what you need to know to correct the definition.  The
-function @code{1=} is `void'.
-
-@ignore
-@need 800
-In GNU Emacs 20 and before, you will see:
-
-@smallexample
-Symbol's function definition is void:@: 1=
-@end smallexample
-
-@noindent
-which has the same meaning as the @file{*Backtrace*} buffer line in
-version 21.
-@end ignore
-
-However, suppose you are not quite certain what is going on?
-You can read the complete backtrace.
-
-In this case, you need to run a recent GNU Emacs, which automatically
-starts the debugger that puts you in the @file{*Backtrace*} buffer; or
-else, you need to start the debugger manually as described below.
-
-Read the @file{*Backtrace*} buffer from the bottom up; it tells you
-what Emacs did that led to the error.  Emacs made an interactive call
-to @kbd{C-x C-e} (@code{eval-last-sexp}), which led to the evaluation
-of the @code{triangle-bugged} expression.  Each line above tells you
-what the Lisp interpreter evaluated next.
-
-@need 1250
-The third line from the top of the buffer is
-
-@smallexample
-(setq number (1= number))
-@end smallexample
-
-@noindent
-Emacs tried to evaluate this expression; in order to do so, it tried
-to evaluate the inner expression shown on the second line from the
-top:
-
-@smallexample
-(1= number)
-@end smallexample
-
-@need 1250
-@noindent
-This is where the error occurred; as the top line says:
-
-@smallexample
-Debugger entered--Lisp error: (void-function 1=)
-@end smallexample
-
-@noindent
-You can correct the mistake, re-evaluate the function definition, and
-then run your test again.</Text>
-        </Document>
         <Document ID="84">
             <Title>Kill Ring Overview</Title>
             <Text>
@@ -3637,290 +3637,6 @@ is easier to understand.)
 
 To begin to understand how @code{yank} and @code{yank-pop} work, it is
 first necessary to look at the @code{kill-ring-yank-pointer} variable.</Text>
-        </Document>
-        <Document ID="126">
-            <Title>debug-on-entry</Title>
-            <Text>
-@node debug-on-entry, debug-on-quit, debug, Debugging
-@section @code{debug-on-entry}
-@findex debug-on-entry
-
-A recent GNU Emacs starts the debugger automatically when your
-function has an error.
-
-@ignore
-GNU Emacs version 20 and before did not; it simply
-presented you with an error message.  You had to start the debugger
-manually.
-@end ignore
-
-Incidentally, you can start the debugger manually for all versions of
-Emacs; the advantage is that the debugger runs even if you do not have
-a bug in your code.  Sometimes your code will be free of bugs!
-
-You can enter the debugger when you call the function by calling
-@code{debug-on-entry}.
-
-@need 1250
-@noindent
-Type:
-
-@smallexample
-M-x debug-on-entry RET triangle-bugged RET
-@end smallexample
-
-@need 1250
-@noindent
-Now, evaluate the following:
-
-@smallexample
-(triangle-bugged 5)
-@end smallexample
-
-@noindent
-All versions of Emacs will create a @file{*Backtrace*} buffer and tell
-you that it is beginning to evaluate the @code{triangle-bugged}
-function:
-
-@smallexample
-@group
----------- Buffer: *Backtrace* ----------
-Debugger entered--entering a function:
-* triangle-bugged(5)
-  eval((triangle-bugged 5))
-@end group
-@group
-  eval-last-sexp-1(nil)
-  eval-last-sexp(nil)
-  call-interactively(eval-last-sexp)
----------- Buffer: *Backtrace* ----------
-@end group
-@end smallexample
-
-In the @file{*Backtrace*} buffer, type @kbd{d}.  Emacs will evaluate
-the first expression in @code{triangle-bugged}; the buffer will look
-like this:
-
-@smallexample
-@group
----------- Buffer: *Backtrace* ----------
-Debugger entered--beginning evaluation of function call form:
-* (let ((total 0)) (while (> number 0) (setq total ...)
-        (setq number ...)) total)
-* triangle-bugged(5)
-  eval((triangle-bugged 5))
-@end group
-@group
-  eval-last-sexp-1(nil)
-  eval-last-sexp(nil)
-  call-interactively(eval-last-sexp)
----------- Buffer: *Backtrace* ----------
-@end group
-@end smallexample
-
-@noindent
-Now, type @kbd{d} again, eight times, slowly.  Each time you type
-@kbd{d}, Emacs will evaluate another expression in the function
-definition.
-
-@need 1750
-Eventually, the buffer will look like this:
-
-@smallexample
-@group
----------- Buffer: *Backtrace* ----------
-Debugger entered--beginning evaluation of function call form:
-* (setq number (1= number))
-* (while (> number 0) (setq total (+ total number))
-        (setq number (1= number)))
-@group
-@end group
-* (let ((total 0)) (while (> number 0) (setq total ...)
-        (setq number ...)) total)
-* triangle-bugged(5)
-  eval((triangle-bugged 5))
-@group
-@end group
-  eval-last-sexp-1(nil)
-  eval-last-sexp(nil)
-  call-interactively(eval-last-sexp)
----------- Buffer: *Backtrace* ----------
-@end group
-@end smallexample
-
-@need 1500
-@noindent
-Finally, after you type @kbd{d} two more times, Emacs will reach the
-error, and the top two lines of the @file{*Backtrace*} buffer will look
-like this:
-
-@smallexample
-@group
----------- Buffer: *Backtrace* ----------
-Debugger entered--Lisp error: (void-function 1=)
-* (1= number)
-@dots{}
----------- Buffer: *Backtrace* ----------
-@end group
-@end smallexample
-
-By typing @kbd{d}, you were able to step through the function.
-
-You can quit a @file{*Backtrace*} buffer by typing @kbd{q} in it; this
-quits the trace, but does not cancel @code{debug-on-entry}.
-
-@findex cancel-debug-on-entry
-To cancel the effect of @code{debug-on-entry}, call
-@code{cancel-debug-on-entry} and the name of the function, like this:
-
-@smallexample
-M-x cancel-debug-on-entry RET triangle-bugged RET
-@end smallexample
-
-@noindent
-(If you are reading this in Info, cancel @code{debug-on-entry} now.)</Text>
-        </Document>
-        <Document ID="85">
-            <Title>The kill-ring-yank-pointer Variable</Title>
-            <Text>
-@node kill-ring-yank-pointer, yank nthcdr Exercises, Kill Ring Overview, Yanking
-@comment  node-name,  next,  previous,  up
-@section The @code{kill-ring-yank-pointer} Variable
-
-@code{kill-ring-yank-pointer} is a variable, just as @code{kill-ring} is
-a variable.  It points to something by being bound to the value of what
-it points to, like any other Lisp variable.
-
-@need 1000
-Thus, if the value of the kill ring is:
-
-@smallexample
-("some text" "a different piece of text" "yet more text")
-@end smallexample
-
-@need 1250
-@noindent
-and the @code{kill-ring-yank-pointer} points to the second clause, the
-value of @code{kill-ring-yank-pointer} is:
-
-@smallexample
-("a different piece of text" "yet more text")
-@end smallexample
-
-As explained in the previous chapter (@pxref{List Implementation}), the
-computer does not keep two different copies of the text being pointed to
-by both the @code{kill-ring} and the @code{kill-ring-yank-pointer}.  The
-words ``a different piece of text'' and ``yet more text'' are not
-duplicated.  Instead, the two Lisp variables point to the same pieces of
-text.  Here is a diagram:
-
-@c cons-cell-diagram #5
-@ifnottex
-@smallexample
-@group
-kill-ring     kill-ring-yank-pointer
-    |               |
-    |      ___ ___  |     ___ ___      ___ ___
-     ---> |   |   |  --> |   |   |    |   |   |
-          |___|___|----> |___|___|--> |___|___|--> nil
-            |              |            |
-            |              |            |
-            |              |             --> "yet more text"
-            |              |
-            |               --> "a different piece of text"
-            |
-             --> "some text"
-@end group
-@end smallexample
-@sp 1
-@end ifnottex
-@ifset print-postscript-figures
-@sp 1
-@tex
-@center @image{cons-5}
-%%%% old method of including an image
-% \input /usr/local/lib/tex/inputs/psfig.tex
-% \centerline{\psfig{figure=/usr/local/lib/emacs/man/cons-5.eps}}
-% \catcode`\@=0 %
-@end tex
-@sp 1
-@end ifset
-@ifclear print-postscript-figures
-@iftex
-@smallexample
-@group
-kill-ring     kill-ring-yank-pointer
-    |               |
-    |      ___ ___  |     ___ ___      ___ ___
-     ---> |   |   |  --> |   |   |    |   |   |
-          |___|___|----> |___|___|--> |___|___|--> nil
-            |              |            |
-            |              |            |
-            |              |             --> "yet more text"
-            |              |
-            |               --> "a different piece of text
-            |
-             --> "some text"
-@end group
-@end smallexample
-@sp 1
-@end iftex
-@end ifclear
-
-Both the variable @code{kill-ring} and the variable
-@code{kill-ring-yank-pointer} are pointers.  But the kill ring itself is
-usually described as if it were actually what it is composed of.  The
-@code{kill-ring} is spoken of as if it were the list rather than that it
-points to the list.  Conversely, the @code{kill-ring-yank-pointer} is
-spoken of as pointing to a list.
-
-These two ways of talking about the same thing sound confusing at first but
-make sense on reflection.  The kill ring is generally thought of as the
-complete structure of data that holds the information of what has recently
-been cut out of the Emacs buffers.  The @code{kill-ring-yank-pointer}
-on the other hand, serves to indicate---that is, to `point to'---that part
-of the kill ring of which the first element (the @sc{car}) will be
-inserted.
-
-@ignore
-In GNU Emacs 22, the @code{kill-new} function calls
-
-@code{(setq kill-ring-yank-pointer kill-ring)}
-
-(defun rotate-yank-pointer (arg)
-  "Rotate the yanking point in the kill ring.
-With argument, rotate that many kills forward (or backward, if negative)."
-  (interactive "p")
-  (current-kill arg))
-
-(defun current-kill (n &amp;optional do-not-move)
-  "Rotate the yanking point by N places, and then return that kill.
-If N is zero, `interprogram-paste-function' is set, and calling it
-returns a string, then that string is added to the front of the
-kill ring and returned as the latest kill.
-If optional arg DO-NOT-MOVE is non-nil, then don't actually move the
-yanking point; just return the Nth kill forward."
-  (let ((interprogram-paste (and (= n 0)
-                                 interprogram-paste-function
-                                 (funcall interprogram-paste-function))))
-    (if interprogram-paste
-        (progn
-          ;; Disable the interprogram cut function when we add the new
-          ;; text to the kill ring, so Emacs doesn't try to own the
-          ;; selection, with identical text.
-          (let ((interprogram-cut-function nil))
-            (kill-new interprogram-paste))
-          interprogram-paste)
-      (or kill-ring (error "Kill ring is empty"))
-      (let ((ARGth-kill-element
-             (nthcdr (mod (- n (length kill-ring-yank-pointer))
-                          (length kill-ring))
-                     kill-ring)))
-        (or do-not-move
-            (setq kill-ring-yank-pointer ARGth-kill-element))
-        (car ARGth-kill-element)))))
-
-@end ignore</Text>
         </Document>
         <Document ID="130">
             <Title>Handling the Kill Ring</Title>
@@ -4539,6 +4255,290 @@ provides many of the features we just discussed.  But functions such
 as @code{kill-ring-yank-pointer} do not use this library, possibly
 because they were written earlier.</Text>
         </Document>
+        <Document ID="85">
+            <Title>The kill-ring-yank-pointer Variable</Title>
+            <Text>
+@node kill-ring-yank-pointer, yank nthcdr Exercises, Kill Ring Overview, Yanking
+@comment  node-name,  next,  previous,  up
+@section The @code{kill-ring-yank-pointer} Variable
+
+@code{kill-ring-yank-pointer} is a variable, just as @code{kill-ring} is
+a variable.  It points to something by being bound to the value of what
+it points to, like any other Lisp variable.
+
+@need 1000
+Thus, if the value of the kill ring is:
+
+@smallexample
+("some text" "a different piece of text" "yet more text")
+@end smallexample
+
+@need 1250
+@noindent
+and the @code{kill-ring-yank-pointer} points to the second clause, the
+value of @code{kill-ring-yank-pointer} is:
+
+@smallexample
+("a different piece of text" "yet more text")
+@end smallexample
+
+As explained in the previous chapter (@pxref{List Implementation}), the
+computer does not keep two different copies of the text being pointed to
+by both the @code{kill-ring} and the @code{kill-ring-yank-pointer}.  The
+words ``a different piece of text'' and ``yet more text'' are not
+duplicated.  Instead, the two Lisp variables point to the same pieces of
+text.  Here is a diagram:
+
+@c cons-cell-diagram #5
+@ifnottex
+@smallexample
+@group
+kill-ring     kill-ring-yank-pointer
+    |               |
+    |      ___ ___  |     ___ ___      ___ ___
+     ---> |   |   |  --> |   |   |    |   |   |
+          |___|___|----> |___|___|--> |___|___|--> nil
+            |              |            |
+            |              |            |
+            |              |             --> "yet more text"
+            |              |
+            |               --> "a different piece of text"
+            |
+             --> "some text"
+@end group
+@end smallexample
+@sp 1
+@end ifnottex
+@ifset print-postscript-figures
+@sp 1
+@tex
+@center @image{cons-5}
+%%%% old method of including an image
+% \input /usr/local/lib/tex/inputs/psfig.tex
+% \centerline{\psfig{figure=/usr/local/lib/emacs/man/cons-5.eps}}
+% \catcode`\@=0 %
+@end tex
+@sp 1
+@end ifset
+@ifclear print-postscript-figures
+@iftex
+@smallexample
+@group
+kill-ring     kill-ring-yank-pointer
+    |               |
+    |      ___ ___  |     ___ ___      ___ ___
+     ---> |   |   |  --> |   |   |    |   |   |
+          |___|___|----> |___|___|--> |___|___|--> nil
+            |              |            |
+            |              |            |
+            |              |             --> "yet more text"
+            |              |
+            |               --> "a different piece of text
+            |
+             --> "some text"
+@end group
+@end smallexample
+@sp 1
+@end iftex
+@end ifclear
+
+Both the variable @code{kill-ring} and the variable
+@code{kill-ring-yank-pointer} are pointers.  But the kill ring itself is
+usually described as if it were actually what it is composed of.  The
+@code{kill-ring} is spoken of as if it were the list rather than that it
+points to the list.  Conversely, the @code{kill-ring-yank-pointer} is
+spoken of as pointing to a list.
+
+These two ways of talking about the same thing sound confusing at first but
+make sense on reflection.  The kill ring is generally thought of as the
+complete structure of data that holds the information of what has recently
+been cut out of the Emacs buffers.  The @code{kill-ring-yank-pointer}
+on the other hand, serves to indicate---that is, to `point to'---that part
+of the kill ring of which the first element (the @sc{car}) will be
+inserted.
+
+@ignore
+In GNU Emacs 22, the @code{kill-new} function calls
+
+@code{(setq kill-ring-yank-pointer kill-ring)}
+
+(defun rotate-yank-pointer (arg)
+  "Rotate the yanking point in the kill ring.
+With argument, rotate that many kills forward (or backward, if negative)."
+  (interactive "p")
+  (current-kill arg))
+
+(defun current-kill (n &amp;optional do-not-move)
+  "Rotate the yanking point by N places, and then return that kill.
+If N is zero, `interprogram-paste-function' is set, and calling it
+returns a string, then that string is added to the front of the
+kill ring and returned as the latest kill.
+If optional arg DO-NOT-MOVE is non-nil, then don't actually move the
+yanking point; just return the Nth kill forward."
+  (let ((interprogram-paste (and (= n 0)
+                                 interprogram-paste-function
+                                 (funcall interprogram-paste-function))))
+    (if interprogram-paste
+        (progn
+          ;; Disable the interprogram cut function when we add the new
+          ;; text to the kill ring, so Emacs doesn't try to own the
+          ;; selection, with identical text.
+          (let ((interprogram-cut-function nil))
+            (kill-new interprogram-paste))
+          interprogram-paste)
+      (or kill-ring (error "Kill ring is empty"))
+      (let ((ARGth-kill-element
+             (nthcdr (mod (- n (length kill-ring-yank-pointer))
+                          (length kill-ring))
+                     kill-ring)))
+        (or do-not-move
+            (setq kill-ring-yank-pointer ARGth-kill-element))
+        (car ARGth-kill-element)))))
+
+@end ignore</Text>
+        </Document>
+        <Document ID="126">
+            <Title>debug-on-entry</Title>
+            <Text>
+@node debug-on-entry, debug-on-quit, debug, Debugging
+@section @code{debug-on-entry}
+@findex debug-on-entry
+
+A recent GNU Emacs starts the debugger automatically when your
+function has an error.
+
+@ignore
+GNU Emacs version 20 and before did not; it simply
+presented you with an error message.  You had to start the debugger
+manually.
+@end ignore
+
+Incidentally, you can start the debugger manually for all versions of
+Emacs; the advantage is that the debugger runs even if you do not have
+a bug in your code.  Sometimes your code will be free of bugs!
+
+You can enter the debugger when you call the function by calling
+@code{debug-on-entry}.
+
+@need 1250
+@noindent
+Type:
+
+@smallexample
+M-x debug-on-entry RET triangle-bugged RET
+@end smallexample
+
+@need 1250
+@noindent
+Now, evaluate the following:
+
+@smallexample
+(triangle-bugged 5)
+@end smallexample
+
+@noindent
+All versions of Emacs will create a @file{*Backtrace*} buffer and tell
+you that it is beginning to evaluate the @code{triangle-bugged}
+function:
+
+@smallexample
+@group
+---------- Buffer: *Backtrace* ----------
+Debugger entered--entering a function:
+* triangle-bugged(5)
+  eval((triangle-bugged 5))
+@end group
+@group
+  eval-last-sexp-1(nil)
+  eval-last-sexp(nil)
+  call-interactively(eval-last-sexp)
+---------- Buffer: *Backtrace* ----------
+@end group
+@end smallexample
+
+In the @file{*Backtrace*} buffer, type @kbd{d}.  Emacs will evaluate
+the first expression in @code{triangle-bugged}; the buffer will look
+like this:
+
+@smallexample
+@group
+---------- Buffer: *Backtrace* ----------
+Debugger entered--beginning evaluation of function call form:
+* (let ((total 0)) (while (> number 0) (setq total ...)
+        (setq number ...)) total)
+* triangle-bugged(5)
+  eval((triangle-bugged 5))
+@end group
+@group
+  eval-last-sexp-1(nil)
+  eval-last-sexp(nil)
+  call-interactively(eval-last-sexp)
+---------- Buffer: *Backtrace* ----------
+@end group
+@end smallexample
+
+@noindent
+Now, type @kbd{d} again, eight times, slowly.  Each time you type
+@kbd{d}, Emacs will evaluate another expression in the function
+definition.
+
+@need 1750
+Eventually, the buffer will look like this:
+
+@smallexample
+@group
+---------- Buffer: *Backtrace* ----------
+Debugger entered--beginning evaluation of function call form:
+* (setq number (1= number))
+* (while (> number 0) (setq total (+ total number))
+        (setq number (1= number)))
+@group
+@end group
+* (let ((total 0)) (while (> number 0) (setq total ...)
+        (setq number ...)) total)
+* triangle-bugged(5)
+  eval((triangle-bugged 5))
+@group
+@end group
+  eval-last-sexp-1(nil)
+  eval-last-sexp(nil)
+  call-interactively(eval-last-sexp)
+---------- Buffer: *Backtrace* ----------
+@end group
+@end smallexample
+
+@need 1500
+@noindent
+Finally, after you type @kbd{d} two more times, Emacs will reach the
+error, and the top two lines of the @file{*Backtrace*} buffer will look
+like this:
+
+@smallexample
+@group
+---------- Buffer: *Backtrace* ----------
+Debugger entered--Lisp error: (void-function 1=)
+* (1= number)
+@dots{}
+---------- Buffer: *Backtrace* ----------
+@end group
+@end smallexample
+
+By typing @kbd{d}, you were able to step through the function.
+
+You can quit a @file{*Backtrace*} buffer by typing @kbd{q} in it; this
+quits the trace, but does not cancel @code{debug-on-entry}.
+
+@findex cancel-debug-on-entry
+To cancel the effect of @code{debug-on-entry}, call
+@code{cancel-debug-on-entry} and the name of the function, like this:
+
+@smallexample
+M-x cancel-debug-on-entry RET triangle-bugged RET
+@end smallexample
+
+@noindent
+(If you are reading this in Info, cancel @code{debug-on-entry} now.)</Text>
+        </Document>
         <Document ID="86">
             <Title>Exercises with yank and nthcdr</Title>
             <Text>
@@ -4610,41 +4610,6 @@ Internet, see
 Documentation Format}.
 @end iftex
 @end itemize</Text>
-        </Document>
-        <Document ID="127">
-            <Title>debug-on-quit and debug</Title>
-            <Text>
-@node debug-on-quit, edebug, debug-on-entry, Debugging
-@section @code{debug-on-quit} and @code{(debug)}
-
-In addition to setting @code{debug-on-error} or calling @code{debug-on-entry},
-there are two other ways to start @code{debug}.
-
-@findex debug-on-quit
-You can start @code{debug} whenever you type @kbd{C-g}
-(@code{keyboard-quit}) by setting the variable @code{debug-on-quit} to
-@code{t}.  This is useful for debugging infinite loops.
-
-@need 1500
-@cindex @code{(debug)} in code
-Or, you can insert a line that says @code{(debug)} into your code
-where you want the debugger to start, like this:
-
-@smallexample
-@group
-(defun triangle-bugged (number)
-  "Return sum of numbers 1 through NUMBER inclusive."
-  (let ((total 0))
-    (while (> number 0)
-      (setq total (+ total number))
-      (debug)                         ; @r{Start debugger.}
-      (setq number (1= number)))      ; @r{Error here.}
-    total))
-@end group
-@end smallexample
-
-The @code{debug} function is described in detail in @ref{Debugger, ,
-The Lisp Debugger, elisp, The GNU Emacs Lisp Reference Manual}.</Text>
         </Document>
         <Document ID="131">
             <Title>A Graph with Labelled Axes</Title>
@@ -6969,6 +6934,41 @@ Here is the graph:
 @noindent
 The largest group of functions contain 10 -- 19 words and symbols each.</Text>
         </Document>
+        <Document ID="127">
+            <Title>debug-on-quit and debug</Title>
+            <Text>
+@node debug-on-quit, edebug, debug-on-entry, Debugging
+@section @code{debug-on-quit} and @code{(debug)}
+
+In addition to setting @code{debug-on-error} or calling @code{debug-on-entry},
+there are two other ways to start @code{debug}.
+
+@findex debug-on-quit
+You can start @code{debug} whenever you type @kbd{C-g}
+(@code{keyboard-quit}) by setting the variable @code{debug-on-quit} to
+@code{t}.  This is useful for debugging infinite loops.
+
+@need 1500
+@cindex @code{(debug)} in code
+Or, you can insert a line that says @code{(debug)} into your code
+where you want the debugger to start, like this:
+
+@smallexample
+@group
+(defun triangle-bugged (number)
+  "Return sum of numbers 1 through NUMBER inclusive."
+  (let ((total 0))
+    (while (> number 0)
+      (setq total (+ total number))
+      (debug)                         ; @r{Start debugger.}
+      (setq number (1= number)))      ; @r{Error here.}
+    total))
+@end group
+@end smallexample
+
+The @code{debug} function is described in detail in @ref{Debugger, ,
+The Lisp Debugger, elisp, The GNU Emacs Lisp Reference Manual}.</Text>
+        </Document>
         <Document ID="87">
             <Title>while</Title>
             <Text>
@@ -8158,29 +8158,128 @@ sentence cannot go beyond a paragraph).  If the search fails, the
 function will return @code{nil}; and the repeat count will be provided
 by the argument to the @code{forward-sentence} function.</Text>
         </Document>
-        <Document ID="10">
-            <Title>A Few More Complex Functions</Title>
+        <Document ID="132">
+            <Title>Free Software and Free Manuals</Title>
             <Text>
-@node More Complex, Narrowing &amp; Widening, Buffer Walk Through, Top
-@comment  node-name,  next,  previous,  up
-@chapter A Few More Complex Functions
+@node Free Software and Free Manuals, GNU Free Documentation License, Full Graph, Top
+@appendix Free Software and Free Manuals
 
-In this chapter, we build on what we have learned in previous chapters
-by looking at more complex functions.  The @code{copy-to-buffer}
-function illustrates use of two @code{save-excursion} expressions in
-one definition, while the @code{insert-buffer} function illustrates
-use of an asterisk in an @code{interactive} expression, use of
-@code{or}, and the important distinction between a name and the object
-to which the name refers.
+@strong{by Richard M. Stallman}
+@sp 1
 
-@menu
-* copy-to-buffer::              With @code{set-buffer}, @code{get-buffer-create}.
-* insert-buffer::               Read-only, and with @code{or}.
-* beginning-of-buffer::         Shows @code{goto-char},
-                                @code{point-min}, and @code{push-mark}.
-* Second Buffer Related Review::
-* optional Exercise::
-@end menu</Text>
+The biggest deficiency in free operating systems is not in the
+software---it is the lack of good free manuals that we can include in
+these systems.  Many of our most important programs do not come with
+full manuals.  Documentation is an essential part of any software
+package; when an important free software package does not come with a
+free manual, that is a major gap.  We have many such gaps today.
+
+Once upon a time, many years ago, I thought I would learn Perl.  I got
+a copy of a free manual, but I found it hard to read.  When I asked
+Perl users about alternatives, they told me that there were better
+introductory manuals---but those were not free.
+
+Why was this?  The authors of the good manuals had written them for
+O'Reilly Associates, which published them with restrictive terms---no
+copying, no modification, source files not available---which exclude
+them from the free software community.
+
+That wasn't the first time this sort of thing has happened, and (to
+our community's great loss) it was far from the last.  Proprietary
+manual publishers have enticed a great many authors to restrict their
+manuals since then.  Many times I have heard a GNU user eagerly tell me
+about a manual that he is writing, with which he expects to help the
+GNU project---and then had my hopes dashed, as he proceeded to explain
+that he had signed a contract with a publisher that would restrict it
+so that we cannot use it.
+
+Given that writing good English is a rare skill among programmers, we
+can ill afford to lose manuals this way.
+
+Free documentation, like free software, is a matter of freedom, not
+price.  The problem with these manuals was not that O'Reilly Associates
+charged a price for printed copies---that in itself is fine.  The Free
+Software Foundation @uref{http://shop.fsf.org, sells printed copies} of
+free @uref{http://www.gnu.org/doc/doc.html, GNU manuals}, too.
+But GNU manuals are available in source code form, while these manuals
+are available only on paper.  GNU manuals come with permission to copy
+and modify; the Perl manuals do not.  These restrictions are the
+problems.
+
+The criterion for a free manual is pretty much the same as for free
+software: it is a matter of giving all users certain
+freedoms.  Redistribution (including commercial redistribution) must be
+permitted, so that the manual can accompany every copy of the program,
+on-line or on paper.  Permission for modification is crucial too.
+
+As a general rule, I don't believe that it is essential for people to
+have permission to modify all sorts of articles and books.  The issues
+for writings are not necessarily the same as those for software.  For
+example, I don't think you or I are obliged to give permission to
+modify articles like this one, which describe our actions and our
+views.
+
+But there is a particular reason why the freedom to modify is crucial
+for documentation for free software.  When people exercise their right
+to modify the software, and add or change its features, if they are
+conscientious they will change the manual too---so they can provide
+accurate and usable documentation with the modified program.  A manual
+which forbids programmers to be conscientious and finish the job, or
+more precisely requires them to write a new manual from scratch if
+they change the program, does not fill our community's needs.
+
+While a blanket prohibition on modification is unacceptable, some
+kinds of limits on the method of modification pose no problem.  For
+example, requirements to preserve the original author's copyright
+notice, the distribution terms, or the list of authors, are ok.  It is
+also no problem to require modified versions to include notice that
+they were modified, even to have entire sections that may not be
+deleted or changed, as long as these sections deal with nontechnical
+topics.  (Some GNU manuals have them.)
+
+These kinds of restrictions are not a problem because, as a practical
+matter, they don't stop the conscientious programmer from adapting the
+manual to fit the modified program.  In other words, they don't block
+the free software community from making full use of the manual.
+
+However, it must be possible to modify all the technical content of
+the manual, and then distribute the result in all the usual media,
+through all the usual channels; otherwise, the restrictions do block
+the community, the manual is not free, and so we need another manual.
+
+Unfortunately, it is often hard to find someone to write another
+manual when a proprietary manual exists.  The obstacle is that many
+users think that a proprietary manual is good enough---so they don't
+see the need to write a free manual.  They do not see that the free
+operating system has a gap that needs filling.
+
+Why do users think that proprietary manuals are good enough? Some have
+not considered the issue.  I hope this article will do something to
+change that.
+
+Other users consider proprietary manuals acceptable for the same
+reason so many people consider proprietary software acceptable: they
+judge in purely practical terms, not using freedom as a
+criterion.  These people are entitled to their opinions, but since
+those opinions spring from values which do not include freedom, they
+are no guide for those of us who do value freedom.
+
+Please spread the word about this issue.  We continue to lose manuals
+to proprietary publishing.  If we spread the word that proprietary
+manuals are not sufficient, perhaps the next person who wants to help
+GNU by writing documentation will realize, before it is too late, that
+he must above all make it free.
+
+We can also encourage commercial publishers to sell free, copylefted
+manuals instead of proprietary ones.  One way you can help this is to
+check the distribution terms of a manual before you buy it, and prefer
+copylefted manuals to non-copylefted ones.
+
+@sp 2
+@noindent
+Note: The Free Software Foundation maintains a page on its Web site
+that lists free books available from other publishers:@*
+@uref{http://www.gnu.org/doc/other-free-books.html}</Text>
         </Document>
         <Document ID="128">
             <Title>The edebug Source Level Debugger</Title>
@@ -8327,128 +8426,29 @@ times a function is called, and more.
 Edebug is described in @ref{edebug, , Edebug, elisp, The GNU Emacs
 Lisp Reference Manual}.</Text>
         </Document>
-        <Document ID="132">
-            <Title>Free Software and Free Manuals</Title>
+        <Document ID="10">
+            <Title>A Few More Complex Functions</Title>
             <Text>
-@node Free Software and Free Manuals, GNU Free Documentation License, Full Graph, Top
-@appendix Free Software and Free Manuals
+@node More Complex, Narrowing &amp; Widening, Buffer Walk Through, Top
+@comment  node-name,  next,  previous,  up
+@chapter A Few More Complex Functions
 
-@strong{by Richard M. Stallman}
-@sp 1
+In this chapter, we build on what we have learned in previous chapters
+by looking at more complex functions.  The @code{copy-to-buffer}
+function illustrates use of two @code{save-excursion} expressions in
+one definition, while the @code{insert-buffer} function illustrates
+use of an asterisk in an @code{interactive} expression, use of
+@code{or}, and the important distinction between a name and the object
+to which the name refers.
 
-The biggest deficiency in free operating systems is not in the
-software---it is the lack of good free manuals that we can include in
-these systems.  Many of our most important programs do not come with
-full manuals.  Documentation is an essential part of any software
-package; when an important free software package does not come with a
-free manual, that is a major gap.  We have many such gaps today.
-
-Once upon a time, many years ago, I thought I would learn Perl.  I got
-a copy of a free manual, but I found it hard to read.  When I asked
-Perl users about alternatives, they told me that there were better
-introductory manuals---but those were not free.
-
-Why was this?  The authors of the good manuals had written them for
-O'Reilly Associates, which published them with restrictive terms---no
-copying, no modification, source files not available---which exclude
-them from the free software community.
-
-That wasn't the first time this sort of thing has happened, and (to
-our community's great loss) it was far from the last.  Proprietary
-manual publishers have enticed a great many authors to restrict their
-manuals since then.  Many times I have heard a GNU user eagerly tell me
-about a manual that he is writing, with which he expects to help the
-GNU project---and then had my hopes dashed, as he proceeded to explain
-that he had signed a contract with a publisher that would restrict it
-so that we cannot use it.
-
-Given that writing good English is a rare skill among programmers, we
-can ill afford to lose manuals this way.
-
-Free documentation, like free software, is a matter of freedom, not
-price.  The problem with these manuals was not that O'Reilly Associates
-charged a price for printed copies---that in itself is fine.  The Free
-Software Foundation @uref{http://shop.fsf.org, sells printed copies} of
-free @uref{http://www.gnu.org/doc/doc.html, GNU manuals}, too.
-But GNU manuals are available in source code form, while these manuals
-are available only on paper.  GNU manuals come with permission to copy
-and modify; the Perl manuals do not.  These restrictions are the
-problems.
-
-The criterion for a free manual is pretty much the same as for free
-software: it is a matter of giving all users certain
-freedoms.  Redistribution (including commercial redistribution) must be
-permitted, so that the manual can accompany every copy of the program,
-on-line or on paper.  Permission for modification is crucial too.
-
-As a general rule, I don't believe that it is essential for people to
-have permission to modify all sorts of articles and books.  The issues
-for writings are not necessarily the same as those for software.  For
-example, I don't think you or I are obliged to give permission to
-modify articles like this one, which describe our actions and our
-views.
-
-But there is a particular reason why the freedom to modify is crucial
-for documentation for free software.  When people exercise their right
-to modify the software, and add or change its features, if they are
-conscientious they will change the manual too---so they can provide
-accurate and usable documentation with the modified program.  A manual
-which forbids programmers to be conscientious and finish the job, or
-more precisely requires them to write a new manual from scratch if
-they change the program, does not fill our community's needs.
-
-While a blanket prohibition on modification is unacceptable, some
-kinds of limits on the method of modification pose no problem.  For
-example, requirements to preserve the original author's copyright
-notice, the distribution terms, or the list of authors, are ok.  It is
-also no problem to require modified versions to include notice that
-they were modified, even to have entire sections that may not be
-deleted or changed, as long as these sections deal with nontechnical
-topics.  (Some GNU manuals have them.)
-
-These kinds of restrictions are not a problem because, as a practical
-matter, they don't stop the conscientious programmer from adapting the
-manual to fit the modified program.  In other words, they don't block
-the free software community from making full use of the manual.
-
-However, it must be possible to modify all the technical content of
-the manual, and then distribute the result in all the usual media,
-through all the usual channels; otherwise, the restrictions do block
-the community, the manual is not free, and so we need another manual.
-
-Unfortunately, it is often hard to find someone to write another
-manual when a proprietary manual exists.  The obstacle is that many
-users think that a proprietary manual is good enough---so they don't
-see the need to write a free manual.  They do not see that the free
-operating system has a gap that needs filling.
-
-Why do users think that proprietary manuals are good enough? Some have
-not considered the issue.  I hope this article will do something to
-change that.
-
-Other users consider proprietary manuals acceptable for the same
-reason so many people consider proprietary software acceptable: they
-judge in purely practical terms, not using freedom as a
-criterion.  These people are entitled to their opinions, but since
-those opinions spring from values which do not include freedom, they
-are no guide for those of us who do value freedom.
-
-Please spread the word about this issue.  We continue to lose manuals
-to proprietary publishing.  If we spread the word that proprietary
-manuals are not sufficient, perhaps the next person who wants to help
-GNU by writing documentation will realize, before it is too late, that
-he must above all make it free.
-
-We can also encourage commercial publishers to sell free, copylefted
-manuals instead of proprietary ones.  One way you can help this is to
-check the distribution terms of a manual before you buy it, and prefer
-copylefted manuals to non-copylefted ones.
-
-@sp 2
-@noindent
-Note: The Free Software Foundation maintains a page on its Web site
-that lists free books available from other publishers:@*
-@uref{http://www.gnu.org/doc/other-free-books.html}</Text>
+@menu
+* copy-to-buffer::              With @code{set-buffer}, @code{get-buffer-create}.
+* insert-buffer::               Read-only, and with @code{or}.
+* beginning-of-buffer::         Shows @code{goto-char},
+                                @code{point-min}, and @code{push-mark}.
+* Second Buffer Related Review::
+* optional Exercise::
+@end menu</Text>
         </Document>
         <Document ID="89">
             <Title>Recursion</Title>
@@ -10464,55 +10464,6 @@ functions, the old terms are still in use.  In particular, since the
 terms are used in the Emacs Lisp source code, we will use them in this
 introduction.</Text>
         </Document>
-        <Document ID="129">
-            <Title>Debugging Exercises</Title>
-            <Text>
-@need 1500
-@node Debugging Exercises,  , edebug, Debugging
-@section Debugging Exercises
-
-@itemize @bullet
-@item
-Install the @code{count-words-region} function and then cause it to
-enter the built-in debugger when you call it.  Run the command on a
-region containing two words.  You will need to press @kbd{d} a
-remarkable number of times.  On your system, is a `hook' called after
-the command finishes?  (For information on hooks, see @ref{Command
-Overview, , Command Loop Overview, elisp, The GNU Emacs Lisp Reference
-Manual}.)
-
-@item
-Copy @code{count-words-region} into the @file{*scratch*} buffer,
-instrument the function for Edebug, and walk through its execution.
-The function does not need to have a bug, although you can introduce
-one if you wish.  If the function lacks a bug, the walk-through
-completes without problems.
-
-@item
-While running Edebug, type @kbd{?} to see a list of all the Edebug commands.
-(The @code{global-edebug-prefix} is usually @kbd{C-x X}, i.e.@:
-@kbd{@key{CTRL}-x} followed by an upper case @kbd{X}; use this prefix
-for commands made outside of the Edebug debugging buffer.)
-
-@item
-In the Edebug debugging buffer, use the @kbd{p}
-(@code{edebug-bounce-point}) command to see where in the region the
-@code{count-words-region} is working.
-
-@item
-Move point to some spot further down the function and then type the
-@kbd{h} (@code{edebug-goto-here}) command to jump to that location.
-
-@item
-Use the @kbd{t} (@code{edebug-trace-mode}) command to cause Edebug to
-walk through the function on its own; use an upper case @kbd{T} for
-@code{edebug-Trace-fast-mode}.
-
-@item
-Set a breakpoint, then run Edebug in Trace mode until it reaches the
-stopping point.
-@end itemize</Text>
-        </Document>
         <Document ID="133">
             <Title>GNU Free Documentation License</Title>
             <Text>
@@ -10597,6 +10548,55 @@ airplane.
    arch-tag: da1a2154-531f-43a8-8e33-fc7faad10acf
 @end ignore
 </Text>
+        </Document>
+        <Document ID="129">
+            <Title>Debugging Exercises</Title>
+            <Text>
+@need 1500
+@node Debugging Exercises,  , edebug, Debugging
+@section Debugging Exercises
+
+@itemize @bullet
+@item
+Install the @code{count-words-region} function and then cause it to
+enter the built-in debugger when you call it.  Run the command on a
+region containing two words.  You will need to press @kbd{d} a
+remarkable number of times.  On your system, is a `hook' called after
+the command finishes?  (For information on hooks, see @ref{Command
+Overview, , Command Loop Overview, elisp, The GNU Emacs Lisp Reference
+Manual}.)
+
+@item
+Copy @code{count-words-region} into the @file{*scratch*} buffer,
+instrument the function for Edebug, and walk through its execution.
+The function does not need to have a bug, although you can introduce
+one if you wish.  If the function lacks a bug, the walk-through
+completes without problems.
+
+@item
+While running Edebug, type @kbd{?} to see a list of all the Edebug commands.
+(The @code{global-edebug-prefix} is usually @kbd{C-x X}, i.e.@:
+@kbd{@key{CTRL}-x} followed by an upper case @kbd{X}; use this prefix
+for commands made outside of the Edebug debugging buffer.)
+
+@item
+In the Edebug debugging buffer, use the @kbd{p}
+(@code{edebug-bounce-point}) command to see where in the region the
+@code{count-words-region} is working.
+
+@item
+Move point to some spot further down the function and then type the
+@kbd{h} (@code{edebug-goto-here}) command to jump to that location.
+
+@item
+Use the @kbd{t} (@code{edebug-trace-mode}) command to cause Edebug to
+walk through the function on its own; use an upper case @kbd{T} for
+@code{edebug-Trace-fast-mode}.
+
+@item
+Set a breakpoint, then run Edebug in Trace mode until it reaches the
+stopping point.
+@end itemize</Text>
         </Document>
         <Document ID="95">
             <Title>Create Your Own TAGS File</Title>
@@ -17228,17 +17228,14 @@ The task is easy: use @code{find-file-noselect} and @code{set-buffer}.</Text>
 @comment  node-name,  next,  previous,  up
 @chapter List Processing
 
-To the untutored eye, Lisp is a strange programming language.  In Lisp
-code there are parentheses everywhere.  Some people even claim that
-the name stands for `Lots of Isolated Silly Parentheses'.  But the
-claim is unwarranted.  Lisp stands for LISt Processing, and the
-programming language handles @emph{lists} (and lists of lists) by
-putting them between parentheses.  The parentheses mark the boundaries
-of the list.  Sometimes a list is preceded by a single apostrophe or
-quotation mark, @samp{'}@footnote{The single apostrophe or quotation
-mark is an abbreviation for the function @code{quote}; you need not
-think about functions now; functions are defined in @ref{Making
-Errors, , Generate an Error Message}.}  Lists are the basis of Lisp.
+특별한 지식이 없는 사람들에게는 Lisp은 이상한 프로그래밍 언어로 보인다. Lisp 코드 어디나
+괄호들이 보인다. 몇몇 사람들은 심지어 이름이 ‘Lots of Isolated Silly Parentheses’을 
+나타낸다고 한다. 그러나, 이것은 틀렸다. Lisp은 LISt Processing을 나타내고, 괄호 사이에
+@emph{list}를(그리고 list의 list) 넣어서 다루는프로그래밍 언어이다. 괄호는 리스트의 경계를
+표시한다. 때로는 작은 따옴표 또는 인용 기호 @samp{‘} @footnote{ 작은 따옴표 또는 인용
+기호는 @code{quote} 함수의 약어다.; 지금 함수들에 대해서 몰라도 된다.; 함수들은 
+@ref{Making Errors, , Generate an Error Message}.에 정의 되어 있다. } 뒤에 list가 
+위치한다. List는 Lisp의 근본이다.
 
 @menu
 * Lisp Lists::                  What are lists?
