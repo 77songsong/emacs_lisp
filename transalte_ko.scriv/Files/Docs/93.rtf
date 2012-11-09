@@ -1,0 +1,299 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node forward-sentence, forward-paragraph, re-search-forward, Regexp Search\
+@comment  node-name,  next,  previous,  up\
+@section @code\{forward-sentence\}\
+@findex forward-sentence\
+\
+The command to move the cursor forward a sentence is a straightforward\
+illustration of how to use regular expression searches in Emacs Lisp.\
+Indeed, the function looks longer and more complicated than it is; this\
+is because the function is designed to go backwards as well as forwards;\
+and, optionally, over more than one sentence.  The function is usually\
+bound to the key command @kbd\{M-e\}.\
+\
+@menu\
+* Complete forward-sentence::\
+* fwd-sentence while loops::    Two @code\{while\} loops.\
+* fwd-sentence re-search::      A regular expression search.\
+@end menu\
+\
+@node Complete forward-sentence, fwd-sentence while loops, forward-sentence, forward-sentence\
+@ifnottex\
+@unnumberedsubsec Complete @code\{forward-sentence\} function definition\
+@end ifnottex\
+\
+@need 1250\
+Here is the code for @code\{forward-sentence\}:\
+\
+@c in GNU Emacs 22\
+@smallexample\
+@group\
+(defun forward-sentence (&optional arg)\
+  "Move forward to next `sentence-end'.  With argument, repeat.\
+With negative argument, move backward repeatedly to `sentence-beginning'.\
+\
+The variable `sentence-end' is a regular expression that matches ends of\
+sentences.  Also, every paragraph boundary terminates sentences as well."\
+@end group\
+@group\
+  (interactive "p")\
+  (or arg (setq arg 1))\
+  (let ((opoint (point))\
+        (sentence-end (sentence-end)))\
+    (while (< arg 0)\
+      (let ((pos (point))\
+            (par-beg (save-excursion (start-of-paragraph-text) (point))))\
+       (if (and (re-search-backward sentence-end par-beg t)\
+                (or (< (match-end 0) pos)\
+                    (re-search-backward sentence-end par-beg t)))\
+           (goto-char (match-end 0))\
+         (goto-char par-beg)))\
+      (setq arg (1+ arg)))\
+@end group\
+@group\
+    (while (> arg 0)\
+      (let ((par-end (save-excursion (end-of-paragraph-text) (point))))\
+       (if (re-search-forward sentence-end par-end t)\
+           (skip-chars-backward " \\t\\n")\
+         (goto-char par-end)))\
+      (setq arg (1- arg)))\
+    (constrain-to-field nil opoint t)))\
+@end group\
+@end smallexample\
+\
+@ignore\
+GNU Emacs 21\
+@smallexample\
+@group\
+(defun forward-sentence (&optional arg)\
+  "Move forward to next sentence-end.  With argument, repeat.\
+With negative argument, move backward repeatedly to sentence-beginning.\
+Sentence ends are identified by the value of sentence-end\
+treated as a regular expression.  Also, every paragraph boundary\
+terminates sentences as well."\
+@end group\
+@group\
+  (interactive "p")\
+  (or arg (setq arg 1))\
+  (while (< arg 0)\
+    (let ((par-beg\
+           (save-excursion (start-of-paragraph-text) (point))))\
+      (if (re-search-backward\
+           (concat sentence-end "[^ \\t\\n]") par-beg t)\
+          (goto-char (1- (match-end 0)))\
+        (goto-char par-beg)))\
+    (setq arg (1+ arg)))\
+  (while (> arg 0)\
+    (let ((par-end\
+           (save-excursion (end-of-paragraph-text) (point))))\
+      (if (re-search-forward sentence-end par-end t)\
+          (skip-chars-backward " \\t\\n")\
+        (goto-char par-end)))\
+    (setq arg (1- arg))))\
+@end group\
+@end smallexample\
+@end ignore\
+\
+The function looks long at first sight and it is best to look at its\
+skeleton first, and then its muscle.  The way to see the skeleton is to\
+look at the expressions that start in the left-most columns:\
+\
+@smallexample\
+@group\
+(defun forward-sentence (&optional arg)\
+  "@var\{documentation\}@dots\{\}"\
+  (interactive "p")\
+  (or arg (setq arg 1))\
+  (let ((opoint (point)) (sentence-end (sentence-end)))\
+    (while (< arg 0)\
+      (let ((pos (point))\
+            (par-beg (save-excursion (start-of-paragraph-text) (point))))\
+       @var\{rest-of-body-of-while-loop-when-going-backwards\}\
+    (while (> arg 0)\
+      (let ((par-end (save-excursion (end-of-paragraph-text) (point))))\
+       @var\{rest-of-body-of-while-loop-when-going-forwards\}\
+    @var\{handle-forms-and-equivalent\}\
+@end group\
+@end smallexample\
+\
+This looks much simpler!  The function definition consists of\
+documentation, an @code\{interactive\} expression, an @code\{or\}\
+expression, a @code\{let\} expression, and @code\{while\} loops.\
+\
+Let's look at each of these parts in turn.\
+\
+We note that the documentation is thorough and understandable.\
+\
+The function has an @code\{interactive "p"\} declaration.  This means\
+that the processed prefix argument, if any, is passed to the\
+function as its argument.  (This will be a number.)  If the function\
+is not passed an argument (it is optional) then the argument\
+@code\{arg\} will be bound to 1.\
+\
+When @code\{forward-sentence\} is called non-interactively without an\
+argument, @code\{arg\} is bound to @code\{nil\}.  The @code\{or\} expression\
+handles this.  What it does is either leave the value of @code\{arg\} as\
+it is, but only if @code\{arg\} is bound to a value; or it sets the\
+value of @code\{arg\} to 1, in the case when @code\{arg\} is bound to\
+@code\{nil\}.\
+\
+Next is a @code\{let\}.  That specifies the values of two local\
+variables, @code\{point\} and @code\{sentence-end\}.  The local value of\
+point, from before the search, is used in the\
+@code\{constrain-to-field\} function which handles forms and\
+equivalents.  The @code\{sentence-end\} variable is set by the\
+@code\{sentence-end\} function.\
+\
+@node fwd-sentence while loops, fwd-sentence re-search, Complete forward-sentence, forward-sentence\
+@unnumberedsubsec The @code\{while\} loops\
+\
+Two @code\{while\} loops follow.  The first @code\{while\} has a\
+true-or-false-test that tests true if the prefix argument for\
+@code\{forward-sentence\} is a negative number.  This is for going\
+backwards.  The body of this loop is similar to the body of the second\
+@code\{while\} clause, but it is not exactly the same.  We will skip\
+this @code\{while\} loop and concentrate on the second @code\{while\}\
+loop.\
+\
+@need 1500\
+The second @code\{while\} loop is for moving point forward.  Its skeleton\
+looks like this:\
+\
+@smallexample\
+@group\
+(while (> arg 0)            ; @r\{true-or-false-test\}\
+  (let @var\{varlist\}\
+    (if (@var\{true-or-false-test\})\
+        @var\{then-part\}\
+      @var\{else-part\}\
+  (setq arg (1- arg))))     ; @code\{while\} @r\{loop decrementer\}\
+@end group\
+@end smallexample\
+\
+The @code\{while\} loop is of the decrementing kind.\
+(@xref\{Decrementing Loop, , A Loop with a Decrementing Counter\}.)  It\
+has a true-or-false-test that tests true so long as the counter (in\
+this case, the variable @code\{arg\}) is greater than zero; and it has a\
+decrementer that subtracts 1 from the value of the counter every time\
+the loop repeats.\
+\
+If no prefix argument is given to @code\{forward-sentence\}, which is\
+the most common way the command is used, this @code\{while\} loop will\
+run once, since the value of @code\{arg\} will be 1.\
+\
+The body of the @code\{while\} loop consists of a @code\{let\} expression,\
+which creates and binds a local variable, and has, as its body, an\
+@code\{if\} expression.\
+\
+@need 1250\
+The body of the @code\{while\} loop looks like this:\
+\
+@smallexample\
+@group\
+(let ((par-end\
+       (save-excursion (end-of-paragraph-text) (point))))\
+  (if (re-search-forward sentence-end par-end t)\
+      (skip-chars-backward " \\t\\n")\
+    (goto-char par-end)))\
+@end group\
+@end smallexample\
+\
+The @code\{let\} expression creates and binds the local variable\
+@code\{par-end\}.  As we shall see, this local variable is designed to\
+provide a bound or limit to the regular expression search.  If the\
+search fails to find a proper sentence ending in the paragraph, it will\
+stop on reaching the end of the paragraph.\
+\
+But first, let us examine how @code\{par-end\} is bound to the value of\
+the end of the paragraph.  What happens is that the @code\{let\} sets the\
+value of @code\{par-end\} to the value returned when the Lisp interpreter\
+evaluates the expression\
+\
+@smallexample\
+@group\
+(save-excursion (end-of-paragraph-text) (point))\
+@end group\
+@end smallexample\
+\
+@noindent\
+In this expression, @code\{(end-of-paragraph-text)\} moves point to the\
+end of the paragraph, @code\{(point)\} returns the value of point, and then\
+@code\{save-excursion\} restores point to its original position.  Thus,\
+the @code\{let\} binds @code\{par-end\} to the value returned by the\
+@code\{save-excursion\} expression, which is the position of the end of\
+the paragraph.  (The @code\{end-of-paragraph-text\} function uses\
+@code\{forward-paragraph\}, which we will discuss shortly.)\
+\
+@need 1200\
+Emacs next evaluates the body of the @code\{let\}, which is an @code\{if\}\
+expression that looks like this:\
+\
+@smallexample\
+@group\
+(if (re-search-forward sentence-end par-end t) ; @r\{if-part\}\
+    (skip-chars-backward " \\t\\n")              ; @r\{then-part\}\
+  (goto-char par-end)))                        ; @r\{else-part\}\
+@end group\
+@end smallexample\
+\
+The @code\{if\} tests whether its first argument is true and if so,\
+evaluates its then-part; otherwise, the Emacs Lisp interpreter\
+evaluates the else-part.  The true-or-false-test of the @code\{if\}\
+expression is the regular expression search.\
+\
+It may seem odd to have what looks like the `real work' of\
+the @code\{forward-sentence\} function buried here, but this is a common\
+way this kind of operation is carried out in Lisp.\
+\
+@node fwd-sentence re-search,  , fwd-sentence while loops, forward-sentence\
+@unnumberedsubsec The regular expression search\
+\
+The @code\{re-search-forward\} function searches for the end of the\
+sentence, that is, for the pattern defined by the @code\{sentence-end\}\
+regular expression.  If the pattern is found---if the end of the sentence is\
+found---then the @code\{re-search-forward\} function does two things:\
+\
+@enumerate\
+@item\
+The @code\{re-search-forward\} function carries out a side effect, which\
+is to move point to the end of the occurrence found.\
+\
+@item\
+The @code\{re-search-forward\} function returns a value of true.  This is\
+the value received by the @code\{if\}, and means that the search was\
+successful.\
+@end enumerate\
+\
+@noindent\
+The side effect, the movement of point, is completed before the\
+@code\{if\} function is handed the value returned by the successful\
+conclusion of the search.\
+\
+When the @code\{if\} function receives the value of true from a successful\
+call to @code\{re-search-forward\}, the @code\{if\} evaluates the then-part,\
+which is the expression @code\{(skip-chars-backward " \\t\\n")\}.  This\
+expression moves backwards over any blank spaces, tabs or carriage\
+returns until a printed character is found and then leaves point after\
+the character.  Since point has already been moved to the end of the\
+pattern that marks the end of the sentence, this action leaves point\
+right after the closing printed character of the sentence, which is\
+usually a period.\
+\
+On the other hand, if the @code\{re-search-forward\} function fails to\
+find a pattern marking the end of the sentence, the function returns\
+false.  The false then causes the @code\{if\} to evaluate its third\
+argument, which is @code\{(goto-char par-end)\}:  it moves point to the\
+end of the paragraph.\
+\
+(And if the text is in a form or equivalent, and point may not move\
+fully, then the @code\{constrain-to-field\} function comes into play.)\
+\
+Regular expression searches are exceptionally useful and the pattern\
+illustrated by @code\{re-search-forward\}, in which the search is the\
+test of an @code\{if\} expression, is handy.  You will see or write code\
+incorporating this pattern often.}

@@ -1,0 +1,96 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Regexp Review, re-search Exercises, etags, Regexp Search\
+@comment  node-name,  next,  previous,  up\
+@section Review\
+\
+Here is a brief summary of some recently introduced functions.\
+\
+@table @code\
+@item while\
+Repeatedly evaluate the body of the expression so long as the first\
+element of the body tests true.  Then return @code\{nil\}.  (The\
+expression is evaluated only for its side effects.)\
+\
+@need 1250\
+For example:\
+\
+@smallexample\
+@group\
+(let ((foo 2))\
+  (while (> foo 0)\
+    (insert (format "foo is %d.\\n" foo))\
+    (setq foo (1- foo))))\
+\
+     @result\{\}      foo is 2.\
+             foo is 1.\
+             nil\
+@end group\
+@end smallexample\
+\
+@noindent\
+(The @code\{insert\} function inserts its arguments at point; the\
+@code\{format\} function returns a string formatted from its arguments\
+the way @code\{message\} formats its arguments; @code\{\\n\} produces a new\
+line.)\
+\
+@item re-search-forward\
+Search for a pattern, and if the pattern is found, move point to rest\
+just after it.\
+\
+@noindent\
+Takes four arguments, like @code\{search-forward\}:\
+\
+@enumerate\
+@item\
+A regular expression that specifies the pattern to search for.\
+(Remember to put quotation marks around this argument!)\
+\
+@item\
+Optionally, the limit of the search.\
+\
+@item\
+Optionally, what to do if the search fails, return @code\{nil\} or an\
+error message.\
+\
+@item\
+Optionally, how many times to repeat the search; if negative, the\
+search goes backwards.\
+@end enumerate\
+\
+@item let*\
+Bind some variables locally to particular values,\
+and then evaluate the remaining arguments, returning the value of the\
+last one.  While binding the local variables, use the local values of\
+variables bound earlier, if any.\
+\
+@need 1250\
+For example:\
+\
+@smallexample\
+@group\
+(let* ((foo 7)\
+      (bar (* 3 foo)))\
+  (message "`bar' is %d." bar))\
+     @result\{\} `bar' is 21.\
+@end group\
+@end smallexample\
+\
+@item match-beginning\
+Return the position of the start of the text found by the last regular\
+expression search.\
+\
+@item looking-at\
+Return @code\{t\} for true if the text after point matches the argument,\
+which should be a regular expression.\
+\
+@item eobp\
+Return @code\{t\} for true if point is at the end of the accessible part\
+of a buffer.  The end of the accessible part is the end of the buffer\
+if the buffer is not narrowed; it is the end of the narrowed part if\
+the buffer is narrowed.\
+@end table}

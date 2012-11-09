@@ -1,0 +1,80 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node re-search-forward, forward-sentence, sentence-end, Regexp Search\
+@comment  node-name,  next,  previous,  up\
+@section The @code\{re-search-forward\} Function\
+@findex re-search-forward\
+\
+The @code\{re-search-forward\} function is very like the\
+@code\{search-forward\} function.  (@xref\{search-forward, , The\
+@code\{search-forward\} Function\}.)\
+\
+@code\{re-search-forward\} searches for a regular expression.  If the\
+search is successful, it leaves point immediately after the last\
+character in the target.  If the search is backwards, it leaves point\
+just before the first character in the target.  You may tell\
+@code\{re-search-forward\} to return @code\{t\} for true.  (Moving point\
+is therefore a `side effect'.)\
+\
+Like @code\{search-forward\}, the @code\{re-search-forward\} function takes\
+four arguments:\
+\
+@enumerate\
+@item\
+The first argument is the regular expression that the function searches\
+for.  The regular expression will be a string between quotations marks.\
+\
+@item\
+The optional second argument limits how far the function will search; it is a\
+bound, which is specified as a position in the buffer.\
+\
+@item\
+The optional third argument specifies how the function responds to\
+failure: @code\{nil\} as the third argument causes the function to\
+signal an error (and print a message) when the search fails; any other\
+value causes it to return @code\{nil\} if the search fails and @code\{t\}\
+if the search succeeds.\
+\
+@item\
+The optional fourth argument is the repeat count.  A negative repeat\
+count causes @code\{re-search-forward\} to search backwards.\
+@end enumerate\
+\
+@need 800\
+The template for @code\{re-search-forward\} looks like this:\
+\
+@smallexample\
+@group\
+(re-search-forward "@var\{regular-expression\}"\
+                @var\{limit-of-search\}\
+                @var\{what-to-do-if-search-fails\}\
+                @var\{repeat-count\})\
+@end group\
+@end smallexample\
+\
+The second, third, and fourth arguments are optional.  However, if you\
+want to pass a value to either or both of the last two arguments, you\
+must also pass a value to all the preceding arguments.  Otherwise, the\
+Lisp interpreter will mistake which argument you are passing the value\
+to.\
+\
+@need 1200\
+In the @code\{forward-sentence\} function, the regular expression will be\
+the value of the variable @code\{sentence-end\}.  In simple form, that is:\
+\
+@smallexample\
+@group\
+"[.?!][]\\"')@\}]*\\\\($\\\\|  \\\\|  \\\\)[\
+]*"\
+@end group\
+@end smallexample\
+\
+@noindent\
+The limit of the search will be the end of the paragraph (since a\
+sentence cannot go beyond a paragraph).  If the search fails, the\
+function will return @code\{nil\}; and the repeat count will be provided\
+by the argument to the @code\{forward-sentence\} function.}

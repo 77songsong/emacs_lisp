@@ -1,0 +1,180 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node dolist dotimes, Recursion, while, Loops & Recursion\
+@comment  node-name,  next,  previous,  up\
+@section Save your time: @code\{dolist\} and @code\{dotimes\}\
+\
+In addition to @code\{while\}, both @code\{dolist\} and @code\{dotimes\}\
+provide for looping.  Sometimes these are quicker to write than the\
+equivalent @code\{while\} loop.  Both are Lisp macros.  (@xref\{Macros, ,\
+Macros, elisp, The GNU Emacs Lisp Reference Manual\}. )\
+\
+@code\{dolist\} works like a @code\{while\} loop that `@sc\{cdr\}s down a\
+list':  @code\{dolist\} automatically shortens the list each time it\
+loops---takes the @sc\{cdr\} of the list---and binds the @sc\{car\} of\
+each shorter version of the list to the first of its arguments.\
+\
+@code\{dotimes\} loops a specific number of times: you specify the number.\
+\
+@menu\
+* dolist::\
+* dotimes::\
+@end menu\
+\
+@node dolist, dotimes, dolist dotimes, dolist dotimes\
+@unnumberedsubsubsec The @code\{dolist\} Macro\
+@findex dolist\
+\
+Suppose, for example, you want to reverse a list, so that\
+``first'' ``second'' ``third'' becomes ``third'' ``second'' ``first''.\
+\
+@need 1250\
+In practice, you would use the @code\{reverse\} function, like this:\
+\
+@smallexample\
+@group\
+(setq animals '(gazelle giraffe lion tiger))\
+\
+(reverse animals)\
+@end group\
+@end smallexample\
+\
+@need 800\
+@noindent\
+Here is how you could reverse the list using a @code\{while\} loop:\
+\
+@smallexample\
+@group\
+(setq animals '(gazelle giraffe lion tiger))\
+\
+(defun reverse-list-with-while (list)\
+  "Using while, reverse the order of LIST."\
+  (let (value)  ; make sure list starts empty\
+    (while list\
+      (setq value (cons (car list) value))\
+      (setq list (cdr list)))\
+    value))\
+\
+(reverse-list-with-while animals)\
+@end group\
+@end smallexample\
+\
+@need 800\
+@noindent\
+And here is how you could use the @code\{dolist\} macro:\
+\
+@smallexample\
+@group\
+(setq animals '(gazelle giraffe lion tiger))\
+\
+(defun reverse-list-with-dolist (list)\
+  "Using dolist, reverse the order of LIST."\
+  (let (value)  ; make sure list starts empty\
+    (dolist (element list value)\
+      (setq value (cons element value)))))\
+\
+(reverse-list-with-dolist animals)\
+@end group\
+@end smallexample\
+\
+@need 1250\
+@noindent\
+In Info, you can place your cursor after the closing parenthesis of\
+each expression and type @kbd\{C-x C-e\}; in each case, you should see\
+\
+@smallexample\
+(tiger lion giraffe gazelle)\
+@end smallexample\
+\
+@noindent\
+in the echo area.\
+\
+For this example, the existing @code\{reverse\} function is obviously best.\
+The @code\{while\} loop is just like our first example (@pxref\{Loop\
+Example, , A @code\{while\} Loop and a List\}).  The @code\{while\} first\
+checks whether the list has elements; if so, it constructs a new list\
+by adding the first element of the list to the existing list (which in\
+the first iteration of the loop is @code\{nil\}).  Since the second\
+element is prepended in front of the first element, and the third\
+element is prepended in front of the second element, the list is reversed.\
+\
+In the expression using a @code\{while\} loop,\
+the @w\{@code\{(setq list (cdr list))\}\}\
+expression shortens the list, so the @code\{while\} loop eventually\
+stops.  In addition, it provides the @code\{cons\} expression with a new\
+first element by creating a new and shorter list at each repetition of\
+the loop.\
+\
+The @code\{dolist\} expression does very much the same as the\
+@code\{while\} expression, except that the @code\{dolist\} macro does some\
+of the work you have to do when writing a @code\{while\} expression.\
+\
+Like a @code\{while\} loop, a @code\{dolist\} loops.  What is different is\
+that it automatically shortens the list each time it loops --- it\
+`@sc\{cdr\}s down the list' on its own --- and it automatically binds\
+the @sc\{car\} of each shorter version of the list to the first of its\
+arguments.\
+\
+In the example, the @sc\{car\} of each shorter version of the list is\
+referred to using the symbol @samp\{element\}, the list itself is called\
+@samp\{list\}, and the value returned is called @samp\{value\}.  The\
+remainder of the @code\{dolist\} expression is the body.\
+\
+The @code\{dolist\} expression binds the @sc\{car\} of each shorter\
+version of the list to @code\{element\} and then evaluates the body of\
+the expression; and repeats the loop.  The result is returned in\
+@code\{value\}.\
+\
+@node dotimes,  , dolist, dolist dotimes\
+@unnumberedsubsubsec The @code\{dotimes\} Macro\
+@findex dotimes\
+\
+The @code\{dotimes\} macro is similar to @code\{dolist\}, except that it\
+loops a specific number of times.\
+\
+The first argument to @code\{dotimes\} is assigned the numbers 0, 1, 2\
+and so forth each time around the loop, and the value of the third\
+argument is returned.  You need to provide the value of the second\
+argument, which is how many times the macro loops.\
+\
+@need 1250\
+For example, the following binds the numbers from 0 up to, but not\
+including, the number 3 to the first argument, @var\{number\}, and then\
+constructs a list of the three numbers.  (The first number is 0, the\
+second number is 1, and the third number is 2; this makes a total of\
+three numbers in all, starting with zero as the first number.)\
+\
+@smallexample\
+@group\
+(let (value)      ; otherwise a value is a void variable\
+  (dotimes (number 3 value)\
+    (setq value (cons number value))))\
+\
+@result\{\} (2 1 0)\
+@end group\
+@end smallexample\
+\
+@noindent\
+@code\{dotimes\} returns @code\{value\}, so the way to use\
+@code\{dotimes\} is to operate on some expression @var\{number\} number of\
+times and then return the result, either as a list or an atom.\
+\
+@need 1250\
+Here is an example of a @code\{defun\} that uses @code\{dotimes\} to add\
+up the number of pebbles in a triangle.\
+\
+@smallexample\
+@group\
+(defun triangle-using-dotimes (number-of-rows)\
+  "Using dotimes, add up the number of pebbles in a triangle."\
+(let ((total 0))  ; otherwise a total is a void variable\
+  (dotimes (number number-of-rows total)\
+    (setq total (+ total (1+ number))))))\
+\
+(triangle-using-dotimes 4)\
+@end group\
+@end smallexample}

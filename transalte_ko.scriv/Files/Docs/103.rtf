@@ -1,0 +1,199 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node count-words-in-defun, Several defuns, Syntax, Words in a defun\
+@section The @code\{count-words-in-defun\} Function\
+@cindex Counting words in a @code\{defun\}\
+\
+We have seen that there are several ways to write a\
+@code\{count-word-region\} function.  To write a\
+@code\{count-words-in-defun\}, we need merely adapt one of these\
+versions.\
+\
+The version that uses a @code\{while\} loop is easy to understand, so I\
+am going to adapt that.  Because @code\{count-words-in-defun\} will be\
+part of a more complex program, it need not be interactive and it need\
+not display a message but just return the count.  These considerations\
+simplify the definition a little.\
+\
+On the other hand, @code\{count-words-in-defun\} will be used within a\
+buffer that contains function definitions.  Consequently, it is\
+reasonable to ask that the function determine whether it is called\
+when point is within a function definition, and if it is, to return\
+the count for that definition.  This adds complexity to the\
+definition, but saves us from needing to pass arguments to the\
+function.\
+\
+@need 1250\
+These considerations lead us to prepare the following template:\
+\
+@smallexample\
+@group\
+(defun count-words-in-defun ()\
+  "@var\{documentation\}@dots\{\}"\
+  (@var\{set up\}@dots\{\}\
+     (@var\{while loop\}@dots\{\})\
+   @var\{return count\})\
+@end group\
+@end smallexample\
+\
+@noindent\
+As usual, our job is to fill in the slots.\
+\
+First, the set up.\
+\
+We are presuming that this function will be called within a buffer\
+containing function definitions.  Point will either be within a\
+function definition or not.  For @code\{count-words-in-defun\} to work,\
+point must move to the beginning of the definition, a counter must\
+start at zero, and the counting loop must stop when point reaches the\
+end of the definition.\
+\
+The @code\{beginning-of-defun\} function searches backwards for an\
+opening delimiter such as a @samp\{(\} at the beginning of a line, and\
+moves point to that position, or else to the limit of the search.  In\
+practice, this means that @code\{beginning-of-defun\} moves point to the\
+beginning of an enclosing or preceding function definition, or else to\
+the beginning of the buffer.  We can use @code\{beginning-of-defun\} to\
+place point where we wish to start.\
+\
+The @code\{while\} loop requires a counter to keep track of the words or\
+symbols being counted.  A @code\{let\} expression can be used to create\
+a local variable for this purpose, and bind it to an initial value of zero.\
+\
+The @code\{end-of-defun\} function works like @code\{beginning-of-defun\}\
+except that it moves point to the end of the definition.\
+@code\{end-of-defun\} can be used as part of an expression that\
+determines the position of the end of the definition.\
+\
+The set up for @code\{count-words-in-defun\} takes shape rapidly: first\
+we move point to the beginning of the definition, then we create a\
+local variable to hold the count, and finally, we record the position\
+of the end of the definition so the @code\{while\} loop will know when to stop\
+looping.\
+\
+@need 1250\
+The code looks like this:\
+\
+@smallexample\
+@group\
+(beginning-of-defun)\
+(let ((count 0)\
+      (end (save-excursion (end-of-defun) (point))))\
+@end group\
+@end smallexample\
+\
+@noindent\
+The code is simple.  The only slight complication is likely to concern\
+@code\{end\}: it is bound to the position of the end of the definition\
+by a @code\{save-excursion\} expression that returns the value of point\
+after @code\{end-of-defun\} temporarily moves it to the end of the\
+definition.\
+\
+The second part of the @code\{count-words-in-defun\}, after the set up,\
+is the @code\{while\} loop.\
+\
+The loop must contain an expression that jumps point forward word by\
+word and symbol by symbol, and another expression that counts the\
+jumps.  The true-or-false-test for the @code\{while\} loop should test\
+true so long as point should jump forward, and false when point is at\
+the end of the definition.  We have already redefined the regular\
+expression for this (@pxref\{Syntax\}), so the loop is straightforward:\
+\
+@smallexample\
+@group\
+(while (and (< (point) end)\
+            (re-search-forward\
+             "\\\\(\\\\w\\\\|\\\\s_\\\\)+[^ \\t\\n]*[ \\t\\n]*" end t)\
+  (setq count (1+ count)))\
+@end group\
+@end smallexample\
+\
+The third part of the function definition returns the count of words\
+and symbols.  This part is the last expression within the body of the\
+@code\{let\} expression, and can be, very simply, the local variable\
+@code\{count\}, which when evaluated returns the count.\
+\
+@need 1250\
+Put together, the @code\{count-words-in-defun\} definition looks like this:\
+\
+@findex count-words-in-defun\
+@smallexample\
+@group\
+(defun count-words-in-defun ()\
+  "Return the number of words and symbols in a defun."\
+  (beginning-of-defun)\
+  (let ((count 0)\
+        (end (save-excursion (end-of-defun) (point))))\
+@end group\
+@group\
+    (while\
+        (and (< (point) end)\
+             (re-search-forward\
+              "\\\\(\\\\w\\\\|\\\\s_\\\\)+[^ \\t\\n]*[ \\t\\n]*"\
+              end t))\
+      (setq count (1+ count)))\
+    count))\
+@end group\
+@end smallexample\
+\
+How to test this?  The function is not interactive, but it is easy to\
+put a wrapper around the function to make it interactive; we can use\
+almost the same code as for the recursive version of\
+@code\{count-words-region\}:\
+\
+@smallexample\
+@group\
+;;; @r\{Interactive version.\}\
+(defun count-words-defun ()\
+  "Number of words and symbols in a function definition."\
+  (interactive)\
+  (message\
+   "Counting words and symbols in function definition ... ")\
+@end group\
+@group\
+  (let ((count (count-words-in-defun)))\
+    (cond\
+     ((zerop count)\
+      (message\
+       "The definition does NOT have any words or symbols."))\
+@end group\
+@group\
+     ((= 1 count)\
+      (message\
+       "The definition has 1 word or symbol."))\
+     (t\
+      (message\
+       "The definition has %d words or symbols." count)))))\
+@end group\
+@end smallexample\
+\
+@need 800\
+@noindent\
+Let's re-use @kbd\{C-c =\} as a convenient keybinding:\
+\
+@smallexample\
+(global-set-key "\\C-c=" 'count-words-defun)\
+@end smallexample\
+\
+Now we can try out @code\{count-words-defun\}: install both\
+@code\{count-words-in-defun\} and @code\{count-words-defun\}, and set the\
+keybinding, and then place the cursor within the following definition:\
+\
+@smallexample\
+@group\
+(defun multiply-by-seven (number)\
+  "Multiply NUMBER by seven."\
+  (* 7 number))\
+     @result\{\} 10\
+@end group\
+@end smallexample\
+\
+@noindent\
+Success!  The definition has 10 words and symbols.\
+\
+The next problem is to count the numbers of words and symbols in\
+several definitions within a single file.}

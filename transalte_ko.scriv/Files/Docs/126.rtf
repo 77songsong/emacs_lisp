@@ -1,0 +1,144 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node debug-on-entry, debug-on-quit, debug, Debugging\
+@section @code\{debug-on-entry\}\
+@findex debug-on-entry\
+\
+A recent GNU Emacs starts the debugger automatically when your\
+function has an error.\
+\
+@ignore\
+GNU Emacs version 20 and before did not; it simply\
+presented you with an error message.  You had to start the debugger\
+manually.\
+@end ignore\
+\
+Incidentally, you can start the debugger manually for all versions of\
+Emacs; the advantage is that the debugger runs even if you do not have\
+a bug in your code.  Sometimes your code will be free of bugs!\
+\
+You can enter the debugger when you call the function by calling\
+@code\{debug-on-entry\}.\
+\
+@need 1250\
+@noindent\
+Type:\
+\
+@smallexample\
+M-x debug-on-entry RET triangle-bugged RET\
+@end smallexample\
+\
+@need 1250\
+@noindent\
+Now, evaluate the following:\
+\
+@smallexample\
+(triangle-bugged 5)\
+@end smallexample\
+\
+@noindent\
+All versions of Emacs will create a @file\{*Backtrace*\} buffer and tell\
+you that it is beginning to evaluate the @code\{triangle-bugged\}\
+function:\
+\
+@smallexample\
+@group\
+---------- Buffer: *Backtrace* ----------\
+Debugger entered--entering a function:\
+* triangle-bugged(5)\
+  eval((triangle-bugged 5))\
+@end group\
+@group\
+  eval-last-sexp-1(nil)\
+  eval-last-sexp(nil)\
+  call-interactively(eval-last-sexp)\
+---------- Buffer: *Backtrace* ----------\
+@end group\
+@end smallexample\
+\
+In the @file\{*Backtrace*\} buffer, type @kbd\{d\}.  Emacs will evaluate\
+the first expression in @code\{triangle-bugged\}; the buffer will look\
+like this:\
+\
+@smallexample\
+@group\
+---------- Buffer: *Backtrace* ----------\
+Debugger entered--beginning evaluation of function call form:\
+* (let ((total 0)) (while (> number 0) (setq total ...)\
+        (setq number ...)) total)\
+* triangle-bugged(5)\
+  eval((triangle-bugged 5))\
+@end group\
+@group\
+  eval-last-sexp-1(nil)\
+  eval-last-sexp(nil)\
+  call-interactively(eval-last-sexp)\
+---------- Buffer: *Backtrace* ----------\
+@end group\
+@end smallexample\
+\
+@noindent\
+Now, type @kbd\{d\} again, eight times, slowly.  Each time you type\
+@kbd\{d\}, Emacs will evaluate another expression in the function\
+definition.\
+\
+@need 1750\
+Eventually, the buffer will look like this:\
+\
+@smallexample\
+@group\
+---------- Buffer: *Backtrace* ----------\
+Debugger entered--beginning evaluation of function call form:\
+* (setq number (1= number))\
+* (while (> number 0) (setq total (+ total number))\
+        (setq number (1= number)))\
+@group\
+@end group\
+* (let ((total 0)) (while (> number 0) (setq total ...)\
+        (setq number ...)) total)\
+* triangle-bugged(5)\
+  eval((triangle-bugged 5))\
+@group\
+@end group\
+  eval-last-sexp-1(nil)\
+  eval-last-sexp(nil)\
+  call-interactively(eval-last-sexp)\
+---------- Buffer: *Backtrace* ----------\
+@end group\
+@end smallexample\
+\
+@need 1500\
+@noindent\
+Finally, after you type @kbd\{d\} two more times, Emacs will reach the\
+error, and the top two lines of the @file\{*Backtrace*\} buffer will look\
+like this:\
+\
+@smallexample\
+@group\
+---------- Buffer: *Backtrace* ----------\
+Debugger entered--Lisp error: (void-function 1=)\
+* (1= number)\
+@dots\{\}\
+---------- Buffer: *Backtrace* ----------\
+@end group\
+@end smallexample\
+\
+By typing @kbd\{d\}, you were able to step through the function.\
+\
+You can quit a @file\{*Backtrace*\} buffer by typing @kbd\{q\} in it; this\
+quits the trace, but does not cancel @code\{debug-on-entry\}.\
+\
+@findex cancel-debug-on-entry\
+To cancel the effect of @code\{debug-on-entry\}, call\
+@code\{cancel-debug-on-entry\} and the name of the function, like this:\
+\
+@smallexample\
+M-x cancel-debug-on-entry RET triangle-bugged RET\
+@end smallexample\
+\
+@noindent\
+(If you are reading this in Info, cancel @code\{debug-on-entry\} now.)}

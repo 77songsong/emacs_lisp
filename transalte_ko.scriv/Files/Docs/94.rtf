@@ -1,0 +1,634 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node forward-paragraph, etags, forward-sentence, Regexp Search\
+@comment  node-name,  next,  previous,  up\
+@section @code\{forward-paragraph\}: a Goldmine of Functions\
+@findex forward-paragraph\
+\
+@ignore\
+@c in GNU Emacs 22\
+(defun forward-paragraph (&optional arg)\
+  "Move forward to end of paragraph.\
+With argument ARG, do it ARG times;\
+a negative argument ARG = -N means move backward N paragraphs.\
+\
+A line which `paragraph-start' matches either separates paragraphs\
+\\(if `paragraph-separate' matches it also) or is the first line of a paragraph.\
+A paragraph end is the beginning of a line which is not part of the paragraph\
+to which the end of the previous line belongs, or the end of the buffer.\
+Returns the count of paragraphs left to move."\
+  (interactive "p")\
+  (or arg (setq arg 1))\
+  (let* ((opoint (point))\
+         (fill-prefix-regexp\
+          (and fill-prefix (not (equal fill-prefix ""))\
+               (not paragraph-ignore-fill-prefix)\
+               (regexp-quote fill-prefix)))\
+         ;; Remove ^ from paragraph-start and paragraph-sep if they are there.\
+         ;; These regexps shouldn't be anchored, because we look for them\
+         ;; starting at the left-margin.  This allows paragraph commands to\
+         ;; work normally with indented text.\
+         ;; This hack will not find problem cases like "whatever\\\\|^something".\
+         (parstart (if (and (not (equal "" paragraph-start))\
+                            (equal ?^ (aref paragraph-start 0)))\
+                       (substring paragraph-start 1)\
+                     paragraph-start))\
+         (parsep (if (and (not (equal "" paragraph-separate))\
+                          (equal ?^ (aref paragraph-separate 0)))\
+                     (substring paragraph-separate 1)\
+                   paragraph-separate))\
+         (parsep\
+          (if fill-prefix-regexp\
+              (concat parsep "\\\\|"\
+                      fill-prefix-regexp "[ \\t]*$")\
+            parsep))\
+         ;; This is used for searching.\
+         (sp-parstart (concat "^[ \\t]*\\\\(?:" parstart "\\\\|" parsep "\\\\)"))\
+         start found-start)\
+    (while (and (< arg 0) (not (bobp)))\
+      (if (and (not (looking-at parsep))\
+               (re-search-backward "^\\n" (max (1- (point)) (point-min)) t)\
+               (looking-at parsep))\
+          (setq arg (1+ arg))\
+        (setq start (point))\
+        ;; Move back over paragraph-separating lines.\
+        (forward-char -1) (beginning-of-line)\
+        (while (and (not (bobp))\
+                    (progn (move-to-left-margin)\
+                           (looking-at parsep)))\
+          (forward-line -1))\
+        (if (bobp)\
+            nil\
+          (setq arg (1+ arg))\
+          ;; Go to end of the previous (non-separating) line.\
+          (end-of-line)\
+          ;; Search back for line that starts or separates paragraphs.\
+          (if (if fill-prefix-regexp\
+                  ;; There is a fill prefix; it overrides parstart.\
+                  (let (multiple-lines)\
+                    (while (and (progn (beginning-of-line) (not (bobp)))\
+                                (progn (move-to-left-margin)\
+                                       (not (looking-at parsep)))\
+                                (looking-at fill-prefix-regexp))\
+                      (unless (= (point) start)\
+                        (setq multiple-lines t))\
+                      (forward-line -1))\
+                    (move-to-left-margin)\
+                    ;; This deleted code caused a long hanging-indent line\
+                    ;; not to be filled together with the following lines.\
+                    ;; ;; Don't move back over a line before the paragraph\
+                    ;; ;; which doesn't start with fill-prefix\
+                    ;; ;; unless that is the only line we've moved over.\
+                    ;; (and (not (looking-at fill-prefix-regexp))\
+                    ;;      multiple-lines\
+                    ;;      (forward-line 1))\
+                    (not (bobp)))\
+                (while (and (re-search-backward sp-parstart nil 1)\
+                            (setq found-start t)\
+                            ;; Found a candidate, but need to check if it is a\
+                            ;; REAL parstart.\
+                            (progn (setq start (point))\
+                                   (move-to-left-margin)\
+                                   (not (looking-at parsep)))\
+                            (not (and (looking-at parstart)\
+                                      (or (not use-hard-newlines)\
+                                          (bobp)\
+                                          (get-text-property\
+                                           (1- start) 'hard)))))\
+                  (setq found-start nil)\
+                  (goto-char start))\
+                found-start)\
+              ;; Found one.\
+              (progn\
+                ;; Move forward over paragraph separators.\
+                ;; We know this cannot reach the place we started\
+                ;; because we know we moved back over a non-separator.\
+                (while (and (not (eobp))\
+                            (progn (move-to-left-margin)\
+                                   (looking-at parsep)))\
+                  (forward-line 1))\
+                ;; If line before paragraph is just margin, back up to there.\
+                (end-of-line 0)\
+                (if (> (current-column) (current-left-margin))\
+                    (forward-char 1)\
+                  (skip-chars-backward " \\t")\
+                  (if (not (bolp))\
+                      (forward-line 1))))\
+            ;; No starter or separator line => use buffer beg.\
+            (goto-char (point-min))))))\
+\
+    (while (and (> arg 0) (not (eobp)))\
+      ;; Move forward over separator lines...\
+      (while (and (not (eobp))\
+                  (progn (move-to-left-margin) (not (eobp)))\
+                  (looking-at parsep))\
+        (forward-line 1))\
+      (unless (eobp) (setq arg (1- arg)))\
+      ;; ... and one more line.\
+      (forward-line 1)\
+      (if fill-prefix-regexp\
+          ;; There is a fill prefix; it overrides parstart.\
+          (while (and (not (eobp))\
+                      (progn (move-to-left-margin) (not (eobp)))\
+                      (not (looking-at parsep))\
+                      (looking-at fill-prefix-regexp))\
+            (forward-line 1))\
+        (while (and (re-search-forward sp-parstart nil 1)\
+                    (progn (setq start (match-beginning 0))\
+                           (goto-char start)\
+                           (not (eobp)))\
+                    (progn (move-to-left-margin)\
+                           (not (looking-at parsep)))\
+                    (or (not (looking-at parstart))\
+                        (and use-hard-newlines\
+                             (not (get-text-property (1- start) 'hard)))))\
+          (forward-char 1))\
+        (if (< (point) (point-max))\
+            (goto-char start))))\
+    (constrain-to-field nil opoint t)\
+    ;; Return the number of steps that could not be done.\
+    arg))\
+@end ignore\
+\
+The @code\{forward-paragraph\} function moves point forward to the end\
+of the paragraph.  It is usually bound to @kbd\{M-@\}\} and makes use of a\
+number of functions that are important in themselves, including\
+@code\{let*\}, @code\{match-beginning\}, and @code\{looking-at\}.\
+\
+The function definition for @code\{forward-paragraph\} is considerably\
+longer than the function definition for @code\{forward-sentence\}\
+because it works with a paragraph, each line of which may begin with a\
+fill prefix.\
+\
+A fill prefix consists of a string of characters that are repeated at\
+the beginning of each line.  For example, in Lisp code, it is a\
+convention to start each line of a paragraph-long comment with\
+@samp\{;;; \}.  In Text mode, four blank spaces make up another common\
+fill prefix, creating an indented paragraph.  (@xref\{Fill Prefix, , ,\
+emacs, The GNU Emacs Manual\}, for more information about fill\
+prefixes.)\
+\
+The existence of a fill prefix means that in addition to being able to\
+find the end of a paragraph whose lines begin on the left-most\
+column, the @code\{forward-paragraph\} function must be able to find the\
+end of a paragraph when all or many of the lines in the buffer begin\
+with the fill prefix.\
+\
+Moreover, it is sometimes practical to ignore a fill prefix that\
+exists, especially when blank lines separate paragraphs.\
+This is an added complication.\
+\
+@menu\
+* forward-paragraph in brief::  Key parts of the function definition.\
+* fwd-para let::                The @code\{let*\} expression.\
+* fwd-para while::              The forward motion @code\{while\} loop.\
+@end menu\
+\
+@node forward-paragraph in brief, fwd-para let, forward-paragraph, forward-paragraph\
+@ifnottex\
+@unnumberedsubsec Shortened @code\{forward-paragraph\} function definition\
+@end ifnottex\
+\
+Rather than print all of the @code\{forward-paragraph\} function, we\
+will only print parts of it.  Read without preparation, the function\
+can be daunting!\
+\
+@need 800\
+In outline, the function looks like this:\
+\
+@smallexample\
+@group\
+(defun forward-paragraph (&optional arg)\
+  "@var\{documentation\}@dots\{\}"\
+  (interactive "p")\
+  (or arg (setq arg 1))\
+  (let*\
+      @var\{varlist\}\
+    (while (and (< arg 0) (not (bobp)))     ; @r\{backward-moving-code\}\
+      @dots\{\}\
+    (while (and (> arg 0) (not (eobp)))     ; @r\{forward-moving-code\}\
+      @dots\{\}\
+@end group\
+@end smallexample\
+\
+The first parts of the function are routine: the function's argument\
+list consists of one optional argument.  Documentation follows.\
+\
+The lower case @samp\{p\} in the @code\{interactive\} declaration means\
+that the processed prefix argument, if any, is passed to the function.\
+This will be a number, and is the repeat count of how many paragraphs\
+point will move.  The @code\{or\} expression in the next line handles\
+the common case when no argument is passed to the function, which occurs\
+if the function is called from other code rather than interactively.\
+This case was described earlier.  (@xref\{forward-sentence, The\
+@code\{forward-sentence\} function\}.)  Now we reach the end of the\
+familiar part of this function.\
+\
+@node fwd-para let, fwd-para while, forward-paragraph in brief, forward-paragraph\
+@unnumberedsubsec The @code\{let*\} expression\
+\
+The next line of the @code\{forward-paragraph\} function begins a\
+@code\{let*\} expression.  This is a different than @code\{let\}.  The\
+symbol is @code\{let*\} not @code\{let\}.\
+\
+The @code\{let*\} special form is like @code\{let\} except that Emacs sets\
+each variable in sequence, one after another, and variables in the\
+latter part of the varlist can make use of the values to which Emacs\
+set variables in the earlier part of the varlist.\
+\
+@ignore\
+( refappend save-excursion, , code save-excursion in code append-to-buffer .)\
+@end ignore\
+\
+(@ref\{append save-excursion, , @code\{save-excursion\} in @code\{append-to-buffer\}\}.)\
+\
+In the @code\{let*\} expression in this function, Emacs binds a total of\
+seven variables:  @code\{opoint\}, @code\{fill-prefix-regexp\},\
+@code\{parstart\}, @code\{parsep\}, @code\{sp-parstart\}, @code\{start\}, and\
+@code\{found-start\}.\
+\
+The variable @code\{parsep\} appears twice, first, to remove instances\
+of @samp\{^\}, and second, to handle fill prefixes.\
+\
+The variable @code\{opoint\} is just the value of @code\{point\}.  As you\
+can guess, it is used in a @code\{constrain-to-field\} expression, just\
+as in @code\{forward-sentence\}.\
+\
+The variable @code\{fill-prefix-regexp\} is set to the value returned by\
+evaluating the following list:\
+\
+@smallexample\
+@group\
+(and fill-prefix\
+     (not (equal fill-prefix ""))\
+     (not paragraph-ignore-fill-prefix)\
+     (regexp-quote fill-prefix))\
+@end group\
+@end smallexample\
+\
+@noindent\
+This is an expression whose first element is the @code\{and\} special form.\
+\
+As we learned earlier (@pxref\{kill-new function, , The @code\{kill-new\}\
+function\}), the @code\{and\} special form evaluates each of its\
+arguments until one of the arguments returns a value of @code\{nil\}, in\
+which case the @code\{and\} expression returns @code\{nil\}; however, if\
+none of the arguments returns a value of @code\{nil\}, the value\
+resulting from evaluating the last argument is returned.  (Since such\
+a value is not @code\{nil\}, it is considered true in Lisp.)  In other\
+words, an @code\{and\} expression returns a true value only if all its\
+arguments are true.\
+@findex and\
+\
+In this case, the variable @code\{fill-prefix-regexp\} is bound to a\
+non-@code\{nil\} value only if the following four expressions produce a\
+true (i.e., a non-@code\{nil\}) value when they are evaluated; otherwise,\
+@code\{fill-prefix-regexp\} is bound to @code\{nil\}.\
+\
+@table @code\
+@item fill-prefix\
+When this variable is evaluated, the value of the fill prefix, if any,\
+is returned.  If there is no fill prefix, this variable returns\
+@code\{nil\}.\
+\
+@item (not (equal fill-prefix "")\
+This expression checks whether an existing fill prefix is an empty\
+string, that is, a string with no characters in it.  An empty string is\
+not a useful fill prefix.\
+\
+@item (not paragraph-ignore-fill-prefix)\
+This expression returns @code\{nil\} if the variable\
+@code\{paragraph-ignore-fill-prefix\} has been turned on by being set to a\
+true value such as @code\{t\}.\
+\
+@item (regexp-quote fill-prefix)\
+This is the last argument to the @code\{and\} special form.  If all the\
+arguments to the @code\{and\} are true, the value resulting from\
+evaluating this expression will be returned by the @code\{and\} expression\
+and bound to the variable @code\{fill-prefix-regexp\},\
+@end table\
+\
+@findex regexp-quote\
+@noindent\
+The result of evaluating this @code\{and\} expression successfully is that\
+@code\{fill-prefix-regexp\} will be bound to the value of\
+@code\{fill-prefix\} as modified by the @code\{regexp-quote\} function.\
+What @code\{regexp-quote\} does is read a string and return a regular\
+expression that will exactly match the string and match nothing else.\
+This means that @code\{fill-prefix-regexp\} will be set to a value that\
+will exactly match the fill prefix if the fill prefix exists.\
+Otherwise, the variable will be set to @code\{nil\}.\
+\
+The next two local variables in the @code\{let*\} expression are\
+designed to remove instances of @samp\{^\} from @code\{parstart\} and\
+@code\{parsep\}, the local variables which indicate the paragraph start\
+and the paragraph separator.  The next expression sets @code\{parsep\}\
+again.  That is to handle fill prefixes.\
+\
+This is the setting that requires the definition call @code\{let*\}\
+rather than @code\{let\}.  The true-or-false-test for the @code\{if\}\
+depends on whether the variable @code\{fill-prefix-regexp\} evaluates to\
+@code\{nil\} or some other value.\
+\
+If @code\{fill-prefix-regexp\} does not have a value, Emacs evaluates\
+the else-part of the @code\{if\} expression and binds @code\{parsep\} to\
+its local value.  (@code\{parsep\} is a regular expression that matches\
+what separates paragraphs.)\
+\
+But if @code\{fill-prefix-regexp\} does have a value, Emacs evaluates\
+the then-part of the @code\{if\} expression and binds @code\{parsep\} to a\
+regular expression that includes the @code\{fill-prefix-regexp\} as part\
+of the pattern.\
+\
+Specifically, @code\{parsep\} is set to the original value of the\
+paragraph separate regular expression concatenated with an alternative\
+expression that consists of the @code\{fill-prefix-regexp\} followed by\
+optional whitespace to the end of the line.  The whitespace is defined\
+by @w\{@code\{"[ \\t]*$"\}\}.)  The @samp\{\\\\|\} defines this portion of the\
+regexp as an alternative to @code\{parsep\}.\
+\
+According to a comment in the code, the next local variable,\
+@code\{sp-parstart\}, is used for searching, and then the final two,\
+@code\{start\} and @code\{found-start\}, are set to @code\{nil\}.\
+\
+Now we get into the body of the @code\{let*\}.  The first part of the body\
+of the @code\{let*\} deals with the case when the function is given a\
+negative argument and is therefore moving backwards.  We will skip this\
+section.\
+\
+@node fwd-para while,  , fwd-para let, forward-paragraph\
+@unnumberedsubsec The forward motion @code\{while\} loop\
+\
+The second part of the body of the @code\{let*\} deals with forward\
+motion.  It is a @code\{while\} loop that repeats itself so long as the\
+value of @code\{arg\} is greater than zero.  In the most common use of\
+the function, the value of the argument is 1, so the body of the\
+@code\{while\} loop is evaluated exactly once, and the cursor moves\
+forward one paragraph.\
+\
+@ignore\
+(while (and (> arg 0) (not (eobp)))\
+\
+  ;; Move forward over separator lines...\
+  (while (and (not (eobp))\
+              (progn (move-to-left-margin) (not (eobp)))\
+              (looking-at parsep))\
+    (forward-line 1))\
+  (unless (eobp) (setq arg (1- arg)))\
+  ;; ... and one more line.\
+  (forward-line 1)\
+\
+  (if fill-prefix-regexp\
+      ;; There is a fill prefix; it overrides parstart.\
+      (while (and (not (eobp))\
+                  (progn (move-to-left-margin) (not (eobp)))\
+                  (not (looking-at parsep))\
+                  (looking-at fill-prefix-regexp))\
+        (forward-line 1))\
+\
+    (while (and (re-search-forward sp-parstart nil 1)\
+                (progn (setq start (match-beginning 0))\
+                       (goto-char start)\
+                       (not (eobp)))\
+                (progn (move-to-left-margin)\
+                       (not (looking-at parsep)))\
+                (or (not (looking-at parstart))\
+                    (and use-hard-newlines\
+                         (not (get-text-property (1- start) 'hard)))))\
+      (forward-char 1))\
+\
+    (if (< (point) (point-max))\
+        (goto-char start))))\
+@end ignore\
+\
+This part handles three situations: when point is between paragraphs,\
+when there is a fill prefix and when there is no fill prefix.\
+\
+@need 800\
+The @code\{while\} loop looks like this:\
+\
+@smallexample\
+@group\
+;; @r\{going forwards and not at the end of the buffer\}\
+(while (and (> arg 0) (not (eobp)))\
+\
+  ;; @r\{between paragraphs\}\
+  ;; Move forward over separator lines...\
+  (while (and (not (eobp))\
+              (progn (move-to-left-margin) (not (eobp)))\
+              (looking-at parsep))\
+    (forward-line 1))\
+  ;;  @r\{This decrements the loop\}\
+  (unless (eobp) (setq arg (1- arg)))\
+  ;; ... and one more line.\
+  (forward-line 1)\
+@end group\
+\
+@group\
+  (if fill-prefix-regexp\
+      ;; There is a fill prefix; it overrides parstart;\
+      ;; we go forward line by line\
+      (while (and (not (eobp))\
+                  (progn (move-to-left-margin) (not (eobp)))\
+                  (not (looking-at parsep))\
+                  (looking-at fill-prefix-regexp))\
+        (forward-line 1))\
+@end group\
+\
+@group\
+    ;; There is no fill prefix;\
+    ;; we go forward character by character\
+    (while (and (re-search-forward sp-parstart nil 1)\
+                (progn (setq start (match-beginning 0))\
+                       (goto-char start)\
+                       (not (eobp)))\
+                (progn (move-to-left-margin)\
+                       (not (looking-at parsep)))\
+                (or (not (looking-at parstart))\
+                    (and use-hard-newlines\
+                         (not (get-text-property (1- start) 'hard)))))\
+      (forward-char 1))\
+@end group\
+\
+@group\
+    ;; and if there is no fill prefix and if we are not at the end,\
+    ;;     go to whatever was found in the regular expression search\
+    ;;     for sp-parstart\
+    (if (< (point) (point-max))\
+        (goto-char start))))\
+@end group\
+@end smallexample\
+\
+@findex eobp\
+We can see that this is a decrementing counter @code\{while\} loop,\
+using the expression @code\{(setq arg (1- arg))\} as the decrementer.\
+That expression is not far from the @code\{while\}, but is hidden in\
+another Lisp macro, an @code\{unless\} macro.  Unless we are at the end\
+of the buffer --- that is what the @code\{eobp\} function determines; it\
+is an abbreviation of @samp\{End Of Buffer P\} --- we decrease the value\
+of @code\{arg\} by one.\
+\
+(If we are at the end of the buffer, we cannot go forward any more and\
+the next loop of the @code\{while\} expression will test false since the\
+test is an @code\{and\} with @code\{(not (eobp))\}.  The @code\{not\}\
+function means exactly as you expect; it is another name for\
+@code\{null\}, a function that returns true when its argument is false.)\
+\
+Interestingly, the loop count is not decremented until we leave the\
+space between paragraphs, unless we come to the end of buffer or stop\
+seeing the local value of the paragraph separator.\
+\
+That second @code\{while\} also has a @code\{(move-to-left-margin)\}\
+expression.  The function is self-explanatory.  It is inside a\
+@code\{progn\} expression and not the last element of its body, so it is\
+only invoked for its side effect, which is to move point to the left\
+margin of the current line.\
+\
+@findex looking-at\
+The @code\{looking-at\} function is also self-explanatory; it returns\
+true if the text after point matches the regular expression given as\
+its argument.\
+\
+The rest of the body of the loop looks difficult at first, but makes\
+sense as you come to understand it.\
+\
+@need 800\
+First consider what happens if there is a fill prefix:\
+\
+@smallexample\
+@group\
+  (if fill-prefix-regexp\
+      ;; There is a fill prefix; it overrides parstart;\
+      ;; we go forward line by line\
+      (while (and (not (eobp))\
+                  (progn (move-to-left-margin) (not (eobp)))\
+                  (not (looking-at parsep))\
+                  (looking-at fill-prefix-regexp))\
+        (forward-line 1))\
+@end group\
+@end smallexample\
+\
+@noindent\
+This expression moves point forward line by line so long\
+as four conditions are true:\
+\
+@enumerate\
+@item\
+Point is not at the end of the buffer.\
+\
+@item\
+We can move to the left margin of the text and are\
+not at the end of the buffer.\
+\
+@item\
+The text following point does not separate paragraphs.\
+\
+@item\
+The pattern following point is the fill prefix regular expression.\
+@end enumerate\
+\
+The last condition may be puzzling, until you remember that point was\
+moved to the beginning of the line early in the @code\{forward-paragraph\}\
+function.  This means that if the text has a fill prefix, the\
+@code\{looking-at\} function will see it.\
+\
+@need 1250\
+Consider what happens when there is no fill prefix.\
+\
+@smallexample\
+@group\
+    (while (and (re-search-forward sp-parstart nil 1)\
+                (progn (setq start (match-beginning 0))\
+                       (goto-char start)\
+                       (not (eobp)))\
+                (progn (move-to-left-margin)\
+                       (not (looking-at parsep)))\
+                (or (not (looking-at parstart))\
+                    (and use-hard-newlines\
+                         (not (get-text-property (1- start) 'hard)))))\
+      (forward-char 1))\
+@end group\
+@end smallexample\
+\
+@noindent\
+This @code\{while\} loop has us searching forward for\
+@code\{sp-parstart\}, which is the combination of possible whitespace\
+with a the local value of the start of a paragraph or of a paragraph\
+separator.  (The latter two are within an expression starting\
+@code\{\\(?:\} so that they are not referenced by the\
+@code\{match-beginning\} function.)\
+\
+@need 800\
+The two expressions,\
+\
+@smallexample\
+@group\
+(setq start (match-beginning 0))\
+(goto-char start)\
+@end group\
+@end smallexample\
+\
+@noindent\
+mean go to the start of the text matched by the regular expression\
+search.\
+\
+The @code\{(match-beginning 0)\} expression is new.  It returns a number\
+specifying the location of the start of the text that was matched by\
+the last search.\
+\
+The @code\{match-beginning\} function is used here because of a\
+characteristic of a forward search: a successful forward search,\
+regardless of whether it is a plain search or a regular expression\
+search, moves point to the end of the text that is found.  In this\
+case, a successful search moves point to the end of the pattern for\
+@code\{sp-parstart\}.\
+\
+However, we want to put point at the end of the current paragraph, not\
+somewhere else.  Indeed, since the search possibly includes the\
+paragraph separator, point may end up at the beginning of the next one\
+unless we use an expression that includes @code\{match-beginning\}.\
+\
+@findex match-beginning\
+When given an argument of 0, @code\{match-beginning\} returns the\
+position that is the start of the text matched by the most recent\
+search.  In this case, the most recent search looks for\
+@code\{sp-parstart\}.  The @code\{(match-beginning 0)\} expression returns\
+the beginning position of that pattern, rather than the end position\
+of that pattern.\
+\
+(Incidentally, when passed a positive number as an argument, the\
+@code\{match-beginning\} function returns the location of point at that\
+parenthesized expression in the last search unless that parenthesized\
+expression begins with @code\{\\(?:\}.  I don't know why @code\{\\(?:\}\
+appears here since the argument is 0.)\
+\
+@need 1250\
+The last expression when there is no fill prefix is\
+\
+@smallexample\
+@group\
+(if (< (point) (point-max))\
+    (goto-char start))))\
+@end group\
+@end smallexample\
+\
+@noindent\
+This says that if there is no fill prefix and if we are not at the\
+end, point should move to the beginning of whatever was found by the\
+regular expression search for @code\{sp-parstart\}.\
+\
+The full definition for the @code\{forward-paragraph\} function not only\
+includes code for going forwards, but also code for going backwards.\
+\
+If you are reading this inside of GNU Emacs and you want to see the\
+whole function, you can type @kbd\{C-h f\} (@code\{describe-function\})\
+and the name of the function.  This gives you the function\
+documentation and the name of the library containing the function's\
+source.  Place point over the name of the library and press the RET\
+key; you will be taken directly to the source.  (Be sure to install\
+your sources!  Without them, you are like a person who tries to drive\
+a car with his eyes shut!)}

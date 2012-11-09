@@ -1,0 +1,384 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node recursive-count-words, Counting Exercise, count-words-region, Counting Words\
+@comment  node-name,  next,  previous,  up\
+@section Count Words Recursively\
+@cindex Count words recursively\
+@cindex Recursively counting words\
+@cindex Words, counted recursively\
+\
+You can write the function for counting words recursively as well as\
+with a @code\{while\} loop.  Let's see how this is done.\
+\
+First, we need to recognize that the @code\{count-words-region\}\
+function has three jobs: it sets up the appropriate conditions for\
+counting to occur; it counts the words in the region; and it sends a\
+message to the user telling how many words there are.\
+\
+If we write a single recursive function to do everything, we will\
+receive a message for every recursive call.  If the region contains 13\
+words, we will receive thirteen messages, one right after the other.\
+We don't want this!  Instead, we must write two functions to do the\
+job, one of which (the recursive function) will be used inside of the\
+other.  One function will set up the conditions and display the\
+message; the other will return the word count.\
+\
+Let us start with the function that causes the message to be displayed.\
+We can continue to call this @code\{count-words-region\}.\
+\
+This is the function that the user will call.  It will be interactive.\
+Indeed, it will be similar to our previous versions of this\
+function, except that it will call @code\{recursive-count-words\} to\
+determine how many words are in the region.\
+\
+@need 1250\
+We can readily construct a template for this function, based on our\
+previous versions:\
+\
+@smallexample\
+@group\
+;; @r\{Recursive version; uses regular expression search\}\
+(defun count-words-region (beginning end)\
+  "@var\{documentation\}@dots\{\}"\
+  (@var\{interactive-expression\}@dots\{\})\
+@end group\
+@group\
+\
+;;; @r\{1. Set up appropriate conditions.\}\
+  (@var\{explanatory message\})\
+  (@var\{set-up functions\}@dots\{\}\
+@end group\
+@group\
+\
+;;; @r\{2. Count the words.\}\
+    @var\{recursive call\}\
+@end group\
+@group\
+\
+;;; @r\{3. Send a message to the user.\}\
+    @var\{message providing word count\}))\
+@end group\
+@end smallexample\
+\
+The definition looks straightforward, except that somehow the count\
+returned by the recursive call must be passed to the message\
+displaying the word count.  A little thought suggests that this can be\
+done by making use of a @code\{let\} expression: we can bind a variable\
+in the varlist of a @code\{let\} expression to the number of words in\
+the region, as returned by the recursive call; and then the\
+@code\{cond\} expression, using binding, can display the value to the\
+user.\
+\
+Often, one thinks of the binding within a @code\{let\} expression as\
+somehow secondary to the `primary' work of a function.  But in this\
+case, what you might consider the `primary' job of the function,\
+counting words, is done within the @code\{let\} expression.\
+\
+@need 1250\
+Using @code\{let\}, the function definition looks like this:\
+\
+@smallexample\
+@group\
+(defun count-words-region (beginning end)\
+  "Print number of words in the region."\
+  (interactive "r")\
+@end group\
+\
+@group\
+;;; @r\{1. Set up appropriate conditions.\}\
+  (message "Counting words in region ... ")\
+  (save-excursion\
+    (goto-char beginning)\
+@end group\
+\
+@group\
+;;; @r\{2. Count the words.\}\
+    (let ((count (recursive-count-words end)))\
+@end group\
+\
+@group\
+;;; @r\{3. Send a message to the user.\}\
+      (cond ((zerop count)\
+             (message\
+              "The region does NOT have any words."))\
+            ((= 1 count)\
+             (message\
+              "The region has 1 word."))\
+            (t\
+             (message\
+              "The region has %d words." count))))))\
+@end group\
+@end smallexample\
+\
+Next, we need to write the recursive counting function.\
+\
+A recursive function has at least three parts: the `do-again-test', the\
+`next-step-expression', and the recursive call.\
+\
+The do-again-test determines whether the function will or will not be\
+called again.  Since we are counting words in a region and can use a\
+function that moves point forward for every word, the do-again-test\
+can check whether point is still within the region.  The do-again-test\
+should find the value of point and determine whether point is before,\
+at, or after the value of the end of the region.  We can use the\
+@code\{point\} function to locate point.  Clearly, we must pass the\
+value of the end of the region to the recursive counting function as an\
+argument.\
+\
+In addition, the do-again-test should also test whether the search finds a\
+word.  If it does not, the function should not call itself again.\
+\
+The next-step-expression changes a value so that when the recursive\
+function is supposed to stop calling itself, it stops.  More\
+precisely, the next-step-expression changes a value so that at the\
+right time, the do-again-test stops the recursive function from\
+calling itself again.  In this case, the next-step-expression can be\
+the expression that moves point forward, word by word.\
+\
+The third part of a recursive function is the recursive call.\
+\
+Somewhere, also, we also need a part that does the `work' of the\
+function, a part that does the counting.  A vital part!\
+\
+@need 1250\
+But already, we have an outline of the recursive counting function:\
+\
+@smallexample\
+@group\
+(defun recursive-count-words (region-end)\
+  "@var\{documentation\}@dots\{\}"\
+   @var\{do-again-test\}\
+   @var\{next-step-expression\}\
+   @var\{recursive call\})\
+@end group\
+@end smallexample\
+\
+Now we need to fill in the slots.  Let's start with the simplest cases\
+first:  if point is at or beyond the end of the region, there cannot\
+be any words in the region, so the function should return zero.\
+Likewise, if the search fails, there are no words to count, so the\
+function should return zero.\
+\
+On the other hand, if point is within the region and the search\
+succeeds, the function should call itself again.\
+\
+@need 800\
+Thus, the do-again-test should look like this:\
+\
+@smallexample\
+@group\
+(and (< (point) region-end)\
+     (re-search-forward "\\\\w+\\\\W*" region-end t))\
+@end group\
+@end smallexample\
+\
+Note that the search expression is part of the do-again-test---the\
+function returns @code\{t\} if its search succeeds and @code\{nil\} if it\
+fails.  (@xref\{Whitespace Bug, , The Whitespace Bug in\
+@code\{count-words-region\}\}, for an explanation of how\
+@code\{re-search-forward\} works.)\
+\
+The do-again-test is the true-or-false test of an @code\{if\} clause.\
+Clearly, if the do-again-test succeeds, the then-part of the @code\{if\}\
+clause should call the function again; but if it fails, the else-part\
+should return zero since either point is outside the region or the\
+search failed because there were no words to find.\
+\
+But before considering the recursive call, we need to consider the\
+next-step-expression.  What is it?  Interestingly, it is the search\
+part of the do-again-test.\
+\
+In addition to returning @code\{t\} or @code\{nil\} for the\
+do-again-test, @code\{re-search-forward\} moves point forward as a side\
+effect of a successful search.  This is the action that changes the\
+value of point so that the recursive function stops calling itself\
+when point completes its movement through the region.  Consequently,\
+the @code\{re-search-forward\} expression is the next-step-expression.\
+\
+@need 1200\
+In outline, then, the body of the @code\{recursive-count-words\}\
+function looks like this:\
+\
+@smallexample\
+@group\
+(if @var\{do-again-test-and-next-step-combined\}\
+    ;; @r\{then\}\
+    @var\{recursive-call-returning-count\}\
+  ;; @r\{else\}\
+  @var\{return-zero\})\
+@end group\
+@end smallexample\
+\
+How to incorporate the mechanism that counts?\
+\
+If you are not used to writing recursive functions, a question like\
+this can be troublesome.  But it can and should be approached\
+systematically.\
+\
+We know that the counting mechanism should be associated in some way\
+with the recursive call.  Indeed, since the next-step-expression moves\
+point forward by one word, and since a recursive call is made for\
+each word, the counting mechanism must be an expression that adds one\
+to the value returned by a call to @code\{recursive-count-words\}.\
+\
+@need 800\
+Consider several cases:\
+\
+@itemize @bullet\
+@item\
+If there are two words in the region, the function should return\
+a value resulting from adding one to the value returned when it counts\
+the first word, plus the number returned when it counts the remaining\
+words in the region, which in this case is one.\
+\
+@item\
+If there is one word in the region, the function should return\
+a value resulting from adding one to the value returned when it counts\
+that word, plus the number returned when it counts the remaining\
+words in the region, which in this case is zero.\
+\
+@item\
+If there are no words in the region, the function should return zero.\
+@end itemize\
+\
+From the sketch we can see that the else-part of the @code\{if\} returns\
+zero for the case of no words.  This means that the then-part of the\
+@code\{if\} must return a value resulting from adding one to the value\
+returned from a count of the remaining words.\
+\
+@need 1200\
+The expression will look like this, where @code\{1+\} is a function that\
+adds one to its argument.\
+\
+@smallexample\
+(1+ (recursive-count-words region-end))\
+@end smallexample\
+\
+@need 1200\
+The whole @code\{recursive-count-words\} function will then look like\
+this:\
+\
+@smallexample\
+@group\
+(defun recursive-count-words (region-end)\
+  "@var\{documentation\}@dots\{\}"\
+\
+;;; @r\{1. do-again-test\}\
+  (if (and (< (point) region-end)\
+           (re-search-forward "\\\\w+\\\\W*" region-end t))\
+@end group\
+\
+@group\
+;;; @r\{2. then-part: the recursive call\}\
+      (1+ (recursive-count-words region-end))\
+\
+;;; @r\{3. else-part\}\
+    0))\
+@end group\
+@end smallexample\
+\
+@need 1250\
+Let's examine how this works:\
+\
+If there are no words in the region, the else part of the @code\{if\}\
+expression is evaluated and consequently the function returns zero.\
+\
+If there is one word in the region, the value of point is less than\
+the value of @code\{region-end\} and the search succeeds.  In this case,\
+the true-or-false-test of the @code\{if\} expression tests true, and the\
+then-part of the @code\{if\} expression is evaluated.  The counting\
+expression is evaluated.  This expression returns a value (which will\
+be the value returned by the whole function) that is the sum of one\
+added to the value returned by a recursive call.\
+\
+Meanwhile, the next-step-expression has caused point to jump over the\
+first (and in this case only) word in the region.  This means that\
+when @code\{(recursive-count-words region-end)\} is evaluated a second\
+time, as a result of the recursive call, the value of point will be\
+equal to or greater than the value of region end.  So this time,\
+@code\{recursive-count-words\} will return zero.  The zero will be added\
+to one, and the original evaluation of @code\{recursive-count-words\}\
+will return one plus zero, which is one, which is the correct amount.\
+\
+Clearly, if there are two words in the region, the first call to\
+@code\{recursive-count-words\} returns one added to the value returned\
+by calling @code\{recursive-count-words\} on a region containing the\
+remaining word---that is, it adds one to one, producing two, which is\
+the correct amount.\
+\
+Similarly, if there are three words in the region, the first call to\
+@code\{recursive-count-words\} returns one added to the value returned\
+by calling @code\{recursive-count-words\} on a region containing the\
+remaining two words---and so on and so on.\
+\
+@need 1250\
+@noindent\
+With full documentation the two functions look like this:\
+\
+@need 1250\
+@noindent\
+The recursive function:\
+\
+@findex recursive-count-words\
+@smallexample\
+@group\
+(defun recursive-count-words (region-end)\
+  "Number of words between point and REGION-END."\
+@end group\
+\
+@group\
+;;; @r\{1. do-again-test\}\
+  (if (and (< (point) region-end)\
+           (re-search-forward "\\\\w+\\\\W*" region-end t))\
+@end group\
+\
+@group\
+;;; @r\{2. then-part: the recursive call\}\
+      (1+ (recursive-count-words region-end))\
+\
+;;; @r\{3. else-part\}\
+    0))\
+@end group\
+@end smallexample\
+\
+@need 800\
+@noindent\
+The wrapper:\
+\
+@smallexample\
+@group\
+;;; @r\{Recursive version\}\
+(defun count-words-region (beginning end)\
+  "Print number of words in the region.\
+@end group\
+\
+@group\
+Words are defined as at least one word-constituent\
+character followed by at least one character that is\
+not a word-constituent.  The buffer's syntax table\
+determines which characters these are."\
+@end group\
+@group\
+  (interactive "r")\
+  (message "Counting words in region ... ")\
+  (save-excursion\
+    (goto-char beginning)\
+    (let ((count (recursive-count-words end)))\
+@end group\
+@group\
+      (cond ((zerop count)\
+             (message\
+              "The region does NOT have any words."))\
+@end group\
+@group\
+            ((= 1 count)\
+             (message "The region has 1 word."))\
+            (t\
+             (message\
+              "The region has %d words." count))))))\
+@end group\
+@end smallexample}

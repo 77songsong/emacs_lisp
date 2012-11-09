@@ -1,0 +1,119 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@need 1700\
+@node Keybindings, Keymaps, Indent Tabs Mode, Emacs Initialization\
+@section Some Keybindings\
+\
+Now for some personal keybindings:\
+\
+@smallexample\
+@group\
+;;; Compare windows\
+(global-set-key "\\C-cw" 'compare-windows)\
+@end group\
+@end smallexample\
+\
+@findex compare-windows\
+@code\{compare-windows\} is a nifty command that compares the text in\
+your current window with text in the next window.  It makes the\
+comparison by starting at point in each window, moving over text in\
+each window as far as they match.  I use this command all the time.\
+\
+This also shows how to set a key globally, for all modes.\
+\
+@cindex Setting a key globally\
+@cindex Global set key\
+@cindex Key setting globally\
+@findex global-set-key\
+The command is @code\{global-set-key\}.  It is followed by the\
+keybinding.  In a @file\{.emacs\} file, the keybinding is written as\
+shown: @code\{\\C-c\} stands for `control-c', which means `press the\
+control key and the @key\{c\} key at the same time'.  The @code\{w\} means\
+`press the @key\{w\} key'.  The keybinding is surrounded by double\
+quotation marks.  In documentation, you would write this as\
+@w\{@kbd\{C-c w\}\}.  (If you were binding a @key\{META\} key, such as\
+@kbd\{M-c\}, rather than a @key\{CTRL\} key, you would write\
+@w\{@code\{\\M-c\}\} in your @file\{.emacs\} file.  @xref\{Init Rebinding, ,\
+Rebinding Keys in Your Init File, emacs, The GNU Emacs Manual\}, for\
+details.)\
+\
+The command invoked by the keys is @code\{compare-windows\}.  Note that\
+@code\{compare-windows\} is preceded by a single quote; otherwise, Emacs\
+would first try to evaluate the symbol to determine its value.\
+\
+These three things, the double quotation marks, the backslash before\
+the @samp\{C\}, and the single quote mark are necessary parts of\
+keybinding that I tend to forget.  Fortunately, I have come to\
+remember that I should look at my existing @file\{.emacs\} file, and\
+adapt what is there.\
+\
+As for the keybinding itself: @kbd\{C-c w\}.  This combines the prefix\
+key, @kbd\{C-c\}, with a single character, in this case, @kbd\{w\}.  This\
+set of keys, @kbd\{C-c\} followed by a single character, is strictly\
+reserved for individuals' own use.  (I call these `own' keys, since\
+these are for my own use.)  You should always be able to create such a\
+keybinding for your own use without stomping on someone else's\
+keybinding.  If you ever write an extension to Emacs, please avoid\
+taking any of these keys for public use.  Create a key like @kbd\{C-c\
+C-w\} instead.  Otherwise, we will run out of `own' keys.\
+\
+@need 1250\
+Here is another keybinding, with a comment:\
+\
+@smallexample\
+@group\
+;;; Keybinding for `occur'\
+; I use occur a lot, so let's bind it to a key:\
+(global-set-key "\\C-co" 'occur)\
+@end group\
+@end smallexample\
+\
+@findex occur\
+The @code\{occur\} command shows all the lines in the current buffer\
+that contain a match for a regular expression.  Matching lines are\
+shown in a buffer called @file\{*Occur*\}.  That buffer serves as a menu\
+to jump to occurrences.\
+\
+@findex global-unset-key\
+@cindex Unbinding key\
+@cindex Key unbinding\
+@need 1250\
+Here is how to unbind a key, so it does not\
+work:\
+\
+@smallexample\
+@group\
+;;; Unbind `C-x f'\
+(global-unset-key "\\C-xf")\
+@end group\
+@end smallexample\
+\
+There is a reason for this unbinding: I found I inadvertently typed\
+@w\{@kbd\{C-x f\}\} when I meant to type @kbd\{C-x C-f\}.  Rather than find a\
+file, as I intended, I accidentally set the width for filled text,\
+almost always to a width I did not want.  Since I hardly ever reset my\
+default width, I simply unbound the key.\
+\
+@findex list-buffers, @r\{rebound\}\
+@findex buffer-menu, @r\{bound to key\}\
+@need 1250\
+The following rebinds an existing key:\
+\
+@smallexample\
+@group\
+;;; Rebind `C-x C-b' for `buffer-menu'\
+(global-set-key "\\C-x\\C-b" 'buffer-menu)\
+@end group\
+@end smallexample\
+\
+By default, @kbd\{C-x C-b\} runs the\
+@code\{list-buffers\} command.  This command lists\
+your buffers in @emph\{another\} window.  Since I\
+almost always want to do something in that\
+window, I prefer the  @code\{buffer-menu\}\
+command, which not only lists the buffers,\
+but moves point into that window.}

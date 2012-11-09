@@ -1,0 +1,164 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node graph-body-print, recursive-graph-body-print, Columns of a graph, Readying a Graph\
+@section The @code\{graph-body-print\} Function\
+@findex graph-body-print\
+\
+After our preparation in the preceding section, the\
+@code\{graph-body-print\} function is straightforward.  The function\
+will print column after column of asterisks and blanks, using the\
+elements of a numbers' list to specify the number of asterisks in each\
+column.  This is a repetitive act, which means we can use a\
+decrementing @code\{while\} loop or recursive function for the job.  In\
+this section, we will write the definition using a @code\{while\} loop.\
+\
+The @code\{column-of-graph\} function requires the height of the graph\
+as an argument, so we should determine and record that as a local variable.\
+\
+This leads us to the following template for the @code\{while\} loop\
+version of this function:\
+\
+@smallexample\
+@group\
+(defun graph-body-print (numbers-list)\
+  "@var\{documentation\}@dots\{\}"\
+  (let ((height  @dots\{\}\
+         @dots\{\}))\
+@end group\
+\
+@group\
+    (while numbers-list\
+      @var\{insert-columns-and-reposition-point\}\
+      (setq numbers-list (cdr numbers-list)))))\
+@end group\
+@end smallexample\
+\
+@noindent\
+We need to fill in the slots of the template.\
+\
+Clearly, we can use the @code\{(apply 'max numbers-list)\} expression to\
+determine the height of the graph.\
+\
+The @code\{while\} loop will cycle through the @code\{numbers-list\} one\
+element at a time.  As it is shortened by the @code\{(setq numbers-list\
+(cdr numbers-list))\} expression, the @sc\{car\} of each instance of the\
+list is the value of the argument for @code\{column-of-graph\}.\
+\
+At each cycle of the @code\{while\} loop, the @code\{insert-rectangle\}\
+function inserts the list returned by @code\{column-of-graph\}.  Since\
+the @code\{insert-rectangle\} function moves point to the lower right of\
+the inserted rectangle, we need to save the location of point at the\
+time the rectangle is inserted, move back to that position after the\
+rectangle is inserted, and then move horizontally to the next place\
+from which @code\{insert-rectangle\} is called.\
+\
+If the inserted columns are one character wide, as they will be if\
+single blanks and asterisks are used, the repositioning command is\
+simply @code\{(forward-char 1)\}; however, the width of a column may be\
+greater than one.  This means that the repositioning command should be\
+written @code\{(forward-char symbol-width)\}.  The @code\{symbol-width\}\
+itself is the length of a @code\{graph-blank\} and can be found using\
+the expression @code\{(length graph-blank)\}.  The best place to bind\
+the @code\{symbol-width\} variable to the value of the width of graph\
+column is in the varlist of the @code\{let\} expression.\
+\
+@need 1250\
+These considerations lead to the following function definition:\
+\
+@smallexample\
+@group\
+(defun graph-body-print (numbers-list)\
+  "Print a bar graph of the NUMBERS-LIST.\
+The numbers-list consists of the Y-axis values."\
+\
+  (let ((height (apply 'max numbers-list))\
+        (symbol-width (length graph-blank))\
+        from-position)\
+@end group\
+\
+@group\
+    (while numbers-list\
+      (setq from-position (point))\
+      (insert-rectangle\
+       (column-of-graph height (car numbers-list)))\
+      (goto-char from-position)\
+      (forward-char symbol-width)\
+@end group\
+@group\
+      ;; @r\{Draw graph column by column.\}\
+      (sit-for 0)\
+      (setq numbers-list (cdr numbers-list)))\
+@end group\
+@group\
+    ;; @r\{Place point for X axis labels.\}\
+    (forward-line height)\
+    (insert "\\n")\
+))\
+@end group\
+@end smallexample\
+\
+@noindent\
+The one unexpected expression in this function is the\
+@w\{@code\{(sit-for 0)\}\} expression in the @code\{while\} loop.  This\
+expression makes the graph printing operation more interesting to\
+watch than it would be otherwise.  The expression causes Emacs to\
+`sit' or do nothing for a zero length of time and then redraw the\
+screen.  Placed here, it causes Emacs to redraw the screen column by\
+column.  Without it, Emacs would not redraw the screen until the\
+function exits.\
+\
+We can test @code\{graph-body-print\} with a short list of numbers.\
+\
+@enumerate\
+@item\
+Install @code\{graph-symbol\}, @code\{graph-blank\},\
+@code\{column-of-graph\}, which are in\
+@iftex\
+@ref\{Readying a Graph, , Readying a Graph\},\
+@end iftex\
+@ifinfo\
+@ref\{Columns of a graph\},\
+@end ifinfo\
+and @code\{graph-body-print\}.\
+\
+@need 800\
+@item\
+Copy the following expression:\
+\
+@smallexample\
+(graph-body-print '(1 2 3 4 6 4 3 5 7 6 5 2 3))\
+@end smallexample\
+\
+@item\
+Switch to the @file\{*scratch*\} buffer and place the cursor where you\
+want the graph to start.\
+\
+@item\
+Type @kbd\{M-:\} (@code\{eval-expression\}).\
+\
+@item\
+Yank the @code\{graph-body-print\} expression into the minibuffer\
+with @kbd\{C-y\} (@code\{yank)\}.\
+\
+@item\
+Press @key\{RET\} to evaluate the @code\{graph-body-print\} expression.\
+@end enumerate\
+\
+@need 800\
+Emacs will print a graph like this:\
+\
+@smallexample\
+@group\
+                    *\
+                *   **\
+                *  ****\
+               *** ****\
+              ********* *\
+             ************\
+            *************\
+@end group\
+@end smallexample}

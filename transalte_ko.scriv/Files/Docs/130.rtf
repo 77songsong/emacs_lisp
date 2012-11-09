@@ -1,0 +1,619 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Kill Ring, Full Graph, the-the, Top\
+@appendix Handling the Kill Ring\
+@cindex Kill ring handling\
+@cindex Handling the kill ring\
+@cindex Ring, making a list like a\
+\
+The kill ring is a list that is transformed into a ring by the\
+workings of the @code\{current-kill\} function.  The @code\{yank\} and\
+@code\{yank-pop\} commands use the @code\{current-kill\} function.\
+\
+This appendix describes the @code\{current-kill\} function as well as\
+both the @code\{yank\} and the @code\{yank-pop\} commands, but first,\
+consider the workings of the kill ring.\
+\
+@menu\
+* What the Kill Ring Does::\
+* current-kill::\
+* yank::                        Paste a copy of a clipped element.\
+* yank-pop::                    Insert element pointed to.\
+* ring file::\
+@end menu\
+\
+@node What the Kill Ring Does, current-kill, Kill Ring, Kill Ring\
+@ifnottex\
+@unnumberedsec What the Kill Ring Does\
+@end ifnottex\
+\
+@need 1250\
+The kill ring has a default maximum length of sixty items; this number\
+is too large for an explanation.  Instead, set it to four.  Please\
+evaluate the following:\
+\
+@smallexample\
+@group\
+(setq old-kill-ring-max kill-ring-max)\
+(setq kill-ring-max 4)\
+@end group\
+@end smallexample\
+\
+@noindent\
+Then, please copy each line of the following indented example into the\
+kill ring.  You may kill each line with @kbd\{C-k\} or mark it and copy\
+it with @kbd\{M-w\}.\
+\
+@noindent\
+(In a read-only buffer, such as the @file\{*info*\} buffer, the kill\
+command, @kbd\{C-k\} (@code\{kill-line\}), will not remove the text,\
+merely copy it to the kill ring.  However, your machine may beep at\
+you.  Alternatively, for silence, you may copy the region of each line\
+with the @kbd\{M-w\} (@code\{kill-ring-save\}) command.  You must mark\
+each line for this command to succeed, but it does not matter at which\
+end you put point or mark.)\
+\
+@need 1250\
+@noindent\
+Please invoke the calls in order, so that five elements attempt to\
+fill the kill ring:\
+\
+@smallexample\
+@group\
+first some text\
+second piece of text\
+third line\
+fourth line of text\
+fifth bit of text\
+@end group\
+@end smallexample\
+\
+@need 1250\
+@noindent\
+Then find the value of @code\{kill-ring\} by evaluating\
+\
+@smallexample\
+kill-ring\
+@end smallexample\
+\
+@need 800\
+@noindent\
+It is:\
+\
+@smallexample\
+@group\
+("fifth bit of text" "fourth line of text"\
+"third line" "second piece of text")\
+@end group\
+@end smallexample\
+\
+@noindent\
+The first element, @samp\{first some text\}, was dropped.\
+\
+@need 1250\
+To return to the old value for the length of the kill ring, evaluate:\
+\
+@smallexample\
+(setq kill-ring-max old-kill-ring-max)\
+@end smallexample\
+\
+\
+@node current-kill, yank, What the Kill Ring Does, Kill Ring\
+@comment  node-name,  next,  previous,  up\
+@appendixsec The @code\{current-kill\} Function\
+@findex current-kill\
+\
+The @code\{current-kill\} function changes the element in the kill ring\
+to which @code\{kill-ring-yank-pointer\} points.  (Also, the\
+@code\{kill-new\} function sets @code\{kill-ring-yank-pointer\} to point\
+to the latest element of the kill ring.  The @code\{kill-new\}\
+function is used directly or indirectly by @code\{kill-append\},\
+@code\{copy-region-as-kill\}, @code\{kill-ring-save\}, @code\{kill-line\},\
+and @code\{kill-region\}.)\
+\
+@menu\
+* Code for current-kill::\
+* Understanding current-kill::\
+@end menu\
+\
+@node Code for current-kill, Understanding current-kill, current-kill, current-kill\
+@ifnottex\
+@unnumberedsubsec The code for @code\{current-kill\}\
+@end ifnottex\
+\
+\
+@need 1500\
+The @code\{current-kill\} function is used by @code\{yank\} and by\
+@code\{yank-pop\}.  Here is the code for @code\{current-kill\}:\
+\
+@smallexample\
+@group\
+(defun current-kill (n &optional do-not-move)\
+  "Rotate the yanking point by N places, and then return that kill.\
+If N is zero, `interprogram-paste-function' is set, and calling it\
+returns a string, then that string is added to the front of the\
+kill ring and returned as the latest kill.\
+@end group\
+@group\
+If optional arg DO-NOT-MOVE is non-nil, then don't actually move the\
+yanking point; just return the Nth kill forward."\
+  (let ((interprogram-paste (and (= n 0)\
+                                 interprogram-paste-function\
+                                 (funcall interprogram-paste-function))))\
+@end group\
+@group\
+    (if interprogram-paste\
+        (progn\
+          ;; Disable the interprogram cut function when we add the new\
+          ;; text to the kill ring, so Emacs doesn't try to own the\
+          ;; selection, with identical text.\
+          (let ((interprogram-cut-function nil))\
+            (kill-new interprogram-paste))\
+          interprogram-paste)\
+@end group\
+@group\
+      (or kill-ring (error "Kill ring is empty"))\
+      (let ((ARGth-kill-element\
+             (nthcdr (mod (- n (length kill-ring-yank-pointer))\
+                          (length kill-ring))\
+                     kill-ring)))\
+        (or do-not-move\
+            (setq kill-ring-yank-pointer ARGth-kill-element))\
+        (car ARGth-kill-element)))))\
+@end group\
+@end smallexample\
+\
+Remember also that the @code\{kill-new\} function sets\
+@code\{kill-ring-yank-pointer\} to the latest element of the kill\
+ring, which means that all the functions that call it set the value\
+indirectly: @code\{kill-append\}, @code\{copy-region-as-kill\},\
+@code\{kill-ring-save\}, @code\{kill-line\}, and @code\{kill-region\}.\
+\
+@need 1500\
+Here is the line in @code\{kill-new\}, which is explained in\
+@ref\{kill-new function, , The @code\{kill-new\} function\}.\
+\
+@smallexample\
+(setq kill-ring-yank-pointer kill-ring)\
+@end smallexample\
+\
+@node Understanding current-kill,  , Code for current-kill, current-kill\
+@ifnottex\
+@unnumberedsubsec @code\{current-kill\} in Outline\
+@end ifnottex\
+\
+The @code\{current-kill\} function looks complex, but as usual, it can\
+be understood by taking it apart piece by piece.  First look at it in\
+skeletal form:\
+\
+@smallexample\
+@group\
+(defun current-kill (n &optional do-not-move)\
+  "Rotate the yanking point by N places, and then return that kill."\
+  (let @var\{varlist\}\
+    @var\{body\}@dots\{\})\
+@end group\
+@end smallexample\
+\
+This function takes two arguments, one of which is optional.  It has a\
+documentation string.  It is @emph\{not\} interactive.\
+\
+@menu\
+* Body of current-kill::\
+* Digression concerning error::  How to mislead humans, but not computers.\
+* Determining the Element::\
+@end menu\
+\
+@node Body of current-kill, Digression concerning error, Understanding current-kill, Understanding current-kill\
+@ifnottex\
+@unnumberedsubsubsec The Body of @code\{current-kill\}\
+@end ifnottex\
+\
+The body of the function definition is a @code\{let\} expression, which\
+itself has a body as well as a @var\{varlist\}.\
+\
+The @code\{let\} expression declares a variable that will be only usable\
+within the bounds of this function.  This variable is called\
+@code\{interprogram-paste\} and is for copying to another program.  It\
+is not for copying within this instance of GNU Emacs.  Most window\
+systems provide a facility for interprogram pasting.  Sadly, that\
+facility usually provides only for the last element.  Most windowing\
+systems have not adopted a ring of many possibilities, even though\
+Emacs has provided it for decades.\
+\
+The @code\{if\} expression has two parts, one if there exists\
+@code\{interprogram-paste\} and one if not.\
+\
+@need 2000\
+Let us consider the `if not' or else-part of the @code\{current-kill\}\
+function.  (The then-part uses the @code\{kill-new\} function, which\
+we have already described.  @xref\{kill-new function, , The\
+@code\{kill-new\} function\}.)\
+\
+@smallexample\
+@group\
+(or kill-ring (error "Kill ring is empty"))\
+(let ((ARGth-kill-element\
+       (nthcdr (mod (- n (length kill-ring-yank-pointer))\
+                    (length kill-ring))\
+               kill-ring)))\
+  (or do-not-move\
+      (setq kill-ring-yank-pointer ARGth-kill-element))\
+  (car ARGth-kill-element))\
+@end group\
+@end smallexample\
+\
+@noindent\
+The code first checks whether the kill ring has content; otherwise it\
+signals an error.\
+\
+@need 1000\
+Note that the @code\{or\} expression is very similar to testing length\
+with an @code\{if\}:\
+\
+@findex zerop\
+@findex error\
+@smallexample\
+@group\
+(if (zerop (length kill-ring))          ; @r\{if-part\}\
+    (error "Kill ring is empty"))       ; @r\{then-part\}\
+  ;; No else-part\
+@end group\
+@end smallexample\
+\
+@noindent\
+If there is not anything in the kill ring, its length must be zero and\
+an error message sent to the user: @samp\{Kill ring is empty\}.  The\
+@code\{current-kill\} function uses an @code\{or\} expression which is\
+simpler.  But an @code\{if\} expression reminds us what goes on.\
+\
+This @code\{if\} expression uses the function @code\{zerop\} which returns\
+true if the value it is testing is zero.  When @code\{zerop\} tests\
+true, the then-part of the @code\{if\} is evaluated.  The then-part is a\
+list starting with the function @code\{error\}, which is a function that\
+is similar to the @code\{message\} function\
+(@pxref\{message, , The @code\{message\} Function\}) in that\
+it prints a one-line message in the echo area.  However, in addition\
+to printing a message, @code\{error\} also stops evaluation of the\
+function within which it is embedded.  This means that the rest of the\
+function will not be evaluated if the length of the kill ring is zero.\
+\
+Then the @code\{current-kill\} function selects the element to return.\
+The selection depends on the number of places that @code\{current-kill\}\
+rotates and on where @code\{kill-ring-yank-pointer\} points.\
+\
+Next, either the optional @code\{do-not-move\} argument is true or the\
+current value of @code\{kill-ring-yank-pointer\} is set to point to the\
+list.  Finally, another expression returns the first element of the\
+list even if the @code\{do-not-move\} argument is true.\
+\
+@node Digression concerning error, Determining the Element, Body of current-kill, Understanding current-kill\
+@ifnottex\
+@unnumberedsubsubsec Digression about the word `error'\
+@end ifnottex\
+\
+In my opinion, it is slightly misleading, at least to humans, to use\
+the term `error' as the name of the @code\{error\} function.  A better\
+term would be `cancel'.  Strictly speaking, of course, you cannot\
+point to, much less rotate a pointer to a list that has no length, so\
+from the point of view of the computer, the word `error' is correct.\
+But a human expects to attempt this sort of thing, if only to find out\
+whether the kill ring is full or empty.  This is an act of\
+exploration.\
+\
+From the human point of view, the act of exploration and discovery is\
+not necessarily an error, and therefore should not be labelled as one,\
+even in the bowels of a computer.  As it is, the code in Emacs implies\
+that a human who is acting virtuously, by exploring his or her\
+environment, is making an error.  This is bad.  Even though the computer\
+takes the same steps as it does when there is an `error', a term such as\
+`cancel' would have a clearer connotation.\
+\
+@node Determining the Element,  , Digression concerning error, Understanding current-kill\
+@ifnottex\
+@unnumberedsubsubsec Determining the Element\
+@end ifnottex\
+\
+Among other actions, the else-part of the @code\{if\} expression sets\
+the value of @code\{kill-ring-yank-pointer\} to\
+@code\{ARGth-kill-element\} when the kill ring has something in it and\
+the value of @code\{do-not-move\} is @code\{nil\}.\
+\
+@need 800\
+The code looks like this:\
+\
+@smallexample\
+@group\
+(nthcdr (mod (- n (length kill-ring-yank-pointer))\
+             (length kill-ring))\
+        kill-ring)))\
+@end group\
+@end smallexample\
+\
+This needs some examination.  Unless it is not supposed to move the\
+pointer, the @code\{current-kill\} function changes where\
+@code\{kill-ring-yank-pointer\} points.\
+That is what the\
+@w\{@code\{(setq kill-ring-yank-pointer ARGth-kill-element))\}\}\
+expression does.  Also, clearly, @code\{ARGth-kill-element\} is being\
+set to be equal to some @sc\{cdr\} of the kill ring, using the\
+@code\{nthcdr\} function that is described in an earlier section.\
+(@xref\{copy-region-as-kill\}.)  How does it do this?\
+\
+As we have seen before (@pxref\{nthcdr\}), the @code\{nthcdr\} function\
+works by repeatedly taking the @sc\{cdr\} of a list---it takes the\
+@sc\{cdr\} of the @sc\{cdr\} of the @sc\{cdr\} @dots\{\}\
+\
+@need 800\
+The two following expressions produce the same result:\
+\
+@smallexample\
+@group\
+(setq kill-ring-yank-pointer (cdr kill-ring))\
+\
+(setq kill-ring-yank-pointer (nthcdr 1 kill-ring))\
+@end group\
+@end smallexample\
+\
+However, the @code\{nthcdr\} expression is more complicated.  It uses\
+the @code\{mod\} function to determine which @sc\{cdr\} to select.\
+\
+(You will remember to look at inner functions first; indeed, we will\
+have to go inside the @code\{mod\}.)\
+\
+The @code\{mod\} function returns the value of its first argument modulo\
+the second; that is to say, it returns the remainder after dividing\
+the first argument by the second.  The value returned has the same\
+sign as the second argument.\
+\
+@need 800\
+Thus,\
+\
+@smallexample\
+@group\
+(mod 12 4)\
+  @result\{\} 0  ;; @r\{because there is no remainder\}\
+(mod 13 4)\
+  @result\{\} 1\
+@end group\
+@end smallexample\
+\
+@need 1250\
+In this case, the first argument is often smaller than the second.\
+That is fine.\
+\
+@smallexample\
+@group\
+(mod 0 4)\
+  @result\{\} 0\
+(mod 1 4)\
+  @result\{\} 1\
+@end group\
+@end smallexample\
+\
+We can guess what the @code\{-\} function does.  It is like @code\{+\} but\
+subtracts instead of adds; the @code\{-\} function subtracts its second\
+argument from its first.  Also, we already know what the @code\{length\}\
+function does (@pxref\{length\}).  It returns the length of a list.\
+\
+And @code\{n\} is the name of the required argument to the\
+@code\{current-kill\} function.\
+\
+@need 1250\
+So when the first argument to @code\{nthcdr\} is zero, the @code\{nthcdr\}\
+expression returns the whole list, as you can see by evaluating the\
+following:\
+\
+@smallexample\
+@group\
+;; kill-ring-yank-pointer @r\{and\} kill-ring @r\{have a length of four\}\
+;; @r\{and\} (mod (- 0 4) 4) @result\{\} 0\
+(nthcdr (mod (- 0 4) 4)\
+        '("fourth line of text"\
+          "third line"\
+          "second piece of text"\
+          "first some text"))\
+@end group\
+@end smallexample\
+\
+@need 1250\
+When the first argument to the @code\{current-kill\} function is one,\
+the @code\{nthcdr\} expression returns the list without its first\
+element.\
+\
+@smallexample\
+@group\
+(nthcdr (mod (- 1 4) 4)\
+        '("fourth line of text"\
+          "third line"\
+          "second piece of text"\
+          "first some text"))\
+@end group\
+@end smallexample\
+\
+@cindex @samp\{global variable\} defined\
+@cindex @samp\{variable, global\}, defined\
+Incidentally, both @code\{kill-ring\} and @code\{kill-ring-yank-pointer\}\
+are @dfn\{global variables\}.  That means that any expression in Emacs\
+Lisp can access them.  They are not like the local variables set by\
+@code\{let\} or like the symbols in an argument list.\
+Local variables can only be accessed\
+within the @code\{let\} that defines them or the function that specifies\
+them in an argument list (and within expressions called by them).\
+\
+@ignore\
+@c texi2dvi fails when the name of the section is within ifnottex ...\
+(@xref\{Prevent confusion, , @code\{let\} Prevents Confusion\}, and\
+@ref\{defun, , The @code\{defun\} Special Form\}.)\
+@end ignore\
+\
+@node yank, yank-pop, current-kill, Kill Ring\
+@comment  node-name,  next,  previous,  up\
+@appendixsec @code\{yank\}\
+@findex yank\
+\
+After learning about @code\{current-kill\}, the code for the\
+@code\{yank\} function is almost easy.\
+\
+The @code\{yank\} function does not use the\
+@code\{kill-ring-yank-pointer\} variable directly.  It calls\
+@code\{insert-for-yank\} which calls @code\{current-kill\} which sets the\
+@code\{kill-ring-yank-pointer\} variable.\
+\
+@need 1250\
+The code looks like this:\
+\
+@c in GNU Emacs 22\
+@smallexample\
+@group\
+(defun yank (&optional arg)\
+  "Reinsert (\\"paste\\") the last stretch of killed text.\
+More precisely, reinsert the stretch of killed text most recently\
+killed OR yanked.  Put point at end, and set mark at beginning.\
+With just \\\\[universal-argument] as argument, same but put point at\
+beginning (and mark at end).  With argument N, reinsert the Nth most\
+recently killed stretch of killed text.\
+\
+When this command inserts killed text into the buffer, it honors\
+`yank-excluded-properties' and `yank-handler' as described in the\
+doc string for `insert-for-yank-1', which see.\
+\
+See also the command \\\\[yank-pop]."\
+@end group\
+@group\
+  (interactive "*P")\
+  (setq yank-window-start (window-start))\
+  ;; If we don't get all the way thru, make last-command indicate that\
+  ;; for the following command.\
+  (setq this-command t)\
+  (push-mark (point))\
+@end group\
+@group\
+  (insert-for-yank (current-kill (cond\
+                                  ((listp arg) 0)\
+                                  ((eq arg '-) -2)\
+                                  (t (1- arg)))))\
+  (if (consp arg)\
+      ;; This is like exchange-point-and-mark,\
+      ;;     but doesn't activate the mark.\
+      ;; It is cleaner to avoid activation, even though the command\
+      ;; loop would deactivate the mark because we inserted text.\
+      (goto-char (prog1 (mark t)\
+                   (set-marker (mark-marker) (point) (current-buffer)))))\
+@end group\
+@group\
+  ;; If we do get all the way thru, make this-command indicate that.\
+  (if (eq this-command t)\
+      (setq this-command 'yank))\
+  nil)\
+@end group\
+@end smallexample\
+\
+The key expression is @code\{insert-for-yank\}, which inserts the string\
+returned by @code\{current-kill\}, but removes some text properties from\
+it.\
+\
+However, before getting to that expression, the function sets the value\
+of @code\{yank-window-start\} to the position returned by the\
+@code\{(window-start)\} expression, the position at which the display\
+currently starts.  The @code\{yank\} function also sets\
+@code\{this-command\} and pushes the mark.\
+\
+After it yanks the appropriate element, if the optional argument is a\
+@sc\{cons\} rather than a number or nothing, it puts point at beginning\
+of the yanked text and mark at its end.\
+\
+(The @code\{prog1\} function is like @code\{progn\} but returns the value\
+of its first argument rather than the value of its last argument.  Its\
+first argument is forced to return the buffer's mark as an integer.\
+You can see the documentation for these functions by placing point\
+over them in this buffer and then typing @kbd\{C-h f\}\
+(@code\{describe-function\}) followed by a @kbd\{RET\}; the default is the\
+function.)\
+\
+The last part of the function tells what to do when it succeeds.\
+\
+@node yank-pop, ring file, yank, Kill Ring\
+@comment  node-name,  next,  previous,  up\
+@appendixsec @code\{yank-pop\}\
+@findex yank-pop\
+\
+After understanding @code\{yank\} and @code\{current-kill\}, you know how\
+to approach the @code\{yank-pop\} function.  Leaving out the\
+documentation to save space, it looks like this:\
+\
+@c GNU Emacs 22\
+@smallexample\
+@group\
+(defun yank-pop (&optional arg)\
+  "@dots\{\}"\
+  (interactive "*p")\
+  (if (not (eq last-command 'yank))\
+      (error "Previous command was not a yank"))\
+@end group\
+@group\
+  (setq this-command 'yank)\
+  (unless arg (setq arg 1))\
+  (let ((inhibit-read-only t)\
+        (before (< (point) (mark t))))\
+@end group\
+@group\
+    (if before\
+        (funcall (or yank-undo-function 'delete-region) (point) (mark t))\
+      (funcall (or yank-undo-function 'delete-region) (mark t) (point)))\
+    (setq yank-undo-function nil)\
+@end group\
+@group\
+    (set-marker (mark-marker) (point) (current-buffer))\
+    (insert-for-yank (current-kill arg))\
+    ;; Set the window start back where it was in the yank command,\
+    ;; if possible.\
+    (set-window-start (selected-window) yank-window-start t)\
+@end group\
+@group\
+    (if before\
+        ;; This is like exchange-point-and-mark,\
+        ;;     but doesn't activate the mark.\
+        ;; It is cleaner to avoid activation, even though the command\
+        ;; loop would deactivate the mark because we inserted text.\
+        (goto-char (prog1 (mark t)\
+                     (set-marker (mark-marker)\
+                                 (point)\
+                                 (current-buffer))))))\
+  nil)\
+@end group\
+@end smallexample\
+\
+The function is interactive with a small @samp\{p\} so the prefix\
+argument is processed and passed to the function.  The command can\
+only be used after a previous yank; otherwise an error message is\
+sent.  This check uses the variable @code\{last-command\} which is set\
+by @code\{yank\} and is discussed elsewhere.\
+(@xref\{copy-region-as-kill\}.)\
+\
+The @code\{let\} clause sets the variable @code\{before\} to true or false\
+depending whether point is before or after mark and then the region\
+between point and mark is deleted.  This is the region that was just\
+inserted by the previous yank and it is this text that will be\
+replaced.\
+\
+@code\{funcall\} calls its first argument as a function, passing\
+remaining arguments to it.  The first argument is whatever the\
+@code\{or\} expression returns.  The two remaining arguments are the\
+positions of point and mark set by the preceding @code\{yank\} command.\
+\
+There is more, but that is the hardest part.\
+\
+@node ring file,  , yank-pop, Kill Ring\
+@comment  node-name,  next,  previous,  up\
+@appendixsec The @file\{ring.el\} File\
+@cindex @file\{ring.el\} file\
+\
+Interestingly, GNU Emacs posses a file called @file\{ring.el\} that\
+provides many of the features we just discussed.  But functions such\
+as @code\{kill-ring-yank-pointer\} do not use this library, possibly\
+because they were written earlier.}

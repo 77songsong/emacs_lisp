@@ -1,0 +1,437 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node kill-region, copy-region-as-kill, zap-to-char, Cutting & Storing Text\
+@comment  node-name,  next,  previous,  up\
+@section @code\{kill-region\}\
+@findex kill-region\
+\
+The @code\{zap-to-char\} function uses the @code\{kill-region\} function.\
+This function clips text from a region and copies that text to\
+the kill ring, from which it may be retrieved.\
+\
+@ignore\
+GNU Emacs 22:\
+\
+(defun kill-region (beg end &optional yank-handler)\
+  "Kill (\\"cut\\") text between point and mark.\
+This deletes the text from the buffer and saves it in the kill ring.\
+The command \\\\[yank] can retrieve it from there.\
+\\(If you want to kill and then yank immediately, use \\\\[kill-ring-save].)\
+\
+If you want to append the killed region to the last killed text,\
+use \\\\[append-next-kill] before \\\\[kill-region].\
+\
+If the buffer is read-only, Emacs will beep and refrain from deleting\
+the text, but put the text in the kill ring anyway.  This means that\
+you can use the killing commands to copy text from a read-only buffer.\
+\
+This is the primitive for programs to kill text (as opposed to deleting it).\
+Supply two arguments, character positions indicating the stretch of text\
+ to be killed.\
+Any command that calls this function is a \\"kill command\\".\
+If the previous command was also a kill command,\
+the text killed this time appends to the text killed last time\
+to make one entry in the kill ring.\
+\
+In Lisp code, optional third arg YANK-HANDLER, if non-nil,\
+specifies the yank-handler text property to be set on the killed\
+text.  See `insert-for-yank'."\
+  ;; Pass point first, then mark, because the order matters\
+  ;; when calling kill-append.\
+  (interactive (list (point) (mark)))\
+  (unless (and beg end)\
+    (error "The mark is not set now, so there is no region"))\
+  (condition-case nil\
+      (let ((string (filter-buffer-substring beg end t)))\
+        (when string                        ;STRING is nil if BEG = END\
+          ;; Add that string to the kill ring, one way or another.\
+          (if (eq last-command 'kill-region)\
+              (kill-append string (< end beg) yank-handler)\
+            (kill-new string nil yank-handler)))\
+        (when (or string (eq last-command 'kill-region))\
+          (setq this-command 'kill-region))\
+        nil)\
+    ((buffer-read-only text-read-only)\
+     ;; The code above failed because the buffer, or some of the characters\
+     ;; in the region, are read-only.\
+     ;; We should beep, in case the user just isn't aware of this.\
+     ;; However, there's no harm in putting\
+     ;; the region's text in the kill ring, anyway.\
+     (copy-region-as-kill beg end)\
+     ;; Set this-command now, so it will be set even if we get an error.\
+     (setq this-command 'kill-region)\
+     ;; This should barf, if appropriate, and give us the correct error.\
+     (if kill-read-only-ok\
+         (progn (message "Read only text copied to kill ring") nil)\
+       ;; Signal an error if the buffer is read-only.\
+       (barf-if-buffer-read-only)\
+       ;; If the buffer isn't read-only, the text is.\
+       (signal 'text-read-only (list (current-buffer)))))))\
+@end ignore\
+\
+The Emacs 22 version of that function uses @code\{condition-case\} and\
+@code\{copy-region-as-kill\}, both of which we will explain.\
+@code\{condition-case\} is an important special form.\
+\
+In essence, the @code\{kill-region\} function calls\
+@code\{condition-case\}, which takes three arguments.  In this function,\
+the first argument does nothing.  The second argument contains the\
+code that does the work when all goes well.  The third argument\
+contains the code that is called in the event of an error.\
+\
+@menu\
+* Complete kill-region::        The function definition.\
+* condition-case::              Dealing with a problem.\
+* Lisp macro::\
+@end menu\
+\
+@node Complete kill-region, condition-case, kill-region, kill-region\
+@ifnottex\
+@unnumberedsubsec The Complete @code\{kill-region\} Definition\
+@end ifnottex\
+\
+@need 1200\
+We will go through the @code\{condition-case\} code in a moment.  First,\
+let us look at the definition of @code\{kill-region\}, with comments\
+added:\
+\
+@c GNU Emacs 22:\
+@smallexample\
+@group\
+(defun kill-region (beg end)\
+  "Kill (\\"cut\\") text between point and mark.\
+This deletes the text from the buffer and saves it in the kill ring.\
+The command \\\\[yank] can retrieve it from there. @dots\{\} "\
+@end group\
+\
+@group\
+  ;; @bullet\{\} Since order matters, pass point first.\
+  (interactive (list (point) (mark)))\
+  ;; @bullet\{\} And tell us if we cannot cut the text.\
+  ;; `unless' is an `if' without a then-part.\
+  (unless (and beg end)\
+    (error "The mark is not set now, so there is no region"))\
+@end group\
+\
+@group\
+  ;; @bullet\{\} `condition-case' takes three arguments.\
+  ;;    If the first argument is nil, as it is here,\
+  ;;    information about the error signal is not\
+  ;;    stored for use by another function.\
+  (condition-case nil\
+@end group\
+\
+@group\
+      ;; @bullet\{\} The second argument to `condition-case' tells the\
+      ;;    Lisp interpreter what to do when all goes well.\
+@end group\
+\
+@group\
+      ;;    It starts with a `let' function that extracts the string\
+      ;;    and tests whether it exists.  If so (that is what the\
+      ;;    `when' checks), it calls an `if' function that determines\
+      ;;    whether the previous command was another call to\
+      ;;    `kill-region'; if it was, then the new text is appended to\
+      ;;    the previous text; if not, then a different function,\
+      ;;    `kill-new', is called.\
+@end group\
+\
+@group\
+      ;;    The `kill-append' function concatenates the new string and\
+      ;;    the old.  The `kill-new' function inserts text into a new\
+      ;;    item in the kill ring.\
+@end group\
+\
+@group\
+      ;;    `when' is an `if' without an else-part.  The second `when'\
+      ;;    again checks whether the current string exists; in\
+      ;;    addition, it checks whether the previous command was\
+      ;;    another call to `kill-region'.  If one or the other\
+      ;;    condition is true, then it sets the current command to\
+      ;;    be `kill-region'.\
+@end group\
+@group\
+      (let ((string (filter-buffer-substring beg end t)))\
+        (when string                    ;STRING is nil if BEG = END\
+          ;; Add that string to the kill ring, one way or another.\
+          (if (eq last-command 'kill-region)\
+@end group\
+@group\
+              ;;    @minus\{\} `yank-handler' is an optional argument to\
+              ;;    `kill-region' that tells the `kill-append' and\
+              ;;    `kill-new' functions how deal with properties\
+              ;;    added to the text, such as `bold' or `italics'.\
+              (kill-append string (< end beg) yank-handler)\
+            (kill-new string nil yank-handler)))\
+        (when (or string (eq last-command 'kill-region))\
+          (setq this-command 'kill-region))\
+        nil)\
+@end group\
+\
+@group\
+    ;;  @bullet\{\} The third argument to `condition-case' tells the interpreter\
+    ;;    what to do with an error.\
+@end group\
+@group\
+    ;;    The third argument has a conditions part and a body part.\
+    ;;    If the conditions are met (in this case,\
+    ;;             if text or buffer are read-only)\
+    ;;    then the body is executed.\
+@end group\
+@group\
+    ;;    The first part of the third argument is the following:\
+    ((buffer-read-only text-read-only) ;; the if-part\
+     ;; @dots\{\}  the then-part\
+     (copy-region-as-kill beg end)\
+@end group\
+@group\
+     ;;    Next, also as part of the then-part, set this-command, so\
+     ;;    it will be set in an error\
+     (setq this-command 'kill-region)\
+     ;;    Finally, in the then-part, send a message if you may copy\
+     ;;    the text to the kill ring without signally an error, but\
+     ;;    don't if you may not.\
+@end group\
+@group\
+     (if kill-read-only-ok\
+         (progn (message "Read only text copied to kill ring") nil)\
+       (barf-if-buffer-read-only)\
+       ;; If the buffer isn't read-only, the text is.\
+       (signal 'text-read-only (list (current-buffer)))))\
+@end group\
+@end smallexample\
+\
+@ignore\
+@c v 21\
+@smallexample\
+@group\
+(defun kill-region (beg end)\
+  "Kill between point and mark.\
+The text is deleted but saved in the kill ring."\
+  (interactive "r")\
+@end group\
+\
+@group\
+  ;; 1. `condition-case' takes three arguments.\
+  ;;    If the first argument is nil, as it is here,\
+  ;;    information about the error signal is not\
+  ;;    stored for use by another function.\
+  (condition-case nil\
+@end group\
+\
+@group\
+      ;; 2. The second argument to `condition-case'\
+      ;;    tells the Lisp interpreter what to do when all goes well.\
+@end group\
+\
+@group\
+      ;;    The `delete-and-extract-region' function usually does the\
+      ;;    work.  If the beginning and ending of the region are both\
+      ;;    the same, then the variable `string' will be empty, or nil\
+      (let ((string (delete-and-extract-region beg end)))\
+@end group\
+\
+@group\
+        ;; `when' is an `if' clause that cannot take an `else-part'.\
+        ;; Emacs normally sets the value of `last-command' to the\
+        ;; previous command.\
+@end group\
+@group\
+        ;; `kill-append' concatenates the new string and the old.\
+        ;; `kill-new' inserts text into a new item in the kill ring.\
+        (when string\
+          (if (eq last-command 'kill-region)\
+              ;; if true, prepend string\
+              (kill-append string (< end beg))\
+            (kill-new string)))\
+        (setq this-command 'kill-region))\
+@end group\
+\
+@group\
+    ;; 3. The third argument to `condition-case' tells the interpreter\
+    ;;    what to do with an error.\
+@end group\
+@group\
+    ;;    The third argument has a conditions part and a body part.\
+    ;;    If the conditions are met (in this case,\
+    ;;             if text or buffer are read-only)\
+    ;;    then the body is executed.\
+@end group\
+@group\
+    ((buffer-read-only text-read-only) ;; this is the if-part\
+     ;; then...\
+     (copy-region-as-kill beg end)\
+@end group\
+@group\
+     (if kill-read-only-ok            ;; usually this variable is nil\
+         (message "Read only text copied to kill ring")\
+       ;; or else, signal an error if the buffer is read-only;\
+       (barf-if-buffer-read-only)\
+       ;; and, in any case, signal that the text is read-only.\
+       (signal 'text-read-only (list (current-buffer)))))))\
+@end group\
+@end smallexample\
+@end ignore\
+\
+@node condition-case, Lisp macro, Complete kill-region, kill-region\
+@comment  node-name,  next,  previous,  up\
+@subsection @code\{condition-case\}\
+@findex condition-case\
+\
+As we have seen earlier (@pxref\{Making Errors, , Generate an Error\
+Message\}), when the Emacs Lisp interpreter has trouble evaluating an\
+expression, it provides you with help; in the jargon, this is called\
+``signaling an error''.  Usually, the computer stops the program and\
+shows you a message.\
+\
+However, some programs undertake complicated actions.  They should not\
+simply stop on an error.  In the @code\{kill-region\} function, the most\
+likely error is that you will try to kill text that is read-only and\
+cannot be removed.  So the @code\{kill-region\} function contains code\
+to handle this circumstance.  This code, which makes up the body of\
+the @code\{kill-region\} function, is inside of a @code\{condition-case\}\
+special form.\
+\
+@need 800\
+The template for @code\{condition-case\} looks like this:\
+\
+@smallexample\
+@group\
+(condition-case\
+  @var\{var\}\
+  @var\{bodyform\}\
+  @var\{error-handler\}@dots\{\})\
+@end group\
+@end smallexample\
+\
+The second argument, @var\{bodyform\}, is straightforward.  The\
+@code\{condition-case\} special form causes the Lisp interpreter to\
+evaluate the code in @var\{bodyform\}.  If no error occurs, the special\
+form returns the code's value and produces the side-effects, if any.\
+\
+In short, the @var\{bodyform\} part of a @code\{condition-case\}\
+expression determines what should happen when everything works\
+correctly.\
+\
+However, if an error occurs, among its other actions, the function\
+generating the error signal will define one or more error condition\
+names.\
+\
+An error handler is the third argument to @code\{condition case\}.\
+An error handler has two parts, a @var\{condition-name\} and a\
+@var\{body\}.  If the @var\{condition-name\} part of an error handler\
+matches a condition name generated by an error, then the @var\{body\}\
+part of the error handler is run.\
+\
+As you will expect, the @var\{condition-name\} part of an error handler\
+may be either a single condition name or a list of condition names.\
+\
+Also, a complete @code\{condition-case\} expression may contain more\
+than one error handler.  When an error occurs, the first applicable\
+handler is run.\
+\
+Lastly, the first argument to the @code\{condition-case\} expression,\
+the @var\{var\} argument, is sometimes bound to a variable that\
+contains information about the error.  However, if that argument is\
+nil, as is the case in @code\{kill-region\}, that information is\
+discarded.\
+\
+@need 1200\
+In brief, in the @code\{kill-region\} function, the code\
+@code\{condition-case\} works like this:\
+\
+@smallexample\
+@group\
+@var\{If no errors\}, @var\{run only this code\}\
+    @var\{but\}, @var\{if errors\}, @var\{run this other code\}.\
+@end group\
+@end smallexample\
+\
+@ignore\
+2006 Oct 24\
+In Emacs 22,\
+copy-region-as-kill is short, 12 lines, and uses\
+filter-buffer-substring, which is longer, 39 lines\
+and has delete-and-extract-region in it.\
+delete-and-extract-region is written in C.\
+\
+see Initializing a Variable with @code\{defvar\}\
+this is line 8054\
+Initializing a Variable with @code\{defvar\} includes line 8350\
+@end ignore\
+\
+@node Lisp macro,  , condition-case, kill-region\
+@comment  node-name,  next,  previous,  up\
+@subsection Lisp macro\
+@cindex Macro, lisp\
+@cindex Lisp macro\
+\
+The part of the @code\{condition-case\} expression that is evaluated in\
+the expectation that all goes well has a @code\{when\}.  The code uses\
+@code\{when\} to determine whether the @code\{string\} variable points to\
+text that exists.\
+\
+A @code\{when\} expression is simply a programmers' convenience.  It is\
+an @code\{if\} without the possibility of an else clause.  In your mind,\
+you can replace @code\{when\} with @code\{if\} and understand what goes\
+on.  That is what the Lisp interpreter does.\
+\
+Technically speaking, @code\{when\} is a Lisp macro.  A Lisp @dfn\{macro\}\
+enables you to define new control constructs and other language\
+features.  It tells the interpreter how to compute another Lisp\
+expression which will in turn compute the value.  In this case, the\
+`other expression' is an @code\{if\} expression.\
+\
+The @code\{kill-region\} function definition also has an @code\{unless\}\
+macro; it is the converse of @code\{when\}.  The @code\{unless\} macro is\
+an @code\{if\} without a then clause\
+\
+For more about Lisp macros, see @ref\{Macros, , Macros, elisp, The GNU\
+Emacs Lisp Reference Manual\}.  The C programming language also\
+provides macros.  These are different, but also useful.\
+\
+@ignore\
+We will briefly look at C macros in\
+@ref\{Digression into C\}.\
+@end ignore\
+\
+@need 1200\
+Regarding the @code\{when\} macro, in the @code\{condition-case\}\
+expression, when the string has content, then another conditional\
+expression is executed.  This is an @code\{if\} with both a then-part\
+and an else-part.\
+\
+@smallexample\
+@group\
+(if (eq last-command 'kill-region)\
+    (kill-append string (< end beg) yank-handler)\
+  (kill-new string nil yank-handler))\
+@end group\
+@end smallexample\
+\
+The then-part is evaluated if the previous command was another call to\
+@code\{kill-region\}; if not, the else-part is evaluated.\
+\
+@code\{yank-handler\} is an optional argument to @code\{kill-region\} that\
+tells the @code\{kill-append\} and @code\{kill-new\} functions how deal\
+with properties added to the text, such as `bold' or `italics'.\
+\
+@code\{last-command\} is a variable that comes with Emacs that we have\
+not seen before.  Normally, whenever a function is executed, Emacs\
+sets the value of @code\{last-command\} to the previous command.\
+\
+@need 1200\
+In this segment of the definition, the @code\{if\} expression checks\
+whether the previous command was @code\{kill-region\}.  If it was,\
+\
+@smallexample\
+(kill-append string (< end beg) yank-handler)\
+@end smallexample\
+\
+@noindent\
+concatenates a copy of the newly clipped text to the just previously\
+clipped text in the kill ring.}

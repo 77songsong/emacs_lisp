@@ -1,0 +1,88 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Several files recursively, Prepare the data, Several files, Words in a defun\
+@section Recursively Count Words in Different Files\
+\
+Besides a @code\{while\} loop, you can work on each of a list of files\
+with recursion.  A recursive version of @code\{lengths-list-many-files\}\
+is short and simple.\
+\
+The recursive function has the usual parts: the `do-again-test', the\
+`next-step-expression', and the recursive call.  The `do-again-test'\
+determines whether the function should call itself again, which it\
+will do if the @code\{list-of-files\} contains any remaining elements;\
+the `next-step-expression' resets the @code\{list-of-files\} to the\
+@sc\{cdr\} of itself, so eventually the list will be empty; and the\
+recursive call calls itself on the shorter list.  The complete\
+function is shorter than this description!\
+@findex recursive-lengths-list-many-files\
+\
+@smallexample\
+@group\
+(defun recursive-lengths-list-many-files (list-of-files)\
+  "Return list of lengths of each defun in LIST-OF-FILES."\
+  (if list-of-files                     ; @r\{do-again-test\}\
+      (append\
+       (lengths-list-file\
+        (expand-file-name (car list-of-files)))\
+       (recursive-lengths-list-many-files\
+        (cdr list-of-files)))))\
+@end group\
+@end smallexample\
+\
+@noindent\
+In a sentence, the function returns the lengths' list for the first of\
+the @code\{list-of-files\} appended to the result of calling itself on\
+the rest of the @code\{list-of-files\}.\
+\
+Here is a test of @code\{recursive-lengths-list-many-files\}, along with\
+the results of running @code\{lengths-list-file\} on each of the files\
+individually.\
+\
+Install @code\{recursive-lengths-list-many-files\} and\
+@code\{lengths-list-file\}, if necessary, and then evaluate the\
+following expressions.  You may need to change the files' pathnames;\
+those here work when this Info file and the Emacs sources are located\
+in their customary places.  To change the expressions, copy them to\
+the @file\{*scratch*\} buffer, edit them, and then evaluate them.\
+\
+The results are shown after the @samp\{@result\{\}\}.  (These results are\
+for files from Emacs version 22.1.1; files from other versions of\
+Emacs may produce different results.)\
+\
+@c !!! 22.1.1 lisp sources location here\
+@smallexample\
+@group\
+(cd "/usr/local/share/emacs/22.1.1/")\
+\
+(lengths-list-file "./lisp/macros.el")\
+     @result\{\} (283 263 480 90)\
+@end group\
+\
+@group\
+(lengths-list-file "./lisp/mail/mailalias.el")\
+     @result\{\} (38 32 29 95 178 180 321 218 324)\
+@end group\
+\
+@group\
+(lengths-list-file "./lisp/makesum.el")\
+     @result\{\} (85 181)\
+@end group\
+\
+@group\
+  (recursive-lengths-list-many-files\
+   '("./lisp/macros.el"\
+     "./lisp/mail/mailalias.el"\
+     "./lisp/makesum.el"))\
+       @result\{\} (283 263 480 90 38 32 29 95 178 180 321 218 324 85 181)\
+@end group\
+@end smallexample\
+\
+The @code\{recursive-lengths-list-many-files\} function produces the\
+output we want.\
+\
+The next step is to prepare the data in the list for display in a graph.}

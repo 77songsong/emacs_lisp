@@ -1,0 +1,74 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Autoload, Simple Extension, Loading Files, Emacs Initialization\
+@section Autoloading\
+@findex autoload\
+\
+Instead of installing a function by loading the file that contains it,\
+or by evaluating the function definition, you can make the function\
+available but not actually install it until it is first called.  This\
+is called @dfn\{autoloading\}.\
+\
+When you execute an autoloaded function, Emacs automatically evaluates\
+the file that contains the definition, and then calls the function.\
+\
+Emacs starts quicker with autoloaded functions, since their libraries\
+are not loaded right away; but you need to wait a moment when you\
+first use such a function, while its containing file is evaluated.\
+\
+Rarely used functions are frequently autoloaded.  The\
+@file\{loaddefs.el\} library contains hundreds of autoloaded functions,\
+from @code\{bookmark-set\} to @code\{wordstar-mode\}.  Of course, you may\
+come to use a `rare' function frequently.  When you do, you should\
+load that function's file with a @code\{load\} expression in your\
+@file\{.emacs\} file.\
+\
+In my @file\{.emacs\} file, I load 14 libraries that contain functions\
+that would otherwise be autoloaded.  (Actually, it would have been\
+better to include these files in my `dumped' Emacs, but I forgot.\
+@xref\{Building Emacs, , Building Emacs, elisp, The GNU Emacs Lisp\
+Reference Manual\}, and the @file\{INSTALL\} file for more about\
+dumping.)\
+\
+You may also want to include autoloaded expressions in your @file\{.emacs\}\
+file.  @code\{autoload\} is a built-in function that takes up to five\
+arguments, the final three of which are optional.  The first argument\
+is the name of the function to be autoloaded; the second is the name\
+of the file to be loaded.  The third argument is documentation for the\
+function, and the fourth tells whether the function can be called\
+interactively.  The fifth argument tells what type of\
+object---@code\{autoload\} can handle a keymap or macro as well as a\
+function (the default is a function).\
+\
+@need 800\
+Here is a typical example:\
+\
+@smallexample\
+@group\
+(autoload 'html-helper-mode\
+  "html-helper-mode" "Edit HTML documents" t)\
+@end group\
+@end smallexample\
+\
+@noindent\
+(@code\{html-helper-mode\} is an older alternative to @code\{html-mode\},\
+which is a standard part of the distribution.)\
+\
+@noindent\
+This expression autoloads the @code\{html-helper-mode\} function.  It\
+takes it from the @file\{html-helper-mode.el\} file (or from the byte\
+compiled version @file\{html-helper-mode.elc\}, if that exists.)  The\
+file must be located in a directory specified by @code\{load-path\}.\
+The documentation says that this is a mode to help you edit documents\
+written in the HyperText Markup Language.  You can call this mode\
+interactively by typing @kbd\{M-x html-helper-mode\}.  (You need to\
+duplicate the function's regular documentation in the autoload\
+expression because the regular function is not yet loaded, so its\
+documentation is not available.)\
+\
+@xref\{Autoload, , Autoload, elisp, The GNU Emacs Lisp Reference\
+Manual\}, for more information.}

@@ -1,0 +1,127 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Text and Auto-fill, Mail Aliases, Beginning a .emacs File, Emacs Initialization\
+@section Text and Auto Fill Mode\
+\
+Now we come to the part that `turns on' Text mode and\
+Auto Fill mode.\
+\
+@smallexample\
+@group\
+;;; Text mode and Auto Fill mode\
+;; The next two lines put Emacs into Text mode\
+;; and Auto Fill mode, and are for writers who\
+;; want to start writing prose rather than code.\
+(setq-default major-mode 'text-mode)\
+(add-hook 'text-mode-hook 'turn-on-auto-fill)\
+@end group\
+@end smallexample\
+\
+Here is the first part of this @file\{.emacs\} file that does something\
+besides remind a forgetful human!\
+\
+The first of the two lines in parentheses tells Emacs to turn on Text\
+mode when you find a file, @emph\{unless\} that file should go into some\
+other mode, such as C mode.\
+\
+@cindex Per-buffer, local variables list\
+@cindex Local variables list, per-buffer,\
+@cindex Automatic mode selection\
+@cindex Mode selection, automatic\
+When Emacs reads a file, it looks at the extension to the file name,\
+if any.  (The extension is the part that comes after a @samp\{.\}.)  If\
+the file ends with a @samp\{.c\} or @samp\{.h\} extension then Emacs turns\
+on C mode.  Also, Emacs looks at first nonblank line of the file; if\
+the line says @w\{@samp\{-*- C -*-\}\}, Emacs turns on C mode.  Emacs\
+possesses a list of extensions and specifications that it uses\
+automatically.  In addition, Emacs looks near the last page for a\
+per-buffer, ``local variables list'', if any.\
+\
+@ifinfo\
+@xref\{Choosing Modes, , How Major Modes are Chosen, emacs, The GNU\
+Emacs Manual\}.\
+\
+@xref\{File Variables, , Local Variables in Files, emacs, The GNU Emacs\
+Manual\}.\
+@end ifinfo\
+@iftex\
+See sections ``How Major Modes are Chosen'' and ``Local Variables in\
+Files'' in @cite\{The GNU Emacs Manual\}.\
+@end iftex\
+\
+Now, back to the @file\{.emacs\} file.\
+\
+@need 800\
+Here is the line again; how does it work?\
+\
+@cindex Text Mode turned on\
+@smallexample\
+(setq major-mode 'text-mode)\
+@end smallexample\
+\
+@noindent\
+This line is a short, but complete Emacs Lisp expression.\
+\
+We are already familiar with @code\{setq\}.  It sets the following variable,\
+@code\{major-mode\}, to the subsequent value, which is @code\{text-mode\}.\
+The single quote mark before @code\{text-mode\} tells Emacs to deal directly\
+with the @code\{text-mode\} symbol, not with whatever it might stand for.\
+@xref\{set & setq, , Setting the Value of a Variable\},\
+for a reminder of how @code\{setq\} works.\
+The main point is that there is no difference between the procedure you\
+use to set a value in your @file\{.emacs\} file and the procedure you use\
+anywhere else in Emacs.\
+\
+@need 800\
+Here is the next line:\
+\
+@cindex Auto Fill mode turned on\
+@findex add-hook\
+@smallexample\
+(add-hook 'text-mode-hook 'turn-on-auto-fill)\
+@end smallexample\
+\
+@noindent\
+In this line, the @code\{add-hook\} command adds\
+@code\{turn-on-auto-fill\} to the variable.\
+\
+@code\{turn-on-auto-fill\} is the name of a program, that, you guessed\
+it!, turns on Auto Fill mode.\
+\
+Every time Emacs turns on Text mode, Emacs runs the commands `hooked'\
+onto Text mode.  So every time Emacs turns on Text mode, Emacs also\
+turns on Auto Fill mode.\
+\
+In brief, the first line causes Emacs to enter Text mode when you edit a\
+file, unless the file name extension, a first non-blank line, or local\
+variables to tell Emacs otherwise.\
+\
+Text mode among other actions, sets the syntax table to work\
+conveniently for writers.  In Text mode, Emacs considers an apostrophe\
+as part of a word like a letter; but Emacs does not consider a period\
+or a space as part of a word.  Thus, @kbd\{M-f\} moves you over\
+@samp\{it's\}.  On the other hand, in C mode, @kbd\{M-f\} stops just after\
+the @samp\{t\} of @samp\{it's\}.\
+\
+The second line causes Emacs to turn on Auto Fill mode when it turns\
+on Text mode.  In Auto Fill mode, Emacs automatically breaks a line\
+that is too wide and brings the excessively wide part of the line down\
+to the next line.  Emacs breaks lines between words, not within them.\
+\
+When Auto Fill mode is turned off, lines continue to the right as you\
+type them.  Depending on how you set the value of\
+@code\{truncate-lines\}, the words you type either disappear off the\
+right side of the screen, or else are shown, in a rather ugly and\
+unreadable manner, as a continuation line on the screen.\
+\
+@need 1250\
+In addition, in this part of my @file\{.emacs\} file, I tell the Emacs\
+fill commands to insert two spaces after a colon:\
+\
+@smallexample\
+(setq colon-double-space t)\
+@end smallexample}

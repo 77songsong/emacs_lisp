@@ -1,0 +1,90 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Syntax, count-words-in-defun, Words and Symbols, Words in a defun\
+@section What Constitutes a Word or Symbol?\
+@cindex Syntax categories and tables\
+\
+Emacs treats different characters as belonging to different\
+@dfn\{syntax categories\}.  For example, the regular expression,\
+@samp\{\\\\w+\}, is a pattern specifying one or more @emph\{word\
+constituent\} characters.  Word constituent characters are members of\
+one syntax category.  Other syntax categories include the class of\
+punctuation characters, such as the period and the comma, and the\
+class of whitespace characters, such as the blank space and the tab\
+character.  (For more information, see @ref\{Syntax, Syntax, The Syntax\
+Table, emacs, The GNU Emacs Manual\}, and @ref\{Syntax Tables, , Syntax\
+Tables, elisp, The GNU Emacs Lisp Reference Manual\}.)\
+\
+Syntax tables specify which characters belong to which categories.\
+Usually, a hyphen is not specified as a `word constituent character'.\
+Instead, it is specified as being in the `class of characters that are\
+part of symbol names but not words.'  This means that the\
+@code\{count-words-region\} function treats it in the same way it treats\
+an interword white space, which is why @code\{count-words-region\}\
+counts @samp\{multiply-by-seven\} as three words.\
+\
+There are two ways to cause Emacs to count @samp\{multiply-by-seven\} as\
+one symbol: modify the syntax table or modify the regular expression.\
+\
+We could redefine a hyphen as a word constituent character by\
+modifying the syntax table that Emacs keeps for each mode.  This\
+action would serve our purpose, except that a hyphen is merely the\
+most common character within symbols that is not typically a word\
+constituent character; there are others, too.\
+\
+Alternatively, we can redefine the regular expression used in the\
+@code\{count-words\} definition so as to include symbols.  This\
+procedure has the merit of clarity, but the task is a little tricky.\
+\
+@need 1200\
+The first part is simple enough: the pattern must match ``at least one\
+character that is a word or symbol constituent''.  Thus:\
+\
+@smallexample\
+"\\\\(\\\\w\\\\|\\\\s_\\\\)+"\
+@end smallexample\
+\
+@noindent\
+The @samp\{\\\\(\} is the first part of the grouping construct that\
+includes the @samp\{\\\\w\} and the @samp\{\\\\s_\} as alternatives, separated\
+by the @samp\{\\\\|\}.  The @samp\{\\\\w\} matches any word-constituent\
+character and the @samp\{\\\\s_\} matches any character that is part of a\
+symbol name but not a word-constituent character.  The @samp\{+\}\
+following the group indicates that the word or symbol constituent\
+characters must be matched at least once.\
+\
+However, the second part of the regexp is more difficult to design.\
+What we want is to follow the first part with ``optionally one or more\
+characters that are not constituents of a word or symbol''.  At first,\
+I thought I could define this with the following:\
+\
+@smallexample\
+"\\\\(\\\\W\\\\|\\\\S_\\\\)*"\
+@end smallexample\
+\
+@noindent\
+The upper case @samp\{W\} and @samp\{S\} match characters that are\
+@emph\{not\} word or symbol constituents.  Unfortunately, this\
+expression matches any character that is either not a word constituent\
+or not a symbol constituent.  This matches any character!\
+\
+I then noticed that every word or symbol in my test region was\
+followed by white space (blank space, tab, or newline).  So I tried\
+placing a pattern to match one or more blank spaces after the pattern\
+for one or more word or symbol constituents.  This failed, too.  Words\
+and symbols are often separated by whitespace, but in actual code\
+parentheses may follow symbols and punctuation may follow words.  So\
+finally, I designed a pattern in which the word or symbol constituents\
+are followed optionally by characters that are not white space and\
+then followed optionally by white space.\
+\
+@need 800\
+Here is the full regular expression:\
+\
+@smallexample\
+"\\\\(\\\\w\\\\|\\\\s_\\\\)+[^ \\t\\n]*[ \\t\\n]*"\
+@end smallexample}

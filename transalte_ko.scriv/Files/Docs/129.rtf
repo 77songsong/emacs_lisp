@@ -1,0 +1,51 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@need 1500\
+@node Debugging Exercises,  , edebug, Debugging\
+@section Debugging Exercises\
+\
+@itemize @bullet\
+@item\
+Install the @code\{count-words-region\} function and then cause it to\
+enter the built-in debugger when you call it.  Run the command on a\
+region containing two words.  You will need to press @kbd\{d\} a\
+remarkable number of times.  On your system, is a `hook' called after\
+the command finishes?  (For information on hooks, see @ref\{Command\
+Overview, , Command Loop Overview, elisp, The GNU Emacs Lisp Reference\
+Manual\}.)\
+\
+@item\
+Copy @code\{count-words-region\} into the @file\{*scratch*\} buffer,\
+instrument the function for Edebug, and walk through its execution.\
+The function does not need to have a bug, although you can introduce\
+one if you wish.  If the function lacks a bug, the walk-through\
+completes without problems.\
+\
+@item\
+While running Edebug, type @kbd\{?\} to see a list of all the Edebug commands.\
+(The @code\{global-edebug-prefix\} is usually @kbd\{C-x X\}, i.e.@:\
+@kbd\{@key\{CTRL\}-x\} followed by an upper case @kbd\{X\}; use this prefix\
+for commands made outside of the Edebug debugging buffer.)\
+\
+@item\
+In the Edebug debugging buffer, use the @kbd\{p\}\
+(@code\{edebug-bounce-point\}) command to see where in the region the\
+@code\{count-words-region\} is working.\
+\
+@item\
+Move point to some spot further down the function and then type the\
+@kbd\{h\} (@code\{edebug-goto-here\}) command to jump to that location.\
+\
+@item\
+Use the @kbd\{t\} (@code\{edebug-trace-mode\}) command to cause Edebug to\
+walk through the function on its own; use an upper case @kbd\{T\} for\
+@code\{edebug-Trace-fast-mode\}.\
+\
+@item\
+Set a breakpoint, then run Edebug in Trace mode until it reaches the\
+stopping point.\
+@end itemize}

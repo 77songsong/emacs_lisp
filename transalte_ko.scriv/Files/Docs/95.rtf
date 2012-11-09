@@ -1,0 +1,129 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node etags, Regexp Review, forward-paragraph, Regexp Search\
+@section Create Your Own @file\{TAGS\} File\
+@findex etags\
+@cindex @file\{TAGS\} file, create own\
+\
+Besides @kbd\{C-h f\} (@code\{describe-function\}), another way to see the\
+source of a function is to type @kbd\{M-.\} (@code\{find-tag\}) and the\
+name of the function when prompted for it.  This is a good habit to\
+get into.  The @kbd\{M-.\} (@code\{find-tag\}) command takes you directly\
+to the source for a function, variable, or node.  The function depends\
+on tags tables to tell it where to go.\
+\
+If the @code\{find-tag\} function first asks you for the name of a\
+@file\{TAGS\} table, give it the name of a @file\{TAGS\} file such as\
+@file\{/usr/local/src/emacs/src/TAGS\}.  (The exact path to your\
+@file\{TAGS\} file depends on how your copy of Emacs was installed.  I\
+just told you the location that provides both my C and my Emacs Lisp\
+sources.)\
+\
+You can also create your own @file\{TAGS\} file for directories that\
+lack one.\
+\
+You often need to build and install tags tables yourself.  They are\
+not built automatically.  A tags table is called a @file\{TAGS\} file;\
+the name is in upper case letters.\
+\
+You can create a @file\{TAGS\} file by calling the @code\{etags\} program\
+that comes as a part of the Emacs distribution.  Usually, @code\{etags\}\
+is compiled and installed when Emacs is built.  (@code\{etags\} is not\
+an Emacs Lisp function or a part of Emacs; it is a C program.)\
+\
+@need 1250\
+To create a @file\{TAGS\} file, first switch to the directory in which\
+you want to create the file.  In Emacs you can do this with the\
+@kbd\{M-x cd\} command, or by visiting a file in the directory, or by\
+listing the directory with @kbd\{C-x d\} (@code\{dired\}).  Then run the\
+compile command, with @w\{@code\{etags *.el\}\} as the command to execute\
+\
+@smallexample\
+M-x compile RET etags *.el RET\
+@end smallexample\
+\
+@noindent\
+to create a @file\{TAGS\} file for Emacs Lisp.\
+\
+For example, if you have a large number of files in your\
+@file\{~/emacs\} directory, as I do---I have 137 @file\{.el\} files in it,\
+of which I load 12---you can create a @file\{TAGS\} file for the Emacs\
+Lisp files in that directory.\
+\
+@need 1250\
+The @code\{etags\} program takes all the usual shell `wildcards'.  For\
+example, if you have two directories for which you want a single\
+@file\{TAGS\} file, type @w\{@code\{etags *.el ../elisp/*.el\}\}, where\
+@file\{../elisp/\} is the second directory:\
+\
+@smallexample\
+M-x compile RET etags *.el ../elisp/*.el RET\
+@end smallexample\
+\
+@need 1250\
+Type\
+\
+@smallexample\
+M-x compile RET etags --help RET\
+@end smallexample\
+\
+@noindent\
+to see a list of the options accepted by @code\{etags\} as well as a\
+list of supported languages.\
+\
+The @code\{etags\} program handles more than 20 languages, including\
+Emacs Lisp, Common Lisp, Scheme, C, C++, Ada, Fortran, HTML, Java,\
+LaTeX, Pascal, Perl, Postscript, Python, TeX, Texinfo, makefiles, and\
+most assemblers.  The program has no switches for specifying the\
+language; it recognizes the language in an input file according to its\
+file name and contents.\
+\
+@file\{etags\} is very helpful when you are writing code yourself and\
+want to refer back to functions you have already written.  Just run\
+@code\{etags\} again at intervals as you write new functions, so they\
+become part of the @file\{TAGS\} file.\
+\
+If you think an appropriate @file\{TAGS\} file already exists for what\
+you want, but do not know where it is, you can use the @code\{locate\}\
+program to attempt to find it.\
+\
+Type @w\{@kbd\{M-x locate @key\{RET\} TAGS @key\{RET\}\}\} and Emacs will list\
+for you the full path names of all your @file\{TAGS\} files.  On my\
+system, this command lists 34 @file\{TAGS\} files.  On the other hand, a\
+`plain vanilla' system I recently installed did not contain any\
+@file\{TAGS\} files.\
+\
+If the tags table you want has been created, you can use the @code\{M-x\
+visit-tags-table\} command to specify it.  Otherwise, you will need to\
+create the tag table yourself and then use @code\{M-x\
+visit-tags-table\}.\
+\
+@subsubheading Building Tags in the Emacs sources\
+@cindex Building Tags in the Emacs sources\
+@cindex Tags in the Emacs sources\
+@findex make tags\
+\
+The GNU Emacs sources come with a @file\{Makefile\} that contains a\
+sophisticated @code\{etags\} command that creates, collects, and merges\
+tags tables from all over the Emacs sources and puts the information\
+into one @file\{TAGS\} file in the @file\{src/\} directory. (The\
+@file\{src/\} directory is below the top level of your Emacs directory.)\
+\
+@need 1250\
+To build this @file\{TAGS\} file, go to the top level of your Emacs\
+source directory and run the compile command @code\{make tags\}:\
+\
+@smallexample\
+M-x compile RET make tags RET\
+@end smallexample\
+\
+@noindent\
+(The @code\{make tags\} command works well with the GNU Emacs sources,\
+as well as with some other source packages.)\
+\
+For more information, see @ref\{Tags, , Tag Tables, emacs, The GNU Emacs\
+Manual\}.}

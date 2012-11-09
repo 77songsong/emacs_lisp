@@ -1,0 +1,153 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Several files, Several files recursively, lengths-list-file, Words in a defun\
+@section Count Words in @code\{defuns\} in Different Files\
+\
+In the previous section, we created a function that returns a list of\
+the lengths of each definition in a file.  Now, we want to define a\
+function to return a master list of the lengths of the definitions in\
+a list of files.\
+\
+Working on each of a list of files is a repetitious act, so we can use\
+either a @code\{while\} loop or recursion.\
+\
+@menu\
+* lengths-list-many-files::     Return a list of the lengths of defuns.\
+* append::                      Attach one list to another.\
+@end menu\
+\
+@node lengths-list-many-files, append, Several files, Several files\
+@ifnottex\
+@unnumberedsubsec Determine the lengths of @code\{defuns\}\
+@end ifnottex\
+\
+The design using a @code\{while\} loop is routine.  The argument passed\
+the function is a list of files.  As we saw earlier (@pxref\{Loop\
+Example\}), you can write a @code\{while\} loop so that the body of the\
+loop is evaluated if such a list contains elements, but to exit the\
+loop if the list is empty.  For this design to work, the body of the\
+loop must contain an expression that shortens the list each time the\
+body is evaluated, so that eventually the list is empty.  The usual\
+technique is to set the value of the list to the value of the @sc\{cdr\}\
+of the list each time the body is evaluated.\
+\
+@need 800\
+The template looks like this:\
+\
+@smallexample\
+@group\
+(while @var\{test-whether-list-is-empty\}\
+  @var\{body\}@dots\{\}\
+  @var\{set-list-to-cdr-of-list\})\
+@end group\
+@end smallexample\
+\
+Also, we remember that a @code\{while\} loop returns @code\{nil\} (the\
+result of evaluating the true-or-false-test), not the result of any\
+evaluation within its body.  (The evaluations within the body of the\
+loop are done for their side effects.)  However, the expression that\
+sets the lengths' list is part of the body---and that is the value\
+that we want returned by the function as a whole.  To do this, we\
+enclose the @code\{while\} loop within a @code\{let\} expression, and\
+arrange that the last element of the @code\{let\} expression contains\
+the value of the lengths' list.  (@xref\{Incrementing Example, , Loop\
+Example with an Incrementing Counter\}.)\
+\
+@findex lengths-list-many-files\
+@need 1250\
+These considerations lead us directly to the function itself:\
+\
+@smallexample\
+@group\
+;;; @r\{Use @code\{while\} loop.\}\
+(defun lengths-list-many-files (list-of-files)\
+  "Return list of lengths of defuns in LIST-OF-FILES."\
+@end group\
+@group\
+  (let (lengths-list)\
+\
+;;; @r\{true-or-false-test\}\
+    (while list-of-files\
+      (setq lengths-list\
+            (append\
+             lengths-list\
+\
+;;; @r\{Generate a lengths' list.\}\
+             (lengths-list-file\
+              (expand-file-name (car list-of-files)))))\
+@end group\
+\
+@group\
+;;; @r\{Make files' list shorter.\}\
+      (setq list-of-files (cdr list-of-files)))\
+\
+;;; @r\{Return final value of lengths' list.\}\
+    lengths-list))\
+@end group\
+@end smallexample\
+\
+@code\{expand-file-name\} is a built-in function that converts a file\
+name to the absolute, long, path name form.  The function employs the\
+name of the directory in which the function is called.\
+\
+@c !!! 22.1.1 lisp sources location here\
+@need 1500\
+Thus, if @code\{expand-file-name\} is called on @code\{debug.el\} when\
+Emacs is visiting the\
+@file\{/usr/local/share/emacs/22.1.1/lisp/emacs-lisp/\} directory,\
+\
+@smallexample\
+debug.el\
+@end smallexample\
+\
+@need 800\
+@noindent\
+becomes\
+\
+@c !!! 22.1.1 lisp sources location here\
+@smallexample\
+/usr/local/share/emacs/22.1.1/lisp/emacs-lisp/debug.el\
+@end smallexample\
+\
+The only other new element of this function definition is the as yet\
+unstudied function @code\{append\}, which merits a short section for\
+itself.\
+\
+@node append,  , lengths-list-many-files, Several files\
+@subsection The @code\{append\} Function\
+\
+@need 800\
+The @code\{append\} function attaches one list to another.  Thus,\
+\
+@smallexample\
+(append '(1 2 3 4) '(5 6 7 8))\
+@end smallexample\
+\
+@need 800\
+@noindent\
+produces the list\
+\
+@smallexample\
+(1 2 3 4 5 6 7 8)\
+@end smallexample\
+\
+This is exactly how we want to attach two lengths' lists produced by\
+@code\{lengths-list-file\} to each other.  The results contrast with\
+@code\{cons\},\
+\
+@smallexample\
+(cons '(1 2 3 4) '(5 6 7 8))\
+@end smallexample\
+\
+@need 1250\
+@noindent\
+which constructs a new list in which the first argument to @code\{cons\}\
+becomes the first element of the new list:\
+\
+@smallexample\
+((1 2 3 4) 5 6 7 8)\
+@end smallexample}

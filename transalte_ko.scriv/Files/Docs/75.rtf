@@ -1,0 +1,308 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node zap-to-char, kill-region, Storing Text, Cutting & Storing Text\
+@comment  node-name,  next,  previous,  up\
+@section @code\{zap-to-char\}\
+@findex zap-to-char\
+\
+The @code\{zap-to-char\} function changed little between GNU Emacs\
+version 19 and GNU Emacs version 22.  However, @code\{zap-to-char\}\
+calls another function, @code\{kill-region\}, which enjoyed a major\
+rewrite.\
+\
+The @code\{kill-region\} function in Emacs 19 is complex, but does not\
+use code that is important at this time.  We will skip it.\
+\
+The @code\{kill-region\} function in Emacs 22 is easier to read than the\
+same function in Emacs 19 and introduces a very important concept,\
+that of error handling.  We will walk through the function.\
+\
+But first, let us look at the interactive @code\{zap-to-char\} function.\
+\
+@menu\
+* Complete zap-to-char::        The complete implementation.\
+* zap-to-char interactive::     A three part interactive expression.\
+* zap-to-char body::            A short overview.\
+* search-forward::              How to search for a string.\
+* progn::                       The @code\{progn\} special form.\
+* Summing up zap-to-char::      Using @code\{point\} and @code\{search-forward\}.\
+@end menu\
+\
+@node Complete zap-to-char, zap-to-char interactive, zap-to-char, zap-to-char\
+@ifnottex\
+@unnumberedsubsec The Complete @code\{zap-to-char\} Implementation\
+@end ifnottex\
+\
+The @code\{zap-to-char\} function removes the text in the region between\
+the location of the cursor (i.e., of point) up to and including the\
+next occurrence of a specified character.  The text that\
+@code\{zap-to-char\} removes is put in the kill ring; and it can be\
+retrieved from the kill ring by typing @kbd\{C-y\} (@code\{yank\}).  If\
+the command is given an argument, it removes text through that number\
+of occurrences.  Thus, if the cursor were at the beginning of this\
+sentence and the character were @samp\{s\}, @samp\{Thus\} would be\
+removed.  If the argument were two, @samp\{Thus, if the curs\} would be\
+removed, up to and including the @samp\{s\} in @samp\{cursor\}.\
+\
+If the specified character is not found, @code\{zap-to-char\} will say\
+``Search failed'', tell you the character you typed, and not remove\
+any text.\
+\
+In order to determine how much text to remove, @code\{zap-to-char\} uses\
+a search function.  Searches are used extensively in code that\
+manipulates text, and we will focus attention on them as well as on the\
+deletion command.\
+\
+@ignore\
+@c GNU Emacs version 19\
+(defun zap-to-char (arg char)  ; version 19 implementation\
+  "Kill up to and including ARG'th occurrence of CHAR.\
+Goes backward if ARG is negative; error if CHAR not found."\
+  (interactive "*p\\ncZap to char: ")\
+  (kill-region (point)\
+               (progn\
+                 (search-forward\
+                  (char-to-string char) nil nil arg)\
+                 (point))))\
+@end ignore\
+\
+@need 1250\
+Here is the complete text of the version 22 implementation of the function:\
+\
+@c GNU Emacs 22\
+@smallexample\
+@group\
+(defun zap-to-char (arg char)\
+  "Kill up to and including ARG'th occurrence of CHAR.\
+Case is ignored if `case-fold-search' is non-nil in the current buffer.\
+Goes backward if ARG is negative; error if CHAR not found."\
+  (interactive "p\\ncZap to char: ")\
+  (if (char-table-p translation-table-for-input)\
+      (setq char (or (aref translation-table-for-input char) char)))\
+  (kill-region (point) (progn\
+                         (search-forward (char-to-string char)\
+                                         nil nil arg)\
+                         (point))))\
+@end group\
+@end smallexample\
+\
+The documentation is thorough.  You do need to know the jargon meaning\
+of the word `kill'.\
+\
+@node zap-to-char interactive, zap-to-char body, Complete zap-to-char, zap-to-char\
+@comment  node-name,  next,  previous,  up\
+@subsection The @code\{interactive\} Expression\
+\
+@need 800\
+The interactive expression in the @code\{zap-to-char\} command looks like\
+this:\
+\
+@smallexample\
+(interactive "p\\ncZap to char: ")\
+@end smallexample\
+\
+The part within quotation marks, @code\{"p\\ncZap to char:@: "\}, specifies\
+two different things.  First, and most simply, is the @samp\{p\}.\
+This part is separated from the next part by a newline, @samp\{\\n\}.\
+The @samp\{p\} means that the first argument to the function will be\
+passed the value of a `processed prefix'.  The prefix argument is\
+passed by typing @kbd\{C-u\} and a number, or @kbd\{M-\} and a number.  If\
+the function is called interactively without a prefix, 1 is passed to\
+this argument.\
+\
+The second part of @code\{"p\\ncZap to char:@: "\} is\
+@samp\{cZap to char:@:  \}.  In this part, the lower case @samp\{c\}\
+indicates that @code\{interactive\} expects a prompt and that the\
+argument will be a character.  The prompt follows the @samp\{c\} and is\
+the string @samp\{Zap to char:@: \} (with a space after the colon to\
+make it look good).\
+\
+What all this does is prepare the arguments to @code\{zap-to-char\} so they\
+are of the right type, and give the user a prompt.\
+\
+In a read-only buffer, the @code\{zap-to-char\} function copies the text\
+to the kill ring, but does not remove it.  The echo area displays a\
+message saying that the buffer is read-only.  Also, the terminal may\
+beep or blink at you.\
+\
+@node zap-to-char body, search-forward, zap-to-char interactive, zap-to-char\
+@comment  node-name,  next,  previous,  up\
+@subsection The Body of @code\{zap-to-char\}\
+\
+The body of the @code\{zap-to-char\} function contains the code that\
+kills (that is, removes) the text in the region from the current\
+position of the cursor up to and including the specified character.\
+\
+The first part of the code looks like this:\
+\
+@smallexample\
+(if (char-table-p translation-table-for-input)\
+    (setq char (or (aref translation-table-for-input char) char)))\
+(kill-region (point) (progn\
+                       (search-forward (char-to-string char) nil nil arg)\
+                       (point)))\
+@end smallexample\
+\
+@noindent\
+@code\{char-table-p\} is an hitherto unseen function.  It determines\
+whether its argument is a character table.  When it is, it sets the\
+character passed to @code\{zap-to-char\} to one of them, if that\
+character exists, or to the character itself.  (This becomes important\
+for certain characters in non-European languages.  The @code\{aref\}\
+function extracts an element from an array.  It is an array-specific\
+function that is not described in this document.  @xref\{Arrays, ,\
+Arrays, elisp, The GNU Emacs Lisp Reference Manual\}.)\
+\
+@noindent\
+@code\{(point)\} is the current position of the cursor.\
+\
+The next part of the code is an expression using @code\{progn\}.  The body\
+of the @code\{progn\} consists of calls to @code\{search-forward\} and\
+@code\{point\}.\
+\
+It is easier to understand how @code\{progn\} works after learning about\
+@code\{search-forward\}, so we will look at @code\{search-forward\} and\
+then at @code\{progn\}.\
+\
+@node search-forward, progn, zap-to-char body, zap-to-char\
+@comment  node-name,  next,  previous,  up\
+@subsection The @code\{search-forward\} Function\
+@findex search-forward\
+\
+The @code\{search-forward\} function is used to locate the\
+zapped-for-character in @code\{zap-to-char\}.  If the search is\
+successful, @code\{search-forward\} leaves point immediately after the\
+last character in the target string.  (In @code\{zap-to-char\}, the\
+target string is just one character long.  @code\{zap-to-char\} uses the\
+function @code\{char-to-string\} to ensure that the computer treats that\
+character as a string.)  If the search is backwards,\
+@code\{search-forward\} leaves point just before the first character in\
+the target.  Also, @code\{search-forward\} returns @code\{t\} for true.\
+(Moving point is therefore a `side effect'.)\
+\
+@need 1250\
+In @code\{zap-to-char\}, the @code\{search-forward\} function looks like this:\
+\
+@smallexample\
+(search-forward (char-to-string char) nil nil arg)\
+@end smallexample\
+\
+The @code\{search-forward\} function takes four arguments:\
+\
+@enumerate\
+@item\
+The first argument is the target, what is searched for.  This must be a\
+string, such as @samp\{"z"\}.\
+\
+As it happens, the argument passed to @code\{zap-to-char\} is a single\
+character.  Because of the way computers are built, the Lisp\
+interpreter may treat a single character as being different from a\
+string of characters.  Inside the computer, a single character has a\
+different electronic format than a string of one character.  (A single\
+character can often be recorded in the computer using exactly one\
+byte; but a string may be longer, and the computer needs to be ready\
+for this.)  Since the @code\{search-forward\} function searches for a\
+string, the character that the @code\{zap-to-char\} function receives as\
+its argument must be converted inside the computer from one format to\
+the other; otherwise the @code\{search-forward\} function will fail.\
+The @code\{char-to-string\} function is used to make this conversion.\
+\
+@item\
+The second argument bounds the search; it is specified as a position in\
+the buffer.  In this case, the search can go to the end of the buffer,\
+so no bound is set and the second argument is @code\{nil\}.\
+\
+@item\
+The third argument tells the function what it should do if the search\
+fails---it can signal an error (and print a message) or it can return\
+@code\{nil\}.  A @code\{nil\} as the third argument causes the function to\
+signal an error when the search fails.\
+\
+@item\
+The fourth argument to @code\{search-forward\} is the repeat count---how\
+many occurrences of the string to look for.  This argument is optional\
+and if the function is called without a repeat count, this argument is\
+passed the value 1.  If this argument is negative, the search goes\
+backwards.\
+@end enumerate\
+\
+@need 800\
+In template form, a @code\{search-forward\} expression looks like this:\
+\
+@smallexample\
+@group\
+(search-forward "@var\{target-string\}"\
+                @var\{limit-of-search\}\
+                @var\{what-to-do-if-search-fails\}\
+                @var\{repeat-count\})\
+@end group\
+@end smallexample\
+\
+We will look at @code\{progn\} next.\
+\
+@node progn, Summing up zap-to-char, search-forward, zap-to-char\
+@comment  node-name,  next,  previous,  up\
+@subsection The @code\{progn\} Special Form\
+@findex progn\
+\
+@code\{progn\} is a special form that causes each of its arguments to be\
+evaluated in sequence and then returns the value of the last one.  The\
+preceding expressions are evaluated only for the side effects they\
+perform.  The values produced by them are discarded.\
+\
+@need 800\
+The template for a @code\{progn\} expression is very simple:\
+\
+@smallexample\
+@group\
+(progn\
+  @var\{body\}@dots\{\})\
+@end group\
+@end smallexample\
+\
+In @code\{zap-to-char\}, the @code\{progn\} expression has to do two things:\
+put point in exactly the right position; and return the location of\
+point so that @code\{kill-region\} will know how far to kill to.\
+\
+The first argument to the @code\{progn\} is @code\{search-forward\}.  When\
+@code\{search-forward\} finds the string, the function leaves point\
+immediately after the last character in the target string.  (In this\
+case the target string is just one character long.)  If the search is\
+backwards, @code\{search-forward\} leaves point just before the first\
+character in the target.  The movement of point is a side effect.\
+\
+The second and last argument to @code\{progn\} is the expression\
+@code\{(point)\}.  This expression returns the value of point, which in\
+this case will be the location to which it has been moved by\
+@code\{search-forward\}.  (In the source, a line that tells the function\
+to go to the previous character, if it is going forward, was commented\
+out in 1999; I don't remember whether that feature or mis-feature was\
+ever a part of the distributed source.)  The value of @code\{point\} is\
+returned by the @code\{progn\} expression and is passed to\
+@code\{kill-region\} as @code\{kill-region\}'s second argument.\
+\
+@node Summing up zap-to-char,  , progn, zap-to-char\
+@comment  node-name,  next,  previous,  up\
+@subsection Summing up @code\{zap-to-char\}\
+\
+Now that we have seen how @code\{search-forward\} and @code\{progn\} work,\
+we can see how the @code\{zap-to-char\} function works as a whole.\
+\
+The first argument to @code\{kill-region\} is the position of the cursor\
+when the @code\{zap-to-char\} command is given---the value of point at\
+that time.  Within the @code\{progn\}, the search function then moves\
+point to just after the zapped-to-character and @code\{point\} returns the\
+value of this location.  The @code\{kill-region\} function puts together\
+these two values of point, the first one as the beginning of the region\
+and the second one as the end of the region, and removes the region.\
+\
+The @code\{progn\} special form is necessary because the\
+@code\{kill-region\} command takes two arguments; and it would fail if\
+@code\{search-forward\} and @code\{point\} expressions were written in\
+sequence as two additional arguments.  The @code\{progn\} expression is\
+a single argument to @code\{kill-region\} and returns the one value that\
+@code\{kill-region\} needs for its second argument.}

@@ -1,0 +1,60 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Several defuns, Find a File, count-words-in-defun, Words in a defun\
+@section Count Several @code\{defuns\} Within a File\
+\
+A file such as @file\{simple.el\} may have a hundred or more function\
+definitions within it.  Our long term goal is to collect statistics on\
+many files, but as a first step, our immediate goal is to collect\
+statistics on one file.\
+\
+The information will be a series of numbers, each number being the\
+length of a function definition.  We can store the numbers in a list.\
+\
+We know that we will want to incorporate the information regarding one\
+file with information about many other files; this means that the\
+function for counting definition lengths within one file need only\
+return the list of lengths.  It need not and should not display any\
+messages.\
+\
+The word count commands contain one expression to jump point forward\
+word by word and another expression to count the jumps.  The function\
+to return the lengths of definitions can be designed to work the same\
+way, with one expression to jump point forward definition by\
+definition and another expression to construct the lengths' list.\
+\
+This statement of the problem makes it elementary to write the\
+function definition.  Clearly, we will start the count at the\
+beginning of the file, so the first command will be @code\{(goto-char\
+(point-min))\}.  Next, we start the @code\{while\} loop; and the\
+true-or-false test of the loop can be a regular expression search for\
+the next function definition---so long as the search succeeds, point\
+is moved forward and then the body of the loop is evaluated.  The body\
+needs an expression that constructs the lengths' list.  @code\{cons\},\
+the list construction command, can be used to create the list.  That\
+is almost all there is to it.\
+\
+@need 800\
+Here is what this fragment of code looks like:\
+\
+@smallexample\
+@group\
+(goto-char (point-min))\
+(while (re-search-forward "^(defun" nil t)\
+  (setq lengths-list\
+        (cons (count-words-in-defun) lengths-list)))\
+@end group\
+@end smallexample\
+\
+What we have left out is the mechanism for finding the file that\
+contains the function definitions.\
+\
+In previous examples, we either used this, the Info file, or we\
+switched back and forth to some other buffer, such as the\
+@file\{*scratch*\} buffer.\
+\
+Finding a file is a new process that we have not yet discussed.}

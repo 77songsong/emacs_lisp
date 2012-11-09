@@ -1,0 +1,59 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Words and Symbols, Syntax, Divide and Conquer, Words in a defun\
+@section What to Count?\
+@cindex Words and symbols in defun\
+\
+When we first start thinking about how to count the words in a\
+function definition, the first question is (or ought to be) what are\
+we going to count?  When we speak of `words' with respect to a Lisp\
+function definition, we are actually speaking, in large part, of\
+`symbols'.  For example, the following @code\{multiply-by-seven\}\
+function contains the five symbols @code\{defun\},\
+@code\{multiply-by-seven\}, @code\{number\}, @code\{*\}, and @code\{7\}.  In\
+addition, in the documentation string, it contains the four words\
+@samp\{Multiply\}, @samp\{NUMBER\}, @samp\{by\}, and @samp\{seven\}.  The\
+symbol @samp\{number\} is repeated, so the definition contains a total\
+of ten words and symbols.\
+\
+@smallexample\
+@group\
+(defun multiply-by-seven (number)\
+  "Multiply NUMBER by seven."\
+  (* 7 number))\
+@end group\
+@end smallexample\
+\
+@noindent\
+However, if we mark the @code\{multiply-by-seven\} definition with\
+@kbd\{C-M-h\} (@code\{mark-defun\}), and then call\
+@code\{count-words-region\} on it, we will find that\
+@code\{count-words-region\} claims the definition has eleven words, not\
+ten!  Something is wrong!\
+\
+The problem is twofold: @code\{count-words-region\} does not count the\
+@samp\{*\} as a word, and it counts the single symbol,\
+@code\{multiply-by-seven\}, as containing three words.  The hyphens are\
+treated as if they were interword spaces rather than intraword\
+connectors: @samp\{multiply-by-seven\} is counted as if it were written\
+@samp\{multiply by seven\}.\
+\
+The cause of this confusion is the regular expression search within\
+the @code\{count-words-region\} definition that moves point forward word\
+by word.  In the canonical version of @code\{count-words-region\}, the\
+regexp is:\
+\
+@smallexample\
+"\\\\w+\\\\W*"\
+@end smallexample\
+\
+@noindent\
+This regular expression is a pattern defining one or more word\
+constituent characters possibly followed by one or more characters\
+that are not word constituents.  What is meant by `word constituent\
+characters' brings us to the issue of syntax, which is worth a section\
+of its own.}

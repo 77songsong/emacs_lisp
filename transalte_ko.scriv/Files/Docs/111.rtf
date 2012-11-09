@@ -1,0 +1,92 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node recursive-graph-body-print, Printed Axes, graph-body-print, Readying a Graph\
+@section The @code\{recursive-graph-body-print\} Function\
+@findex recursive-graph-body-print\
+\
+The @code\{graph-body-print\} function may also be written recursively.\
+The recursive solution is divided into two parts: an outside `wrapper'\
+that uses a @code\{let\} expression to determine the values of several\
+variables that need only be found once, such as the maximum height of\
+the graph, and an inside function that is called recursively to print\
+the graph.\
+\
+@need 1250\
+The `wrapper' is uncomplicated:\
+\
+@smallexample\
+@group\
+(defun recursive-graph-body-print (numbers-list)\
+  "Print a bar graph of the NUMBERS-LIST.\
+The numbers-list consists of the Y-axis values."\
+  (let ((height (apply 'max numbers-list))\
+        (symbol-width (length graph-blank))\
+        from-position)\
+    (recursive-graph-body-print-internal\
+     numbers-list\
+     height\
+     symbol-width)))\
+@end group\
+@end smallexample\
+\
+The recursive function is a little more difficult.  It has four parts:\
+the `do-again-test', the printing code, the recursive call, and the\
+`next-step-expression'.  The `do-again-test' is a @code\{when\}\
+expression that determines whether the @code\{numbers-list\} contains\
+any remaining elements; if it does, the function prints one column of\
+the graph using the printing code and calls itself again.  The\
+function calls itself again according to the value produced by the\
+`next-step-expression' which causes the call to act on a shorter\
+version of the @code\{numbers-list\}.\
+\
+@smallexample\
+@group\
+(defun recursive-graph-body-print-internal\
+  (numbers-list height symbol-width)\
+  "Print a bar graph.\
+Used within recursive-graph-body-print function."\
+@end group\
+\
+@group\
+  (when numbers-list\
+        (setq from-position (point))\
+        (insert-rectangle\
+         (column-of-graph height (car numbers-list)))\
+@end group\
+@group\
+        (goto-char from-position)\
+        (forward-char symbol-width)\
+        (sit-for 0)     ; @r\{Draw graph column by column.\}\
+        (recursive-graph-body-print-internal\
+         (cdr numbers-list) height symbol-width)))\
+@end group\
+@end smallexample\
+\
+@need 1250\
+After installation, this expression can be tested; here is a sample:\
+\
+@smallexample\
+(recursive-graph-body-print '(3 2 5 6 7 5 3 4 6 4 3 2 1))\
+@end smallexample\
+\
+@need 800\
+Here is what @code\{recursive-graph-body-print\} produces:\
+\
+@smallexample\
+@group\
+                *\
+               **   *\
+              ****  *\
+              **** ***\
+            * *********\
+            ************\
+            *************\
+@end group\
+@end smallexample\
+\
+Either of these two functions, @code\{graph-body-print\} or\
+@code\{recursive-graph-body-print\}, create the body of a graph.}

@@ -1,0 +1,982 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Recursion, Looping exercise, dolist dotimes, Loops & Recursion\
+@comment  node-name,  next,  previous,  up\
+@section Recursion\
+@cindex Recursion\
+\
+A recursive function contains code that tells the Lisp interpreter to\
+call a program that runs exactly like itself, but with slightly\
+different arguments.  The code runs exactly the same because it has\
+the same name.  However, even though the program has the same name, it\
+is not the same entity.  It is different.  In the jargon, it is a\
+different `instance'.\
+\
+Eventually, if the program is written correctly, the `slightly\
+different arguments' will become sufficiently different from the first\
+arguments that the final instance will stop.\
+\
+@menu\
+* Building Robots::             Same model, different serial number ...\
+* Recursive Definition Parts::  Walk until you stop ...\
+* Recursion with list::         Using a list as the test whether to recurse.\
+* Recursive triangle function::\
+* Recursion with cond::\
+* Recursive Patterns::          Often used templates.\
+* No Deferment::                Don't store up work ...\
+* No deferment solution::\
+@end menu\
+\
+@node Building Robots, Recursive Definition Parts, Recursion, Recursion\
+@comment  node-name,  next,  previous,  up\
+@subsection Building Robots: Extending the Metaphor\
+@cindex Building robots\
+@cindex Robots, building\
+\
+It is sometimes helpful to think of a running program as a robot that\
+does a job.  In doing its job, a recursive function calls on a second\
+robot to help it.  The second robot is identical to the first in every\
+way, except that the second robot helps the first and has been\
+passed different arguments than the first.\
+\
+In a recursive function, the second robot may call a third; and the\
+third may call a fourth, and so on.  Each of these is a different\
+entity; but all are clones.\
+\
+Since each robot has slightly different instructions---the arguments\
+will differ from one robot to the next---the last robot should know\
+when to stop.\
+\
+Let's expand on the metaphor in which a computer program is a robot.\
+\
+A function definition provides the blueprints for a robot.  When you\
+install a function definition, that is, when you evaluate a\
+@code\{defun\} special form, you install the necessary equipment to\
+build robots.  It is as if you were in a factory, setting up an\
+assembly line.  Robots with the same name are built according to the\
+same blueprints.  So they have, as it were, the same `model number',\
+but a different `serial number'.\
+\
+We often say that a recursive function `calls itself'.  What we mean\
+is that the instructions in a recursive function cause the Lisp\
+interpreter to run a different function that has the same name and\
+does the same job as the first, but with different arguments.\
+\
+It is important that the arguments differ from one instance to the\
+next; otherwise, the process will never stop.\
+\
+@node Recursive Definition Parts, Recursion with list, Building Robots, Recursion\
+@comment  node-name,  next,  previous,  up\
+@subsection The Parts of a Recursive Definition\
+@cindex Parts of a Recursive Definition\
+@cindex Recursive Definition Parts\
+\
+A recursive function typically contains a conditional expression which\
+has three parts:\
+\
+@enumerate\
+@item\
+A true-or-false-test that determines whether the function is called\
+again, here called the @dfn\{do-again-test\}.\
+\
+@item\
+The name of the function.  When this name is called, a new instance of\
+the function---a new robot, as it were---is created and told what to do.\
+\
+@item\
+An expression that returns a different value each time the function is\
+called, here called the @dfn\{next-step-expression\}.  Consequently, the\
+argument (or arguments) passed to the new instance of the function\
+will be different from that passed to the previous instance.  This\
+causes the conditional expression, the @dfn\{do-again-test\}, to test\
+false after the correct number of repetitions.\
+@end enumerate\
+\
+Recursive functions can be much simpler than any other kind of\
+function.  Indeed, when people first start to use them, they often look\
+so mysteriously simple as to be incomprehensible.  Like riding a\
+bicycle, reading a recursive function definition takes a certain knack\
+which is hard at first but then seems simple.\
+\
+@need 1200\
+There are several different common recursive patterns.  A very simple\
+pattern looks like this:\
+\
+@smallexample\
+@group\
+(defun @var\{name-of-recursive-function\} (@var\{argument-list\})\
+  "@var\{documentation\}@dots\{\}"\
+  (if @var\{do-again-test\}\
+    @var\{body\}@dots\{\}\
+    (@var\{name-of-recursive-function\}\
+         @var\{next-step-expression\})))\
+@end group\
+@end smallexample\
+\
+Each time a recursive function is evaluated, a new instance of it is\
+created and told what to do.  The arguments tell the instance what to do.\
+\
+An argument is bound to the value of the next-step-expression.  Each\
+instance runs with a different value of the next-step-expression.\
+\
+The value in the next-step-expression is used in the do-again-test.\
+\
+The value returned by the next-step-expression is passed to the new\
+instance of the function, which evaluates it (or some\
+transmogrification of it) to determine whether to continue or stop.\
+The next-step-expression is designed so that the do-again-test returns\
+false when the function should no longer be repeated.\
+\
+The do-again-test is sometimes called the @dfn\{stop condition\},\
+since it stops the repetitions when it tests false.\
+\
+@node Recursion with list, Recursive triangle function, Recursive Definition Parts, Recursion\
+@comment  node-name,  next,  previous,  up\
+@subsection Recursion with a List\
+\
+The example of a @code\{while\} loop that printed the elements of a list\
+of numbers can be written recursively.  Here is the code, including\
+an expression to set the value of the variable @code\{animals\} to a list.\
+\
+If you are using GNU Emacs 20 or before, this example must be copied\
+to the @file\{*scratch*\} buffer and each expression must be evaluated\
+there.  Use @kbd\{C-u C-x C-e\} to evaluate the\
+@code\{(print-elements-recursively animals)\} expression so that the\
+results are printed in the buffer; otherwise the Lisp interpreter will\
+try to squeeze the results into the one line of the echo area.\
+\
+Also, place your cursor immediately after the last closing parenthesis\
+of the @code\{print-elements-recursively\} function, before the comment.\
+Otherwise, the Lisp interpreter will try to evaluate the comment.\
+\
+If you are using a more recent version of Emacs, you can evaluate this\
+expression directly in Info.\
+\
+@findex print-elements-recursively\
+@smallexample\
+@group\
+(setq animals '(gazelle giraffe lion tiger))\
+\
+(defun print-elements-recursively (list)\
+  "Print each element of LIST on a line of its own.\
+Uses recursion."\
+  (when list                            ; @r\{do-again-test\}\
+        (print (car list))              ; @r\{body\}\
+        (print-elements-recursively     ; @r\{recursive call\}\
+         (cdr list))))                  ; @r\{next-step-expression\}\
+\
+(print-elements-recursively animals)\
+@end group\
+@end smallexample\
+\
+The @code\{print-elements-recursively\} function first tests whether\
+there is any content in the list; if there is, the function prints the\
+first element of the list, the @sc\{car\} of the list.  Then the\
+function `invokes itself', but gives itself as its argument, not the\
+whole list, but the second and subsequent elements of the list, the\
+@sc\{cdr\} of the list.\
+\
+Put another way, if the list is not empty, the function invokes\
+another instance of code that is similar to the initial code, but is a\
+different thread of execution, with different arguments than the first\
+instance.\
+\
+Put in yet another way, if the list is not empty, the first robot\
+assembles a second robot and tells it what to do; the second robot is\
+a different individual from the first, but is the same model.\
+\
+When the second evaluation occurs, the @code\{when\} expression is\
+evaluated and if true, prints the first element of the list it\
+receives as its argument (which is the second element of the original\
+list).  Then the function `calls itself' with the @sc\{cdr\} of the list\
+it is invoked with, which (the second time around) is the @sc\{cdr\} of\
+the @sc\{cdr\} of the original list.\
+\
+Note that although we say that the function `calls itself', what we\
+mean is that the Lisp interpreter assembles and instructs a new\
+instance of the program.  The new instance is a clone of the first,\
+but is a separate individual.\
+\
+Each time the function `invokes itself', it invokes itself on a\
+shorter version of the original list.  It creates a new instance that\
+works on a shorter list.\
+\
+Eventually, the function invokes itself on an empty list.  It creates\
+a new instance whose argument is @code\{nil\}.  The conditional expression\
+tests the value of @code\{list\}.  Since the value of @code\{list\} is\
+@code\{nil\}, the @code\{when\} expression tests false so the then-part is\
+not evaluated.  The function as a whole then returns @code\{nil\}.\
+\
+@need 1200\
+When you evaluate the expression @code\{(print-elements-recursively\
+animals)\} in the @file\{*scratch*\} buffer, you see this result:\
+\
+@smallexample\
+@group\
+gazelle\
+\
+giraffe\
+\
+lion\
+\
+tiger\
+nil\
+@end group\
+@end smallexample\
+\
+@need 2000\
+@node Recursive triangle function, Recursion with cond, Recursion with list, Recursion\
+@comment  node-name,  next,  previous,  up\
+@subsection Recursion in Place of a Counter\
+@findex triangle-recursively\
+\
+@need 1200\
+The @code\{triangle\} function described in a previous section can also\
+be written recursively.  It looks like this:\
+\
+@smallexample\
+@group\
+(defun triangle-recursively (number)\
+  "Return the sum of the numbers 1 through NUMBER inclusive.\
+Uses recursion."\
+  (if (= number 1)                    ; @r\{do-again-test\}\
+      1                               ; @r\{then-part\}\
+    (+ number                         ; @r\{else-part\}\
+       (triangle-recursively          ; @r\{recursive call\}\
+        (1- number)))))               ; @r\{next-step-expression\}\
+\
+(triangle-recursively 7)\
+@end group\
+@end smallexample\
+\
+@noindent\
+You can install this function by evaluating it and then try it by\
+evaluating @code\{(triangle-recursively 7)\}.  (Remember to put your\
+cursor immediately after the last parenthesis of the function\
+definition, before the comment.)  The function evaluates to 28.\
+\
+To understand how this function works, let's consider what happens in the\
+various cases when the function is passed 1, 2, 3, or 4 as the value of\
+its argument.\
+\
+@menu\
+* Recursive Example arg of 1 or 2::\
+* Recursive Example arg of 3 or 4::\
+@end menu\
+\
+@node Recursive Example arg of 1 or 2, Recursive Example arg of 3 or 4, Recursive triangle function, Recursive triangle function\
+@ifnottex\
+@unnumberedsubsubsec An argument of 1 or 2\
+@end ifnottex\
+\
+First, what happens if the value of the argument is 1?\
+\
+The function has an @code\{if\} expression after the documentation\
+string.  It tests whether the value of @code\{number\} is equal to 1; if\
+so, Emacs evaluates the then-part of the @code\{if\} expression, which\
+returns the number 1 as the value of the function.  (A triangle with\
+one row has one pebble in it.)\
+\
+Suppose, however, that the value of the argument is 2.  In this case,\
+Emacs evaluates the else-part of the @code\{if\} expression.\
+\
+@need 1200\
+The else-part consists of an addition, the recursive call to\
+@code\{triangle-recursively\} and a decrementing action; and it looks like\
+this:\
+\
+@smallexample\
+(+ number (triangle-recursively (1- number)))\
+@end smallexample\
+\
+When Emacs evaluates this expression, the innermost expression is\
+evaluated first; then the other parts in sequence.  Here are the steps\
+in detail:\
+\
+@table @i\
+@item Step 1 @w\{  \} Evaluate the innermost expression.\
+\
+The innermost expression is @code\{(1- number)\} so Emacs decrements the\
+value of @code\{number\} from 2 to 1.\
+\
+@item Step 2 @w\{  \} Evaluate the @code\{triangle-recursively\} function.\
+\
+The Lisp interpreter creates an individual instance of\
+@code\{triangle-recursively\}.  It does not matter that this function is\
+contained within itself.  Emacs passes the result Step 1 as the\
+argument used by this instance of the @code\{triangle-recursively\}\
+function\
+\
+In this case, Emacs evaluates @code\{triangle-recursively\} with an\
+argument of 1.  This means that this evaluation of\
+@code\{triangle-recursively\} returns 1.\
+\
+@item Step 3 @w\{  \} Evaluate the value of @code\{number\}.\
+\
+The variable @code\{number\} is the second element of the list that\
+starts with @code\{+\}; its value is 2.\
+\
+@item Step 4 @w\{  \} Evaluate the @code\{+\} expression.\
+\
+The @code\{+\} expression receives two arguments, the first\
+from the evaluation of @code\{number\} (Step 3) and the second from the\
+evaluation of @code\{triangle-recursively\} (Step 2).\
+\
+The result of the addition is the sum of 2 plus 1, and the number 3 is\
+returned, which is correct.  A triangle with two rows has three\
+pebbles in it.\
+@end table\
+\
+@node Recursive Example arg of 3 or 4,  , Recursive Example arg of 1 or 2, Recursive triangle function\
+@unnumberedsubsubsec An argument of 3 or 4\
+\
+Suppose that @code\{triangle-recursively\} is called with an argument of\
+3.\
+\
+@table @i\
+@item Step 1 @w\{  \} Evaluate the do-again-test.\
+\
+The @code\{if\} expression is evaluated first.  This is the do-again\
+test and returns false, so the else-part of the @code\{if\} expression\
+is evaluated.  (Note that in this example, the do-again-test causes\
+the function to call itself when it tests false, not when it tests\
+true.)\
+\
+@item Step 2 @w\{  \} Evaluate the innermost expression of the else-part.\
+\
+The innermost expression of the else-part is evaluated, which decrements\
+3 to 2.  This is the next-step-expression.\
+\
+@item Step 3 @w\{  \} Evaluate the @code\{triangle-recursively\} function.\
+\
+The number 2 is passed to the @code\{triangle-recursively\} function.\
+\
+We already know what happens when Emacs evaluates @code\{triangle-recursively\} with\
+an argument of 2.  After going through the sequence of actions described\
+earlier, it returns a value of 3.  So that is what will happen here.\
+\
+@item Step 4 @w\{  \} Evaluate the addition.\
+\
+3 will be passed as an argument to the addition and will be added to the\
+number with which the function was called, which is 3.\
+@end table\
+\
+@noindent\
+The value returned by the function as a whole will be 6.\
+\
+Now that we know what will happen when @code\{triangle-recursively\} is\
+called with an argument of 3, it is evident what will happen if it is\
+called with an argument of 4:\
+\
+@quotation\
+@need 800\
+In the recursive call, the evaluation of\
+\
+@smallexample\
+(triangle-recursively (1- 4))\
+@end smallexample\
+\
+@need 800\
+@noindent\
+will return the value of evaluating\
+\
+@smallexample\
+(triangle-recursively 3)\
+@end smallexample\
+\
+@noindent\
+which is 6 and this value will be added to 4 by the addition in the\
+third line.\
+@end quotation\
+\
+@noindent\
+The value returned by the function as a whole will be 10.\
+\
+Each time @code\{triangle-recursively\} is evaluated, it evaluates a\
+version of itself---a different instance of itself---with a smaller\
+argument, until the argument is small enough so that it does not\
+evaluate itself.\
+\
+Note that this particular design for a recursive function\
+requires that operations be deferred.\
+\
+Before @code\{(triangle-recursively 7)\} can calculate its answer, it\
+must call @code\{(triangle-recursively 6)\}; and before\
+@code\{(triangle-recursively 6)\} can calculate its answer, it must call\
+@code\{(triangle-recursively 5)\}; and so on.  That is to say, the\
+calculation that @code\{(triangle-recursively 7)\} makes must be\
+deferred until @code\{(triangle-recursively 6)\} makes its calculation;\
+and @code\{(triangle-recursively 6)\} must defer until\
+@code\{(triangle-recursively 5)\} completes; and so on.\
+\
+If each of these instances of @code\{triangle-recursively\} are thought\
+of as different robots, the first robot must wait for the second to\
+complete its job, which must wait until the third completes, and so\
+on.\
+\
+There is a way around this kind of waiting, which we will discuss in\
+@ref\{No Deferment, , Recursion without Deferments\}.\
+\
+@node Recursion with cond, Recursive Patterns, Recursive triangle function, Recursion\
+@comment  node-name,  next,  previous,  up\
+@subsection Recursion Example Using @code\{cond\}\
+@findex cond\
+\
+The version of @code\{triangle-recursively\} described earlier is written\
+with the @code\{if\} special form.  It can also be written using another\
+special form called @code\{cond\}.  The name of the special form\
+@code\{cond\} is an abbreviation of the word @samp\{conditional\}.\
+\
+Although the @code\{cond\} special form is not used as often in the\
+Emacs Lisp sources as @code\{if\}, it is used often enough to justify\
+explaining it.\
+\
+@need 800\
+The template for a @code\{cond\} expression looks like this:\
+\
+@smallexample\
+@group\
+(cond\
+ @var\{body\}@dots\{\})\
+@end group\
+@end smallexample\
+\
+@noindent\
+where the @var\{body\} is a series of lists.\
+\
+@need 800\
+Written out more fully, the template looks like this:\
+\
+@smallexample\
+@group\
+(cond\
+ (@var\{first-true-or-false-test\} @var\{first-consequent\})\
+ (@var\{second-true-or-false-test\} @var\{second-consequent\})\
+ (@var\{third-true-or-false-test\} @var\{third-consequent\})\
+  @dots\{\})\
+@end group\
+@end smallexample\
+\
+When the Lisp interpreter evaluates the @code\{cond\} expression, it\
+evaluates the first element (the @sc\{car\} or true-or-false-test) of\
+the first expression in a series of expressions within the body of the\
+@code\{cond\}.\
+\
+If the true-or-false-test returns @code\{nil\} the rest of that\
+expression, the consequent, is skipped and  the true-or-false-test of the\
+next expression is evaluated.  When an expression is found whose\
+true-or-false-test returns a value that is not @code\{nil\}, the\
+consequent of that expression is evaluated.  The consequent can be one\
+or more expressions.  If the consequent consists of more than one\
+expression, the expressions are evaluated in sequence and the value of\
+the last one is returned.  If the expression does not have a consequent,\
+the value of the true-or-false-test is returned.\
+\
+If none of the true-or-false-tests test true, the @code\{cond\} expression\
+returns @code\{nil\}.\
+\
+@need 1250\
+Written using @code\{cond\}, the @code\{triangle\} function looks like this:\
+\
+@smallexample\
+@group\
+(defun triangle-using-cond (number)\
+  (cond ((<= number 0) 0)\
+        ((= number 1) 1)\
+        ((> number 1)\
+         (+ number (triangle-using-cond (1- number))))))\
+@end group\
+@end smallexample\
+\
+@noindent\
+In this example, the @code\{cond\} returns 0 if the number is less than or\
+equal to 0, it returns 1 if the number is 1 and it evaluates @code\{(+\
+number (triangle-using-cond (1- number)))\} if the number is greater than\
+1.\
+\
+@node Recursive Patterns, No Deferment, Recursion with cond, Recursion\
+@comment  node-name,  next,  previous,  up\
+@subsection Recursive Patterns\
+@cindex Recursive Patterns\
+\
+Here are three common recursive patterns.  Each involves a list.\
+Recursion does not need to involve lists, but Lisp is designed for lists\
+and this provides a sense of its primal capabilities.\
+\
+@menu\
+* Every::\
+* Accumulate::\
+* Keep::\
+@end menu\
+\
+@node Every, Accumulate, Recursive Patterns, Recursive Patterns\
+@comment  node-name,  next,  previous,  up\
+@unnumberedsubsubsec Recursive Pattern: @emph\{every\}\
+@cindex Every, type of recursive pattern\
+@cindex Recursive pattern: every\
+\
+In the @code\{every\} recursive pattern, an action is performed on every\
+element of a list.\
+\
+@need 1500\
+The basic pattern is:\
+\
+@itemize @bullet\
+@item\
+If a list be empty, return @code\{nil\}.\
+@item\
+Else, act on the beginning of the list (the @sc\{car\} of the list)\
+    @itemize @minus\
+    @item\
+    through a recursive call by the function on the rest (the\
+    @sc\{cdr\}) of the list,\
+    @item\
+    and, optionally, combine the acted-on element, using @code\{cons\},\
+    with the results of acting on the rest.\
+    @end itemize\
+@end itemize\
+\
+@need 1500\
+Here is example:\
+\
+@smallexample\
+@group\
+(defun square-each (numbers-list)\
+  "Square each of a NUMBERS LIST, recursively."\
+  (if (not numbers-list)                ; do-again-test\
+      nil\
+    (cons\
+     (* (car numbers-list) (car numbers-list))\
+     (square-each (cdr numbers-list))))) ; next-step-expression\
+@end group\
+\
+@group\
+(square-each '(1 2 3))\
+    @result\{\} (1 4 9)\
+@end group\
+@end smallexample\
+\
+@need 1200\
+@noindent\
+If @code\{numbers-list\} is empty, do nothing.  But if it has content,\
+construct a list combining the square of the first number in the list\
+with the result of the recursive call.\
+\
+(The example follows the pattern exactly: @code\{nil\} is returned if\
+the numbers' list is empty.  In practice, you would write the\
+conditional so it carries out the action when the numbers' list is not\
+empty.)\
+\
+The @code\{print-elements-recursively\} function (@pxref\{Recursion with\
+list, , Recursion with a List\}) is another example of an @code\{every\}\
+pattern, except in this case, rather than bring the results together\
+using @code\{cons\}, we print each element of output.\
+\
+@need 1250\
+The @code\{print-elements-recursively\} function looks like this:\
+\
+@smallexample\
+@group\
+(setq animals '(gazelle giraffe lion tiger))\
+@end group\
+\
+@group\
+(defun print-elements-recursively (list)\
+  "Print each element of LIST on a line of its own.\
+Uses recursion."\
+  (when list                            ; @r\{do-again-test\}\
+        (print (car list))              ; @r\{body\}\
+        (print-elements-recursively     ; @r\{recursive call\}\
+         (cdr list))))                  ; @r\{next-step-expression\}\
+\
+(print-elements-recursively animals)\
+@end group\
+@end smallexample\
+\
+@need 1500\
+The pattern for @code\{print-elements-recursively\} is:\
+\
+@itemize @bullet\
+@item\
+When the list is empty, do nothing.\
+@item\
+But when the list has at least one element,\
+    @itemize @minus\
+    @item\
+    act on the beginning of the list (the @sc\{car\} of the list),\
+    @item\
+    and make a recursive call on the rest (the @sc\{cdr\}) of the list.\
+    @end itemize\
+@end itemize\
+\
+@node Accumulate, Keep, Every, Recursive Patterns\
+@comment  node-name,  next,  previous,  up\
+@unnumberedsubsubsec Recursive Pattern: @emph\{accumulate\}\
+@cindex Accumulate, type of recursive pattern\
+@cindex Recursive pattern: accumulate\
+\
+Another recursive pattern is called the @code\{accumulate\} pattern.  In\
+the @code\{accumulate\} recursive pattern, an action is performed on\
+every element of a list and the result of that action is accumulated\
+with the results of performing the action on the other elements.\
+\
+This is very like the `every' pattern using @code\{cons\}, except that\
+@code\{cons\} is not used, but some other combiner.\
+\
+@need 1500\
+The pattern is:\
+\
+@itemize @bullet\
+@item\
+If a list be empty, return zero or some other constant.\
+@item\
+Else, act on the beginning of the list (the @sc\{car\} of the list),\
+    @itemize @minus\
+    @item\
+    and combine that acted-on element, using @code\{+\} or\
+    some other combining function, with\
+    @item\
+    a recursive call by the function on the rest (the @sc\{cdr\}) of the list.\
+    @end itemize\
+@end itemize\
+\
+@need 1500\
+Here is an example:\
+\
+@smallexample\
+@group\
+(defun add-elements (numbers-list)\
+  "Add the elements of NUMBERS-LIST together."\
+  (if (not numbers-list)\
+      0\
+    (+ (car numbers-list) (add-elements (cdr numbers-list)))))\
+@end group\
+\
+@group\
+(add-elements '(1 2 3 4))\
+    @result\{\} 10\
+@end group\
+@end smallexample\
+\
+@xref\{Files List, , Making a List of Files\}, for an example of the\
+accumulate pattern.\
+\
+@node Keep,  , Accumulate, Recursive Patterns\
+@comment  node-name,  next,  previous,  up\
+@unnumberedsubsubsec Recursive Pattern: @emph\{keep\}\
+@cindex Keep, type of recursive pattern\
+@cindex Recursive pattern: keep\
+\
+A third recursive pattern is called the @code\{keep\} pattern.\
+In the @code\{keep\} recursive pattern, each element of a list is tested;\
+the element is acted on and the results are kept only if the element\
+meets a criterion.\
+\
+Again, this is very like the `every' pattern, except the element is\
+skipped unless it meets a criterion.\
+\
+@need 1500\
+The pattern has three parts:\
+\
+@itemize @bullet\
+@item\
+If a list be empty, return @code\{nil\}.\
+@item\
+Else, if the beginning of the list (the @sc\{car\} of the list) passes\
+        a test\
+    @itemize @minus\
+    @item\
+    act on that element and combine it, using @code\{cons\} with\
+    @item\
+    a recursive call by the function on the rest (the @sc\{cdr\}) of the list.\
+    @end itemize\
+@item\
+Otherwise, if the beginning of the list (the @sc\{car\} of the list) fails\
+the test\
+    @itemize @minus\
+    @item\
+    skip on that element,\
+    @item\
+    and, recursively call the function on the rest (the @sc\{cdr\}) of the list.\
+    @end itemize\
+@end itemize\
+\
+@need 1500\
+Here is an example that uses @code\{cond\}:\
+\
+@smallexample\
+@group\
+(defun keep-three-letter-words (word-list)\
+  "Keep three letter words in WORD-LIST."\
+  (cond\
+   ;; First do-again-test: stop-condition\
+   ((not word-list) nil)\
+\
+   ;; Second do-again-test: when to act\
+   ((eq 3 (length (symbol-name (car word-list))))\
+    ;; combine acted-on element with recursive call on shorter list\
+    (cons (car word-list) (keep-three-letter-words (cdr word-list))))\
+\
+   ;; Third do-again-test: when to skip element;\
+   ;;   recursively call shorter list with next-step expression\
+   (t (keep-three-letter-words (cdr word-list)))))\
+@end group\
+\
+@group\
+(keep-three-letter-words '(one two three four five six))\
+    @result\{\} (one two six)\
+@end group\
+@end smallexample\
+\
+It goes without saying that you need not use @code\{nil\} as the test for\
+when to stop; and you can, of course, combine these patterns.\
+\
+@node No Deferment, No deferment solution, Recursive Patterns, Recursion\
+@subsection Recursion without Deferments\
+@cindex Deferment in recursion\
+@cindex Recursion without Deferments\
+\
+Let's consider again what happens with the @code\{triangle-recursively\}\
+function.  We will find that the intermediate calculations are\
+deferred until all can be done.\
+\
+@need 800\
+Here is the function definition:\
+\
+@smallexample\
+@group\
+(defun triangle-recursively (number)\
+  "Return the sum of the numbers 1 through NUMBER inclusive.\
+Uses recursion."\
+  (if (= number 1)                    ; @r\{do-again-test\}\
+      1                               ; @r\{then-part\}\
+    (+ number                         ; @r\{else-part\}\
+       (triangle-recursively          ; @r\{recursive call\}\
+        (1- number)))))               ; @r\{next-step-expression\}\
+@end group\
+@end smallexample\
+\
+What happens when we call this function with a argument of 7?\
+\
+The first instance of the @code\{triangle-recursively\} function adds\
+the number 7 to the value returned by a second instance of\
+@code\{triangle-recursively\}, an instance that has been passed an\
+argument of 6.  That is to say, the first calculation is:\
+\
+@smallexample\
+(+ 7 (triangle-recursively 6))\
+@end smallexample\
+\
+@noindent\
+The first instance of @code\{triangle-recursively\}---you may want to\
+think of it as a little robot---cannot complete its job.  It must hand\
+off the calculation for @code\{(triangle-recursively 6)\} to a second\
+instance of the program, to a second robot.  This second individual is\
+completely different from the first one; it is, in the jargon, a\
+`different instantiation'.  Or, put another way, it is a different\
+robot.  It is the same model as the first; it calculates triangle\
+numbers recursively; but it has a different serial number.\
+\
+And what does @code\{(triangle-recursively 6)\} return?  It returns the\
+number 6 added to the value returned by evaluating\
+@code\{triangle-recursively\} with an argument of 5.  Using the robot\
+metaphor, it asks yet another robot to help it.\
+\
+@need 800\
+Now the total is:\
+\
+@smallexample\
+(+ 7 6 (triangle-recursively 5))\
+@end smallexample\
+\
+@need 800\
+And what happens next?\
+\
+@smallexample\
+(+ 7 6 5 (triangle-recursively 4))\
+@end smallexample\
+\
+Each time @code\{triangle-recursively\} is called, except for the last\
+time, it creates another instance of the program---another robot---and\
+asks it to make a calculation.\
+\
+@need 800\
+Eventually, the full addition is set up and performed:\
+\
+@smallexample\
+(+ 7 6 5 4 3 2 1)\
+@end smallexample\
+\
+This design for the function defers the calculation of the first step\
+until the second can be done, and defers that until the third can be\
+done, and so on.  Each deferment means the computer must remember what\
+is being waited on.  This is not a problem when there are only a few\
+steps, as in this example.  But it can be a problem when there are\
+more steps.\
+\
+@node No deferment solution,  , No Deferment, Recursion\
+@subsection No Deferment Solution\
+@cindex No deferment solution\
+@cindex Defermentless solution\
+@cindex Solution without deferment\
+\
+The solution to the problem of deferred operations is to write in a\
+manner that does not defer operations@footnote\{The phrase @dfn\{tail\
+recursive\} is used to describe such a process, one that uses\
+`constant space'.\}.  This requires\
+writing to a different pattern, often one that involves writing two\
+function definitions, an `initialization' function and a `helper'\
+function.\
+\
+The `initialization' function sets up the job; the `helper' function\
+does the work.\
+\
+@need 1200\
+Here are the two function definitions for adding up numbers.  They are\
+so simple, I find them hard to understand.\
+\
+@smallexample\
+@group\
+(defun triangle-initialization (number)\
+  "Return the sum of the numbers 1 through NUMBER inclusive.\
+This is the `initialization' component of a two function\
+duo that uses recursion."\
+  (triangle-recursive-helper 0 0 number))\
+@end group\
+@end smallexample\
+\
+@smallexample\
+@group\
+(defun triangle-recursive-helper (sum counter number)\
+  "Return SUM, using COUNTER, through NUMBER inclusive.\
+This is the `helper' component of a two function duo\
+that uses recursion."\
+  (if (> counter number)\
+      sum\
+    (triangle-recursive-helper (+ sum counter)  ; @r\{sum\}\
+                               (1+ counter)     ; @r\{counter\}\
+                               number)))        ; @r\{number\}\
+@end group\
+@end smallexample\
+\
+@need 1250\
+Install both function definitions by evaluating them, then call\
+@code\{triangle-initialization\} with 2 rows:\
+\
+@smallexample\
+@group\
+(triangle-initialization 2)\
+    @result\{\} 3\
+@end group\
+@end smallexample\
+\
+The `initialization' function calls the first instance of the `helper'\
+function with three arguments: zero, zero, and a number which is the\
+number of rows in the triangle.\
+\
+The first two arguments passed to the `helper' function are\
+initialization values.  These values are changed when\
+@code\{triangle-recursive-helper\} invokes new instances.@footnote\{The\
+jargon is mildly confusing:  @code\{triangle-recursive-helper\} uses a\
+process that is iterative in a procedure that is recursive.  The\
+process is called iterative because the computer need only record the\
+three values, @code\{sum\}, @code\{counter\}, and @code\{number\}; the\
+procedure is recursive because the function `calls itself'.  On the\
+other hand, both the process and the procedure used by\
+@code\{triangle-recursively\} are called recursive.  The word\
+`recursive' has different meanings in the two contexts.\}\
+\
+Let's see what happens when we have a triangle that has one row.  (This\
+triangle will have one pebble in it!)\
+\
+@need 1200\
+@code\{triangle-initialization\} will call its helper with\
+the arguments @w\{@code\{0 0 1\}\}.  That function will run the conditional\
+test whether @code\{(> counter number)\}:\
+\
+@smallexample\
+(> 0 1)\
+@end smallexample\
+\
+@need 1200\
+@noindent\
+and find that the result is false, so it will invoke\
+the else-part of the @code\{if\} clause:\
+\
+@smallexample\
+@group\
+    (triangle-recursive-helper\
+     (+ sum counter)  ; @r\{sum plus counter\} @result\{\} @r\{sum\}\
+     (1+ counter)     ; @r\{increment counter\} @result\{\} @r\{counter\}\
+     number)          ; @r\{number stays the same\}\
+@end group\
+@end smallexample\
+\
+@need 800\
+@noindent\
+which will first compute:\
+\
+@smallexample\
+@group\
+(triangle-recursive-helper (+ 0 0)  ; @r\{sum\}\
+                           (1+ 0)   ; @r\{counter\}\
+                           1)       ; @r\{number\}\
+@exdent which is:\
+\
+(triangle-recursive-helper 0 1 1)\
+@end group\
+@end smallexample\
+\
+Again, @code\{(> counter number)\} will be false, so again, the Lisp\
+interpreter will evaluate @code\{triangle-recursive-helper\}, creating a\
+new instance with new arguments.\
+\
+@need 800\
+This new instance will be;\
+\
+@smallexample\
+@group\
+    (triangle-recursive-helper\
+     (+ sum counter)  ; @r\{sum plus counter\} @result\{\} @r\{sum\}\
+     (1+ counter)     ; @r\{increment counter\} @result\{\} @r\{counter\}\
+     number)          ; @r\{number stays the same\}\
+\
+@exdent which is:\
+\
+(triangle-recursive-helper 1 2 1)\
+@end group\
+@end smallexample\
+\
+In this case, the @code\{(> counter number)\} test will be true!  So the\
+instance will return the value of the sum, which will be 1, as\
+expected.\
+\
+Now, let's pass @code\{triangle-initialization\} an argument\
+of 2, to find out how many pebbles there are in a triangle with two rows.\
+\
+That function calls @code\{(triangle-recursive-helper 0 0 2)\}.\
+\
+@need 800\
+In stages, the instances called will be:\
+\
+@smallexample\
+@group\
+                          @r\{sum counter number\}\
+(triangle-recursive-helper 0    1       2)\
+\
+(triangle-recursive-helper 1    2       2)\
+\
+(triangle-recursive-helper 3    3       2)\
+@end group\
+@end smallexample\
+\
+When the last instance is called, the @code\{(> counter number)\} test\
+will be true, so the instance will return the value of @code\{sum\},\
+which will be 3.\
+\
+This kind of pattern helps when you are writing functions that can use\
+many resources in a computer.}

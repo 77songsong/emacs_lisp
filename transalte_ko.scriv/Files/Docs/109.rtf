@@ -1,0 +1,690 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Prepare the data,  , Several files recursively, Words in a defun\
+@section Prepare the Data for Display in a Graph\
+\
+The @code\{recursive-lengths-list-many-files\} function returns a list\
+of numbers.  Each number records the length of a function definition.\
+What we need to do now is transform this data into a list of numbers\
+suitable for generating a graph.  The new list will tell how many\
+functions definitions contain less than 10 words and\
+symbols, how many contain between 10 and 19 words and symbols, how\
+many contain between 20 and 29 words and symbols, and so on.\
+\
+In brief, we need to go through the lengths' list produced by the\
+@code\{recursive-lengths-list-many-files\} function and count the number\
+of defuns within each range of lengths, and produce a list of those\
+numbers.\
+\
+@menu\
+* Data for Display in Detail::\
+* Sorting::                     Sorting lists.\
+* Files List::                  Making a list of files.\
+* Counting function definitions::\
+@end menu\
+\
+@node Data for Display in Detail, Sorting, Prepare the data, Prepare the data\
+@ifnottex\
+@unnumberedsubsec The Data for Display in Detail\
+@end ifnottex\
+\
+Based on what we have done before, we can readily foresee that it\
+should not be too hard to write a function that `@sc\{cdr\}s' down the\
+lengths' list, looks at each element, determines which length range it\
+is in, and increments a counter for that range.\
+\
+However, before beginning to write such a function, we should consider\
+the advantages of sorting the lengths' list first, so the numbers are\
+ordered from smallest to largest.  First, sorting will make it easier\
+to count the numbers in each range, since two adjacent numbers will\
+either be in the same length range or in adjacent ranges.  Second, by\
+inspecting a sorted list, we can discover the highest and lowest\
+number, and thereby determine the largest and smallest length range\
+that we will need.\
+\
+@node Sorting, Files List, Data for Display in Detail, Prepare the data\
+@subsection Sorting Lists\
+@findex sort\
+\
+Emacs contains a function to sort lists, called (as you might guess)\
+@code\{sort\}.  The @code\{sort\} function takes two arguments, the list\
+to be sorted, and a predicate that determines whether the first of\
+two list elements is ``less'' than the second.\
+\
+As we saw earlier (@pxref\{Wrong Type of Argument, , Using the Wrong\
+Type Object as an Argument\}), a predicate is a function that\
+determines whether some property is true or false.  The @code\{sort\}\
+function will reorder a list according to whatever property the\
+predicate uses; this means that @code\{sort\} can be used to sort\
+non-numeric lists by non-numeric criteria---it can, for example,\
+alphabetize a list.\
+\
+@need 1250\
+The @code\{<\} function is used when sorting a numeric list.  For example,\
+\
+@smallexample\
+(sort '(4 8 21 17 33 7 21 7) '<)\
+@end smallexample\
+\
+@need 800\
+@noindent\
+produces this:\
+\
+@smallexample\
+(4 7 7 8 17 21 21 33)\
+@end smallexample\
+\
+@noindent\
+(Note that in this example, both the arguments are quoted so that the\
+symbols are not evaluated before being passed to @code\{sort\} as\
+arguments.)\
+\
+Sorting the list returned by the\
+@code\{recursive-lengths-list-many-files\} function is straightforward;\
+it uses the @code\{<\} function:\
+\
+@ignore\
+2006 Oct 29\
+In GNU Emacs 22,  eval\
+(progn\
+  (cd "/usr/local/share/emacs/22.0.50/")\
+  (sort\
+   (recursive-lengths-list-many-files\
+    '("./lisp/macros.el"\
+      "./lisp/mail/mailalias.el"\
+      "./lisp/makesum.el"))\
+   '<))\
+\
+@end ignore\
+\
+@smallexample\
+@group\
+(sort\
+ (recursive-lengths-list-many-files\
+  '("./lisp/macros.el"\
+    "./lisp/mailalias.el"\
+    "./lisp/makesum.el"))\
+ '<)\
+@end group\
+@end smallexample\
+\
+@need 800\
+@noindent\
+which produces:\
+\
+@smallexample\
+(29 32 38 85 90 95 178 180 181 218 263 283 321 324 480)\
+@end smallexample\
+\
+@noindent\
+(Note that in this example, the first argument to @code\{sort\} is not\
+quoted, since the expression must be evaluated so as to produce the\
+list that is passed to @code\{sort\}.)\
+\
+@node Files List, Counting function definitions, Sorting, Prepare the data\
+@subsection Making a List of Files\
+\
+The @code\{recursive-lengths-list-many-files\} function requires a list\
+of files as its argument.  For our test examples, we constructed such\
+a list by hand; but the Emacs Lisp source directory is too large for\
+us to do for that.  Instead, we will write a function to do the job\
+for us.  In this function, we will use both a @code\{while\} loop and a\
+recursive call.\
+\
+@findex directory-files\
+We did not have to write a function like this for older versions of\
+GNU Emacs, since they placed all the @samp\{.el\} files in one\
+directory.  Instead, we were able to use the @code\{directory-files\}\
+function, which lists the names of files that match a specified\
+pattern within a single directory.\
+\
+However, recent versions of Emacs place Emacs Lisp files in\
+sub-directories of the top level @file\{lisp\} directory.  This\
+re-arrangement eases navigation.  For example, all the mail related\
+files are in a @file\{lisp\} sub-directory called @file\{mail\}.  But at\
+the same time, this arrangement forces us to create a file listing\
+function that descends into the sub-directories.\
+\
+@findex files-in-below-directory\
+We can create this function, called @code\{files-in-below-directory\},\
+using familiar functions such as @code\{car\}, @code\{nthcdr\}, and\
+@code\{substring\} in conjunction with an existing function called\
+@code\{directory-files-and-attributes\}.  This latter function not only\
+lists all the filenames in a directory, including the names\
+of sub-directories, but also their attributes.\
+\
+To restate our goal: to create a function that will enable us\
+to feed filenames to @code\{recursive-lengths-list-many-files\}\
+as a list that looks like this (but with more elements):\
+\
+@smallexample\
+@group\
+("./lisp/macros.el"\
+ "./lisp/mail/rmail.el"\
+ "./lisp/makesum.el")\
+@end group\
+@end smallexample\
+\
+The @code\{directory-files-and-attributes\} function returns a list of\
+lists.  Each of the lists within the main list consists of 13\
+elements.  The first element is a string that contains the name of the\
+file -- which, in GNU/Linux, may be a `directory file', that is to\
+say, a file with the special attributes of a directory.  The second\
+element of the list is @code\{t\} for a directory, a string\
+for symbolic link (the string is the name linked to), or @code\{nil\}.\
+\
+For example, the first @samp\{.el\} file in the @file\{lisp/\} directory\
+is @file\{abbrev.el\}.  Its name is\
+@file\{/usr/local/share/emacs/22.1.1/lisp/abbrev.el\} and it is not a\
+directory or a symbolic link.\
+\
+@need 1000\
+This is how @code\{directory-files-and-attributes\} lists that file and\
+its attributes:\
+\
+@smallexample\
+@group\
+("abbrev.el"\
+nil\
+1\
+1000\
+100\
+@end group\
+@group\
+(17733 259)\
+(17491 28834)\
+(17596 62124)\
+13157\
+"-rw-rw-r--"\
+@end group\
+@group\
+nil\
+2971624\
+773)\
+@end group\
+@end smallexample\
+\
+@need 1200\
+On the other hand, @file\{mail/\} is a directory within the @file\{lisp/\}\
+directory.  The beginning of its listing looks like this:\
+\
+@smallexample\
+@group\
+("mail"\
+t\
+@dots\{\}\
+)\
+@end group\
+@end smallexample\
+\
+(To learn about the different attributes, look at the documentation of\
+@code\{file-attributes\}.  Bear in mind that the @code\{file-attributes\}\
+function does not list the filename, so its first element is\
+@code\{directory-files-and-attributes\}'s second element.)\
+\
+We will want our new function, @code\{files-in-below-directory\}, to\
+list the @samp\{.el\} files in the directory it is told to check, and in\
+any directories below that directory.\
+\
+This gives us a hint on how to construct\
+@code\{files-in-below-directory\}:  within a directory, the function\
+should add @samp\{.el\} filenames to a list; and if, within a directory,\
+the function comes upon a sub-directory, it should go into that\
+sub-directory and repeat its actions.\
+\
+However, we should note that every directory contains a name that\
+refers to itself, called @file\{.\}, (``dot'') and a name that refers to\
+its parent directory, called @file\{..\} (``double dot'').  (In\
+@file\{/\}, the root directory, @file\{..\} refers to itself, since\
+@file\{/\} has no parent.)  Clearly, we do not want our\
+@code\{files-in-below-directory\} function to enter those directories,\
+since they always lead us, directly or indirectly, to the current\
+directory.\
+\
+Consequently, our @code\{files-in-below-directory\} function must do\
+several tasks:\
+\
+@itemize @bullet\
+@item\
+Check to see whether it is looking at a filename that ends in\
+@samp\{.el\}; and if so, add its name to a list.\
+\
+@item\
+Check to see whether it is looking at a filename that is the name of a\
+directory; and if so,\
+\
+@itemize @minus\
+@item\
+Check to see whether it is looking at @file\{.\}  or @file\{..\}; and if\
+so skip it.\
+\
+@item\
+Or else, go into that directory and repeat the process.\
+@end itemize\
+@end itemize\
+\
+Let's write a function definition to do these tasks.  We will use a\
+@code\{while\} loop to move from one filename to another within a\
+directory, checking what needs to be done; and we will use a recursive\
+call to repeat the actions on each sub-directory.  The recursive\
+pattern is `accumulate'\
+(@pxref\{Accumulate, , Recursive Pattern: @emph\{accumulate\}\}),\
+using @code\{append\} as the combiner.\
+\
+@ignore\
+(directory-files "/usr/local/src/emacs/lisp/" t "\\\\.el$")\
+(shell-command "find /usr/local/src/emacs/lisp/ -name '*.el'")\
+\
+(directory-files "/usr/local/share/emacs/22.1.1/lisp/" t "\\\\.el$")\
+(shell-command "find /usr/local/share/emacs/22.1.1/lisp/ -name '*.el'")\
+@end ignore\
+\
+@c  /usr/local/share/emacs/22.1.1/lisp/\
+\
+@need 800\
+Here is the function:\
+\
+@smallexample\
+@group\
+(defun files-in-below-directory (directory)\
+  "List the .el files in DIRECTORY and in its sub-directories."\
+  ;; Although the function will be used non-interactively,\
+  ;; it will be easier to test if we make it interactive.\
+  ;; The directory will have a name such as\
+  ;;  "/usr/local/share/emacs/22.1.1/lisp/"\
+  (interactive "DDirectory name: ")\
+@end group\
+@group\
+  (let (el-files-list\
+        (current-directory-list\
+         (directory-files-and-attributes directory t)))\
+    ;; while we are in the current directory\
+    (while current-directory-list\
+@end group\
+@group\
+      (cond\
+       ;; check to see whether filename ends in `.el'\
+       ;; and if so, append its name to a list.\
+       ((equal ".el" (substring (car (car current-directory-list)) -3))\
+        (setq el-files-list\
+              (cons (car (car current-directory-list)) el-files-list)))\
+@end group\
+@group\
+       ;; check whether filename is that of a directory\
+       ((eq t (car (cdr (car current-directory-list))))\
+        ;; decide whether to skip or recurse\
+        (if\
+            (equal "."\
+                   (substring (car (car current-directory-list)) -1))\
+            ;; then do nothing since filename is that of\
+            ;;   current directory or parent, "." or ".."\
+            ()\
+@end group\
+@group\
+          ;; else descend into the directory and repeat the process\
+          (setq el-files-list\
+                (append\
+                 (files-in-below-directory\
+                  (car (car current-directory-list)))\
+                 el-files-list)))))\
+      ;; move to the next filename in the list; this also\
+      ;; shortens the list so the while loop eventually comes to an end\
+      (setq current-directory-list (cdr current-directory-list)))\
+    ;; return the filenames\
+    el-files-list))\
+@end group\
+@end smallexample\
+\
+@c (files-in-below-directory "/usr/local/src/emacs/lisp/")\
+@c (files-in-below-directory "/usr/local/share/emacs/22.1.1/lisp/")\
+\
+The @code\{files-in-below-directory\} @code\{directory-files\} function\
+takes one argument, the name of a directory.\
+\
+@need 1250\
+Thus, on my system,\
+\
+@c (length (files-in-below-directory "/usr/local/src/emacs/lisp/"))\
+\
+@c !!! 22.1.1 lisp sources location here\
+@smallexample\
+@group\
+(length\
+ (files-in-below-directory "/usr/local/share/emacs/22.1.1/lisp/"))\
+@end group\
+@end smallexample\
+\
+@noindent\
+tells me that in and below my Lisp sources directory are 1031\
+@samp\{.el\} files.\
+\
+@code\{files-in-below-directory\} returns a list in reverse alphabetical\
+order.  An expression to sort the list in alphabetical order looks\
+like this:\
+\
+@smallexample\
+@group\
+(sort\
+ (files-in-below-directory "/usr/local/share/emacs/22.1.1/lisp/")\
+ 'string-lessp)\
+@end group\
+@end smallexample\
+\
+@ignore\
+(defun test ()\
+  "Test how long it takes to find lengths of all sorted elisp defuns."\
+  (insert "\\n" (current-time-string) "\\n")\
+  (sit-for 0)\
+  (sort\
+   (recursive-lengths-list-many-files\
+    (files-in-below-directory "/usr/local/src/emacs/lisp/"))\
+   '<)\
+  (insert (format "%s" (current-time-string))))\
+@end ignore\
+\
+@node Counting function definitions,  , Files List, Prepare the data\
+@subsection Counting function definitions\
+\
+Our immediate goal is to generate a list that tells us how many\
+function definitions contain fewer than 10 words and symbols, how many\
+contain between 10 and 19 words and symbols, how many contain between\
+20 and 29 words and symbols, and so on.\
+\
+With a sorted list of numbers, this is easy: count how many elements\
+of the list are smaller than 10, then, after moving past the numbers\
+just counted, count how many are smaller than 20, then, after moving\
+past the numbers just counted, count how many are smaller than 30, and\
+so on.  Each of the numbers, 10, 20, 30, 40, and the like, is one\
+larger than the top of that range.  We can call the list of such\
+numbers the @code\{top-of-ranges\} list.\
+\
+@need 1200\
+If we wished, we could generate this list automatically, but it is\
+simpler to write a list manually.  Here it is:\
+@vindex top-of-ranges\
+\
+@smallexample\
+@group\
+(defvar top-of-ranges\
+ '(10  20  30  40  50\
+   60  70  80  90 100\
+  110 120 130 140 150\
+  160 170 180 190 200\
+  210 220 230 240 250\
+  260 270 280 290 300)\
+ "List specifying ranges for `defuns-per-range'.")\
+@end group\
+@end smallexample\
+\
+To change the ranges, we edit this list.\
+\
+Next, we need to write the function that creates the list of the\
+number of definitions within each range.  Clearly, this function must\
+take the @code\{sorted-lengths\} and the @code\{top-of-ranges\} lists\
+as arguments.\
+\
+The @code\{defuns-per-range\} function must do two things again and\
+again: it must count the number of definitions within a range\
+specified by the current top-of-range value; and it must shift to the\
+next higher value in the @code\{top-of-ranges\} list after counting the\
+number of definitions in the current range.  Since each of these\
+actions is repetitive, we can use @code\{while\} loops for the job.\
+One loop counts the number of definitions in the range defined by the\
+current top-of-range value, and the other loop selects each of the\
+top-of-range values in turn.\
+\
+Several entries of the @code\{sorted-lengths\} list are counted for each\
+range; this means that the loop for the @code\{sorted-lengths\} list\
+will be inside the loop for the @code\{top-of-ranges\} list, like a\
+small gear inside a big gear.\
+\
+The inner loop counts the number of definitions within the range.  It\
+is a simple counting loop of the type we have seen before.\
+(@xref\{Incrementing Loop, , A loop with an incrementing counter\}.)\
+The true-or-false test of the loop tests whether the value from the\
+@code\{sorted-lengths\} list is smaller than the current value of the\
+top of the range.  If it is, the function increments the counter and\
+tests the next value from the @code\{sorted-lengths\} list.\
+\
+@need 1250\
+The inner loop looks like this:\
+\
+@smallexample\
+@group\
+(while @var\{length-element-smaller-than-top-of-range\}\
+  (setq number-within-range (1+ number-within-range))\
+  (setq sorted-lengths (cdr sorted-lengths)))\
+@end group\
+@end smallexample\
+\
+The outer loop must start with the lowest value of the\
+@code\{top-of-ranges\} list, and then be set to each of the succeeding\
+higher values in turn.  This can be done with a loop like this:\
+\
+@smallexample\
+@group\
+(while top-of-ranges\
+  @var\{body-of-loop\}@dots\{\}\
+  (setq top-of-ranges (cdr top-of-ranges)))\
+@end group\
+@end smallexample\
+\
+@need 1200\
+Put together, the two loops look like this:\
+\
+@smallexample\
+@group\
+(while top-of-ranges\
+\
+  ;; @r\{Count the number of elements within the current range.\}\
+  (while @var\{length-element-smaller-than-top-of-range\}\
+    (setq number-within-range (1+ number-within-range))\
+    (setq sorted-lengths (cdr sorted-lengths)))\
+\
+  ;; @r\{Move to next range.\}\
+  (setq top-of-ranges (cdr top-of-ranges)))\
+@end group\
+@end smallexample\
+\
+In addition, in each circuit of the outer loop, Emacs should record\
+the number of definitions within that range (the value of\
+@code\{number-within-range\}) in a list.  We can use @code\{cons\} for\
+this purpose.  (@xref\{cons, , @code\{cons\}\}.)\
+\
+The @code\{cons\} function works fine, except that the list it\
+constructs will contain the number of definitions for the highest\
+range at its beginning and the number of definitions for the lowest\
+range at its end.  This is because @code\{cons\} attaches new elements\
+of the list to the beginning of the list, and since the two loops are\
+working their way through the lengths' list from the lower end first,\
+the @code\{defuns-per-range-list\} will end up largest number first.\
+But we will want to print our graph with smallest values first and the\
+larger later.  The solution is to reverse the order of the\
+@code\{defuns-per-range-list\}.  We can do this using the\
+@code\{nreverse\} function, which reverses the order of a list.\
+@findex nreverse\
+\
+@need 800\
+For example,\
+\
+@smallexample\
+(nreverse '(1 2 3 4))\
+@end smallexample\
+\
+@need 800\
+@noindent\
+produces:\
+\
+@smallexample\
+(4 3 2 1)\
+@end smallexample\
+\
+Note that the @code\{nreverse\} function is ``destructive''---that is,\
+it changes the list to which it is applied; this contrasts with the\
+@code\{car\} and @code\{cdr\} functions, which are non-destructive.  In\
+this case, we do not want the original @code\{defuns-per-range-list\},\
+so it does not matter that it is destroyed.  (The @code\{reverse\}\
+function provides a reversed copy of a list, leaving the original list\
+as is.)\
+@findex reverse\
+\
+@need 1250\
+Put all together, the @code\{defuns-per-range\} looks like this:\
+\
+@smallexample\
+@group\
+(defun defuns-per-range (sorted-lengths top-of-ranges)\
+  "SORTED-LENGTHS defuns in each TOP-OF-RANGES range."\
+  (let ((top-of-range (car top-of-ranges))\
+        (number-within-range 0)\
+        defuns-per-range-list)\
+@end group\
+\
+@group\
+    ;; @r\{Outer loop.\}\
+    (while top-of-ranges\
+@end group\
+\
+@group\
+      ;; @r\{Inner loop.\}\
+      (while (and\
+              ;; @r\{Need number for numeric test.\}\
+              (car sorted-lengths)\
+              (< (car sorted-lengths) top-of-range))\
+@end group\
+\
+@group\
+        ;; @r\{Count number of definitions within current range.\}\
+        (setq number-within-range (1+ number-within-range))\
+        (setq sorted-lengths (cdr sorted-lengths)))\
+\
+      ;; @r\{Exit inner loop but remain within outer loop.\}\
+@end group\
+\
+@group\
+      (setq defuns-per-range-list\
+            (cons number-within-range defuns-per-range-list))\
+      (setq number-within-range 0)      ; @r\{Reset count to zero.\}\
+@end group\
+\
+@group\
+      ;; @r\{Move to next range.\}\
+      (setq top-of-ranges (cdr top-of-ranges))\
+      ;; @r\{Specify next top of range value.\}\
+      (setq top-of-range (car top-of-ranges)))\
+@end group\
+\
+@group\
+    ;; @r\{Exit outer loop and count the number of defuns larger than\}\
+    ;; @r\{  the largest top-of-range value.\}\
+    (setq defuns-per-range-list\
+          (cons\
+           (length sorted-lengths)\
+           defuns-per-range-list))\
+@end group\
+\
+@group\
+    ;; @r\{Return a list of the number of definitions within each range,\}\
+    ;; @r\{  smallest to largest.\}\
+    (nreverse defuns-per-range-list)))\
+@end group\
+@end smallexample\
+\
+@need 1200\
+@noindent\
+The function is straightforward except for one subtle feature.  The\
+true-or-false test of the inner loop looks like this:\
+\
+@smallexample\
+@group\
+(and (car sorted-lengths)\
+     (< (car sorted-lengths) top-of-range))\
+@end group\
+@end smallexample\
+\
+@need 800\
+@noindent\
+instead of like this:\
+\
+@smallexample\
+(< (car sorted-lengths) top-of-range)\
+@end smallexample\
+\
+The purpose of the test is to determine whether the first item in the\
+@code\{sorted-lengths\} list is less than the value of the top of the\
+range.\
+\
+The simple version of the test works fine unless the\
+@code\{sorted-lengths\} list has a @code\{nil\} value.  In that case, the\
+@code\{(car sorted-lengths)\} expression function returns\
+@code\{nil\}.  The @code\{<\} function cannot compare a number to\
+@code\{nil\}, which is an empty list, so Emacs signals an error and\
+stops the function from attempting to continue to execute.\
+\
+The @code\{sorted-lengths\} list always becomes @code\{nil\} when the\
+counter reaches the end of the list.  This means that any attempt to\
+use the @code\{defuns-per-range\} function with the simple version of\
+the test will fail.\
+\
+We solve the problem by using the @code\{(car sorted-lengths)\}\
+expression in conjunction with the @code\{and\} expression.  The\
+@code\{(car sorted-lengths)\} expression returns a non-@code\{nil\}\
+value so long as the list has at least one number within it, but\
+returns @code\{nil\} if the list is empty.  The @code\{and\} expression\
+first evaluates the @code\{(car sorted-lengths)\} expression, and\
+if it is @code\{nil\}, returns false @emph\{without\} evaluating the\
+@code\{<\} expression.  But if the @code\{(car sorted-lengths)\}\
+expression returns a non-@code\{nil\} value, the @code\{and\} expression\
+evaluates the @code\{<\} expression, and returns that value as the value\
+of the @code\{and\} expression.\
+\
+@c colon in printed section title causes problem in Info cross reference\
+This way, we avoid an error.\
+@iftex\
+@noindent\
+(For information about @code\{and\}, see\
+@ref\{kill-new function, , The @code\{kill-new\} function\}.)\
+@end iftex\
+@ifinfo\
+@noindent\
+(@xref\{kill-new function, , The @code\{kill-new\} function\}, for\
+information about @code\{and\}.)\
+@end ifinfo\
+\
+Here is a short test of the @code\{defuns-per-range\} function.  First,\
+evaluate the expression that binds (a shortened)\
+@code\{top-of-ranges\} list to the list of values, then evaluate the\
+expression for binding the @code\{sorted-lengths\} list, and then\
+evaluate the @code\{defuns-per-range\} function.\
+\
+@smallexample\
+@group\
+;; @r\{(Shorter list than we will use later.)\}\
+(setq top-of-ranges\
+ '(110 120 130 140 150\
+   160 170 180 190 200))\
+\
+(setq sorted-lengths\
+      '(85 86 110 116 122 129 154 176 179 200 265 300 300))\
+\
+(defuns-per-range sorted-lengths top-of-ranges)\
+@end group\
+@end smallexample\
+\
+@need 800\
+@noindent\
+The list returned looks like this:\
+\
+@smallexample\
+(2 2 2 0 0 1 0 2 0 0 4)\
+@end smallexample\
+\
+@noindent\
+Indeed, there are two elements of the @code\{sorted-lengths\} list\
+smaller than 110, two elements between 110 and 119, two elements\
+between 120 and 129, and so on.  There are four elements with a value\
+of 200 or larger.}

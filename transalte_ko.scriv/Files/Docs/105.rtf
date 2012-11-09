@@ -1,0 +1,89 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Find a File, lengths-list-file, Several defuns, Words in a defun\
+@comment  node-name,  next,  previous,  up\
+@section Find a File\
+@cindex Find a File\
+\
+To find a file in Emacs, you use the @kbd\{C-x C-f\} (@code\{find-file\})\
+command.  This command is almost, but not quite right for the lengths\
+problem.\
+\
+@need 1200\
+Let's look at the source for @code\{find-file\}:\
+\
+@smallexample\
+@group\
+(defun find-file (filename)\
+  "Edit file FILENAME.\
+Switch to a buffer visiting file FILENAME,\
+creating one if none already exists."\
+  (interactive "FFind file: ")\
+  (switch-to-buffer (find-file-noselect filename)))\
+@end group\
+@end smallexample\
+\
+@noindent\
+(The most recent version of the @code\{find-file\} function definition\
+permits you to specify optional wildcards to visit multiple files; that\
+makes the definition more complex and we will not discuss it here,\
+since it is not relevant.  You can see its source using either\
+@kbd\{M-.\} (@code\{find-tag\}) or @kbd\{C-h f\} (@code\{describe-function\}).)\
+\
+@ignore\
+In Emacs 22\
+(defun find-file (filename &optional wildcards)\
+  "Edit file FILENAME.\
+Switch to a buffer visiting file FILENAME,\
+creating one if none already exists.\
+Interactively, the default if you just type RET is the current directory,\
+but the visited file name is available through the minibuffer history:\
+type M-n to pull it into the minibuffer.\
+\
+Interactively, or if WILDCARDS is non-nil in a call from Lisp,\
+expand wildcards (if any) and visit multiple files.  You can\
+suppress wildcard expansion by setting `find-file-wildcards' to nil.\
+\
+To visit a file without any kind of conversion and without\
+automatically choosing a major mode, use \\\\[find-file-literally]."\
+  (interactive (find-file-read-args "Find file: " nil))\
+  (let ((value (find-file-noselect filename nil nil wildcards)))\
+    (if (listp value)\
+        (mapcar 'switch-to-buffer (nreverse value))\
+      (switch-to-buffer value))))\
+@end ignore\
+\
+The definition I am showing possesses short but complete documentation\
+and an interactive specification that prompts you for a file name when\
+you use the command interactively.  The body of the definition\
+contains two functions, @code\{find-file-noselect\} and\
+@code\{switch-to-buffer\}.\
+\
+According to its documentation as shown by @kbd\{C-h f\} (the\
+@code\{describe-function\} command), the @code\{find-file-noselect\}\
+function reads the named file into a buffer and returns the buffer.\
+(Its most recent version includes an optional wildcards argument,\
+too, as well as another to read a file literally and an other you\
+suppress warning messages.  These optional arguments are irrelevant.)\
+\
+However, the @code\{find-file-noselect\} function does not select the\
+buffer in which it puts the file.  Emacs does not switch its attention\
+(or yours if you are using @code\{find-file-noselect\}) to the selected\
+buffer.  That is what @code\{switch-to-buffer\} does: it switches the\
+buffer to which Emacs attention is directed; and it switches the\
+buffer displayed in the window to the new buffer.  We have discussed\
+buffer switching elsewhere.  (@xref\{Switching Buffers\}.)\
+\
+In this histogram project, we do not need to display each file on the\
+screen as the program determines the length of each definition within\
+it.  Instead of employing @code\{switch-to-buffer\}, we can work with\
+@code\{set-buffer\}, which redirects the attention of the computer\
+program to a different buffer but does not redisplay it on the screen.\
+So instead of calling on @code\{find-file\} to do the job, we must write\
+our own expression.\
+\
+The task is easy: use @code\{find-file-noselect\} and @code\{set-buffer\}.}

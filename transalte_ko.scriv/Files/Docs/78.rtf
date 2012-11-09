@@ -1,0 +1,171 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Digression into C, defvar, copy-region-as-kill, Cutting & Storing Text\
+@comment  node-name,  next,  previous,  up\
+@section Digression into C\
+@findex delete-and-extract-region\
+@cindex C, a digression into\
+@cindex Digression into C\
+\
+The @code\{copy-region-as-kill\} function (@pxref\{copy-region-as-kill, ,\
+@code\{copy-region-as-kill\}\}) uses the @code\{filter-buffer-substring\}\
+function, which in turn uses the @code\{delete-and-extract-region\}\
+function.  It removes the contents of a region and you cannot get them\
+back.\
+\
+Unlike the other code discussed here, the\
+@code\{delete-and-extract-region\} function is not written in Emacs\
+Lisp; it is written in C and is one of the primitives of the GNU Emacs\
+system.  Since it is very simple, I will digress briefly from Lisp and\
+describe it here.\
+\
+@c GNU Emacs 22  in /usr/local/src/emacs/src/editfns.c\
+@c the DEFUN for  buffer-substring-no-properties\
+\
+@need 1500\
+Like many of the other Emacs primitives,\
+@code\{delete-and-extract-region\} is written as an instance of a C\
+macro, a macro being a template for code.  The complete macro looks\
+like this:\
+\
+@smallexample\
+@group\
+DEFUN ("buffer-substring-no-properties", Fbuffer_substring_no_properties,\
+       Sbuffer_substring_no_properties, 2, 2, 0,\
+       doc: /* Return the characters of part of the buffer,\
+without the text properties.\
+The two arguments START and END are character positions;\
+they can be in either order.  */)\
+     (start, end)\
+     Lisp_Object start, end;\
+@\{\
+  register int b, e;\
+\
+  validate_region (&start, &end);\
+  b = XINT (start);\
+  e = XINT (end);\
+\
+  return make_buffer_string (b, e, 0);\
+@\}\
+@end group\
+@end smallexample\
+\
+Without going into the details of the macro writing process, let me\
+point out that this macro starts with the word @code\{DEFUN\}.  The word\
+@code\{DEFUN\} was chosen since the code serves the same purpose as\
+@code\{defun\} does in Lisp.  (The @code\{DEFUN\} C macro is defined in\
+@file\{emacs/src/lisp.h\}.)\
+\
+The word @code\{DEFUN\} is followed by seven parts inside of\
+parentheses:\
+\
+@itemize @bullet\
+@item\
+The first part is the name given to the function in Lisp,\
+@code\{delete-and-extract-region\}.\
+\
+@item\
+The second part is the name of the function in C,\
+@code\{Fdelete_and_extract_region\}.  By convention, it starts with\
+@samp\{F\}.  Since C does not use hyphens in names, underscores are used\
+instead.\
+\
+@item\
+The third part is the name for the C constant structure that records\
+information on this function for internal use.  It is the name of the\
+function in C but begins with an @samp\{S\} instead of an @samp\{F\}.\
+\
+@item\
+The fourth and fifth parts specify the minimum and maximum number of\
+arguments the function can have.  This function demands exactly 2\
+arguments.\
+\
+@item\
+The sixth part is nearly like the argument that follows the\
+@code\{interactive\} declaration in a function written in Lisp: a letter\
+followed, perhaps, by a prompt.  The only difference from the Lisp is\
+when the macro is called with no arguments.  Then you write a @code\{0\}\
+(which is a `null string'), as in this macro.\
+\
+If you were to specify arguments, you would place them between\
+quotation marks.  The C macro for @code\{goto-char\} includes\
+@code\{"NGoto char: "\} in this position to indicate that the function\
+expects a raw prefix, in this case, a numerical location in a buffer,\
+and provides a prompt.\
+\
+@item\
+The seventh part is a documentation string, just like the one for a\
+function written in Emacs Lisp, except that every newline must be\
+written explicitly as @samp\{\\n\} followed by a backslash and carriage\
+return.\
+\
+@need 1000\
+Thus, the first two lines of documentation for  @code\{goto-char\} are\
+written like this:\
+\
+@smallexample\
+@group\
+  "Set point to POSITION, a number or marker.\\n\\\
+Beginning of buffer is position (point-min), end is (point-max)."\
+@end group\
+@end smallexample\
+@end itemize\
+\
+@need 1200\
+In a C macro, the formal parameters come next, with a statement of\
+what kind of object they are, followed by what might be called the `body'\
+of the macro.  For @code\{delete-and-extract-region\} the `body'\
+consists of the following four lines:\
+\
+@smallexample\
+@group\
+validate_region (&start, &end);\
+if (XINT (start) == XINT (end))\
+  return build_string ("");\
+return del_range_1 (XINT (start), XINT (end), 1, 1);\
+@end group\
+@end smallexample\
+\
+The   @code\{validate_region\} function checks whether the values\
+passed as the beginning and end of the region are the proper type and\
+are within range.  If the beginning and end positions are the same,\
+then return and empty string.\
+\
+The @code\{del_range_1\} function actually deletes the text.  It is a\
+complex function we will not look into.  It updates the buffer and\
+does other things.  However, it is worth looking at the two arguments\
+passed to @code\{del_range\}.  These are @w\{@code\{XINT (start)\}\} and\
+@w\{@code\{XINT (end)\}\}.\
+\
+As far as the C language is concerned, @code\{start\} and @code\{end\} are\
+two integers that mark the beginning and end of the region to be\
+deleted@footnote\{More precisely, and requiring more expert knowledge\
+to understand, the two integers are of type `Lisp_Object', which can\
+also be a C union instead of an integer type.\}.\
+\
+In early versions of Emacs, these two numbers were thirty-two bits\
+long, but the code is slowly being generalized to handle other\
+lengths.  Three of the available bits are used to specify the type of\
+information; the remaining bits are used as `content'.\
+\
+@samp\{XINT\} is a C macro that extracts the relevant number from the\
+longer collection of bits; the three other bits are discarded.\
+\
+@need 800\
+The command in @code\{delete-and-extract-region\} looks like this:\
+\
+@smallexample\
+del_range_1 (XINT (start), XINT (end), 1, 1);\
+@end smallexample\
+\
+@noindent\
+It deletes the region between the beginning position, @code\{start\},\
+and the ending position, @code\{end\}.\
+\
+From the point of view of the person writing Lisp, Emacs is all very\
+simple; but hidden underneath is a great deal of complexity to make it\
+all work.}

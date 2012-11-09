@@ -1,0 +1,144 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node kill-ring-yank-pointer, yank nthcdr Exercises, Kill Ring Overview, Yanking\
+@comment  node-name,  next,  previous,  up\
+@section The @code\{kill-ring-yank-pointer\} Variable\
+\
+@code\{kill-ring-yank-pointer\} is a variable, just as @code\{kill-ring\} is\
+a variable.  It points to something by being bound to the value of what\
+it points to, like any other Lisp variable.\
+\
+@need 1000\
+Thus, if the value of the kill ring is:\
+\
+@smallexample\
+("some text" "a different piece of text" "yet more text")\
+@end smallexample\
+\
+@need 1250\
+@noindent\
+and the @code\{kill-ring-yank-pointer\} points to the second clause, the\
+value of @code\{kill-ring-yank-pointer\} is:\
+\
+@smallexample\
+("a different piece of text" "yet more text")\
+@end smallexample\
+\
+As explained in the previous chapter (@pxref\{List Implementation\}), the\
+computer does not keep two different copies of the text being pointed to\
+by both the @code\{kill-ring\} and the @code\{kill-ring-yank-pointer\}.  The\
+words ``a different piece of text'' and ``yet more text'' are not\
+duplicated.  Instead, the two Lisp variables point to the same pieces of\
+text.  Here is a diagram:\
+\
+@c cons-cell-diagram #5\
+@ifnottex\
+@smallexample\
+@group\
+kill-ring     kill-ring-yank-pointer\
+    |               |\
+    |      ___ ___  |     ___ ___      ___ ___\
+     ---> |   |   |  --> |   |   |    |   |   |\
+          |___|___|----> |___|___|--> |___|___|--> nil\
+            |              |            |\
+            |              |            |\
+            |              |             --> "yet more text"\
+            |              |\
+            |               --> "a different piece of text"\
+            |\
+             --> "some text"\
+@end group\
+@end smallexample\
+@sp 1\
+@end ifnottex\
+@ifset print-postscript-figures\
+@sp 1\
+@tex\
+@center @image\{cons-5\}\
+%%%% old method of including an image\
+% \\input /usr/local/lib/tex/inputs/psfig.tex\
+% \\centerline\{\\psfig\{figure=/usr/local/lib/emacs/man/cons-5.eps\}\}\
+% \\catcode`\\@=0 %\
+@end tex\
+@sp 1\
+@end ifset\
+@ifclear print-postscript-figures\
+@iftex\
+@smallexample\
+@group\
+kill-ring     kill-ring-yank-pointer\
+    |               |\
+    |      ___ ___  |     ___ ___      ___ ___\
+     ---> |   |   |  --> |   |   |    |   |   |\
+          |___|___|----> |___|___|--> |___|___|--> nil\
+            |              |            |\
+            |              |            |\
+            |              |             --> "yet more text"\
+            |              |\
+            |               --> "a different piece of text\
+            |\
+             --> "some text"\
+@end group\
+@end smallexample\
+@sp 1\
+@end iftex\
+@end ifclear\
+\
+Both the variable @code\{kill-ring\} and the variable\
+@code\{kill-ring-yank-pointer\} are pointers.  But the kill ring itself is\
+usually described as if it were actually what it is composed of.  The\
+@code\{kill-ring\} is spoken of as if it were the list rather than that it\
+points to the list.  Conversely, the @code\{kill-ring-yank-pointer\} is\
+spoken of as pointing to a list.\
+\
+These two ways of talking about the same thing sound confusing at first but\
+make sense on reflection.  The kill ring is generally thought of as the\
+complete structure of data that holds the information of what has recently\
+been cut out of the Emacs buffers.  The @code\{kill-ring-yank-pointer\}\
+on the other hand, serves to indicate---that is, to `point to'---that part\
+of the kill ring of which the first element (the @sc\{car\}) will be\
+inserted.\
+\
+@ignore\
+In GNU Emacs 22, the @code\{kill-new\} function calls\
+\
+@code\{(setq kill-ring-yank-pointer kill-ring)\}\
+\
+(defun rotate-yank-pointer (arg)\
+  "Rotate the yanking point in the kill ring.\
+With argument, rotate that many kills forward (or backward, if negative)."\
+  (interactive "p")\
+  (current-kill arg))\
+\
+(defun current-kill (n &optional do-not-move)\
+  "Rotate the yanking point by N places, and then return that kill.\
+If N is zero, `interprogram-paste-function' is set, and calling it\
+returns a string, then that string is added to the front of the\
+kill ring and returned as the latest kill.\
+If optional arg DO-NOT-MOVE is non-nil, then don't actually move the\
+yanking point; just return the Nth kill forward."\
+  (let ((interprogram-paste (and (= n 0)\
+                                 interprogram-paste-function\
+                                 (funcall interprogram-paste-function))))\
+    (if interprogram-paste\
+        (progn\
+          ;; Disable the interprogram cut function when we add the new\
+          ;; text to the kill ring, so Emacs doesn't try to own the\
+          ;; selection, with identical text.\
+          (let ((interprogram-cut-function nil))\
+            (kill-new interprogram-paste))\
+          interprogram-paste)\
+      (or kill-ring (error "Kill ring is empty"))\
+      (let ((ARGth-kill-element\
+             (nthcdr (mod (- n (length kill-ring-yank-pointer))\
+                          (length kill-ring))\
+                     kill-ring)))\
+        (or do-not-move\
+            (setq kill-ring-yank-pointer ARGth-kill-element))\
+        (car ARGth-kill-element)))))\
+\
+@end ignore}

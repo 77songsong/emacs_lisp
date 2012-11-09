@@ -1,0 +1,88 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Beginning a .emacs File, Text and Auto-fill, defcustom, Emacs Initialization\
+@section Beginning a @file\{.emacs\} File\
+@cindex @file\{.emacs\} file, beginning of\
+\
+When you start Emacs, it loads your @file\{.emacs\} file unless you tell\
+it not to by specifying @samp\{-q\} on the command line.  (The\
+@code\{emacs -q\} command gives you a plain, out-of-the-box Emacs.)\
+\
+A @file\{.emacs\} file contains Lisp expressions.  Often, these are no\
+more than expressions to set values; sometimes they are function\
+definitions.\
+\
+@xref\{Init File, , The Init File @file\{~/.emacs\}, emacs, The GNU Emacs\
+Manual\}, for a short description of initialization files.\
+\
+This chapter goes over some of the same ground, but is a walk among\
+extracts from a complete, long-used @file\{.emacs\} file---my own.\
+\
+The first part of the file consists of comments: reminders to myself.\
+By now, of course, I remember these things, but when I started, I did\
+not.\
+\
+@need 1200\
+@smallexample\
+@group\
+;;;; Bob's .emacs file\
+; Robert J. Chassell\
+; 26 September 1985\
+@end group\
+@end smallexample\
+\
+@noindent\
+Look at that date!  I started this file a long time ago.  I have been\
+adding to it ever since.\
+\
+@smallexample\
+@group\
+; Each section in this file is introduced by a\
+; line beginning with four semicolons; and each\
+; entry is introduced by a line beginning with\
+; three semicolons.\
+@end group\
+@end smallexample\
+\
+@noindent\
+This describes the usual conventions for comments in Emacs Lisp.\
+Everything on a line that follows a semicolon is a comment.  Two,\
+three, and four semicolons are used as subsection and section markers.\
+(@xref\{Comments, ,, elisp, The GNU Emacs Lisp Reference Manual\}, for\
+more about comments.)\
+\
+@smallexample\
+@group\
+;;;; The Help Key\
+; Control-h is the help key;\
+; after typing control-h, type a letter to\
+; indicate the subject about which you want help.\
+; For an explanation of the help facility,\
+; type control-h two times in a row.\
+@end group\
+@end smallexample\
+\
+@noindent\
+Just remember: type @kbd\{C-h\} two times for help.\
+\
+@smallexample\
+@group\
+; To find out about any mode, type control-h m\
+; while in that mode.  For example, to find out\
+; about mail mode, enter mail mode and then type\
+; control-h m.\
+@end group\
+@end smallexample\
+\
+@noindent\
+`Mode help', as I call this, is very helpful.  Usually, it tells you\
+all you need to know.\
+\
+Of course, you don't need to include comments like these in your\
+@file\{.emacs\} file.  I included them in mine because I kept forgetting\
+about Mode help or the conventions for comments---but I was able to\
+remember to look here to remind myself.}

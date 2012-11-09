@@ -977,6 +977,133 @@ GNU Emacs, it is stored in a list and you can bring it back with a<br/>
 <br/>
 (The use of the word `kill' in Emacs for pr...</p>
 </li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>zap-to-char</strong><br/><br/>
+@node zap-to-char, kill-region, Storing Text, Cutting & Storing Text<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section @code{zap-to-char}<br/>
+@findex zap-to-char<br/>
+<br/>
+The @code{zap-to-char} function changed little between GNU Emacs<br/>
+version 19 and GNU Emacs version 22.  However, @code{zap-to-char}<br/>
+calls another function, @code{kill-region}, which enjoyed a major<br/>
+rewrite.<br/>
+<br/>
+The @code{kill-region} function in Emacs 19 is complex, but does not<br/>
+use code that is important at this time.  We will skip it.<br/>
+<br/>
+Th...</p>
+</li>
+<li>
+<p class="binderItem"><strong>kill-region</strong><br/><br/>
+@node kill-region, copy-region-as-kill, zap-to-char, Cutting & Storing Text<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section @code{kill-region}<br/>
+@findex kill-region<br/>
+<br/>
+The @code{zap-to-char} function uses the @code{kill-region} function.<br/>
+This function clips text from a region and copies that text to<br/>
+the kill ring, from which it may be retrieved.<br/>
+<br/>
+@ignore<br/>
+GNU Emacs 22:<br/>
+<br/>
+(defun kill-region (beg end &optional yank-handler)<br/>
+  "Kill (\"cut\") text between point and mark.<br/>
+This deletes the text from t...</p>
+</li>
+<li>
+<p class="binderItem"><strong>copy-region-as-kill</strong><br/><br/>
+@node copy-region-as-kill, Digression into C, kill-region, Cutting & Storing Text<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section @code{copy-region-as-kill}<br/>
+@findex copy-region-as-kill<br/>
+@findex nthcdr<br/>
+<br/>
+The @code{copy-region-as-kill} function copies a region of text from a<br/>
+buffer and (via either @code{kill-append} or @code{kill-new}) saves it<br/>
+in the @code{kill-ring}.<br/>
+<br/>
+If you call @code{copy-region-as-kill} immediately after a<br/>
+@code{kill-region} command, Emacs appends the newly copied text to ...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Digression into C</strong><br/><br/>
+@node Digression into C, defvar, copy-region-as-kill, Cutting & Storing Text<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Digression into C<br/>
+@findex delete-and-extract-region<br/>
+@cindex C, a digression into<br/>
+@cindex Digression into C<br/>
+<br/>
+The @code{copy-region-as-kill} function (@pxref{copy-region-as-kill, ,<br/>
+@code{copy-region-as-kill}}) uses the @code{filter-buffer-substring}<br/>
+function, which in turn uses the @code{delete-and-extract-region}<br/>
+function.  It removes the contents of a region and you c...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Initializing a Variable with defvar</strong><br/><br/>
+@node defvar, cons & search-fwd Review, Digression into C, Cutting & Storing Text<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Initializing a Variable with @code{defvar}<br/>
+@findex defvar<br/>
+@cindex Initializing a variable<br/>
+@cindex Variable initialization<br/>
+<br/>
+@ignore<br/>
+2006 Oct 24<br/>
+In Emacs 22,<br/>
+copy-region-as-kill is short, 12 lines, and uses<br/>
+filter-buffer-substring, which is longer, 39 lines<br/>
+and has delete-and-extract-region in it.<br/>
+delete-and-extract-region is written in C.<br/>
+<br/>
+see Initializing a Varia...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Review</strong><br/><br/>
+@need 1250<br/>
+@node cons & search-fwd Review, search Exercises, defvar, Cutting & Storing Text<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Review<br/>
+<br/>
+Here is a brief summary of some recently introduced functions.<br/>
+<br/>
+@table @code<br/>
+@item car<br/>
+@itemx cdr<br/>
+@code{car} returns the first element of a list; @code{cdr} returns the<br/>
+second and subsequent elements of a list.<br/>
+<br/>
+@need 1250<br/>
+For example:<br/>
+<br/>
+@smallexample<br/>
+@group<br/>
+(car '(1 2 3 4 5 6 7))<br/>
+     @result{} 1<br/>
+(cdr '(1 2 3 4 5 6 7))<br/>
+     @result{} (2 3 4 5 6 ...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Searching Exercises</strong><br/><br/>
+@need 1500<br/>
+@node search Exercises,  , cons & search-fwd Review, Cutting & Storing Text<br/>
+@section Searching Exercises<br/>
+<br/>
+@itemize @bullet<br/>
+@item<br/>
+Write an interactive function that searches for a string.  If the<br/>
+search finds the string, leave point after it and display a message<br/>
+that says ``Found!''.  (Do not use @code{search-forward} for the name<br/>
+of this function; if you do, you will overwrite the existing version of<br/>
+@code{search-forward} that comes with Emacs.  Use a name such as<br/>
+@code{test-search}...</p>
+</li>
+</ul>
+<hr/>
 <li>
 <p class="binderItem"><strong>How Lists are Implemented</strong><br/><br/>
 @node List Implementation, Yanking, Cutting & Storing Text, Top<br/>
@@ -990,6 +1117,33 @@ straightforward in theory.  The atom @samp{rose}, for example, is<br/>
 recorded as the four contiguous letters @samp{r}, @samp{o}, @samp{s},<br/>
 @samp{e}.  A list, on the other hand, is kept differentl...</p>
 </li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>Symbols as a Chest of Drawers</strong><br/><br/>
+@node Symbols as Chest, List Exercise, Lists diagrammed, List Implementation<br/>
+@section Symbols as a Chest of Drawers<br/>
+@cindex Symbols as a Chest of Drawers<br/>
+@cindex Chest of Drawers, metaphor for a symbol<br/>
+@cindex Drawers, Chest of, metaphor for a symbol<br/>
+<br/>
+In an earlier section, I suggested that you might imagine a symbol as<br/>
+being a chest of drawers.  The function definition is put in one<br/>
+drawer, the value in another, and so on.  What is put in the drawer<br/>
+holding the value can be changed without aff...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Exercise</strong><br/><br/>
+@node List Exercise,  , Symbols as Chest, List Implementation<br/>
+@section Exercise<br/>
+<br/>
+Set @code{flowers} to @code{violet} and @code{buttercup}.  Cons two<br/>
+more flowers on to this list and set this new list to<br/>
+@code{more-flowers}.  Set the @sc{car} of @code{flowers} to a fish.<br/>
+What does the @code{more-flowers} list now contain?</p>
+</li>
+</ul>
+<hr/>
 <li>
 <p class="binderItem"><strong>Yanking Text Back</strong><br/><br/>
 @node Yanking, Loops & Recursion, List Implementation, Top<br/>
@@ -1005,6 +1159,59 @@ you can bring it back with a `yank' command.  The text that is cut out of<br/>
 the buffer is put in the kill ring and the yank commands insert the<br/>
 appropriate contents of the kill ring back into a buffer (not necessaril...</p>
 </li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>Kill Ring Overview</strong><br/><br/>
+@node Kill Ring Overview, kill-ring-yank-pointer, Yanking, Yanking<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Kill Ring Overview<br/>
+@cindex Kill ring overview<br/>
+<br/>
+The kill ring is a list of textual strings.  This is what it looks like:<br/>
+<br/>
+@smallexample<br/>
+("some text" "a different piece of text" "yet more text")<br/>
+@end smallexample<br/>
+<br/>
+If this were the contents of my kill ring and I pressed @kbd{C-y}, the<br/>
+string of characters saying @samp{some text} would be inserted in this<br/>
+buffer where my cursor is ...</p>
+</li>
+<li>
+<p class="binderItem"><strong>The kill-ring-yank-pointer Variable</strong><br/><br/>
+@node kill-ring-yank-pointer, yank nthcdr Exercises, Kill Ring Overview, Yanking<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section The @code{kill-ring-yank-pointer} Variable<br/>
+<br/>
+@code{kill-ring-yank-pointer} is a variable, just as @code{kill-ring} is<br/>
+a variable.  It points to something by being bound to the value of what<br/>
+it points to, like any other Lisp variable.<br/>
+<br/>
+@need 1000<br/>
+Thus, if the value of the kill ring is:<br/>
+<br/>
+@smallexample<br/>
+("some text" "a different piece of text" "yet more text")<br/>
+@end sma...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Exercises with yank and nthcdr</strong><br/><br/>
+@need 1500<br/>
+@node yank nthcdr Exercises,  , kill-ring-yank-pointer, Yanking<br/>
+@section Exercises with @code{yank} and @code{nthcdr}<br/>
+<br/>
+@itemize @bullet<br/>
+@item<br/>
+Using @kbd{C-h v} (@code{describe-variable}), look at the value of<br/>
+your kill ring.  Add several items to your kill ring; look at its<br/>
+value again.  Using @kbd{M-y} (@code{yank-pop)}, move all the way<br/>
+around the kill ring.  How many items were in your kill ring?  Find<br/>
+the value of @code{kill-ring-max}.  Was your kill ring full, or could<br/>
+you have ...</p>
+</li>
+</ul>
+<hr/>
 <li>
 <p class="binderItem"><strong>Loops and Recursion</strong><br/><br/>
 @node Loops & Recursion, Regexp Search, Yanking, Top<br/>
@@ -1021,6 +1228,75 @@ loop, and the other uses @dfn{recursion}.<br/>
 Repetition can be very valuable.  For example, to move forward four<br/>
 sentences, you need only write a program th...</p>
 </li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>while</strong><br/><br/>
+@node while, dolist dotimes, Loops & Recursion, Loops & Recursion<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section @code{while}<br/>
+@cindex Loops<br/>
+@findex while<br/>
+<br/>
+The @code{while} special form tests whether the value returned by<br/>
+evaluating its first argument is true or false.  This is similar to what<br/>
+the Lisp interpreter does with an @code{if}; what the interpreter does<br/>
+next, however, is different.<br/>
+<br/>
+In a @code{while} expression, if the value returned by evaluating the<br/>
+first argument is false, the ...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Save your time dolist and dotimes</strong><br/><br/>
+@node dolist dotimes, Recursion, while, Loops & Recursion<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Save your time: @code{dolist} and @code{dotimes}<br/>
+<br/>
+In addition to @code{while}, both @code{dolist} and @code{dotimes}<br/>
+provide for looping.  Sometimes these are quicker to write than the<br/>
+equivalent @code{while} loop.  Both are Lisp macros.  (@xref{Macros, ,<br/>
+Macros, elisp, The GNU Emacs Lisp Reference Manual}. )<br/>
+<br/>
+@code{dolist} works like a @code{while} loop that `@sc{cdr}s down a<br/>
+list':  @...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Recursion</strong><br/><br/>
+@node Recursion, Looping exercise, dolist dotimes, Loops & Recursion<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Recursion<br/>
+@cindex Recursion<br/>
+<br/>
+A recursive function contains code that tells the Lisp interpreter to<br/>
+call a program that runs exactly like itself, but with slightly<br/>
+different arguments.  The code runs exactly the same because it has<br/>
+the same name.  However, even though the program has the same name, it<br/>
+is not the same entity.  It is different.  In the jargon, it is a<br/>
+different ...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Looping Exercise</strong><br/><br/>
+@need 1500<br/>
+@node Looping exercise,  , Recursion, Loops & Recursion<br/>
+@section Looping Exercise<br/>
+<br/>
+@itemize @bullet<br/>
+@item<br/>
+Write a function similar to @code{triangle} in which each row has a<br/>
+value which is the square of the row number.  Use a @code{while} loop.<br/>
+<br/>
+@item<br/>
+Write a function similar to @code{triangle} that multiplies instead of<br/>
+adds the values.<br/>
+<br/>
+@item<br/>
+Rewrite these two functions recursively.  Rewrite these functions<br/>
+using @code{cond}.<br/>
+<br/>
+@c comma in printed title causes problem in Info cross ...</p>
+</li>
+</ul>
+<hr/>
 <li>
 <p class="binderItem"><strong>Regular Expression Searches</strong><br/><br/>
 @node Regexp Search, Counting Words, Loops & Recursion, Top<br/>
@@ -1037,6 +1313,122 @@ Regular expression searches are used extensively in GNU Emacs.  The<br/>
 two functions, @code{forward-sentence} and @code{forward-paragraph},<br/>
 illustrate these s...</p>
 </li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>The Regular Expression for sentence-end</strong><br/><br/>
+@node sentence-end, re-search-forward, Regexp Search, Regexp Search<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section The Regular Expression for @code{sentence-end}<br/>
+@findex sentence-end<br/>
+<br/>
+The symbol @code{sentence-end} is bound to the pattern that marks the<br/>
+end of a sentence.  What should this regular expression be?<br/>
+<br/>
+Clearly, a sentence may be ended by a period, a question mark, or an<br/>
+exclamation mark.  Indeed, in English, only clauses that end with one<br/>
+of those three characters should be cons...</p>
+</li>
+<li>
+<p class="binderItem"><strong>The re-search-forward Function</strong><br/><br/>
+@node re-search-forward, forward-sentence, sentence-end, Regexp Search<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section The @code{re-search-forward} Function<br/>
+@findex re-search-forward<br/>
+<br/>
+The @code{re-search-forward} function is very like the<br/>
+@code{search-forward} function.  (@xref{search-forward, , The<br/>
+@code{search-forward} Function}.)<br/>
+<br/>
+@code{re-search-forward} searches for a regular expression.  If the<br/>
+search is successful, it leaves point immediately after the last<br/>
+character in the target.  ...</p>
+</li>
+<li>
+<p class="binderItem"><strong>forward-sentence</strong><br/><br/>
+@node forward-sentence, forward-paragraph, re-search-forward, Regexp Search<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section @code{forward-sentence}<br/>
+@findex forward-sentence<br/>
+<br/>
+The command to move the cursor forward a sentence is a straightforward<br/>
+illustration of how to use regular expression searches in Emacs Lisp.<br/>
+Indeed, the function looks longer and more complicated than it is; this<br/>
+is because the function is designed to go backwards as well as forwards;<br/>
+and, optionally, over more than one...</p>
+</li>
+<li>
+<p class="binderItem"><strong>forward-paragraph: a Goldmine of Functions</strong><br/><br/>
+@node forward-paragraph, etags, forward-sentence, Regexp Search<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section @code{forward-paragraph}: a Goldmine of Functions<br/>
+@findex forward-paragraph<br/>
+<br/>
+@ignore<br/>
+@c in GNU Emacs 22<br/>
+(defun forward-paragraph (&optional arg)<br/>
+  "Move forward to end of paragraph.<br/>
+With argument ARG, do it ARG times;<br/>
+a negative argument ARG = -N means move backward N paragraphs.<br/>
+<br/>
+A line which `paragraph-start' matches either separates paragraphs<br/>
+\(if `paragraph-separate' matches ...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Create Your Own TAGS File</strong><br/><br/>
+@node etags, Regexp Review, forward-paragraph, Regexp Search<br/>
+@section Create Your Own @file{TAGS} File<br/>
+@findex etags<br/>
+@cindex @file{TAGS} file, create own<br/>
+<br/>
+Besides @kbd{C-h f} (@code{describe-function}), another way to see the<br/>
+source of a function is to type @kbd{M-.} (@code{find-tag}) and the<br/>
+name of the function when prompted for it.  This is a good habit to<br/>
+get into.  The @kbd{M-.} (@code{find-tag}) command takes you directly<br/>
+to the source for a function, variable, or node.  The function depe...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Review</strong><br/><br/>
+@node Regexp Review, re-search Exercises, etags, Regexp Search<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Review<br/>
+<br/>
+Here is a brief summary of some recently introduced functions.<br/>
+<br/>
+@table @code<br/>
+@item while<br/>
+Repeatedly evaluate the body of the expression so long as the first<br/>
+element of the body tests true.  Then return @code{nil}.  (The<br/>
+expression is evaluated only for its side effects.)<br/>
+<br/>
+@need 1250<br/>
+For example:<br/>
+<br/>
+@smallexample<br/>
+@group<br/>
+(let ((foo 2))<br/>
+  (while (> foo 0)<br/>
+    (insert (format "fo...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Exercises with re-search-forward</strong><br/><br/>
+@need 1500<br/>
+@node re-search Exercises,  , Regexp Review, Regexp Search<br/>
+@section Exercises with @code{re-search-forward}<br/>
+<br/>
+@itemize @bullet<br/>
+@item<br/>
+Write a function to search for a regular expression that matches two<br/>
+or more blank lines in sequence.<br/>
+<br/>
+@item<br/>
+Write a function to search for duplicated words, such as `the the'.<br/>
+@xref{Regexps, , Syntax of Regular Expressions, emacs, The GNU Emacs<br/>
+Manual}, for information on how to write a regexp (a regular<br/>
+expression) to match a string that is composed of...</p>
+</li>
+</ul>
+<hr/>
 <li>
 <p class="binderItem"><strong>Counting: Repeitition and Regexps</strong><br/><br/>
 @node Counting Words, Words in a defun, Regexp Search, Top<br/>
@@ -1053,6 +1445,47 @@ word count commands using @code{while} loops and recursion.<br/>
 * Why Count Words::<br/>
 * count-words-regi...</p>
 </li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>The count-words-region Function</strong><br/><br/>
+@node count-words-region, recursive-count-words, Why Count Words, Counting Words<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section The @code{count-words-region} Function<br/>
+@findex count-words-region<br/>
+<br/>
+A word count command could count words in a line, paragraph, region,<br/>
+or buffer.  What should the command cover?  You could design the<br/>
+command to count the number of words in a complete buffer.  However,<br/>
+the Emacs tradition encourages flexibility---you may want to count<br/>
+words in just a section, rath...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Count Words Recursively</strong><br/><br/>
+@node recursive-count-words, Counting Exercise, count-words-region, Counting Words<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Count Words Recursively<br/>
+@cindex Count words recursively<br/>
+@cindex Recursively counting words<br/>
+@cindex Words, counted recursively<br/>
+<br/>
+You can write the function for counting words recursively as well as<br/>
+with a @code{while} loop.  Let's see how this is done.<br/>
+<br/>
+First, we need to recognize that the @code{count-words-region}<br/>
+function has three jobs: it sets up the appropria...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Exercise: Counting Punctuation</strong><br/><br/>
+@node Counting Exercise,  , recursive-count-words, Counting Words<br/>
+@section Exercise: Counting Punctuation<br/>
+<br/>
+Using a @code{while} loop, write a function to count the number of<br/>
+punctuation marks in a region---period, comma, semicolon, colon,<br/>
+exclamation mark, and question mark.  Do the same using recursion.</p>
+</li>
+</ul>
+<hr/>
 <li>
 <p class="binderItem"><strong>Counting Words in a defun</strong><br/><br/>
 @node Words in a defun, Readying a Graph, Counting Words, Top<br/>
@@ -1066,6 +1499,140 @@ definition.  Clearly, this can be done using some variant of<br/>
 Repetition and Regexps}.  If we are just going to count the words in<br/>
 one definition, it is easy enough to mark the definit...</p>
 </li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>What to Count?</strong><br/><br/>
+@node Words and Symbols, Syntax, Divide and Conquer, Words in a defun<br/>
+@section What to Count?<br/>
+@cindex Words and symbols in defun<br/>
+<br/>
+When we first start thinking about how to count the words in a<br/>
+function definition, the first question is (or ought to be) what are<br/>
+we going to count?  When we speak of `words' with respect to a Lisp<br/>
+function definition, we are actually speaking, in large part, of<br/>
+`symbols'.  For example, the following @code{multiply-by-seven}<br/>
+function contains the five symbols @code...</p>
+</li>
+<li>
+<p class="binderItem"><strong>What Constitutes a Word or Symbol</strong><br/><br/>
+@node Syntax, count-words-in-defun, Words and Symbols, Words in a defun<br/>
+@section What Constitutes a Word or Symbol?<br/>
+@cindex Syntax categories and tables<br/>
+<br/>
+Emacs treats different characters as belonging to different<br/>
+@dfn{syntax categories}.  For example, the regular expression,<br/>
+@samp{\\w+}, is a pattern specifying one or more @emph{word<br/>
+constituent} characters.  Word constituent characters are members of<br/>
+one syntax category.  Other syntax categories include the class of<br/>
+punctuation characters, su...</p>
+</li>
+<li>
+<p class="binderItem"><strong>The count-words-in-defun Function</strong><br/><br/>
+@node count-words-in-defun, Several defuns, Syntax, Words in a defun<br/>
+@section The @code{count-words-in-defun} Function<br/>
+@cindex Counting words in a @code{defun}<br/>
+<br/>
+We have seen that there are several ways to write a<br/>
+@code{count-word-region} function.  To write a<br/>
+@code{count-words-in-defun}, we need merely adapt one of these<br/>
+versions.<br/>
+<br/>
+The version that uses a @code{while} loop is easy to understand, so I<br/>
+am going to adapt that.  Because @code{count-words-in-defun} will be<br/>
+part of a more complex pro...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Count Several defuns Within a File</strong><br/><br/>
+@node Several defuns, Find a File, count-words-in-defun, Words in a defun<br/>
+@section Count Several @code{defuns} Within a File<br/>
+<br/>
+A file such as @file{simple.el} may have a hundred or more function<br/>
+definitions within it.  Our long term goal is to collect statistics on<br/>
+many files, but as a first step, our immediate goal is to collect<br/>
+statistics on one file.<br/>
+<br/>
+The information will be a series of numbers, each number being the<br/>
+length of a function definition.  We can store the numbers in a list.<br/>
+<br/>
+We kn...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Find a File</strong><br/><br/>
+@node Find a File, lengths-list-file, Several defuns, Words in a defun<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@section Find a File<br/>
+@cindex Find a File<br/>
+<br/>
+To find a file in Emacs, you use the @kbd{C-x C-f} (@code{find-file})<br/>
+command.  This command is almost, but not quite right for the lengths<br/>
+problem.<br/>
+<br/>
+@need 1200<br/>
+Let's look at the source for @code{find-file}:<br/>
+<br/>
+@smallexample<br/>
+@group<br/>
+(defun find-file (filename)<br/>
+  "Edit file FILENAME.<br/>
+Switch to a buffer visiting file FILENAME,<br/>
+creating one if non...</p>
+</li>
+<li>
+<p class="binderItem"><strong>lengths-list-file in Detail</strong><br/><br/>
+@node lengths-list-file, Several files, Find a File, Words in a defun<br/>
+@section @code{lengths-list-file} in Detail<br/>
+<br/>
+The core of the @code{lengths-list-file} function is a @code{while}<br/>
+loop containing a function to move point forward `defun by defun' and<br/>
+a function to count the number of words and symbols in each defun.<br/>
+This core must be surrounded by functions that do various other tasks,<br/>
+including finding the file, and ensuring that point starts out at the<br/>
+beginning of the file.  The function d...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Count Words in defuns in Different Files</strong><br/><br/>
+@node Several files, Several files recursively, lengths-list-file, Words in a defun<br/>
+@section Count Words in @code{defuns} in Different Files<br/>
+<br/>
+In the previous section, we created a function that returns a list of<br/>
+the lengths of each definition in a file.  Now, we want to define a<br/>
+function to return a master list of the lengths of the definitions in<br/>
+a list of files.<br/>
+<br/>
+Working on each of a list of files is a repetitious act, so we can use<br/>
+either a @code{while} loop or recursion.<br/>
+<br/>
+@menu<br/>
+* lengths-li...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Recursively Count Words in Different Files</strong><br/><br/>
+@node Several files recursively, Prepare the data, Several files, Words in a defun<br/>
+@section Recursively Count Words in Different Files<br/>
+<br/>
+Besides a @code{while} loop, you can work on each of a list of files<br/>
+with recursion.  A recursive version of @code{lengths-list-many-files}<br/>
+is short and simple.<br/>
+<br/>
+The recursive function has the usual parts: the `do-again-test', the<br/>
+`next-step-expression', and the recursive call.  The `do-again-test'<br/>
+determines whether the function should call itself again, which...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Prepare the Data for Display in a Graph</strong><br/><br/>
+@node Prepare the data,  , Several files recursively, Words in a defun<br/>
+@section Prepare the Data for Display in a Graph<br/>
+<br/>
+The @code{recursive-lengths-list-many-files} function returns a list<br/>
+of numbers.  Each number records the length of a function definition.<br/>
+What we need to do now is transform this data into a list of numbers<br/>
+suitable for generating a graph.  The new list will tell how many<br/>
+functions definitions contain less than 10 words and<br/>
+symbols, how many contain between 10 and 19 words a...</p>
+</li>
+</ul>
+<hr/>
 <li>
 <p class="binderItem"><strong>Readying a Graph</strong><br/><br/>
 @c The next step is to turn this numbers' list into a graph.<br/>
@@ -1083,6 +1650,48 @@ As a practical matter, if you were creating a graph, you would<br/>
 probably use a program such as @code{gnuplot} to do the job.<br/>
 ...</p>
 </li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>The graph-body-print Function</strong><br/><br/>
+@node graph-body-print, recursive-graph-body-print, Columns of a graph, Readying a Graph<br/>
+@section The @code{graph-body-print} Function<br/>
+@findex graph-body-print<br/>
+<br/>
+After our preparation in the preceding section, the<br/>
+@code{graph-body-print} function is straightforward.  The function<br/>
+will print column after column of asterisks and blanks, using the<br/>
+elements of a numbers' list to specify the number of asterisks in each<br/>
+column.  This is a repetitive act, which means we can use a<br/>
+decrementing @code{whi...</p>
+</li>
+<li>
+<p class="binderItem"><strong>The recursive-graph-body-print Function</strong><br/><br/>
+@node recursive-graph-body-print, Printed Axes, graph-body-print, Readying a Graph<br/>
+@section The @code{recursive-graph-body-print} Function<br/>
+@findex recursive-graph-body-print<br/>
+<br/>
+The @code{graph-body-print} function may also be written recursively.<br/>
+The recursive solution is divided into two parts: an outside `wrapper'<br/>
+that uses a @code{let} expression to determine the values of several<br/>
+variables that need only be found once, such as the maximum height of<br/>
+the graph, and an inside function that is ca...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Need for Printed Axes</strong><br/><br/>
+@node Printed Axes, Line Graph Exercise, recursive-graph-body-print, Readying a Graph<br/>
+@section Need for Printed Axes<br/>
+<br/>
+A graph needs printed axes, so you can orient yourself.  For a do-once<br/>
+project, it may be reasonable to draw the axes by hand using Emacs'<br/>
+Picture mode; but a graph drawing function may be used more than once.<br/>
+<br/>
+For this reason, I have written enhancements to the basic<br/>
+@code{print-graph-body} function that automatically print labels for<br/>
+the horizontal and vertical axes.  Since th...</p>
+</li>
+</ul>
+<hr/>
 <li>
 <p class="binderItem"><strong>Your .emacs File</strong><br/><br/>
 @node Emacs Initialization, Debugging, Readying a Graph, Top<br/>
@@ -1099,6 +1708,220 @@ it to suit themselves.<br/>
 GNU Emacs is mostly written in Emacs Lisp; this means that by writing<br/>
 expression...</p>
 </li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>Site-wide initialization Files</strong><br/><br/>
+@node Site-wide Init, defcustom, Default Configuration, Emacs Initialization<br/>
+@section Site-wide Initialization Files<br/>
+<br/>
+@cindex @file{default.el} init file<br/>
+@cindex @file{site-init.el} init file<br/>
+@cindex @file{site-load.el} init file<br/>
+In addition to your personal initialization file, Emacs automatically<br/>
+loads various site-wide initialization files, if they exist.  These<br/>
+have the same form as your @file{.emacs} file, but are loaded by<br/>
+everyone.<br/>
+<br/>
+Two site-wide initialization files, @file{site-load.el}...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Specifying Variables using defcustom</strong><br/><br/>
+@node defcustom, Beginning a .emacs File, Site-wide Init, Emacs Initialization<br/>
+@section Specifying Variables using @code{defcustom}<br/>
+@findex defcustom<br/>
+<br/>
+You can specify variables using @code{defcustom} so that you and<br/>
+others can then use Emacs' @code{customize} feature to set their<br/>
+values.  (You cannot use @code{customize} to write function<br/>
+definitions; but you can write @code{defuns} in your @file{.emacs}<br/>
+file.  Indeed, you can write any Lisp expression in your @file{.emacs}<br/>
+file.)<br/>
+<br/>
+The @code{cu...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Beginning a .emacs File</strong><br/><br/>
+@node Beginning a .emacs File, Text and Auto-fill, defcustom, Emacs Initialization<br/>
+@section Beginning a @file{.emacs} File<br/>
+@cindex @file{.emacs} file, beginning of<br/>
+<br/>
+When you start Emacs, it loads your @file{.emacs} file unless you tell<br/>
+it not to by specifying @samp{-q} on the command line.  (The<br/>
+@code{emacs -q} command gives you a plain, out-of-the-box Emacs.)<br/>
+<br/>
+A @file{.emacs} file contains Lisp expressions.  Often, these are no<br/>
+more than expressions to set values; sometimes they are function<br/>
+d...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Text and Auto Fill Mode</strong><br/><br/>
+@node Text and Auto-fill, Mail Aliases, Beginning a .emacs File, Emacs Initialization<br/>
+@section Text and Auto Fill Mode<br/>
+<br/>
+Now we come to the part that `turns on' Text mode and<br/>
+Auto Fill mode.<br/>
+<br/>
+@smallexample<br/>
+@group<br/>
+;;; Text mode and Auto Fill mode<br/>
+;; The next two lines put Emacs into Text mode<br/>
+;; and Auto Fill mode, and are for writers who<br/>
+;; want to start writing prose rather than code.<br/>
+(setq-default major-mode 'text-mode)<br/>
+(add-hook 'text-mode-hook 'turn-on-auto-fill)<br/>
+@end group<br/>
+@end smallexample...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Mail Aliases</strong><br/><br/>
+@node Mail Aliases, Indent Tabs Mode, Text and Auto-fill, Emacs Initialization<br/>
+@section Mail Aliases<br/>
+<br/>
+Here is a @code{setq} that `turns on' mail aliases, along with more<br/>
+reminders.<br/>
+<br/>
+@smallexample<br/>
+@group<br/>
+;;; Mail mode<br/>
+; To enter mail mode, type `C-x m'<br/>
+; To enter RMAIL (for reading mail),<br/>
+; type `M-x rmail'<br/>
+(setq mail-aliases t)<br/>
+@end group<br/>
+@end smallexample<br/>
+<br/>
+@cindex Mail aliases<br/>
+@noindent<br/>
+This @code{setq} command sets the value of the variable<br/>
+@code{mail-aliases} to @code{t}.  Since @code{t} mea...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Indent Tabs Mode</strong><br/><br/>
+@node Indent Tabs Mode, Keybindings, Mail Aliases, Emacs Initialization<br/>
+@section Indent Tabs Mode<br/>
+@cindex Tabs, preventing<br/>
+@findex indent-tabs-mode<br/>
+<br/>
+By default, Emacs inserts tabs in place of multiple spaces when it<br/>
+formats a region.  (For example, you might indent many lines of text<br/>
+all at once with the @code{indent-region} command.)  Tabs look fine on<br/>
+a terminal or with ordinary printing, but they produce badly indented<br/>
+output when you use @TeX{} or Texinfo since @TeX{} ignores tabs.<br/>
+<br/>
+@need 1...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Some Keybindings</strong><br/><br/>
+@need 1700<br/>
+@node Keybindings, Keymaps, Indent Tabs Mode, Emacs Initialization<br/>
+@section Some Keybindings<br/>
+<br/>
+Now for some personal keybindings:<br/>
+<br/>
+@smallexample<br/>
+@group<br/>
+;;; Compare windows<br/>
+(global-set-key "\C-cw" 'compare-windows)<br/>
+@end group<br/>
+@end smallexample<br/>
+<br/>
+@findex compare-windows<br/>
+@code{compare-windows} is a nifty command that compares the text in<br/>
+your current window with text in the next window.  It makes the<br/>
+comparison by starting at point in each window, moving over text in<br/>
+each window as far as...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Keymaps</strong><br/><br/>
+@node Keymaps, Loading Files, Keybindings, Emacs Initialization<br/>
+@section Keymaps<br/>
+@cindex Keymaps<br/>
+@cindex Rebinding keys<br/>
+<br/>
+Emacs uses @dfn{keymaps} to record which keys call which commands.<br/>
+When you use @code{global-set-key} to set the keybinding for a single<br/>
+command in all parts of Emacs, you are specifying the keybinding in<br/>
+@code{current-global-map}.<br/>
+<br/>
+Specific modes, such as C mode or Text mode, have their own keymaps;<br/>
+the mode-specific keymaps override the global map that is shared by<br/>
+all buff...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Loading Files</strong><br/><br/>
+@node Loading Files, Autoload, Keymaps, Emacs Initialization<br/>
+@section Loading Files<br/>
+@cindex Loading files<br/>
+@c findex load<br/>
+<br/>
+Many people in the GNU Emacs community have written extensions to<br/>
+Emacs.  As time goes by, these extensions are often included in new<br/>
+releases.  For example, the Calendar and Diary packages are now part<br/>
+of the standard GNU Emacs, as is Calc.<br/>
+<br/>
+You can use a @code{load} command to evaluate a complete file and<br/>
+thereby install all the functions and variables in the file into Ema...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Autoloading</strong><br/><br/>
+@node Autoload, Simple Extension, Loading Files, Emacs Initialization<br/>
+@section Autoloading<br/>
+@findex autoload<br/>
+<br/>
+Instead of installing a function by loading the file that contains it,<br/>
+or by evaluating the function definition, you can make the function<br/>
+available but not actually install it until it is first called.  This<br/>
+is called @dfn{autoloading}.<br/>
+<br/>
+When you execute an autoloaded function, Emacs automatically evaluates<br/>
+the file that contains the definition, and then calls the function.<br/>
+<br/>
+Emacs start...</p>
+</li>
+<li>
+<p class="binderItem"><strong>A Simple Extension: line-to-top-of-window</strong><br/><br/>
+@node Simple Extension, X11 Colors, Autoload, Emacs Initialization<br/>
+@section A Simple Extension: @code{line-to-top-of-window}<br/>
+@findex line-to-top-of-window<br/>
+@cindex Simple extension in @file{.emacs} file<br/>
+<br/>
+Here is a simple extension to Emacs that moves the line point is on to<br/>
+the top of the window.  I use this all the time, to make text easier<br/>
+to read.<br/>
+<br/>
+You can put the following code into a separate file and then load it<br/>
+from your @file{.emacs} file, or you can include it within your<br/>
+@file{.emacs}...</p>
+</li>
+<li>
+<p class="binderItem"><strong>X11 Colors</strong><br/><br/>
+@node X11 Colors, Miscellaneous, Simple Extension, Emacs Initialization<br/>
+@section X11 Colors<br/>
+<br/>
+You can specify colors when you use Emacs with the MIT X Windowing<br/>
+system.<br/>
+<br/>
+I dislike the default colors and specify my own.<br/>
+<br/>
+@need 1250<br/>
+Here are the expressions in my @file{.emacs}<br/>
+file that set values:<br/>
+<br/>
+@smallexample<br/>
+@group<br/>
+;; Set cursor color<br/>
+(set-cursor-color "white")<br/>
+<br/>
+;; Set mouse color<br/>
+(set-mouse-color "white")<br/>
+<br/>
+;; Set foreground and background<br/>
+(set-foreground-color "white")<br/>
+(set-background-color ...</p>
+</li>
+</ul>
+<hr/>
 <li>
 <p class="binderItem"><strong>Debugging</strong><br/><br/>
 @node Debugging, Conclusion, Emacs Initialization, Top<br/>
@@ -1115,6 +1938,91 @@ In this chapter, I will walk through a short example of each.<br/>
 <br/>
 @me...</p>
 </li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>debug</strong><br/><br/>
+@node debug, debug-on-entry, Debugging, Debugging<br/>
+@section @code{debug}<br/>
+@findex debug<br/>
+<br/>
+Suppose you have written a function definition that is intended to<br/>
+return the sum of the numbers 1 through a given number.  (This is the<br/>
+@code{triangle} function discussed earlier.  @xref{Decrementing<br/>
+Example, , Example with Decrementing Counter}, for a discussion.)<br/>
+@c xref{Decrementing Loop,, Loop with a Decrementing Counter}, for a discussion.)<br/>
+<br/>
+However, your function definition has a bug.  You have mistype...</p>
+</li>
+<li>
+<p class="binderItem"><strong>debug-on-entry</strong><br/><br/>
+@node debug-on-entry, debug-on-quit, debug, Debugging<br/>
+@section @code{debug-on-entry}<br/>
+@findex debug-on-entry<br/>
+<br/>
+A recent GNU Emacs starts the debugger automatically when your<br/>
+function has an error.<br/>
+<br/>
+@ignore<br/>
+GNU Emacs version 20 and before did not; it simply<br/>
+presented you with an error message.  You had to start the debugger<br/>
+manually.<br/>
+@end ignore<br/>
+<br/>
+Incidentally, you can start the debugger manually for all versions of<br/>
+Emacs; the advantage is that the debugger runs even if you do not have<br/>
+a bug in you...</p>
+</li>
+<li>
+<p class="binderItem"><strong>debug-on-quit and debug</strong><br/><br/>
+@node debug-on-quit, edebug, debug-on-entry, Debugging<br/>
+@section @code{debug-on-quit} and @code{(debug)}<br/>
+<br/>
+In addition to setting @code{debug-on-error} or calling @code{debug-on-entry},<br/>
+there are two other ways to start @code{debug}.<br/>
+<br/>
+@findex debug-on-quit<br/>
+You can start @code{debug} whenever you type @kbd{C-g}<br/>
+(@code{keyboard-quit}) by setting the variable @code{debug-on-quit} to<br/>
+@code{t}.  This is useful for debugging infinite loops.<br/>
+<br/>
+@need 1500<br/>
+@cindex @code{(debug)} in code<br/>
+Or, you can insert ...</p>
+</li>
+<li>
+<p class="binderItem"><strong>The edebug Source Level Debugger</strong><br/><br/>
+@node edebug, Debugging Exercises, debug-on-quit, Debugging<br/>
+@section The @code{edebug} Source Level Debugger<br/>
+@cindex Source level debugger<br/>
+@findex edebug<br/>
+<br/>
+Edebug is a source level debugger.  Edebug normally displays the<br/>
+source of the code you are debugging, with an arrow at the left that<br/>
+shows which line you are currently executing.<br/>
+<br/>
+You can walk through the execution of a function, line by line, or run<br/>
+quickly until reaching a @dfn{breakpoint} where execution stops.<br/>
+<br/>
+Edebug is described in @re...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Debugging Exercises</strong><br/><br/>
+@need 1500<br/>
+@node Debugging Exercises,  , edebug, Debugging<br/>
+@section Debugging Exercises<br/>
+<br/>
+@itemize @bullet<br/>
+@item<br/>
+Install the @code{count-words-region} function and then cause it to<br/>
+enter the built-in debugger when you call it.  Run the command on a<br/>
+region containing two words.  You will need to press @kbd{d} a<br/>
+remarkable number of times.  On your system, is a `hook' called after<br/>
+the command finishes?  (For information on hooks, see @ref{Command<br/>
+Overview, , Command Loop Overview, elisp, The GNU E...</p>
+</li>
+</ul>
+<hr/>
 <li>
 <p class="binderItem"><strong>Conclusion</strong><br/><br/>
 @node Conclusion, the-the, Debugging, Top<br/>
@@ -1130,6 +2038,78 @@ teach yourself.<br/>
 <br/>
 You have learned some of the basic nuts and bolts of programming.  But<br/>
 only some.  There are a gre...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Handling the Kill Ring</strong><br/><br/>
+@node Kill Ring, Full Graph, the-the, Top<br/>
+@appendix Handling the Kill Ring<br/>
+@cindex Kill ring handling<br/>
+@cindex Handling the kill ring<br/>
+@cindex Ring, making a list like a<br/>
+<br/>
+The kill ring is a list that is transformed into a ring by the<br/>
+workings of the @code{current-kill} function.  The @code{yank} and<br/>
+@code{yank-pop} commands use the @code{current-kill} function.<br/>
+<br/>
+This appendix describes the @code{current-kill} function as well as<br/>
+both the @code{yank} and the @code{yank-pop} commands, but first,<br/>
+co...</p>
+</li>
+<li>
+<p class="binderItem"><strong>A Graph with Labelled Axes</strong><br/><br/>
+@node Full Graph, Free Software and Free Manuals, Kill Ring, Top<br/>
+@appendix A Graph with Labelled Axes<br/>
+<br/>
+Printed axes help you understand a graph.  They convey scale.  In an<br/>
+earlier chapter (@pxref{Readying a Graph, ,  Readying a Graph}), we<br/>
+wrote the code to print the body of a graph.  Here we write the code<br/>
+for printing and labelling vertical and horizontal axes, along with the<br/>
+body itself.<br/>
+<br/>
+@menu<br/>
+* Labelled Example::<br/>
+* print-graph Varlist::         @code{let} expression in @code{print-graph}.<br/>
+...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Free Software and Free Manuals</strong><br/><br/>
+@node Free Software and Free Manuals, GNU Free Documentation License, Full Graph, Top<br/>
+@appendix Free Software and Free Manuals<br/>
+<br/>
+@strong{by Richard M. Stallman}<br/>
+@sp 1<br/>
+<br/>
+The biggest deficiency in free operating systems is not in the<br/>
+software---it is the lack of good free manuals that we can include in<br/>
+these systems.  Many of our most important programs do not come with<br/>
+full manuals.  Documentation is an essential part of any software<br/>
+package; when an important free software package does not come w...</p>
+</li>
+<li>
+<p class="binderItem"><strong>GNU Free Documentation License</strong><br/><br/>
+@node GNU Free Documentation License, Index, Free Software and Free Manuals, Top<br/>
+@appendix GNU Free Documentation License<br/>
+<br/>
+@cindex FDL, GNU Free Documentation License<br/>
+@include doclicense.texi<br/>
+<br/>
+@node Index, About the Author, GNU Free Documentation License, Top<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@unnumbered Index<br/>
+<br/>
+@ignore<br/>
+MENU ENTRY: NODE NAME.<br/>
+@end ignore<br/>
+<br/>
+@printindex cp<br/>
+<br/>
+@iftex<br/>
+@c Place biographical information on right-hand (verso) page<br/>
+<br/>
+@tex<br/>
+\par\vfill\supereject<br/>
+\ifodd\pageno<br/>
+    \gl...</p>
 </li>
 </ul>
 

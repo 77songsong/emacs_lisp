@@ -1,0 +1,747 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node copy-region-as-kill, Digression into C, kill-region, Cutting & Storing Text\
+@comment  node-name,  next,  previous,  up\
+@section @code\{copy-region-as-kill\}\
+@findex copy-region-as-kill\
+@findex nthcdr\
+\
+The @code\{copy-region-as-kill\} function copies a region of text from a\
+buffer and (via either @code\{kill-append\} or @code\{kill-new\}) saves it\
+in the @code\{kill-ring\}.\
+\
+If you call @code\{copy-region-as-kill\} immediately after a\
+@code\{kill-region\} command, Emacs appends the newly copied text to the\
+previously copied text.  This means that if you yank back the text, you\
+get it all, from both this and the previous operation.  On the other\
+hand, if some other command precedes the @code\{copy-region-as-kill\},\
+the function copies the text into a separate entry in the kill ring.\
+\
+@menu\
+* Complete copy-region-as-kill::  The complete function definition.\
+* copy-region-as-kill body::      The body of @code\{copy-region-as-kill\}.\
+@end menu\
+\
+@node Complete copy-region-as-kill, copy-region-as-kill body, copy-region-as-kill, copy-region-as-kill\
+@ifnottex\
+@unnumberedsubsec The complete @code\{copy-region-as-kill\} function definition\
+@end ifnottex\
+\
+@need 1200\
+Here is the complete text of the version 22 @code\{copy-region-as-kill\}\
+function:\
+\
+@smallexample\
+@group\
+(defun copy-region-as-kill (beg end)\
+  "Save the region as if killed, but don't kill it.\
+In Transient Mark mode, deactivate the mark.\
+If `interprogram-cut-function' is non-nil, also save the text for a window\
+system cut and paste."\
+  (interactive "r")\
+@end group\
+@group\
+  (if (eq last-command 'kill-region)\
+      (kill-append (filter-buffer-substring beg end) (< end beg))\
+    (kill-new (filter-buffer-substring beg end)))\
+@end group\
+@group\
+  (if transient-mark-mode\
+      (setq deactivate-mark t))\
+  nil)\
+@end group\
+@end smallexample\
+\
+@need 800\
+As usual, this function can be divided into its component parts:\
+\
+@smallexample\
+@group\
+(defun copy-region-as-kill (@var\{argument-list\})\
+  "@var\{documentation\}@dots\{\}"\
+  (interactive "r")\
+  @var\{body\}@dots\{\})\
+@end group\
+@end smallexample\
+\
+The arguments are @code\{beg\} and @code\{end\} and the function is\
+interactive with @code\{"r"\}, so the two arguments must refer to the\
+beginning and end of the region.  If you have been reading though this\
+document from the beginning, understanding these parts of a function is\
+almost becoming routine.\
+\
+The documentation is somewhat confusing unless you remember that the\
+word `kill' has a meaning different from usual.  The `Transient Mark'\
+and @code\{interprogram-cut-function\} comments explain certain\
+side-effects.\
+\
+After you once set a mark, a buffer always contains a region.  If you\
+wish, you can use Transient Mark mode to highlight the region\
+temporarily.  (No one wants to highlight the region all the time, so\
+Transient Mark mode highlights it only at appropriate times.  Many\
+people turn off Transient Mark mode, so the region is never\
+highlighted.)\
+\
+Also, a windowing system allows you to copy, cut, and paste among\
+different programs.  In the X windowing system, for example, the\
+@code\{interprogram-cut-function\} function is @code\{x-select-text\},\
+which works with the windowing system's equivalent of the Emacs kill\
+ring.\
+\
+The body of the @code\{copy-region-as-kill\} function starts with an\
+@code\{if\} clause.  What this clause does is distinguish between two\
+different situations: whether or not this command is executed\
+immediately after a previous @code\{kill-region\} command.  In the first\
+case, the new region is appended to the previously copied text.\
+Otherwise, it is inserted into the beginning of the kill ring as a\
+separate piece of text from the previous piece.\
+\
+The last two lines of the function prevent the region from lighting up\
+if Transient Mark mode is turned on.\
+\
+The body of @code\{copy-region-as-kill\} merits discussion in detail.\
+\
+@node copy-region-as-kill body,  , Complete copy-region-as-kill, copy-region-as-kill\
+@comment  node-name,  next,  previous,  up\
+@subsection The Body of @code\{copy-region-as-kill\}\
+\
+The @code\{copy-region-as-kill\} function works in much the same way as\
+the @code\{kill-region\} function.  Both are written so that two or more\
+kills in a row combine their text into a single entry.  If you yank\
+back the text from the kill ring, you get it all in one piece.\
+Moreover, kills that kill forward from the current position of the\
+cursor are added to the end of the previously copied text and commands\
+that copy text backwards add it to the beginning of the previously\
+copied text.  This way, the words in the text stay in the proper\
+order.\
+\
+Like @code\{kill-region\}, the @code\{copy-region-as-kill\} function makes\
+use of the @code\{last-command\} variable that keeps track of the\
+previous Emacs command.\
+\
+@menu\
+* last-command & this-command::\
+* kill-append function::\
+* kill-new function::\
+@end menu\
+\
+@node last-command & this-command, kill-append function, copy-region-as-kill body, copy-region-as-kill body\
+@ifnottex\
+@unnumberedsubsubsec @code\{last-command\} and @code\{this-command\}\
+@end ifnottex\
+\
+Normally, whenever a function is executed, Emacs sets the value of\
+@code\{this-command\} to the function being executed (which in this case\
+would be @code\{copy-region-as-kill\}).  At the same time, Emacs sets\
+the value of @code\{last-command\} to the previous value of\
+@code\{this-command\}.\
+\
+In the first part of the body of the @code\{copy-region-as-kill\}\
+function, an @code\{if\} expression determines whether the value of\
+@code\{last-command\} is @code\{kill-region\}.  If so, the then-part of\
+the @code\{if\} expression is evaluated; it uses the @code\{kill-append\}\
+function to concatenate the text copied at this call to the function\
+with the text already in the first element (the @sc\{car\}) of the kill\
+ring.  On the other hand, if the value of @code\{last-command\} is not\
+@code\{kill-region\}, then the @code\{copy-region-as-kill\} function\
+attaches a new element to the kill ring using the @code\{kill-new\}\
+function.\
+\
+@need 1250\
+The @code\{if\} expression reads as follows; it uses @code\{eq\}:\
+\
+@smallexample\
+@group\
+  (if (eq last-command 'kill-region)\
+      ;; @r\{then-part\}\
+      (kill-append  (filter-buffer-substring beg end) (< end beg))\
+    ;; @r\{else-part\}\
+    (kill-new  (filter-buffer-substring beg end)))\
+@end group\
+@end smallexample\
+\
+@findex filter-buffer-substring\
+(The @code\{filter-buffer-substring\} function returns a filtered\
+substring of the buffer, if any.  Optionally---the arguments are not\
+here, so neither is done---the function may delete the initial text or\
+return the text without its properties; this function is a replacement\
+for the older @code\{buffer-substring\} function, which came before text\
+properties were implemented.)\
+\
+@findex eq @r\{(example of use)\}\
+@noindent\
+The @code\{eq\} function tests whether its first argument is the same Lisp\
+object as its second argument.  The @code\{eq\} function is similar to the\
+@code\{equal\} function in that it is used to test for equality, but\
+differs in that it determines whether two representations are actually\
+the same object inside the computer, but with different names.\
+@code\{equal\} determines whether the structure and contents of two\
+expressions are the same.\
+\
+If the previous command was @code\{kill-region\}, then the Emacs Lisp\
+interpreter calls the @code\{kill-append\} function\
+\
+@node kill-append function, kill-new function, last-command & this-command, copy-region-as-kill body\
+@unnumberedsubsubsec The @code\{kill-append\} function\
+@findex kill-append\
+\
+@need 800\
+The @code\{kill-append\} function looks like this:\
+\
+@c in GNU Emacs 22\
+@smallexample\
+@group\
+(defun kill-append (string before-p &optional yank-handler)\
+  "Append STRING to the end of the latest kill in the kill ring.\
+If BEFORE-P is non-nil, prepend STRING to the kill.\
+@dots\{\} "\
+  (let* ((cur (car kill-ring)))\
+    (kill-new (if before-p (concat string cur) (concat cur string))\
+              (or (= (length cur) 0)\
+                  (equal yank-handler\
+                         (get-text-property 0 'yank-handler cur)))\
+              yank-handler)))\
+@end group\
+@end smallexample\
+\
+@ignore\
+was:\
+(defun kill-append (string before-p)\
+  "Append STRING to the end of the latest kill in the kill ring.\
+If BEFORE-P is non-nil, prepend STRING to the kill.\
+If `interprogram-cut-function' is set, pass the resulting kill to\
+it."\
+  (kill-new (if before-p\
+                (concat string (car kill-ring))\
+              (concat (car kill-ring) string))\
+            t))\
+@end ignore\
+\
+@noindent\
+The @code\{kill-append\} function is fairly straightforward.  It uses\
+the @code\{kill-new\} function, which we will discuss in more detail in\
+a moment.\
+\
+(Also, the function provides an optional argument called\
+@code\{yank-handler\}; when invoked, this argument tells the function\
+how to deal with properties added to the text, such as `bold' or\
+`italics'.)\
+\
+@c !!! bug in GNU Emacs 22 version of  kill-append ?\
+It has a @code\{let*\} function to set the value of the first element of\
+the kill ring to @code\{cur\}.  (I do not know why the function does not\
+use @code\{let\} instead; only one value is set in the expression.\
+Perhaps this is a bug that produces no problems?)\
+\
+Consider the conditional that is one of the two arguments to\
+@code\{kill-new\}.  It uses @code\{concat\} to concatenate the new text to\
+the @sc\{car\} of the kill ring.  Whether it prepends or appends the\
+text depends on the results of an @code\{if\} expression:\
+\
+@smallexample\
+@group\
+(if before-p                            ; @r\{if-part\}\
+    (concat string cur)                 ; @r\{then-part\}\
+  (concat cur string))                  ; @r\{else-part\}\
+@end group\
+@end smallexample\
+\
+@noindent\
+If the region being killed is before the region that was killed in the\
+last command, then it should be prepended before the material that was\
+saved in the previous kill; and conversely, if the killed text follows\
+what was just killed, it should be appended after the previous text.\
+The @code\{if\} expression depends on the predicate @code\{before-p\} to\
+decide whether the newly saved text should be put before or after the\
+previously saved text.\
+\
+The symbol @code\{before-p\} is the name of one of the arguments to\
+@code\{kill-append\}.  When the @code\{kill-append\} function is\
+evaluated, it is bound to the value returned by evaluating the actual\
+argument.  In this case, this is the expression @code\{(< end beg)\}.\
+This expression does not directly determine whether the killed text in\
+this command is located before or after the kill text of the last\
+command; what it does is determine whether the value of the variable\
+@code\{end\} is less than the value of the variable @code\{beg\}.  If it\
+is, it means that the user is most likely heading towards the\
+beginning of the buffer.  Also, the result of evaluating the predicate\
+expression, @code\{(< end beg)\}, will be true and the text will be\
+prepended before the previous text.  On the other hand, if the value of\
+the variable @code\{end\} is greater than the value of the variable\
+@code\{beg\}, the text will be appended after the previous text.\
+\
+@need 800\
+When the newly saved text will be prepended, then the string with the new\
+text will be concatenated before the old text:\
+\
+@smallexample\
+(concat string cur)\
+@end smallexample\
+\
+@need 1200\
+@noindent\
+But if the text will be appended, it will be concatenated\
+after the old text:\
+\
+@smallexample\
+(concat cur string))\
+@end smallexample\
+\
+To understand how this works, we first need to review the\
+@code\{concat\} function.  The @code\{concat\} function links together or\
+unites two strings of text.  The result is a string.  For example:\
+\
+@smallexample\
+@group\
+(concat "abc" "def")\
+     @result\{\} "abcdef"\
+@end group\
+\
+@group\
+(concat "new "\
+        (car '("first element" "second element")))\
+     @result\{\} "new first element"\
+\
+(concat (car\
+        '("first element" "second element")) " modified")\
+     @result\{\} "first element modified"\
+@end group\
+@end smallexample\
+\
+We can now make sense of @code\{kill-append\}: it modifies the contents\
+of the kill ring.  The kill ring is a list, each element of which is\
+saved text.  The @code\{kill-append\} function uses the @code\{kill-new\}\
+function which in turn uses the @code\{setcar\} function.\
+\
+@node kill-new function,  , kill-append function, copy-region-as-kill body\
+@unnumberedsubsubsec The @code\{kill-new\} function\
+@findex kill-new\
+\
+@c in GNU Emacs 22, additional documentation to kill-new:\
+@ignore\
+Optional third arguments YANK-HANDLER controls how the STRING is later\
+inserted into a buffer; see `insert-for-yank' for details.\
+When a yank handler is specified, STRING must be non-empty (the yank\
+handler, if non-nil, is stored as a `yank-handler' text property on STRING).\
+\
+When the yank handler has a non-nil PARAM element, the original STRING\
+argument is not used by `insert-for-yank'.  However, since Lisp code\
+may access and use elements from the kill ring directly, the STRING\
+argument should still be a \\"useful\\" string for such uses."\
+@end ignore\
+@need 1200\
+The @code\{kill-new\} function looks like this:\
+\
+@smallexample\
+@group\
+(defun kill-new (string &optional replace yank-handler)\
+  "Make STRING the latest kill in the kill ring.\
+Set `kill-ring-yank-pointer' to point to it.\
+\
+If `interprogram-cut-function' is non-nil, apply it to STRING.\
+Optional second argument REPLACE non-nil means that STRING will replace\
+the front of the kill ring, rather than being added to the list.\
+@dots\{\}"\
+@end group\
+@group\
+  (if (> (length string) 0)\
+      (if yank-handler\
+          (put-text-property 0 (length string)\
+                             'yank-handler yank-handler string))\
+    (if yank-handler\
+        (signal 'args-out-of-range\
+                (list string "yank-handler specified for empty string"))))\
+@end group\
+@group\
+  (if (fboundp 'menu-bar-update-yank-menu)\
+      (menu-bar-update-yank-menu string (and replace (car kill-ring))))\
+@end group\
+@group\
+  (if (and replace kill-ring)\
+      (setcar kill-ring string)\
+    (push string kill-ring)\
+    (if (> (length kill-ring) kill-ring-max)\
+        (setcdr (nthcdr (1- kill-ring-max) kill-ring) nil)))\
+@end group\
+@group\
+  (setq kill-ring-yank-pointer kill-ring)\
+  (if interprogram-cut-function\
+      (funcall interprogram-cut-function string (not replace))))\
+@end group\
+@end smallexample\
+@ignore\
+was:\
+(defun kill-new (string &optional replace)\
+  "Make STRING the latest kill in the kill ring.\
+Set the kill-ring-yank pointer to point to it.\
+If `interprogram-cut-function' is non-nil, apply it to STRING.\
+Optional second argument REPLACE non-nil means that STRING will replace\
+the front of the kill ring, rather than being added to the list."\
+  (and (fboundp 'menu-bar-update-yank-menu)\
+       (menu-bar-update-yank-menu string (and replace (car kill-ring))))\
+  (if (and replace kill-ring)\
+      (setcar kill-ring string)\
+    (setq kill-ring (cons string kill-ring))\
+    (if (> (length kill-ring) kill-ring-max)\
+        (setcdr (nthcdr (1- kill-ring-max) kill-ring) nil)))\
+  (setq kill-ring-yank-pointer kill-ring)\
+  (if interprogram-cut-function\
+      (funcall interprogram-cut-function string (not replace))))\
+@end ignore\
+\
+(Notice that the function is not interactive.)\
+\
+As usual, we can look at this function in parts.\
+\
+The function definition has an optional @code\{yank-handler\} argument,\
+which when invoked tells the function how to deal with properties\
+added to the text, such as `bold' or `italics'.  We will skip that.\
+\
+@need 1200\
+The first line of the documentation makes sense:\
+\
+@smallexample\
+Make STRING the latest kill in the kill ring.\
+@end smallexample\
+\
+@noindent\
+Let's skip over the rest of the documentation for the moment.\
+\
+@noindent\
+Also, let's skip over the initial @code\{if\} expression and those lines\
+of code involving @code\{menu-bar-update-yank-menu\}.  We will explain\
+them below.\
+\
+@need 1200\
+The critical lines are these:\
+\
+@smallexample\
+@group\
+  (if (and replace kill-ring)\
+      ;; @r\{then\}\
+      (setcar kill-ring string)\
+@end group\
+@group\
+    ;; @r\{else\}\
+  (push string kill-ring)\
+@end group\
+@group\
+    (setq kill-ring (cons string kill-ring))\
+    (if (> (length kill-ring) kill-ring-max)\
+        ;; @r\{avoid overly long kill ring\}\
+        (setcdr (nthcdr (1- kill-ring-max) kill-ring) nil)))\
+@end group\
+@group\
+  (setq kill-ring-yank-pointer kill-ring)\
+  (if interprogram-cut-function\
+      (funcall interprogram-cut-function string (not replace))))\
+@end group\
+@end smallexample\
+\
+The conditional test is @w\{@code\{(and replace kill-ring)\}\}.\
+This will be true when two conditions are met:  the kill ring has\
+something in it, and the @code\{replace\} variable is true.\
+\
+@need 1250\
+When the @code\{kill-append\} function sets @code\{replace\} to be true\
+and when the kill ring has at least one item in it, the @code\{setcar\}\
+expression is executed:\
+\
+@smallexample\
+(setcar kill-ring string)\
+@end smallexample\
+\
+The @code\{setcar\} function actually changes the first element of the\
+@code\{kill-ring\} list to the value of @code\{string\}.  It replaces the\
+first element.\
+\
+@need 1250\
+On the other hand, if the kill ring is empty, or replace is false, the\
+else-part of the condition is executed:\
+\
+@smallexample\
+(push string kill-ring)\
+@end smallexample\
+\
+@noindent\
+@need 1250\
+@code\{push\} puts its first argument onto the second.  It is similar to\
+the older\
+\
+@smallexample\
+(setq kill-ring (cons string kill-ring))\
+@end smallexample\
+\
+@noindent\
+@need 1250\
+or the newer\
+\
+@smallexample\
+(add-to-list kill-ring string)\
+@end smallexample\
+\
+@noindent\
+When it is false, the expression first constructs a new version of the\
+kill ring by prepending @code\{string\} to the existing kill ring as a\
+new element (that is what the @code\{push\} does).  Then it executes a\
+second @code\{if\} clause.  This second @code\{if\} clause keeps the kill\
+ring from growing too long.\
+\
+Let's look at these two expressions in order.\
+\
+The @code\{push\} line of the else-part sets the new value of the kill\
+ring to what results from adding the string being killed to the old\
+kill ring.\
+\
+We can see how this works with an example.\
+\
+@need 800\
+First,\
+\
+@smallexample\
+(setq example-list '("here is a clause" "another clause"))\
+@end smallexample\
+\
+@need 1200\
+@noindent\
+After evaluating this expression with @kbd\{C-x C-e\}, you can evaluate\
+@code\{example-list\} and see what it returns:\
+\
+@smallexample\
+@group\
+example-list\
+     @result\{\} ("here is a clause" "another clause")\
+@end group\
+@end smallexample\
+\
+@need 1200\
+@noindent\
+Now, we can add a new element on to this list by evaluating the\
+following expression:\
+@findex push, @r\{example\}\
+\
+@smallexample\
+(push "a third clause" example-list)\
+@end smallexample\
+\
+@need 800\
+@noindent\
+When we evaluate @code\{example-list\}, we find its value is:\
+\
+@smallexample\
+@group\
+example-list\
+     @result\{\} ("a third clause" "here is a clause" "another clause")\
+@end group\
+@end smallexample\
+\
+@noindent\
+Thus, the third clause is added to the list by @code\{push\}.\
+\
+@need 1200\
+Now for the second part of the @code\{if\} clause.  This expression\
+keeps the kill ring from growing too long.  It looks like this:\
+\
+@smallexample\
+@group\
+(if (> (length kill-ring) kill-ring-max)\
+    (setcdr (nthcdr (1- kill-ring-max) kill-ring) nil))\
+@end group\
+@end smallexample\
+\
+The code checks whether the length of the kill ring is greater than\
+the maximum permitted length.  This is the value of\
+@code\{kill-ring-max\} (which is 60, by default).  If the length of the\
+kill ring is too long, then this code sets the last element of the\
+kill ring to @code\{nil\}.  It does this by using two functions,\
+@code\{nthcdr\} and @code\{setcdr\}.\
+\
+We looked at @code\{setcdr\} earlier (@pxref\{setcdr, , @code\{setcdr\}\}).\
+It sets the @sc\{cdr\} of a list, just as @code\{setcar\} sets the\
+@sc\{car\} of a list.  In this case, however, @code\{setcdr\} will not be\
+setting the @sc\{cdr\} of the whole kill ring; the @code\{nthcdr\}\
+function is used to cause it to set the @sc\{cdr\} of the next to last\
+element of the kill ring---this means that since the @sc\{cdr\} of the\
+next to last element is the last element of the kill ring, it will set\
+the last element of the kill ring.\
+\
+@findex nthcdr, @r\{example\}\
+The @code\{nthcdr\} function works by repeatedly taking the @sc\{cdr\} of a\
+list---it takes the @sc\{cdr\} of the @sc\{cdr\} of the @sc\{cdr\}\
+@dots\{\}  It does this @var\{N\} times and returns the results.\
+(@xref\{nthcdr, , @code\{nthcdr\}\}.)\
+\
+@findex setcdr, @r\{example\}\
+Thus, if we had a four element list that was supposed to be three\
+elements long, we could set the @sc\{cdr\} of the next to last element\
+to @code\{nil\}, and thereby shorten the list.  (If you set the last\
+element to some other value than @code\{nil\}, which you could do, then\
+you would not have shortened the list.  @xref\{setcdr, ,\
+@code\{setcdr\}\}.)\
+\
+You can see shortening by evaluating the following three expressions\
+in turn.  First set the value of @code\{trees\} to @code\{(maple oak pine\
+birch)\}, then set the @sc\{cdr\} of its second @sc\{cdr\} to @code\{nil\}\
+and then find the value of @code\{trees\}:\
+\
+@smallexample\
+@group\
+(setq trees '(maple oak pine birch))\
+     @result\{\} (maple oak pine birch)\
+@end group\
+\
+@group\
+(setcdr (nthcdr 2 trees) nil)\
+     @result\{\} nil\
+\
+trees\
+     @result\{\} (maple oak pine)\
+@end group\
+@end smallexample\
+\
+@noindent\
+(The value returned by the @code\{setcdr\} expression is @code\{nil\} since\
+that is what the @sc\{cdr\} is set to.)\
+\
+To repeat, in @code\{kill-new\}, the @code\{nthcdr\} function takes the\
+@sc\{cdr\} a number of times that is one less than the maximum permitted\
+size of the kill ring and @code\{setcdr\} sets the @sc\{cdr\} of that\
+element (which will be the rest of the elements in the kill ring) to\
+@code\{nil\}.  This prevents the kill ring from growing too long.\
+\
+@need 800\
+The next to last expression in the @code\{kill-new\} function is\
+\
+@smallexample\
+(setq kill-ring-yank-pointer kill-ring)\
+@end smallexample\
+\
+The @code\{kill-ring-yank-pointer\} is a global variable that is set to be\
+the @code\{kill-ring\}.\
+\
+Even though the @code\{kill-ring-yank-pointer\} is called a\
+@samp\{pointer\}, it is a variable just like the kill ring.  However, the\
+name has been chosen to help humans understand how the variable is used.\
+\
+@need 1200\
+Now, to return to an early expression in the body of the function:\
+\
+@smallexample\
+@group\
+  (if (fboundp 'menu-bar-update-yank-menu)\
+       (menu-bar-update-yank-menu string (and replace (car kill-ring))))\
+@end group\
+@end smallexample\
+\
+@noindent\
+It starts with an @code\{if\} expression\
+\
+In this case, the expression tests first to see whether\
+@code\{menu-bar-update-yank-menu\} exists as a function, and if so,\
+calls it.  The @code\{fboundp\} function returns true if the symbol it\
+is testing has a function definition that `is not void'.  If the\
+symbol's function definition were void, we would receive an error\
+message, as we did when we created errors intentionally (@pxref\{Making\
+Errors, , Generate an Error Message\}).\
+\
+@noindent\
+The then-part contains an expression whose first element is the\
+function @code\{and\}.\
+\
+@findex and\
+The @code\{and\} special form evaluates each of its arguments until one\
+of the arguments returns a value of @code\{nil\}, in which case the\
+@code\{and\} expression returns @code\{nil\}; however, if none of the\
+arguments returns a value of @code\{nil\}, the value resulting from\
+evaluating the last argument is returned.  (Since such a value is not\
+@code\{nil\}, it is considered true in Emacs Lisp.)  In other words, an\
+@code\{and\} expression returns a true value only if all its arguments\
+are true.  (@xref\{Second Buffer Related Review\}.)\
+\
+The expression determines whether the second argument to\
+@code\{menu-bar-update-yank-menu\} is true or not.\
+@ignore\
+    ;; If we're supposed to be extending an existing string, and that\
+    ;; string really is at the front of the menu, then update it in place.\
+@end ignore\
+\
+@code\{menu-bar-update-yank-menu\} is one of the functions that make it\
+possible to use the `Select and Paste' menu in the Edit item of a menu\
+bar; using a mouse, you can look at the various pieces of text you\
+have saved and select one piece to paste.\
+\
+The last expression in the @code\{kill-new\} function adds the newly\
+copied string to whatever facility exists for copying and pasting\
+among different programs running in a windowing system.  In the X\
+Windowing system, for example, the @code\{x-select-text\} function takes\
+the string and stores it in memory operated by X.  You can paste the\
+string in another program, such as an Xterm.\
+\
+@need 1200\
+The expression looks like this:\
+\
+@smallexample\
+@group\
+  (if interprogram-cut-function\
+      (funcall interprogram-cut-function string (not replace))))\
+@end group\
+@end smallexample\
+\
+If an @code\{interprogram-cut-function\} exists, then Emacs executes\
+@code\{funcall\}, which in turn calls its first argument as a function\
+and passes the remaining arguments to it.  (Incidentally, as far as I\
+can see, this @code\{if\} expression could be replaced by an @code\{and\}\
+expression similar to the one in the first part of the function.)\
+\
+We are not going to discuss windowing systems and other programs\
+further, but merely note that this is a mechanism that enables GNU\
+Emacs to work easily and well with other programs.\
+\
+This code for placing text in the kill ring, either concatenated with\
+an existing element or as a new element, leads us to the code for\
+bringing back text that has been cut out of the buffer---the yank\
+commands.  However, before discussing the yank commands, it is better\
+to learn how lists are implemented in a computer.  This will make\
+clear such mysteries as the use of the term `pointer'.  But before\
+that, we will digress into C.\
+\
+@ignore\
+@c is this true in Emacs 22?   Does not seems to be\
+\
+  (If the @w\{@code\{(< end beg))\}\}\
+expression is true, @code\{kill-append\} prepends the string to the just\
+previously clipped text.  For a detailed discussion, see\
+@ref\{kill-append function, , The @code\{kill-append\} function\}.)\
+\
+If you then yank back the text, i.e., `paste' it, you get both\
+pieces of text at once.  That way, if you delete two words in a row,\
+and then yank them back, you get both words, in their proper order,\
+with one yank.  (The @w\{@code\{(< end beg))\}\} expression makes sure the\
+order is correct.)\
+\
+On the other hand, if the previous command is not @code\{kill-region\},\
+then the @code\{kill-new\} function is called, which adds the text to\
+the kill ring as the latest item, and sets the\
+@code\{kill-ring-yank-pointer\} variable to point to it.\
+@end ignore\
+@ignore\
+\
+@c Evidently, changed for Emacs 22. The zap-to-char command does not\
+@c use the delete-and-extract-region function\
+\
+2006 Oct 26, the Digression into C is now OK but should come after\
+copy-region-as-kill and filter-buffer-substring\
+\
+2006 Oct 24\
+In Emacs 22,\
+copy-region-as-kill is short, 12 lines, and uses\
+filter-buffer-substring, which is longer, 39 lines\
+and has delete-and-extract-region in it.\
+delete-and-extract-region is written in C.\
+\
+see Initializing a Variable with @code\{defvar\}\
+@end ignore}

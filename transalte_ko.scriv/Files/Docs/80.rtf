@@ -1,0 +1,155 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@need 1250\
+@node cons & search-fwd Review, search Exercises, defvar, Cutting & Storing Text\
+@comment  node-name,  next,  previous,  up\
+@section Review\
+\
+Here is a brief summary of some recently introduced functions.\
+\
+@table @code\
+@item car\
+@itemx cdr\
+@code\{car\} returns the first element of a list; @code\{cdr\} returns the\
+second and subsequent elements of a list.\
+\
+@need 1250\
+For example:\
+\
+@smallexample\
+@group\
+(car '(1 2 3 4 5 6 7))\
+     @result\{\} 1\
+(cdr '(1 2 3 4 5 6 7))\
+     @result\{\} (2 3 4 5 6 7)\
+@end group\
+@end smallexample\
+\
+@item cons\
+@code\{cons\} constructs a list by prepending its first argument to its\
+second argument.\
+\
+@need 1250\
+For example:\
+\
+@smallexample\
+@group\
+(cons 1 '(2 3 4))\
+     @result\{\} (1 2 3 4)\
+@end group\
+@end smallexample\
+\
+@item funcall\
+@code\{funcall\} evaluates its first argument as a function.  It passes\
+its remaining arguments to its first argument.\
+\
+@item nthcdr\
+Return the result of taking @sc\{cdr\} `n' times on a list.\
+@iftex\
+The\
+@tex\
+$n^\{th\}$\
+@end tex\
+@code\{cdr\}.\
+@end iftex\
+The `rest of the rest', as it were.\
+\
+@need 1250\
+For example:\
+\
+@smallexample\
+@group\
+(nthcdr 3 '(1 2 3 4 5 6 7))\
+     @result\{\} (4 5 6 7)\
+@end group\
+@end smallexample\
+\
+@item setcar\
+@itemx setcdr\
+@code\{setcar\} changes the first element of a list; @code\{setcdr\}\
+changes the second and subsequent elements of a list.\
+\
+@need 1250\
+For example:\
+\
+@smallexample\
+@group\
+(setq triple '(1 2 3))\
+\
+(setcar triple '37)\
+\
+triple\
+     @result\{\} (37 2 3)\
+\
+(setcdr triple '("foo" "bar"))\
+\
+triple\
+     @result\{\} (37 "foo" "bar")\
+@end group\
+@end smallexample\
+\
+@item progn\
+Evaluate each argument in sequence and then return the value of the\
+last.\
+\
+@need 1250\
+For example:\
+\
+@smallexample\
+@group\
+(progn 1 2 3 4)\
+     @result\{\} 4\
+@end group\
+@end smallexample\
+\
+@item save-restriction\
+Record whatever narrowing is in effect in the current buffer, if any,\
+and restore that narrowing after evaluating the arguments.\
+\
+@item search-forward\
+Search for a string, and if the string is found, move point.  With a\
+regular expression, use the similar @code\{re-search-forward\}.\
+(@xref\{Regexp Search, , Regular Expression Searches\}, for an\
+explanation of regular expression patterns and searches.)\
+\
+@need 1250\
+@noindent\
+@code\{search-forward\} and @code\{re-search-forward\} take four\
+arguments:\
+\
+@enumerate\
+@item\
+The string or regular expression to search for.\
+\
+@item\
+Optionally, the limit of the search.\
+\
+@item\
+Optionally, what to do if the search fails, return @code\{nil\} or an\
+error message.\
+\
+@item\
+Optionally, how many times to repeat the search; if negative, the\
+search goes backwards.\
+@end enumerate\
+\
+@item kill-region\
+@itemx delete-and-extract-region\
+@itemx copy-region-as-kill\
+\
+@code\{kill-region\} cuts the text between point and mark from the\
+buffer and stores that text in the kill ring, so you can get it back\
+by yanking.\
+\
+@code\{copy-region-as-kill\} copies the text between point and mark into\
+the kill ring, from which you can get it by yanking.  The function\
+does not cut or remove the text from the buffer.\
+@end table\
+\
+@code\{delete-and-extract-region\} removes the text between point and\
+mark from the buffer and throws it away.  You cannot get it back.\
+(This is not an interactive command.)}

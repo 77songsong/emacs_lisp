@@ -1,0 +1,152 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node defvar, cons & search-fwd Review, Digression into C, Cutting & Storing Text\
+@comment  node-name,  next,  previous,  up\
+@section Initializing a Variable with @code\{defvar\}\
+@findex defvar\
+@cindex Initializing a variable\
+@cindex Variable initialization\
+\
+@ignore\
+2006 Oct 24\
+In Emacs 22,\
+copy-region-as-kill is short, 12 lines, and uses\
+filter-buffer-substring, which is longer, 39 lines\
+and has delete-and-extract-region in it.\
+delete-and-extract-region is written in C.\
+\
+see Initializing a Variable with @code\{defvar\}\
+\
+@end ignore\
+\
+The @code\{copy-region-as-kill\} function is written in Emacs Lisp.  Two\
+functions within it, @code\{kill-append\} and @code\{kill-new\}, copy a\
+region in a buffer and save it in a variable called the\
+@code\{kill-ring\}.  This section describes how the @code\{kill-ring\}\
+variable is created and initialized using the @code\{defvar\} special\
+form.\
+\
+(Again we note that the term @code\{kill-ring\} is a misnomer.  The text\
+that is clipped out of the buffer can be brought back; it is not a ring\
+of corpses, but a ring of resurrectable text.)\
+\
+In Emacs Lisp, a variable such as the @code\{kill-ring\} is created and\
+given an initial value by using the @code\{defvar\} special form.  The\
+name comes from ``define variable''.\
+\
+The @code\{defvar\} special form is similar to @code\{setq\} in that it sets\
+the value of a variable.  It is unlike @code\{setq\} in two ways: first,\
+it only sets the value of the variable if the variable does not already\
+have a value.  If the variable already has a value, @code\{defvar\} does\
+not override the existing value.  Second, @code\{defvar\} has a\
+documentation string.\
+\
+(Another special form, @code\{defcustom\}, is designed for variables\
+that people customize.  It has more features than @code\{defvar\}.\
+(@xref\{defcustom, , Setting Variables with @code\{defcustom\}\}.)\
+\
+@menu\
+* See variable current value::\
+* defvar and asterisk::\
+@end menu\
+\
+@node See variable current value, defvar and asterisk, defvar, defvar\
+@ifnottex\
+@unnumberedsubsec Seeing the Current Value of a Variable\
+@end ifnottex\
+\
+You can see the current value of a variable, any variable, by using\
+the @code\{describe-variable\} function, which is usually invoked by\
+typing @kbd\{C-h v\}.  If you type @kbd\{C-h v\} and then @code\{kill-ring\}\
+(followed by @key\{RET\}) when prompted, you will see what is in your\
+current kill ring---this may be quite a lot!  Conversely, if you have\
+been doing nothing this Emacs session except read this document, you\
+may have nothing in it.  Also, you will see the documentation for\
+@code\{kill-ring\}:\
+\
+@smallexample\
+@group\
+Documentation:\
+List of killed text sequences.\
+Since the kill ring is supposed to interact nicely with cut-and-paste\
+facilities offered by window systems, use of this variable should\
+@end group\
+@group\
+interact nicely with `interprogram-cut-function' and\
+`interprogram-paste-function'.  The functions `kill-new',\
+`kill-append', and `current-kill' are supposed to implement this\
+interaction; you may want to use them instead of manipulating the kill\
+ring directly.\
+@end group\
+@end smallexample\
+\
+@need 800\
+The kill ring is defined by a @code\{defvar\} in the following way:\
+\
+@smallexample\
+@group\
+(defvar kill-ring nil\
+  "List of killed text sequences.\
+@dots\{\}")\
+@end group\
+@end smallexample\
+\
+@noindent\
+In this variable definition, the variable is given an initial value of\
+@code\{nil\}, which makes sense, since if you have saved nothing, you want\
+nothing back if you give a @code\{yank\} command.  The documentation\
+string is written just like the documentation string of a @code\{defun\}.\
+As with the documentation string of the @code\{defun\}, the first line of\
+the documentation should be a complete sentence, since some commands,\
+like @code\{apropos\}, print only the first line of documentation.\
+Succeeding lines should not be indented; otherwise they look odd when\
+you use @kbd\{C-h v\} (@code\{describe-variable\}).\
+\
+@node defvar and asterisk,  , See variable current value, defvar\
+@subsection @code\{defvar\} and an asterisk\
+@findex defvar @r\{for a user customizable variable\}\
+@findex defvar @r\{with an asterisk\}\
+\
+In the past, Emacs used the @code\{defvar\} special form both for\
+internal variables that you would not expect a user to change and for\
+variables that you do expect a user to change.  Although you can still\
+use @code\{defvar\} for user customizable variables, please use\
+@code\{defcustom\} instead, since that special form provides a path into\
+the Customization commands.  (@xref\{defcustom, , Specifying Variables\
+using @code\{defcustom\}\}.)\
+\
+When you specified a variable using the @code\{defvar\} special form,\
+you could distinguish a variable that a user might want to change from\
+others by typing an asterisk, @samp\{*\}, in the first column of its\
+documentation string.  For example:\
+\
+@smallexample\
+@group\
+(defvar shell-command-default-error-buffer nil\
+  "*Buffer name for `shell-command' @dots\{\} error output.\
+@dots\{\} ")\
+@end group\
+@end smallexample\
+\
+@findex set-variable\
+@noindent\
+You could (and still can) use the @code\{set-variable\} command to\
+change the value of @code\{shell-command-default-error-buffer\}\
+temporarily.  However, options set using @code\{set-variable\} are set\
+only for the duration of your editing session.  The new values are not\
+saved between sessions.  Each time Emacs starts, it reads the original\
+value, unless you change the value within your @file\{.emacs\} file,\
+either by setting it manually or by using @code\{customize\}.\
+@xref\{Emacs Initialization, , Your @file\{.emacs\} File\}.\
+\
+For me, the major use of the @code\{set-variable\} command is to suggest\
+variables that I might want to set in my @file\{.emacs\} file.  There\
+are now more than 700 such variables --- far too many to remember\
+readily.  Fortunately, you can press @key\{TAB\} after calling the\
+@code\{M-x set-variable\} command to see the list of variables.\
+(@xref\{Examining, , Examining and Setting Variables, emacs,\
+The GNU Emacs Manual\}.)}
