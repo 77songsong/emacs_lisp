@@ -317,7 +317,7 @@ supports it in developing GNU and promoting software freedom.''
 @contents
 
 @ifnottex
-@node Top, Preface, (dir), (dir)
+@node Top, 서문, (dir), (dir)
 @top An Introduction to Programming in Emacs Lisp
 
 @insertcopying
@@ -337,8 +337,8 @@ every node in every chapter.
 @c end iftex
 
 @menu
-* Preface::                     What to look for.
-* List Processing::             What is Lisp?
+* 서문::                     What to look for.
+* List 처리하기::             What is Lisp?
 * Practicing Evaluation::       Running several programs.
 * Writing Defuns::              How to write function definitions.
 * Buffer Walk Through::         Exploring a few buffer-related functions.
@@ -368,27 +368,27 @@ every node in every chapter.
 @detailmenu
  --- The Detailed Node Listing ---
 
-Preface
+서문
 
-* Why::                         Why learn Emacs Lisp?
-* On Reading this Text::        Read, gain familiarity, pick up habits....
-* Who You Are::                 For whom this is written.
+* 왜::                         Emacs Lisp을 왜 배우는가?
+* On Reading this Text::        읽고, 친숙해지고, 습관을 들여라....
+* Who You Are::                 누구를 위한 문서.
 * Lisp History::
-* Note for Novices::            You can read this as a novice.
+* Note for Novices::            초보자도 읽을 수 있다.
 * Thank You::
 
-List Processing
+List 처리하기
 
-* Lisp Lists::                  What are lists?
-* Run a Program::               Any list in Lisp is a program ready to run.
-* Making Errors::               Generating an error message.
-* Names & Definitions::         Names of symbols and function definitions.
-* Lisp Interpreter::            What the Lisp interpreter does.
-* Evaluation::                  Running a program.
-* Variables::                   Returning a value from a variable.
-* Arguments::                   Passing information to a function.
-* set & setq::                  Setting the value of a variable.
-* Summary::                     The major points.
+* Lisp Lists::                  list는 무엇인가?
+* Run a Program::               Lisp에서 list는 실행할 준비가 된 프로그램이다.
+* Making Errors::               에러 메시지 만들기.
+* Names & Definitions::         기호 이름들과 함수 정의들.
+* Lisp Interpreter::            Lisp 해석기가 하는 일.
+* Evaluation::                  프로그램 실행.
+* Variables::                   변수로부터 값을 넘겨 받기.
+* Arguments::                   함수에 정보 넘기기.
+* set & setq::                  변수에 값 설정하기.
+* Summary::                     중요한 점들.
 * Error Message Exercises::
 
 Lisp Lists
@@ -829,51 +829,39 @@ Printing the Whole Graph
 @end menu
 
 
-@node Preface, List Processing, Top, Top
+@node 서문, List 처리하기, Top, Top
 @comment  node-name,  next,  previous,  up
-@unnumbered Preface
+@unnumbered 서문
 
-Most of the GNU Emacs integrated environment is written in the programming
-language called Emacs Lisp.  The code written in this programming
-language is the software---the sets of instructions---that tell the
-computer what to do when you give it commands.  Emacs is designed so
-that you can write new code in Emacs Lisp and easily install it as an
-extension to the editor.
+GNU Emacs 통합 환경의 대부분은 Emacs Lisp이라는 프로그래밍 언어로 만들어졌다. 이
+프로그래밍 언어로 작성된 코드는 컴퓨터가 무엇을 해야 하는지 말해주는 소프트웨어 --- 
+명령들의 집합들 --- 이다. Emacs Lisp으로 새로운 코드를 작성할 수 있고, 편집기의 확장으로
+쉽게 설치될 수 있게 Emacs는 설계되었다.
 
-(GNU Emacs is sometimes called an ``extensible editor'', but it does
-much more than provide editing capabilities.  It is better to refer to
-Emacs as an ``extensible computing environment''.  However, that
-phrase is quite a mouthful.  It is easier to refer to Emacs simply as
-an editor.  Moreover, everything you do in Emacs---find the Mayan date
-and phases of the moon, simplify polynomials, debug code, manage
-files, read letters, write books---all these activities are kinds of
-editing in the most general sense of the word.)
+( 때때로 GNU Emacs는 “확장 가능한 편집기”로 불리지만 편집 능력 이상을 한다. “확장 가능한 컴퓨팅 환경”으로 언급되는 것이 더 맞다. 그러나, 저 문구는 꽤 어려운 말이다. 단순히 편집기로  Emacs가 언급되는 것이 더 쉽다. 게다가 Emacs에서 하는 모든 것은 --- 마야 날짜와 달의 위상 찾기, 다항식 풀기, 코드 디버깅, 파일 관리, 편지 읽기, 책 읽기 --- 가장 일반적인 의미에서 편집의 종류이다. )
 
 @menu
-* Why::                         Why learn Emacs Lisp?
-* On Reading this Text::        Read, gain familiarity, pick up habits....
-* Who You Are::                 For whom this is written.
+* 왜::                         Emacs Lisp을 왜 배우는가?
+* On Reading this Text::        읽고, 친숙해지고, 습관을 들여라....
+* Who You Are::                 누구를 위한 문서.
 * Lisp History::
-* Note for Novices::            You can read this as a novice.
+* Note for Novices::            초보자도 읽을 수 있다.
 * Thank You::
 @end menu
 
-@node Why, On Reading this Text, Preface, Preface
+
+@node 왜, On Reading this Text, 서문, 서문
 @ifnottex
-@unnumberedsec Why Study Emacs Lisp?
+@unnumberedsec Emacs Lisp을 왜 배우는가?
 @end ifnottex
 
-Although Emacs Lisp is usually thought of in association only with Emacs,
-it is a full computer programming language.  You can use Emacs Lisp as
-you would any other programming language.
+Emacs Lisp이 오직 Emacs와 관련된 것으로 대개 생각하지만, Emacs Lisp은 완전한 컴퓨터
+프로그래밍 언어다. 다른 프로그래밍 언어처럼 Emacs Lisp을 사용할 수 있다.
 
-Perhaps you want to understand programming; perhaps you want to extend
-Emacs; or perhaps you want to become a programmer.  This introduction to
-Emacs Lisp is designed to get you started: to guide you in learning the
-fundamentals of programming, and more importantly, to show you how you
-can teach yourself to go further.
+아마도 프로그래밍을 이해하고 싶어할 것이다.; 아마도 Emacs를 확장하기를 원할 것이다.; 또는 아마도 프로그래머가 되기를 원할 것이다. Emacs Lisp에 대한 소개는 시작하기 위해 설계되었다.: 프로그래밍의 기본을 배우게 안내하고, 더 중요한 것은 앞으로 자신에게 가르칠 수 있는 방법을 보여주는 것이다.
 
-@node On Reading this Text, Who You Are, Why, Preface
+
+@node On Reading this Text, Who You Are, 왜, 서문
 @comment  node-name,  next,  previous,  up
 @unnumberedsec On Reading this Text
 
@@ -924,7 +912,8 @@ Emacs to help you understand what puzzles you or to find out how to do
 something new.  This self-reliance is not only a pleasure, but an
 advantage.
 
-@node Who You Are, Lisp History, On Reading this Text, Preface
+
+@node Who You Are, Lisp History, On Reading this Text, 서문
 @comment  node-name,  next,  previous,  up
 @unnumberedsec For Whom This is Written
 
@@ -987,7 +976,8 @@ quoted above.  And, of course, after you have read this
 @cite{Introduction}, you will find the @cite{Reference Manual} useful
 when you are writing your own programs.
 
-@node Lisp History, Note for Novices, Who You Are, Preface
+
+@node Lisp History, Note for Novices, Who You Are, 서문
 @unnumberedsec Lisp History
 @cindex Lisp history
 
@@ -1004,7 +994,8 @@ standard in the 1980s.  However, Emacs Lisp is much simpler than Common
 Lisp.  (The standard Emacs distribution contains an optional extensions
 file, @file{cl.el}, that adds many Common Lisp features to Emacs Lisp.)
 
-@node Note for Novices, Thank You, Lisp History, Preface
+
+@node Note for Novices, Thank You, Lisp History, 서문
 @comment  node-name,  next,  previous,  up
 @unnumberedsec A Note for Novices
 
@@ -1052,7 +1043,8 @@ A note on terminology:  when I use the word Lisp alone, I often am
 referring to the various dialects of Lisp in general, but when I speak
 of Emacs Lisp, I am referring to GNU Emacs Lisp in particular.
 
-@node Thank You,  , Note for Novices, Preface
+
+@node Thank You,  , Note for Novices, 서문
 @comment  node-name,  next,  previous,  up
 @unnumberedsec Thank You
 
@@ -1092,35 +1084,35 @@ Robert J. Chassell
 @end iftex
 
 
-@node List Processing, Practicing Evaluation, Preface, Top
+@node List 처리하기, Practicing Evaluation, 서문, Top
 @comment  node-name,  next,  previous,  up
-@chapter List Processing
+@chapter List 처리하기
 
 특별한 지식이 없는 사람들에게는 Lisp은 이상한 프로그래밍 언어로 보인다. Lisp 코드 어디나
 괄호들이 보인다. 몇몇 사람들은 심지어 이름이 ‘Lots of Isolated Silly Parentheses’을 
 나타낸다고 한다. 그러나, 이것은 틀렸다. Lisp은 LISt Processing을 나타내고, 괄호 사이에
-@emph{list}를(그리고 list의 list) 넣어서 다루는프로그래밍 언어이다. 괄호는 리스트의 경계를
+@emph{list}를(그리고 list의 list) 넣어서 다루는 프로그래밍 언어이다. 괄호는 리스트의 경계를
 표시한다. 때로는 작은 따옴표 또는 인용 기호 @samp{‘} @footnote{ 작은 따옴표 또는 인용
 기호는 @code{quote} 함수의 약어다.; 지금 함수들에 대해서 몰라도 된다.; 함수들은 
 @ref{Making Errors, , Generate an Error Message}.에 정의 되어 있다. } 뒤에 list가 
 위치한다. List는 Lisp의 근본이다.
 
 @menu
-* Lisp Lists::                  What are lists?
-* Run a Program::               Any list in Lisp is a program ready to run.
-* Making Errors::               Generating an error message.
-* Names & Definitions::         Names of symbols and function definitions.
-* Lisp Interpreter::            What the Lisp interpreter does.
-* Evaluation::                  Running a program.
-* Variables::                   Returning a value from a variable.
-* Arguments::                   Passing information to a function.
-* set & setq::                  Setting the value of a variable.
-* Summary::                     The major points.
+* Lisp Lists::                  list는 무엇인가?
+* Run a Program::               Lisp에서 list는 실행할 준비가 된 프로그램이다.
+* Making Errors::               에러 메시지 만들기.
+* Names & Definitions::         기호 이름들과 함수 정의들.
+* Lisp Interpreter::            Lisp 해석기가 하는 일.
+* Evaluation::                  프로그램 실행.
+* Variables::                   변수로부터 값을 넘겨 받기.
+* Arguments::                   함수에 정보 넘기기.
+* set & setq::                  변수에 값 설정하기.
+* Summary::                     중요한 점들.
 * Error Message Exercises::
 @end menu
 
 
-@node Lisp Lists, Run a Program, List Processing, List Processing
+@node Lisp Lists, Run a Program, List 처리하기, List 처리하기
 @comment  node-name,  next,  previous,  up
 @section Lisp Lists
 @cindex Lisp Lists
@@ -1327,7 +1319,7 @@ parenthesis.  (@xref{Major Modes, , Major Modes, emacs, The GNU Emacs
 Manual}, for more information about Emacs' modes.)
 
 
-@node Run a Program, Making Errors, Lisp Lists, List Processing
+@node Run a Program, Making Errors, Lisp Lists, List 처리하기
 @comment  node-name,  next,  previous,  up
 @section Run a Program
 @cindex Run a program
@@ -1391,7 +1383,7 @@ But before discussing this (@pxref{Variables}), we will discuss what the
 Lisp interpreter does when you make an error.
 
 
-@node Making Errors, Names & Definitions, Run a Program, List Processing
+@node Making Errors, Names & Definitions, Run a Program, List 처리하기
 @comment  node-name,  next,  previous,  up
 @section Generate an Error Message
 @cindex Generate an error message
@@ -1533,7 +1525,7 @@ definition is void:@: this}.  The symbol (that is, the word
 @samp{this}) lacks instructions for the computer to carry out.
 
 
-@node Names & Definitions, Lisp Interpreter, Making Errors, List Processing
+@node Names & Definitions, Lisp Interpreter, Making Errors, List 처리하기
 @comment  node-name,  next,  previous,  up
 @section Symbol Names and Function Definitions
 @cindex Symbol names
@@ -1569,7 +1561,7 @@ Thus, all the names for functions that deal with Texinfo start with
 start with @samp{rmail-}.
 
 
-@node Lisp Interpreter, Evaluation, Names & Definitions, List Processing
+@node Lisp Interpreter, Evaluation, Names & Definitions, List 처리하기
 @comment  node-name,  next,  previous,  up
 @section The Lisp Interpreter
 @cindex Lisp interpreter, what it does
@@ -1651,7 +1643,7 @@ The GNU Emacs Lisp Reference Manual}, for a full description of byte
 compilation.
 
 
-@node Evaluation, Variables, Lisp Interpreter, List Processing
+@node Evaluation, Variables, Lisp Interpreter, List 처리하기
 @comment  node-name,  next,  previous,  up
 @section Evaluation
 @cindex Evaluation
@@ -1760,7 +1752,7 @@ symbol by itself is evaluated, something different happens, as we will
 see in the next section.
 
 
-@node Variables, Arguments, Evaluation, List Processing
+@node Variables, Arguments, Evaluation, List 처리하기
 @comment  node-name,  next,  previous,  up
 @section Variables
 @cindex Variables
@@ -1960,7 +1952,7 @@ The meaning is the same as in GNU Emacs 22.
 @end ignore
 
 
-@node Arguments, set & setq, Variables, List Processing
+@node Arguments, set & setq, Variables, List 처리하기
 @comment  node-name,  next,  previous,  up
 @section Arguments
 @cindex Arguments
@@ -2366,7 +2358,7 @@ message @code{"He saw 38 red foxes leaping."} appears in your echo
 area.
 
 
-@node set & setq, Summary, Arguments, List Processing
+@node set & setq, Summary, Arguments, List 처리하기
 @comment  node-name,  next,  previous,  up
 @section Setting the Value of a Variable
 @cindex Variable, setting value
@@ -2553,7 +2545,7 @@ is then returned as the value of the inner list and passed to the
 Thus, the value of the variable, @code{counter}, is changed.
 
 
-@node Summary, Error Message Exercises, set & setq, List Processing
+@node Summary, Error Message Exercises, set & setq, List 처리하기
 @comment  node-name,  next,  previous,  up
 @section Summary
 
@@ -2617,7 +2609,7 @@ create a side effect.
 @end itemize
 
 
-@node Error Message Exercises,  , Summary, List Processing
+@node Error Message Exercises,  , Summary, List 처리하기
 @comment  node-name,  next,  previous,  up
 @section Exercises
 
@@ -2641,7 +2633,7 @@ evaluated.
 @end itemize
 
 
-@node Practicing Evaluation, Writing Defuns, List Processing, Top
+@node Practicing Evaluation, Writing Defuns, List 처리하기, Top
 @comment  node-name,  next,  previous,  up
 @chapter Practicing Evaluation
 @cindex Practicing evaluation

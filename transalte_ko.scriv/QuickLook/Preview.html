@@ -50,40 +50,128 @@
 <ul>
 <li>
 <p class="binderItem"><strong>Preface</strong><br/><br/>
-@node Preface, List Processing, Top, Top<br/>
+@node 서문, List 처리하기, Top, Top<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@unnumbered Preface<br/>
+@unnumbered 서문<br/>
 <br/>
-Most of the GNU Emacs integrated environment is written in the programming<br/>
-language called Emacs Lisp.  The code written in this programming<br/>
-language is the software---the sets of instructions---that tell the<br/>
-computer what to do when you give it commands.  Emacs is designed so<br/>
-that you can write new code in Emacs Lisp and easily install it as an<br/>
-extension to the editor.<br/>
+GNU Emacs 통합 환경의 대부분은 Emacs Lisp이라는 프로그래밍 언어로 만들어졌다. 이<br/>
+프로그래밍 언어로 작성된 코드는 컴퓨터가 무엇을 해야 하는지 말해주는 소프트웨어 --- <br/>
+명령들의 집합들 --- 이다. Emacs Lisp으로 새로운 코드를 작성할 수 있고, 편집기의 확장으로<br/>
+쉽게 설치될 수 있게 Emacs는 설계되었다.<br/>
 <br/>
-(GNU Emacs is someti...</p>
+( 때때로 GNU Emacs는 “확장 가능한 편집기”로 불리지만 편집 능력 이상을 한다. “확장 가능한 컴퓨팅 환경”으로 언급되는 것이 더 맞다. 그러나, 저 문구는 꽤 어려운 말이다. 단순히 편집기로  Emacs가 언급되는 것이 더 쉽다. 게다가 Emacs에서 하는 모든 것은 --- 마야 날짜와 달의 위상 찾기, 다항식 풀기, 코드 디버깅, 파일 관리, 편지 읽기, 책 읽기 --- 가장 일...</p>
 </li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>Why Study Emacs Lisp?</strong><br/><br/>
+@node 왜, On Reading this Text, 서문, 서문<br/>
+@ifnottex<br/>
+@unnumberedsec Emacs Lisp을 왜 배우는가?<br/>
+@end ifnottex<br/>
+<br/>
+Emacs Lisp이 오직 Emacs와 관련된 것으로 대개 생각하지만, Emacs Lisp은 완전한 컴퓨터<br/>
+프로그래밍 언어다. 다른 프로그래밍 언어처럼 Emacs Lisp을 사용할 수 있다.<br/>
+<br/>
+아마도 프로그래밍을 이해하고 싶어할 것이다.; 아마도 Emacs를 확장하기를 원할 것이다.; 또는 아마도 프로그래머가 되기를 원할 것이다. Emacs Lisp에 대한 소개는 시작하기 위해 설계되었다.: 프로그래밍의 기본을 배우게 안내하고, 더 중요한 것은 앞으로 자신에게 가르칠 수 있는 방법을 보여주는 것이다.</p>
+</li>
+<li>
+<p class="binderItem"><strong>On Reading this Text</strong><br/><br/>
+@node On Reading this Text, Who You Are, 왜, 서문<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@unnumberedsec On Reading this Text<br/>
+<br/>
+All through this document, you will see little sample programs you can<br/>
+run inside of Emacs.  If you read this document in Info inside of GNU<br/>
+Emacs, you can run the programs as they appear.  (This is easy to do and<br/>
+is explained when the examples are presented.)  Alternatively, you can<br/>
+read this introduction as a printed book while sitting beside a computer<br/>
+running Emacs....</p>
+</li>
+<li>
+<p class="binderItem"><strong>For Whom This is Written</strong><br/><br/>
+@node Who You Are, Lisp History, On Reading this Text, 서문<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@unnumberedsec For Whom This is Written<br/>
+<br/>
+This text is written as an elementary introduction for people who are<br/>
+not programmers.  If you are a programmer, you may not be satisfied with<br/>
+this primer.  The reason is that you may have become expert at reading<br/>
+reference manuals and be put off by the way this text is organized.<br/>
+<br/>
+An expert programmer who reviewed this text said to me:<br/>
+<br/>
+@quotation<br/>
+@i{I p...</p>
+</li>
+<li>
+<p class="binderItem"><strong>List History</strong><br/><br/>
+@node Lisp History, Note for Novices, Who You Are, 서문<br/>
+@unnumberedsec Lisp History<br/>
+@cindex Lisp history<br/>
+<br/>
+Lisp was first developed in the late 1950s at the Massachusetts<br/>
+Institute of Technology for research in artificial intelligence.  The<br/>
+great power of the Lisp language makes it superior for other purposes as<br/>
+well, such as writing editor commands and integrated environments.<br/>
+<br/>
+@cindex Maclisp<br/>
+@cindex Common Lisp<br/>
+GNU Emacs Lisp is largely inspired by Maclisp, which was written at MIT<br/>
+in the 1960s...</p>
+</li>
+<li>
+<p class="binderItem"><strong>A Not for Novices</strong><br/><br/>
+@node Note for Novices, Thank You, Lisp History, 서문<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@unnumberedsec A Note for Novices<br/>
+<br/>
+If you don't know GNU Emacs, you can still read this document<br/>
+profitably.  However, I recommend you learn Emacs, if only to learn to<br/>
+move around your computer screen.  You can teach yourself how to use<br/>
+Emacs with the on-line tutorial.  To use it, type @kbd{C-h t}.  (This<br/>
+means you press and release the @key{CTRL} key and the @kbd{h} at the<br/>
+same time, and then press a...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Thank You</strong><br/><br/>
+@node Thank You,  , Note for Novices, 서문<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@unnumberedsec Thank You<br/>
+<br/>
+My thanks to all who helped me with this book.  My especial thanks to<br/>
+@r{Jim Blandy}, @r{Noah Friedman}, @w{Jim Kingdon}, @r{Roland<br/>
+McGrath}, @w{Frank Ritter}, @w{Randy Smith}, @w{Richard M.@:<br/>
+Stallman}, and @w{Melissa Weisshaus}.  My thanks also go to both<br/>
+@w{Philip Johnson} and @w{David Stampe} for their patient<br/>
+encouragement.  My mistakes are my own.<br/>
+<br/>
+@flushright<br/>
+Robert J. Chassell<br/>
+@...</p>
+</li>
+</ul>
 </ul>
 <hr/>
 <li>
 <p class="binderItem"><strong>List Processing</strong><br/><br/>
-@node List Processing, Practicing Evaluation, Preface, Top<br/>
+@node List 처리하기, Practicing Evaluation, 서문, Top<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@chapter List Processing<br/>
+@chapter List 처리하기<br/>
 <br/>
 특별한 지식이 없는 사람들에게는 Lisp은 이상한 프로그래밍 언어로 보인다. Lisp 코드 어디나<br/>
 괄호들이 보인다. 몇몇 사람들은 심지어 이름이 ‘Lots of Isolated Silly Parentheses’을 <br/>
 나타낸다고 한다. 그러나, 이것은 틀렸다. Lisp은 LISt Processing을 나타내고, 괄호 사이에<br/>
-@emph{list}를(그리고 list의 list) 넣어서 다루는프로그래밍 언어이다. 괄호는 리스트의 경계를<br/>
+@emph{list}를(그리고 list의 list) 넣어서 다루는 프로그래밍 언어이다. 괄호는 리스트의 경계를<br/>
 표시한다. 때로는 작은 따옴표 또는 인용 기호 @samp{‘} @footnote{ 작은 따옴표 또는 인용<br/>
 기호는 @code{quote} 함수의 약어다.; 지금 함수들에 대해서 몰라도 된다.; 함수들은 <br/>
-@ref{Making Error...</p>
+@ref{Making Errors, , Generate an...</p>
 </li>
 <hr/>
 <ul>
 <li>
 <p class="binderItem"><strong>Lisp Lists</strong><br/><br/>
-@node Lisp Lists, Run a Program, List Processing, List Processing<br/>
+@node Lisp Lists, Run a Program, List 처리하기, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section Lisp Lists<br/>
 @cindex Lisp Lists<br/>
@@ -103,11 +191,11 @@ to be familiar with:<br/>
 @end smallexample<br/>
 <br/>
 @noindent<br/>
-The elements...</p>
+The elements of this lis...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Run a Program</strong><br/><br/>
-@node Run a Program, Making Errors, Lisp Lists, List Processing<br/>
+@node Run a Program, Making Errors, Lisp Lists, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section Run a Program<br/>
 @cindex Run a program<br/>
@@ -118,11 +206,11 @@ A list in Lisp---any list---is a program ready to run.  If you run it<br/>
 (for which the Lisp jargon is @dfn{evaluate}), the computer will do one<br/>
 of three things: do nothing except return to you the list itself; send<br/>
 you an error message; or, treat the first symbol in the list as a<br/>
-comman...</p>
+command to d...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Generate an Error Message</strong><br/><br/>
-@node Making Errors, Names & Definitions, Run a Program, List Processing<br/>
+@node Making Errors, Names & Definitions, Run a Program, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section Generate an Error Message<br/>
 @cindex Generate an error message<br/>
@@ -132,11 +220,11 @@ Partly so you won't worry if you do it accidentally, we will now give<br/>
 a command to the Lisp interpreter that generates an error message.<br/>
 This is a harmless activity; and indeed, we will often try to generate<br/>
 error messages intentionally.  Once you understand the jargon, error<br/>
-mes...</p>
+messages ...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Symbol Names and Function Definition</strong><br/><br/>
-@node Names & Definitions, Lisp Interpreter, Making Errors, List Processing<br/>
+@node Names & Definitions, Lisp Interpreter, Making Errors, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section Symbol Names and Function Definitions<br/>
 @cindex Symbol names<br/>
@@ -145,11 +233,11 @@ We can articulate another characteristic of Lisp based on what we have<br/>
 discussed so far---an important characteristic: a symbol, like<br/>
 @code{+}, is not itself the set of instructions for the computer to<br/>
 carry out.  Instead, the symbol is used, perhaps temporarily, as a way<br/>
-of locating the definition or set of i...</p>
+of locating the definition or set of instruc...</p>
 </li>
 <li>
 <p class="binderItem"><strong>The Lisp Interpreter</strong><br/><br/>
-@node Lisp Interpreter, Evaluation, Names & Definitions, List Processing<br/>
+@node Lisp Interpreter, Evaluation, Names & Definitions, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section The Lisp Interpreter<br/>
 @cindex Lisp interpreter, what it does<br/>
@@ -159,11 +247,11 @@ Based on what we have seen, we can now start to figure out what the<br/>
 Lisp interpreter does when we command it to evaluate a list.<br/>
 First, it looks to see whether there is a quote before the list; if<br/>
 there is, the interpreter just gives us the list.  On the other<br/>
-hand, if there is ...</p>
+hand, if there is no quo...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Evaluation</strong><br/><br/>
-@node Evaluation, Variables, Lisp Interpreter, List Processing<br/>
+@node Evaluation, Variables, Lisp Interpreter, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section Evaluation<br/>
 @cindex Evaluation<br/>
@@ -173,11 +261,11 @@ activity is called @dfn{evaluation}.  We say that the interpreter<br/>
 `evaluates the expression'.  I've used this term several times before.<br/>
 The word comes from its use in everyday language, `to ascertain the<br/>
 value or amount of; to appraise', according to @cite{Webster's New<br/>
-Collegiate Dic...</p>
+Collegiate Dictionar...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Variables</strong><br/><br/>
-@node Variables, Arguments, Evaluation, List Processing<br/>
+@node Variables, Arguments, Evaluation, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section Variables<br/>
 @cindex Variables<br/>
@@ -187,11 +275,11 @@ have a function definition attached to it.  The two are different.<br/>
 The function definition is a set of instructions that a computer will<br/>
 obey.  A value, on the other hand, is something, such as number or a<br/>
 name, that can vary (which is why such a symbol is called a variable).<br/>
-The value of a...</p>
+The value of a symbo...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Arguments</strong><br/><br/>
-@node Arguments, set & setq, Variables, List Processing<br/>
+@node Arguments, set & setq, Variables, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section Arguments<br/>
 @cindex Arguments<br/>
@@ -206,11 +294,11 @@ as follows:<br/>
 @end smallexample<br/>
 <br/>
 If you evaluate this expression, the number 4 will appear in your echo<br/>
-area.  What the Lisp interpreter does is add the numbers...</p>
+area.  What the Lisp interpreter does is add the numbers that ...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Setting the Value of a Variable</strong><br/><br/>
-@node set & setq, Summary, Arguments, List Processing<br/>
+@node set & setq, Summary, Arguments, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section Setting the Value of a Variable<br/>
 @cindex Variable, setting value<br/>
@@ -220,11 +308,12 @@ area.  What the Lisp interpreter does is add the numbers...</p>
 There are several ways by which a variable can be given a value.  One of<br/>
 the ways is to use either the function @code{set} or the function<br/>
 @code{setq}.  Another way is to use @code{let} (@pxref{let}).  (The<br/>
-jargon for this process is to @dfn{bind} a variable to a va...</p>
+jargon for this process is to @dfn{bind} a variable to a value.)<br/>
+...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Summary</strong><br/><br/>
-@node Summary, Error Message Exercises, set & setq, List Processing<br/>
+@node Summary, Error Message Exercises, set & setq, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section Summary<br/>
 <br/>
@@ -241,11 +330,11 @@ In summary,<br/>
 Lisp programs are made up of expressions, which are lists or single atoms.<br/>
 <br/>
 @item<br/>
-Lists are made up of zero or more atoms or inner lists, sepa...</p>
+Lists are made up of zero or more atoms or inner lists, separated ...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Excercises</strong><br/><br/>
-@node Error Message Exercises,  , Summary, List Processing<br/>
+@node Error Message Exercises,  , Summary, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section Exercises<br/>
 <br/>
@@ -265,13 +354,13 @@ Create a counter that increments by two rather than one.<br/>
 <br/>
 @item<br/>
 Write an expression that prints a message in the echo area when<br/>
-ev...</p>
+evaluate...</p>
 </li>
 </ul>
 <hr/>
 <li>
 <p class="binderItem"><strong>Practicing Evaluation</strong><br/><br/>
-@node Practicing Evaluation, Writing Defuns, List Processing, Top<br/>
+@node Practicing Evaluation, Writing Defuns, List 처리하기, Top<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @chapter Practicing Evaluation<br/>
 @cindex Practicing evaluation<br/>
@@ -281,7 +370,7 @@ Before learning how to write a function definition in Emacs Lisp, it is<br/>
 useful to spend a little time evaluating various expressions that have<br/>
 already been written.  These expressions will be lists with the<br/>
 functions as their first (and often only) element.  Since some of the<br/>
-functions associated wi...</p>
+functions associated with buf...</p>
 </li>
 <hr/>
 <ul>
