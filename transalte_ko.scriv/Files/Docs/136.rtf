@@ -4,55 +4,43 @@
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
 
 \f0\fs28 \cf0 \
-@node Who You Are, Lisp History, On Reading this Text, \'bc\'ad\'b9\'ae\
+@node \'b4\'eb\'bb\'f3 \'b5\'b6\'c0\'da, Lisp \'bf\'aa\'bb\'e7, \'c0\'cc \'c3\'a5 \'c0\'d0\'b1\'e2\'bf\'a1 \'b4\'eb\'c7\'d8, \'bc\'ad\'b9\'ae\
 @comment  node-name,  next,  previous,  up\
-@unnumberedsec For Whom This is Written\
+@unnumberedsec \'b4\'eb\'bb\'f3 \'b5\'b6\'c0\'da\
 \
-This text is written as an elementary introduction for people who are\
-not programmers.  If you are a programmer, you may not be satisfied with\
-this primer.  The reason is that you may have become expert at reading\
-reference manuals and be put off by the way this text is organized.\
+\'c0\'cc \'b1\'db\'c0\'ba \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a1\'b8\'d3\'b0\'a1 \'be\'c6\'b4\'d1 \'bb\'e7\'b6\'f7\'b5\'e9\'c0\'bb \'c0\'a7\'c7\'d8\'bc\'ad \'bd\'b1\'b0\'ed \'b0\'a3\'b4\'dc\'c7\'d1 \'bc\'d2\'b0\'b3\'b7\'ce\'bc\'ad \'be\'b2\'bf\'a9\'c1\'b3\'b4\'d9. \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a1\'b8\'d3\'b6\'f3\'b8\'e9 \
+\'c0\'d4\'b9\'ae\'bc\'ad\'b7\'ce \'b8\'b8\'c1\'b7\'c7\'cf\'c1\'f6 \'be\'ca\'c0\'bb \'bc\'f6 \'c0\'d6\'b4\'d9. \'c2\'fc\'b0\'ed \'bc\'b3\'b8\'ed\'bc\'ad\'b5\'e9\'c0\'bb \'c0\'d0\'b4\'c2 \'b0\'cd\'bf\'a1 \'c0\'fc\'b9\'ae\'b0\'a1\'c0\'cc\'b0\'ed \'c0\'cc \'b1\'db\'c0\'cc \'b1\'b8\'bc\'ba\'b5\'c8 \'b9\'e6\'bd\'c4\'bf\'a1 \
+\'c8\'ef\'b9\'cc\'b0\'a1 \'be\'f8\'b4\'c2 \'b0\'cd\'c0\'cc \'c0\'cc\'c0\'af\'c0\'cc\'b4\'d9.\
 \
-An expert programmer who reviewed this text said to me:\
+\'c0\'fc\'b9\'ae\'c0\'fb\'c0\'ce \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a1\'b8\'d3\'b0\'a1 \'c0\'cc \'b1\'db\'c0\'bb \'ba\'b8\'b0\'ed \'c0\'cc\'b7\'b8\'b0\'d4 \'c0\'cc\'be\'df\'b1\'e2 \'c7\'df\'b4\'d9.:\
 \
 @quotation\
-@i\{I prefer to learn from reference manuals.  I ``dive into'' each\
-paragraph, and ``come up for air'' between paragraphs.\}\
+@i\{ \'b3\'aa\'b4\'c2 \'c2\'fc\'b0\'ed \'bc\'b3\'b8\'ed\'bc\'ad\'b5\'e9\'b7\'ce\'ba\'ce\'c5\'cd \'b9\'e8\'bf\'ec\'b4\'c2 \'b0\'cd\'c0\'bb \'bc\'b1\'c8\'a3\'c7\'d1\'b4\'d9. \'b3\'aa\'b4\'c2 \'b0\'a2 \'c0\'fd\'bf\'a1 \'a1\'b0\'ba\'fc\'c1\'ae \'b5\'e9\'be\'fa\'b0\'ed\'a1\'b1, \'b0\'a2 \'c0\'fd \'c1\'df\'b0\'a3\'bf\'a1\
+ \'a1\'b0\'bc\'f6\'b8\'e9\'c0\'b8\'b7\'ce \'b3\'aa\'bf\'d4\'b4\'d9\'a1\'b1. \}\
 \
-@i\{When I get to the end of a paragraph, I assume that that subject is\
-done, finished, that I know everything I need (with the\
-possible exception of the case when the next paragraph starts talking\
-about it in more detail).  I expect that a well written reference manual\
-will not have a lot of redundancy, and that it will have excellent\
-pointers to the (one) place where the information I want is.\}\
+@i\{ \'b0\'a2 \'c0\'fd\'c0\'c7 \'b3\'a1\'bf\'a1 \'b5\'b5\'b4\'de\'c7\'df\'c0\'bb \'b6\'a7, \'b4\'d9\'b7\'ef\'c1\'f6\'b4\'c2 \'c1\'d6\'c1\'a6\'b4\'c2 \'bf\'cf\'b7\'e1\'b5\'c7\'be\'fa\'b0\'ed \'b3\'bb\'b0\'a1 \'c7\'ca\'bf\'e4\'c7\'d1 \'b8\'f0\'b5\'e7 \'b0\'cd\'c0\'bb \'be\'c8\'b4\'d9\'b0\'ed \
+\'c3\'df\'c1\'a4\'c7\'df\'b4\'d9. ( \'b4\'d9\'c0\'bd \'c0\'fd\'bf\'a1\'bc\'ad \'b1\'d7 \'c1\'d6\'c1\'a6\'bf\'a1 \'b4\'eb\'c7\'d8\'bc\'ad \'ba\'b8\'b4\'d9 \'c0\'da\'bc\'bc\'c7\'d1 \'b0\'cd\'c0\'bb \'c0\'cc\'be\'df\'b1\'e2\'c7\'cf\'b8\'e9\'bc\'ad \'bd\'c3\'c0\'db\'c7\'d2 \'b6\'a7 \'b1\'d7 \'b0\'e6\'bf\'ec\'c0\'c7 \
+\'b0\'a1\'b4\'c9\'c7\'d1 \'bf\'b9\'bf\'dc\'b7\'ce ). \'b8\'b9\'c0\'ba \'c1\'df\'ba\'b9\'c0\'bb \'b0\'ae\'c1\'f6 \'be\'ca\'b4\'c2 \'c0\'df \'be\'b2\'bf\'a9\'c1\'f8 \'c2\'fc\'b0\'ed \'bc\'b3\'b8\'ed\'bc\'ad\'bf\'cd \'b3\'bb\'b0\'a1 \'bf\'f8\'c7\'cf\'b4\'c2 \'c1\'a4\'ba\'b8\'b5\'e9\'c0\'cc \'b8\'f0\'bf\'a9\'c0\'d6\'b4\'c2 \
+\'c0\'e5\'bc\'d2\'bf\'a1 \'b4\'eb\'c7\'d1 \'c1\'c1\'c0\'ba \'c0\'a7\'c4\'a1 \'c7\'a5\'bd\'c3\'b8\'a6 \'b0\'a1\'c1\'f6\'b0\'ed \'c0\'d6\'c0\'bb \'b0\'cd\'c0\'b8\'b7\'ce \'b1\'e2\'b4\'eb\'c7\'df\'b4\'d9.  \}\
 @end quotation\
 \
-This introduction is not written for this person!\
+\'c0\'cc \'bc\'d2\'b0\'b3\'b4\'c2 \'c0\'cc\'b7\'b1 \'bb\'e7\'b6\'f7\'c0\'bb \'c0\'a7\'c7\'d8\'bc\'ad \'be\'b2\'bf\'a9\'c1\'f6\'c1\'f6 \'be\'ca\'be\'d2\'b4\'d9!\
 \
-Firstly, I try to say everything at least three times: first, to\
-introduce it; second, to show it in context; and third, to show it in a\
-different context, or to review it.\
+\'c3\'b9 \'b9\'f8\'c2\'b0\'b7\'ce \'c0\'fb\'be\'ee\'b5\'b5 \'bc\'bc \'b9\'f8\'bf\'a1 \'b8\'f0\'b5\'e7 \'b0\'cd\'c0\'bb \'c0\'cc\'be\'df\'b1\'e2 \'c7\'cf\'b7\'c1\'b0\'ed \'c7\'df\'b4\'d9.: \'bc\'d2\'b0\'b3\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'cc \'c3\'b3\'c0\'bd; \'b9\'ae\'b8\'c6\'bf\'a1\'bc\'ad \
+\'ba\'b8\'bf\'a9\'c1\'d6\'b4\'c2 \'b0\'cd\'c0\'cc \'b5\'ce \'b9\'f8\'c2\'b0; \'b1\'d7\'b8\'ae\'b0\'ed \'b4\'d9\'b8\'a5 \'b9\'ae\'b8\'c6\'bf\'a1\'bc\'ad \'ba\'b8\'bf\'a9\'c1\'d6\'b0\'c5\'b3\'aa \'ba\'b9\'bd\'c0\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'cc \'bc\'bc \'b9\'f8\'c2\'b0\'c0\'cc\'b4\'d9.\
 \
-Secondly, I hardly ever put all the information about a subject in one\
-place, much less in one paragraph.  To my way of thinking, that imposes\
-too heavy a burden on the reader.  Instead I try to explain only what\
-you need to know at the time.  (Sometimes I include a little extra\
-information so you won't be surprised later when the additional\
-information is formally introduced.)\
+\'b5\'ce \'b9\'f8\'c2\'b0\'b7\'ce \'c7\'d1 \'c0\'fd\'ba\'b8\'b4\'d9 \'c0\'db\'c0\'ba \'c7\'d1 \'c0\'e5\'bc\'d2\'bf\'a1 \'be\'ee\'b6\'b2 \'c1\'d6\'c1\'a6\'bf\'a1 \'b4\'eb\'c7\'d1 \'b8\'f0\'b5\'e7 \'c1\'a4\'ba\'b8\'b8\'a6 \'c1\'bb\'c3\'b3\'b7\'b3 \'b3\'f5\'c1\'f6 \'be\'ca\'be\'d2\'b4\'d9. \'b5\'b6\'c0\'da\'bf\'a1\'b0\'d4 \
+\'b3\'ca\'b9\'ab \'b9\'ab\'b0\'c5\'bf\'ee \'ba\'ce\'b4\'e3\'c0\'bb \'ba\'ce\'b0\'fa\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'b8\'b7\'ce \'bb\'fd\'b0\'a2\'c7\'d1\'b4\'d9. \'b4\'eb\'bd\'c5 \'b4\'dc\'c1\'f6 \'b1\'d7 \'b6\'a7 \'be\'cb\'be\'c6\'be\'df \'c7\'d2 \'b0\'cd\'c0\'bb \'bc\'b3\'b8\'ed\'c7\'cf\'b0\'ed\'c0\'da \'c7\'df\'b4\'d9. \
+( \'b6\'a7\'b7\'ce\'b4\'c2 \'c3\'df\'b0\'a1 \'c1\'a4\'ba\'b8\'b0\'a1 \'b0\'f8\'bd\'c4\'c0\'fb\'c0\'b8\'b7\'ce \'bc\'d2\'b0\'b3 \'b5\'c9 \'b6\'a7, \'b3\'aa\'c1\'df\'bf\'a1 \'b3\'ee\'b6\'f3\'c1\'f6 \'be\'ca\'b0\'d4 \'be\'e0\'b0\'a3\'c0\'c7 \'c3\'df\'b0\'a1 \'c1\'a4\'ba\'b8\'b8\'a6 \'c6\'f7\'c7\'d4\'c7\'df\'b4\'d9. )\
 \
-When you read this text, you are not expected to learn everything the\
-first time.  Frequently, you need only make, as it were, a `nodding\
-acquaintance' with some of the items mentioned.  My hope is that I have\
-structured the text and given you enough hints that you will be alert to\
-what is important, and concentrate on it.\
+\'c0\'cc \'b1\'db\'c0\'bb \'c0\'d0\'c0\'bb \'b6\'a7, \'c3\'b3\'c0\'bd\'bf\'a1 \'b8\'f0\'b5\'e7 \'b0\'cd\'c0\'bb \'b9\'e8\'bf\'ec\'b1\'e2\'b8\'a6 \'b1\'e2\'b4\'eb \'c7\'cf\'c1\'f6 \'b8\'b6\'b6\'f3. \'b8\'bb\'c7\'cf\'c0\'da\'b8\'e9 \'be\'f0\'b1\'de\'b5\'c8 \'b8\'ee \'b0\'a1\'c1\'f6 \'c7\'d7\'b8\'f1\'bf\'a1 \'b4\'eb\'c7\'d1  \
+\'a1\'ae\'be\'ee\'bc\'b3\'c7\'c2 \'c1\'f6\'bd\'c4\'a1\'af \'c0\'b8\'b7\'ce \'c7\'d2 \'b8\'b8\'c7\'d2 \'c1\'a4\'b5\'b5\'c0\'cc\'b4\'d9 . \'b1\'db\'c0\'bb \'b1\'b8\'c1\'b6\'c8\'ad\'c7\'df\'b0\'ed \'b9\'ab\'be\'f9\'c0\'cc \'c1\'df\'bf\'e4\'c7\'cf\'b0\'ed \'b9\'ab\'be\'f9\'bf\'a1 \'c1\'fd\'c1\'df\'c7\'d8\'be\'df \'c7\'cf\'b4\'c2\'c1\'f6 \
+\'b0\'e6\'b0\'ed\'c7\'cf\'b4\'c2 \'c3\'e6\'ba\'d0\'c7\'d1 \'c8\'f9\'c6\'ae\'b8\'a6 \'c1\'a6\'b0\'f8\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'cc \'c8\'f1\'b8\'c1\'c0\'cc\'b4\'d9.\
 \
-You will need to ``dive into'' some paragraphs; there is no other way\
-to read them.  But I have tried to keep down the number of such\
-paragraphs.  This book is intended as an approachable hill, rather than\
-as a daunting mountain.\
+\'b8\'ee \'b4\'dc\'b6\'f4\'bf\'a1 \'a1\'b0\'ba\'fc\'c1\'ae \'b5\'e9\'a1\'b1 \'c7\'ca\'bf\'e4\'b0\'a1 \'c0\'d6\'c0\'bb \'b0\'cd\'c0\'cc\'b4\'d9.; \'b1\'d7 \'b0\'cd\'c0\'bb \'c0\'d0\'b4\'c2 \'b4\'d9\'b8\'a5 \'b9\'e6\'b9\'fd\'c0\'ba \'be\'f8\'b4\'d9. \'b1\'d7\'b7\'af\'b3\'aa \'b1\'d7\'b7\'b1 \'b4\'dc\'b6\'f4\'b5\'e9\'c0\'bb \
+\'c0\'fb\'b0\'d4 \'c7\'cf\'b7\'c1\'b0\'ed \'b3\'eb\'b7\'c2\'c7\'df\'b4\'d9. \'c0\'cc \'c3\'a5\'c0\'ba \'ba\'ce\'b4\'e3\'bd\'ba\'b7\'af\'bf\'ee \'bb\'ea \'ba\'b8\'b4\'d9 \'c1\'a2\'b1\'d9\'c7\'cf\'b1\'e2 \'bd\'ac\'bf\'ee \'be\'f0\'b4\'f6\'c3\'b3\'b7\'b3 \'c0\'c7\'b5\'b5\'c7\'df\'b4\'d9.\
 \
-This introduction to @cite\{Programming in Emacs Lisp\} has a companion\
-document,\
+@cite\{Programming in Emacs Lisp\} \'bc\'d2\'b0\'b3\'b4\'c2 \'c0\'da\'b8\'c5 \'b9\'ae\'bc\'ad\'b8\'a6 \'b0\'a1\'c1\'f6\'b0\'ed \'c0\'d6\'b4\'d9.\
 @iftex\
 @cite\{The GNU Emacs Lisp Reference Manual\}.\
 @end iftex\
@@ -60,9 +48,7 @@ document,\
 @ref\{Top, , The GNU Emacs Lisp Reference Manual, elisp, The GNU\
 Emacs Lisp Reference Manual\}.\
 @end ifnottex\
-The reference manual has more detail than this introduction.  In the\
-reference manual, all the information about one topic is concentrated\
-in one place.  You should turn to it if you are like the programmer\
-quoted above.  And, of course, after you have read this\
-@cite\{Introduction\}, you will find the @cite\{Reference Manual\} useful\
-when you are writing your own programs.}
+\'c2\'fc\'b0\'ed \'bc\'b3\'b8\'ed\'bc\'ad\'b4\'c2 \'c0\'cc \'bc\'d2\'b0\'b3\'ba\'b8\'b4\'d9 \'b4\'f5\'bf\'ed \'bc\'bc\'bc\'bc\'c7\'d1 \'b3\'bb\'bf\'eb\'c0\'bb \'b0\'a1\'c1\'f6\'b0\'ed \'c0\'d6\'b4\'d9. \'c2\'fc\'b0\'ed \'bc\'b3\'b8\'ed\'bc\'ad\'bf\'a1\'bc\'ad \'c7\'cf\'b3\'aa\'c0\'c7 \'c1\'d6\'c1\'a6\'bf\'a1 \'b4\'eb\'c7\'d1 \
+\'b8\'f0\'b5\'e7 \'c1\'a4\'ba\'b8\'b4\'c2 \'c7\'d1 \'c0\'e5\'bc\'d2\'bf\'a1 \'c1\'fd\'c1\'df\'b5\'c7\'be\'ee \'c0\'d6\'b4\'d9. \'c0\'a7\'bf\'a1 \'c0\'ce\'bf\'eb\'c7\'d1 \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a1\'b8\'d3\'b6\'f3\'b8\'e9 \'c0\'cc \'b0\'cd\'bf\'a1 \'c0\'c7\'c1\'f6\'c7\'d2 \'b0\'cd\'c0\'cc\'b4\'d9. \'b1\'d7\'b8\'ae\'b0\'ed \
+\'b9\'b0\'b7\'d0 \'c0\'cc @cite\{Introduction\}\'c0\'bb \'c0\'d0\'c0\'ba \'c8\'c4\'bf\'a1\'b4\'c2 \'c0\'da\'bd\'c5\'c0\'c7 \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a5\'c0\'bb \'c0\'db\'bc\'ba\'c7\'d2 \'b6\'a7, @cite\{Reference \
+Manual\}\'c0\'bb \'c0\'af\'bf\'eb\'c7\'cf\'b0\'d4 \'c3\'a3\'c0\'bb \'b0\'cd\'c0\'cc\'b4\'d9.}

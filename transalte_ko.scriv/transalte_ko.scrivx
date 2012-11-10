@@ -7,7 +7,7 @@
                 <IncludeInCompile>Yes</IncludeInCompile>
             </MetaData>
             <CorkboardAndOutliner>
-                <SelectedSubdocumentIDs>135</SelectedSubdocumentIDs>
+                <SelectedSubdocumentIDs>136</SelectedSubdocumentIDs>
                 <OutlinerExpandedState>
                     <ItemID>5</ItemID>
                     <ItemID>24</ItemID>
@@ -15,23 +15,23 @@
                 </OutlinerExpandedState>
             </CorkboardAndOutliner>
             <Children>
-                <BinderItem ID="5" Type="Text" Created="2012-11-09 00:18:17 +0900" Modified="2012-11-10 03:35:35 +0900">
+                <BinderItem ID="5" Type="Text" Created="2012-11-09 00:18:17 +0900" Modified="2012-11-10 15:45:46 +0900">
                     <Title>An Introduction to Programming in Emacs Lisp</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
                         <NotesTextSelection>0,0</NotesTextSelection>
                     </MetaData>
                     <TextSettings>
-                        <TextSelection>0,0</TextSelection>
+                        <TextSelection>304,0</TextSelection>
                     </TextSettings>
                     <CorkboardAndOutliner>
-                        <SelectedSubdocumentIDs>134</SelectedSubdocumentIDs>
+                        <SelectedSubdocumentIDs>138</SelectedSubdocumentIDs>
                         <OutlinerExpandedState>
                             <ItemID>24</ItemID>
                         </OutlinerExpandedState>
                     </CorkboardAndOutliner>
                     <Children>
-                        <BinderItem ID="24" Type="Text" Created="2012-11-09 00:44:38 +0900" Modified="2012-11-10 03:36:01 +0900">
+                        <BinderItem ID="24" Type="Text" Created="2012-11-09 00:44:38 +0900" Modified="2012-11-10 15:45:46 +0900">
                             <Title>Preface</Title>
                             <MetaData>
                                 <LabelID>2</LabelID>
@@ -42,10 +42,10 @@
                                 <TextSelection>0,0</TextSelection>
                             </TextSettings>
                             <CorkboardAndOutliner>
-                                <SelectedSubdocumentIDs>134</SelectedSubdocumentIDs>
+                                <SelectedSubdocumentIDs>135</SelectedSubdocumentIDs>
                             </CorkboardAndOutliner>
                             <Children>
-                                <BinderItem ID="134" Type="Text" Created="2012-11-10 02:39:47 +0900" Modified="2012-11-10 03:50:28 +0900">
+                                <BinderItem ID="134" Type="Text" Created="2012-11-10 02:39:47 +0900" Modified="2012-11-10 13:52:08 +0900">
                                     <Title>Why Study Emacs Lisp?</Title>
                                     <MetaData>
                                         <LabelID>2</LabelID>
@@ -56,54 +56,59 @@
                                         <TextSelection>0,0</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
-                                <BinderItem ID="135" Type="Text" Created="2012-11-10 02:40:08 +0900" Modified="2012-11-10 03:36:01 +0900">
+                                <BinderItem ID="135" Type="Text" Created="2012-11-10 02:40:08 +0900" Modified="2012-11-10 15:45:46 +0900">
                                     <Title>On Reading this Text</Title>
                                     <MetaData>
+                                        <LabelID>2</LabelID>
                                         <IncludeInCompile>Yes</IncludeInCompile>
                                         <NotesTextSelection>0,0</NotesTextSelection>
                                     </MetaData>
                                     <TextSettings>
-                                        <TextSelection>1753,0</TextSelection>
+                                        <TextSelection>106,20</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
-                                <BinderItem ID="136" Type="Text" Created="2012-11-10 02:40:14 +0900" Modified="2012-11-10 03:01:45 +0900">
+                                <BinderItem ID="136" Type="Text" Created="2012-11-10 02:40:14 +0900" Modified="2012-11-10 15:48:17 +0900">
                                     <Title>For Whom This is Written</Title>
                                     <MetaData>
+                                        <LabelID>2</LabelID>
                                         <IncludeInCompile>Yes</IncludeInCompile>
                                         <NotesTextSelection>0,0</NotesTextSelection>
                                     </MetaData>
                                     <TextSettings>
-                                        <TextSelection>0,0</TextSelection>
+                                        <TextSelection>471,0</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
-                                <BinderItem ID="137" Type="Text" Created="2012-11-10 02:40:30 +0900" Modified="2012-11-10 03:01:45 +0900">
+                                <BinderItem ID="137" Type="Text" Created="2012-11-10 02:40:30 +0900" Modified="2012-11-10 15:45:46 +0900">
                                     <Title>List History</Title>
                                     <MetaData>
+                                        <LabelID>2</LabelID>
                                         <IncludeInCompile>Yes</IncludeInCompile>
                                         <NotesTextSelection>0,0</NotesTextSelection>
                                     </MetaData>
                                     <TextSettings>
-                                        <TextSelection>773,0</TextSelection>
+                                        <TextSelection>464,0</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
-                                <BinderItem ID="138" Type="Text" Created="2012-11-10 02:40:35 +0900" Modified="2012-11-10 03:01:45 +0900">
+                                <BinderItem ID="138" Type="Text" Created="2012-11-10 02:40:35 +0900" Modified="2012-11-10 14:47:01 +0900">
                                     <Title>A Not for Novices</Title>
                                     <MetaData>
+                                        <LabelID>2</LabelID>
+                                        <IncludeInCompile>Yes</IncludeInCompile>
+                                        <NotesTextSelection>0,0</NotesTextSelection>
+                                    </MetaData>
+                                    <TextSettings>
+                                        <TextSelection>897,0</TextSelection>
+                                    </TextSettings>
+                                </BinderItem>
+                                <BinderItem ID="139" Type="Text" Created="2012-11-10 02:40:39 +0900" Modified="2012-11-10 14:47:01 +0900">
+                                    <Title>Thank You</Title>
+                                    <MetaData>
+                                        <LabelID>2</LabelID>
                                         <IncludeInCompile>Yes</IncludeInCompile>
                                         <NotesTextSelection>0,0</NotesTextSelection>
                                     </MetaData>
                                     <TextSettings>
                                         <TextSelection>0,0</TextSelection>
-                                    </TextSettings>
-                                </BinderItem>
-                                <BinderItem ID="139" Type="Text" Created="2012-11-10 02:40:39 +0900" Modified="2012-11-10 03:01:50 +0900">
-                                    <Title>Thank You</Title>
-                                    <MetaData>
-                                        <IncludeInCompile>Yes</IncludeInCompile>
-                                        <NotesTextSelection>0,0</NotesTextSelection>
-                                    </MetaData>
-                                    <TextSettings>
-                                        <TextSelection>91,13</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
                             </Children>
@@ -1474,7 +1479,7 @@
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2012-11-09 00:23:48 +0900" IgnoreDeadline="Yes">0</DraftTarget>
         <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" ResetType="Midnight" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="-158" Characters="-1602" Date="2012-11-10 02:24:49 +0900"></PreviousSession>
+        <PreviousSession Words="-599" Characters="-5466" Date="2012-11-10 10:08:31 +0900"></PreviousSession>
     </ProjectTargets>
     <PrintSettings PaperSize="595.289978,841.890015" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="iso-a4" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
 </ScrivenerProject>

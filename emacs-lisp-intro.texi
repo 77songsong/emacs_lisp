@@ -371,11 +371,11 @@ every node in every chapter.
 서문
 
 * 왜::                         Emacs Lisp을 왜 배우는가?
-* On Reading this Text::        읽고, 친숙해지고, 습관을 들여라....
-* Who You Are::                 누구를 위한 문서.
-* Lisp History::
-* Note for Novices::            초보자도 읽을 수 있다.
-* Thank You::
+* 이 책 읽기에 대해::        읽고, 친숙해지고, 습관을 들여라....
+* 대상 독자::                 누구를 위한 문서.
+* Lisp 역사::
+* 초보자를 위한 노트::            초보자도 읽을 수 있다.
+* 감사합니다.::
 
 List 처리하기
 
@@ -842,15 +842,15 @@ GNU Emacs 통합 환경의 대부분은 Emacs Lisp이라는 프로그래밍 언�
 
 @menu
 * 왜::                         Emacs Lisp을 왜 배우는가?
-* On Reading this Text::        읽고, 친숙해지고, 습관을 들여라....
-* Who You Are::                 누구를 위한 문서.
-* Lisp History::
-* Note for Novices::            초보자도 읽을 수 있다.
-* Thank You::
+* 이 책 읽기에 대해::        읽고, 친숙해지고, 습관을 들여라....
+* 대상 독자::                 누구를 위한 문서.
+* Lisp 역사::
+* 초보자를 위한 노트::            초보자도 읽을 수 있다.
+* 감사합니다.::
 @end menu
 
 
-@node 왜, On Reading this Text, 서문, 서문
+@node 왜, 이 책 읽기에 대해, 서문, 서문
 @ifnottex
 @unnumberedsec Emacs Lisp을 왜 배우는가?
 @end ifnottex
@@ -861,41 +861,29 @@ Emacs Lisp이 오직 Emacs와 관련된 것으로 대개 생각하지만, Emacs 
 아마도 프로그래밍을 이해하고 싶어할 것이다.; 아마도 Emacs를 확장하기를 원할 것이다.; 또는 아마도 프로그래머가 되기를 원할 것이다. Emacs Lisp에 대한 소개는 시작하기 위해 설계되었다.: 프로그래밍의 기본을 배우게 안내하고, 더 중요한 것은 앞으로 자신에게 가르칠 수 있는 방법을 보여주는 것이다.
 
 
-@node On Reading this Text, Who You Are, 왜, 서문
+@node 이 책 읽기에 대해, 대상 독자, 왜, 서문
 @comment  node-name,  next,  previous,  up
-@unnumberedsec On Reading this Text
+@unnumberedsec 이 책 읽기에 대해
 
-All through this document, you will see little sample programs you can
-run inside of Emacs.  If you read this document in Info inside of GNU
-Emacs, you can run the programs as they appear.  (This is easy to do and
-is explained when the examples are presented.)  Alternatively, you can
-read this introduction as a printed book while sitting beside a computer
-running Emacs.  (This is what I like to do; I like printed books.)  If
-you don't have a running Emacs beside you, you can still read this book,
-but in this case, it is best to treat it as a novel or as a travel guide
-to a country not yet visited: interesting, but not the same as being
-there.
+이 문서에서 Emacs에 실행할 수 있는 작은 샘플 프로그램들을 볼 수 있다. GNU Emacs 안에서 
+이 문서를 읽는다면, 보이는 것 처럼 프로그램들을 수행할 수 있다. ( 이 것은 쉽고, 예제가 나올 때
+설명할 것이다. ) 아니면 Emacs가 수행되는 컴퓨터 옆에 앉아서 출력 된 책으로 이 소개를 읽을 
+수 있다. ( 이 것은 내가 좋아하는 방법이다.; 출력 된 책을 좋아한다. ) 옆에서 Emacs를 수행할 
+수 없더라도 여전히 이 책을 읽을 수 있다. 그러나 이 경우에는 소설이나 아직 방문하지 않은 
+나라에 대한 여행 가이드를 읽는 것처럼 하는 것이 제일 좋다.; 흥미로움은 차이가 없다.
 
-Much of this introduction is dedicated to walk-throughs or guided tours
-of code used in GNU Emacs.  These tours are designed for two purposes:
-first, to give you familiarity with real, working code (code you use
-every day); and, second, to give you familiarity with the way Emacs
-works.  It is interesting to see how a working environment is
-implemented.
-Also, I
-hope that you will pick up the habit of browsing through source code.
-You can learn from it and mine it for ideas.  Having GNU Emacs is like
-having a dragon's cave of treasures.
+이 소개의 대부분은 GNU Emacs에서 사용되는 코드의 길잡이 여행 또는 자세한 설명에 
+집중한다. 이 여행에는 두 가지 목적이 있다. 첫 번째는 실제로 동작하는 코드에 익숙함을 준다. 
+( 매일 사용하는 코드 ); 그리고 두 번재는 Emacs가 동작하는 방식에 익숙함을 주는 것이다. 
+동작하는 환경이 어떻게 구현되어있는지 보는 것은 흥미롭다. 또한 소스 코드를 살펴보는 습관을 
+얻기를 희망한다. 소스 코드로부터 배울 수 있고 생각들을 얻을 수 있다. GNU Emacs를 얻는 
+것은 용의 보물 동굴을 얻는 것과 같다.
 
-In addition to learning about Emacs as an editor and Emacs Lisp as a
-programming language, the examples and guided tours will give you an
-opportunity to get acquainted with Emacs as a Lisp programming
-environment.  GNU Emacs supports programming and provides tools that
-you will want to become comfortable using, such as @kbd{M-.} (the key
-which invokes the @code{find-tag} command).  You will also learn about
-buffers and other objects that are part of the environment.
-Learning about these features of Emacs is like learning new routes
-around your home town.
+편집기로 Emacs와 프로그래밍 언어로 Emacs Lisp을 배우는 것 뿐만 아니라, 예제들과 길잡이 
+여행은 Lisp 프로그래밍 환경으로 Emacs를 알 수 있는 기회를 줄 것이다. GNU Emacs는 
+프로그래밍을 지원하고 @kbd{M-.} ( @code{find-tag} 명령을 실행하는 키 ) 같이 사용하면 
+편안할 도구들을 제공한다. 버퍼와 환경의 부분인 다른 객체들도 배울 것이다. Emacs의 이런 
+특징들을 배우는 것은 집 주변에 새로운 길을 배우는 것과 같다.
 
 @ignore
 In addition, I have written several programs as extended examples.
@@ -906,62 +894,49 @@ programs used for illustrations, there is very little in here that is
 advantage of Emacs Lisp: it is easy to learn to use it for work.
 @end ignore
 
-Finally, I hope to convey some of the skills for using Emacs to
-learn aspects of programming that you don't know.  You can often use
-Emacs to help you understand what puzzles you or to find out how to do
-something new.  This self-reliance is not only a pleasure, but an
-advantage.
+마지막으로 모르는 프로그래밍의 양상을 배우기 위해 Emacs를 사용하는 몇 가지 기술을 전달할 
+것이다. 당혹스럽게 만드는 것을 이해하는데 도움을 주거나 새로운 것을 하는 방법을 찾기위해 
+종종 Emacs 사용할 수 있다. 자기 의존은 기쁨일 뿐만 아니라 장점이기도 하다.
 
 
-@node Who You Are, Lisp History, On Reading this Text, 서문
+
+@node 대상 독자, Lisp 역사, 이 책 읽기에 대해, 서문
 @comment  node-name,  next,  previous,  up
-@unnumberedsec For Whom This is Written
+@unnumberedsec 대상 독자
 
-This text is written as an elementary introduction for people who are
-not programmers.  If you are a programmer, you may not be satisfied with
-this primer.  The reason is that you may have become expert at reading
-reference manuals and be put off by the way this text is organized.
+이 글은 프로그래머가 아닌 사람들을 위해서 쉽고 간단한 소개로서 쓰여졌다. 프로그래머라면 
+입문서로 만족하지 않을 수 있다. 참고 설명서들을 읽는 것에 전문가이고 이 글이 구성된 방식에 
+흥미가 없는 것이 이유이다.
 
-An expert programmer who reviewed this text said to me:
+전문적인 프로그래머가 이 글을 보고 이렇게 이야기 했다.:
 
 @quotation
-@i{I prefer to learn from reference manuals.  I ``dive into'' each
-paragraph, and ``come up for air'' between paragraphs.}
+@i{ 나는 참고 설명서들로부터 배우는 것을 선호한다. 나는 각 절에 “빠져 들었고”, 각 절 중간에
+ “수면으로 나왔다”. }
 
-@i{When I get to the end of a paragraph, I assume that that subject is
-done, finished, that I know everything I need (with the
-possible exception of the case when the next paragraph starts talking
-about it in more detail).  I expect that a well written reference manual
-will not have a lot of redundancy, and that it will have excellent
-pointers to the (one) place where the information I want is.}
+@i{ 각 절의 끝에 도달했을 때, 다뤄지는 주제는 완료되었고 내가 필요한 모든 것을 안다고 
+추정했다. ( 다음 절에서 그 주제에 대해서 보다 자세한 것을 이야기하면서 시작할 때 그 경우의 
+가능한 예외로 ). 많은 중복을 갖지 않는 잘 쓰여진 참고 설명서와 내가 원하는 정보들이 모여있는 
+장소에 대한 좋은 위치 표시를 가지고 있을 것으로 기대했다.  }
 @end quotation
 
-This introduction is not written for this person!
+이 소개는 이런 사람을 위해서 쓰여지지 않았다!
 
-Firstly, I try to say everything at least three times: first, to
-introduce it; second, to show it in context; and third, to show it in a
-different context, or to review it.
+첫 번째로 적어도 세 번에 모든 것을 이야기 하려고 했다.: 소개하는 것이 처음; 문맥에서 
+보여주는 것이 두 번째; 그리고 다른 문맥에서 보여주거나 복습하는 것이 세 번째이다.
 
-Secondly, I hardly ever put all the information about a subject in one
-place, much less in one paragraph.  To my way of thinking, that imposes
-too heavy a burden on the reader.  Instead I try to explain only what
-you need to know at the time.  (Sometimes I include a little extra
-information so you won't be surprised later when the additional
-information is formally introduced.)
+두 번째로 한 절보다 작은 한 장소에 어떤 주제에 대한 모든 정보를 좀처럼 놓지 않았다. 독자에게 
+너무 무거운 부담을 부과하는 것으로 생각한다. 대신 단지 그 때 알아야 할 것을 설명하고자 했다. 
+( 때로는 추가 정보가 공식적으로 소개 될 때, 나중에 놀라지 않게 약간의 추가 정보를 포함했다. )
 
-When you read this text, you are not expected to learn everything the
-first time.  Frequently, you need only make, as it were, a `nodding
-acquaintance' with some of the items mentioned.  My hope is that I have
-structured the text and given you enough hints that you will be alert to
-what is important, and concentrate on it.
+이 글을 읽을 때, 처음에 모든 것을 배우기를 기대 하지 마라. 말하자면 언급된 몇 가지 항목에 대한  
+‘어설픈 지식’ 으로 할 만할 정도이다 . 글을 구조화했고 무엇이 중요하고 무엇에 집중해야 하는지 
+경고하는 충분한 힌트를 제공하는 것이 희망이다.
 
-You will need to ``dive into'' some paragraphs; there is no other way
-to read them.  But I have tried to keep down the number of such
-paragraphs.  This book is intended as an approachable hill, rather than
-as a daunting mountain.
+몇 단락에 “빠져 들” 필요가 있을 것이다.; 그 것을 읽는 다른 방법은 없다. 그러나 그런 단락들을 
+적게 하려고 노력했다. 이 책은 부담스러운 산 보다 접근하기 쉬운 언덕처럼 의도했다.
 
-This introduction to @cite{Programming in Emacs Lisp} has a companion
-document,
+@cite{Programming in Emacs Lisp} 소개는 자매 문서를 가지고 있다.
 @iftex
 @cite{The GNU Emacs Lisp Reference Manual}.
 @end iftex
@@ -969,91 +944,67 @@ document,
 @ref{Top, , The GNU Emacs Lisp Reference Manual, elisp, The GNU
 Emacs Lisp Reference Manual}.
 @end ifnottex
-The reference manual has more detail than this introduction.  In the
-reference manual, all the information about one topic is concentrated
-in one place.  You should turn to it if you are like the programmer
-quoted above.  And, of course, after you have read this
-@cite{Introduction}, you will find the @cite{Reference Manual} useful
-when you are writing your own programs.
+참고 설명서는 이 소개보다 더욱 세세한 내용을 가지고 있다. 참고 설명서에서 하나의 주제에 대한 
+모든 정보는 한 장소에 집중되어 있다. 위에 인용한 프로그래머라면 이 것에 의지할 것이다. 그리고 
+물론 이 @cite{Introduction}을 읽은 후에는 자신의 프로그램을 작성할 때, @cite{Reference 
+Manual}을 유용하게 찾을 것이다.
 
 
-@node Lisp History, Note for Novices, Who You Are, 서문
-@unnumberedsec Lisp History
-@cindex Lisp history
+@node Lisp 역사, 초보자를 위한 노트, 대상 독자, 서문
+@unnumberedsec Lisp 역사
+@cindex Lisp 역사
 
-Lisp was first developed in the late 1950s at the Massachusetts
-Institute of Technology for research in artificial intelligence.  The
-great power of the Lisp language makes it superior for other purposes as
-well, such as writing editor commands and integrated environments.
+Lisp은 1950년대 말에 인공 지능 연구를 위해 MIT에서 처음으로 개발되었다. Lisp 언어의 큰
+힘은 통합 환경과 편집기 명령을 작성하는 것 뿐만 아니라 다른 목적들에도 우수하다는 것이다.
 
 @cindex Maclisp
 @cindex Common Lisp
-GNU Emacs Lisp is largely inspired by Maclisp, which was written at MIT
-in the 1960s.  It is somewhat inspired by Common Lisp, which became a
-standard in the 1980s.  However, Emacs Lisp is much simpler than Common
-Lisp.  (The standard Emacs distribution contains an optional extensions
-file, @file{cl.el}, that adds many Common Lisp features to Emacs Lisp.)
+GNU Emacs Lisp 은 1960년대에 MIT에서 만든 Maclisp에 가장 큰 영향을 받았다.  1980년대에 표준이 된 Common Lisp에도 다소 영향을 받았다. 그러나, Emacs Lisp은 Common Lisp보다 많이 단순하다. ( 표준 Emacs 배포판은 Emacs Lisp에 많은 Common Lisp의 특징을 추가하는 선택적인 확장 파일 @file{cl.el}을 포함하고 있다. )
 
 
-@node Note for Novices, Thank You, Lisp History, 서문
+
+@node 초보자를 위한 노트, 감사합니다., Lisp 역사, 서문
 @comment  node-name,  next,  previous,  up
-@unnumberedsec A Note for Novices
+@unnumberedsec 초보자를 위한 노트
 
-If you don't know GNU Emacs, you can still read this document
-profitably.  However, I recommend you learn Emacs, if only to learn to
-move around your computer screen.  You can teach yourself how to use
-Emacs with the on-line tutorial.  To use it, type @kbd{C-h t}.  (This
-means you press and release the @key{CTRL} key and the @kbd{h} at the
-same time, and then press and release @kbd{t}.)
+GNU Emacs를 모르더라도, 여전히 이 문서를 유익하게 읽을 수 있다. 그러나, 컴퓨터 
+화면 주위만 움직이는 것만을 배우고자 한다면 Emacs를 배우는 것을 추천한다. 온라인 교재를 
+통해 Emacs 사용법을 스스로 익힐 수 있다. 온라인 사용 교재를 쓰기 위해서 @kbd{C-h t}를 
+눌러라.  ( 이 것은 동시에 @key{CTRL} 와 @kbd{h} 를 눌렀다 땐 후 @kbd{t}를 눌렀다 때는 
+것을 의미한다.)
 
-Also, I often refer to one of Emacs' standard commands by listing the
-keys which you press to invoke the command and then giving the name of
-the command in parentheses, like this: @kbd{M-C-\}
-(@code{indent-region}).  What this means is that the
-@code{indent-region} command is customarily invoked by typing
-@kbd{M-C-\}.  (You can, if you wish, change the keys that are typed to
-invoke the command; this is called @dfn{rebinding}.  @xref{Keymaps, ,
-Keymaps}.)  The abbreviation @kbd{M-C-\} means that you type your
-@key{META} key, @key{CTRL} key and @key{\} key all at the same time.
-(On many modern keyboards the @key{META} key is labelled
-@key{ALT}.)
-Sometimes a combination like this is called a keychord, since it is
-similar to the way you play a chord on a piano.  If your keyboard does
-not have a @key{META} key, the @key{ESC} key prefix is used in place
-of it.  In this case, @kbd{M-C-\} means that you press and release your
-@key{ESC} key and then type the @key{CTRL} key and the @key{\} key at
-the same time.  But usually @kbd{M-C-\} means press the @key{CTRL} key
-along with the key that is labelled @key{ALT} and, at the same time,
-press the @key{\} key.
+@kbd{M-C-\} (@code{indent-region}) 처럼 명령 키와 괄호 안에 명령의 이름의 목록을 
+통해서 Emacs의 표준 명령들의 하나를 종종 참조한다. 이는 @code{indent-region} 명령은 
+@kbd{M-C-\} 입력에 의해서 관례 상 불려지는 것을 나타낸다. ( 원한다면 명령을 부르는 
+키들을 변경할 수 있다.; 이 것은 @dfn{rebinding}이라 부른다. 
+@xref{Keymaps, ,Keymaps}. ) 축약어 @kbd{M-C-\} 은 @key{META} 키, 
+@key{CTRL} 키 그리고 @key{\} 키를 모두 같은 시간에 눌러야한다는 것을 의미한다. ( 많은 
+현대 키보드들에서 @key{META} 키는 @key{ALT} 키이다. ) 피아노에서 코드를 연주하는
+방식과 비슷하기 때문에 이 같은 조합을 키 코드라고 부르기도 한다. 키보드에 @key{META} 
+키가 없다면, @key{ESC} 키가 앞에 쓰여진다. 이 경우에 @kbd{M-C-\} 는 @key{ESC} 키를 
+눌렀다 땐 후, @key{CTRL} 키 와 @key{\} 키를 동시에 누른다. 그러나 보통 @kbd{M-C-\}은 
+@key{CTRL} 키와 @key{ALT} 키 그리고 @key{\} 키를 동시에 누르는 것을 의미한다.
 
-In addition to typing a lone keychord, you can prefix what you type
-with @kbd{C-u}, which is called the `universal argument'.  The
-@kbd{C-u} keychord passes an argument to the subsequent command.
-Thus, to indent a region of plain text by 6 spaces, mark the region,
-and then type @w{@kbd{C-u 6 M-C-\}}.  (If you do not specify a number,
-Emacs either passes the number 4 to the command or otherwise runs the
-command differently than it would otherwise.)  @xref{Arguments, ,
-Numeric Arguments, emacs, The GNU Emacs Manual}.
+하나의 키 코드 입력 뿐만 아니라 ‘보편적 인자”로 불리는 @kbd{C-u}를 먼저 입력할 수 있다. 
+@kbd{C-u} 키 코드는 인자를 다음 명령에 전달한다. 공백 6개 만큼 텍스트의 공간을 들여쓰기 
+한다면 지역을 표시하고 @w{@kbd{C-u 6 M-C-\}}를 입력한다. ( 숫자를 명시하지 않는다면 
+명령에 숫자 4를 넘기거나 다르게 동작한다. ) @xref{Arguments, ,Numeric Arguments, 
+emacs, The GNU Emacs Manual}.
 
-If you are reading this in Info using GNU Emacs, you can read through
-this whole document just by pressing the space bar, @key{SPC}.
-(To learn about Info, type @kbd{C-h i} and then select Info.)
+GNU Emacs를 사용하여 Info에서 이 문서를 읽는 중이라면, 스페이스 바, @key{SPC}를 
+누르는 것으로 문서 전체를 읽을 수 있다. ( Info에 대해서 배우기 위해서 @kbd{C-h i} 입력한 후 
+Info를 선택하라. )
 
-A note on terminology:  when I use the word Lisp alone, I often am
-referring to the various dialects of Lisp in general, but when I speak
-of Emacs Lisp, I am referring to GNU Emacs Lisp in particular.
+용어에 대한 메모: Lisp 단어 혼자만 사용할 때는 일반적으로 다양한 Lisp을 가리킨다. 그러나 
+Emacs Lisp이라고 할 때는 특히 GNU Emacs Lisp을 가리킨다.
 
 
-@node Thank You,  , Note for Novices, 서문
+
+@node 감사합니다.,  , 초보자를 위한 노트, 서문
 @comment  node-name,  next,  previous,  up
-@unnumberedsec Thank You
+@unnumberedsec 감사합니다.
 
-My thanks to all who helped me with this book.  My especial thanks to
-@r{Jim Blandy}, @r{Noah Friedman}, @w{Jim Kingdon}, @r{Roland
-McGrath}, @w{Frank Ritter}, @w{Randy Smith}, @w{Richard M.@:
-Stallman}, and @w{Melissa Weisshaus}.  My thanks also go to both
-@w{Philip Johnson} and @w{David Stampe} for their patient
-encouragement.  My mistakes are my own.
+이 책을 도와주신 모든 분들에게 감사 드립니다. @r{Jim Blandy}, @r{Noah Friedman}, @w{Jim Kingdon}, @r{Roland McGrath}, @w{Frank Ritter}, @w{Randy Smith}, @w{Richard M.@:Stallman}, 그리고 @w{Melissa Weisshaus} 이 분들에게는 더욱 감사함을 느낍니다.  꾸준한 격려를 주신 @w{Philip Johnson} 와 @w{David Stampe} 이 두 분에게도 감사합니다. 이 책의 모든 실수는 모두 저의 것입니다.
 
 @flushright
 Robert J. Chassell

@@ -65,7 +65,7 @@ GNU Emacs 통합 환경의 대부분은 Emacs Lisp이라는 프로그래밍 언�
 <ul>
 <li>
 <p class="binderItem"><strong>Why Study Emacs Lisp?</strong><br/><br/>
-@node 왜, On Reading this Text, 서문, 서문<br/>
+@node 왜, 이 책 읽기에 대해, 서문, 서문<br/>
 @ifnottex<br/>
 @unnumberedsec Emacs Lisp을 왜 배우는가?<br/>
 @end ifnottex<br/>
@@ -77,78 +77,83 @@ Emacs Lisp이 오직 Emacs와 관련된 것으로 대개 생각하지만, Emacs 
 </li>
 <li>
 <p class="binderItem"><strong>On Reading this Text</strong><br/><br/>
-@node On Reading this Text, Who You Are, 왜, 서문<br/>
+@node 이 책 읽기에 대해, 대상 독자, 왜, 서문<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@unnumberedsec On Reading this Text<br/>
+@unnumberedsec 이 책 읽기에 대해<br/>
 <br/>
-All through this document, you will see little sample programs you can<br/>
-run inside of Emacs.  If you read this document in Info inside of GNU<br/>
-Emacs, you can run the programs as they appear.  (This is easy to do and<br/>
-is explained when the examples are presented.)  Alternatively, you can<br/>
-read this introduction as a printed book while sitting beside a computer<br/>
-running Emacs....</p>
+이 문서에서 Emacs에 실행할 수 있는 작은 샘플 프로그램들을 볼 수 있다. GNU Emacs 안에서 <br/>
+이 문서를 읽는다면, 보이는 것 처럼 프로그램들을 수행할 수 있다. ( 이 것은 쉽고, 예제가 나올 때<br/>
+설명할 것이다. ) 아니면 Emacs가 수행되는 컴퓨터 옆에 앉아서 출력 된 책으로 이 소개를 읽을 <br/>
+수 있다. ( 이 것은 내가 좋아하는 방법이다.; 출력 된 책을 좋아한다. ) 옆에서 Emacs를 수행할 <br/>
+수 없더라도 여전히 이 책을 읽을 수 있다. 그러나 이 경우에는 소설이나 아직 방문하지 않은 <br/>
+나라에 대한 여행 가이드를 읽는 것처럼 하는 것이 제일 좋다.; 흥미로움은 차이가 없다.<br/>
+<br/>
+이 소개의 대부분은 GNU Emacs에서 사용되는 코드의 길잡이 여행 또는 자세한 설명에 <br/>
+집중한다. 이 여...</p>
 </li>
 <li>
 <p class="binderItem"><strong>For Whom This is Written</strong><br/><br/>
-@node Who You Are, Lisp History, On Reading this Text, 서문<br/>
+@node 대상 독자, Lisp 역사, 이 책 읽기에 대해, 서문<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@unnumberedsec For Whom This is Written<br/>
+@unnumberedsec 대상 독자<br/>
 <br/>
-This text is written as an elementary introduction for people who are<br/>
-not programmers.  If you are a programmer, you may not be satisfied with<br/>
-this primer.  The reason is that you may have become expert at reading<br/>
-reference manuals and be put off by the way this text is organized.<br/>
+이 글은 프로그래머가 아닌 사람들을 위해서 쉽고 간단한 소개로서 쓰여졌다. 프로그래머라면 <br/>
+입문서로 만족하지 않을 수 있다. 참고 설명서들을 읽는 것에 전문가이고 이 글이 구성된 방식에 <br/>
+흥미가 없는 것이 이유이다.<br/>
 <br/>
-An expert programmer who reviewed this text said to me:<br/>
+전문적인 프로그래머가 이 글을 보고 이렇게 이야기 했다.:<br/>
 <br/>
 @quotation<br/>
-@i{I p...</p>
+@i{ 나는 참고 설명서들로부터 배우는 것을 선호한다. 나는 각 절에 “빠져 들었고”, 각 절 중간에<br/>
+ “수면으로 나왔다”. }<br/>
+<br/>
+@i{ 각 절의 끝에 도달했을 때, 다뤄지는 주제는 완료되었고 내가 필요한 모든 것을 안다고 <br/>
+추정했다. ( 다음 절에서 그 주제에 대해서 보다 자세한 것을 이야기하면서 시작할 때 그 경우의 <br/>
+가능한 예외로 ). 많은 중복을 갖지 않는 잘 쓰여진 참고 설명서와 내가 원하는 정보들이...</p>
 </li>
 <li>
 <p class="binderItem"><strong>List History</strong><br/><br/>
-@node Lisp History, Note for Novices, Who You Are, 서문<br/>
-@unnumberedsec Lisp History<br/>
-@cindex Lisp history<br/>
+@node Lisp 역사, 초보자를 위한 노트, 대상 독자, 서문<br/>
+@unnumberedsec Lisp 역사<br/>
+@cindex Lisp 역사<br/>
 <br/>
-Lisp was first developed in the late 1950s at the Massachusetts<br/>
-Institute of Technology for research in artificial intelligence.  The<br/>
-great power of the Lisp language makes it superior for other purposes as<br/>
-well, such as writing editor commands and integrated environments.<br/>
+Lisp은 1950년대 말에 인공 지능 연구를 위해 MIT에서 처음으로 개발되었다. Lisp 언어의 큰<br/>
+힘은 통합 환경과 편집기 명령을 작성하는 것 뿐만 아니라 다른 목적들에도 우수하다는 것이다.<br/>
 <br/>
 @cindex Maclisp<br/>
 @cindex Common Lisp<br/>
-GNU Emacs Lisp is largely inspired by Maclisp, which was written at MIT<br/>
-in the 1960s...</p>
+GNU Emacs Lisp 은 1960년대에 MIT에서 만든 Maclisp에 가장 큰 영향을 받았다.  1980년대에 표준이 된 Common Lisp에도 다소 영향을 받았다. 그러나, Emacs Lisp은 Common Lisp보다 많이 단순하다. ( 표준 Emacs 배포판은 Emacs Lisp에 많은 Common Lisp의 특징을 추가하는 선택적인 확장 파일 @file{cl.el}을 포함하고 있다. )</p>
 </li>
 <li>
 <p class="binderItem"><strong>A Not for Novices</strong><br/><br/>
-@node Note for Novices, Thank You, Lisp History, 서문<br/>
+@node 초보자를 위한 노트, 감사합니다., Lisp 역사, 서문<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@unnumberedsec A Note for Novices<br/>
+@unnumberedsec 초보자를 위한 노트<br/>
 <br/>
-If you don't know GNU Emacs, you can still read this document<br/>
-profitably.  However, I recommend you learn Emacs, if only to learn to<br/>
-move around your computer screen.  You can teach yourself how to use<br/>
-Emacs with the on-line tutorial.  To use it, type @kbd{C-h t}.  (This<br/>
-means you press and release the @key{CTRL} key and the @kbd{h} at the<br/>
-same time, and then press a...</p>
+GNU Emacs를 모르더라도, 여전히 이 문서를 유익하게 읽을 수 있다. 그러나, 컴퓨터 <br/>
+화면 주위만 움직이는 것만을 배우고자 한다면 Emacs를 배우는 것을 추천한다. 온라인 교재를 <br/>
+통해 Emacs 사용법을 스스로 익힐 수 있다. 온라인 사용 교재를 쓰기 위해서 @kbd{C-h t}를 <br/>
+눌러라.  ( 이 것은 동시에 @key{CTRL} 와 @kbd{h} 를 눌렀다 땐 후 @kbd{t}를 눌렀다 때는 <br/>
+것을 의미한다.)<br/>
+<br/>
+@kbd{M-C-\} (@code{indent-region}) 처럼 명령 키와 괄호 안에 명령의 이름의 목록을 <br/>
+통해서 Emacs의 표준 명령들의 하나를 종종 참조한다. 이는 @code{indent-region} 명령은 <br/>
+@kbd{M-C-\} 입력에 의해서 관례 상 불...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Thank You</strong><br/><br/>
-@node Thank You,  , Note for Novices, 서문<br/>
+@node 감사합니다.,  , 초보자를 위한 노트, 서문<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@unnumberedsec Thank You<br/>
+@unnumberedsec 감사합니다.<br/>
 <br/>
-My thanks to all who helped me with this book.  My especial thanks to<br/>
-@r{Jim Blandy}, @r{Noah Friedman}, @w{Jim Kingdon}, @r{Roland<br/>
-McGrath}, @w{Frank Ritter}, @w{Randy Smith}, @w{Richard M.@:<br/>
-Stallman}, and @w{Melissa Weisshaus}.  My thanks also go to both<br/>
-@w{Philip Johnson} and @w{David Stampe} for their patient<br/>
-encouragement.  My mistakes are my own.<br/>
+이 책을 도와주신 모든 분들에게 감사 드립니다. @r{Jim Blandy}, @r{Noah Friedman}, @w{Jim Kingdon}, @r{Roland McGrath}, @w{Frank Ritter}, @w{Randy Smith}, @w{Richard M.@:Stallman}, 그리고 @w{Melissa Weisshaus} 이 분들에게는 더욱 감사함을 느낍니다.  꾸준한 격려를 주신 @w{Philip Johnson} 와 @w{David Stampe} 이 두 분에게도 감사합니다. 이 책의 모든 실수는 모두 저의 것입니다.<br/>
 <br/>
 @flushright<br/>
 Robert J. Chassell<br/>
-@...</p>
+@email{bob@@gnu.org}<br/>
+@end flushright<br/>
+<br/>
+@c ================ Beginning of ...</p>
 </li>
 </ul>
 </ul>
