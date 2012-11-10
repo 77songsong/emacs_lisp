@@ -1,0 +1,77 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Lisp Atoms, Whitespace in Lists, \'bc\'fd\'c0\'da\'bf\'cd List, Lisp\'bf\'a1\'bc\'ad List\
+@comment  node-name,  next,  previous,  up\
+@subsection Lisp Atoms\
+@cindex Lisp Atoms\
+\
+Lisp\'bf\'a1\'bc\'ad @dfn\{atom\}\'b6\'f3 \'ba\'ce\'b8\'a3\'b4\'c2 \'b4\'dc\'be\'ee\'b5\'e9\'c0\'cc \'c0\'d6\'b4\'d9. \'c0\'cc \'bf\'eb\'be\'ee\'b4\'c2 \'b4\'dc\'be\'ee \'a1\'ae\'c2\'c9\'b0\'b6 \'bc\'f6 \'be\'f8\'b4\'c2\'a1\'af \'b0\'cd\'c0\'bb \
+\'c0\'c7\'b9\'cc\'c7\'cf\'b4\'c2 atom\'c0\'c7 \'bf\'aa\'bb\'e7\'c0\'fb\'c0\'ce \'c0\'c7\'b9\'cc\'bf\'a1\'bc\'ad \'bf\'d4\'b4\'d9. Lisp\'b1\'ee\'c1\'f6 \'bf\'b5\'c7\'e2\'c0\'bb \'c1\'d6\'be\'fa\'b4\'d9. List\'bf\'a1 \'bb\'e7\'bf\'eb\'c7\'cf\'b4\'c2 \
+\'b4\'dc\'be\'ee\'b5\'e9\'c0\'ba \'b4\'f5 \'c0\'cc\'bb\'f3 \'c0\'db\'c0\'ba \'ba\'ce\'ba\'d0\'c0\'b8\'b7\'ce \'c2\'c9\'b0\'b6 \'bc\'f6 \'be\'f8\'b0\'ed \'bf\'a9\'c0\'fc\'c8\'f7 \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a5\'c0\'c7 \'ba\'ce\'ba\'d0\'c0\'b8\'b7\'ce \'b0\'b0\'c0\'ba \'b0\'cd\'c0\'bb \
+\'c0\'c7\'b9\'cc\'c7\'d1\'b4\'d9.; \'bc\'fd\'c0\'da\'bf\'cd @samp\{+\} \'b0\'b0\'c0\'ba \'c7\'cf\'b3\'aa\'c0\'c7 \'b9\'ae\'c0\'da \'b1\'e2\'c8\'a3\'c3\'b3\'b7\'b3. \'b9\'dd\'b8\'e9\'bf\'a1 atom\'b0\'fa \'b4\'d9\'b8\'a5 List\'b4\'c2 \
+\'ba\'ce\'ba\'d0\'b5\'e9\'b7\'ce \'b3\'aa\'b4\'b2\'c1\'fa \'bc\'f6 \'c0\'d6\'b4\'d9. (  @xref\{car cdr & cons,\
+, @code\{car\} @code\{cdr\} & @code\{cons\} Fundamental Functions\}. )\
+\
+List\'bf\'a1\'bc\'ad atom\'c0\'ba \'b0\'f8\'b9\'e9\'c0\'b8\'b7\'ce \'b1\'b8\'ba\'d0\'b5\'c8\'b4\'d9. \'b0\'fd\'c8\'a3\'c0\'c7 \'b9\'d9\'b7\'ce \'bf\'b7\'bf\'a1 \'c0\'d6\'c0\'bb \'bc\'f6 \'c0\'d6\'b4\'d9.\
+\
+@cindex @samp\{empty list\} defined\
+\'b1\'e2\'bc\'fa\'c0\'fb\'c0\'b8\'b7\'ce \'c0\'cc\'be\'df\'b1\'e2 \'c7\'cf\'b8\'e9 Lisp\'bf\'a1\'bc\'ad List\'b4\'c2 \'b0\'f8\'b9\'e9\'c0\'b8\'b7\'ce \'b1\'b8\'ba\'d0\'b5\'c7\'b4\'c2 atom\'b5\'e9 \'b6\'c7\'b4\'c2 \'b4\'d9\'b8\'a5 List\'b5\'e9 \
+\'c8\'a4\'c0\'ba \'b5\'d1 \'b4\'d9\'b8\'a6 \'b5\'d1\'b7\'af\'bd\'d1 \'b0\'fd\'c8\'a3\'b7\'ce \'b1\'b8\'bc\'ba\'b5\'c8\'b4\'d9. List\'b4\'c2 \'b1\'d7 \'be\'c8\'bf\'a1 \'c7\'cf\'b3\'aa\'c0\'c7 atom\'c0\'bb \'b0\'a1\'c1\'fa \'bc\'f6 \'c0\'d6\'b0\'c5\'b3\'aa \
+\'be\'c6\'b9\'ab \'b0\'cd\'b5\'b5 \'b0\'a1\'c1\'f6\'c1\'f6 \'be\'ca\'c0\'bb \'bc\'f6 \'c0\'d6\'b4\'d9. \'be\'c8\'bf\'a1 \'be\'c6\'b9\'ab \'b0\'cd\'b5\'b5 \'be\'f8\'b4\'c2 List\'b4\'c2 \'b4\'d9\'c0\'bd\'b0\'fa \'b0\'b0\'b4\'d9.: @code\{()\} \
+\'c0\'cc\'b0\'ed @dfn\{\'ba\'f3 List\}\'b7\'ce \'ba\'d2\'b8\'b0\'b4\'d9. \'b4\'d9\'b8\'a5 \'b0\'cd\'b0\'fa \'b4\'d9\'b8\'a3\'b0\'d4 \'ba\'f3 List\'b4\'c2 \'b5\'bf\'bd\'c3\'bf\'a1 atom\'c0\'cc\'b8\'e9\'bc\'ad List\'b7\'ce \
+\'b0\'a3\'c1\'d6\'b5\'c8\'b4\'d9.\
+\
+@cindex Symbolic expressions, introduced\
+@cindex @samp\{expression\} defined\
+@cindex @samp\{form\} defined\
+atom\'b0\'fa List \'b5\'d1\'c0\'c7 \'c3\'e2\'b7\'c2 \'b5\'c8 \'c7\'a5\'c7\'f6\'c0\'ba @dfn\{symbolic expressions\} \'b6\'c7\'b4\'c2 \'ba\'b8\'b4\'d9 \'b0\'a3\'b0\'e1\'c7\'cf\'b0\'d4 \
+@dfn\{s-expressions\}\'b6\'f3 \'ba\'d2\'b8\'b0\'b4\'d9. \'b4\'dc\'be\'ee @dfn\{expression\} \'c0\'da\'c3\'bc\'b4\'c2 \'c3\'e2\'b7\'c2 \'b5\'c8 \'c7\'a5\'c7\'f6 \'b6\'c7\'b4\'c2 \
+\'c4\'c4\'c7\'bb\'c5\'cd\'bf\'a1 \'b3\'bb\'ba\'ce\'bf\'a1 \'c0\'fa\'c0\'e5\'b5\'c8 \'b0\'cd\'c0\'b8\'b7\'ce List \'b6\'c7\'b4\'c2 atom\'c0\'b8\'b7\'ce \'c2\'fc\'c1\'b6\'b5\'c9 \'bc\'f6 \'c0\'d6\'b4\'d9. \'c1\'be\'c1\'be \'bb\'e7\'b6\'f7\'b5\'e9\'c0\'ba \
+@dfn\{expression\}\'c0\'bb \'b8\'b6\'b1\'b8\'c0\'e2\'c0\'cc\'b7\'ce \'bb\'e7\'bf\'eb\'c7\'d1\'b4\'d9. ( \'b6\'c7\'c7\'d1 \'b8\'b9\'c0\'ba \'b1\'db\'b5\'e9\'bf\'a1\'bc\'ad @dfn\{form\} \'b4\'dc\'be\'ee\'b4\'c2 \
+expression\'c0\'c7 \'b5\'bf\'c0\'c7\'be\'ee\'b7\'ce \'bb\'e7\'bf\'eb\'b5\'c7\'b0\'ed \'c0\'d6\'b4\'d9. )\
+\
+\'bf\'ec\'bf\'ac\'c8\'f7 \'bf\'ec\'c1\'d6\'b8\'a6 \'b1\'b8\'bc\'ba\'c7\'cf\'b4\'c2 atom\'b5\'e9\'c0\'ba \'c2\'c9\'b0\'b3\'c1\'fa \'bc\'f6 \'be\'f8\'b4\'d9\'b0\'ed \'bb\'fd\'b0\'a2\'b5\'c7\'be\'ee \'b1\'d7\'b7\'b8\'b0\'d4 \'ba\'d2\'b8\'ae\'be\'fa\'b4\'d9.; \'b1\'d7\'b7\'af\'b3\'aa \
+\'b9\'b0\'b8\'ae\'c0\'fb\'c0\'ce atom\'b5\'e9\'c0\'ba \'c2\'c9\'b0\'b3\'c1\'fa \'bc\'f6 \'c0\'d6\'b4\'d9\'b0\'ed \'c6\'c7\'b8\'ed\'b5\'c7\'be\'fa\'b4\'d9. \'ba\'ce\'ba\'d0\'c0\'ba atom\'c0\'b8\'b7\'ce \'c2\'c9\'b0\'b3\'c1\'fa \'bc\'f6 \'c0\'d6\'b0\'c5\'b3\'aa \
+\'b0\'b0\'c0\'ba \'c5\'a9\'b1\'e2\'c0\'c7 \'b5\'ce \'ba\'ce\'ba\'d0\'c0\'b8\'b7\'ce \'ba\'d0\'bf\'ad\'b5\'c9 \'bc\'f6 \'c0\'d6\'b4\'d9. \'b9\'b0\'b8\'ae\'c0\'fb \'c1\'f8\'c2\'a5 \'bc\'ba\'c1\'fa\'c0\'bb \'be\'cb\'b1\'e2 \'c0\'fc\'bf\'a1 atom\'c0\'ba \'bc\'ba\'b1\'de\'c7\'cf\'b0\'d4 \
+\'c0\'cc\'b8\'a7 \'c1\'f6\'be\'ee\'c1\'b3\'b4\'d9. Lisp\'bf\'a1\'bc\'ad \'b9\'e8\'bf\'ad\'b0\'fa \'b0\'b0\'c0\'ba \'be\'ee\'b6\'b2 \'c1\'be\'b7\'f9\'c0\'c7 atom\'c0\'ba \'ba\'ce\'ba\'d0\'c0\'b8\'b7\'ce \'b3\'aa\'b4\'b2\'c1\'fa \'bc\'f6 \'c0\'d6\'b4\'d9.; \
+\'b1\'d7\'b7\'af\'b3\'aa \'c0\'cc\'b7\'b8\'b0\'d4 \'c7\'cf\'b4\'c2 \'b9\'e6\'b9\'fd\'c0\'ba List\'b8\'a6 \'b3\'aa\'b4\'a9\'b4\'c2 \'b9\'e6\'b9\'fd\'b0\'fa\'b4\'c2 \'b4\'d9\'b8\'a3\'b4\'d9. List \'bf\'ac\'bb\'ea\'bf\'a1 \'bf\'b5\'c7\'e2 \'c1\'d6\'b4\'c2 \
+\'b9\'fc\'c0\'a7\'bf\'a1\'bc\'ad\'b4\'c2 List\'c0\'c7 atom\'b5\'e9\'c0\'ba \'b3\'aa\'b4\'b2\'c1\'fa \'bc\'f6 \'be\'f8\'b4\'d9.\
+\
+As in English, the meanings of the component letters of a Lisp atom\
+are different from the meaning the letters make as a word.  For\
+example, the word for the South American sloth, the @samp\{ai\}, is\
+completely different from the two words, @samp\{a\}, and @samp\{i\}.\
+\
+There are many kinds of atom in nature but only a few in Lisp: for\
+example, @dfn\{numbers\}, such as 37, 511, or 1729, and @dfn\{symbols\}, such\
+as @samp\{+\}, @samp\{foo\}, or @samp\{forward-line\}.  The words we have\
+listed in the examples above are all symbols.  In everyday Lisp\
+conversation, the word ``atom'' is not often used, because programmers\
+usually try to be more specific about what kind of atom they are dealing\
+with.  Lisp programming is mostly about symbols (and sometimes numbers)\
+within lists.  (Incidentally, the preceding three word parenthetical\
+remark is a proper list in Lisp, since it consists of atoms, which in\
+this case are symbols, separated by whitespace and enclosed by\
+parentheses, without any non-Lisp punctuation.)\
+\
+@need 1250\
+Text between double quotation marks---even sentences or\
+paragraphs---is also an atom.  Here is an example:\
+@cindex Text between double quotation marks\
+\
+@smallexample\
+'(this list includes "text between quotation marks.")\
+@end smallexample\
+\
+@cindex @samp\{string\} defined\
+@noindent\
+In Lisp, all of the quoted text including the punctuation mark and the\
+blank spaces is a single atom.  This kind of atom is called a\
+@dfn\{string\} (for `string of characters') and is the sort of thing that\
+is used for messages that a computer can print for a human to read.\
+Strings are a different kind of atom than numbers or symbols and are\
+used differently.}

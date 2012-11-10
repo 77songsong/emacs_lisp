@@ -176,15 +176,13 @@ Robert J. Chassell<br/>
 <ul>
 <li>
 <p class="binderItem"><strong>Lisp Lists</strong><br/><br/>
-@node Lisp Lists, Run a Program, List 처리하기, List 처리하기<br/>
+@node Lisp에서 List, Run a Program, List 처리하기, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@section Lisp Lists<br/>
+@section Lisp에서 List<br/>
 @cindex Lisp Lists<br/>
 <br/>
-In Lisp, a list looks like this: @code{'(rose violet daisy buttercup)}.<br/>
-This list is preceded by a single apostrophe.  It could just as well be<br/>
-written as follows, which looks more like the kind of list you are likely<br/>
-to be familiar with:<br/>
+Lisp에서 list는 이런 형태이다.; @code{'(rose violet daisy buttercup)}. 이 list는 작은 <br/>
+따옴표로 시작한다. 다음 처럼 쓰여질 수 있을 뿐만 아니라, 더 친숙한 list의 형태로 보인다.<br/>
 <br/>
 @smallexample<br/>
 @group<br/>
@@ -196,22 +194,108 @@ to be familiar with:<br/>
 @end smallexample<br/>
 <br/>
 @noindent<br/>
-The elements of this lis...</p>
+주위에 돌로 둘러싸여 있는 들판에 꽃들처럼 공백에 의해서 구분되고 괄호에 싸여 있는 이 list의 요소들은 <br/>
+다른 4가지의 꽃들의 이름들이다. <br/>
+@cindex Flowers in a field<br/>
+<br/>
+@menu<br/>
+* 숫자와 List::     ...</p>
+</li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>Numbers, Lists inside of Lists</strong><br/><br/>
+@node 숫자와 List, Lisp Atoms, Lisp에서 List, Lisp에서 List<br/>
+@ifnottex<br/>
+@unnumberedsubsec 숫자, List 안의 List<br/>
+@end ifnottex<br/>
+<br/>
+List는 이 List 처럼 그 안에 숫자들을 가질 수 있다.: @code{(+ 2 2)}. 이 List는 더하기 기호, <br/>
+@samp{+}, 그리고 이어서 공백으로 구분되는 두 개의 @samp{2} 가 온다.<br/>
+<br/>
+Lisp에서 데이터와 프로그램은 같은 방식으로 표현된다.; 공백에 의해서 구분되고 괄호에 싸여있는 단어들, <br/>
+숫자들 또는 다른 List들이다. ( 프로그램이 데이터처럼 보이기 때문에 하나의 프로그램은 쉽게 다른 <br/>
+프로그램을 위한 데이터로 쉽게 제공할 수 있다.; 이는 Lisp의 매우 강력한 특징이다. ) ( 부수적으로 지금 <br/>
+괄호로 싸여있는 구절들은 @samp{;}와 구두점인 @samp{.}을 포함하고 있기 때문에 Lisp의 List가 <br/>
+@emph{아니다}. )<br/>
+<br/>
+@need ...</p>
 </li>
 <li>
+<p class="binderItem"><strong>Lisp Atoms</strong><br/><br/>
+@node Lisp Atoms, Whitespace in Lists, 숫자와 List, Lisp에서 List<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@subsection Lisp Atoms<br/>
+@cindex Lisp Atoms<br/>
+<br/>
+Lisp에서 @dfn{atom}라 부르는 단어들이 있다. 이 용어는 단어 ‘쪼갤 수 없는’ 것을 <br/>
+의미하는 atom의 역사적인 의미에서 왔다. Lisp까지 영향을 주었다. List에 사용하는 <br/>
+단어들은 더 이상 작은 부분으로 쪼갤 수 없고 여전히 프로그램의 부분으로 같은 것을 <br/>
+의미한다.; 숫자와 @samp{+} 같은 하나의 문자 기호처럼. 반면에 atom과 다른 List는 <br/>
+부분들로 나눠질 수 있다. (  @xref{car cdr & cons,<br/>
+, @code{car} @code{cdr} & @code{cons} Fundamental Functions}. )<br/>
+<br/>
+List에서 atom은 공백으로 구분된다. 괄호의 바로 옆에 있...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Whitespace in Lists</strong><br/><br/>
+@node Whitespace in Lists, Typing Lists, Lisp Atoms, Lisp에서 List<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@subsection Whitespace in Lists<br/>
+@cindex Whitespace in lists<br/>
+<br/>
+@need 1200<br/>
+The amount of whitespace in a list does not matter.  From the point of view<br/>
+of the Lisp language,<br/>
+<br/>
+@smallexample<br/>
+@group<br/>
+'(this list<br/>
+   looks like this)<br/>
+@end group<br/>
+@end smallexample<br/>
+<br/>
+@need 800<br/>
+@noindent<br/>
+is exactly the same as this:<br/>
+<br/>
+@smallexample<br/>
+'(this list looks like this)<br/>
+@end smallexample<br/>
+<br/>
+Both examples show what t...</p>
+</li>
+<li>
+<p class="binderItem"><strong>GNU Emacs Helps You Type Lists</strong><br/><br/>
+@node Typing Lists,  , Whitespace in Lists, Lisp에서 List<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@subsection GNU Emacs Helps You Type Lists<br/>
+@cindex Help typing lists<br/>
+@cindex Formatting help<br/>
+<br/>
+When you type a Lisp expression in GNU Emacs using either Lisp<br/>
+Interaction mode or Emacs Lisp mode, you have available to you several<br/>
+commands to format the Lisp expression so it is easy to read.  For<br/>
+example, pressing the @key{TAB} key automatically indents the line the<br/>
+cursor is on by the right amount. ...</p>
+</li>
+</ul>
+<hr/>
+<li>
 <p class="binderItem"><strong>Run a Program</strong><br/><br/>
-@node Run a Program, Making Errors, Lisp Lists, List 처리하기<br/>
+@node Run a Program, Making Errors, Lisp에서 List, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section Run a Program<br/>
 @cindex Run a program<br/>
 @cindex Program, running one<br/>
 <br/>
 @cindex @samp{evaluate} defined<br/>
+<br/>
 A list in Lisp---any list---is a program ready to run.  If you run it<br/>
 (for which the Lisp jargon is @dfn{evaluate}), the computer will do one<br/>
 of three things: do nothing except return to you the list itself; send<br/>
 you an error message; or, treat the first symbol in the list as a<br/>
-command to d...</p>
+command to...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Generate an Error Message</strong><br/><br/>

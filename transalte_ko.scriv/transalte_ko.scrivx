@@ -7,7 +7,7 @@
                 <IncludeInCompile>Yes</IncludeInCompile>
             </MetaData>
             <CorkboardAndOutliner>
-                <SelectedSubdocumentIDs>136</SelectedSubdocumentIDs>
+                <SelectedSubdocumentIDs>26</SelectedSubdocumentIDs>
                 <OutlinerExpandedState>
                     <ItemID>5</ItemID>
                     <ItemID>24</ItemID>
@@ -15,7 +15,7 @@
                 </OutlinerExpandedState>
             </CorkboardAndOutliner>
             <Children>
-                <BinderItem ID="5" Type="Text" Created="2012-11-09 00:18:17 +0900" Modified="2012-11-10 15:45:46 +0900">
+                <BinderItem ID="5" Type="Text" Created="2012-11-09 00:18:17 +0900" Modified="2012-11-11 00:56:25 +0900">
                     <Title>An Introduction to Programming in Emacs Lisp</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -31,7 +31,7 @@
                         </OutlinerExpandedState>
                     </CorkboardAndOutliner>
                     <Children>
-                        <BinderItem ID="24" Type="Text" Created="2012-11-09 00:44:38 +0900" Modified="2012-11-10 15:45:46 +0900">
+                        <BinderItem ID="24" Type="Text" Created="2012-11-09 00:44:38 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Preface</Title>
                             <MetaData>
                                 <LabelID>2</LabelID>
@@ -45,7 +45,7 @@
                                 <SelectedSubdocumentIDs>135</SelectedSubdocumentIDs>
                             </CorkboardAndOutliner>
                             <Children>
-                                <BinderItem ID="134" Type="Text" Created="2012-11-10 02:39:47 +0900" Modified="2012-11-10 13:52:08 +0900">
+                                <BinderItem ID="134" Type="Text" Created="2012-11-10 02:39:47 +0900" Modified="2012-11-11 00:56:25 +0900">
                                     <Title>Why Study Emacs Lisp?</Title>
                                     <MetaData>
                                         <LabelID>2</LabelID>
@@ -56,7 +56,7 @@
                                         <TextSelection>0,0</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
-                                <BinderItem ID="135" Type="Text" Created="2012-11-10 02:40:08 +0900" Modified="2012-11-10 15:45:46 +0900">
+                                <BinderItem ID="135" Type="Text" Created="2012-11-10 02:40:08 +0900" Modified="2012-11-11 00:56:25 +0900">
                                     <Title>On Reading this Text</Title>
                                     <MetaData>
                                         <LabelID>2</LabelID>
@@ -67,7 +67,7 @@
                                         <TextSelection>106,20</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
-                                <BinderItem ID="136" Type="Text" Created="2012-11-10 02:40:14 +0900" Modified="2012-11-10 15:48:17 +0900">
+                                <BinderItem ID="136" Type="Text" Created="2012-11-10 02:40:14 +0900" Modified="2012-11-11 00:56:25 +0900">
                                     <Title>For Whom This is Written</Title>
                                     <MetaData>
                                         <LabelID>2</LabelID>
@@ -78,7 +78,7 @@
                                         <TextSelection>471,0</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
-                                <BinderItem ID="137" Type="Text" Created="2012-11-10 02:40:30 +0900" Modified="2012-11-10 15:45:46 +0900">
+                                <BinderItem ID="137" Type="Text" Created="2012-11-10 02:40:30 +0900" Modified="2012-11-11 00:56:25 +0900">
                                     <Title>List History</Title>
                                     <MetaData>
                                         <LabelID>2</LabelID>
@@ -86,10 +86,10 @@
                                         <NotesTextSelection>0,0</NotesTextSelection>
                                     </MetaData>
                                     <TextSettings>
-                                        <TextSelection>464,0</TextSelection>
+                                        <TextSelection>0,0</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
-                                <BinderItem ID="138" Type="Text" Created="2012-11-10 02:40:35 +0900" Modified="2012-11-10 14:47:01 +0900">
+                                <BinderItem ID="138" Type="Text" Created="2012-11-10 02:40:35 +0900" Modified="2012-11-11 00:56:25 +0900">
                                     <Title>A Not for Novices</Title>
                                     <MetaData>
                                         <LabelID>2</LabelID>
@@ -100,7 +100,7 @@
                                         <TextSelection>897,0</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
-                                <BinderItem ID="139" Type="Text" Created="2012-11-10 02:40:39 +0900" Modified="2012-11-10 14:47:01 +0900">
+                                <BinderItem ID="139" Type="Text" Created="2012-11-10 02:40:39 +0900" Modified="2012-11-11 00:56:25 +0900">
                                     <Title>Thank You</Title>
                                     <MetaData>
                                         <LabelID>2</LabelID>
@@ -115,17 +115,23 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="6" Type="Text" Created="2012-11-09 00:32:02 +0900" Modified="2012-11-10 03:01:50 +0900">
+                <BinderItem ID="6" Type="Text" Created="2012-11-09 00:32:02 +0900" Modified="2012-11-11 00:56:25 +0900">
                     <Title>List Processing</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
                         <NotesTextSelection>0,0</NotesTextSelection>
                     </MetaData>
                     <TextSettings>
-                        <TextSelection>252,0</TextSelection>
+                        <TextSelection>1061,0</TextSelection>
                     </TextSettings>
+                    <CorkboardAndOutliner>
+                        <SelectedSubdocumentIDs></SelectedSubdocumentIDs>
+                        <OutlinerExpandedState>
+                            <ItemID>25</ItemID>
+                        </OutlinerExpandedState>
+                    </CorkboardAndOutliner>
                     <Children>
-                        <BinderItem ID="25" Type="Text" Created="2012-11-09 00:46:03 +0900" Modified="2012-11-10 02:45:20 +0900">
+                        <BinderItem ID="25" Type="Text" Created="2012-11-09 00:46:03 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Lisp Lists</Title>
                             <MetaData>
                                 <LabelID>2</LabelID>
@@ -133,20 +139,66 @@
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>0,0</TextSelection>
+                                <TextSelection>727,0</TextSelection>
                             </TextSettings>
+                            <CorkboardAndOutliner>
+                                <SelectedSubdocumentIDs>144</SelectedSubdocumentIDs>
+                            </CorkboardAndOutliner>
+                            <Children>
+                                <BinderItem ID="141" Type="Text" Created="2012-11-10 23:58:28 +0900" Modified="2012-11-11 00:56:25 +0900">
+                                    <Title>Numbers, Lists inside of Lists</Title>
+                                    <MetaData>
+                                        <LabelID>2</LabelID>
+                                        <IncludeInCompile>Yes</IncludeInCompile>
+                                        <NotesTextSelection>0,0</NotesTextSelection>
+                                    </MetaData>
+                                    <TextSettings>
+                                        <TextSelection>543,0</TextSelection>
+                                    </TextSettings>
+                                </BinderItem>
+                                <BinderItem ID="144" Type="Text" Created="2012-11-11 00:00:05 +0900" Modified="2012-11-11 01:30:31 +0900">
+                                    <Title>Lisp Atoms</Title>
+                                    <MetaData>
+                                        <IncludeInCompile>Yes</IncludeInCompile>
+                                        <NotesTextSelection>0,0</NotesTextSelection>
+                                    </MetaData>
+                                    <TextSettings>
+                                        <TextSelection>400,0</TextSelection>
+                                    </TextSettings>
+                                </BinderItem>
+                                <BinderItem ID="142" Type="Text" Created="2012-11-10 23:59:44 +0900" Modified="2012-11-11 00:56:25 +0900">
+                                    <Title>Whitespace in Lists</Title>
+                                    <MetaData>
+                                        <IncludeInCompile>Yes</IncludeInCompile>
+                                        <NotesTextSelection>0,0</NotesTextSelection>
+                                    </MetaData>
+                                    <TextSettings>
+                                        <TextSelection>1378,0</TextSelection>
+                                    </TextSettings>
+                                </BinderItem>
+                                <BinderItem ID="143" Type="Text" Created="2012-11-10 23:59:49 +0900" Modified="2012-11-11 00:56:25 +0900">
+                                    <Title>GNU Emacs Helps You Type Lists</Title>
+                                    <MetaData>
+                                        <IncludeInCompile>Yes</IncludeInCompile>
+                                        <NotesTextSelection>0,0</NotesTextSelection>
+                                    </MetaData>
+                                    <TextSettings>
+                                        <TextSelection>100,10</TextSelection>
+                                    </TextSettings>
+                                </BinderItem>
+                            </Children>
                         </BinderItem>
-                        <BinderItem ID="26" Type="Text" Created="2012-11-09 00:47:42 +0900" Modified="2012-11-10 02:45:39 +0900">
+                        <BinderItem ID="26" Type="Text" Created="2012-11-09 00:47:42 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Run a Program</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>2800,0</TextSelection>
+                                <TextSelection>209,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="27" Type="Text" Created="2012-11-09 00:47:48 +0900" Modified="2012-11-10 02:45:39 +0900">
+                        <BinderItem ID="27" Type="Text" Created="2012-11-09 00:47:48 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Generate an Error Message</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -156,7 +208,7 @@
                                 <TextSelection>5395,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="28" Type="Text" Created="2012-11-09 00:47:54 +0900" Modified="2012-11-10 02:45:39 +0900">
+                        <BinderItem ID="28" Type="Text" Created="2012-11-09 00:47:54 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Symbol Names and Function Definition</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -166,7 +218,7 @@
                                 <TextSelection>0,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="29" Type="Text" Created="2012-11-09 00:48:00 +0900" Modified="2012-11-10 02:45:39 +0900">
+                        <BinderItem ID="29" Type="Text" Created="2012-11-09 00:48:00 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>The Lisp Interpreter</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -176,7 +228,7 @@
                                 <TextSelection>3878,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="30" Type="Text" Created="2012-11-09 00:48:10 +0900" Modified="2012-11-10 02:45:39 +0900">
+                        <BinderItem ID="30" Type="Text" Created="2012-11-09 00:48:10 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Evaluation</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -186,7 +238,7 @@
                                 <TextSelection>4688,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="31" Type="Text" Created="2012-11-09 00:48:16 +0900" Modified="2012-11-10 02:45:39 +0900">
+                        <BinderItem ID="31" Type="Text" Created="2012-11-09 00:48:16 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Variables</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -196,7 +248,7 @@
                                 <TextSelection>7070,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="32" Type="Text" Created="2012-11-09 00:48:30 +0900" Modified="2012-11-10 02:45:39 +0900">
+                        <BinderItem ID="32" Type="Text" Created="2012-11-09 00:48:30 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Arguments</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -206,7 +258,7 @@
                                 <TextSelection>0,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="33" Type="Text" Created="2012-11-09 00:48:45 +0900" Modified="2012-11-10 02:45:39 +0900">
+                        <BinderItem ID="33" Type="Text" Created="2012-11-09 00:48:45 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Setting the Value of a Variable</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -216,7 +268,7 @@
                                 <TextSelection>7765,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="34" Type="Text" Created="2012-11-09 00:48:51 +0900" Modified="2012-11-10 02:45:39 +0900">
+                        <BinderItem ID="34" Type="Text" Created="2012-11-09 00:48:51 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Summary</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -226,7 +278,7 @@
                                 <TextSelection>1818,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="35" Type="Text" Created="2012-11-09 00:48:56 +0900" Modified="2012-11-10 02:45:39 +0900">
+                        <BinderItem ID="35" Type="Text" Created="2012-11-09 00:48:56 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Excercises</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -238,7 +290,7 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="7" Type="Text" Created="2012-11-09 00:32:51 +0900" Modified="2012-11-10 02:45:39 +0900">
+                <BinderItem ID="7" Type="Text" Created="2012-11-09 00:32:51 +0900" Modified="2012-11-11 00:56:25 +0900">
                     <Title>Practicing Evaluation</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -248,7 +300,7 @@
                         <TextSelection>2815,0</TextSelection>
                     </TextSettings>
                     <Children>
-                        <BinderItem ID="36" Type="Text" Created="2012-11-09 11:11:12 +0900" Modified="2012-11-09 11:12:48 +0900">
+                        <BinderItem ID="36" Type="Text" Created="2012-11-09 11:11:12 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Buffer Names</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -258,7 +310,7 @@
                                 <TextSelection>641,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="37" Type="Text" Created="2012-11-09 11:11:25 +0900" Modified="2012-11-09 11:12:41 +0900">
+                        <BinderItem ID="37" Type="Text" Created="2012-11-09 11:11:25 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Getting Buffers</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -268,7 +320,7 @@
                                 <TextSelection>0,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="38" Type="Text" Created="2012-11-09 11:11:38 +0900" Modified="2012-11-09 11:12:29 +0900">
+                        <BinderItem ID="38" Type="Text" Created="2012-11-09 11:11:38 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Switching Buffers</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -278,7 +330,7 @@
                                 <TextSelection>0,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="39" Type="Text" Created="2012-11-09 11:11:46 +0900" Modified="2012-11-09 11:12:14 +0900">
+                        <BinderItem ID="39" Type="Text" Created="2012-11-09 11:11:46 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Buffer Size and the Location of Point</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -288,7 +340,7 @@
                                 <TextSelection>0,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="40" Type="Text" Created="2012-11-09 11:11:51 +0900" Modified="2012-11-09 11:12:00 +0900">
+                        <BinderItem ID="40" Type="Text" Created="2012-11-09 11:11:51 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Excercise</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -300,7 +352,7 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="8" Type="Text" Created="2012-11-09 00:33:37 +0900" Modified="2012-11-09 11:13:56 +0900">
+                <BinderItem ID="8" Type="Text" Created="2012-11-09 00:33:37 +0900" Modified="2012-11-11 00:56:25 +0900">
                     <Title>How To Write  Function Definition</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -310,7 +362,7 @@
                         <TextSelection>2691,0</TextSelection>
                     </TextSettings>
                     <Children>
-                        <BinderItem ID="41" Type="Text" Created="2012-11-09 11:13:54 +0900" Modified="2012-11-09 11:18:44 +0900">
+                        <BinderItem ID="41" Type="Text" Created="2012-11-09 11:13:54 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>The defun Special Form</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -320,7 +372,7 @@
                                 <TextSelection>7768,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="42" Type="Text" Created="2012-11-09 11:14:31 +0900" Modified="2012-11-09 11:18:32 +0900">
+                        <BinderItem ID="42" Type="Text" Created="2012-11-09 11:14:31 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Install a Function Definition</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -330,7 +382,7 @@
                                 <TextSelection>4286,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="43" Type="Text" Created="2012-11-09 11:14:37 +0900" Modified="2012-11-09 11:18:19 +0900">
+                        <BinderItem ID="43" Type="Text" Created="2012-11-09 11:14:37 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Make a Function interactive</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -340,7 +392,7 @@
                                 <TextSelection>5878,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="44" Type="Text" Created="2012-11-09 11:14:45 +0900" Modified="2012-11-09 11:18:08 +0900">
+                        <BinderItem ID="44" Type="Text" Created="2012-11-09 11:14:45 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Different Options for interactive</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -350,7 +402,7 @@
                                 <TextSelection>3437,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="45" Type="Text" Created="2012-11-09 11:14:58 +0900" Modified="2012-11-09 11:17:45 +0900">
+                        <BinderItem ID="45" Type="Text" Created="2012-11-09 11:14:58 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Install Code Permanently</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -360,7 +412,7 @@
                                 <TextSelection>0,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="46" Type="Text" Created="2012-11-09 11:15:04 +0900" Modified="2012-11-09 11:17:27 +0900">
+                        <BinderItem ID="46" Type="Text" Created="2012-11-09 11:15:04 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>let</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -370,7 +422,7 @@
                                 <TextSelection>279,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="47" Type="Text" Created="2012-11-09 11:15:12 +0900" Modified="2012-11-09 11:17:05 +0900">
+                        <BinderItem ID="47" Type="Text" Created="2012-11-09 11:15:12 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>The if Special Form</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -380,7 +432,7 @@
                                 <TextSelection>6909,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="48" Type="Text" Created="2012-11-09 11:15:16 +0900" Modified="2012-11-09 11:16:52 +0900">
+                        <BinderItem ID="48" Type="Text" Created="2012-11-09 11:15:16 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>if--then--else Expressions</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -390,7 +442,7 @@
                                 <TextSelection>3140,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="49" Type="Text" Created="2012-11-09 11:15:21 +0900" Modified="2012-11-09 11:16:41 +0900">
+                        <BinderItem ID="49" Type="Text" Created="2012-11-09 11:15:21 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Truth and Falsehood in Emacs Lisp</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -400,7 +452,7 @@
                                 <TextSelection>3234,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="50" Type="Text" Created="2012-11-09 11:15:26 +0900" Modified="2012-11-09 11:16:25 +0900">
+                        <BinderItem ID="50" Type="Text" Created="2012-11-09 11:15:26 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>save-excursion</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -410,7 +462,7 @@
                                 <TextSelection>0,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="51" Type="Text" Created="2012-11-09 11:15:31 +0900" Modified="2012-11-09 11:15:58 +0900">
+                        <BinderItem ID="51" Type="Text" Created="2012-11-09 11:15:31 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Review</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -420,7 +472,7 @@
                                 <TextSelection>8238,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="52" Type="Text" Created="2012-11-09 11:15:36 +0900" Modified="2012-11-09 11:15:58 +0900">
+                        <BinderItem ID="52" Type="Text" Created="2012-11-09 11:15:36 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Excercises</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -432,7 +484,7 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="9" Type="Text" Created="2012-11-09 00:34:50 +0900" Modified="2012-11-09 11:19:34 +0900">
+                <BinderItem ID="9" Type="Text" Created="2012-11-09 00:34:50 +0900" Modified="2012-11-11 00:56:25 +0900">
                     <Title>A Few Buffer -- Related Functions</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -442,7 +494,7 @@
                         <TextSelection>1093,0</TextSelection>
                     </TextSettings>
                     <Children>
-                        <BinderItem ID="53" Type="Text" Created="2012-11-09 11:19:32 +0900" Modified="2012-11-09 11:21:31 +0900">
+                        <BinderItem ID="53" Type="Text" Created="2012-11-09 11:19:32 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Finding More Information</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -452,7 +504,7 @@
                                 <TextSelection>0,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="54" Type="Text" Created="2012-11-09 11:19:45 +0900" Modified="2012-11-09 11:21:20 +0900">
+                        <BinderItem ID="54" Type="Text" Created="2012-11-09 11:19:45 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>A Simplified beginning-of-buffer Definition</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -462,7 +514,7 @@
                                 <TextSelection>234,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="55" Type="Text" Created="2012-11-09 11:19:52 +0900" Modified="2012-11-09 11:20:55 +0900">
+                        <BinderItem ID="55" Type="Text" Created="2012-11-09 11:19:52 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>The Definition of mark-whole-buffer</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -472,7 +524,7 @@
                                 <TextSelection>0,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="56" Type="Text" Created="2012-11-09 11:20:01 +0900" Modified="2012-11-09 11:20:41 +0900">
+                        <BinderItem ID="56" Type="Text" Created="2012-11-09 11:20:01 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>The Definition of append-to-buffer</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -482,7 +534,7 @@
                                 <TextSelection>0,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="57" Type="Text" Created="2012-11-09 11:20:06 +0900" Modified="2012-11-09 11:20:27 +0900">
+                        <BinderItem ID="57" Type="Text" Created="2012-11-09 11:20:06 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Review</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -492,7 +544,7 @@
                                 <TextSelection>0,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="58" Type="Text" Created="2012-11-09 11:20:11 +0900" Modified="2012-11-09 11:20:19 +0900">
+                        <BinderItem ID="58" Type="Text" Created="2012-11-09 11:20:11 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Exercises</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -504,7 +556,7 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="10" Type="Text" Created="2012-11-09 00:35:15 +0900" Modified="2012-11-09 11:22:31 +0900">
+                <BinderItem ID="10" Type="Text" Created="2012-11-09 00:35:15 +0900" Modified="2012-11-11 00:56:25 +0900">
                     <Title>A Few More Complex Functions</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -514,7 +566,7 @@
                         <TextSelection>927,0</TextSelection>
                     </TextSettings>
                     <Children>
-                        <BinderItem ID="59" Type="Text" Created="2012-11-09 11:22:28 +0900" Modified="2012-11-09 11:24:01 +0900">
+                        <BinderItem ID="59" Type="Text" Created="2012-11-09 11:22:28 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>The Definition of copy-to-buffer</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -524,7 +576,7 @@
                                 <TextSelection>2817,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="60" Type="Text" Created="2012-11-09 11:22:39 +0900" Modified="2012-11-09 11:23:49 +0900">
+                        <BinderItem ID="60" Type="Text" Created="2012-11-09 11:22:39 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>The Definition of insert-buffer</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -534,7 +586,7 @@
                                 <TextSelection>17054,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="61" Type="Text" Created="2012-11-09 11:22:44 +0900" Modified="2012-11-09 11:23:34 +0900">
+                        <BinderItem ID="61" Type="Text" Created="2012-11-09 11:22:44 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Complete Definition of beginning-of-buffer</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -544,7 +596,7 @@
                                 <TextSelection>15829,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="62" Type="Text" Created="2012-11-09 11:22:54 +0900" Modified="2012-11-09 11:23:18 +0900">
+                        <BinderItem ID="62" Type="Text" Created="2012-11-09 11:22:54 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Review</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -554,7 +606,7 @@
                                 <TextSelection>1632,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="63" Type="Text" Created="2012-11-09 11:22:59 +0900" Modified="2012-11-09 11:23:12 +0900">
+                        <BinderItem ID="63" Type="Text" Created="2012-11-09 11:22:59 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>optional Argument Exercise</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -566,7 +618,7 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="11" Type="Text" Created="2012-11-09 00:36:00 +0900" Modified="2012-11-09 11:24:21 +0900">
+                <BinderItem ID="11" Type="Text" Created="2012-11-09 00:36:00 +0900" Modified="2012-11-11 00:56:25 +0900">
                     <Title>Narrowing and Widening</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -576,7 +628,7 @@
                         <TextSelection>2572,0</TextSelection>
                     </TextSettings>
                     <Children>
-                        <BinderItem ID="64" Type="Text" Created="2012-11-09 11:24:09 +0900" Modified="2012-11-09 11:25:35 +0900">
+                        <BinderItem ID="64" Type="Text" Created="2012-11-09 11:24:09 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>The save-restriction Special Form</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -586,7 +638,7 @@
                                 <TextSelection>3059,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="65" Type="Text" Created="2012-11-09 11:24:18 +0900" Modified="2012-11-09 11:25:41 +0900">
+                        <BinderItem ID="65" Type="Text" Created="2012-11-09 11:24:18 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>what-line</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -596,7 +648,7 @@
                                 <TextSelection>117,8</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="66" Type="Text" Created="2012-11-09 11:25:08 +0900" Modified="2012-11-09 11:26:01 +0900">
+                        <BinderItem ID="66" Type="Text" Created="2012-11-09 11:25:08 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Exercise with Narrowing</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -608,7 +660,7 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="12" Type="Text" Created="2012-11-09 00:36:59 +0900" Modified="2012-11-09 11:26:45 +0900">
+                <BinderItem ID="12" Type="Text" Created="2012-11-09 00:36:59 +0900" Modified="2012-11-11 00:56:25 +0900">
                     <Title>car, cdr, cons: Fundamental Functions</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -618,7 +670,7 @@
                         <TextSelection>2095,0</TextSelection>
                     </TextSettings>
                     <Children>
-                        <BinderItem ID="68" Type="Text" Created="2012-11-09 11:26:41 +0900" Modified="2012-11-09 11:28:22 +0900">
+                        <BinderItem ID="68" Type="Text" Created="2012-11-09 11:26:41 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>car and cdr</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -628,7 +680,7 @@
                                 <TextSelection>3607,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="69" Type="Text" Created="2012-11-09 11:26:50 +0900" Modified="2012-11-09 11:28:08 +0900">
+                        <BinderItem ID="69" Type="Text" Created="2012-11-09 11:26:50 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>cons</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -638,7 +690,7 @@
                                 <TextSelection>5180,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="70" Type="Text" Created="2012-11-09 11:26:55 +0900" Modified="2012-11-09 11:27:56 +0900">
+                        <BinderItem ID="70" Type="Text" Created="2012-11-09 11:26:55 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>nthcdr</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -648,7 +700,7 @@
                                 <TextSelection>3301,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="71" Type="Text" Created="2012-11-09 11:27:00 +0900" Modified="2012-11-09 11:27:47 +0900">
+                        <BinderItem ID="71" Type="Text" Created="2012-11-09 11:27:00 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>nth</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -658,7 +710,7 @@
                                 <TextSelection>1516,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="72" Type="Text" Created="2012-11-09 11:27:04 +0900" Modified="2012-11-09 11:27:41 +0900">
+                        <BinderItem ID="72" Type="Text" Created="2012-11-09 11:27:04 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>setcar</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -668,7 +720,7 @@
                                 <TextSelection>2562,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="73" Type="Text" Created="2012-11-09 11:27:09 +0900" Modified="2012-11-09 11:27:33 +0900">
+                        <BinderItem ID="73" Type="Text" Created="2012-11-09 11:27:09 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>setcdr</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -678,7 +730,7 @@
                                 <TextSelection>0,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="74" Type="Text" Created="2012-11-09 11:27:13 +0900" Modified="2012-11-09 11:27:26 +0900">
+                        <BinderItem ID="74" Type="Text" Created="2012-11-09 11:27:13 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Exercise</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -690,7 +742,7 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="13" Type="Text" Created="2012-11-09 00:37:29 +0900" Modified="2012-11-09 13:30:57 +0900">
+                <BinderItem ID="13" Type="Text" Created="2012-11-09 00:37:29 +0900" Modified="2012-11-11 00:56:25 +0900">
                     <Title>Cutting and Storing Text</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -700,7 +752,7 @@
                         <TextSelection>3621,0</TextSelection>
                     </TextSettings>
                     <Children>
-                        <BinderItem ID="75" Type="Text" Created="2012-11-09 13:30:54 +0900" Modified="2012-11-09 13:33:11 +0900">
+                        <BinderItem ID="75" Type="Text" Created="2012-11-09 13:30:54 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>zap-to-char</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -710,7 +762,7 @@
                                 <TextSelection>12727,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="76" Type="Text" Created="2012-11-09 13:31:07 +0900" Modified="2012-11-09 13:33:00 +0900">
+                        <BinderItem ID="76" Type="Text" Created="2012-11-09 13:31:07 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>kill-region</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -720,7 +772,7 @@
                                 <TextSelection>15997,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="77" Type="Text" Created="2012-11-09 13:31:15 +0900" Modified="2012-11-09 13:32:44 +0900">
+                        <BinderItem ID="77" Type="Text" Created="2012-11-09 13:31:15 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>copy-region-as-kill</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -730,7 +782,7 @@
                                 <TextSelection>126,8</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="78" Type="Text" Created="2012-11-09 13:31:20 +0900" Modified="2012-11-09 13:32:29 +0900">
+                        <BinderItem ID="78" Type="Text" Created="2012-11-09 13:31:20 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Digression into C</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -740,7 +792,7 @@
                                 <TextSelection>5910,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="79" Type="Text" Created="2012-11-09 13:31:26 +0900" Modified="2012-11-09 13:32:18 +0900">
+                        <BinderItem ID="79" Type="Text" Created="2012-11-09 13:31:26 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Initializing a Variable with defvar</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -750,7 +802,7 @@
                                 <TextSelection>5867,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="80" Type="Text" Created="2012-11-09 13:31:32 +0900" Modified="2012-11-09 13:31:58 +0900">
+                        <BinderItem ID="80" Type="Text" Created="2012-11-09 13:31:32 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Review</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -760,7 +812,7 @@
                                 <TextSelection>3170,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="81" Type="Text" Created="2012-11-09 13:31:38 +0900" Modified="2012-11-09 13:31:52 +0900">
+                        <BinderItem ID="81" Type="Text" Created="2012-11-09 13:31:38 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Searching Exercises</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -772,7 +824,7 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="14" Type="Text" Created="2012-11-09 00:39:42 +0900" Modified="2012-11-09 13:33:28 +0900">
+                <BinderItem ID="14" Type="Text" Created="2012-11-09 00:39:42 +0900" Modified="2012-11-11 00:56:25 +0900">
                     <Title>How Lists are Implemented</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -782,7 +834,7 @@
                         <TextSelection>11393,0</TextSelection>
                     </TextSettings>
                     <Children>
-                        <BinderItem ID="82" Type="Text" Created="2012-11-09 13:33:26 +0900" Modified="2012-11-09 13:34:00 +0900">
+                        <BinderItem ID="82" Type="Text" Created="2012-11-09 13:33:26 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Symbols as a Chest of Drawers</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -792,7 +844,7 @@
                                 <TextSelection>3347,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="83" Type="Text" Created="2012-11-09 13:33:38 +0900" Modified="2012-11-09 13:33:46 +0900">
+                        <BinderItem ID="83" Type="Text" Created="2012-11-09 13:33:38 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Exercise</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -804,7 +856,7 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="15" Type="Text" Created="2012-11-09 00:40:00 +0900" Modified="2012-11-09 13:34:22 +0900">
+                <BinderItem ID="15" Type="Text" Created="2012-11-09 00:40:00 +0900" Modified="2012-11-11 00:56:25 +0900">
                     <Title>Yanking Text Back</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -814,7 +866,7 @@
                         <TextSelection>1381,0</TextSelection>
                     </TextSettings>
                     <Children>
-                        <BinderItem ID="84" Type="Text" Created="2012-11-09 13:34:20 +0900" Modified="2012-11-09 13:35:25 +0900">
+                        <BinderItem ID="84" Type="Text" Created="2012-11-09 13:34:20 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Kill Ring Overview</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -824,7 +876,7 @@
                                 <TextSelection>1787,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="85" Type="Text" Created="2012-11-09 13:34:29 +0900" Modified="2012-11-09 13:35:10 +0900">
+                        <BinderItem ID="85" Type="Text" Created="2012-11-09 13:34:29 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>The kill-ring-yank-pointer Variable</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -834,7 +886,7 @@
                                 <TextSelection>4982,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="86" Type="Text" Created="2012-11-09 13:34:37 +0900" Modified="2012-11-09 13:34:56 +0900">
+                        <BinderItem ID="86" Type="Text" Created="2012-11-09 13:34:37 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Exercises with yank and nthcdr</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -846,7 +898,7 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="16" Type="Text" Created="2012-11-09 00:40:19 +0900" Modified="2012-11-09 13:35:37 +0900">
+                <BinderItem ID="16" Type="Text" Created="2012-11-09 00:40:19 +0900" Modified="2012-11-11 00:56:25 +0900">
                     <Title>Loops and Recursion</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -856,7 +908,7 @@
                         <TextSelection>1650,0</TextSelection>
                     </TextSettings>
                     <Children>
-                        <BinderItem ID="87" Type="Text" Created="2012-11-09 13:35:35 +0900" Modified="2012-11-09 13:36:43 +0900">
+                        <BinderItem ID="87" Type="Text" Created="2012-11-09 13:35:35 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>while</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -866,7 +918,7 @@
                                 <TextSelection>29566,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="88" Type="Text" Created="2012-11-09 13:35:44 +0900" Modified="2012-11-09 13:36:31 +0900">
+                        <BinderItem ID="88" Type="Text" Created="2012-11-09 13:35:44 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Save your time dolist and dotimes</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -876,7 +928,7 @@
                                 <TextSelection>5829,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="89" Type="Text" Created="2012-11-09 13:35:52 +0900" Modified="2012-11-09 13:36:17 +0900">
+                        <BinderItem ID="89" Type="Text" Created="2012-11-09 13:35:52 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Recursion</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -886,7 +938,7 @@
                                 <TextSelection>33007,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="90" Type="Text" Created="2012-11-09 13:35:56 +0900" Modified="2012-11-09 13:36:08 +0900">
+                        <BinderItem ID="90" Type="Text" Created="2012-11-09 13:35:56 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Looping Exercise</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -898,7 +950,7 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="17" Type="Text" Created="2012-11-09 00:41:03 +0900" Modified="2012-11-09 13:37:02 +0900">
+                <BinderItem ID="17" Type="Text" Created="2012-11-09 00:41:03 +0900" Modified="2012-11-11 00:56:25 +0900">
                     <Title>Regular Expression Searches</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -908,7 +960,7 @@
                         <TextSelection>2230,0</TextSelection>
                     </TextSettings>
                     <Children>
-                        <BinderItem ID="91" Type="Text" Created="2012-11-09 13:36:59 +0900" Modified="2012-11-09 13:39:16 +0900">
+                        <BinderItem ID="91" Type="Text" Created="2012-11-09 13:36:59 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>The Regular Expression for sentence-end</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -918,7 +970,7 @@
                                 <TextSelection>6044,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="92" Type="Text" Created="2012-11-09 13:37:07 +0900" Modified="2012-11-09 13:39:02 +0900">
+                        <BinderItem ID="92" Type="Text" Created="2012-11-09 13:37:07 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>The re-search-forward Function</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -928,7 +980,7 @@
                                 <TextSelection>2645,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="93" Type="Text" Created="2012-11-09 13:37:17 +0900" Modified="2012-11-09 13:38:47 +0900">
+                        <BinderItem ID="93" Type="Text" Created="2012-11-09 13:37:17 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>forward-sentence</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -938,7 +990,7 @@
                                 <TextSelection>0,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="94" Type="Text" Created="2012-11-09 13:37:21 +0900" Modified="2012-11-09 13:38:34 +0900">
+                        <BinderItem ID="94" Type="Text" Created="2012-11-09 13:37:21 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>forward-paragraph: a Goldmine of Functions</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -948,7 +1000,7 @@
                                 <TextSelection>25430,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="95" Type="Text" Created="2012-11-09 13:37:25 +0900" Modified="2012-11-09 13:38:11 +0900">
+                        <BinderItem ID="95" Type="Text" Created="2012-11-09 13:37:25 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Create Your Own TAGS File</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -958,7 +1010,7 @@
                                 <TextSelection>0,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="96" Type="Text" Created="2012-11-09 13:37:28 +0900" Modified="2012-11-09 13:37:57 +0900">
+                        <BinderItem ID="96" Type="Text" Created="2012-11-09 13:37:28 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Review</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -968,7 +1020,7 @@
                                 <TextSelection>2324,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="97" Type="Text" Created="2012-11-09 13:37:33 +0900" Modified="2012-11-09 13:37:47 +0900">
+                        <BinderItem ID="97" Type="Text" Created="2012-11-09 13:37:33 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Exercises with re-search-forward</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -980,7 +1032,7 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="18" Type="Text" Created="2012-11-09 00:41:20 +0900" Modified="2012-11-09 13:39:34 +0900">
+                <BinderItem ID="18" Type="Text" Created="2012-11-09 00:41:20 +0900" Modified="2012-11-11 00:56:25 +0900">
                     <Title>Counting: Repeitition and Regexps</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -990,7 +1042,7 @@
                         <TextSelection>1583,0</TextSelection>
                     </TextSettings>
                     <Children>
-                        <BinderItem ID="98" Type="Text" Created="2012-11-09 13:39:32 +0900" Modified="2012-11-09 13:40:29 +0900">
+                        <BinderItem ID="98" Type="Text" Created="2012-11-09 13:39:32 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>The count-words-region Function</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1000,7 +1052,7 @@
                                 <TextSelection>18079,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="99" Type="Text" Created="2012-11-09 13:39:41 +0900" Modified="2012-11-09 13:40:16 +0900">
+                        <BinderItem ID="99" Type="Text" Created="2012-11-09 13:39:41 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Count Words Recursively</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1010,7 +1062,7 @@
                                 <TextSelection>12699,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="100" Type="Text" Created="2012-11-09 13:39:47 +0900" Modified="2012-11-09 13:40:03 +0900">
+                        <BinderItem ID="100" Type="Text" Created="2012-11-09 13:39:47 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Exercise: Counting Punctuation</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1022,7 +1074,7 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="19" Type="Text" Created="2012-11-09 00:41:42 +0900" Modified="2012-11-09 13:40:41 +0900">
+                <BinderItem ID="19" Type="Text" Created="2012-11-09 00:41:42 +0900" Modified="2012-11-11 00:56:25 +0900">
                     <Title>Counting Words in a defun</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -1032,7 +1084,7 @@
                         <TextSelection>2809,0</TextSelection>
                     </TextSettings>
                     <Children>
-                        <BinderItem ID="101" Type="Text" Created="2012-11-09 13:40:39 +0900" Modified="2012-11-09 13:43:18 +0900">
+                        <BinderItem ID="101" Type="Text" Created="2012-11-09 13:40:39 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>What to Count?</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1042,7 +1094,7 @@
                                 <TextSelection>2113,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="102" Type="Text" Created="2012-11-09 13:40:51 +0900" Modified="2012-11-09 13:43:09 +0900">
+                        <BinderItem ID="102" Type="Text" Created="2012-11-09 13:40:51 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>What Constitutes a Word or Symbol</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1052,7 +1104,7 @@
                                 <TextSelection>3828,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="103" Type="Text" Created="2012-11-09 13:40:54 +0900" Modified="2012-11-09 13:42:49 +0900">
+                        <BinderItem ID="103" Type="Text" Created="2012-11-09 13:40:54 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>The count-words-in-defun Function</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1062,7 +1114,7 @@
                                 <TextSelection>6447,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="104" Type="Text" Created="2012-11-09 13:40:58 +0900" Modified="2012-11-09 13:42:36 +0900">
+                        <BinderItem ID="104" Type="Text" Created="2012-11-09 13:40:58 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Count Several defuns Within a File</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1072,7 +1124,7 @@
                                 <TextSelection>2312,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="105" Type="Text" Created="2012-11-09 13:41:02 +0900" Modified="2012-11-09 13:42:22 +0900">
+                        <BinderItem ID="105" Type="Text" Created="2012-11-09 13:41:02 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Find a File</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1082,7 +1134,7 @@
                                 <TextSelection>3562,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="106" Type="Text" Created="2012-11-09 13:41:06 +0900" Modified="2012-11-09 13:42:15 +0900">
+                        <BinderItem ID="106" Type="Text" Created="2012-11-09 13:41:06 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>lengths-list-file in Detail</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1092,7 +1144,7 @@
                                 <TextSelection>5391,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="107" Type="Text" Created="2012-11-09 13:41:10 +0900" Modified="2012-11-09 13:42:02 +0900">
+                        <BinderItem ID="107" Type="Text" Created="2012-11-09 13:41:10 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Count Words in defuns in Different Files</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1102,7 +1154,7 @@
                                 <TextSelection>4424,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="108" Type="Text" Created="2012-11-09 13:41:13 +0900" Modified="2012-11-09 13:41:47 +0900">
+                        <BinderItem ID="108" Type="Text" Created="2012-11-09 13:41:13 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Recursively Count Words in Different Files</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1112,7 +1164,7 @@
                                 <TextSelection>2917,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="109" Type="Text" Created="2012-11-09 13:41:16 +0900" Modified="2012-11-09 13:41:34 +0900">
+                        <BinderItem ID="109" Type="Text" Created="2012-11-09 13:41:16 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Prepare the Data for Display in a Graph</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1124,7 +1176,7 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="20" Type="Text" Created="2012-11-09 00:42:02 +0900" Modified="2012-11-09 13:43:49 +0900">
+                <BinderItem ID="20" Type="Text" Created="2012-11-09 00:42:02 +0900" Modified="2012-11-11 00:56:25 +0900">
                     <Title>Readying a Graph</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -1134,7 +1186,7 @@
                         <TextSelection>15427,0</TextSelection>
                     </TextSettings>
                     <Children>
-                        <BinderItem ID="110" Type="Text" Created="2012-11-09 13:43:46 +0900" Modified="2012-11-09 13:44:33 +0900">
+                        <BinderItem ID="110" Type="Text" Created="2012-11-09 13:43:46 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>The graph-body-print Function</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1144,7 +1196,7 @@
                                 <TextSelection>5006,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="111" Type="Text" Created="2012-11-09 13:43:54 +0900" Modified="2012-11-09 13:44:20 +0900">
+                        <BinderItem ID="111" Type="Text" Created="2012-11-09 13:43:54 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>The recursive-graph-body-print Function</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1154,7 +1206,7 @@
                                 <TextSelection>2720,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="112" Type="Text" Created="2012-11-09 13:43:58 +0900" Modified="2012-11-09 13:44:07 +0900">
+                        <BinderItem ID="112" Type="Text" Created="2012-11-09 13:43:58 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Need for Printed Axes</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1166,7 +1218,7 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="21" Type="Text" Created="2012-11-09 00:42:26 +0900" Modified="2012-11-09 13:44:42 +0900">
+                <BinderItem ID="21" Type="Text" Created="2012-11-09 00:42:26 +0900" Modified="2012-11-11 00:56:25 +0900">
                     <Title>Your .emacs File</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -1176,7 +1228,7 @@
                         <TextSelection>3728,0</TextSelection>
                     </TextSettings>
                     <Children>
-                        <BinderItem ID="113" Type="Text" Created="2012-11-09 13:44:39 +0900" Modified="2012-11-09 13:47:56 +0900">
+                        <BinderItem ID="113" Type="Text" Created="2012-11-09 13:44:39 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Site-wide initialization Files</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1186,7 +1238,7 @@
                                 <TextSelection>2182,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="114" Type="Text" Created="2012-11-09 13:44:48 +0900" Modified="2012-11-09 13:47:44 +0900">
+                        <BinderItem ID="114" Type="Text" Created="2012-11-09 13:44:48 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Specifying Variables using defcustom</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1196,7 +1248,7 @@
                                 <TextSelection>6148,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="115" Type="Text" Created="2012-11-09 13:44:52 +0900" Modified="2012-11-09 13:47:12 +0900">
+                        <BinderItem ID="115" Type="Text" Created="2012-11-09 13:44:52 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Beginning a .emacs File</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1206,7 +1258,7 @@
                                 <TextSelection>2559,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="116" Type="Text" Created="2012-11-09 13:44:56 +0900" Modified="2012-11-09 13:47:03 +0900">
+                        <BinderItem ID="116" Type="Text" Created="2012-11-09 13:44:56 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Text and Auto Fill Mode</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1216,7 +1268,7 @@
                                 <TextSelection>4418,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="117" Type="Text" Created="2012-11-09 13:45:00 +0900" Modified="2012-11-09 13:47:03 +0900">
+                        <BinderItem ID="117" Type="Text" Created="2012-11-09 13:45:00 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Mail Aliases</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1226,7 +1278,7 @@
                                 <TextSelection>960,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="118" Type="Text" Created="2012-11-09 13:45:03 +0900" Modified="2012-11-09 13:47:03 +0900">
+                        <BinderItem ID="118" Type="Text" Created="2012-11-09 13:45:03 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Indent Tabs Mode</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1236,7 +1288,7 @@
                                 <TextSelection>1175,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="119" Type="Text" Created="2012-11-09 13:45:06 +0900" Modified="2012-11-09 13:47:03 +0900">
+                        <BinderItem ID="119" Type="Text" Created="2012-11-09 13:45:06 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Some Keybindings</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1246,7 +1298,7 @@
                                 <TextSelection>4016,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="120" Type="Text" Created="2012-11-09 13:45:09 +0900" Modified="2012-11-09 13:47:03 +0900">
+                        <BinderItem ID="120" Type="Text" Created="2012-11-09 13:45:09 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Keymaps</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1256,7 +1308,7 @@
                                 <TextSelection>2454,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="121" Type="Text" Created="2012-11-09 13:45:21 +0900" Modified="2012-11-09 13:47:03 +0900">
+                        <BinderItem ID="121" Type="Text" Created="2012-11-09 13:45:21 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Loading Files</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1266,7 +1318,7 @@
                                 <TextSelection>3231,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="122" Type="Text" Created="2012-11-09 13:45:24 +0900" Modified="2012-11-09 13:47:03 +0900">
+                        <BinderItem ID="122" Type="Text" Created="2012-11-09 13:45:24 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Autoloading</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1276,7 +1328,7 @@
                                 <TextSelection>2989,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="123" Type="Text" Created="2012-11-09 13:45:28 +0900" Modified="2012-11-09 13:47:03 +0900">
+                        <BinderItem ID="123" Type="Text" Created="2012-11-09 13:45:28 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>A Simple Extension: line-to-top-of-window</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1286,7 +1338,7 @@
                                 <TextSelection>3160,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="124" Type="Text" Created="2012-11-09 13:45:31 +0900" Modified="2012-11-09 13:47:03 +0900">
+                        <BinderItem ID="124" Type="Text" Created="2012-11-09 13:45:31 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>X11 Colors</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1298,7 +1350,7 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="22" Type="Text" Created="2012-11-09 00:42:31 +0900" Modified="2012-11-09 13:48:09 +0900">
+                <BinderItem ID="22" Type="Text" Created="2012-11-09 00:42:31 +0900" Modified="2012-11-11 00:56:25 +0900">
                     <Title>Debugging</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -1308,7 +1360,7 @@
                         <TextSelection>830,0</TextSelection>
                     </TextSettings>
                     <Children>
-                        <BinderItem ID="125" Type="Text" Created="2012-11-09 13:48:06 +0900" Modified="2012-11-09 13:49:22 +0900">
+                        <BinderItem ID="125" Type="Text" Created="2012-11-09 13:48:06 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>debug</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1318,7 +1370,7 @@
                                 <TextSelection>3606,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="126" Type="Text" Created="2012-11-09 13:48:13 +0900" Modified="2012-11-09 13:49:14 +0900">
+                        <BinderItem ID="126" Type="Text" Created="2012-11-09 13:48:13 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>debug-on-entry</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1328,7 +1380,7 @@
                                 <TextSelection>3585,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="127" Type="Text" Created="2012-11-09 13:48:16 +0900" Modified="2012-11-09 13:49:05 +0900">
+                        <BinderItem ID="127" Type="Text" Created="2012-11-09 13:48:16 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>debug-on-quit and debug</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1338,7 +1390,7 @@
                                 <TextSelection>1073,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="128" Type="Text" Created="2012-11-09 13:48:20 +0900" Modified="2012-11-09 13:48:50 +0900">
+                        <BinderItem ID="128" Type="Text" Created="2012-11-09 13:48:20 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>The edebug Source Level Debugger</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1348,7 +1400,7 @@
                                 <TextSelection>4672,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="129" Type="Text" Created="2012-11-09 13:48:24 +0900" Modified="2012-11-09 13:48:35 +0900">
+                        <BinderItem ID="129" Type="Text" Created="2012-11-09 13:48:24 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Debugging Exercises</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1360,7 +1412,7 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="23" Type="Text" Created="2012-11-09 00:42:46 +0900" Modified="2012-11-09 13:50:16 +0900">
+                <BinderItem ID="23" Type="Text" Created="2012-11-09 00:42:46 +0900" Modified="2012-11-11 00:56:25 +0900">
                     <Title>Conclusion</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -1370,7 +1422,7 @@
                         <TextSelection>8587,0</TextSelection>
                     </TextSettings>
                 </BinderItem>
-                <BinderItem ID="130" Type="Text" Created="2012-11-09 13:50:05 +0900" Modified="2012-11-09 13:52:15 +0900">
+                <BinderItem ID="130" Type="Text" Created="2012-11-09 13:50:05 +0900" Modified="2012-11-11 00:56:25 +0900">
                     <Title>Handling the Kill Ring</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -1380,7 +1432,7 @@
                         <TextSelection>0,0</TextSelection>
                     </TextSettings>
                 </BinderItem>
-                <BinderItem ID="131" Type="Text" Created="2012-11-09 13:51:05 +0900" Modified="2012-11-09 13:52:03 +0900">
+                <BinderItem ID="131" Type="Text" Created="2012-11-09 13:51:05 +0900" Modified="2012-11-11 00:56:25 +0900">
                     <Title>A Graph with Labelled Axes</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -1390,7 +1442,7 @@
                         <TextSelection>0,0</TextSelection>
                     </TextSettings>
                 </BinderItem>
-                <BinderItem ID="132" Type="Text" Created="2012-11-09 13:51:10 +0900" Modified="2012-11-09 13:51:47 +0900">
+                <BinderItem ID="132" Type="Text" Created="2012-11-09 13:51:10 +0900" Modified="2012-11-11 00:56:25 +0900">
                     <Title>Free Software and Free Manuals</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -1400,7 +1452,7 @@
                         <TextSelection>0,0</TextSelection>
                     </TextSettings>
                 </BinderItem>
-                <BinderItem ID="133" Type="Text" Created="2012-11-09 13:51:15 +0900" Modified="2012-11-09 13:51:35 +0900">
+                <BinderItem ID="133" Type="Text" Created="2012-11-09 13:51:15 +0900" Modified="2012-11-11 00:56:25 +0900">
                     <Title>GNU Free Documentation License</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -1479,7 +1531,7 @@
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2012-11-09 00:23:48 +0900" IgnoreDeadline="Yes">0</DraftTarget>
         <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" ResetType="Midnight" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="-599" Characters="-5466" Date="2012-11-10 10:08:31 +0900"></PreviousSession>
+        <PreviousSession Words="-200" Characters="-1619" Date="2012-11-10 23:45:46 +0900"></PreviousSession>
     </ProjectTargets>
     <PrintSettings PaperSize="595.289978,841.890015" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="iso-a4" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
 </ScrivenerProject>

@@ -18567,6 +18567,35 @@ five six seven
 You can substitute the other regular expressions shown above in the
 function definition and try each of them on this list.</Text>
         </Document>
+        <Document ID="141">
+            <Title>Numbers, Lists inside of Lists</Title>
+            <Text>
+@node 숫자와 List, Lisp Atoms, Lisp에서 List, Lisp에서 List
+@ifnottex
+@unnumberedsubsec 숫자, List 안의 List
+@end ifnottex
+
+List는 이 List 처럼 그 안에 숫자들을 가질 수 있다.: @code{(+ 2 2)}. 이 List는 더하기 기호, 
+@samp{+}, 그리고 이어서 공백으로 구분되는 두 개의 @samp{2} 가 온다.
+
+Lisp에서 데이터와 프로그램은 같은 방식으로 표현된다.; 공백에 의해서 구분되고 괄호에 싸여있는 단어들, 
+숫자들 또는 다른 List들이다. ( 프로그램이 데이터처럼 보이기 때문에 하나의 프로그램은 쉽게 다른 
+프로그램을 위한 데이터로 쉽게 제공할 수 있다.; 이는 Lisp의 매우 강력한 특징이다. ) ( 부수적으로 지금 
+괄호로 싸여있는 구절들은 @samp{;}와 구두점인 @samp{.}을 포함하고 있기 때문에 Lisp의 List가 
+@emph{아니다}. )
+
+@need 1200
+이번에는 List 안에 List를 가지고 있는 다른 List가 있다.
+
+@smallexample
+'(this list has (a list inside of it))
+@end smallexample
+
+이 List의 요소들은 단어 @samp{this}, @samp{list}, @samp{has}, 와 List @samp{(a list 
+inside of it)} 이다. 내부 List는 단어 @samp{a}, @samp{list}, @samp{inside},
+@samp{of}, @samp{it} 로 구성되어 있다.
+</Text>
+        </Document>
         <Document ID="24">
             <Title>Preface</Title>
             <Text>
@@ -18632,15 +18661,13 @@ Emacs Lisp이라고 할 때는 특히 GNU Emacs Lisp을 가리킨다.
         <Document ID="25">
             <Title>Lisp Lists</Title>
             <Text>
-@node Lisp Lists, Run a Program, List 처리하기, List 처리하기
+@node Lisp에서 List, Run a Program, List 처리하기, List 처리하기
 @comment  node-name,  next,  previous,  up
-@section Lisp Lists
+@section Lisp에서 List
 @cindex Lisp Lists
 
-In Lisp, a list looks like this: @code{'(rose violet daisy buttercup)}.
-This list is preceded by a single apostrophe.  It could just as well be
-written as follows, which looks more like the kind of list you are likely
-to be familiar with:
+Lisp에서 list는 이런 형태이다.; @code{'(rose violet daisy buttercup)}. 이 list는 작은 
+따옴표로 시작한다. 다음 처럼 쓰여질 수 있을 뿐만 아니라, 더 친숙한 list의 형태로 보인다.
 
 @smallexample
 @group
@@ -18652,129 +18679,21 @@ to be familiar with:
 @end smallexample
 
 @noindent
-The elements of this list are the names of the four different flowers,
-separated from each other by whitespace and surrounded by parentheses,
-like flowers in a field with a stone wall around them.
+주위에 돌로 둘러싸여 있는 들판에 꽃들처럼 공백에 의해서 구분되고 괄호에 싸여 있는 이 list의 요소들은 
+다른 4가지의 꽃들의 이름들이다. 
 @cindex Flowers in a field
 
 @menu
-* Numbers Lists::               List have numbers, other lists, in them.
+* 숫자와 List::                  List는 숫자, List를 가진다
 * Lisp Atoms::                  Elemental entities.
 * Whitespace in Lists::         Formatting lists to be readable.
 * Typing Lists::                How GNU Emacs helps you type lists.
-@end menu
-
-@node Numbers Lists, Lisp Atoms, Lisp Lists, Lisp Lists
-@ifnottex
-@unnumberedsubsec Numbers, Lists inside of Lists
-@end ifnottex
-
-Lists can also have numbers in them, as in this list: @code{(+ 2 2)}.
-This list has a plus-sign, @samp{+}, followed by two @samp{2}s, each
-separated by whitespace.
-
-In Lisp, both data and programs are represented the same way; that is,
-they are both lists of words, numbers, or other lists, separated by
-whitespace and surrounded by parentheses.  (Since a program looks like
-data, one program may easily serve as data for another; this is a very
-powerful feature of Lisp.)  (Incidentally, these two parenthetical
-remarks are @emph{not} Lisp lists, because they contain @samp{;} and
-@samp{.} as punctuation marks.)
-
-@need 1200
-Here is another list, this time with a list inside of it:
-
-@smallexample
-'(this list has (a list inside of it))
-@end smallexample
-
-The components of this list are the words @samp{this}, @samp{list},
-@samp{has}, and the list @samp{(a list inside of it)}.  The interior
-list is made up of the words @samp{a}, @samp{list}, @samp{inside},
-@samp{of}, @samp{it}.
-
-@node Lisp Atoms, Whitespace in Lists, Numbers Lists, Lisp Lists
-@comment  node-name,  next,  previous,  up
-@subsection Lisp Atoms
-@cindex Lisp Atoms
-
-In Lisp, what we have been calling words are called @dfn{atoms}.  This
-term comes from the historical meaning of the word atom, which means
-`indivisible'.  As far as Lisp is concerned, the words we have been
-using in the lists cannot be divided into any smaller parts and still
-mean the same thing as part of a program; likewise with numbers and
-single character symbols like @samp{+}.  On the other hand, unlike an
-ancient atom, a list can be split into parts.  (@xref{car cdr &amp; cons,
-, @code{car} @code{cdr} &amp; @code{cons} Fundamental Functions}.)
-
-In a list, atoms are separated from each other by whitespace.  They can be
-right next to a parenthesis.
-
-@cindex @samp{empty list} defined
-Technically speaking, a list in Lisp consists of parentheses surrounding
-atoms separated by whitespace or surrounding other lists or surrounding
-both atoms and other lists.  A list can have just one atom in it or
-have nothing in it at all.  A list with nothing in it looks like this:
-@code{()}, and is called the @dfn{empty list}.  Unlike anything else, an
-empty list is considered both an atom and a list at the same time.
-
-@cindex Symbolic expressions, introduced
-@cindex @samp{expression} defined
-@cindex @samp{form} defined
-The printed representation of both atoms and lists are called
-@dfn{symbolic expressions} or, more concisely, @dfn{s-expressions}.
-The word @dfn{expression} by itself can refer to either the printed
-representation, or to the atom or list as it is held internally in the
-computer.  Often, people use the term @dfn{expression}
-indiscriminately.  (Also, in many texts, the word @dfn{form} is used
-as a synonym for expression.)
-
-Incidentally, the atoms that make up our universe were named such when
-they were thought to be indivisible; but it has been found that physical
-atoms are not indivisible.  Parts can split off an atom or it can
-fission into two parts of roughly equal size.  Physical atoms were named
-prematurely, before their truer nature was found.  In Lisp, certain
-kinds of atom, such as an array, can be separated into parts; but the
-mechanism for doing this is different from the mechanism for splitting a
-list.  As far as list operations are concerned, the atoms of a list are
-unsplittable.
-
-As in English, the meanings of the component letters of a Lisp atom
-are different from the meaning the letters make as a word.  For
-example, the word for the South American sloth, the @samp{ai}, is
-completely different from the two words, @samp{a}, and @samp{i}.
-
-There are many kinds of atom in nature but only a few in Lisp: for
-example, @dfn{numbers}, such as 37, 511, or 1729, and @dfn{symbols}, such
-as @samp{+}, @samp{foo}, or @samp{forward-line}.  The words we have
-listed in the examples above are all symbols.  In everyday Lisp
-conversation, the word ``atom'' is not often used, because programmers
-usually try to be more specific about what kind of atom they are dealing
-with.  Lisp programming is mostly about symbols (and sometimes numbers)
-within lists.  (Incidentally, the preceding three word parenthetical
-remark is a proper list in Lisp, since it consists of atoms, which in
-this case are symbols, separated by whitespace and enclosed by
-parentheses, without any non-Lisp punctuation.)
-
-@need 1250
-Text between double quotation marks---even sentences or
-paragraphs---is also an atom.  Here is an example:
-@cindex Text between double quotation marks
-
-@smallexample
-'(this list includes "text between quotation marks.")
-@end smallexample
-
-@cindex @samp{string} defined
-@noindent
-In Lisp, all of the quoted text including the punctuation mark and the
-blank spaces is a single atom.  This kind of atom is called a
-@dfn{string} (for `string of characters') and is the sort of thing that
-is used for messages that a computer can print for a human to read.
-Strings are a different kind of atom than numbers or symbols and are
-used differently.
-
-@node Whitespace in Lists, Typing Lists, Lisp Atoms, Lisp Lists
+@end menu</Text>
+        </Document>
+        <Document ID="142">
+            <Title>Whitespace in Lists</Title>
+            <Text>
+@node Whitespace in Lists, Typing Lists, Lisp Atoms, Lisp에서 List
 @comment  node-name,  next,  previous,  up
 @subsection Whitespace in Lists
 @cindex Whitespace in lists
@@ -18813,30 +18732,7 @@ of these examples, except that the list may be longer and more complex.
 In brief, a list is between parentheses, a string is between quotation
 marks, a symbol looks like a word, and a number looks like a number.
 (For certain situations, square brackets, dots and a few other special
-characters may be used; however, we will go quite far without them.)
-
-@node Typing Lists,  , Whitespace in Lists, Lisp Lists
-@comment  node-name,  next,  previous,  up
-@subsection GNU Emacs Helps You Type Lists
-@cindex Help typing lists
-@cindex Formatting help
-
-When you type a Lisp expression in GNU Emacs using either Lisp
-Interaction mode or Emacs Lisp mode, you have available to you several
-commands to format the Lisp expression so it is easy to read.  For
-example, pressing the @key{TAB} key automatically indents the line the
-cursor is on by the right amount.  A command to properly indent the
-code in a region is customarily bound to @kbd{M-C-\}.  Indentation is
-designed so that you can see which elements of a list belong to which
-list---elements of a sub-list are indented more than the elements of
-the enclosing list.
-
-In addition, when you type a closing parenthesis, Emacs momentarily
-jumps the cursor back to the matching opening parenthesis, so you can
-see which one it is.  This is very useful, since every list you type
-in Lisp must have its closing parenthesis match its opening
-parenthesis.  (@xref{Major Modes, , Major Modes, emacs, The GNU Emacs
-Manual}, for more information about Emacs' modes.)</Text>
+characters may be used; however, we will go quite far without them.)</Text>
         </Document>
         <Document ID="30">
             <Title>Evaluation</Title>
@@ -18952,13 +18848,14 @@ see in the next section.</Text>
         <Document ID="26">
             <Title>Run a Program</Title>
             <Text>
-@node Run a Program, Making Errors, Lisp Lists, List 처리하기
+@node Run a Program, Making Errors, Lisp에서 List, List 처리하기
 @comment  node-name,  next,  previous,  up
 @section Run a Program
 @cindex Run a program
 @cindex Program, running one
 
 @cindex @samp{evaluate} defined
+
 A list in Lisp---any list---is a program ready to run.  If you run it
 (for which the Lisp jargon is @dfn{evaluate}), the computer will do one
 of three things: do nothing except return to you the list itself; send
@@ -19397,6 +19294,32 @@ moment.)
 The error message can be understood: @samp{Symbol's function
 definition is void:@: this}.  The symbol (that is, the word
 @samp{this}) lacks instructions for the computer to carry out.</Text>
+        </Document>
+        <Document ID="143">
+            <Title>GNU Emacs Helps You Type Lists</Title>
+            <Text>
+@node Typing Lists,  , Whitespace in Lists, Lisp에서 List
+@comment  node-name,  next,  previous,  up
+@subsection GNU Emacs Helps You Type Lists
+@cindex Help typing lists
+@cindex Formatting help
+
+When you type a Lisp expression in GNU Emacs using either Lisp
+Interaction mode or Emacs Lisp mode, you have available to you several
+commands to format the Lisp expression so it is easy to read.  For
+example, pressing the @key{TAB} key automatically indents the line the
+cursor is on by the right amount.  A command to properly indent the
+code in a region is customarily bound to @kbd{M-C-\}.  Indentation is
+designed so that you can see which elements of a list belong to which
+list---elements of a sub-list are indented more than the elements of
+the enclosing list.
+
+In addition, when you type a closing parenthesis, Emacs momentarily
+jumps the cursor back to the matching opening parenthesis, so you can
+see which one it is.  This is very useful, since every list you type
+in Lisp must have its closing parenthesis match its opening
+parenthesis.  (@xref{Major Modes, , Major Modes, emacs, The GNU Emacs
+Manual}, for more information about Emacs' modes.)</Text>
         </Document>
         <Document ID="32">
             <Title>Arguments</Title>
@@ -19853,6 +19776,81 @@ start with @samp{rmail-}.</Text>
 Using a @code{while} loop, write a function to count the number of
 punctuation marks in a region---period, comma, semicolon, colon,
 exclamation mark, and question mark.  Do the same using recursion.</Text>
+        </Document>
+        <Document ID="144">
+            <Title>Lisp Atoms</Title>
+            <Text>
+@node Lisp Atoms, Whitespace in Lists, 숫자와 List, Lisp에서 List
+@comment  node-name,  next,  previous,  up
+@subsection Lisp Atoms
+@cindex Lisp Atoms
+
+Lisp에서 @dfn{atom}라 부르는 단어들이 있다. 이 용어는 단어 ‘쪼갤 수 없는’ 것을 
+의미하는 atom의 역사적인 의미에서 왔다. Lisp까지 영향을 주었다. List에 사용하는 
+단어들은 더 이상 작은 부분으로 쪼갤 수 없고 여전히 프로그램의 부분으로 같은 것을 
+의미한다.; 숫자와 @samp{+} 같은 하나의 문자 기호처럼. 반면에 atom과 다른 List는 
+부분들로 나눠질 수 있다. (  @xref{car cdr &amp; cons,
+, @code{car} @code{cdr} &amp; @code{cons} Fundamental Functions}. )
+
+List에서 atom은 공백으로 구분된다. 괄호의 바로 옆에 있을 수 있다.
+
+@cindex @samp{empty list} defined
+기술적으로 이야기 하면 Lisp에서 List는 공백으로 구분되는 atom들 또는 다른 List들 
+혹은 둘 다를 둘러싼 괄호로 구성된다. List는 그 안에 하나의 atom을 가질 수 있거나 
+아무 것도 가지지 않을 수 있다. 안에 아무 것도 없는 List는 다음과 같다.: @code{()} 
+이고 @dfn{빈 List}로 불린다. 다른 것과 다르게 빈 List는 동시에 atom이면서 List로 
+간주된다.
+
+@cindex Symbolic expressions, introduced
+@cindex @samp{expression} defined
+@cindex @samp{form} defined
+atom과 List 둘의 출력 된 표현은 @dfn{symbolic expressions} 또는 보다 간결하게 
+@dfn{s-expressions}라 불린다. 단어 @dfn{expression} 자체는 출력 된 표현 또는 
+컴퓨터에 내부에 저장된 것으로 List 또는 atom으로 참조될 수 있다. 종종 사람들은 
+@dfn{expression}을 마구잡이로 사용한다. ( 또한 많은 글들에서 @dfn{form} 단어는 
+expression의 동의어로 사용되고 있다. )
+
+우연히 우주를 구성하는 atom들은 쪼개질 수 없다고 생각되어 그렇게 불리었다.; 그러나 
+물리적인 atom들은 쪼개질 수 있다고 판명되었다. 부분은 atom으로 쪼개질 수 있거나 
+같은 크기의 두 부분으로 분열될 수 있다. 물리적 진짜 성질을 알기 전에 atom은 성급하게 
+이름 지어졌다. Lisp에서 배열과 같은 어떤 종류의 atom은 부분으로 나눠질 수 있다.; 
+그러나 이렇게 하는 방법은 List를 나누는 방법과는 다르다. List 연산에 영향 주는 
+범위에서는 List의 atom들은 나눠질 수 없다.
+
+As in English, the meanings of the component letters of a Lisp atom
+are different from the meaning the letters make as a word.  For
+example, the word for the South American sloth, the @samp{ai}, is
+completely different from the two words, @samp{a}, and @samp{i}.
+
+There are many kinds of atom in nature but only a few in Lisp: for
+example, @dfn{numbers}, such as 37, 511, or 1729, and @dfn{symbols}, such
+as @samp{+}, @samp{foo}, or @samp{forward-line}.  The words we have
+listed in the examples above are all symbols.  In everyday Lisp
+conversation, the word ``atom'' is not often used, because programmers
+usually try to be more specific about what kind of atom they are dealing
+with.  Lisp programming is mostly about symbols (and sometimes numbers)
+within lists.  (Incidentally, the preceding three word parenthetical
+remark is a proper list in Lisp, since it consists of atoms, which in
+this case are symbols, separated by whitespace and enclosed by
+parentheses, without any non-Lisp punctuation.)
+
+@need 1250
+Text between double quotation marks---even sentences or
+paragraphs---is also an atom.  Here is an example:
+@cindex Text between double quotation marks
+
+@smallexample
+'(this list includes "text between quotation marks.")
+@end smallexample
+
+@cindex @samp{string} defined
+@noindent
+In Lisp, all of the quoted text including the punctuation mark and the
+blank spaces is a single atom.  This kind of atom is called a
+@dfn{string} (for `string of characters') and is the sort of thing that
+is used for messages that a computer can print for a human to read.
+Strings are a different kind of atom than numbers or symbols and are
+used differently.</Text>
         </Document>
         <Document ID="33">
             <Title>Setting the Value of a Variable</Title>
@@ -21961,7 +21959,7 @@ every node in every chapter.
 
 List 처리하기
 
-* Lisp Lists::                  list는 무엇인가?
+* Lisp에서 List::                  list는 무엇인가?
 * Run a Program::               Lisp에서 list는 실행할 준비가 된 프로그램이다.
 * Making Errors::               에러 메시지 만들기.
 * Names &amp; Definitions::         기호 이름들과 함수 정의들.
@@ -21973,9 +21971,9 @@ List 처리하기
 * Summary::                     중요한 점들.
 * Error Message Exercises::
 
-Lisp Lists
+Lisp에서 List
 
-* Numbers Lists::               List have numbers, other lists, in them.
+* 숫자와 List::               List는 숫자, List를 가진다
 * Lisp Atoms::                  Elemental entities.
 * Whitespace in Lists::         Formatting lists to be readable.
 * Typing Lists::                How GNU Emacs helps you type lists.
@@ -22514,7 +22512,7 @@ The task is easy: use @code{find-file-noselect} and @code{set-buffer}.</Text>
 위치한다. List는 Lisp의 근본이다.
 
 @menu
-* Lisp Lists::                  list는 무엇인가?
+* Lisp에서 List::                list는 무엇인가?
 * Run a Program::               Lisp에서 list는 실행할 준비가 된 프로그램이다.
 * Making Errors::               에러 메시지 만들기.
 * Names &amp; Definitions::         기호 이름들과 함수 정의들.

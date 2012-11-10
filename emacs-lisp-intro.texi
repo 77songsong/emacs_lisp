@@ -379,7 +379,7 @@ every node in every chapter.
 
 List 처리하기
 
-* Lisp Lists::                  list는 무엇인가?
+* Lisp에서 List::                  list는 무엇인가?
 * Run a Program::               Lisp에서 list는 실행할 준비가 된 프로그램이다.
 * Making Errors::               에러 메시지 만들기.
 * Names & Definitions::         기호 이름들과 함수 정의들.
@@ -391,9 +391,9 @@ List 처리하기
 * Summary::                     중요한 점들.
 * Error Message Exercises::
 
-Lisp Lists
+Lisp에서 List
 
-* Numbers Lists::               List have numbers, other lists, in them.
+* 숫자와 List::               List는 숫자, List를 가진다
 * Lisp Atoms::                  Elemental entities.
 * Whitespace in Lists::         Formatting lists to be readable.
 * Typing Lists::                How GNU Emacs helps you type lists.
@@ -1049,7 +1049,7 @@ Robert J. Chassell
 위치한다. List는 Lisp의 근본이다.
 
 @menu
-* Lisp Lists::                  list는 무엇인가?
+* Lisp에서 List::                list는 무엇인가?
 * Run a Program::               Lisp에서 list는 실행할 준비가 된 프로그램이다.
 * Making Errors::               에러 메시지 만들기.
 * Names & Definitions::         기호 이름들과 함수 정의들.
@@ -1063,15 +1063,13 @@ Robert J. Chassell
 @end menu
 
 
-@node Lisp Lists, Run a Program, List 처리하기, List 처리하기
+@node Lisp에서 List, Run a Program, List 처리하기, List 처리하기
 @comment  node-name,  next,  previous,  up
-@section Lisp Lists
+@section Lisp에서 List
 @cindex Lisp Lists
 
-In Lisp, a list looks like this: @code{'(rose violet daisy buttercup)}.
-This list is preceded by a single apostrophe.  It could just as well be
-written as follows, which looks more like the kind of list you are likely
-to be familiar with:
+Lisp에서 list는 이런 형태이다.; @code{'(rose violet daisy buttercup)}. 이 list는 작은 
+따옴표로 시작한다. 다음 처럼 쓰여질 수 있을 뿐만 아니라, 더 친숙한 list의 형태로 보인다.
 
 @smallexample
 @group
@@ -1083,48 +1081,46 @@ to be familiar with:
 @end smallexample
 
 @noindent
-The elements of this list are the names of the four different flowers,
-separated from each other by whitespace and surrounded by parentheses,
-like flowers in a field with a stone wall around them.
+주위에 돌로 둘러싸여 있는 들판에 꽃들처럼 공백에 의해서 구분되고 괄호에 싸여 있는 이 list의 요소들은 
+다른 4가지의 꽃들의 이름들이다. 
 @cindex Flowers in a field
 
 @menu
-* Numbers Lists::               List have numbers, other lists, in them.
+* 숫자와 List::                   List는 숫자, List를 가진다
 * Lisp Atoms::                  Elemental entities.
 * Whitespace in Lists::         Formatting lists to be readable.
 * Typing Lists::                How GNU Emacs helps you type lists.
 @end menu
 
-@node Numbers Lists, Lisp Atoms, Lisp Lists, Lisp Lists
+
+@node 숫자와 List, Lisp Atoms, Lisp에서 List, Lisp에서 List
 @ifnottex
-@unnumberedsubsec Numbers, Lists inside of Lists
+@unnumberedsubsec 숫자, List 안의 List
 @end ifnottex
 
-Lists can also have numbers in them, as in this list: @code{(+ 2 2)}.
-This list has a plus-sign, @samp{+}, followed by two @samp{2}s, each
-separated by whitespace.
+List는 이 List 처럼 그 안에 숫자들을 가질 수 있다.: @code{(+ 2 2)}. 이 List는 더하기 기호, 
+@samp{+}, 그리고 이어서 공백으로 구분되는 두 개의 @samp{2} 가 온다.
 
-In Lisp, both data and programs are represented the same way; that is,
-they are both lists of words, numbers, or other lists, separated by
-whitespace and surrounded by parentheses.  (Since a program looks like
-data, one program may easily serve as data for another; this is a very
-powerful feature of Lisp.)  (Incidentally, these two parenthetical
-remarks are @emph{not} Lisp lists, because they contain @samp{;} and
-@samp{.} as punctuation marks.)
+Lisp에서 데이터와 프로그램은 같은 방식으로 표현된다.; 공백에 의해서 구분되고 괄호에 싸여있는 단어들, 
+숫자들 또는 다른 List들이다. ( 프로그램이 데이터처럼 보이기 때문에 하나의 프로그램은 쉽게 다른 
+프로그램을 위한 데이터로 쉽게 제공할 수 있다.; 이는 Lisp의 매우 강력한 특징이다. ) ( 부수적으로 지금 
+괄호로 싸여있는 구절들은 @samp{;}와 구두점인 @samp{.}을 포함하고 있기 때문에 Lisp의 List가 
+@emph{아니다}. )
 
 @need 1200
-Here is another list, this time with a list inside of it:
+이번에는 List 안에 List를 가지고 있는 다른 List가 있다.
 
 @smallexample
 '(this list has (a list inside of it))
 @end smallexample
 
-The components of this list are the words @samp{this}, @samp{list},
-@samp{has}, and the list @samp{(a list inside of it)}.  The interior
-list is made up of the words @samp{a}, @samp{list}, @samp{inside},
-@samp{of}, @samp{it}.
+이 List의 요소들은 단어 @samp{this}, @samp{list}, @samp{has}, 와 List @samp{(a list 
+inside of it)} 이다. 내부 List는 단어 @samp{a}, @samp{list}, @samp{inside},
+@samp{of}, @samp{it} 로 구성되어 있다.
 
-@node Lisp Atoms, Whitespace in Lists, Numbers Lists, Lisp Lists
+
+
+@node Lisp Atoms, Whitespace in Lists, 숫자와 List, Lisp에서 List
 @comment  node-name,  next,  previous,  up
 @subsection Lisp Atoms
 @cindex Lisp Atoms
@@ -1205,7 +1201,8 @@ is used for messages that a computer can print for a human to read.
 Strings are a different kind of atom than numbers or symbols and are
 used differently.
 
-@node Whitespace in Lists, Typing Lists, Lisp Atoms, Lisp Lists
+
+@node Whitespace in Lists, Typing Lists, Lisp Atoms, Lisp에서 List
 @comment  node-name,  next,  previous,  up
 @subsection Whitespace in Lists
 @cindex Whitespace in lists
@@ -1246,7 +1243,8 @@ marks, a symbol looks like a word, and a number looks like a number.
 (For certain situations, square brackets, dots and a few other special
 characters may be used; however, we will go quite far without them.)
 
-@node Typing Lists,  , Whitespace in Lists, Lisp Lists
+
+@node Typing Lists,  , Whitespace in Lists, Lisp에서 List
 @comment  node-name,  next,  previous,  up
 @subsection GNU Emacs Helps You Type Lists
 @cindex Help typing lists
@@ -1270,13 +1268,14 @@ parenthesis.  (@xref{Major Modes, , Major Modes, emacs, The GNU Emacs
 Manual}, for more information about Emacs' modes.)
 
 
-@node Run a Program, Making Errors, Lisp Lists, List 처리하기
+@node Run a Program, Making Errors, Lisp에서 List, List 처리하기
 @comment  node-name,  next,  previous,  up
 @section Run a Program
 @cindex Run a program
 @cindex Program, running one
 
 @cindex @samp{evaluate} defined
+
 A list in Lisp---any list---is a program ready to run.  If you run it
 (for which the Lisp jargon is @dfn{evaluate}), the computer will do one
 of three things: do nothing except return to you the list itself; send
