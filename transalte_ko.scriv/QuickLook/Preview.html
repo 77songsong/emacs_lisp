@@ -223,7 +223,7 @@ Lisp에서 데이터와 프로그램은 같은 방식으로 표현된다.; 공�
 </li>
 <li>
 <p class="binderItem"><strong>Lisp Atoms</strong><br/><br/>
-@node Lisp Atoms, Whitespace in Lists, 숫자와 List, Lisp에서 List<br/>
+@node Lisp Atoms, List에서 공백 문자, 숫자와 List, Lisp에서 List<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @subsection Lisp Atoms<br/>
 @cindex Lisp Atoms<br/>
@@ -231,22 +231,21 @@ Lisp에서 데이터와 프로그램은 같은 방식으로 표현된다.; 공�
 Lisp에서 @dfn{atom}라 부르는 단어들이 있다. 이 용어는 단어 ‘쪼갤 수 없는’ 것을 <br/>
 의미하는 atom의 역사적인 의미에서 왔다. Lisp까지 영향을 주었다. List에 사용하는 <br/>
 단어들은 더 이상 작은 부분으로 쪼갤 수 없고 여전히 프로그램의 부분으로 같은 것을 <br/>
-의미한다.; 숫자와 @samp{+} 같은 하나의 문자 기호처럼. 반면에 atom과 다른 List는 <br/>
+의미한다.; 숫자와 @samp{+} 같은 하나의 문자 기호처럼. 반면에 atom과 다르게 List는 <br/>
 부분들로 나눠질 수 있다. (  @xref{car cdr & cons,<br/>
 , @code{car} @code{cdr} & @code{cons} Fundamental Functions}. )<br/>
 <br/>
-List에서 atom은 공백으로 구분된다. 괄호의 바로 옆에 있...</p>
+List에서 atom은 공백으로 구분된다. 괄호의 바로 옆에 있을 수 있다...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Whitespace in Lists</strong><br/><br/>
-@node Whitespace in Lists, Typing Lists, Lisp Atoms, Lisp에서 List<br/>
+@node List에서 공백 문자, Typing Lists, Lisp Atoms, Lisp에서 List<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@subsection Whitespace in Lists<br/>
+@subsection List에서 공백 문자<br/>
 @cindex Whitespace in lists<br/>
 <br/>
 @need 1200<br/>
-The amount of whitespace in a list does not matter.  From the point of view<br/>
-of the Lisp language,<br/>
+List에서 공백의 양은 중요하지 않다. Lisp 언어의 관점에서는,<br/>
 <br/>
 @smallexample<br/>
 @group<br/>
@@ -257,17 +256,18 @@ of the Lisp language,<br/>
 <br/>
 @need 800<br/>
 @noindent<br/>
-is exactly the same as this:<br/>
+은 다음과 정확히 동일하다.:<br/>
 <br/>
 @smallexample<br/>
 '(this list looks like this)<br/>
 @end smallexample<br/>
 <br/>
-Both examples show what t...</p>
+두 예제는 Lisp에서 같은 List를 보여준다. List는 기호 @samp{this}, @samp{list}, <br/>
+@samp{looks}, @samp{like}, 그리고 @samp{this} 순으로...</p>
 </li>
 <li>
 <p class="binderItem"><strong>GNU Emacs Helps You Type Lists</strong><br/><br/>
-@node Typing Lists,  , Whitespace in Lists, Lisp에서 List<br/>
+@node Typing Lists,  , List에서 공백 문자, Lisp에서 List<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @subsection GNU Emacs Helps You Type Lists<br/>
 @cindex Help typing lists<br/>
@@ -277,7 +277,7 @@ When you type a Lisp expression in GNU Emacs using either Lisp<br/>
 Interaction mode or Emacs Lisp mode, you have available to you several<br/>
 commands to format the Lisp expression so it is easy to read.  For<br/>
 example, pressing the @key{TAB} key automatically indents the line the<br/>
-cursor is on by the right amount. ...</p>
+cursor is on by the right amount.  A comm...</p>
 </li>
 </ul>
 <hr/>

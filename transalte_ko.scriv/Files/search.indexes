@@ -18332,6 +18332,35 @@ Fifth, write a function to print the results as a graph.
 This is quite a project!  But if we take each step slowly, it will not
 be difficult.</Text>
         </Document>
+        <Document ID="141">
+            <Title>Numbers, Lists inside of Lists</Title>
+            <Text>
+@node 숫자와 List, Lisp Atoms, Lisp에서 List, Lisp에서 List
+@ifnottex
+@unnumberedsubsec 숫자, List 안의 List
+@end ifnottex
+
+List는 이 List 처럼 그 안에 숫자들을 가질 수 있다.: @code{(+ 2 2)}. 이 List는 더하기 기호, 
+@samp{+}, 그리고 이어서 공백으로 구분되는 두 개의 @samp{2} 가 온다.
+
+Lisp에서 데이터와 프로그램은 같은 방식으로 표현된다.; 공백에 의해서 구분되고 괄호에 싸여있는 단어들, 
+숫자들 또는 다른 List들이다. ( 프로그램이 데이터처럼 보이기 때문에 하나의 프로그램은 쉽게 다른 
+프로그램을 위한 데이터로 쉽게 제공할 수 있다.; 이는 Lisp의 매우 강력한 특징이다. ) ( 부수적으로 지금 
+괄호로 싸여있는 구절들은 @samp{;}와 구두점인 @samp{.}을 포함하고 있기 때문에 Lisp의 List가 
+@emph{아니다}. )
+
+@need 1200
+이번에는 List 안에 List를 가지고 있는 다른 List가 있다.
+
+@smallexample
+'(this list has (a list inside of it))
+@end smallexample
+
+이 List의 요소들은 단어 @samp{this}, @samp{list}, @samp{has}, 와 List @samp{(a list 
+inside of it)} 이다. 내부 List는 단어 @samp{a}, @samp{list}, @samp{inside},
+@samp{of}, @samp{it} 로 구성되어 있다.
+</Text>
+        </Document>
         <Document ID="137">
             <Title>List History</Title>
             <Text>
@@ -18567,35 +18596,6 @@ five six seven
 You can substitute the other regular expressions shown above in the
 function definition and try each of them on this list.</Text>
         </Document>
-        <Document ID="141">
-            <Title>Numbers, Lists inside of Lists</Title>
-            <Text>
-@node 숫자와 List, Lisp Atoms, Lisp에서 List, Lisp에서 List
-@ifnottex
-@unnumberedsubsec 숫자, List 안의 List
-@end ifnottex
-
-List는 이 List 처럼 그 안에 숫자들을 가질 수 있다.: @code{(+ 2 2)}. 이 List는 더하기 기호, 
-@samp{+}, 그리고 이어서 공백으로 구분되는 두 개의 @samp{2} 가 온다.
-
-Lisp에서 데이터와 프로그램은 같은 방식으로 표현된다.; 공백에 의해서 구분되고 괄호에 싸여있는 단어들, 
-숫자들 또는 다른 List들이다. ( 프로그램이 데이터처럼 보이기 때문에 하나의 프로그램은 쉽게 다른 
-프로그램을 위한 데이터로 쉽게 제공할 수 있다.; 이는 Lisp의 매우 강력한 특징이다. ) ( 부수적으로 지금 
-괄호로 싸여있는 구절들은 @samp{;}와 구두점인 @samp{.}을 포함하고 있기 때문에 Lisp의 List가 
-@emph{아니다}. )
-
-@need 1200
-이번에는 List 안에 List를 가지고 있는 다른 List가 있다.
-
-@smallexample
-'(this list has (a list inside of it))
-@end smallexample
-
-이 List의 요소들은 단어 @samp{this}, @samp{list}, @samp{has}, 와 List @samp{(a list 
-inside of it)} 이다. 내부 List는 단어 @samp{a}, @samp{list}, @samp{inside},
-@samp{of}, @samp{it} 로 구성되어 있다.
-</Text>
-        </Document>
         <Document ID="24">
             <Title>Preface</Title>
             <Text>
@@ -18618,6 +18618,46 @@ GNU Emacs 통합 환경의 대부분은 Emacs Lisp이라는 프로그래밍 언�
 * 초보자를 위한 노트::            초보자도 읽을 수 있다.
 * 감사합니다.::
 @end menu</Text>
+        </Document>
+        <Document ID="142">
+            <Title>Whitespace in Lists</Title>
+            <Text>
+@node List에서 공백 문자, Typing Lists, Lisp Atoms, Lisp에서 List
+@comment  node-name,  next,  previous,  up
+@subsection List에서 공백 문자
+@cindex Whitespace in lists
+
+@need 1200
+List에서 공백의 양은 중요하지 않다. Lisp 언어의 관점에서는,
+
+@smallexample
+@group
+'(this list
+   looks like this)
+@end group
+@end smallexample
+
+@need 800
+@noindent
+은 다음과 정확히 동일하다.:
+
+@smallexample
+'(this list looks like this)
+@end smallexample
+
+두 예제는 Lisp에서 같은 List를 보여준다. List는 기호 @samp{this}, @samp{list}, 
+@samp{looks}, @samp{like}, 그리고 @samp{this} 순으로 구성되어 있다.
+
+추가 공백과 새 줄은 List를 읽기 좋게 만들기 위해서 설계되었다. Lisp이 이 표현을 
+읽을 때, 모든 공백은 제거 된다. ( 그러나 구분하기 위해서 atom 사이에 적어도 하나의 
+공백은 필요하다. )
+
+보기에는 다루었던 예제들이 Lisp list의 대부분을 다룬 것처럼 보인다. Lisp에서 다른 
+list는 더 길거나 더 복잡한 것을 제외하고는 정도의 차이는 있어도 이 예제들 중에 하나로 
+보인다. 요약하면 List는 괄호 사이에 있고 문자열은 큰 따옴표 사이에 있다. 기호는 단어 
+같이 보이고 숫자는 숫자이다. ( 어떤 상황에서는 꺽쇠 괄호, 점 그리고 다른 특수 문자들도 
+사용될 수 있다.; 그러나 그 것들 없이 멀리 갈 것이다. )
+</Text>
         </Document>
         <Document ID="138">
             <Title>A Not for Novices</Title>
@@ -18685,54 +18725,10 @@ Lisp에서 list는 이런 형태이다.; @code{'(rose violet daisy buttercup)}. 
 
 @menu
 * 숫자와 List::                  List는 숫자, List를 가진다
-* Lisp Atoms::                  Elemental entities.
-* Whitespace in Lists::         Formatting lists to be readable.
+* Lisp Atoms::                  기본적인 요소들.
+* List에서 공백 문자::         읽기 쉽게 List 형식 갖추기.
 * Typing Lists::                How GNU Emacs helps you type lists.
 @end menu</Text>
-        </Document>
-        <Document ID="142">
-            <Title>Whitespace in Lists</Title>
-            <Text>
-@node Whitespace in Lists, Typing Lists, Lisp Atoms, Lisp에서 List
-@comment  node-name,  next,  previous,  up
-@subsection Whitespace in Lists
-@cindex Whitespace in lists
-
-@need 1200
-The amount of whitespace in a list does not matter.  From the point of view
-of the Lisp language,
-
-@smallexample
-@group
-'(this list
-   looks like this)
-@end group
-@end smallexample
-
-@need 800
-@noindent
-is exactly the same as this:
-
-@smallexample
-'(this list looks like this)
-@end smallexample
-
-Both examples show what to Lisp is the same list, the list made up of
-the symbols @samp{this}, @samp{list}, @samp{looks}, @samp{like}, and
-@samp{this} in that order.
-
-Extra whitespace and newlines are designed to make a list more readable
-by humans.  When Lisp reads the expression, it gets rid of all the extra
-whitespace (but it needs to have at least one space between atoms in
-order to tell them apart.)
-
-Odd as it seems, the examples we have seen cover almost all of what Lisp
-lists look like!  Every other list in Lisp looks more or less like one
-of these examples, except that the list may be longer and more complex.
-In brief, a list is between parentheses, a string is between quotation
-marks, a symbol looks like a word, and a number looks like a number.
-(For certain situations, square brackets, dots and a few other special
-characters may be used; however, we will go quite far without them.)</Text>
         </Document>
         <Document ID="30">
             <Title>Evaluation</Title>
@@ -18912,42 +18908,31 @@ from the humanly readable expression to the language of the computer.
 But before discussing this (@pxref{Variables}), we will discuss what the
 Lisp interpreter does when you make an error.</Text>
         </Document>
-        <Document ID="139">
-            <Title>Thank You</Title>
+        <Document ID="143">
+            <Title>GNU Emacs Helps You Type Lists</Title>
             <Text>
-@node 감사합니다.,  , 초보자를 위한 노트, 서문
+@node Typing Lists,  , List에서 공백 문자, Lisp에서 List
 @comment  node-name,  next,  previous,  up
-@unnumberedsec 감사합니다.
+@subsection GNU Emacs Helps You Type Lists
+@cindex Help typing lists
+@cindex Formatting help
 
-이 책을 도와주신 모든 분들에게 감사 드립니다. @r{Jim Blandy}, @r{Noah Friedman}, @w{Jim Kingdon}, @r{Roland McGrath}, @w{Frank Ritter}, @w{Randy Smith}, @w{Richard M.@:Stallman}, 그리고 @w{Melissa Weisshaus} 이 분들에게는 더욱 감사함을 느낍니다.  꾸준한 격려를 주신 @w{Philip Johnson} 와 @w{David Stampe} 이 두 분에게도 감사합니다. 이 책의 모든 실수는 모두 저의 것입니다.
+When you type a Lisp expression in GNU Emacs using either Lisp
+Interaction mode or Emacs Lisp mode, you have available to you several
+commands to format the Lisp expression so it is easy to read.  For
+example, pressing the @key{TAB} key automatically indents the line the
+cursor is on by the right amount.  A command to properly indent the
+code in a region is customarily bound to @kbd{M-C-\}.  Indentation is
+designed so that you can see which elements of a list belong to which
+list---elements of a sub-list are indented more than the elements of
+the enclosing list.
 
-@flushright
-Robert J. Chassell
-@email{bob@@gnu.org}
-@end flushright
-
-@c ================ Beginning of main text ================
-
-@c Start main text on right-hand (verso) page
-
-@tex
-\par\vfill\supereject
-\headings off
-\ifodd\pageno
-    \par\vfill\supereject
-\else
-    \par\vfill\supereject
-    \page\hbox{}\page
-    \par\vfill\supereject
-\fi
-@end tex
-
-@iftex
-@headings off
-@evenheading @thispage @| @| @thischapter
-@oddheading @thissection @| @| @thispage
-@global@pageno = 1
-@end iftex</Text>
+In addition, when you type a closing parenthesis, Emacs momentarily
+jumps the cursor back to the matching opening parenthesis, so you can
+see which one it is.  This is very useful, since every list you type
+in Lisp must have its closing parenthesis match its opening
+parenthesis.  (@xref{Major Modes, , Major Modes, emacs, The GNU Emacs
+Manual}, for more information about Emacs' modes.)</Text>
         </Document>
         <Document ID="31">
             <Title>Variables</Title>
@@ -19151,6 +19136,43 @@ Symbol's value as variable is void:@: +
 The meaning is the same as in GNU Emacs 22.
 @end ignore</Text>
         </Document>
+        <Document ID="139">
+            <Title>Thank You</Title>
+            <Text>
+@node 감사합니다.,  , 초보자를 위한 노트, 서문
+@comment  node-name,  next,  previous,  up
+@unnumberedsec 감사합니다.
+
+이 책을 도와주신 모든 분들에게 감사 드립니다. @r{Jim Blandy}, @r{Noah Friedman}, @w{Jim Kingdon}, @r{Roland McGrath}, @w{Frank Ritter}, @w{Randy Smith}, @w{Richard M.@:Stallman}, 그리고 @w{Melissa Weisshaus} 이 분들에게는 더욱 감사함을 느낍니다.  꾸준한 격려를 주신 @w{Philip Johnson} 와 @w{David Stampe} 이 두 분에게도 감사합니다. 이 책의 모든 실수는 모두 저의 것입니다.
+
+@flushright
+Robert J. Chassell
+@email{bob@@gnu.org}
+@end flushright
+
+@c ================ Beginning of main text ================
+
+@c Start main text on right-hand (verso) page
+
+@tex
+\par\vfill\supereject
+\headings off
+\ifodd\pageno
+    \par\vfill\supereject
+\else
+    \par\vfill\supereject
+    \page\hbox{}\page
+    \par\vfill\supereject
+\fi
+@end tex
+
+@iftex
+@headings off
+@evenheading @thispage @| @| @thischapter
+@oddheading @thissection @| @| @thispage
+@global@pageno = 1
+@end iftex</Text>
+        </Document>
         <Document ID="27">
             <Title>Generate an Error Message</Title>
             <Text>
@@ -19294,32 +19316,6 @@ moment.)
 The error message can be understood: @samp{Symbol's function
 definition is void:@: this}.  The symbol (that is, the word
 @samp{this}) lacks instructions for the computer to carry out.</Text>
-        </Document>
-        <Document ID="143">
-            <Title>GNU Emacs Helps You Type Lists</Title>
-            <Text>
-@node Typing Lists,  , Whitespace in Lists, Lisp에서 List
-@comment  node-name,  next,  previous,  up
-@subsection GNU Emacs Helps You Type Lists
-@cindex Help typing lists
-@cindex Formatting help
-
-When you type a Lisp expression in GNU Emacs using either Lisp
-Interaction mode or Emacs Lisp mode, you have available to you several
-commands to format the Lisp expression so it is easy to read.  For
-example, pressing the @key{TAB} key automatically indents the line the
-cursor is on by the right amount.  A command to properly indent the
-code in a region is customarily bound to @kbd{M-C-\}.  Indentation is
-designed so that you can see which elements of a list belong to which
-list---elements of a sub-list are indented more than the elements of
-the enclosing list.
-
-In addition, when you type a closing parenthesis, Emacs momentarily
-jumps the cursor back to the matching opening parenthesis, so you can
-see which one it is.  This is very useful, since every list you type
-in Lisp must have its closing parenthesis match its opening
-parenthesis.  (@xref{Major Modes, , Major Modes, emacs, The GNU Emacs
-Manual}, for more information about Emacs' modes.)</Text>
         </Document>
         <Document ID="32">
             <Title>Arguments</Title>
@@ -19780,7 +19776,7 @@ exclamation mark, and question mark.  Do the same using recursion.</Text>
         <Document ID="144">
             <Title>Lisp Atoms</Title>
             <Text>
-@node Lisp Atoms, Whitespace in Lists, 숫자와 List, Lisp에서 List
+@node Lisp Atoms, List에서 공백 문자, 숫자와 List, Lisp에서 List
 @comment  node-name,  next,  previous,  up
 @subsection Lisp Atoms
 @cindex Lisp Atoms
@@ -19788,7 +19784,7 @@ exclamation mark, and question mark.  Do the same using recursion.</Text>
 Lisp에서 @dfn{atom}라 부르는 단어들이 있다. 이 용어는 단어 ‘쪼갤 수 없는’ 것을 
 의미하는 atom의 역사적인 의미에서 왔다. Lisp까지 영향을 주었다. List에 사용하는 
 단어들은 더 이상 작은 부분으로 쪼갤 수 없고 여전히 프로그램의 부분으로 같은 것을 
-의미한다.; 숫자와 @samp{+} 같은 하나의 문자 기호처럼. 반면에 atom과 다른 List는 
+의미한다.; 숫자와 @samp{+} 같은 하나의 문자 기호처럼. 반면에 atom과 다르게 List는 
 부분들로 나눠질 수 있다. (  @xref{car cdr &amp; cons,
 , @code{car} @code{cdr} &amp; @code{cons} Fundamental Functions}. )
 
@@ -19817,26 +19813,22 @@ expression의 동의어로 사용되고 있다. )
 그러나 이렇게 하는 방법은 List를 나누는 방법과는 다르다. List 연산에 영향 주는 
 범위에서는 List의 atom들은 나눠질 수 없다.
 
-As in English, the meanings of the component letters of a Lisp atom
-are different from the meaning the letters make as a word.  For
-example, the word for the South American sloth, the @samp{ai}, is
-completely different from the two words, @samp{a}, and @samp{i}.
+영어처럼 Lisp atom의 구성하는 문자들의 의미들은 단어를 만드는 문자들의 의미와 
+다르다. 예를 들면 세 발가락 나무늘보(South American sloth)의 단어, 
+@samp{ai} 는 두 단어 @samp{a}와 @samp{i} 와 전혀 다르다.
 
-There are many kinds of atom in nature but only a few in Lisp: for
-example, @dfn{numbers}, such as 37, 511, or 1729, and @dfn{symbols}, such
-as @samp{+}, @samp{foo}, or @samp{forward-line}.  The words we have
-listed in the examples above are all symbols.  In everyday Lisp
-conversation, the word ``atom'' is not often used, because programmers
-usually try to be more specific about what kind of atom they are dealing
-with.  Lisp programming is mostly about symbols (and sometimes numbers)
-within lists.  (Incidentally, the preceding three word parenthetical
-remark is a proper list in Lisp, since it consists of atoms, which in
-this case are symbols, separated by whitespace and enclosed by
-parentheses, without any non-Lisp punctuation.)
+자연에는 많은 종류의 atom들이 있지만 Lisp에서는 단지 몇 개만 있다. : 예를 들면 
+37,511 또는 1729와 같은 @dfn{숫자}와 @samp{+}, @samp{foo} 또는 
+@samp{forward-line} 같은 @dfn{기호}가 있다. 앞에 예제에서 열거한 단어들은 모두 
+기호들이다. 프로그래머들은 다루는 atom의 종류에 보다 명확하게 하기 때문에, 일상적인 
+Lisp 대화에서 “atom” 단어는 자주 사용되지는 않는다. Lisp 프로그래밍은 List에 있는 
+대부분 기호( 와 때로는 숫자 )에 대한 것이다. ( 덧붙여 삽입 어구로 제시된 앞의 3 단어는 
+공백으로 구분된 기호인 atom으로 구성되어 있고 괄호로 싸여있기 때문에 Lisp에서 
+적절한 list이다. )
 
 @need 1250
-Text between double quotation marks---even sentences or
-paragraphs---is also an atom.  Here is an example:
+큰 따옴표 사이에 있는 글 -- 문장들 또는 문단들 조차 --  또한 atom이다. 여기 예가 
+있다.
 @cindex Text between double quotation marks
 
 @smallexample
@@ -19845,12 +19837,11 @@ paragraphs---is also an atom.  Here is an example:
 
 @cindex @samp{string} defined
 @noindent
-In Lisp, all of the quoted text including the punctuation mark and the
-blank spaces is a single atom.  This kind of atom is called a
-@dfn{string} (for `string of characters') and is the sort of thing that
-is used for messages that a computer can print for a human to read.
-Strings are a different kind of atom than numbers or symbols and are
-used differently.</Text>
+Lisp에서 구두점과 공백 문자들을 포함한 모든 큰 따옴표로 묶인 글은 단일 atom이다. 
+이런 종류의 atom은 @dfn{문자열}이라고 불리고 사람이 읽을 수 있게 컴퓨터가 출력할 
+수 있는 메시지로 사용되는 것들이다. 문자열은 숫자 또는 기호와 다른 종류의 atom이고 
+다르게 사용된다.
+</Text>
         </Document>
         <Document ID="33">
             <Title>Setting the Value of a Variable</Title>
@@ -21974,8 +21965,8 @@ List 처리하기
 Lisp에서 List
 
 * 숫자와 List::               List는 숫자, List를 가진다
-* Lisp Atoms::                  Elemental entities.
-* Whitespace in Lists::         Formatting lists to be readable.
+* Lisp Atoms::                  기본적인 요소들.
+* List에서 공백 문자::         읽기 쉽게 List 형식 갖추기.
 * Typing Lists::                How GNU Emacs helps you type lists.
 
 The Lisp Interpreter

@@ -394,8 +394,8 @@ List 처리하기
 Lisp에서 List
 
 * 숫자와 List::               List는 숫자, List를 가진다
-* Lisp Atoms::                  Elemental entities.
-* Whitespace in Lists::         Formatting lists to be readable.
+* Lisp Atoms::                  기본적인 요소들.
+* List에서 공백 문자::         읽기 쉽게 List 형식 갖추기.
 * Typing Lists::                How GNU Emacs helps you type lists.
 
 The Lisp Interpreter
@@ -1086,9 +1086,9 @@ Lisp에서 list는 이런 형태이다.; @code{'(rose violet daisy buttercup)}. 
 @cindex Flowers in a field
 
 @menu
-* 숫자와 List::                   List는 숫자, List를 가진다
-* Lisp Atoms::                  Elemental entities.
-* Whitespace in Lists::         Formatting lists to be readable.
+* 숫자와 List::                  List는 숫자, List를 가진다
+* Lisp Atoms::                  기본적인 요소들.
+* List에서 공백 문자::         읽기 쉽게 List 형식 갖추기.
 * Typing Lists::                How GNU Emacs helps you type lists.
 @end menu
 
@@ -1120,72 +1120,59 @@ inside of it)} 이다. 내부 List는 단어 @samp{a}, @samp{list}, @samp{inside
 
 
 
-@node Lisp Atoms, Whitespace in Lists, 숫자와 List, Lisp에서 List
+@node Lisp Atoms, List에서 공백 문자, 숫자와 List, Lisp에서 List
 @comment  node-name,  next,  previous,  up
 @subsection Lisp Atoms
 @cindex Lisp Atoms
 
-In Lisp, what we have been calling words are called @dfn{atoms}.  This
-term comes from the historical meaning of the word atom, which means
-`indivisible'.  As far as Lisp is concerned, the words we have been
-using in the lists cannot be divided into any smaller parts and still
-mean the same thing as part of a program; likewise with numbers and
-single character symbols like @samp{+}.  On the other hand, unlike an
-ancient atom, a list can be split into parts.  (@xref{car cdr & cons,
-, @code{car} @code{cdr} & @code{cons} Fundamental Functions}.)
+Lisp에서 @dfn{atom}라 부르는 단어들이 있다. 이 용어는 단어 ‘쪼갤 수 없는’ 것을 
+의미하는 atom의 역사적인 의미에서 왔다. Lisp까지 영향을 주었다. List에 사용하는 
+단어들은 더 이상 작은 부분으로 쪼갤 수 없고 여전히 프로그램의 부분으로 같은 것을 
+의미한다.; 숫자와 @samp{+} 같은 하나의 문자 기호처럼. 반면에 atom과 다르게 List는 
+부분들로 나눠질 수 있다. (  @xref{car cdr & cons,
+, @code{car} @code{cdr} & @code{cons} Fundamental Functions}. )
 
-In a list, atoms are separated from each other by whitespace.  They can be
-right next to a parenthesis.
+List에서 atom은 공백으로 구분된다. 괄호의 바로 옆에 있을 수 있다.
 
 @cindex @samp{empty list} defined
-Technically speaking, a list in Lisp consists of parentheses surrounding
-atoms separated by whitespace or surrounding other lists or surrounding
-both atoms and other lists.  A list can have just one atom in it or
-have nothing in it at all.  A list with nothing in it looks like this:
-@code{()}, and is called the @dfn{empty list}.  Unlike anything else, an
-empty list is considered both an atom and a list at the same time.
+기술적으로 이야기 하면 Lisp에서 List는 공백으로 구분되는 atom들 또는 다른 List들 
+혹은 둘 다를 둘러싼 괄호로 구성된다. List는 그 안에 하나의 atom을 가질 수 있거나 
+아무 것도 가지지 않을 수 있다. 안에 아무 것도 없는 List는 다음과 같다.: @code{()} 
+이고 @dfn{빈 List}로 불린다. 다른 것과 다르게 빈 List는 동시에 atom이면서 List로 
+간주된다.
 
 @cindex Symbolic expressions, introduced
 @cindex @samp{expression} defined
 @cindex @samp{form} defined
-The printed representation of both atoms and lists are called
-@dfn{symbolic expressions} or, more concisely, @dfn{s-expressions}.
-The word @dfn{expression} by itself can refer to either the printed
-representation, or to the atom or list as it is held internally in the
-computer.  Often, people use the term @dfn{expression}
-indiscriminately.  (Also, in many texts, the word @dfn{form} is used
-as a synonym for expression.)
+atom과 List 둘의 출력 된 표현은 @dfn{symbolic expressions} 또는 보다 간결하게 
+@dfn{s-expressions}라 불린다. 단어 @dfn{expression} 자체는 출력 된 표현 또는 
+컴퓨터에 내부에 저장된 것으로 List 또는 atom으로 참조될 수 있다. 종종 사람들은 
+@dfn{expression}을 마구잡이로 사용한다. ( 또한 많은 글들에서 @dfn{form} 단어는 
+expression의 동의어로 사용되고 있다. )
 
-Incidentally, the atoms that make up our universe were named such when
-they were thought to be indivisible; but it has been found that physical
-atoms are not indivisible.  Parts can split off an atom or it can
-fission into two parts of roughly equal size.  Physical atoms were named
-prematurely, before their truer nature was found.  In Lisp, certain
-kinds of atom, such as an array, can be separated into parts; but the
-mechanism for doing this is different from the mechanism for splitting a
-list.  As far as list operations are concerned, the atoms of a list are
-unsplittable.
+우연히 우주를 구성하는 atom들은 쪼개질 수 없다고 생각되어 그렇게 불리었다.; 그러나 
+물리적인 atom들은 쪼개질 수 있다고 판명되었다. 부분은 atom으로 쪼개질 수 있거나 
+같은 크기의 두 부분으로 분열될 수 있다. 물리적 진짜 성질을 알기 전에 atom은 성급하게 
+이름 지어졌다. Lisp에서 배열과 같은 어떤 종류의 atom은 부분으로 나눠질 수 있다.; 
+그러나 이렇게 하는 방법은 List를 나누는 방법과는 다르다. List 연산에 영향 주는 
+범위에서는 List의 atom들은 나눠질 수 없다.
 
-As in English, the meanings of the component letters of a Lisp atom
-are different from the meaning the letters make as a word.  For
-example, the word for the South American sloth, the @samp{ai}, is
-completely different from the two words, @samp{a}, and @samp{i}.
+영어처럼 Lisp atom의 구성하는 문자들의 의미들은 단어를 만드는 문자들의 의미와 
+다르다. 예를 들면 세 발가락 나무늘보(South American sloth)의 단어, 
+@samp{ai} 는 두 단어 @samp{a}와 @samp{i} 와 전혀 다르다.
 
-There are many kinds of atom in nature but only a few in Lisp: for
-example, @dfn{numbers}, such as 37, 511, or 1729, and @dfn{symbols}, such
-as @samp{+}, @samp{foo}, or @samp{forward-line}.  The words we have
-listed in the examples above are all symbols.  In everyday Lisp
-conversation, the word ``atom'' is not often used, because programmers
-usually try to be more specific about what kind of atom they are dealing
-with.  Lisp programming is mostly about symbols (and sometimes numbers)
-within lists.  (Incidentally, the preceding three word parenthetical
-remark is a proper list in Lisp, since it consists of atoms, which in
-this case are symbols, separated by whitespace and enclosed by
-parentheses, without any non-Lisp punctuation.)
+자연에는 많은 종류의 atom들이 있지만 Lisp에서는 단지 몇 개만 있다. : 예를 들면 
+37,511 또는 1729와 같은 @dfn{숫자}와 @samp{+}, @samp{foo} 또는 
+@samp{forward-line} 같은 @dfn{기호}가 있다. 앞에 예제에서 열거한 단어들은 모두 
+기호들이다. 프로그래머들은 다루는 atom의 종류에 보다 명확하게 하기 때문에, 일상적인 
+Lisp 대화에서 “atom” 단어는 자주 사용되지는 않는다. Lisp 프로그래밍은 List에 있는 
+대부분 기호( 와 때로는 숫자 )에 대한 것이다. ( 덧붙여 삽입 어구로 제시된 앞의 3 단어는 
+공백으로 구분된 기호인 atom으로 구성되어 있고 괄호로 싸여있기 때문에 Lisp에서 
+적절한 list이다. )
 
 @need 1250
-Text between double quotation marks---even sentences or
-paragraphs---is also an atom.  Here is an example:
+큰 따옴표 사이에 있는 글 -- 문장들 또는 문단들 조차 --  또한 atom이다. 여기 예가 
+있다.
 @cindex Text between double quotation marks
 
 @smallexample
@@ -1194,22 +1181,20 @@ paragraphs---is also an atom.  Here is an example:
 
 @cindex @samp{string} defined
 @noindent
-In Lisp, all of the quoted text including the punctuation mark and the
-blank spaces is a single atom.  This kind of atom is called a
-@dfn{string} (for `string of characters') and is the sort of thing that
-is used for messages that a computer can print for a human to read.
-Strings are a different kind of atom than numbers or symbols and are
-used differently.
+Lisp에서 구두점과 공백 문자들을 포함한 모든 큰 따옴표로 묶인 글은 단일 atom이다. 
+이런 종류의 atom은 @dfn{문자열}이라고 불리고 사람이 읽을 수 있게 컴퓨터가 출력할 
+수 있는 메시지로 사용되는 것들이다. 문자열은 숫자 또는 기호와 다른 종류의 atom이고 
+다르게 사용된다.
 
 
-@node Whitespace in Lists, Typing Lists, Lisp Atoms, Lisp에서 List
+
+@node List에서 공백 문자, Typing Lists, Lisp Atoms, Lisp에서 List
 @comment  node-name,  next,  previous,  up
-@subsection Whitespace in Lists
+@subsection List에서 공백 문자
 @cindex Whitespace in lists
 
 @need 1200
-The amount of whitespace in a list does not matter.  From the point of view
-of the Lisp language,
+List에서 공백의 양은 중요하지 않다. Lisp 언어의 관점에서는,
 
 @smallexample
 @group
@@ -1220,31 +1205,28 @@ of the Lisp language,
 
 @need 800
 @noindent
-is exactly the same as this:
+은 다음과 정확히 동일하다.:
 
 @smallexample
 '(this list looks like this)
 @end smallexample
 
-Both examples show what to Lisp is the same list, the list made up of
-the symbols @samp{this}, @samp{list}, @samp{looks}, @samp{like}, and
-@samp{this} in that order.
+두 예제는 Lisp에서 같은 List를 보여준다. List는 기호 @samp{this}, @samp{list}, 
+@samp{looks}, @samp{like}, 그리고 @samp{this} 순으로 구성되어 있다.
 
-Extra whitespace and newlines are designed to make a list more readable
-by humans.  When Lisp reads the expression, it gets rid of all the extra
-whitespace (but it needs to have at least one space between atoms in
-order to tell them apart.)
+추가 공백과 새 줄은 List를 읽기 좋게 만들기 위해서 설계되었다. Lisp이 이 표현을 
+읽을 때, 모든 공백은 제거 된다. ( 그러나 구분하기 위해서 atom 사이에 적어도 하나의 
+공백은 필요하다. )
 
-Odd as it seems, the examples we have seen cover almost all of what Lisp
-lists look like!  Every other list in Lisp looks more or less like one
-of these examples, except that the list may be longer and more complex.
-In brief, a list is between parentheses, a string is between quotation
-marks, a symbol looks like a word, and a number looks like a number.
-(For certain situations, square brackets, dots and a few other special
-characters may be used; however, we will go quite far without them.)
+보기에는 다루었던 예제들이 Lisp list의 대부분을 다룬 것처럼 보인다. Lisp에서 다른 
+list는 더 길거나 더 복잡한 것을 제외하고는 정도의 차이는 있어도 이 예제들 중에 하나로 
+보인다. 요약하면 List는 괄호 사이에 있고 문자열은 큰 따옴표 사이에 있다. 기호는 단어 
+같이 보이고 숫자는 숫자이다. ( 어떤 상황에서는 꺽쇠 괄호, 점 그리고 다른 특수 문자들도 
+사용될 수 있다.; 그러나 그 것들 없이 멀리 갈 것이다. )
 
 
-@node Typing Lists,  , Whitespace in Lists, Lisp에서 List
+
+@node Typing Lists,  , List에서 공백 문자, Lisp에서 List
 @comment  node-name,  next,  previous,  up
 @subsection GNU Emacs Helps You Type Lists
 @cindex Help typing lists
