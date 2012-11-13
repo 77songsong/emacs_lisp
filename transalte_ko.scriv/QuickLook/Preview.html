@@ -239,7 +239,7 @@ List에서 atom은 공백으로 구분된다. 괄호의 바로 옆에 있을 수
 </li>
 <li>
 <p class="binderItem"><strong>Whitespace in Lists</strong><br/><br/>
-@node List에서 공백 문자, Typing Lists, Lisp Atoms, Lisp에서 List<br/>
+@node List에서 공백 문자, List 입력하기, Lisp Atoms, Lisp에서 List<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @subsection List에서 공백 문자<br/>
 @cindex Whitespace in lists<br/>
@@ -263,21 +263,24 @@ List에서 공백의 양은 중요하지 않다. Lisp 언어의 관점에서는,
 @end smallexample<br/>
 <br/>
 두 예제는 Lisp에서 같은 List를 보여준다. List는 기호 @samp{this}, @samp{list}, <br/>
-@samp{looks}, @samp{like}, 그리고 @samp{this} 순으로...</p>
+@samp{looks}, @samp{like}, 그리고 @samp{this} 순으로 구성...</p>
 </li>
 <li>
 <p class="binderItem"><strong>GNU Emacs Helps You Type Lists</strong><br/><br/>
-@node Typing Lists,  , List에서 공백 문자, Lisp에서 List<br/>
+@node List 입력하기,  , List에서 공백 문자, Lisp에서 List<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@subsection GNU Emacs Helps You Type Lists<br/>
+@subsection GNU Emacs는 List 입력을 돕는다<br/>
 @cindex Help typing lists<br/>
 @cindex Formatting help<br/>
 <br/>
-When you type a Lisp expression in GNU Emacs using either Lisp<br/>
-Interaction mode or Emacs Lisp mode, you have available to you several<br/>
-commands to format the Lisp expression so it is easy to read.  For<br/>
-example, pressing the @key{TAB} key automatically indents the line the<br/>
-cursor is on by the right amount.  A comm...</p>
+Lisp 대화 모드 또는 Emacs Lisp 모드의 GNU Emacs에서 Lisp 표현식을 입력할 때, <br/>
+읽기 쉽게 Lisp 표현식을 나타내는 몇 가지 명령이 있다. 예를 들면 @key{TAB}을 누르는 <br/>
+것은 자동으로 줄 들여쓰기를 한다. 지역 안에 코드를 들여쓰기하는 명령은 관례상 <br/>
+@kbd{M-C-\}에 엮여있다. 들여쓰기는 List의 요소들이 어떤 List에 속해있는지 볼 수 <br/>
+있게 설계되었다. --- 하위 List의 요소들은 상위 리스트의 요소들보다 더 들여쓰기한다.<br/>
+<br/>
+게다가 닫는 괄호를 입력할 때, Emacs는 확인할 수 있게 즉시 짝을 이루는 여는 괄호로 <br/>
+커...</p>
 </li>
 </ul>
 <hr/>
@@ -291,11 +294,13 @@ cursor is on by the right amount.  A comm...</p>
 <br/>
 @cindex @samp{evaluate} defined<br/>
 <br/>
-A list in Lisp---any list---is a program ready to run.  If you run it<br/>
-(for which the Lisp jargon is @dfn{evaluate}), the computer will do one<br/>
-of three things: do nothing except return to you the list itself; send<br/>
-you an error message; or, treat the first symbol in the list as a<br/>
-command to...</p>
+Lisp에서 list는 --- 아무 List ---  어 수행 시킬 수 있는 프로그램이다. 그 것을 수행하면 <br/>
+( Lisp의 전문 용어로는 @dfn{evalute}라고 한다. )컴퓨터는 세 가지 중 한 가지를 할 것<br/>
+이다.: list 자체를 반환하는 것을 제외하고 아무 것도 하지 않는다.; 에러 메시지를 <br/>
+보여준다.; 또는 list의 첫 기호를 어떤 일을 하는 명령으로 다룬다. ( 물론 보통 이 세 가지 <br/>
+중 마지막이 진짜 원하는 것이다! )<br/>
+<br/>
+@c use code for the single apostrophe,...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Generate an Error Message</strong><br/><br/>

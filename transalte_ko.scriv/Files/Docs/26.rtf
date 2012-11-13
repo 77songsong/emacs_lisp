@@ -12,28 +12,23 @@
 \
 @cindex @samp\{evaluate\} defined\
 \
-A list in Lisp---any list---is a program ready to run.  If you run it\
-(for which the Lisp jargon is @dfn\{evaluate\}), the computer will do one\
-of three things: do nothing except return to you the list itself; send\
-you an error message; or, treat the first symbol in the list as a\
-command to do something.  (Usually, of course, it is the last of these\
-three things that you really want!)\
+Lisp\'bf\'a1\'bc\'ad list\'b4\'c2 --- \'be\'c6\'b9\'ab List ---  \'be\'ee \'bc\'f6\'c7\'e0 \'bd\'c3\'c5\'b3 \'bc\'f6 \'c0\'d6\'b4\'c2 \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a5\'c0\'cc\'b4\'d9. \'b1\'d7 \'b0\'cd\'c0\'bb \'bc\'f6\'c7\'e0\'c7\'cf\'b8\'e9 \
+( Lisp\'c0\'c7 \'c0\'fc\'b9\'ae \'bf\'eb\'be\'ee\'b7\'ce\'b4\'c2 @dfn\{evalute\}\'b6\'f3\'b0\'ed \'c7\'d1\'b4\'d9. )\'c4\'c4\'c7\'bb\'c5\'cd\'b4\'c2 \'bc\'bc \'b0\'a1\'c1\'f6 \'c1\'df \'c7\'d1 \'b0\'a1\'c1\'f6\'b8\'a6 \'c7\'d2 \'b0\'cd\
+\'c0\'cc\'b4\'d9.: list \'c0\'da\'c3\'bc\'b8\'a6 \'b9\'dd\'c8\'af\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'bb \'c1\'a6\'bf\'dc\'c7\'cf\'b0\'ed \'be\'c6\'b9\'ab \'b0\'cd\'b5\'b5 \'c7\'cf\'c1\'f6 \'be\'ca\'b4\'c2\'b4\'d9.; \'bf\'a1\'b7\'af \'b8\'de\'bd\'c3\'c1\'f6\'b8\'a6 \
+\'ba\'b8\'bf\'a9\'c1\'d8\'b4\'d9.; \'b6\'c7\'b4\'c2 list\'c0\'c7 \'c3\'b9 \'b1\'e2\'c8\'a3\'b8\'a6 \'be\'ee\'b6\'b2 \'c0\'cf\'c0\'bb \'c7\'cf\'b4\'c2 \'b8\'ed\'b7\'c9\'c0\'b8\'b7\'ce \'b4\'d9\'b7\'e9\'b4\'d9. ( \'b9\'b0\'b7\'d0 \'ba\'b8\'c5\'eb \'c0\'cc \'bc\'bc \'b0\'a1\'c1\'f6 \
+\'c1\'df \'b8\'b6\'c1\'f6\'b8\'b7\'c0\'cc \'c1\'f8\'c2\'a5 \'bf\'f8\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'cc\'b4\'d9! )\
 \
 @c use code for the single apostrophe, not samp.\
-The single apostrophe, @code\{'\}, that I put in front of some of the\
-example lists in preceding sections is called a @dfn\{quote\}; when it\
-precedes a list, it tells Lisp to do nothing with the list, other than\
-take it as it is written.  But if there is no quote preceding a list,\
-the first item of the list is special: it is a command for the computer\
-to obey.  (In Lisp, these commands are called @emph\{functions\}.)  The list\
-@code\{(+ 2 2)\} shown above did not have a quote in front of it, so Lisp\
-understands that the @code\{+\} is an instruction to do something with the\
-rest of the list: add the numbers that follow.\
+\'be\'d5 \'c0\'fd\'c0\'c7 \'bf\'b9\'c1\'a6 list \'be\'d5\'bf\'a1 \'b3\'f5\'c0\'ba \'c0\'db\'c0\'ba \'b5\'fb\'bf\'c8\'c7\'a5\'b4\'c2, @code\{\'a1\'ae\}, @dfn\{\'c0\'ce\'bf\'eb\}\'b6\'f3\'b0\'ed \'ba\'d2\'b8\'b0\'b4\'d9.; List \
+\'be\'d5\'bf\'a1 \'c0\'d6\'c0\'bb \'b6\'a7, Lisp\'bf\'a1\'b0\'d4 list\'b0\'a1 \'be\'b2\'bf\'a9\'c1\'f8 \'b5\'a5\'b7\'ce \'b0\'a1\'c1\'f6\'b4\'c2 \'b0\'cd \'bf\'a1 \'be\'c6\'b9\'ab \'b0\'cd\'b5\'b5 \'c7\'cf\'c1\'f6 \'b8\'bb\'b6\'f3\'b0\'ed \'c7\'cf\'b4\'c2 \
+\'b0\'cd\'c0\'cc\'b4\'d9. \'b1\'d7\'b7\'af\'b3\'aa, List\'be\'d5\'bf\'a1 \'c0\'ce\'bf\'eb\'c0\'cc \'be\'f8\'b4\'d9\'b8\'e9, List\'c0\'c7 \'c3\'b9 \'c7\'d7\'b8\'f1\'c0\'ba \'c6\'af\'ba\'b0\'c7\'cf\'b4\'d9.: \'b1\'d7 \'b0\'cd\'c0\'ba \'c4\'c4\'c7\'bb\'c5\'cd\'b0\'a1 \
+\'b5\'fb\'b6\'f3\'c7\'d2 \'b8\'ed\'b7\'c9\'c0\'cc\'b4\'d9. ( Lisp\'bf\'a1\'bc\'ad \'c0\'cc \'b8\'ed\'b7\'c9\'c0\'ba @emph\{\'c7\'d4\'bc\'f6\}\'b6\'f3 \'ba\'d2\'b8\'b0\'b4\'d9. ) List \
+@code\{(+ 2 2)\} \'b4\'c2 \'be\'d5\'bf\'a1 \'c0\'ce\'bf\'eb\'c0\'cc \'be\'f8\'b4\'d9. \'b1\'d7\'b7\'a1\'bc\'ad Lisp\'c0\'ba @code\{+\}\'b8\'a6 List\'c0\'c7 \'b3\'aa\'b8\'d3\'c1\'f6 \
+\'c7\'d7\'b8\'f1\'b5\'e9\'b0\'fa \'b9\'ab\'be\'f9\'c0\'bb \'c7\'cf\'b4\'c2 \'b8\'ed\'b7\'c9\'c0\'bb \'c0\'cc\'c7\'d8\'c7\'d1\'b4\'d9.; \'b5\'da\'c0\'cc\'be\'ee \'b3\'aa\'bf\'c0\'b4\'c2 \'bc\'fd\'c0\'da\'b5\'e9\'c0\'bb \'b4\'f5\'c7\'cf\'b6\'f3.\
 \
 @need 1250\
-If you are reading this inside of GNU Emacs in Info, here is how you can\
-evaluate such a list:  place your cursor immediately after the right\
-hand parenthesis of the following list and then type @kbd\{C-x C-e\}:\
+GNU Emacs\'bf\'a1\'bc\'ad info\'b7\'ce \'c0\'cc \'b9\'ae\'bc\'ad\'b8\'a6 \'ba\'b8\'b0\'ed \'c0\'d6\'b4\'d9\'b8\'e9 \'b1\'d7\'b7\'b1 List\'b8\'a6 \'bd\'c7\'c7\'e0\'c7\'cf\'b4\'c2 \'b9\'e6\'b9\'fd\'c0\'cc \'c0\'d6\'b4\'d9.: \
+\'b4\'d9\'c0\'bd List\'c0\'c7 \'b8\'c7 \'bf\'c0\'b8\'a5\'c2\'ca \'b0\'fd\'c8\'a3 \'b5\'da\'b7\'ce \'c4\'bf\'bc\'ad\'b8\'a6 \'c0\'cc\'b5\'bf \'bd\'c3\'c5\'b0\'b0\'ed @kbd\{C-x C-e\}\'b8\'a6 \'c0\'d4\'b7\'c2\'c7\'d8\'b6\'f3.\
 \
 @smallexample\
 (+ 2 2)\
@@ -41,29 +36,28 @@ hand parenthesis of the following list and then type @kbd\{C-x C-e\}:\
 \
 @c use code for the number four, not samp.\
 @noindent\
-You will see the number @code\{4\} appear in the echo area.  (In the\
-jargon, what you have just done is ``evaluate the list.''  The echo area\
-is the line at the bottom of the screen that displays or ``echoes''\
-text.)  Now try the same thing with a quoted list:  place the cursor\
-right after the following list and type @kbd\{C-x C-e\}:\
+\'b8\'de\'be\'c6\'b8\'ae \'bf\'b5\'bf\'aa\'bf\'a1 \'bc\'fd\'c0\'da @code\{4\}\'b0\'a1 \'b3\'aa\'c5\'b8\'b3\'aa\'b4\'c2 \'b0\'cd\'c0\'bb \'ba\'bc \'bc\'f6 \'c0\'d6\'c0\'bb \'b0\'cd\'c0\'cc\'b4\'d9.( \'c0\'fc\'b9\'ae \'bf\'eb\'be\'ee\'b7\'ce \'c1\'f6\'b1\'dd \
+\'c7\'d1 \'b0\'cd\'c0\'bb \'a1\'b0List\'b8\'a6 \'c6\'f2\'b0\'a1\'c7\'cf\'b4\'d9.\'a1\'b1 \'b6\'f3\'b0\'ed \'c7\'d1\'b4\'d9. \'b8\'de\'be\'c6\'b8\'ae \'bf\'b5\'bf\'aa\'c0\'ba \'c3\'e2\'b7\'c2 \'b6\'c7\'b4\'c2 \'b1\'db\'c0\'bb \'a1\'b0\'b8\'de\'be\'c6\'b8\'ae\'c4\'a1\'b4\'c2\'a1\'b1 \'c8\'ad\'b8\'e9\'c0\'c7 \
+\'be\'c6\'b7\'a1\'c0\'c7 \'c1\'d9\'c0\'cc\'b4\'d9. ) \'c1\'f6\'b1\'dd \'c0\'ce\'bf\'eb\'b5\'c8 List\'b7\'ce \'b0\'b0\'c0\'ba \'b0\'cd\'c0\'bb \'c7\'cf\'b0\'ed\'c0\'da \'c7\'d1\'b4\'d9. \'c4\'bf\'bc\'ad\'b8\'a6 \'b4\'d9\'c0\'bd \'b8\'ae\'bd\'ba\'c6\'ae \'b9\'d9\'b7\'ce \
+\'b5\'da\'b7\'ce \'c0\'cc\'b5\'bf \'bd\'c3\'c5\'b2 \'c8\'c4, @kbd\{C-x C-e\}\'b8\'a6 \'c0\'d4\'b7\'c2\'c7\'d8\'b6\'f3.\
 \
 @smallexample\
 '(this is a quoted list)\
 @end smallexample\
 \
 @noindent\
-You will see @code\{(this is a quoted list)\} appear in the echo area.\
+\'b8\'de\'be\'c6\'b8\'ae \'bf\'b5\'bf\'aa\'bf\'a1 @code\{(this is a quoted list)\}\'c0\'cc \'b3\'aa\'c5\'b8\'b3\'aa\'b4\'c2 \'b0\'cd\'c0\'bb \'ba\'bc \'b0\'cd\'c0\'cc\'b4\'d9.\
 \
 @cindex Lisp interpreter, explained\
 @cindex Interpreter, Lisp, explained\
+\'b5\'ce \'b0\'e6\'bf\'ec\'bf\'a1\'bc\'ad \'c7\'df\'b4\'f8 \'b0\'cd\'c0\'ba @dfn\{Lisp \'c7\'d8\'bc\'ae\'b1\'e2\}\'b6\'f3\'b0\'ed \'c7\'cf\'b4\'c2 GNU Emacs \'b3\'bb\'ba\'ce\'c0\'c7 \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a5\'bf\'a1\'b0\'d4 \'b8\'ed\'b7\'c9\'c0\'bb \'c1\'d6\'b4\'c2 \'b0\'cd\'c0\'cc\'b4\'d9. --- \'c7\'a5\'c7\'f6\'bd\'c4\'c0\'bb \'c6\'f2\'b0\'a1\'c7\'cf\'b1\'e2 \'c0\'a7\'c7\'d8 \'c7\'d8\'bc\'ae\'b1\'e2\'bf\'a1\'b0\'d4 \'b8\'ed\'b7\'c9\'c0\'bb \'c1\'d6\'b4\'c2 \'b0\'cd. Lisp \'c7\'d8\'bc\'ae\'b1\'e2\'c0\'c7 \'c0\'cc\'b8\'a7\'c0\'ba \'b4\'dc\'be\'ee\'b7\'ce\'ba\'ce\'c5\'cd \'bf\'d4\'b4\'d9. --- \'b8\'ed\'b7\'c9\'c0\'bb \'c7\'d8\'bc\'ae\'c7\'d1\'b4\'d9.\
 In both cases, what you are doing is giving a command to the program\
 inside of GNU Emacs called the @dfn\{Lisp interpreter\}---giving the\
 interpreter a command to evaluate the expression.  The name of the Lisp\
 interpreter comes from the word for the task done by a human who comes\
 up with the meaning of an expression---who ``interprets'' it.\
 \
-You can also evaluate an atom that is not part of a list---one that is\
-not surrounded by parentheses; again, the Lisp interpreter translates\
-from the humanly readable expression to the language of the computer.\
-But before discussing this (@pxref\{Variables\}), we will discuss what the\
-Lisp interpreter does when you make an error.}
+List\'c0\'c7 \'ba\'ce\'ba\'d0\'c0\'cc \'be\'c6\'b4\'d1 atom\'c0\'bb \'c6\'f2\'b0\'a1\'c7\'d2 \'bc\'f6 \'c0\'d6\'b4\'d9. --- \'b0\'fd\'c8\'a3\'bf\'a1 \'b5\'d1\'b7\'af \'bd\'ce\'c0\'cc\'c1\'f6 \'be\'ca\'be\'d2\'b4\'d9.; \'b4\'d9\'bd\'c3 Lisp \
+\'c7\'d8\'bc\'ae\'b1\'e2\'b4\'c2 \'bb\'e7\'b6\'f7\'c0\'cc \'c0\'d0\'c0\'bb \'bc\'f6 \'c0\'d6\'b4\'c2 \'c7\'a5\'c7\'f6\'bd\'c4\'c0\'bb \'c4\'c4\'c7\'bb\'c5\'cd\'c0\'c7 \'be\'f0\'be\'ee\'b7\'ce \'b9\'f8\'bf\'aa\'c7\'d1\'b4\'d9. \'b1\'d7\'b7\'af\'b3\'aa \'c0\'cc \'b0\'cd \
+(@pxref\{Variables\})\'c0\'bb \'c5\'e4\'b7\'d0\'c7\'cf\'b1\'e2 \'c0\'fc\'bf\'a1  \'bf\'a1\'b7\'af\'b8\'a6 \'b8\'b8\'b5\'e9\'be\'fa\'c0\'bb \'b6\'a7, List \'c7\'d8\'bc\'ae\'b1\'e2\'b0\'a1 \'b9\'ab\'be\'f9\'c0\'bb \
+\'c7\'cf\'b4\'c2\'c1\'f6 \'c0\'c7\'b3\'ed\'c7\'d2 \'b0\'cd\'c0\'cc\'b4\'d9.}

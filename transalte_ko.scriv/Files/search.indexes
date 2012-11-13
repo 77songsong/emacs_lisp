@@ -18622,7 +18622,7 @@ GNU Emacs 통합 환경의 대부분은 Emacs Lisp이라는 프로그래밍 언�
         <Document ID="142">
             <Title>Whitespace in Lists</Title>
             <Text>
-@node List에서 공백 문자, Typing Lists, Lisp Atoms, Lisp에서 List
+@node List에서 공백 문자, List 입력하기, Lisp Atoms, Lisp에서 List
 @comment  node-name,  next,  previous,  up
 @subsection List에서 공백 문자
 @cindex Whitespace in lists
@@ -18727,7 +18727,7 @@ Lisp에서 list는 이런 형태이다.; @code{'(rose violet daisy buttercup)}. 
 * 숫자와 List::                  List는 숫자, List를 가진다
 * Lisp Atoms::                  기본적인 요소들.
 * List에서 공백 문자::         읽기 쉽게 List 형식 갖추기.
-* Typing Lists::                How GNU Emacs helps you type lists.
+* List 입력하기::                GNU Emacs는 List 입력을 돕는 방법.
 @end menu</Text>
         </Document>
         <Document ID="30">
@@ -18852,28 +18852,23 @@ see in the next section.</Text>
 
 @cindex @samp{evaluate} defined
 
-A list in Lisp---any list---is a program ready to run.  If you run it
-(for which the Lisp jargon is @dfn{evaluate}), the computer will do one
-of three things: do nothing except return to you the list itself; send
-you an error message; or, treat the first symbol in the list as a
-command to do something.  (Usually, of course, it is the last of these
-three things that you really want!)
+Lisp에서 list는 --- 아무 List ---  어 수행 시킬 수 있는 프로그램이다. 그 것을 수행하면 
+( Lisp의 전문 용어로는 @dfn{evalute}라고 한다. )컴퓨터는 세 가지 중 한 가지를 할 것
+이다.: list 자체를 반환하는 것을 제외하고 아무 것도 하지 않는다.; 에러 메시지를 
+보여준다.; 또는 list의 첫 기호를 어떤 일을 하는 명령으로 다룬다. ( 물론 보통 이 세 가지 
+중 마지막이 진짜 원하는 것이다! )
 
 @c use code for the single apostrophe, not samp.
-The single apostrophe, @code{'}, that I put in front of some of the
-example lists in preceding sections is called a @dfn{quote}; when it
-precedes a list, it tells Lisp to do nothing with the list, other than
-take it as it is written.  But if there is no quote preceding a list,
-the first item of the list is special: it is a command for the computer
-to obey.  (In Lisp, these commands are called @emph{functions}.)  The list
-@code{(+ 2 2)} shown above did not have a quote in front of it, so Lisp
-understands that the @code{+} is an instruction to do something with the
-rest of the list: add the numbers that follow.
+앞 절의 예제 list 앞에 놓은 작은 따옴표는, @code{‘}, @dfn{인용}라고 불린다.; List 
+앞에 있을 때, Lisp에게 list가 쓰여진 데로 가지는 것 에 아무 것도 하지 말라고 하는 
+것이다. 그러나, List앞에 인용이 없다면, List의 첫 항목은 특별하다.: 그 것은 컴퓨터가 
+따라할 명령이다. ( Lisp에서 이 명령은 @emph{함수}라 불린다. ) List 
+@code{(+ 2 2)} 는 앞에 인용이 없다. 그래서 Lisp은 @code{+}를 List의 나머지 
+항목들과 무엇을 하는 명령을 이해한다.; 뒤이어 나오는 숫자들을 더하라.
 
 @need 1250
-If you are reading this inside of GNU Emacs in Info, here is how you can
-evaluate such a list:  place your cursor immediately after the right
-hand parenthesis of the following list and then type @kbd{C-x C-e}:
+GNU Emacs에서 info로 이 문서를 보고 있다면 그런 List를 실행하는 방법이 있다.: 
+다음 List의 맨 오른쪽 괄호 뒤로 커서를 이동 시키고 @kbd{C-x C-e}를 입력해라.
 
 @smallexample
 (+ 2 2)
@@ -18881,58 +18876,51 @@ hand parenthesis of the following list and then type @kbd{C-x C-e}:
 
 @c use code for the number four, not samp.
 @noindent
-You will see the number @code{4} appear in the echo area.  (In the
-jargon, what you have just done is ``evaluate the list.''  The echo area
-is the line at the bottom of the screen that displays or ``echoes''
-text.)  Now try the same thing with a quoted list:  place the cursor
-right after the following list and type @kbd{C-x C-e}:
+메아리 영역에 숫자 @code{4}가 나타나는 것을 볼 수 있을 것이다.( 전문 용어로 지금 
+한 것을 “List를 평가하다.” 라고 한다. 메아리 영역은 출력 또는 글을 “메아리치는” 화면의 
+아래의 줄이다. ) 지금 인용된 List로 같은 것을 하고자 한다. 커서를 다음 리스트 바로 
+뒤로 이동 시킨 후, @kbd{C-x C-e}를 입력해라.
 
 @smallexample
 '(this is a quoted list)
 @end smallexample
 
 @noindent
-You will see @code{(this is a quoted list)} appear in the echo area.
+메아리 영역에 @code{(this is a quoted list)}이 나타나는 것을 볼 것이다.
 
 @cindex Lisp interpreter, explained
 @cindex Interpreter, Lisp, explained
+두 경우에서 했던 것은 @dfn{Lisp 해석기}라고 하는 GNU Emacs 내부의 프로그램에게 명령을 주는 것이다. --- 표현식을 평가하기 위해 해석기에게 명령을 주는 것. Lisp 해석기의 이름은 단어로부터 왔다. --- 명령을 해석한다.
 In both cases, what you are doing is giving a command to the program
 inside of GNU Emacs called the @dfn{Lisp interpreter}---giving the
 interpreter a command to evaluate the expression.  The name of the Lisp
 interpreter comes from the word for the task done by a human who comes
 up with the meaning of an expression---who ``interprets'' it.
 
-You can also evaluate an atom that is not part of a list---one that is
-not surrounded by parentheses; again, the Lisp interpreter translates
-from the humanly readable expression to the language of the computer.
-But before discussing this (@pxref{Variables}), we will discuss what the
-Lisp interpreter does when you make an error.</Text>
+List의 부분이 아닌 atom을 평가할 수 있다. --- 괄호에 둘러 싸이지 않았다.; 다시 Lisp 
+해석기는 사람이 읽을 수 있는 표현식을 컴퓨터의 언어로 번역한다. 그러나 이 것 
+(@pxref{Variables})을 토론하기 전에  에러를 만들었을 때, List 해석기가 무엇을 
+하는지 의논할 것이다.</Text>
         </Document>
         <Document ID="143">
             <Title>GNU Emacs Helps You Type Lists</Title>
             <Text>
-@node Typing Lists,  , List에서 공백 문자, Lisp에서 List
+@node List 입력하기,  , List에서 공백 문자, Lisp에서 List
 @comment  node-name,  next,  previous,  up
-@subsection GNU Emacs Helps You Type Lists
+@subsection GNU Emacs는 List 입력을 돕는다
 @cindex Help typing lists
 @cindex Formatting help
 
-When you type a Lisp expression in GNU Emacs using either Lisp
-Interaction mode or Emacs Lisp mode, you have available to you several
-commands to format the Lisp expression so it is easy to read.  For
-example, pressing the @key{TAB} key automatically indents the line the
-cursor is on by the right amount.  A command to properly indent the
-code in a region is customarily bound to @kbd{M-C-\}.  Indentation is
-designed so that you can see which elements of a list belong to which
-list---elements of a sub-list are indented more than the elements of
-the enclosing list.
+Lisp 대화 모드 또는 Emacs Lisp 모드의 GNU Emacs에서 Lisp 표현식을 입력할 때, 
+읽기 쉽게 Lisp 표현식을 나타내는 몇 가지 명령이 있다. 예를 들면 @key{TAB}을 누르는 
+것은 자동으로 줄 들여쓰기를 한다. 지역 안에 코드를 들여쓰기하는 명령은 관례상 
+@kbd{M-C-\}에 엮여있다. 들여쓰기는 List의 요소들이 어떤 List에 속해있는지 볼 수 
+있게 설계되었다. --- 하위 List의 요소들은 상위 리스트의 요소들보다 더 들여쓰기한다.
 
-In addition, when you type a closing parenthesis, Emacs momentarily
-jumps the cursor back to the matching opening parenthesis, so you can
-see which one it is.  This is very useful, since every list you type
-in Lisp must have its closing parenthesis match its opening
-parenthesis.  (@xref{Major Modes, , Major Modes, emacs, The GNU Emacs
-Manual}, for more information about Emacs' modes.)</Text>
+게다가 닫는 괄호를 입력할 때, Emacs는 확인할 수 있게 즉시 짝을 이루는 여는 괄호로 
+커서를 움직인다. Lisp에서 입력하는 모든 List는 닫는 괄호와 짝을 이루는 여는 괄호가 
+있어야 하기 때문에 이 것은 매우 유용하다. ( Emacs의 모드들에 관한 자세한 정보는 
+(@xref{Major Modes, , Major Modes, emacs, The GNU Emacs Manual} )</Text>
         </Document>
         <Document ID="31">
             <Title>Variables</Title>
@@ -20238,6 +20226,17 @@ constituent characters possibly followed by one or more characters
 that are not word constituents.  What is meant by `word constituent
 characters' brings us to the issue of syntax, which is worth a section
 of its own.</Text>
+        </Document>
+        <Document ID="145">
+            <Title>용어 정리</Title>
+            <Text>expression		표현식
+mode		모드
+evalute		evaluate
+list			list
+quote		인용구
+function		함수
+atom 		atom
+</Text>
         </Document>
         <Document ID="35">
             <Title>Excercises</Title>
@@ -21967,7 +21966,7 @@ Lisp에서 List
 * 숫자와 List::               List는 숫자, List를 가진다
 * Lisp Atoms::                  기본적인 요소들.
 * List에서 공백 문자::         읽기 쉽게 List 형식 갖추기.
-* Typing Lists::                How GNU Emacs helps you type lists.
+* List 입력하기::                GNU Emacs는 List 입력을 돕는 방법.
 
 The Lisp Interpreter
 
@@ -23836,7 +23835,7 @@ is not greater than 5!} when you evaluate it in the usual way:
 Note that the different levels of indentation make it easy to
 distinguish the then-part from the else-part.  (GNU Emacs has several
 commands that automatically indent @code{if} expressions correctly.
-@xref{Typing Lists, , GNU Emacs Helps You Type Lists}.)
+@xref{List 입력하기, , GNU Emacs는 List 입력을 돕는다}.)
 
 We can extend the @code{type-of-animal} function to include an
 else-part by simply incorporating an additional part to the @code{if}

@@ -396,7 +396,7 @@ Lisp에서 List
 * 숫자와 List::               List는 숫자, List를 가진다
 * Lisp Atoms::                  기본적인 요소들.
 * List에서 공백 문자::         읽기 쉽게 List 형식 갖추기.
-* Typing Lists::                How GNU Emacs helps you type lists.
+* List 입력하기::                GNU Emacs는 List 입력을 돕는 방법.
 
 The Lisp Interpreter
 
@@ -1089,7 +1089,7 @@ Lisp에서 list는 이런 형태이다.; @code{'(rose violet daisy buttercup)}. 
 * 숫자와 List::                  List는 숫자, List를 가진다
 * Lisp Atoms::                  기본적인 요소들.
 * List에서 공백 문자::         읽기 쉽게 List 형식 갖추기.
-* Typing Lists::                How GNU Emacs helps you type lists.
+* List 입력하기::                GNU Emacs는 List 입력을 돕는 방법.
 @end menu
 
 
@@ -1188,7 +1188,7 @@ Lisp에서 구두점과 공백 문자들을 포함한 모든 큰 따옴표로 �
 
 
 
-@node List에서 공백 문자, Typing Lists, Lisp Atoms, Lisp에서 List
+@node List에서 공백 문자, List 입력하기, Lisp Atoms, Lisp에서 List
 @comment  node-name,  next,  previous,  up
 @subsection List에서 공백 문자
 @cindex Whitespace in lists
@@ -1226,28 +1226,22 @@ list는 더 길거나 더 복잡한 것을 제외하고는 정도의 차이는 �
 
 
 
-@node Typing Lists,  , List에서 공백 문자, Lisp에서 List
+@node List 입력하기,  , List에서 공백 문자, Lisp에서 List
 @comment  node-name,  next,  previous,  up
-@subsection GNU Emacs Helps You Type Lists
+@subsection GNU Emacs는 List 입력을 돕는다
 @cindex Help typing lists
 @cindex Formatting help
 
-When you type a Lisp expression in GNU Emacs using either Lisp
-Interaction mode or Emacs Lisp mode, you have available to you several
-commands to format the Lisp expression so it is easy to read.  For
-example, pressing the @key{TAB} key automatically indents the line the
-cursor is on by the right amount.  A command to properly indent the
-code in a region is customarily bound to @kbd{M-C-\}.  Indentation is
-designed so that you can see which elements of a list belong to which
-list---elements of a sub-list are indented more than the elements of
-the enclosing list.
+Lisp 대화 모드 또는 Emacs Lisp 모드의 GNU Emacs에서 Lisp 표현식을 입력할 때, 
+읽기 쉽게 Lisp 표현식을 나타내는 몇 가지 명령이 있다. 예를 들면 @key{TAB}을 누르는 
+것은 자동으로 줄 들여쓰기를 한다. 지역 안에 코드를 들여쓰기하는 명령은 관례상 
+@kbd{M-C-\}에 엮여있다. 들여쓰기는 List의 요소들이 어떤 List에 속해있는지 볼 수 
+있게 설계되었다. --- 하위 List의 요소들은 상위 리스트의 요소들보다 더 들여쓰기한다.
 
-In addition, when you type a closing parenthesis, Emacs momentarily
-jumps the cursor back to the matching opening parenthesis, so you can
-see which one it is.  This is very useful, since every list you type
-in Lisp must have its closing parenthesis match its opening
-parenthesis.  (@xref{Major Modes, , Major Modes, emacs, The GNU Emacs
-Manual}, for more information about Emacs' modes.)
+게다가 닫는 괄호를 입력할 때, Emacs는 확인할 수 있게 즉시 짝을 이루는 여는 괄호로 
+커서를 움직인다. Lisp에서 입력하는 모든 List는 닫는 괄호와 짝을 이루는 여는 괄호가 
+있어야 하기 때문에 이 것은 매우 유용하다. ( Emacs의 모드들에 관한 자세한 정보는 
+(@xref{Major Modes, , Major Modes, emacs, The GNU Emacs Manual} )
 
 
 @node Run a Program, Making Errors, Lisp에서 List, List 처리하기
@@ -4087,7 +4081,7 @@ is not greater than 5!} when you evaluate it in the usual way:
 Note that the different levels of indentation make it easy to
 distinguish the then-part from the else-part.  (GNU Emacs has several
 commands that automatically indent @code{if} expressions correctly.
-@xref{Typing Lists, , GNU Emacs Helps You Type Lists}.)
+@xref{List 입력하기, , GNU Emacs는 List 입력을 돕는다}.)
 
 We can extend the @code{type-of-animal} function to include an
 else-part by simply incorporating an additional part to the @code{if}
