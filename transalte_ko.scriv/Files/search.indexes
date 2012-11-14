@@ -18701,7 +18701,7 @@ Emacs Lisp이라고 할 때는 특히 GNU Emacs Lisp을 가리킨다.
         <Document ID="25">
             <Title>Lisp Lists</Title>
             <Text>
-@node Lisp에서 List, Run a Program, List 처리하기, List 처리하기
+@node Lisp에서 List, 프로그램 실행하기, List 처리하기, List 처리하기
 @comment  node-name,  next,  previous,  up
 @section Lisp에서 List
 @cindex Lisp Lists
@@ -18844,9 +18844,9 @@ see in the next section.</Text>
         <Document ID="26">
             <Title>Run a Program</Title>
             <Text>
-@node Run a Program, Making Errors, Lisp에서 List, List 처리하기
+@node 프로그램 실행하기, Making Errors, Lisp에서 List, List 처리하기
 @comment  node-name,  next,  previous,  up
-@section Run a Program
+@section 프로그램 실행하기
 @cindex Run a program
 @cindex Program, running one
 
@@ -18890,12 +18890,10 @@ GNU Emacs에서 info로 이 문서를 보고 있다면 그런 List를 실행하�
 
 @cindex Lisp interpreter, explained
 @cindex Interpreter, Lisp, explained
-두 경우에서 했던 것은 @dfn{Lisp 해석기}라고 하는 GNU Emacs 내부의 프로그램에게 명령을 주는 것이다. --- 표현식을 평가하기 위해 해석기에게 명령을 주는 것. Lisp 해석기의 이름은 단어로부터 왔다. --- 명령을 해석한다.
-In both cases, what you are doing is giving a command to the program
-inside of GNU Emacs called the @dfn{Lisp interpreter}---giving the
-interpreter a command to evaluate the expression.  The name of the Lisp
-interpreter comes from the word for the task done by a human who comes
-up with the meaning of an expression---who ``interprets'' it.
+두 경우에서 했던 것은 @dfn{Lisp 해석기}로 불리는 GNU Emacs 내부의 프로그램에게 
+명령을 주는 것이다. --- 표현식을 평가하기 위해 해석기에게 명령을 주는 것. Lisp 
+해석기의 이름은 표현식의 의미를 찾는 사람에 의해서 수행된 작업을 뜻하는 단어에서 
+유래했다. --- “통역하는” 사람. 
 
 List의 부분이 아닌 atom을 평가할 수 있다. --- 괄호에 둘러 싸이지 않았다.; 다시 Lisp 
 해석기는 사람이 읽을 수 있는 표현식을 컴퓨터의 언어로 번역한다. 그러나 이 것 
@@ -18920,7 +18918,7 @@ Lisp 대화 모드 또는 Emacs Lisp 모드의 GNU Emacs에서 Lisp 표현식을
 게다가 닫는 괄호를 입력할 때, Emacs는 확인할 수 있게 즉시 짝을 이루는 여는 괄호로 
 커서를 움직인다. Lisp에서 입력하는 모든 List는 닫는 괄호와 짝을 이루는 여는 괄호가 
 있어야 하기 때문에 이 것은 매우 유용하다. ( Emacs의 모드들에 관한 자세한 정보는 
-(@xref{Major Modes, , Major Modes, emacs, The GNU Emacs Manual} )</Text>
+(@xref{Major Modes, , Major Modes, emacs, The GNU Emacs Manual}.)</Text>
         </Document>
         <Document ID="31">
             <Title>Variables</Title>
@@ -19164,7 +19162,7 @@ Robert J. Chassell
         <Document ID="27">
             <Title>Generate an Error Message</Title>
             <Text>
-@node Making Errors, Names &amp; Definitions, Run a Program, List 처리하기
+@node Making Errors, Names &amp; Definitions, 프로그램 실행하기, List 처리하기
 @comment  node-name,  next,  previous,  up
 @section Generate an Error Message
 @cindex Generate an error message
@@ -21950,7 +21948,7 @@ every node in every chapter.
 List 처리하기
 
 * Lisp에서 List::                  list는 무엇인가?
-* Run a Program::               Lisp에서 list는 실행할 준비가 된 프로그램이다.
+* 프로그램 실행하기::               Lisp에서 list는 실행할 준비가 된 프로그램이다.
 * Making Errors::               에러 메시지 만들기.
 * Names &amp; Definitions::         기호 이름들과 함수 정의들.
 * Lisp Interpreter::            Lisp 해석기가 하는 일.
@@ -22503,7 +22501,7 @@ The task is easy: use @code{find-file-noselect} and @code{set-buffer}.</Text>
 
 @menu
 * Lisp에서 List::                list는 무엇인가?
-* Run a Program::               Lisp에서 list는 실행할 준비가 된 프로그램이다.
+* 프로그램 실행하기::               Lisp에서 list는 실행할 준비가 된 프로그램이다.
 * Making Errors::               에러 메시지 만들기.
 * Names &amp; Definitions::         기호 이름들과 함수 정의들.
 * Lisp Interpreter::            Lisp 해석기가 하는 일.

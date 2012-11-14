@@ -16,7 +16,7 @@
                 </OutlinerExpandedState>
             </CorkboardAndOutliner>
             <Children>
-                <BinderItem ID="5" Type="Text" Created="2012-11-09 00:18:17 +0900" Modified="2012-11-14 01:11:16 +0900">
+                <BinderItem ID="5" Type="Text" Created="2012-11-09 00:18:17 +0900" Modified="2012-11-15 01:07:32 +0900">
                     <Title>An Introduction to Programming in Emacs Lisp</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -116,23 +116,23 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="6" Type="Text" Created="2012-11-09 00:32:02 +0900" Modified="2012-11-11 00:56:25 +0900">
+                <BinderItem ID="6" Type="Text" Created="2012-11-09 00:32:02 +0900" Modified="2012-11-15 01:00:15 +0900">
                     <Title>List Processing</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
                         <NotesTextSelection>0,0</NotesTextSelection>
                     </MetaData>
                     <TextSettings>
-                        <TextSelection>1061,0</TextSelection>
+                        <TextSelection>0,0</TextSelection>
                     </TextSettings>
                     <CorkboardAndOutliner>
-                        <SelectedSubdocumentIDs></SelectedSubdocumentIDs>
+                        <SelectedSubdocumentIDs>26</SelectedSubdocumentIDs>
                         <OutlinerExpandedState>
                             <ItemID>25</ItemID>
                         </OutlinerExpandedState>
                     </CorkboardAndOutliner>
                     <Children>
-                        <BinderItem ID="25" Type="Text" Created="2012-11-09 00:46:03 +0900" Modified="2012-11-14 01:11:09 +0900">
+                        <BinderItem ID="25" Type="Text" Created="2012-11-09 00:46:03 +0900" Modified="2012-11-15 01:00:15 +0900">
                             <Title>Lisp Lists</Title>
                             <MetaData>
                                 <LabelID>2</LabelID>
@@ -179,7 +179,7 @@
                                         <TextSelection>270,0</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
-                                <BinderItem ID="143" Type="Text" Created="2012-11-10 23:59:49 +0900" Modified="2012-11-14 01:17:46 +0900">
+                                <BinderItem ID="143" Type="Text" Created="2012-11-10 23:59:49 +0900" Modified="2012-11-15 01:06:45 +0900">
                                     <Title>GNU Emacs Helps You Type Lists</Title>
                                     <MetaData>
                                         <LabelID>2</LabelID>
@@ -187,29 +187,30 @@
                                         <NotesTextSelection>0,0</NotesTextSelection>
                                     </MetaData>
                                     <TextSettings>
-                                        <TextSelection>105,30</TextSelection>
+                                        <TextSelection>668,0</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
                             </Children>
                         </BinderItem>
-                        <BinderItem ID="26" Type="Text" Created="2012-11-09 00:47:42 +0900" Modified="2012-11-14 02:05:14 +0900">
+                        <BinderItem ID="26" Type="Text" Created="2012-11-09 00:47:42 +0900" Modified="2012-11-15 01:00:15 +0900">
                             <Title>Run a Program</Title>
                             <MetaData>
+                                <LabelID>2</LabelID>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>2026,0</TextSelection>
+                                <TextSelection>112,13</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="27" Type="Text" Created="2012-11-09 00:47:48 +0900" Modified="2012-11-11 00:56:25 +0900">
+                        <BinderItem ID="27" Type="Text" Created="2012-11-09 00:47:48 +0900" Modified="2012-11-15 01:00:26 +0900">
                             <Title>Generate an Error Message</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>0,0</TextSelection>
+                                <TextSelection>739,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
                         <BinderItem ID="28" Type="Text" Created="2012-11-09 00:47:54 +0900" Modified="2012-11-11 00:56:25 +0900">
@@ -1545,7 +1546,7 @@
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2012-11-09 00:23:48 +0900" IgnoreDeadline="Yes">0</DraftTarget>
         <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" ResetType="Midnight" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="-134" Characters="-1217" Date="2012-11-13 23:43:37 +0900"></PreviousSession>
+        <PreviousSession Words="-59" Characters="-327" Date="2012-11-15 01:06:29 +0900"></PreviousSession>
     </ProjectTargets>
     <PrintSettings PaperSize="595.289978,841.890015" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="iso-a4" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
 </ScrivenerProject>
