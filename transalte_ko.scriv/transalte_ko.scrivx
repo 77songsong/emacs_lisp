@@ -7,7 +7,7 @@
                 <IncludeInCompile>Yes</IncludeInCompile>
             </MetaData>
             <CorkboardAndOutliner>
-                <SelectedSubdocumentIDs>5</SelectedSubdocumentIDs>
+                <SelectedSubdocumentIDs>27</SelectedSubdocumentIDs>
                 <OutlinerExpandedState>
                     <ItemID>5</ItemID>
                     <ItemID>24</ItemID>
@@ -154,7 +154,7 @@
                                         <NotesTextSelection>0,0</NotesTextSelection>
                                     </MetaData>
                                     <TextSettings>
-                                        <TextSelection>543,0</TextSelection>
+                                        <TextSelection>695,0</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
                                 <BinderItem ID="144" Type="Text" Created="2012-11-11 00:00:05 +0900" Modified="2012-11-13 02:02:30 +0900">
@@ -203,14 +203,14 @@
                                 <TextSelection>112,13</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="27" Type="Text" Created="2012-11-09 00:47:48 +0900" Modified="2012-11-15 01:00:26 +0900">
+                        <BinderItem ID="27" Type="Text" Created="2012-11-09 00:47:48 +0900" Modified="2012-11-20 00:27:26 +0900">
                             <Title>Generate an Error Message</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>739,0</TextSelection>
+                                <TextSelection>3376,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
                         <BinderItem ID="28" Type="Text" Created="2012-11-09 00:47:54 +0900" Modified="2012-11-11 00:56:25 +0900">
@@ -1486,14 +1486,14 @@
                         <CurrentPDFPage>0</CurrentPDFPage>
                     </MediaSettings>
                 </BinderItem>
-                <BinderItem ID="145" Type="Text" Created="2012-11-14 00:47:14 +0900" Modified="2012-11-14 01:53:29 +0900">
+                <BinderItem ID="145" Type="Text" Created="2012-11-14 00:47:14 +0900" Modified="2012-11-20 00:02:14 +0900">
                     <Title>용어 정리</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
                         <NotesTextSelection>0,0</NotesTextSelection>
                     </MetaData>
                     <TextSettings>
-                        <TextSelection>91,0</TextSelection>
+                        <TextSelection>39,0</TextSelection>
                     </TextSettings>
                 </BinderItem>
             </Children>
@@ -1546,7 +1546,7 @@
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2012-11-09 00:23:48 +0900" IgnoreDeadline="Yes">0</DraftTarget>
         <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" ResetType="Midnight" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="-59" Characters="-327" Date="2012-11-15 01:06:29 +0900"></PreviousSession>
+        <PreviousSession Words="-42" Characters="-409" Date="2012-11-19 22:43:46 +0900"></PreviousSession>
     </ProjectTargets>
     <PrintSettings PaperSize="595.289978,841.890015" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="iso-a4" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
 </ScrivenerProject>
