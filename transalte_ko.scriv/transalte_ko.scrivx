@@ -16,7 +16,7 @@
                 </OutlinerExpandedState>
             </CorkboardAndOutliner>
             <Children>
-                <BinderItem ID="5" Type="Text" Created="2012-11-09 00:18:17 +0900" Modified="2012-11-15 01:07:32 +0900">
+                <BinderItem ID="5" Type="Text" Created="2012-11-09 00:18:17 +0900" Modified="2012-11-21 01:45:06 +0900">
                     <Title>An Introduction to Programming in Emacs Lisp</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -116,7 +116,7 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="6" Type="Text" Created="2012-11-09 00:32:02 +0900" Modified="2012-11-15 01:00:15 +0900">
+                <BinderItem ID="6" Type="Text" Created="2012-11-09 00:32:02 +0900" Modified="2012-11-21 01:45:53 +0900">
                     <Title>List Processing</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -126,7 +126,7 @@
                         <TextSelection>0,0</TextSelection>
                     </TextSettings>
                     <CorkboardAndOutliner>
-                        <SelectedSubdocumentIDs>26</SelectedSubdocumentIDs>
+                        <SelectedSubdocumentIDs></SelectedSubdocumentIDs>
                         <OutlinerExpandedState>
                             <ItemID>25</ItemID>
                         </OutlinerExpandedState>
@@ -142,9 +142,6 @@
                             <TextSettings>
                                 <TextSelection>0,0</TextSelection>
                             </TextSettings>
-                            <CorkboardAndOutliner>
-                                <SelectedSubdocumentIDs>143</SelectedSubdocumentIDs>
-                            </CorkboardAndOutliner>
                             <Children>
                                 <BinderItem ID="141" Type="Text" Created="2012-11-10 23:58:28 +0900" Modified="2012-11-11 00:56:25 +0900">
                                     <Title>Numbers, Lists inside of Lists</Title>
@@ -192,7 +189,7 @@
                                 </BinderItem>
                             </Children>
                         </BinderItem>
-                        <BinderItem ID="26" Type="Text" Created="2012-11-09 00:47:42 +0900" Modified="2012-11-15 01:00:15 +0900">
+                        <BinderItem ID="26" Type="Text" Created="2012-11-09 00:47:42 +0900" Modified="2012-11-21 01:45:15 +0900">
                             <Title>Run a Program</Title>
                             <MetaData>
                                 <LabelID>2</LabelID>
@@ -203,17 +200,18 @@
                                 <TextSelection>112,13</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="27" Type="Text" Created="2012-11-09 00:47:48 +0900" Modified="2012-11-20 00:27:26 +0900">
+                        <BinderItem ID="27" Type="Text" Created="2012-11-09 00:47:48 +0900" Modified="2012-11-21 01:52:56 +0900">
                             <Title>Generate an Error Message</Title>
                             <MetaData>
+                                <LabelID>2</LabelID>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>3376,0</TextSelection>
+                                <TextSelection>2277,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="28" Type="Text" Created="2012-11-09 00:47:54 +0900" Modified="2012-11-11 00:56:25 +0900">
+                        <BinderItem ID="28" Type="Text" Created="2012-11-09 00:47:54 +0900" Modified="2012-11-21 01:45:15 +0900">
                             <Title>Symbol Names and Function Definition</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -767,7 +765,7 @@
                                 <TextSelection>12727,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="76" Type="Text" Created="2012-11-09 13:31:07 +0900" Modified="2012-11-11 00:56:25 +0900">
+                        <BinderItem ID="76" Type="Text" Created="2012-11-09 13:31:07 +0900" Modified="2012-11-21 01:45:17 +0900">
                             <Title>kill-region</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -777,7 +775,7 @@
                                 <TextSelection>15997,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="77" Type="Text" Created="2012-11-09 13:31:15 +0900" Modified="2012-11-11 00:56:25 +0900">
+                        <BinderItem ID="77" Type="Text" Created="2012-11-09 13:31:15 +0900" Modified="2012-11-21 01:46:08 +0900">
                             <Title>copy-region-as-kill</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1483,7 +1481,7 @@
                         <NotesTextSelection>0,0</NotesTextSelection>
                     </MetaData>
                     <MediaSettings>
-                        <CurrentPDFPage>0</CurrentPDFPage>
+                        <CurrentPDFPage>5</CurrentPDFPage>
                     </MediaSettings>
                 </BinderItem>
                 <BinderItem ID="145" Type="Text" Created="2012-11-14 00:47:14 +0900" Modified="2012-11-20 00:02:14 +0900">
@@ -1546,7 +1544,7 @@
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2012-11-09 00:23:48 +0900" IgnoreDeadline="Yes">0</DraftTarget>
         <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" ResetType="Midnight" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="-42" Characters="-409" Date="2012-11-19 22:43:46 +0900"></PreviousSession>
+        <PreviousSession Words="-83" Characters="-646" Date="2012-11-21 01:52:08 +0900"></PreviousSession>
     </ProjectTargets>
     <PrintSettings PaperSize="595.289978,841.890015" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="iso-a4" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
 </ScrivenerProject>

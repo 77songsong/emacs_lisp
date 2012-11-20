@@ -381,7 +381,7 @@ List 처리하기
 
 * Lisp에서 List::                  list는 무엇인가?
 * 프로그램 실행하기::               Lisp에서 list는 실행할 준비가 된 프로그램이다.
-* Making Errors::               에러 메시지 만들기.
+* 에러 만들기::               에러 메시지 만들기.
 * Names & Definitions::         기호 이름들과 함수 정의들.
 * Lisp Interpreter::            Lisp 해석기가 하는 일.
 * Evaluation::                  프로그램 실행.
@@ -1045,13 +1045,13 @@ Robert J. Chassell
 @emph{list}를(그리고 list의 list) 넣어서 다루는 프로그래밍 언어이다. 괄호는 리스트의 경계를
 표시한다. 때로는 작은 따옴표 또는 인용 기호 @samp{‘} @footnote{ 작은 따옴표 또는 인용
 기호는 @code{quote} 함수의 약어다.; 지금 함수들에 대해서 몰라도 된다.; 함수들은 
-@ref{Making Errors, , Generate an Error Message}.에 정의 되어 있다. } 뒤에 list가 
+@ref{에러 만들기, , 에러 메시지 만들기}.에 정의 되어 있다. } 뒤에 list가 
 위치한다. List는 Lisp의 근본이다.
 
 @menu
 * Lisp에서 List::                list는 무엇인가?
 * 프로그램 실행하기::               Lisp에서 list는 실행할 준비가 된 프로그램이다.
-* Making Errors::               에러 메시지 만들기.
+* 에러 만들기::               에러 메시지 만들기.
 * Names & Definitions::         기호 이름들과 함수 정의들.
 * Lisp Interpreter::            Lisp 해석기가 하는 일.
 * Evaluation::                  프로그램 실행.
@@ -1244,7 +1244,7 @@ Lisp 대화 모드 또는 Emacs Lisp 모드의 GNU Emacs에서 Lisp 표현식을
 (@xref{Major Modes, , Major Modes, emacs, The GNU Emacs Manual}.)
 
 
-@node 프로그램 실행하기, Making Errors, Lisp에서 List, List 처리하기
+@node 프로그램 실행하기, 에러 만들기, Lisp에서 List, List 처리하기
 @comment  node-name,  next,  previous,  up
 @section 프로그램 실행하기
 @cindex Run a program
@@ -1301,9 +1301,9 @@ List의 부분이 아닌 atom을 평가할 수 있다. --- 괄호에 둘러 싸�
 하는지 의논할 것이다.
 
 
-@node Making Errors, Names & Definitions, 프로그램 실행하기, List 처리하기
+@node 에러 만들기, Names & Definitions, 프로그램 실행하기, List 처리하기
 @comment  node-name,  next,  previous,  up
-@section Generate an Error Message
+@section 에러 메시지 만들기
 @cindex Generate an error message
 @cindex Error message generation
 
@@ -1395,45 +1395,37 @@ Lisp 해석기는 list의 첫 atom인 @samp{this} 단어를 평가하려고 한�
 @samp{this} 이다. ) 컴퓨터가 수행할 명령들의 집합의 정의를 가지고 있지 않다.
 
 다소 이상한 단어, @samp{void-function}는 Emacs Lisp이 구현된 방식을 감추기
-위해 설계되었고, 기호가 명령들을 포함한 장소를 첨부한 함수 정의를 갖지 않는 것을 나타
-낸다. 명령들을 포함해야 하는 장소는 ‘비었다’.
-The slightly odd word, @samp{void-function}, is designed to cover the
-way Emacs Lisp is implemented, which is that when a symbol does not
-have a function definition attached to it, the place that should
-contain the instructions is `void'.
+위해 설계되었고, 기호는 연결된 함수 정의를 갖지 않을 때, 명령들을 포함해야 하는 
+장소는 ‘비었다’.
 
-반면에 @code{(+ 2 2)}를 평가하는 것으로 성공적으로 2 더하기 2를 할 수 있기 때문에, 기호 @code{+}는 컴퓨터가 따라야 할 명령들의 집합을 가지고 있고 그 명령들은 @code{+} 뒤에 따라오는 숫자들을 합해야 한다는 것을 추론할 수 있다.
+반면에 @code{(+ 2 2)}를 평가하는 것으로 성공적으로 2 더하기 2를 할 수 있기 때문에, 
+기호 @code{+}는 컴퓨터가 따라야 할 명령들의 집합을 가지고 있고 그 명령들은 
+@code{+} 뒤에 따라오는 숫자들을 합해야 한다는 것을 추론할 수 있다.
 
 @need 1250
 GNU Emacs 20 버전과 초기 모든 버전들에서 에러 메시지의 한 줄을 볼것이다.; 메아리 
 영역에 다음 처럼 나타날 것이다.
-
-In GNU Emacs version 20, and in earlier versions, you will see only
-one line of error message; it will appear in the echo area and look
-like this:
 
 @smallexample
 Symbol's function definition is void:@: this
 @end smallexample
 
 @noindent
-(Also, your terminal may beep at you---some do, some don't; and others
-blink.  This is just a device to get your attention.)  The message goes
-away as soon as you type another key, even just to move the cursor.
+(또한 터미널은 삑 소리를 낼 것이다. --- 소리가 날 수도 있고, 아닐 수도 있다.; 그리고 
+다른 것들은 깜박인다. 단지 관심을 얻기 위한 장치이다. ) 커서를 움직이거나, 다른 키를 
+누르면 메시지는 바로 사라진다.
 
-We know the meaning of the word @samp{Symbol}.  It refers to the first
-atom of the list, the word @samp{this}.  The word @samp{function}
-refers to the instructions that tell the computer what to do.
-(Technically, the symbol tells the computer where to find the
-instructions, but this is a complication we can ignore for the
-moment.)
+@samp{Symbol}의 의미를 안다. 이 것은 List의 첫 번째 항목, @samp{this} 단어를 
+가리킨다. @samp{function}는 컴퓨터가 해야할 일을 나타내는 명령들을 의미한다. ( 
+기술적으로 기호는 컴퓨터가 명령들을 찾을 수 있는 위치를 나타내지만, 우리는 잠시 동안 
+무시할 수 있는 복잡한 것이다. ) 
 
-The error message can be understood: @samp{Symbol's function
-definition is void:@: this}.  The symbol (that is, the word
-@samp{this}) lacks instructions for the computer to carry out.
+이제 에러 메시지를 이해할 수 있다.: @samp{Symbol’s function definition is 
+void:@: this}. 기호는 ( @samp{this} 단어 ) 컴퓨터가 수행할 수 있는 명령들이 없다.
 
 
-@node Names & Definitions, Lisp Interpreter, Making Errors, List 처리하기
+
+@node Names & Definitions, Lisp Interpreter, 에러 만들기, List 처리하기
 @comment  node-name,  next,  previous,  up
 @section Symbol Names and Function Definitions
 @cindex Symbol names
@@ -8246,7 +8238,7 @@ The text is deleted but saved in the kill ring."
 @subsection @code{condition-case}
 @findex condition-case
 
-As we have seen earlier (@pxref{Making Errors, , Generate an Error
+As we have seen earlier (@pxref{에러 만들기, , Generate an Error
 Message}), when the Emacs Lisp interpreter has trouble evaluating an
 expression, it provides you with help; in the jargon, this is called
 ``signaling an error''.  Usually, the computer stops the program and
@@ -9043,7 +9035,7 @@ calls it.  The @code{fboundp} function returns true if the symbol it
 is testing has a function definition that `is not void'.  If the
 symbol's function definition were void, we would receive an error
 message, as we did when we created errors intentionally (@pxref{Making
-Errors, , Generate an Error Message}).
+Errors, , 에러 메시지 만들기}).
 
 @noindent
 The then-part contains an expression whose first element is the
