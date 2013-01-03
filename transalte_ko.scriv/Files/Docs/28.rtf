@@ -4,37 +4,32 @@
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
 
 \f0\fs28 \cf0 \
-@node Names & Definitions, Lisp Interpreter, \'bf\'a1\'b7\'af \'b8\'b8\'b5\'e9\'b1\'e2, List \'c3\'b3\'b8\'ae\'c7\'cf\'b1\'e2\
+@node \'c0\'cc\'b8\'a7\'b0\'fa \'c1\'a4\'c0\'c7, Lisp Interpreter, \'bf\'a1\'b7\'af \'b8\'b8\'b5\'e9\'b1\'e2, List \'c3\'b3\'b8\'ae\'c7\'cf\'b1\'e2\
 @comment  node-name,  next,  previous,  up\
-@section Symbol Names and Function Definitions\
+@section \'b1\'e2\'c8\'a3 \'c0\'cc\'b8\'a7\'b5\'e9\'b0\'fa \'c7\'d4\'bc\'f6 \'c1\'a4\'c0\'c7\'b5\'e9\
 @cindex Symbol names\
 \
-We can articulate another characteristic of Lisp based on what we have\
-discussed so far---an important characteristic: a symbol, like\
-@code\{+\}, is not itself the set of instructions for the computer to\
-carry out.  Instead, the symbol is used, perhaps temporarily, as a way\
-of locating the definition or set of instructions.  What we see is the\
-name through which the instructions can be found.  Names of people\
-work the same way.  I can be referred to as @samp\{Bob\}; however, I am\
-not the letters @samp\{B\}, @samp\{o\}, @samp\{b\} but am, or was, the\
-consciousness consistently associated with a particular life-form.\
-The name is not me, but it can be used to refer to me.\
+\'c1\'f6\'b1\'dd\'b1\'ee\'c1\'f6 \'b3\'ed\'c0\'c7\'c7\'d1 \'b3\'bb\'bf\'eb\'c0\'bb \'b9\'d9\'c5\'c1\'c0\'b8\'b7\'ce Lisp\'c0\'c7 \'b6\'c7 \'b4\'d9\'b8\'a5 \'c6\'af\'bc\'ba\'b5\'e9\'c0\'bb \'ba\'d0\'b8\'ed\'c7\'cf\'b0\'d4 \'bc\'b3\'b8\'ed\'c7\'d2 \'bc\'f6 \'c0\'d6\'b4\'d9. --- \
+\'c1\'df\'bf\'e4\'c7\'d1 \'c6\'af\'bc\'ba: @code\{+\} \'b0\'b0\'c0\'ba \'b1\'e2\'c8\'a3\'b4\'c2 \'c4\'c4\'c7\'bb\'c5\'cd\'b0\'a1 \'c0\'cc\'c7\'d8\'c7\'cf\'b4\'c2 \'b8\'ed\'b7\'c9\'b5\'e9\'c0\'c7 \'c1\'fd\'c7\'d5\'c0\'cc \'be\'c6\'b4\'cf\'b4\'d9. \'b4\'eb\'bd\'c5\'bf\'a1 \
+\'be\'c6\'b8\'b6 \'c0\'cf\'bd\'c3\'c0\'fb\'c0\'b8\'b7\'ce \'b8\'ed\'b7\'c9\'b5\'e9\'c0\'c7 \'c1\'fd\'c7\'d5 \'b6\'c7\'b4\'c2 \'c1\'a4\'c0\'c7\'b8\'a6 \'c3\'a3\'b4\'c2 \'c7\'cf\'b3\'aa\'c0\'c7 \'b9\'e6\'b9\'fd\'c0\'b8\'b7\'ce \'b1\'e2\'c8\'a3\'b0\'a1 \'bb\'e7\'bf\'eb\'b5\'c8\'b4\'d9. \
+\'b8\'ed\'b7\'c9\'b5\'e9\'c0\'cc \'b9\'df\'b0\'df\'b5\'c9 \'bc\'f6 \'c0\'d6\'b4\'c2 \'b0\'cd\'c0\'bb \'c5\'eb\'c7\'d8\'bc\'ad \'c0\'cc\'b8\'a7\'b5\'e9\'c0\'bb \'ba\'bc \'b0\'cd\'c0\'cc\'b4\'d9. \'bb\'e7\'b6\'f7\'b5\'e9\'c0\'c7 \'c0\'cc\'b8\'a7\'b5\'e9\'b5\'b5 \'b0\'b0\'c0\'ba \
+\'b9\'e6\'bd\'c4\'c0\'cc\'b4\'d9. \'b3\'aa\'b4\'c2 @samp\{Bob\} \'c0\'cc\'b4\'d9.; \'c7\'cf\'c1\'f6\'b8\'b8, \'b3\'aa\'b4\'c2 \'b1\'db\'c0\'da @samp\{B\}, @samp\{o\}, \
+@samp\{b\}\'c0\'ba \'be\'c6\'b4\'cf\'b4\'d9. \'b1\'d7\'b7\'af\'b3\'aa \'c6\'af\'c1\'a4 \'bb\'fd\'c8\'b0\'bf\'a1 \'c1\'f6\'bc\'d3\'c0\'fb\'c0\'b8\'b7\'ce \'b0\'fc\'b7\'c3\'b5\'c8 \'c0\'c7\'bd\'c4\'c0\'cc\'be\'fa\'b4\'d9. \'c0\'cc\'b8\'a7\'c0\'ba \'b3\'bb\'b0\'a1 \
+\'be\'c6\'b4\'cf\'c1\'f6\'b8\'b8 \'b3\'aa\'b8\'a6 \'c1\'f6\'c4\'aa\'c7\'d2 \'bc\'f6 \'c0\'d6\'b4\'d9.\
 \
-In Lisp, one set of instructions can be attached to several names.\
-For example, the computer instructions for adding numbers can be\
-linked to the symbol @code\{plus\} as well as to the symbol @code\{+\}\
-(and are in some dialects of Lisp).  Among humans, I can be referred\
-to as @samp\{Robert\} as well as @samp\{Bob\} and by other words as well.\
+Lisp\'bf\'a1\'bc\'ad \'c7\'cf\'b3\'aa\'c0\'c7 \'b8\'ed\'b7\'c9\'b5\'e9\'c0\'c7 \'c1\'fd\'c7\'d5\'c0\'ba \'bf\'a9\'b7\'af \'c0\'cc\'b8\'a7\'b5\'e9\'bf\'a1 \'ba\'d9\'c0\'bb \'bc\'f6 \'c0\'d6\'b4\'d9. \'bf\'b9\'b8\'a6 \'b5\'e9\'b8\'e9, \'bc\'fd\'c0\'da\'b8\'a6 \'b4\'f5\'c7\'cf\'b4\'c2 \
+\'c4\'c4\'c7\'bb\'c5\'cd \'b8\'ed\'b7\'c9\'b5\'e9\'c0\'ba \'b1\'e2\'c8\'a3 @code\{+\} \'bb\'d3\'b8\'b8 \'be\'c6\'b4\'cf\'b6\'f3 \'b1\'e2\'c8\'a3 @code\{plus\}\'bf\'a1\'b5\'b5 \'bf\'ac\'b0\'e1\'b5\'c9 \'bc\'f6 \'c0\'d6\'b4\'d9. \
+(\'b1\'d7\'b8\'ae\'b0\'ed Lisp\'c0\'c7 \'c0\'cf\'ba\'ce \'b9\'e6\'be\'f0\'b5\'e9\'bf\'a1 \'c0\'d6\'b4\'d9. ) \'bb\'e7\'b6\'f7\'b5\'e9 \'bb\'e7\'c0\'cc\'bf\'a1\'bc\'ad \'b3\'aa\'b4\'c2 @samp\{Robert\}\'bf\'cd \
+@samp\{Bob\} \'bb\'d3\'b8\'b8 \'be\'c6\'b4\'cf\'b6\'f3 \'b4\'d9\'b8\'a5 \'b4\'dc\'be\'ee\'bf\'a1 \'c0\'c7\'c7\'d8\'bc\'ad \'c2\'fc\'c1\'b6\'b5\'c9 \'bc\'f6 \'c0\'d6\'b4\'d9.\
 \
-On the other hand, a symbol can have only one function definition\
-attached to it at a time.  Otherwise, the computer would be confused as\
-to which definition to use.  If this were the case among people, only\
-one person in the world could be named @samp\{Bob\}.  However, the function\
-definition to which the name refers can be changed readily.\
-(@xref\{Install, , Install a Function Definition\}.)\
+\'b9\'dd\'b8\'e9\'bf\'a1, \'b1\'e2\'c8\'a3\'b4\'c2 \'c7\'d1\'b9\'f8\'bf\'a1 \'bf\'c0\'c1\'f7 \'c7\'cf\'b3\'aa\'c0\'c7 \'c7\'d4\'bc\'f6 \'c1\'a4\'c0\'c7\'bf\'a1\'b8\'b8 \'bf\'ac\'b0\'e1\'b5\'c9 \'bc\'f6 \'c0\'d6\'b4\'d9. \'b1\'d7\'b7\'b8\'c1\'f6 \'be\'ca\'c0\'b8\'b8\'e9, \
+\'c4\'c4\'c7\'bb\'c5\'cd\'b4\'c2 \'bb\'e7\'bf\'eb\'c7\'d2 \'c7\'d4\'bc\'f6 \'c1\'a4\'c0\'c7\'bf\'a1 \'b4\'eb\'c7\'d8\'bc\'ad \'c8\'a5\'b5\'bf\'c7\'d2 \'b0\'cd\'c0\'cc\'b4\'d9. \'b8\'b8\'be\'e0 \'bb\'e7\'b6\'f7\'b5\'e9 \'bb\'e7\'c0\'cc\'c0\'c7 \'b0\'e6\'bf\'ec\'b6\'f3\'b8\'e9, \'bc\'bc\'bb\'f3\'bf\'a1 \
+\'bf\'c0\'c1\'f7 \'c7\'d1 \'bb\'e7\'b6\'f7\'b8\'b8\'c0\'cc @samp\{Bob\}\'c0\'cc\'b6\'f3\'b4\'c2 \'c0\'cc\'b8\'a7\'c0\'bb \'b0\'a1\'c1\'fa \'bc\'f6 \'c0\'d6\'b4\'c2 \'b0\'cd\'c0\'cc\'b4\'d9. \'b1\'d7\'b7\'af\'b3\'aa, \'c0\'cc\'b8\'a7\'bf\'a1 \
+\'c0\'c7\'c7\'d8\'bc\'ad \'c2\'fc\'c1\'b6\'b5\'c7\'b4\'c2 \'c7\'d4\'bc\'f6 \'c1\'a4\'c0\'c7\'b4\'c2 \'bc\'d5\'bd\'b1\'b0\'d4 \'ba\'af\'b0\'e6\'b5\'c9 \'bc\'f6 \'c0\'d6\'b4\'d9. (@xref\{Install, , Install a \
+Function Definition\}.)\
 \
-Since Emacs Lisp is large, it is customary to name symbols in a way\
-that identifies the part of Emacs to which the function belongs.\
-Thus, all the names for functions that deal with Texinfo start with\
-@samp\{texinfo-\} and those for functions that deal with reading mail\
-start with @samp\{rmail-\}.}
+Emacs Lisp\'c0\'cc \'b0\'c5\'b4\'eb\'c7\'d8\'c1\'f8 \'c0\'cc\'c8\'c4\'b7\'ce, \'c7\'d4\'bc\'f6\'b0\'a1 \'bc\'d3\'c7\'d1 Emacs\'c0\'c7 \'c0\'cf\'ba\'ce\'b8\'a6 \'c1\'f6\'c4\'aa\'c7\'cf\'b4\'c2 \'b9\'e6\'bd\'c4\'c0\'b8\'b7\'ce \
+\'b1\'e2\'c8\'a3\'b5\'e9\'c0\'bb \'b8\'ed\'b8\'ed\'c7\'cf\'b4\'c2 \'b0\'fc\'b7\'ca\'b0\'a1 \'c0\'d6\'b4\'d9. \'b5\'fb\'b6\'f3\'bc\'ad Texinfo\'b8\'a6 \'b4\'d9\'b7\'e7\'b4\'c2 \'c7\'d4\'bc\'f6\'b5\'e9\'bf\'a1 \'b4\'eb\'c7\'d1 \'b8\'f0\'b5\'e7 \'c0\'cc\'b8\'a7\'b5\'e9\'c0\'ba \
+@samp\{texinfo-\}\'b7\'ce \'bd\'c3\'c0\'db\'c7\'cf\'b0\'ed mail \'c0\'d0\'b4\'c2 \'b0\'cd\'c0\'bb \'b4\'d9\'b7\'e7\'b4\'c2 \'c7\'d4\'bc\'f6\'b5\'e9\'c0\'ba @samp\{rmail-\}\'b7\'ce \
+\'bd\'c3\'c0\'db\'c7\'d1\'b4\'d9.\
+}

@@ -16,7 +16,7 @@
                 </OutlinerExpandedState>
             </CorkboardAndOutliner>
             <Children>
-                <BinderItem ID="5" Type="Text" Created="2012-11-09 00:18:17 +0900" Modified="2012-11-21 01:45:06 +0900">
+                <BinderItem ID="5" Type="Text" Created="2012-11-09 00:18:17 +0900" Modified="2013-01-04 00:50:59 +0900">
                     <Title>An Introduction to Programming in Emacs Lisp</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -116,7 +116,7 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="6" Type="Text" Created="2012-11-09 00:32:02 +0900" Modified="2012-11-21 01:45:53 +0900">
+                <BinderItem ID="6" Type="Text" Created="2012-11-09 00:32:02 +0900" Modified="2013-01-04 00:51:08 +0900">
                     <Title>List Processing</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -200,7 +200,7 @@
                                 <TextSelection>112,13</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="27" Type="Text" Created="2012-11-09 00:47:48 +0900" Modified="2012-11-21 01:52:56 +0900">
+                        <BinderItem ID="27" Type="Text" Created="2012-11-09 00:47:48 +0900" Modified="2013-01-04 00:51:08 +0900">
                             <Title>Generate an Error Message</Title>
                             <MetaData>
                                 <LabelID>2</LabelID>
@@ -208,20 +208,20 @@
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>2277,0</TextSelection>
+                                <TextSelection>3062,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="28" Type="Text" Created="2012-11-09 00:47:54 +0900" Modified="2012-11-21 01:45:15 +0900">
+                        <BinderItem ID="28" Type="Text" Created="2012-11-09 00:47:54 +0900" Modified="2013-01-04 00:51:08 +0900">
                             <Title>Symbol Names and Function Definition</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>0,0</TextSelection>
+                                <TextSelection>7,19</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="29" Type="Text" Created="2012-11-09 00:48:00 +0900" Modified="2012-11-11 00:56:25 +0900">
+                        <BinderItem ID="29" Type="Text" Created="2012-11-09 00:48:00 +0900" Modified="2013-01-04 00:51:08 +0900">
                             <Title>The Lisp Interpreter</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1544,7 +1544,7 @@
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2012-11-09 00:23:48 +0900" IgnoreDeadline="Yes">0</DraftTarget>
         <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" ResetType="Midnight" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="-83" Characters="-646" Date="2012-11-21 01:52:08 +0900"></PreviousSession>
+        <PreviousSession Words="-96" Characters="-856" Date="2013-01-04 00:03:13 +0900"></PreviousSession>
     </ProjectTargets>
     <PrintSettings PaperSize="595.289978,841.890015" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="iso-a4" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
 </ScrivenerProject>

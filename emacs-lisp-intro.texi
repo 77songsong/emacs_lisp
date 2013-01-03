@@ -382,7 +382,7 @@ List 처리하기
 * Lisp에서 List::                  list는 무엇인가?
 * 프로그램 실행하기::               Lisp에서 list는 실행할 준비가 된 프로그램이다.
 * 에러 만들기::               에러 메시지 만들기.
-* Names & Definitions::         기호 이름들과 함수 정의들.
+* 이름과 정의::         기호 이름들과 함수 정의들.
 * Lisp Interpreter::            Lisp 해석기가 하는 일.
 * Evaluation::                  프로그램 실행.
 * Variables::                   변수로부터 값을 넘겨 받기.
@@ -1052,7 +1052,7 @@ Robert J. Chassell
 * Lisp에서 List::                list는 무엇인가?
 * 프로그램 실행하기::               Lisp에서 list는 실행할 준비가 된 프로그램이다.
 * 에러 만들기::               에러 메시지 만들기.
-* Names & Definitions::         기호 이름들과 함수 정의들.
+* 이름과 정의::         기호 이름들과 함수 정의들.
 * Lisp Interpreter::            Lisp 해석기가 하는 일.
 * Evaluation::                  프로그램 실행.
 * Variables::                   변수로부터 값을 넘겨 받기.
@@ -1301,7 +1301,7 @@ List의 부분이 아닌 atom을 평가할 수 있다. --- 괄호에 둘러 싸�
 하는지 의논할 것이다.
 
 
-@node 에러 만들기, Names & Definitions, 프로그램 실행하기, List 처리하기
+@node 에러 만들기, 이름과 정의, 프로그램 실행하기, List 처리하기
 @comment  node-name,  next,  previous,  up
 @section 에러 메시지 만들기
 @cindex Generate an error message
@@ -1382,7 +1382,8 @@ Debugger entered--Lisp error: (void-function this)
 @end smallexample
 
 @noindent
-Lisp 해석기는 list의 첫 atom인 @samp{this} 단어를 평가하려고 한다. 이 행동은 에러 메시지 @samp{void-function this}를 만들어냈다.
+Lisp 해석기는 list의 첫 atom인 @samp{this} 단어를 평가하려고 한다. 이 행동은 에러 
+메시지 @samp{void-function this}를 만들어냈다.
 
 메시지는 @samp{void-function}과 @samp{this}를 포함하고 있다.
 
@@ -1416,7 +1417,7 @@ Symbol's function definition is void:@: this
 누르면 메시지는 바로 사라진다.
 
 @samp{Symbol}의 의미를 안다. 이 것은 List의 첫 번째 항목, @samp{this} 단어를 
-가리킨다. @samp{function}는 컴퓨터가 해야할 일을 나타내는 명령들을 의미한다. ( 
+가리킨다. @samp{function}는 컴퓨터가 할 일을 나타내는 명령들을 의미한다. ( 
 기술적으로 기호는 컴퓨터가 명령들을 찾을 수 있는 위치를 나타내지만, 우리는 잠시 동안 
 무시할 수 있는 복잡한 것이다. ) 
 
@@ -1425,43 +1426,38 @@ void:@: this}. 기호는 ( @samp{this} 단어 ) 컴퓨터가 수행할 수 있�
 
 
 
-@node Names & Definitions, Lisp Interpreter, 에러 만들기, List 처리하기
+@node 이름과 정의, Lisp Interpreter, 에러 만들기, List 처리하기
 @comment  node-name,  next,  previous,  up
-@section Symbol Names and Function Definitions
+@section 기호 이름들과 함수 정의들
 @cindex Symbol names
 
-We can articulate another characteristic of Lisp based on what we have
-discussed so far---an important characteristic: a symbol, like
-@code{+}, is not itself the set of instructions for the computer to
-carry out.  Instead, the symbol is used, perhaps temporarily, as a way
-of locating the definition or set of instructions.  What we see is the
-name through which the instructions can be found.  Names of people
-work the same way.  I can be referred to as @samp{Bob}; however, I am
-not the letters @samp{B}, @samp{o}, @samp{b} but am, or was, the
-consciousness consistently associated with a particular life-form.
-The name is not me, but it can be used to refer to me.
+지금까지 논의한 내용을 바탕으로 Lisp의 또 다른 특성들을 분명하게 설명할 수 있다. --- 
+중요한 특성: @code{+} 같은 기호는 컴퓨터가 이해하는 명령들의 집합이 아니다. 대신에 
+아마 일시적으로 명령들의 집합 또는 정의를 찾는 하나의 방법으로 기호가 사용된다. 
+명령들이 발견될 수 있는 것을 통해서 이름들을 볼 것이다. 사람들의 이름들도 같은 
+방식이다. 나는 @samp{Bob} 이다.; 하지만, 나는 글자 @samp{B}, @samp{o}, 
+@samp{b}은 아니다. 그러나 특정 생활에 지속적으로 관련된 의식이었다. 이름은 내가 
+아니지만 나를 지칭할 수 있다.
 
-In Lisp, one set of instructions can be attached to several names.
-For example, the computer instructions for adding numbers can be
-linked to the symbol @code{plus} as well as to the symbol @code{+}
-(and are in some dialects of Lisp).  Among humans, I can be referred
-to as @samp{Robert} as well as @samp{Bob} and by other words as well.
+Lisp에서 하나의 명령들의 집합은 여러 이름들에 붙을 수 있다. 예를 들면, 숫자를 더하는 
+컴퓨터 명령들은 기호 @code{+} 뿐만 아니라 기호 @code{plus}에도 연결될 수 있다. 
+(그리고 Lisp의 일부 방언들에 있다. ) 사람들 사이에서 나는 @samp{Robert}와 
+@samp{Bob} 뿐만 아니라 다른 단어에 의해서 참조될 수 있다.
 
-On the other hand, a symbol can have only one function definition
-attached to it at a time.  Otherwise, the computer would be confused as
-to which definition to use.  If this were the case among people, only
-one person in the world could be named @samp{Bob}.  However, the function
-definition to which the name refers can be changed readily.
-(@xref{Install, , Install a Function Definition}.)
+반면에, 기호는 한번에 오직 하나의 함수 정의에만 연결될 수 있다. 그렇지 않으면, 
+컴퓨터는 사용할 함수 정의에 대해서 혼동할 것이다. 만약 사람들 사이의 경우라면, 세상에 
+오직 한 사람만이 @samp{Bob}이라는 이름을 가질 수 있는 것이다. 그러나, 이름에 
+의해서 참조되는 함수 정의는 손쉽게 변경될 수 있다. (@xref{Install, , Install a 
+Function Definition}.)
 
-Since Emacs Lisp is large, it is customary to name symbols in a way
-that identifies the part of Emacs to which the function belongs.
-Thus, all the names for functions that deal with Texinfo start with
-@samp{texinfo-} and those for functions that deal with reading mail
-start with @samp{rmail-}.
+Emacs Lisp이 거대해진 이후로, 함수가 속한 Emacs의 일부를 지칭하는 방식으로 
+기호들을 명명하는 관례가 있다. 따라서 Texinfo를 다루는 함수들에 대한 모든 이름들은 
+@samp{texinfo-}로 시작하고 mail 읽는 것을 다루는 함수들은 @samp{rmail-}로 
+시작한다.
 
 
-@node Lisp Interpreter, Evaluation, Names & Definitions, List 처리하기
+
+@node Lisp Interpreter, Evaluation, 이름과 정의, List 처리하기
 @comment  node-name,  next,  previous,  up
 @section The Lisp Interpreter
 @cindex Lisp interpreter, what it does

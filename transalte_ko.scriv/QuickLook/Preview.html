@@ -305,7 +305,7 @@ Lisp에서 list는 --- 아무 List ---  어 수행 시킬 수 있는 프로그�
 </li>
 <li>
 <p class="binderItem"><strong>Generate an Error Message</strong><br/><br/>
-@node 에러 만들기, Names & Definitions, 프로그램 실행하기, List 처리하기<br/>
+@node 에러 만들기, 이름과 정의, 프로그램 실행하기, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section 에러 메시지 만들기<br/>
 @cindex Generate an error message<br/>
@@ -318,24 +318,29 @@ Lisp 해석기가 에러 메시지를 출력하는 명령을 알려줄 것이고
 여행자에게 이정표 같은 것이다.; 그것들을 해석하는 것은 어려울 수 있지만, 한번 이해 <br/>
 했다면 길을 알려줄 것이다.<br/>
 <br/>
-에러 메시지는 내장된 GNU Emacs 디버거에 의해서 생성된다. ‘디버거...</p>
+에러 메시지는 내장된 GNU Emacs 디버거에 의해서 생성된다. ‘디버거를 시작’ 할 <br/>
+것이다....</p>
 </li>
 <li>
 <p class="binderItem"><strong>Symbol Names and Function Definition</strong><br/><br/>
-@node Names & Definitions, Lisp Interpreter, 에러 만들기, List 처리하기<br/>
+@node 이름과 정의, Lisp Interpreter, 에러 만들기, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@section Symbol Names and Function Definitions<br/>
+@section 기호 이름들과 함수 정의들<br/>
 @cindex Symbol names<br/>
 <br/>
-We can articulate another characteristic of Lisp based on what we have<br/>
-discussed so far---an important characteristic: a symbol, like<br/>
-@code{+}, is not itself the set of instructions for the computer to<br/>
-carry out.  Instead, the symbol is used, perhaps temporarily, as a way<br/>
-of locating the definition or set of instructions. ...</p>
+지금까지 논의한 내용을 바탕으로 Lisp의 또 다른 특성들을 분명하게 설명할 수 있다. --- <br/>
+중요한 특성: @code{+} 같은 기호는 컴퓨터가 이해하는 명령들의 집합이 아니다. 대신에 <br/>
+아마 일시적으로 명령들의 집합 또는 정의를 찾는 하나의 방법으로 기호가 사용된다. <br/>
+명령들이 발견될 수 있는 것을 통해서 이름들을 볼 것이다. 사람들의 이름들도 같은 <br/>
+방식이다. 나는 @samp{Bob} 이다.; 하지만, 나는 글자 @samp{B}, @samp{o}, <br/>
+@samp{b}은 아니다. 그러나 특정 생활에 지속적으로 관련된 의식이었다. 이름은 내가 <br/>
+아니지만 나를 지칭할 수 있다.<br/>
+<br/>
+Lisp에서 하나의 명령들의 집합은 여러 이름들에 붙을 수...</p>
 </li>
 <li>
 <p class="binderItem"><strong>The Lisp Interpreter</strong><br/><br/>
-@node Lisp Interpreter, Evaluation, Names & Definitions, List 처리하기<br/>
+@node Lisp Interpreter, Evaluation, 이름과 정의, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section The Lisp Interpreter<br/>
 @cindex Lisp interpreter, what it does<br/>
@@ -345,7 +350,7 @@ Based on what we have seen, we can now start to figure out what the<br/>
 Lisp interpreter does when we command it to evaluate a list.<br/>
 First, it looks to see whether there is a quote before the list; if<br/>
 there is, the interpreter just gives us the list.  On the other<br/>
-hand, if there is no quo...</p>
+hand, if there is no quote, the inter...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Evaluation</strong><br/><br/>
