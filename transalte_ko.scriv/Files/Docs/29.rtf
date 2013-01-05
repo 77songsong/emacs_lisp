@@ -6,81 +6,22 @@
 \f0\fs28 \cf0 \
 @node Lisp Interpreter, Evaluation, \'c0\'cc\'b8\'a7\'b0\'fa \'c1\'a4\'c0\'c7, List \'c3\'b3\'b8\'ae\'c7\'cf\'b1\'e2\
 @comment  node-name,  next,  previous,  up\
-@section The Lisp Interpreter\
+@section Lisp \'c7\'d8\'bc\'ae\'b1\'e2\
 @cindex Lisp interpreter, what it does\
 @cindex Interpreter, what it does\
 \
-Based on what we have seen, we can now start to figure out what the\
-Lisp interpreter does when we command it to evaluate a list.\
-First, it looks to see whether there is a quote before the list; if\
-there is, the interpreter just gives us the list.  On the other\
-hand, if there is no quote, the interpreter looks at the first element\
-in the list and sees whether it has a function definition.  If it does,\
-the interpreter carries out the instructions in the function definition.\
-Otherwise, the interpreter prints an error message.\
+\'bb\'ec\'c6\'ec\'ba\'bb \'b0\'cd\'c0\'bb \'b9\'d9\'c5\'c1\'c0\'b8\'b7\'ce, list\'b8\'a6 \'c6\'f2\'b0\'a1\'c7\'cf\'b6\'f3\'b4\'c2 \'b8\'ed\'b7\'c9\'c0\'bb \'b3\'bb\'b7\'c8\'c0\'bb \'b6\'a7 Lisp \'c7\'d8\'bc\'ae\'b1\'e2\'b0\'a1 \'b9\'ab\'be\'f9\'c0\'bb \'c7\'cf\'b4\'c2\'c1\'f6 \
+\'be\'cb \'bc\'f6 \'c0\'d6\'b4\'d9. \'c3\'b9 \'b9\'f8\'c2\'b0, list \'be\'d5\'bf\'a1 \'b5\'fb\'bf\'c8\'c7\'a5\'b0\'a1 \'c0\'d6\'b4\'c2\'c1\'f6 \'ba\'bb\'b4\'d9.; \'b8\'b8\'be\'e0 \'c0\'d6\'b4\'d9\'b8\'e9, \'c7\'d8\'bc\'ae\'b1\'e2\'b4\'c2 list\'b8\'a6 \'b4\'dc\'c1\'f6 \
+\'bf\'ec\'b8\'ae\'bf\'a1\'b0\'d4 \'c1\'d8\'b4\'d9. \'b9\'dd\'b8\'e9\'bf\'a1 \'b5\'fb\'bf\'c8\'c7\'a5\'b0\'a1 \'be\'f8\'b4\'d9\'b8\'e9, \'c7\'d8\'bc\'ae\'b1\'e2\'b4\'c2 list\'c0\'c7 \'c3\'b9 \'bf\'e4\'bc\'d2\'b8\'a6 \'ba\'b8\'b0\'ed \'b1\'d7 \'bf\'e4\'bc\'d2\'bf\'a1 \
+\'c7\'d8\'b4\'e7\'c7\'cf\'b4\'c2 \'c7\'d4\'bc\'f6\'b0\'a1 \'c0\'d6\'b4\'c2\'c1\'f6 \'ba\'bb\'b4\'d9. \'b8\'b8\'be\'e0 \'c0\'d6\'b4\'d9\'b8\'e9 \'c7\'d8\'bc\'ae\'b1\'e2\'b4\'c2 \'c7\'d4\'bc\'f6 \'c1\'a4\'c0\'c7\'bf\'a1 \'b8\'ed\'b7\'c9\'b5\'e9\'c0\'bb \'bc\'f6\'c7\'e0\'c7\'d1\'b4\'d9. \'b8\'b8\'be\'e0 \
+\'be\'f8\'b4\'d9\'b8\'e9 \'c7\'d8\'bc\'ae\'b1\'e2\'b4\'c2 \'bf\'a1\'b7\'af \'b8\'de\'bd\'c3\'c1\'f6\'b8\'a6 \'c3\'e2\'b7\'c2\'c7\'d1\'b4\'d9.\
 \
-This is how Lisp works.  Simple.  There are added complications which we\
-will get to in a minute, but these are the fundamentals.  Of course, to\
-write Lisp programs, you need to know how to write function definitions\
-and attach them to names, and how to do this without confusing either\
-yourself or the computer.\
+\'c0\'cc \'b0\'cd\'c0\'cc Lisp\'c0\'cc \'b5\'bf\'c0\'db\'c7\'cf\'b4\'c2 \'b9\'e6\'bd\'c4\'c0\'cc\'b4\'d9. \'b4\'dc\'bc\'f8\'c7\'cf\'b4\'d9. \'c0\'e1\'bd\'c3 \'c8\'c4\'bf\'a1 \'ba\'bc \'c3\'df\'b0\'a1\'c0\'fb\'c0\'ce \'ba\'b9\'c0\'e2\'c7\'d4\'c0\'cc \'c0\'d6\'c1\'f6\'b8\'b8, \
+\'c0\'cc \'b0\'cd\'c0\'cc \'b1\'e2\'ba\'bb\'c0\'cc\'b4\'d9. \'b9\'b0\'b7\'d0 Lisp \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a5\'c0\'bb \'c0\'db\'bc\'ba\'c7\'cf\'b1\'e2 \'c0\'a7\'c7\'d8\'bc\'ad\'b4\'c2 \'c7\'d4\'bc\'f6 \'c1\'a4\'c0\'c7\'b8\'a6 \'c0\'db\'bc\'ba\'c7\'cf\'b0\'ed \'b1\'d7 \
+\'c7\'d4\'bc\'f6\'bf\'a1 \'c0\'cc\'b8\'a7\'c0\'bb \'ba\'d9\'c0\'cc\'b4\'c2 \'b0\'cd\'c0\'bb \'be\'cb\'be\'c6\'be\'df \'c7\'d1\'b4\'d9. \'b1\'d7\'b8\'ae\'b0\'ed \'c0\'da\'bd\'c5 \'b6\'c7\'b4\'c2 \'c4\'c4\'c7\'bb\'c5\'cd\'b0\'a1 \'c8\'a5\'b5\'bf\'c7\'cf\'c1\'f6 \'be\'ca\'b0\'d4 \'c0\'cc \
+\'b0\'cd\'c0\'bb \'c7\'cf\'b4\'c2 \'b0\'cd\'b5\'b5 \'be\'cb\'be\'c6\'be\'df \'c7\'d1\'b4\'d9.\
 \
 @menu\
 * Complications::               Variables, Special forms, Lists within.\
 * Byte Compiling::              Specially processing code for speed.\
-@end menu\
-\
-@node Complications, Byte Compiling, Lisp Interpreter, Lisp Interpreter\
-@ifnottex\
-@unnumberedsubsec Complications\
-@end ifnottex\
-\
-Now, for the first complication.  In addition to lists, the Lisp\
-interpreter can evaluate a symbol that is not quoted and does not have\
-parentheses around it.  The Lisp interpreter will attempt to determine\
-the symbol's value as a @dfn\{variable\}.  This situation is described\
-in the section on variables.  (@xref\{Variables\}.)\
-\
-@cindex Special form\
-The second complication occurs because some functions are unusual and do\
-not work in the usual manner.  Those that don't are called @dfn\{special\
-forms\}.  They are used for special jobs, like defining a function, and\
-there are not many of them.  In the next few chapters, you will be\
-introduced to several of the more important special forms.\
-\
-The third and final complication is this: if the function that the\
-Lisp interpreter is looking at is not a special form, and if it is part\
-of a list, the Lisp interpreter looks to see whether the list has a list\
-inside of it.  If there is an inner list, the Lisp interpreter first\
-figures out what it should do with the inside list, and then it works on\
-the outside list.  If there is yet another list embedded inside the\
-inner list, it works on that one first, and so on.  It always works on\
-the innermost list first.  The interpreter works on the innermost list\
-first, to evaluate the result of that list.  The result may be\
-used by the enclosing expression.\
-\
-Otherwise, the interpreter works left to right, from one expression to\
-the next.\
-\
-@node Byte Compiling,  , Complications, Lisp Interpreter\
-@subsection Byte Compiling\
-@cindex Byte compiling\
-\
-One other aspect of interpreting: the Lisp interpreter is able to\
-interpret two kinds of entity: humanly readable code, on which we will\
-focus exclusively, and specially processed code, called @dfn\{byte\
-compiled\} code, which is not humanly readable.  Byte compiled code\
-runs faster than humanly readable code.\
-\
-You can transform humanly readable code into byte compiled code by\
-running one of the compile commands such as @code\{byte-compile-file\}.\
-Byte compiled code is usually stored in a file that ends with a\
-@file\{.elc\} extension rather than a @file\{.el\} extension.  You will\
-see both kinds of file in the @file\{emacs/lisp\} directory; the files\
-to read are those with @file\{.el\} extensions.\
-\
-As a practical matter, for most things you might do to customize or\
-extend Emacs, you do not need to byte compile; and I will not discuss\
-the topic here.  @xref\{Byte Compilation, , Byte Compilation, elisp,\
-The GNU Emacs Lisp Reference Manual\}, for a full description of byte\
-compilation.}
+@end menu}
