@@ -342,16 +342,58 @@ Lisp에서 하나의 명령들의 집합은 여러 이름들에 붙을 수...</p
 <p class="binderItem"><strong>The Lisp Interpreter</strong><br/><br/>
 @node Lisp Interpreter, Evaluation, 이름과 정의, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@section The Lisp Interpreter<br/>
+@section Lisp 해석기<br/>
 @cindex Lisp interpreter, what it does<br/>
 @cindex Interpreter, what it does<br/>
 <br/>
-Based on what we have seen, we can now start to figure out what the<br/>
-Lisp interpreter does when we command it to evaluate a list.<br/>
-First, it looks to see whether there is a quote before the list; if<br/>
-there is, the interpreter just gives us the list.  On the other<br/>
-hand, if there is no quote, the inter...</p>
+살펴본 것을 바탕으로, list를 평가하라는 명령을 내렸을 때 Lisp 해석기가 무엇을 하는지 <br/>
+알 수 있다. 첫 번째, list 앞에 따옴표가 있는지 본다.; 만약 있다면, 해석기는 list를 단지 <br/>
+우리에게 준다. 반면에 따옴표가 없다면, 해석기는 list의 첫 요소를 보고 그 요소에 <br/>
+해당하는 함수가 있는지 본다. 만약 있다면 해석기는 함수 정의에 명령들을 수행한다. 만약 <br/>
+없다면 해석기는 에러 메시지를 출력한다.<br/>
+<br/>
+이 것이 Lisp이 동작하는 방식이다. 단순하다. 잠시 후에 볼 추가적인 복잡함이 있지만, <br/>
+이 것이 기본이다. 물론 Lisp 프...</p>
 </li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>Complications</strong><br/><br/>
+@node Complications, Byte Compiling, Lisp Interpreter, Lisp Interpreter<br/>
+@ifnottex<br/>
+@unnumberedsubsec Complications<br/>
+@end ifnottex<br/>
+<br/>
+이제 첫 복잡함이다. List에 추가적으로 Lisp 해석기는 따옴표와 괄호가 없는 기호를 평가<br/>
+할 수 있다. Lisp 해석기는 @dfn{variable}로서 기호의 값을 결정하려고 할 것이다. 이 <br/>
+상황은 변수들 섹션에서 설명한다. (@xref{Variables}.)<br/>
+<br/>
+@cindex Special form<br/>
+몇 함수들이 비정상적이며 일반적인 방식으로 동작하지 않기 때문에 두 번째 복잡함이 <br/>
+발생한다. 이 것들은 @dfn{special forms}라 부른다. 함수를 정의하는 것 같은 특별한 <br/>
+일에 대해서 사용된다. 그리고 많지는 않다. 다음 장에서 더 중요한 special form에 <br/>
+대해서 나온다.<br/>
+<br/>
+세 번재와 마지막 복잡함은 이것이다.: 만약 Lisp 해...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Byte Compiling</strong><br/><br/>
+@node Byte Compiling,  , Complications, Lisp Interpreter<br/>
+@subsection Byte Compiling<br/>
+@cindex Byte compiling<br/>
+<br/>
+해석기의 한 가지 다른 측면이 있다.: Lisp 해석기는 두 종류의 독립체를 해석할 수 있다.: <br/>
+앞으로 주로 살펴볼 사람이 읽을 수 있는 코드 그리고 사람이 읽을 수 없는 @dfn{byte <br/>
+compiled} 코드라 불리는 특수하게 처리되는 코드. Byte compiled 코드는 사람이 <br/>
+읽는 코드 보다 빠르게 수행된다.<br/>
+<br/>
+@code{byte-compile-file} 같은 컴파일 명령의 하나를 실행하여 사람이 읽을 수 있는 <br/>
+코드를 byte compiled 코드로 변환할 수 있다. byte compiled 코드는 @file{.el} <br/>
+확장자가 아닌 @file{.elc} 확장자를 가지는 보통 파일에 저장된다. @file{emacs/lisp} <br/>
+디렉토리에서 두 종류의 파일을 볼 수 있다.; 읽...</p>
+</li>
+</ul>
+<hr/>
 <li>
 <p class="binderItem"><strong>Evaluation</strong><br/><br/>
 @node Evaluation, Variables, Lisp Interpreter, List 처리하기<br/>
@@ -359,13 +401,48 @@ hand, if there is no quote, the inter...</p>
 @section Evaluation<br/>
 @cindex Evaluation<br/>
 <br/>
-When the Lisp interpreter works on an expression, the term for the<br/>
-activity is called @dfn{evaluation}.  We say that the interpreter<br/>
-`evaluates the expression'.  I've used this term several times before.<br/>
-The word comes from its use in everyday language, `to ascertain the<br/>
-value or amount of; to appraise', according to @cite{Webster's New<br/>
-Collegiate Dictionar...</p>
+Lisp 해석기가 표현에서 동작할 때, 그 행위를 위한 용어로 @dfn{evaluation}이라고 <br/>
+한다. 해석기가 ‘표현을 평가한다.’라고 이야기 한다. 이미 이 용어를 앞에서 여러 번 <br/>
+사용했다. @cite{Webster's New Collegiate Dictionary}.에 따르면 ‘가치 또는 <br/>
+금액을 알아보다; 평가하다.’라는 일상 언어에서 사용하는 것에서 유래되었다.<br/>
+<br/>
+@menu<br/>
+* How the Interpreter Acts::    Returns and Side Effects...<br/>
+* Evaluating Inner Lists::      Lists within lists...<br/>
+@end menu</p>
 </li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>How the Lisp interpreter acts</strong><br/><br/>
+@node How the Interpreter Acts, Evaluating Inner Lists, Evaluation, Evaluation<br/>
+@ifnottex<br/>
+@unnumberedsubsec How the Lisp Interpreter Acts<br/>
+@end ifnottex<br/>
+<br/>
+@cindex @samp{returned value} explained.<br/>
+After evaluating an expression, the Lisp interpreter will most likely<br/>
+@dfn{return} the value that the computer produces by carrying out the<br/>
+instructions it found in the function definition, or perhaps it will<br/>
+give up on that function and produce an error message.  (The interpreter<br/>
+may also find itself tos...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Evaluating inner lists</strong><br/><br/>
+@node Evaluating Inner Lists,  , How the Interpreter Acts, Evaluation<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@subsection Evaluating Inner Lists<br/>
+@cindex Inner list evaluation<br/>
+@cindex Evaluating inner lists<br/>
+<br/>
+If evaluation applies to a list that is inside another list, the outer<br/>
+list may use the value returned by the first evaluation as information<br/>
+when the outer list is evaluated.  This explains why inner expressions<br/>
+are evaluated first: the values they return are used by the outer<br/>
+expression...</p>
+</li>
+</ul>
+<hr/>
 <li>
 <p class="binderItem"><strong>Variables</strong><br/><br/>
 @node Variables, Arguments, Evaluation, List 처리하기<br/>

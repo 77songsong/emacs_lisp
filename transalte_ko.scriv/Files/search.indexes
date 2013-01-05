@@ -18738,108 +18738,15 @@ Lisp에서 list는 이런 형태이다.; @code{'(rose violet daisy buttercup)}. 
 @section Evaluation
 @cindex Evaluation
 
-When the Lisp interpreter works on an expression, the term for the
-activity is called @dfn{evaluation}.  We say that the interpreter
-`evaluates the expression'.  I've used this term several times before.
-The word comes from its use in everyday language, `to ascertain the
-value or amount of; to appraise', according to @cite{Webster's New
-Collegiate Dictionary}.
+Lisp 해석기가 표현에서 동작할 때, 그 행위를 위한 용어로 @dfn{evaluation}이라고 
+한다. 해석기가 ‘표현을 평가한다.’라고 이야기 한다. 이미 이 용어를 앞에서 여러 번 
+사용했다. @cite{Webster's New Collegiate Dictionary}.에 따르면 ‘가치 또는 
+금액을 알아보다; 평가하다.’라는 일상 언어에서 사용하는 것에서 유래되었다.
 
 @menu
 * How the Interpreter Acts::    Returns and Side Effects...
 * Evaluating Inner Lists::      Lists within lists...
-@end menu
-
-@node How the Interpreter Acts, Evaluating Inner Lists, Evaluation, Evaluation
-@ifnottex
-@unnumberedsubsec How the Lisp Interpreter Acts
-@end ifnottex
-
-@cindex @samp{returned value} explained
-After evaluating an expression, the Lisp interpreter will most likely
-@dfn{return} the value that the computer produces by carrying out the
-instructions it found in the function definition, or perhaps it will
-give up on that function and produce an error message.  (The interpreter
-may also find itself tossed, so to speak, to a different function or it
-may attempt to repeat continually what it is doing for ever and ever in
-what is called an `infinite loop'.  These actions are less common; and
-we can ignore them.)  Most frequently, the interpreter returns a value.
-
-@cindex @samp{side effect} defined
-At the same time the interpreter returns a value, it may do something
-else as well, such as move a cursor or copy a file; this other kind of
-action is called a @dfn{side effect}.  Actions that we humans think are
-important, such as printing results, are often ``side effects'' to the
-Lisp interpreter.  The jargon can sound peculiar, but it turns out that
-it is fairly easy to learn to use side effects.
-
-In summary, evaluating a symbolic expression most commonly causes the
-Lisp interpreter to return a value and perhaps carry out a side effect;
-or else produce an error.
-
-@node Evaluating Inner Lists,  , How the Interpreter Acts, Evaluation
-@comment  node-name,  next,  previous,  up
-@subsection Evaluating Inner Lists
-@cindex Inner list evaluation
-@cindex Evaluating inner lists
-
-If evaluation applies to a list that is inside another list, the outer
-list may use the value returned by the first evaluation as information
-when the outer list is evaluated.  This explains why inner expressions
-are evaluated first: the values they return are used by the outer
-expressions.
-
-@need 1250
-We can investigate this process by evaluating another addition example.
-Place your cursor after the following expression and type @kbd{C-x C-e}:
-
-@smallexample
-(+ 2 (+ 3 3))
-@end smallexample
-
-@noindent
-The number 8 will appear in the echo area.
-
-What happens is that the Lisp interpreter first evaluates the inner
-expression, @code{(+ 3 3)}, for which the value 6 is returned; then it
-evaluates the outer expression as if it were written @code{(+ 2 6)}, which
-returns the value 8.  Since there are no more enclosing expressions to
-evaluate, the interpreter prints that value in the echo area.
-
-Now it is easy to understand the name of the command invoked by the
-keystrokes @kbd{C-x C-e}: the name is @code{eval-last-sexp}.  The
-letters @code{sexp} are an abbreviation for `symbolic expression', and
-@code{eval} is an abbreviation for `evaluate'.  The command means
-`evaluate last symbolic expression'.
-
-As an experiment, you can try evaluating the expression by putting the
-cursor at the beginning of the next line immediately following the
-expression, or inside the expression.
-
-@need 800
-Here is another copy of the expression:
-
-@smallexample
-(+ 2 (+ 3 3))
-@end smallexample
-
-@noindent
-If you place the cursor at the beginning of the blank line that
-immediately follows the expression and type @kbd{C-x C-e}, you will
-still get the value 8 printed in the echo area.  Now try putting the
-cursor inside the expression.  If you put it right after the next to
-last parenthesis (so it appears to sit on top of the last parenthesis),
-you will get a 6 printed in the echo area!  This is because the command
-evaluates the expression @code{(+ 3 3)}.
-
-Now put the cursor immediately after a number.  Type @kbd{C-x C-e} and
-you will get the number itself.  In Lisp, if you evaluate a number, you
-get the number itself---this is how numbers differ from symbols.  If you
-evaluate a list starting with a symbol like @code{+}, you will get a
-value returned that is the result of the computer carrying out the
-instructions in the function definition attached to that name.  If a
-symbol by itself is evaluated, something different happens, as we will
-see in the next section.</Text>
+@end menu</Text>
         </Document>
         <Document ID="26">
             <Title>Run a Program</Title>
@@ -20001,84 +19908,25 @@ Thus, the value of the variable, @code{counter}, is changed.</Text>
             <Text>
 @node Lisp Interpreter, Evaluation, 이름과 정의, List 처리하기
 @comment  node-name,  next,  previous,  up
-@section The Lisp Interpreter
+@section Lisp 해석기
 @cindex Lisp interpreter, what it does
 @cindex Interpreter, what it does
 
-Based on what we have seen, we can now start to figure out what the
-Lisp interpreter does when we command it to evaluate a list.
-First, it looks to see whether there is a quote before the list; if
-there is, the interpreter just gives us the list.  On the other
-hand, if there is no quote, the interpreter looks at the first element
-in the list and sees whether it has a function definition.  If it does,
-the interpreter carries out the instructions in the function definition.
-Otherwise, the interpreter prints an error message.
+살펴본 것을 바탕으로, list를 평가하라는 명령을 내렸을 때 Lisp 해석기가 무엇을 하는지 
+알 수 있다. 첫 번째, list 앞에 따옴표가 있는지 본다.; 만약 있다면, 해석기는 list를 단지 
+우리에게 준다. 반면에 따옴표가 없다면, 해석기는 list의 첫 요소를 보고 그 요소에 
+해당하는 함수가 있는지 본다. 만약 있다면 해석기는 함수 정의에 명령들을 수행한다. 만약 
+없다면 해석기는 에러 메시지를 출력한다.
 
-This is how Lisp works.  Simple.  There are added complications which we
-will get to in a minute, but these are the fundamentals.  Of course, to
-write Lisp programs, you need to know how to write function definitions
-and attach them to names, and how to do this without confusing either
-yourself or the computer.
+이 것이 Lisp이 동작하는 방식이다. 단순하다. 잠시 후에 볼 추가적인 복잡함이 있지만, 
+이 것이 기본이다. 물론 Lisp 프로그램을 작성하기 위해서는 함수 정의를 작성하고 그 
+함수에 이름을 붙이는 것을 알아야 한다. 그리고 자신 또는 컴퓨터가 혼동하지 않게 이 
+것을 하는 것도 알아야 한다.
 
 @menu
 * Complications::               Variables, Special forms, Lists within.
 * Byte Compiling::              Specially processing code for speed.
-@end menu
-
-@node Complications, Byte Compiling, Lisp Interpreter, Lisp Interpreter
-@ifnottex
-@unnumberedsubsec Complications
-@end ifnottex
-
-Now, for the first complication.  In addition to lists, the Lisp
-interpreter can evaluate a symbol that is not quoted and does not have
-parentheses around it.  The Lisp interpreter will attempt to determine
-the symbol's value as a @dfn{variable}.  This situation is described
-in the section on variables.  (@xref{Variables}.)
-
-@cindex Special form
-The second complication occurs because some functions are unusual and do
-not work in the usual manner.  Those that don't are called @dfn{special
-forms}.  They are used for special jobs, like defining a function, and
-there are not many of them.  In the next few chapters, you will be
-introduced to several of the more important special forms.
-
-The third and final complication is this: if the function that the
-Lisp interpreter is looking at is not a special form, and if it is part
-of a list, the Lisp interpreter looks to see whether the list has a list
-inside of it.  If there is an inner list, the Lisp interpreter first
-figures out what it should do with the inside list, and then it works on
-the outside list.  If there is yet another list embedded inside the
-inner list, it works on that one first, and so on.  It always works on
-the innermost list first.  The interpreter works on the innermost list
-first, to evaluate the result of that list.  The result may be
-used by the enclosing expression.
-
-Otherwise, the interpreter works left to right, from one expression to
-the next.
-
-@node Byte Compiling,  , Complications, Lisp Interpreter
-@subsection Byte Compiling
-@cindex Byte compiling
-
-One other aspect of interpreting: the Lisp interpreter is able to
-interpret two kinds of entity: humanly readable code, on which we will
-focus exclusively, and specially processed code, called @dfn{byte
-compiled} code, which is not humanly readable.  Byte compiled code
-runs faster than humanly readable code.
-
-You can transform humanly readable code into byte compiled code by
-running one of the compile commands such as @code{byte-compile-file}.
-Byte compiled code is usually stored in a file that ends with a
-@file{.elc} extension rather than a @file{.el} extension.  You will
-see both kinds of file in the @file{emacs/lisp} directory; the files
-to read are those with @file{.el} extensions.
-
-As a practical matter, for most things you might do to customize or
-extend Emacs, you do not need to byte compile; and I will not discuss
-the topic here.  @xref{Byte Compilation, , Byte Compilation, elisp,
-The GNU Emacs Lisp Reference Manual}, for a full description of byte
-compilation.</Text>
+@end menu</Text>
         </Document>
         <Document ID="34">
             <Title>Summary</Title>
@@ -20465,6 +20313,30 @@ You cannot do this in Info since Info is read-only and it will not allow
 you to change the contents of the buffer.  But you can do this in any
 buffer you can edit; and when you write code or documentation (such as
 this book), this feature is very useful.</Text>
+        </Document>
+        <Document ID="146">
+            <Title>Byte Compiling</Title>
+            <Text>
+@node Byte Compiling,  , Complications, Lisp Interpreter
+@subsection Byte Compiling
+@cindex Byte compiling
+
+해석기의 한 가지 다른 측면이 있다.: Lisp 해석기는 두 종류의 독립체를 해석할 수 있다.: 
+앞으로 주로 살펴볼 사람이 읽을 수 있는 코드 그리고 사람이 읽을 수 없는 @dfn{byte 
+compiled} 코드라 불리는 특수하게 처리되는 코드. Byte compiled 코드는 사람이 
+읽는 코드 보다 빠르게 수행된다.
+
+@code{byte-compile-file} 같은 컴파일 명령의 하나를 실행하여 사람이 읽을 수 있는 
+코드를 byte compiled 코드로 변환할 수 있다. byte compiled 코드는 @file{.el} 
+확장자가 아닌 @file{.elc} 확장자를 가지는 보통 파일에 저장된다. @file{emacs/lisp} 
+디렉토리에서 두 종류의 파일을 볼 수 있다.; 읽을 수 있는 파일들은 @file{.el} 확장자를
+가진다.
+
+실제 문제로서 Emacs를 변경하거나 확장하는 대부분의 것들은 byte compile이 
+필요하지 않다. 그리고 이 주제는 여기서 다루지 않을 것이다. byte compilation의 모든 
+설명은 @xref{Byte Compilation, , Byte Compilation, elisp, The GNU Emacs 
+Lisp Reference Manual} 에 있다.
+</Text>
         </Document>
         <Document ID="41">
             <Title>The defun Special Form</Title>
@@ -21125,6 +20997,34 @@ the function as an entity that can do something for you if you `call'
 it---just as a plumber is an entity who can fix a leak if you call him
 or her.</Text>
         </Document>
+        <Document ID="147">
+            <Title>Complications</Title>
+            <Text>
+@node Complications, Byte Compiling, Lisp Interpreter, Lisp Interpreter
+@ifnottex
+@unnumberedsubsec Complications
+@end ifnottex
+
+이제 첫 복잡함이다. List에 추가적으로 Lisp 해석기는 따옴표와 괄호가 없는 기호를 평가
+할 수 있다. Lisp 해석기는 @dfn{variable}로서 기호의 값을 결정하려고 할 것이다. 이 
+상황은 변수들 섹션에서 설명한다. (@xref{Variables}.)
+
+@cindex Special form
+몇 함수들이 비정상적이며 일반적인 방식으로 동작하지 않기 때문에 두 번째 복잡함이 
+발생한다. 이 것들은 @dfn{special forms}라 부른다. 함수를 정의하는 것 같은 특별한 
+일에 대해서 사용된다. 그리고 많지는 않다. 다음 장에서 더 중요한 special form에 
+대해서 나온다.
+
+세 번재와 마지막 복잡함은 이것이다.: 만약 Lisp 해석기가 찾는 함수가 special form이 
+아니고 list의 한 부분이라면 Lisp 해석기는 List 안에 List를 가지고 있는지 본다. 만약에 
+내부 List라면 Lisp 해석기는 안쪽 List에 대해서 먼저 알아내고 그 이후에 바깥쪽 List에 
+대해서 처리한다. 만약 안쪽 List에 또 다른 List가 포함되어 있다면, 그 안쪽 List를 먼저 
+처리한다. 항상 가장 안쪽의 List를 처리한다. List의 결과를 평가하기 위해서 해석기는 
+먼저 가장 안쪽 List에 대해서 처리한다. 결과는 둘러싸인 표현으로 사용될 것이다.
+
+그렇지 않으면 해석기는 왼쪽에서 오른쪽으로, 한 표현에서 그 다음으로 처리한다.
+</Text>
+        </Document>
         <Document ID="43">
             <Title>Make a Function interactive</Title>
             <Text>
@@ -21407,6 +21307,36 @@ switched back and forth to some other buffer, such as the
 @file{*scratch*} buffer.
 
 Finding a file is a new process that we have not yet discussed.</Text>
+        </Document>
+        <Document ID="148">
+            <Title>How the Lisp interpreter acts</Title>
+            <Text>
+@node How the Interpreter Acts, Evaluating Inner Lists, Evaluation, Evaluation
+@ifnottex
+@unnumberedsubsec How the Lisp Interpreter Acts
+@end ifnottex
+
+@cindex @samp{returned value} explained.
+After evaluating an expression, the Lisp interpreter will most likely
+@dfn{return} the value that the computer produces by carrying out the
+instructions it found in the function definition, or perhaps it will
+give up on that function and produce an error message.  (The interpreter
+may also find itself tossed, so to speak, to a different function or it
+may attempt to repeat continually what it is doing for ever and ever in
+what is called an `infinite loop'.  These actions are less common; and
+we can ignore them.)  Most frequently, the interpreter returns a value.
+
+@cindex @samp{side effect} defined
+At the same time the interpreter returns a value, it may do something
+else as well, such as move a cursor or copy a file; this other kind of
+action is called a @dfn{side effect}.  Actions that we humans think are
+important, such as printing results, are often ``side effects'' to the
+Lisp interpreter.  The jargon can sound peculiar, but it turns out that
+it is fairly easy to learn to use side effects.
+
+In summary, evaluating a symbolic expression most commonly causes the
+Lisp interpreter to return a value and perhaps carry out a side effect;
+or else produce an error.</Text>
         </Document>
         <Document ID="44">
             <Title>Different Options for interactive</Title>
@@ -21944,7 +21874,7 @@ Lisp에서 List
 * List에서 공백 문자::         읽기 쉽게 List 형식 갖추기.
 * List 입력하기::                GNU Emacs는 List 입력을 돕는 방법.
 
-The Lisp Interpreter
+Lisp 해석기
 
 * Complications::               Variables, Special forms, Lists within.
 * Byte Compiling::              Specially processing code for speed.
@@ -22490,6 +22420,73 @@ The task is easy: use @code{find-file-noselect} and @code{set-buffer}.</Text>
 * Summary::                     중요한 점들.
 * Error Message Exercises::
 @end menu</Text>
+        </Document>
+        <Document ID="149">
+            <Title>Evaluating inner lists</Title>
+            <Text>
+@node Evaluating Inner Lists,  , How the Interpreter Acts, Evaluation
+@comment  node-name,  next,  previous,  up
+@subsection Evaluating Inner Lists
+@cindex Inner list evaluation
+@cindex Evaluating inner lists
+
+If evaluation applies to a list that is inside another list, the outer
+list may use the value returned by the first evaluation as information
+when the outer list is evaluated.  This explains why inner expressions
+are evaluated first: the values they return are used by the outer
+expressions.
+
+@need 1250
+We can investigate this process by evaluating another addition example.
+Place your cursor after the following expression and type @kbd{C-x C-e}:
+
+@smallexample
+(+ 2 (+ 3 3))
+@end smallexample
+
+@noindent
+The number 8 will appear in the echo area.
+
+What happens is that the Lisp interpreter first evaluates the inner
+expression, @code{(+ 3 3)}, for which the value 6 is returned; then it
+evaluates the outer expression as if it were written @code{(+ 2 6)}, which
+returns the value 8.  Since there are no more enclosing expressions to
+evaluate, the interpreter prints that value in the echo area.
+
+Now it is easy to understand the name of the command invoked by the
+keystrokes @kbd{C-x C-e}: the name is @code{eval-last-sexp}.  The
+letters @code{sexp} are an abbreviation for `symbolic expression', and
+@code{eval} is an abbreviation for `evaluate'.  The command means
+`evaluate last symbolic expression'.
+
+As an experiment, you can try evaluating the expression by putting the
+cursor at the beginning of the next line immediately following the
+expression, or inside the expression.
+
+@need 800
+Here is another copy of the expression:
+
+@smallexample
+(+ 2 (+ 3 3))
+@end smallexample
+
+@noindent
+If you place the cursor at the beginning of the blank line that
+immediately follows the expression and type @kbd{C-x C-e}, you will
+still get the value 8 printed in the echo area.  Now try putting the
+cursor inside the expression.  If you put it right after the next to
+last parenthesis (so it appears to sit on top of the last parenthesis),
+you will get a 6 printed in the echo area!  This is because the command
+evaluates the expression @code{(+ 3 3)}.
+
+Now put the cursor immediately after a number.  Type @kbd{C-x C-e} and
+you will get the number itself.  In Lisp, if you evaluate a number, you
+get the number itself---this is how numbers differ from symbols.  If you
+evaluate a list starting with a symbol like @code{+}, you will get a
+value returned that is the result of the computer carrying out the
+instructions in the function definition attached to that name.  If a
+symbol by itself is evaluated, something different happens, as we will
+see in the next section.</Text>
         </Document>
         <Document ID="46">
             <Title>let</Title>

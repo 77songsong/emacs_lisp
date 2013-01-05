@@ -16,7 +16,7 @@
                 </OutlinerExpandedState>
             </CorkboardAndOutliner>
             <Children>
-                <BinderItem ID="5" Type="Text" Created="2012-11-09 00:18:17 +0900" Modified="2013-01-04 00:50:59 +0900">
+                <BinderItem ID="5" Type="Text" Created="2012-11-09 00:18:17 +0900" Modified="2013-01-06 01:36:43 +0900">
                     <Title>An Introduction to Programming in Emacs Lisp</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -218,28 +218,72 @@
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>7,19</TextSelection>
+                                <TextSelection>466,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="29" Type="Text" Created="2012-11-09 00:48:00 +0900" Modified="2013-01-04 00:51:08 +0900">
+                        <BinderItem ID="29" Type="Text" Created="2012-11-09 00:48:00 +0900" Modified="2013-01-06 01:40:48 +0900">
                             <Title>The Lisp Interpreter</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>3878,0</TextSelection>
+                                <TextSelection>469,0</TextSelection>
                             </TextSettings>
+                            <Children>
+                                <BinderItem ID="147" Type="Text" Created="2013-01-06 01:35:50 +0900" Modified="2013-01-06 01:55:16 +0900">
+                                    <Title>Complications</Title>
+                                    <MetaData>
+                                        <IncludeInCompile>Yes</IncludeInCompile>
+                                        <NotesTextSelection>0,0</NotesTextSelection>
+                                    </MetaData>
+                                    <TextSettings>
+                                        <TextSelection>848,0</TextSelection>
+                                    </TextSettings>
+                                </BinderItem>
+                                <BinderItem ID="146" Type="Text" Created="2013-01-06 01:14:50 +0900" Modified="2013-01-06 02:07:23 +0900">
+                                    <Title>Byte Compiling</Title>
+                                    <MetaData>
+                                        <IncludeInCompile>Yes</IncludeInCompile>
+                                        <NotesTextSelection>0,0</NotesTextSelection>
+                                    </MetaData>
+                                    <TextSettings>
+                                        <TextSelection>723,0</TextSelection>
+                                    </TextSettings>
+                                </BinderItem>
+                            </Children>
                         </BinderItem>
-                        <BinderItem ID="30" Type="Text" Created="2012-11-09 00:48:10 +0900" Modified="2012-11-11 00:56:25 +0900">
+                        <BinderItem ID="30" Type="Text" Created="2012-11-09 00:48:10 +0900" Modified="2013-01-06 02:19:39 +0900">
                             <Title>Evaluation</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>4688,0</TextSelection>
+                                <TextSelection>110,10</TextSelection>
                             </TextSettings>
+                            <Children>
+                                <BinderItem ID="148" Type="Text" Created="2013-01-06 02:09:05 +0900" Modified="2013-01-06 02:22:05 +0900">
+                                    <Title>How the Lisp interpreter acts</Title>
+                                    <MetaData>
+                                        <IncludeInCompile>Yes</IncludeInCompile>
+                                        <NotesTextSelection>0,0</NotesTextSelection>
+                                    </MetaData>
+                                    <TextSettings>
+                                        <TextSelection>192,0</TextSelection>
+                                    </TextSettings>
+                                </BinderItem>
+                                <BinderItem ID="149" Type="Text" Created="2013-01-06 02:09:29 +0900" Modified="2013-01-06 02:09:42 +0900">
+                                    <Title>Evaluating inner lists</Title>
+                                    <MetaData>
+                                        <IncludeInCompile>Yes</IncludeInCompile>
+                                        <NotesTextSelection>0,0</NotesTextSelection>
+                                    </MetaData>
+                                    <TextSettings>
+                                        <TextSelection>0,0</TextSelection>
+                                    </TextSettings>
+                                </BinderItem>
+                            </Children>
                         </BinderItem>
                         <BinderItem ID="31" Type="Text" Created="2012-11-09 00:48:16 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Variables</Title>
@@ -1491,7 +1535,7 @@
                         <NotesTextSelection>0,0</NotesTextSelection>
                     </MetaData>
                     <TextSettings>
-                        <TextSelection>39,0</TextSelection>
+                        <TextSelection>88,0</TextSelection>
                     </TextSettings>
                 </BinderItem>
             </Children>
@@ -1544,7 +1588,7 @@
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2012-11-09 00:23:48 +0900" IgnoreDeadline="Yes">0</DraftTarget>
         <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" ResetType="Midnight" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="-96" Characters="-856" Date="2013-01-04 00:03:13 +0900"></PreviousSession>
+        <PreviousSession Words="-196" Characters="-1678" Date="2013-01-06 01:00:11 +0900"></PreviousSession>
     </ProjectTargets>
     <PrintSettings PaperSize="595.289978,841.890015" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="iso-a4" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
 </ScrivenerProject>
