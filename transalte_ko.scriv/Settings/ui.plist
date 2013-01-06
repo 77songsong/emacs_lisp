@@ -40,7 +40,7 @@
 	<false/>
 	<key>binderSelection</key>
 	<array>
-		<integer>16</integer>
+		<integer>21</integer>
 	</array>
 	<key>binderSplitFrames</key>
 	<array>
@@ -55,6 +55,7 @@
 		<integer>25</integer>
 		<integer>29</integer>
 		<integer>30</integer>
+		<integer>31</integer>
 		<integer>7</integer>
 		<integer>8</integer>
 		<integer>9</integer>
@@ -152,7 +153,7 @@
 	<real>227</real>
 	<key>mainDocumentEditor.binderDocuments</key>
 	<array>
-		<integer>148</integer>
+		<integer>152</integer>
 	</array>
 	<key>mainDocumentEditor.currentEditorViewMode</key>
 	<integer>0</integer>
@@ -181,7 +182,7 @@
 	<key>mainDocumentEditor.navigationHistory</key>
 	<dict>
 		<key>CurrentIndex</key>
-		<integer>765</integer>
+		<integer>785</integer>
 		<key>NavigationHistoryArray</key>
 		<array>
 			<dict>
@@ -6402,6 +6403,166 @@
 				<key>ViewMode</key>
 				<integer>0</integer>
 			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>30</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>149</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>148</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>30</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>148</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>149</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>148</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>149</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>31</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>150</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>151</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>152</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>151</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>152</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>151</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>150</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>151</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>152</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>151</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>152</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
 		</array>
 	</dict>
 	<key>mainDocumentEditor.outlinerColumnsState</key>
@@ -6411,15 +6572,60 @@
 			<string>title</string>
 			<string>label</string>
 			<string>status</string>
+			<string>createdDate</string>
+			<string>modifiedDate</string>
+			<string>words</string>
+			<string>characters</string>
+			<string>includeInExport</string>
+			<string>pageBreakBefore</string>
+			<string>compileAsIs</string>
+			<string>targetCount</string>
+			<string>targetCountType</string>
+			<string>progress</string>
+			<string>totalWords</string>
+			<string>totalCharacters</string>
+			<string>allKeywords</string>
+			<string>totalTargetCount</string>
+			<string>totalProgress</string>
 		</array>
 		<key>widths</key>
 		<dict>
+			<key>allKeywords</key>
+			<real>64</real>
+			<key>characters</key>
+			<real>46</real>
+			<key>compileAsIs</key>
+			<real>110.841796875</real>
+			<key>createdDate</key>
+			<real>53</real>
+			<key>includeInExport</key>
+			<real>20</real>
 			<key>label</key>
 			<real>179.83203125</real>
+			<key>modifiedDate</key>
+			<real>50</real>
+			<key>pageBreakBefore</key>
+			<real>66</real>
+			<key>progress</key>
+			<real>50.041019439697266</real>
 			<key>status</key>
 			<real>49</real>
+			<key>targetCount</key>
+			<real>50</real>
+			<key>targetCountType</key>
+			<real>50</real>
 			<key>title</key>
 			<real>348</real>
+			<key>totalCharacters</key>
+			<real>96</real>
+			<key>totalProgress</key>
+			<real>64</real>
+			<key>totalTargetCount</key>
+			<real>64</real>
+			<key>totalWords</key>
+			<real>72</real>
+			<key>words</key>
+			<real>40</real>
 		</dict>
 	</dict>
 	<key>mainDocumentEditor.outlinerState</key>
@@ -6430,9 +6636,9 @@
 		<integer>25</integer>
 	</array>
 	<key>mainDocumentEditor.scrollRect</key>
-	<string>{{0, 0}, {555, 771}}</string>
+	<string>{{0, 432}, {555, 770.80066}}</string>
 	<key>mainDocumentEditor.selectedRanges</key>
-	<string>{192, 0}</string>
+	<string>{1384, 0}</string>
 	<key>mainDocumentEditor.textEditorState</key>
 	<dict>
 		<key>hasMultiplePages</key>
@@ -6443,7 +6649,7 @@
 		<false/>
 	</dict>
 	<key>mainWindowFrame</key>
-	<string>1323 361 975 865 0 0 2560 1418 </string>
+	<string>1359 408 975 865 0 0 2560 1418 </string>
 	<key>searchResultsTable</key>
 	<dict>
 		<key>order</key>

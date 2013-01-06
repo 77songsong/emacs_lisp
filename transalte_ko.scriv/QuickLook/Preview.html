@@ -421,11 +421,15 @@ Lisp 해석기가 표현에서 동작할 때, 그 행위를 위한 용어로 @df
 @end ifnottex<br/>
 <br/>
 @cindex @samp{returned value} explained.<br/>
-After evaluating an expression, the Lisp interpreter will most likely<br/>
-@dfn{return} the value that the computer produces by carrying out the<br/>
-instructions it found in the function definition, or perhaps it will<br/>
-give up on that function and produce an error message.  (The interpreter<br/>
-may also find itself tos...</p>
+표현을 평가한 후에 Lisp 해석기는 함수 정의에 명령들을 수행하여 얻은 값을 <br/>
+@dfn{return}하거나 아마도 함수 수행을 포기하고 에러 메시지를 출력할 것이다. <br/>
+(   말하자면 그 자체가 다른 함수로 넘겨지거나, ‘무한 반복’이라 하는 것으로 영원히 계속 <br/>
+반복할지도 모른다. 이런 동작들은 드물다.; 그리고 그것들을 무시할 수 있다. ) 대다수의 <br/>
+경우 해석기는 값을 넘겨준다.<br/>
+<br/>
+@cindex @samp{side effect} defined<br/>
+해석기가 값을 넘겨주는 동시에, 커서를 옮기거나 파일을 복사하는 것같은 다른 일을 할 <br/>
+수도 ...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Evaluating inner lists</strong><br/><br/>
@@ -435,11 +439,20 @@ may also find itself tos...</p>
 @cindex Inner list evaluation<br/>
 @cindex Evaluating inner lists<br/>
 <br/>
-If evaluation applies to a list that is inside another list, the outer<br/>
-list may use the value returned by the first evaluation as information<br/>
-when the outer list is evaluated.  This explains why inner expressions<br/>
-are evaluated first: the values they return are used by the outer<br/>
-expression...</p>
+안쪽에 다른 list에 평가가 적용된다면 바깥 list가 평가될 때, 첫 평가에 의해서 넘겨진 <br/>
+값을 정보로서 사용할 것이다. 이는 안쪽의 표현들이 먼저 평가되는 이유이다.: 밖의 <br/>
+표현들은 넘겨진 값들을 사용한다.<br/>
+<br/>
+@need 1250<br/>
+다른 예제를 평가하는 것으로 이 과정을 살펴볼 수 있다. 커서를 다음 표현식 뒤에 <br/>
+위치시킨 후, @kbd{C-x C-e}를 입력하라.:<br/>
+<br/>
+@smallexample<br/>
+(+ 2 (+ 3 3))<br/>
+@end smallexample<br/>
+<br/>
+@noindent<br/>
+숫자 8이 echo 영역에 나타날 것이...</p>
 </li>
 </ul>
 <hr/>
@@ -450,13 +463,76 @@ expression...</p>
 @section Variables<br/>
 @cindex Variables<br/>
 <br/>
-In Emacs Lisp, a symbol can have a value attached to it just as it can<br/>
-have a function definition attached to it.  The two are different.<br/>
-The function definition is a set of instructions that a computer will<br/>
-obey.  A value, on the other hand, is something, such as number or a<br/>
-name, that can vary (which is why such a symbol is called a variable).<br/>
-The value of a symbo...</p>
+Emacs Lisp에서 기호는 기호에 연결된 함수 정의를 가질 수 있는 것 처럼 그 기호에 연결<br/>
+된 값을 가질 수 있다.이 두개는 다르다. 함수 정의는 컴퓨터가 처리해야 하는 명령의 <br/>
+집합이다. 반면에 값은 변할 수 있는 숫자 또는 이름이다. ( 그런 기호가 변수라 하는 <br/>
+이유이다. ) 기호의 값은 기호, 숫자, list, 문자열 처럼 Lisp에서 표현이 될 수 있다. 값을 <br/>
+가질 수 있는 기호는 @dfn{variable}이라고 한다.<br/>
+<br/>
+기호는 동시에 함수 정의와 값을 가질 수 있다. 또는 둘 중 하나를 가질 수 있다. 이 둘은 <br/>
+다르다. 이름 Cambridge는 Massachusetts에 있는 도시를 나타낼 수도 있고 “대단한 <br/>
+프로그래밍 센터” 같...</p>
 </li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>fill-column Example</strong><br/><br/>
+@node fill-column Example, Void Function, Variables, Variables<br/>
+@ifnottex<br/>
+@unnumberedsubsec @code{fill-column}, an Example Variable<br/>
+@end ifnottex<br/>
+<br/>
+@findex fill-column, @r{an example variable}<br/>
+@cindex Example variable, @code{fill-column}<br/>
+@cindex Variable, example of, @code{fill-column}<br/>
+변수 @code{fill-column}은 값을 가지고 있는 기호를 보여준다.: 모든 Emacs <br/>
+버퍼에서 이 기호는 어떤 값으로 설정되어 있다. 보통 72 또는 70이나 때로는 다른 값일 <br/>
+수 있다. 이 기호의 값을 알기 위해서 이 기호를 평가한다. GNU Emacs의 info로 이 <br/>
+문서를 읽고 있다면, 이 기호 뒤에 커서를 이동한 후 @kbd{C-x C-e}를 입력하는 것으로 ...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Error Message for a Symbol Wihout function</strong><br/><br/>
+@node Void Function, Void Variable, fill-column Example, Variables<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@subsection Error Message for a Symbol Without a Function<br/>
+@cindex Symbol without function error<br/>
+@cindex Error for symbol without function<br/>
+<br/>
+변수로의 값을 얻기 위해 @code{fill-column}을 평가 할 때, 이 단어 주변의 괄호가 <br/>
+없었다. 이 것은 함수 이름으로 사용하는 것을 생각하지 않았기 때문이다.<br/>
+<br/>
+만약 @code{fill-column}이 list의 하나 뿐인 요소라면, Lisp 해석기는 이 기호에 연결<br/>
+된 함수 정의를 찾으려고 할 것이다. 그러나 @code{fill-column}은 어떤 함수 정의도 <br/>
+가지고 있지 않다. 이 기호를 평가하는 것을 시도해보자.:<br/>
+<br/>
+@s...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Error Message for a Symbol Without a Value</strong><br/><br/>
+@node Void Variable,  , Void Function, Variables<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@subsection Error Message for a Symbol Without a Value<br/>
+@cindex Symbol without value error<br/>
+@cindex Error for symbol without value<br/>
+<br/>
+bind된 값이 없는 기호를 평가하려고 한다면 에러 메시지를 만날 것이다. 2 더하기 2를 <br/>
+실험하는 것으로 볼 수 있다. 다음 표현에서 커서를 @code{+} 와 첫 숫자 2 사이에 놓고 <br/>
+@kbd{C-x C-e}를 입력한다.<br/>
+<br/>
+@smallexample<br/>
+(+ 2 2)<br/>
+@end smallexample<br/>
+<br/>
+@need 1500<br/>
+@noindent<br/>
+GNU Emacs 22 버전에서 @file{*Backtrace*} 버퍼가 만들어진다.<br/>
+<br/>
+@smallexample<br/>
+@group<br/>
+---------- Buffe...</p>
+</li>
+</ul>
+<hr/>
 <li>
 <p class="binderItem"><strong>Arguments</strong><br/><br/>
 @node Arguments, set & setq, Variables, List 처리하기<br/>

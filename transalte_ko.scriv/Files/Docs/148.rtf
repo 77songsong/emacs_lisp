@@ -10,23 +10,19 @@
 @end ifnottex\
 \
 @cindex @samp\{returned value\} explained.\
-After evaluating an expression, the Lisp interpreter will most likely\
-@dfn\{return\} the value that the computer produces by carrying out the\
-instructions it found in the function definition, or perhaps it will\
-give up on that function and produce an error message.  (The interpreter\
-may also find itself tossed, so to speak, to a different function or it\
-may attempt to repeat continually what it is doing for ever and ever in\
-what is called an `infinite loop'.  These actions are less common; and\
-we can ignore them.)  Most frequently, the interpreter returns a value.\
+\'c7\'a5\'c7\'f6\'c0\'bb \'c6\'f2\'b0\'a1\'c7\'d1 \'c8\'c4\'bf\'a1 Lisp \'c7\'d8\'bc\'ae\'b1\'e2\'b4\'c2 \'c7\'d4\'bc\'f6 \'c1\'a4\'c0\'c7\'bf\'a1 \'b8\'ed\'b7\'c9\'b5\'e9\'c0\'bb \'bc\'f6\'c7\'e0\'c7\'cf\'bf\'a9 \'be\'f2\'c0\'ba \'b0\'aa\'c0\'bb \
+@dfn\{return\}\'c7\'cf\'b0\'c5\'b3\'aa \'be\'c6\'b8\'b6\'b5\'b5 \'c7\'d4\'bc\'f6 \'bc\'f6\'c7\'e0\'c0\'bb \'c6\'f7\'b1\'e2\'c7\'cf\'b0\'ed \'bf\'a1\'b7\'af \'b8\'de\'bd\'c3\'c1\'f6\'b8\'a6 \'c3\'e2\'b7\'c2\'c7\'d2 \'b0\'cd\'c0\'cc\'b4\'d9. \
+(   \'b8\'bb\'c7\'cf\'c0\'da\'b8\'e9 \'b1\'d7 \'c0\'da\'c3\'bc\'b0\'a1 \'b4\'d9\'b8\'a5 \'c7\'d4\'bc\'f6\'b7\'ce \'b3\'d1\'b0\'dc\'c1\'f6\'b0\'c5\'b3\'aa, \'a1\'ae\'b9\'ab\'c7\'d1 \'b9\'dd\'ba\'b9\'a1\'af\'c0\'cc\'b6\'f3 \'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'b8\'b7\'ce \'bf\'b5\'bf\'f8\'c8\'f7 \'b0\'e8\'bc\'d3 \
+\'b9\'dd\'ba\'b9\'c7\'d2\'c1\'f6\'b5\'b5 \'b8\'f0\'b8\'a5\'b4\'d9. \'c0\'cc\'b7\'b1 \'b5\'bf\'c0\'db\'b5\'e9\'c0\'ba \'b5\'e5\'b9\'b0\'b4\'d9.; \'b1\'d7\'b8\'ae\'b0\'ed \'b1\'d7\'b0\'cd\'b5\'e9\'c0\'bb \'b9\'ab\'bd\'c3\'c7\'d2 \'bc\'f6 \'c0\'d6\'b4\'d9. ) \'b4\'eb\'b4\'d9\'bc\'f6\'c0\'c7 \
+\'b0\'e6\'bf\'ec \'c7\'d8\'bc\'ae\'b1\'e2\'b4\'c2 \'b0\'aa\'c0\'bb \'b3\'d1\'b0\'dc\'c1\'d8\'b4\'d9.\
 \
 @cindex @samp\{side effect\} defined\
-At the same time the interpreter returns a value, it may do something\
-else as well, such as move a cursor or copy a file; this other kind of\
-action is called a @dfn\{side effect\}.  Actions that we humans think are\
-important, such as printing results, are often ``side effects'' to the\
-Lisp interpreter.  The jargon can sound peculiar, but it turns out that\
-it is fairly easy to learn to use side effects.\
+\'c7\'d8\'bc\'ae\'b1\'e2\'b0\'a1 \'b0\'aa\'c0\'bb \'b3\'d1\'b0\'dc\'c1\'d6\'b4\'c2 \'b5\'bf\'bd\'c3\'bf\'a1, \'c4\'bf\'bc\'ad\'b8\'a6 \'bf\'c5\'b1\'e2\'b0\'c5\'b3\'aa \'c6\'c4\'c0\'cf\'c0\'bb \'ba\'b9\'bb\'e7\'c7\'cf\'b4\'c2 \'b0\'cd\'b0\'b0\'c0\'ba \'b4\'d9\'b8\'a5 \'c0\'cf\'c0\'bb \'c7\'d2 \
+\'bc\'f6\'b5\'b5 \'c0\'d6\'b4\'d9.; \'c0\'cc\'b7\'b1 \'b4\'d9\'b8\'a5 \'c1\'be\'b7\'f9\'c0\'c7 \'c7\'e0\'b5\'bf\'c0\'bb @dfn\{side effect\}\'b6\'f3\'b0\'ed \'c7\'d1\'b4\'d9. \'b0\'e1\'b0\'fa\'b8\'a6 \'c3\'e2\'b7\'c2\'c7\'cf\'b4\'c2 \
+\'b0\'cd\'c3\'b3\'b7\'b3 \'bb\'e7\'b6\'f7\'b5\'e9\'c0\'cc \'bb\'fd\'b0\'a2\'c7\'cf\'b4\'c2 \'c7\'e0\'b5\'bf\'b5\'e9\'c0\'ba \'c1\'df\'bf\'e4\'c7\'cf\'b0\'ed Lisp \'c7\'d8\'bc\'ae\'b1\'e2\'bf\'a1\'b4\'c2 \'c1\'be\'c1\'be \'a1\'b0side effects\'a1\'b1\'c0\'cc\'b4\'d9. \
+\'c0\'cc \'bf\'eb\'be\'ee\'b4\'c2 \'c0\'cc\'bb\'f3\'c7\'cf\'b0\'d4 \'b5\'e9\'b8\'b1 \'bc\'f6 \'c0\'d6\'b4\'d9. \'b1\'d7\'b7\'af\'b3\'aa side effects\'b8\'a6 \'bb\'e7\'bf\'eb\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'bb \'b9\'e8\'bf\'ec\'b4\'c2 \'b0\'cd\'c0\'cc \
+\'b8\'c5\'bf\'ec \'bd\'ac\'bf\'ee \'b0\'cd\'c0\'b8\'b7\'ce \'b9\'e0\'c7\'f4\'c1\'b3\'b4\'d9.\
 \
-In summary, evaluating a symbolic expression most commonly causes the\
-Lisp interpreter to return a value and perhaps carry out a side effect;\
-or else produce an error.}
+\'bf\'e4\'be\'e0\'c7\'cf\'b8\'e9, \'b0\'a1\'c0\'e5 \'c8\'e7\'c7\'cf\'b0\'d4 \'b1\'e2\'c8\'a3 \'c7\'a5\'c7\'f6\'c0\'bb \'c6\'f2\'b0\'a1\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'ba Lisp \'c7\'d8\'bc\'ae\'b1\'e2\'b0\'a1 \'b0\'aa\'c0\'bb \'b3\'d1\'b0\'dc\'c1\'d6\'b0\'ed \'be\'c6\'b8\'b6\'b5\'b5 \
+side effect\'c0\'bb \'bc\'f6\'c7\'e0\'c7\'d1\'b4\'d9.; \'b6\'c7\'b4\'c2 \'bf\'a1\'b7\'af\'b8\'a6 \'b9\'df\'bb\'fd\'c7\'d1\'b4\'d9.\
+}

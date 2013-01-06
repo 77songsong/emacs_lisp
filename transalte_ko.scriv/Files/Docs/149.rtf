@@ -10,60 +10,48 @@
 @cindex Inner list evaluation\
 @cindex Evaluating inner lists\
 \
-If evaluation applies to a list that is inside another list, the outer\
-list may use the value returned by the first evaluation as information\
-when the outer list is evaluated.  This explains why inner expressions\
-are evaluated first: the values they return are used by the outer\
-expressions.\
+\'be\'c8\'c2\'ca\'bf\'a1 \'b4\'d9\'b8\'a5 list\'bf\'a1 \'c6\'f2\'b0\'a1\'b0\'a1 \'c0\'fb\'bf\'eb\'b5\'c8\'b4\'d9\'b8\'e9 \'b9\'d9\'b1\'f9 list\'b0\'a1 \'c6\'f2\'b0\'a1\'b5\'c9 \'b6\'a7, \'c3\'b9 \'c6\'f2\'b0\'a1\'bf\'a1 \'c0\'c7\'c7\'d8\'bc\'ad \'b3\'d1\'b0\'dc\'c1\'f8 \
+\'b0\'aa\'c0\'bb \'c1\'a4\'ba\'b8\'b7\'ce\'bc\'ad \'bb\'e7\'bf\'eb\'c7\'d2 \'b0\'cd\'c0\'cc\'b4\'d9. \'c0\'cc\'b4\'c2 \'be\'c8\'c2\'ca\'c0\'c7 \'c7\'a5\'c7\'f6\'b5\'e9\'c0\'cc \'b8\'d5\'c0\'fa \'c6\'f2\'b0\'a1\'b5\'c7\'b4\'c2 \'c0\'cc\'c0\'af\'c0\'cc\'b4\'d9.: \'b9\'db\'c0\'c7 \
+\'c7\'a5\'c7\'f6\'b5\'e9\'c0\'ba \'b3\'d1\'b0\'dc\'c1\'f8 \'b0\'aa\'b5\'e9\'c0\'bb \'bb\'e7\'bf\'eb\'c7\'d1\'b4\'d9.\
 \
 @need 1250\
-We can investigate this process by evaluating another addition example.\
-Place your cursor after the following expression and type @kbd\{C-x C-e\}:\
+\'b4\'d9\'b8\'a5 \'bf\'b9\'c1\'a6\'b8\'a6 \'c6\'f2\'b0\'a1\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'b8\'b7\'ce \'c0\'cc \'b0\'fa\'c1\'a4\'c0\'bb \'bb\'ec\'c6\'ec\'ba\'bc \'bc\'f6 \'c0\'d6\'b4\'d9. \'c4\'bf\'bc\'ad\'b8\'a6 \'b4\'d9\'c0\'bd \'c7\'a5\'c7\'f6\'bd\'c4 \'b5\'da\'bf\'a1 \
+\'c0\'a7\'c4\'a1\'bd\'c3\'c5\'b2 \'c8\'c4, @kbd\{C-x C-e\}\'b8\'a6 \'c0\'d4\'b7\'c2\'c7\'cf\'b6\'f3.:\
 \
 @smallexample\
 (+ 2 (+ 3 3))\
 @end smallexample\
 \
 @noindent\
-The number 8 will appear in the echo area.\
+\'bc\'fd\'c0\'da 8\'c0\'cc echo \'bf\'b5\'bf\'aa\'bf\'a1 \'b3\'aa\'c5\'b8\'b3\'af \'b0\'cd\'c0\'cc\'b4\'d9.\
 \
-What happens is that the Lisp interpreter first evaluates the inner\
-expression, @code\{(+ 3 3)\}, for which the value 6 is returned; then it\
-evaluates the outer expression as if it were written @code\{(+ 2 6)\}, which\
-returns the value 8.  Since there are no more enclosing expressions to\
-evaluate, the interpreter prints that value in the echo area.\
+Lisp \'c7\'d8\'bc\'ae\'b1\'e2\'b0\'a1 \'b8\'d5\'c0\'fa \'b0\'aa 6\'c0\'bb \'b3\'d1\'b0\'dc\'c1\'d6\'b4\'c2 \'be\'c8\'c2\'ca \'c7\'a5\'c7\'f6 @code\{(+ 3 3)\} \'c0\'bb \'c6\'f2\'b0\'a1\'c7\'d1\'b4\'d9.; \'b1\'d7\'b8\'ae\'b0\'ed \
+\'b0\'aa 8\'c0\'bb \'b3\'d1\'b0\'dc\'c1\'d6\'b4\'c2 \'b9\'d9\'b1\'f9 \'c7\'a5\'c7\'f6 @code\{(+ 2 6)\} \'c0\'bb \'c6\'f2\'b0\'a1\'c7\'d1\'b4\'d9. \'b4\'f5 \'c0\'cc\'bb\'f3\'c0\'c7 \'c6\'f7\'c7\'d4\'c7\'cf\'b4\'c2 \'c7\'a5\'c7\'f6\'b5\'e9\'c0\'cc \
+\'be\'f8\'b1\'e2 \'b6\'a7\'b9\'ae\'bf\'a1 \'c7\'d8\'bc\'ae\'b1\'e2\'b4\'c2 echo \'bf\'b5\'bf\'aa\'bf\'a1 \'b0\'aa\'c0\'bb \'c3\'e2\'b7\'c2\'c7\'d1\'b4\'d9.\
 \
-Now it is easy to understand the name of the command invoked by the\
-keystrokes @kbd\{C-x C-e\}: the name is @code\{eval-last-sexp\}.  The\
-letters @code\{sexp\} are an abbreviation for `symbolic expression', and\
-@code\{eval\} is an abbreviation for `evaluate'.  The command means\
-`evaluate last symbolic expression'.\
+\'c0\'cc\'c1\'a6 \'c5\'b0 \'c0\'d4\'b7\'c2 @kbd\{C-x C-e\}\'bf\'a1 \'c0\'c7\'c7\'d8 \'bc\'f6\'c7\'e0\'b5\'c7\'b4\'c2 \'b8\'ed\'b7\'c9\'c0\'c7 \'c0\'cc\'b8\'a7\'c0\'bb \'c0\'cc\'c7\'d8\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'cc \'bd\'b1\'b4\'d9.: \
+@code\{eval-last-sexp\}\'b0\'a1 \'c0\'cc\'b8\'a7\'c0\'cc\'b4\'d9. @code\{sexp\}\'c0\'c7 \'b9\'ae\'c0\'da\'b5\'e9\'c0\'ba \'a1\'aesymbolic \
+expression\'a1\'af\'c0\'c7 \'be\'e0\'be\'ee\'c0\'cc\'b4\'d9. \'b1\'d7\'b8\'ae\'b0\'ed @code\{eval\}\'c0\'ba \'a1\'aeevaluate\'a1\'af\'c0\'c7 \'be\'e0\'be\'ee\'c0\'cc\'b4\'d9. \'c0\'cc \'b8\'ed\'b7\'c9\'c0\'ba \
+\'a1\'ae\'b8\'b6\'c1\'f6\'b8\'b7 \'b1\'e2\'c8\'a3 \'c7\'a5\'c7\'f6\'c0\'bb \'c6\'f2\'b0\'a1\'c7\'cf\'b6\'f3\'a1\'af\'b8\'a6 \'c0\'c7\'b9\'cc\'c7\'d1\'b4\'d9.\
 \
-As an experiment, you can try evaluating the expression by putting the\
-cursor at the beginning of the next line immediately following the\
-expression, or inside the expression.\
+\'bd\'c7\'c7\'e8\'c3\'b3\'b7\'b3 \'c7\'a5\'c7\'f6 \'b9\'d9\'b7\'ce \'b5\'da \'b4\'d9\'c0\'bd \'c1\'d9\'c0\'c7 \'bd\'c3\'c0\'db\'bf\'a1 \'c4\'bf\'bc\'ad\'b8\'a6 \'b3\'f5\'b0\'c5\'b3\'aa \'c7\'a5\'c7\'f6 \'be\'c8\'c2\'ca\'bf\'a1 \'c4\'bf\'bc\'ad\'b8\'a6 \'b3\'f5\'b0\'ed \'c7\'a5\'c7\'f6\'c0\'bb \
+\'c6\'f2\'b0\'a1\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'bb \'c7\'d8\'ba\'bc \'bc\'f6 \'c0\'d6\'b4\'d9.\
 \
 @need 800\
-Here is another copy of the expression:\
+\'bf\'a9\'b1\'e2 \'b4\'d9\'b8\'a5 \'c7\'a5\'c7\'f6\'c0\'c7 \'bb\'e7\'ba\'bb\'c0\'cc \'c0\'d6\'b4\'d9.\
 \
 @smallexample\
 (+ 2 (+ 3 3))\
 @end smallexample\
 \
 @noindent\
-If you place the cursor at the beginning of the blank line that\
-immediately follows the expression and type @kbd\{C-x C-e\}, you will\
-still get the value 8 printed in the echo area.  Now try putting the\
-cursor inside the expression.  If you put it right after the next to\
-last parenthesis (so it appears to sit on top of the last parenthesis),\
-you will get a 6 printed in the echo area!  This is because the command\
-evaluates the expression @code\{(+ 3 3)\}.\
+\'c4\'bf\'bc\'ad\'b8\'a6 \'c7\'a5\'c7\'f6 \'b9\'d9\'b7\'ce \'b5\'da\'c0\'c7 \'ba\'f3\'c1\'d9\'c0\'c7 \'bd\'c3\'c0\'db\'bf\'a1 \'b3\'f5\'b0\'ed @kbd\{C-x C-e\}\'b8\'a6 \'c0\'d4\'b7\'c2\'c7\'cf\'b8\'e9 echo \'bf\'b5\'bf\'aa\'bf\'a1 \
+\'b0\'aa 8\'c0\'bb \'be\'f2\'c0\'bb \'b0\'cd\'c0\'cc\'b4\'d9. \'c1\'f6\'b1\'dd \'c4\'bf\'bc\'ad\'b8\'a6 \'c7\'a5\'c7\'f6 \'be\'c8\'c2\'ca\'bf\'a1 \'b3\'f5\'b0\'ed \'bd\'c3\'b5\'b5\'c7\'d8\'ba\'c1\'b6\'f3. \'b8\'b8\'be\'e0 \'b8\'b6\'c1\'f6\'b8\'b7 \'b0\'fd\'c8\'a3\'c0\'c7 \'b9\'d9\'b7\'ce \
+\'bf\'b7\'bf\'a1  \'b3\'f5\'b4\'c2\'b4\'d9\'b8\'e9, ( \'b8\'b6\'c1\'f6\'b8\'b7 \'b0\'fd\'c8\'a3\'c0\'c7 \'b9\'d9\'b7\'ce \'c0\'a7\'bf\'a1 \'b3\'f5\'c0\'ce \'b0\'cd\'c0\'b8\'b7\'ce \'b3\'aa\'c5\'b8\'b3\'ad\'b4\'d9. ) echo \'bf\'b5\'bf\'aa\'bf\'a1 6\'c0\'cc \
+\'c3\'e2\'b7\'c2\'b5\'c7\'b4\'c2 \'b0\'cd\'c0\'bb \'ba\'bc \'b0\'cd\'c0\'cc\'b4\'d9. \'c7\'a5\'c7\'f6 @code\{(+ 3 3)\}\'c0\'bb \'c6\'f2\'b0\'a1\'c7\'d1 \'b8\'ed\'b7\'c9\'c0\'cc\'b1\'e2 \'b6\'a7\'b9\'ae\'c0\'cc\'b4\'d9.\
 \
-Now put the cursor immediately after a number.  Type @kbd\{C-x C-e\} and\
-you will get the number itself.  In Lisp, if you evaluate a number, you\
-get the number itself---this is how numbers differ from symbols.  If you\
-evaluate a list starting with a symbol like @code\{+\}, you will get a\
-value returned that is the result of the computer carrying out the\
-instructions in the function definition attached to that name.  If a\
-symbol by itself is evaluated, something different happens, as we will\
-see in the next section.}
+\'c1\'f6\'b1\'dd \'bc\'fd\'c0\'da \'b9\'d9\'b7\'ce \'b5\'da\'bf\'a1 \'c4\'bf\'bc\'ad\'b8\'a6 \'bf\'f2\'c1\'f7\'bf\'a9\'b6\'f3. @kbd\{C-x C-e\}\'b8\'a6 \'c0\'d4\'b7\'c2\'c7\'cf\'b8\'e9 \'bc\'fd\'c0\'da \'b1\'d7 \'c0\'da\'c3\'bc\'b8\'a6 \'be\'f2\'c0\'bb \
+\'b0\'cd\'c0\'cc\'b4\'d9. Lisp\'bf\'a1\'bc\'ad \'bc\'fd\'c0\'da\'b8\'a6 \'c6\'f2\'b0\'a1\'c7\'cf\'b8\'e9 \'bc\'fd\'c0\'da \'b1\'d7 \'c0\'da\'c3\'bc\'b8\'a6 \'be\'f2\'b4\'c2\'b4\'d9. --- \'bc\'fd\'c0\'da\'b4\'c2 \'b1\'e2\'c8\'a3\'bf\'cd \'b4\'d9\'b8\'a5\'b4\'d9. \
+@code\{+\} \'b0\'b0\'c0\'ba \'b1\'e2\'c8\'a3\'b7\'ce \'bd\'c3\'c0\'db\'c7\'cf\'b4\'c2 list\'b8\'a6 \'c6\'f2\'b0\'a1\'c7\'d1\'b4\'d9\'b8\'e9, \'b1\'d7 \'c0\'cc\'b8\'a7\'bf\'a1 \'bf\'ac\'b0\'e1\'b5\'c8 \'c7\'d4\'bc\'f6 \'c1\'a4\'c0\'c7\'bf\'a1 \'c0\'d6\'b4\'c2 \
+\'b8\'ed\'b7\'c9\'b5\'e9\'c0\'bb \'bd\'c7\'c7\'e0\'c7\'d4\'c0\'b8\'b7\'ce \'be\'f2\'c0\'ba \'b0\'aa\'c0\'bb \'b3\'d1\'b0\'dc \'b9\'de\'c0\'bb \'b0\'cd\'c0\'cc\'b4\'d9. \'b1\'e2\'c8\'a3 \'b1\'d7 \'c0\'da\'c3\'bc\'b8\'a6 \'c6\'f2\'b0\'a1\'c7\'d1\'b4\'d9\'b8\'e9 \'b4\'d9\'c0\'bd \'c0\'e5\'bf\'a1\'bc\'ad \
+\'ba\'b8\'b0\'da\'c1\'f6\'b8\'b8 \'b4\'d9\'b8\'a5 \'be\'ee\'b6\'b2 \'c0\'cf\'c0\'cc \'bb\'fd\'b1\'e6 \'b0\'cd\'c0\'cc\'b4\'d9. }

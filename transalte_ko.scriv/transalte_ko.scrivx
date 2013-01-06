@@ -260,40 +260,72 @@
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>110,10</TextSelection>
+                                <TextSelection>483,0</TextSelection>
                             </TextSettings>
                             <Children>
-                                <BinderItem ID="148" Type="Text" Created="2013-01-06 02:09:05 +0900" Modified="2013-01-06 02:22:05 +0900">
+                                <BinderItem ID="148" Type="Text" Created="2013-01-06 02:09:05 +0900" Modified="2013-01-06 19:57:20 +0900">
                                     <Title>How the Lisp interpreter acts</Title>
                                     <MetaData>
                                         <IncludeInCompile>Yes</IncludeInCompile>
                                         <NotesTextSelection>0,0</NotesTextSelection>
                                     </MetaData>
                                     <TextSettings>
-                                        <TextSelection>192,0</TextSelection>
+                                        <TextSelection>732,0</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
-                                <BinderItem ID="149" Type="Text" Created="2013-01-06 02:09:29 +0900" Modified="2013-01-06 02:09:42 +0900">
+                                <BinderItem ID="149" Type="Text" Created="2013-01-06 02:09:29 +0900" Modified="2013-01-06 20:19:45 +0900">
                                     <Title>Evaluating inner lists</Title>
                                     <MetaData>
                                         <IncludeInCompile>Yes</IncludeInCompile>
                                         <NotesTextSelection>0,0</NotesTextSelection>
                                     </MetaData>
                                     <TextSettings>
-                                        <TextSelection>0,0</TextSelection>
+                                        <TextSelection>1425,0</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
                             </Children>
                         </BinderItem>
-                        <BinderItem ID="31" Type="Text" Created="2012-11-09 00:48:16 +0900" Modified="2012-11-11 00:56:25 +0900">
+                        <BinderItem ID="31" Type="Text" Created="2012-11-09 00:48:16 +0900" Modified="2013-01-06 20:54:31 +0900">
                             <Title>Variables</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>7070,0</TextSelection>
+                                <TextSelection>1001,0</TextSelection>
                             </TextSettings>
+                            <Children>
+                                <BinderItem ID="150" Type="Text" Created="2013-01-06 20:54:29 +0900" Modified="2013-01-06 20:54:53 +0900">
+                                    <Title>fill-column Example</Title>
+                                    <MetaData>
+                                        <IncludeInCompile>Yes</IncludeInCompile>
+                                        <NotesTextSelection>0,0</NotesTextSelection>
+                                    </MetaData>
+                                    <TextSettings>
+                                        <TextSelection>1112,0</TextSelection>
+                                    </TextSettings>
+                                </BinderItem>
+                                <BinderItem ID="151" Type="Text" Created="2013-01-06 20:54:50 +0900" Modified="2013-01-06 21:10:12 +0900">
+                                    <Title>Error Message for a Symbol Wihout function</Title>
+                                    <MetaData>
+                                        <IncludeInCompile>Yes</IncludeInCompile>
+                                        <NotesTextSelection>0,0</NotesTextSelection>
+                                    </MetaData>
+                                    <TextSettings>
+                                        <TextSelection>1072,0</TextSelection>
+                                    </TextSettings>
+                                </BinderItem>
+                                <BinderItem ID="152" Type="Text" Created="2013-01-06 20:55:16 +0900" Modified="2013-01-06 21:25:31 +0900">
+                                    <Title>Error Message for a Symbol Without a Value</Title>
+                                    <MetaData>
+                                        <IncludeInCompile>Yes</IncludeInCompile>
+                                        <NotesTextSelection>0,0</NotesTextSelection>
+                                    </MetaData>
+                                    <TextSettings>
+                                        <TextSelection>1384,0</TextSelection>
+                                    </TextSettings>
+                                </BinderItem>
+                            </Children>
                         </BinderItem>
                         <BinderItem ID="32" Type="Text" Created="2012-11-09 00:48:30 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Arguments</Title>
@@ -1588,7 +1620,7 @@
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2012-11-09 00:23:48 +0900" IgnoreDeadline="Yes">0</DraftTarget>
         <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" ResetType="Midnight" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="-196" Characters="-1678" Date="2013-01-06 01:00:11 +0900"></PreviousSession>
+        <PreviousSession Words="-713" Characters="-5843" Date="2013-01-06 19:29:22 +0900"></PreviousSession>
     </ProjectTargets>
     <PrintSettings PaperSize="595.289978,841.890015" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="iso-a4" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
 </ScrivenerProject>

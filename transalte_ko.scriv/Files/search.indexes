@@ -18835,199 +18835,31 @@ Lisp 대화 모드 또는 Emacs Lisp 모드의 GNU Emacs에서 Lisp 표현식을
 @section Variables
 @cindex Variables
 
-In Emacs Lisp, a symbol can have a value attached to it just as it can
-have a function definition attached to it.  The two are different.
-The function definition is a set of instructions that a computer will
-obey.  A value, on the other hand, is something, such as number or a
-name, that can vary (which is why such a symbol is called a variable).
-The value of a symbol can be any expression in Lisp, such as a symbol,
-number, list, or string.  A symbol that has a value is often called a
-@dfn{variable}.
+Emacs Lisp에서 기호는 기호에 연결된 함수 정의를 가질 수 있는 것 처럼 그 기호에 연결
+된 값을 가질 수 있다.이 두개는 다르다. 함수 정의는 컴퓨터가 처리해야 하는 명령의 
+집합이다. 반면에 값은 변할 수 있는 숫자 또는 이름이다. ( 그런 기호가 변수라 하는 
+이유이다. ) 기호의 값은 기호, 숫자, list, 문자열 처럼 Lisp에서 표현이 될 수 있다. 값을 
+가질 수 있는 기호는 @dfn{variable}이라고 한다.
 
-A symbol can have both a function definition and a value attached to
-it at the same time.  Or it can have just one or the other.
-The two are separate.  This is somewhat similar
-to the way the name Cambridge can refer to the city in Massachusetts
-and have some information attached to the name as well, such as
-``great programming center''.
+기호는 동시에 함수 정의와 값을 가질 수 있다. 또는 둘 중 하나를 가질 수 있다. 이 둘은 
+다르다. 이름 Cambridge는 Massachusetts에 있는 도시를 나타낼 수도 있고 “대단한 
+프로그래밍 센터” 같이 이름에 있는 몇 가지 정보를 가지는 것과 유사하다.
 
 @ignore
-(Incidentally, in Emacs Lisp, a symbol can have two
-other things attached to it, too: a property list and a documentation
-string; these are discussed later.)
+( 그런데 Emacs Lisp에서 기호는 다른 두 가지를 가질 수 있다. 속성 list, 문서 문자열; 
+이 것들은 나중에 논의 될 것이다. )
 @end ignore
 
-Another way to think about this is to imagine a symbol as being a chest
-of drawers.  The function definition is put in one drawer, the value in
-another, and so on.  What is put in the drawer holding the value can be
-changed without affecting the contents of the drawer holding the
-function definition, and vice-verse.
+이 것과 관련된 다른 방식은 기호를 서랍장으로 상상하는 것이다. 함수 정의는 한 서랍에 
+있다. 값은 다른 서랍에 있다. 값을 담고 있는 서랍은 함수 정의를 담고 있는 서랍에 영향 
+없이 변경될 수 있다. 그 반대로도 마찬가지이다.
 
 @menu
 * fill-column Example::
 * Void Function::               The error message for a symbol
                                   without a function.
 * Void Variable::               The error message for a symbol without a value.
-@end menu
-
-@node fill-column Example, Void Function, Variables, Variables
-@ifnottex
-@unnumberedsubsec @code{fill-column}, an Example Variable
-@end ifnottex
-
-@findex fill-column, @r{an example variable}
-@cindex Example variable, @code{fill-column}
-@cindex Variable, example of, @code{fill-column}
-The variable @code{fill-column} illustrates a symbol with a value
-attached to it: in every GNU Emacs buffer, this symbol is set to some
-value, usually 72 or 70, but sometimes to some other value.  To find the
-value of this symbol, evaluate it by itself.  If you are reading this in
-Info inside of GNU Emacs, you can do this by putting the cursor after
-the symbol and typing @kbd{C-x C-e}:
-
-@smallexample
-fill-column
-@end smallexample
-
-@noindent
-After I typed @kbd{C-x C-e}, Emacs printed the number 72 in my echo
-area.  This is the value for which @code{fill-column} is set for me as I
-write this.  It may be different for you in your Info buffer.  Notice
-that the value returned as a variable is printed in exactly the same way
-as the value returned by a function carrying out its instructions.  From
-the point of view of the Lisp interpreter, a value returned is a value
-returned.  What kind of expression it came from ceases to matter once
-the value is known.
-
-A symbol can have any value attached to it or, to use the jargon, we can
-@dfn{bind} the variable to a value: to a number, such as 72; to a
-string, @code{"such as this"}; to a list, such as @code{(spruce pine
-oak)}; we can even bind a variable to a function definition.
-
-A symbol can be bound to a value in several ways.  @xref{set &amp; setq, ,
-Setting the Value of a Variable}, for information about one way to do
-this.
-
-@node Void Function, Void Variable, fill-column Example, Variables
-@comment  node-name,  next,  previous,  up
-@subsection Error Message for a Symbol Without a Function
-@cindex Symbol without function error
-@cindex Error for symbol without function
-
-When we evaluated @code{fill-column} to find its value as a variable,
-we did not place parentheses around the word.  This is because we did
-not intend to use it as a function name.
-
-If @code{fill-column} were the first or only element of a list, the
-Lisp interpreter would attempt to find the function definition
-attached to it.  But @code{fill-column} has no function definition.
-Try evaluating this:
-
-@smallexample
-(fill-column)
-@end smallexample
-
-@need 1250
-@noindent
-In GNU Emacs version 22, you will create a @file{*Backtrace*} buffer
-that says:
-
-@smallexample
-@group
----------- Buffer: *Backtrace* ----------
-Debugger entered--Lisp error: (void-function fill-column)
-  (fill-column)
-  eval((fill-column))
-  eval-last-sexp-1(nil)
-  eval-last-sexp(nil)
-  call-interactively(eval-last-sexp)
----------- Buffer: *Backtrace* ----------
-@end group
-@end smallexample
-
-@noindent
-(Remember, to quit the debugger and make the debugger window go away,
-type @kbd{q} in the @file{*Backtrace*} buffer.)
-
-@ignore
-@need 800
-In GNU Emacs 20 and before, you will produce an error message that says:
-
-@smallexample
-Symbol's function definition is void:@: fill-column
-@end smallexample
-
-@noindent
-(The message will go away as soon as you move the cursor or type
-another key.)
-@end ignore
-
-@node Void Variable,  , Void Function, Variables
-@comment  node-name,  next,  previous,  up
-@subsection Error Message for a Symbol Without a Value
-@cindex Symbol without value error
-@cindex Error for symbol without value
-
-If you attempt to evaluate a symbol that does not have a value bound to
-it, you will receive an error message.  You can see this by
-experimenting with our 2 plus 2 addition.  In the following expression,
-put your cursor right after the @code{+}, before the first number 2,
-type @kbd{C-x C-e}:
-
-@smallexample
-(+ 2 2)
-@end smallexample
-
-@need 1500
-@noindent
-In GNU Emacs 22, you will create a @file{*Backtrace*} buffer that
-says:
-
-@smallexample
-@group
----------- Buffer: *Backtrace* ----------
-Debugger entered--Lisp error: (void-variable +)
-  eval(+)
-  eval-last-sexp-1(nil)
-  eval-last-sexp(nil)
-  call-interactively(eval-last-sexp)
----------- Buffer: *Backtrace* ----------
-@end group
-@end smallexample
-
-@noindent
-(As with the other times we entered the debugger, you can quit by
-typing @kbd{q} in the @file{*Backtrace*} buffer.)
-
-This backtrace is different from the very first error message we saw,
-which said, @samp{Debugger entered--Lisp error: (void-function this)}.
-In this case, the function does not have a value as a variable; while
-in the other error message, the function (the word `this') did not
-have a definition.
-
-In this experiment with the @code{+}, what we did was cause the Lisp
-interpreter to evaluate the @code{+} and look for the value of the
-variable instead of the function definition.  We did this by placing the
-cursor right after the symbol rather than after the parenthesis of the
-enclosing list as we did before.  As a consequence, the Lisp interpreter
-evaluated the preceding s-expression, which in this case was the
-@code{+} by itself.
-
-Since @code{+} does not have a value bound to it, just the function
-definition, the error message reported that the symbol's value as a
-variable was void.
-
-@ignore
-@need 800
-In GNU Emacs version 20 and before, your error message will say:
-
-@example
-Symbol's value as variable is void:@: +
-@end example
-
-@noindent
-The meaning is the same as in GNU Emacs 22.
-@end ignore</Text>
+@end menu</Text>
         </Document>
         <Document ID="139">
             <Title>Thank You</Title>
@@ -20338,6 +20170,41 @@ compiled} 코드라 불리는 특수하게 처리되는 코드. Byte compiled �
 Lisp Reference Manual} 에 있다.
 </Text>
         </Document>
+        <Document ID="150">
+            <Title>fill-column Example</Title>
+            <Text>
+@node fill-column Example, Void Function, Variables, Variables
+@ifnottex
+@unnumberedsubsec @code{fill-column}, an Example Variable
+@end ifnottex
+
+@findex fill-column, @r{an example variable}
+@cindex Example variable, @code{fill-column}
+@cindex Variable, example of, @code{fill-column}
+변수 @code{fill-column}은 값을 가지고 있는 기호를 보여준다.: 모든 Emacs 
+버퍼에서 이 기호는 어떤 값으로 설정되어 있다. 보통 72 또는 70이나 때로는 다른 값일 
+수 있다. 이 기호의 값을 알기 위해서 이 기호를 평가한다. GNU Emacs의 info로 이 
+문서를 읽고 있다면, 이 기호 뒤에 커서를 이동한 후 @kbd{C-x C-e}를 입력하는 것으로 
+이 기호를 평가할 수 있다.
+
+@smallexample
+fill-column
+@end smallexample
+
+@noindent
+@kbd{C-x C-e}를 입력하면 Emacs는 echo 영역에 숫자 72를 출력한다. 내가 이 
+문서를 쓸 당시 나를 위해 설정한 @code{fill-column}의 값이다. 이 값은 다를 수 있다. 
+변수로 넘겨진 값은 함수의 명령을 실행하여 넘겨진 값과 바로 같은 방식으로 출력된다. 
+Lisp 해석기의 관점으로 보면 값이 넘겨지는 것은 값이 넘겨지는 것이다. What kind of 
+expression it came from ceases to matter once the value is known.
+
+기호는 어떤 값을 가질 수 있다. 전문 용어를 사용하면 변수에 값을 @dfn{bind} 한다.: 
+72같은 숫자; @code{“such as this”} 같은 문자열; @code{(spruce pine oak)}
+같은 list; 심지어 변수를 함수에 bind 할 수 있다.
+
+기호는 다른 방식으로 값에 bind 될 수 있다. 이 것과 관련된 정보는 @xref{set &amp; setq, ,
+Setting the Value of a Variable} 참조하라.</Text>
+        </Document>
         <Document ID="41">
             <Title>The defun Special Form</Title>
             <Text>
@@ -21025,6 +20892,58 @@ or her.</Text>
 그렇지 않으면 해석기는 왼쪽에서 오른쪽으로, 한 표현에서 그 다음으로 처리한다.
 </Text>
         </Document>
+        <Document ID="151">
+            <Title>Error Message for a Symbol Wihout function</Title>
+            <Text>
+@node Void Function, Void Variable, fill-column Example, Variables
+@comment  node-name,  next,  previous,  up
+@subsection Error Message for a Symbol Without a Function
+@cindex Symbol without function error
+@cindex Error for symbol without function
+
+변수로의 값을 얻기 위해 @code{fill-column}을 평가 할 때, 이 단어 주변의 괄호가 
+없었다. 이 것은 함수 이름으로 사용하는 것을 생각하지 않았기 때문이다.
+
+만약 @code{fill-column}이 list의 하나 뿐인 요소라면, Lisp 해석기는 이 기호에 연결
+된 함수 정의를 찾으려고 할 것이다. 그러나 @code{fill-column}은 어떤 함수 정의도 
+가지고 있지 않다. 이 기호를 평가하는 것을 시도해보자.:
+
+@smallexample
+(fill-column)
+@end smallexample
+
+@need 1250
+@noindent
+GNU Emacs 22 버전에서는 @file{*Backtrace*} 버퍼를 생성할 것이다.
+
+@smallexample
+@group
+---------- Buffer: *Backtrace* ----------
+Debugger entered--Lisp error: (void-function fill-column)
+  (fill-column)
+  eval((fill-column))
+  eval-last-sexp-1(nil)
+  eval-last-sexp(nil)
+  call-interactively(eval-last-sexp)
+---------- Buffer: *Backtrace* ----------
+@end group
+@end smallexample
+
+@noindent
+( 기억해라. 디버거를 종료하고 디버거 윈도우를 날리기 위해서 @file{*Backtrace*} 버퍼에서 @kbd{q}를 입력하라. )
+
+@ignore
+@need 800
+GNU Emacs 20 버전 이하에서는 에러 메시지가 나타날 것이다.
+
+@smallexample
+Symbol's function definition is void:@: fill-column
+@end smallexample
+
+@noindent
+( 이메시지는 커서를 옮기거나 다른 키를 입력하는 순간 사라진다. )
+@end ignore</Text>
+        </Document>
         <Document ID="43">
             <Title>Make a Function interactive</Title>
             <Text>
@@ -21317,26 +21236,22 @@ Finding a file is a new process that we have not yet discussed.</Text>
 @end ifnottex
 
 @cindex @samp{returned value} explained.
-After evaluating an expression, the Lisp interpreter will most likely
-@dfn{return} the value that the computer produces by carrying out the
-instructions it found in the function definition, or perhaps it will
-give up on that function and produce an error message.  (The interpreter
-may also find itself tossed, so to speak, to a different function or it
-may attempt to repeat continually what it is doing for ever and ever in
-what is called an `infinite loop'.  These actions are less common; and
-we can ignore them.)  Most frequently, the interpreter returns a value.
+표현을 평가한 후에 Lisp 해석기는 함수 정의에 명령들을 수행하여 얻은 값을 
+@dfn{return}하거나 아마도 함수 수행을 포기하고 에러 메시지를 출력할 것이다. 
+(   말하자면 그 자체가 다른 함수로 넘겨지거나, ‘무한 반복’이라 하는 것으로 영원히 계속 
+반복할지도 모른다. 이런 동작들은 드물다.; 그리고 그것들을 무시할 수 있다. ) 대다수의 
+경우 해석기는 값을 넘겨준다.
 
 @cindex @samp{side effect} defined
-At the same time the interpreter returns a value, it may do something
-else as well, such as move a cursor or copy a file; this other kind of
-action is called a @dfn{side effect}.  Actions that we humans think are
-important, such as printing results, are often ``side effects'' to the
-Lisp interpreter.  The jargon can sound peculiar, but it turns out that
-it is fairly easy to learn to use side effects.
+해석기가 값을 넘겨주는 동시에, 커서를 옮기거나 파일을 복사하는 것같은 다른 일을 할 
+수도 있다.; 이런 다른 종류의 행동을 @dfn{side effect}라고 한다. 결과를 출력하는 
+것처럼 사람들이 생각하는 행동들은 중요하고 Lisp 해석기에는 종종 “side effects”이다. 
+이 용어는 이상하게 들릴 수 있다. 그러나 side effects를 사용하는 것을 배우는 것이 
+매우 쉬운 것으로 밝혀졌다.
 
-In summary, evaluating a symbolic expression most commonly causes the
-Lisp interpreter to return a value and perhaps carry out a side effect;
-or else produce an error.</Text>
+요약하면, 가장 흔하게 기호 표현을 평가하는 것은 Lisp 해석기가 값을 넘겨주고 아마도 
+side effect을 수행한다.; 또는 에러를 발생한다.
+</Text>
         </Document>
         <Document ID="44">
             <Title>Different Options for interactive</Title>
@@ -21419,6 +21334,64 @@ a list.
 for an example.  @xref{Using Interactive, , Using @code{Interactive},
 elisp, The GNU Emacs Lisp Reference Manual}, for a more complete
 explanation about this technique.</Text>
+        </Document>
+        <Document ID="152">
+            <Title>Error Message for a Symbol Without a Value</Title>
+            <Text>
+@node Void Variable,  , Void Function, Variables
+@comment  node-name,  next,  previous,  up
+@subsection Error Message for a Symbol Without a Value
+@cindex Symbol without value error
+@cindex Error for symbol without value
+
+bind된 값이 없는 기호를 평가하려고 한다면 에러 메시지를 만날 것이다. 2 더하기 2를 
+실험하는 것으로 볼 수 있다. 다음 표현에서 커서를 @code{+} 와 첫 숫자 2 사이에 놓고 
+@kbd{C-x C-e}를 입력한다.
+
+@smallexample
+(+ 2 2)
+@end smallexample
+
+@need 1500
+@noindent
+GNU Emacs 22 버전에서 @file{*Backtrace*} 버퍼가 만들어진다.
+
+@smallexample
+@group
+---------- Buffer: *Backtrace* ----------
+Debugger entered--Lisp error: (void-variable +)
+  eval(+)
+  eval-last-sexp-1(nil)
+  eval-last-sexp(nil)
+  call-interactively(eval-last-sexp)
+---------- Buffer: *Backtrace* ----------
+@end group
+@end smallexample
+
+@noindent
+( 디버거를 들어간 다른 때 처럼 @file{*Backtrace*} 버퍼에서 @kbd{q}를 입력함으로 빠져나올 수 있다. )
+
+이 @samp{Debugger entered--Lisp error: (void-function this)}에 있던 첫 에러 
+메시지와는 backtrace는 다르다. 이 경우 함수는 변수로서 값을 가지고 있지 않다.; 다른 
+에러 메시지에서 함수는 ( ‘this’ 단어 ) 정의를 가지고 있지 않았다.
+
+@code{+}의 실험에서 @code{+}를 평가하는 Lisp 해석기는 함수 정의 대신에 변수의 
+값을 찾고자 했다. 커서를 List의 닫는 괄호가 아닌 기호 바로 옆에 놓았다. 결과적으로 
+Lisp 해석기는 커서 바로 앞의 기호를 평가했다. 이 경우에는 @code{+} 그 자체이다.
+
+@code{+}는 단지 함수 정의이지 bind된 값이 없기 때문에 에러 메시지는 변수로서 그 기호의 값이 void라는 것을 알려준다.
+
+@ignore
+@need 800
+GNU Emacs 20 버전 이하에서는 다음과 같은 에러 메시지가 출력된다.
+
+@example
+Symbol's value as variable is void:@: +
+@end example
+
+@noindent
+이 의미는 GNU 22 버전과 동일하다.
+@end ignore</Text>
         </Document>
         <Document ID="45">
             <Title>Install Code Permanently</Title>
@@ -22391,6 +22364,61 @@ our own expression.
 
 The task is easy: use @code{find-file-noselect} and @code{set-buffer}.</Text>
         </Document>
+        <Document ID="149">
+            <Title>Evaluating inner lists</Title>
+            <Text>
+@node Evaluating Inner Lists,  , How the Interpreter Acts, Evaluation
+@comment  node-name,  next,  previous,  up
+@subsection Evaluating Inner Lists
+@cindex Inner list evaluation
+@cindex Evaluating inner lists
+
+안쪽에 다른 list에 평가가 적용된다면 바깥 list가 평가될 때, 첫 평가에 의해서 넘겨진 
+값을 정보로서 사용할 것이다. 이는 안쪽의 표현들이 먼저 평가되는 이유이다.: 밖의 
+표현들은 넘겨진 값들을 사용한다.
+
+@need 1250
+다른 예제를 평가하는 것으로 이 과정을 살펴볼 수 있다. 커서를 다음 표현식 뒤에 
+위치시킨 후, @kbd{C-x C-e}를 입력하라.:
+
+@smallexample
+(+ 2 (+ 3 3))
+@end smallexample
+
+@noindent
+숫자 8이 echo 영역에 나타날 것이다.
+
+Lisp 해석기가 먼저 값 6을 넘겨주는 안쪽 표현 @code{(+ 3 3)} 을 평가한다.; 그리고 
+값 8을 넘겨주는 바깥 표현 @code{(+ 2 6)} 을 평가한다. 더 이상의 포함하는 표현들이 
+없기 때문에 해석기는 echo 영역에 값을 출력한다.
+
+이제 키 입력 @kbd{C-x C-e}에 의해 수행되는 명령의 이름을 이해하는 것이 쉽다.: 
+@code{eval-last-sexp}가 이름이다. @code{sexp}의 문자들은 ‘symbolic 
+expression’의 약어이다. 그리고 @code{eval}은 ‘evaluate’의 약어이다. 이 명령은 
+‘마지막 기호 표현을 평가하라’를 의미한다.
+
+실험처럼 표현 바로 뒤 다음 줄의 시작에 커서를 놓거나 표현 안쪽에 커서를 놓고 표현을 
+평가하는 것을 해볼 수 있다.
+
+@need 800
+여기 다른 표현의 사본이 있다.
+
+@smallexample
+(+ 2 (+ 3 3))
+@end smallexample
+
+@noindent
+커서를 표현 바로 뒤의 빈줄의 시작에 놓고 @kbd{C-x C-e}를 입력하면 echo 영역에 
+값 8을 얻을 것이다. 지금 커서를 표현 안쪽에 놓고 시도해봐라. 만약 마지막 괄호의 바로 
+옆에  놓는다면, ( 마지막 괄호의 바로 위에 놓인 것으로 나타난다. ) echo 영역에 6이 
+출력되는 것을 볼 것이다. 표현 @code{(+ 3 3)}을 평가한 명령이기 때문이다.
+
+지금 숫자 바로 뒤에 커서를 움직여라. @kbd{C-x C-e}를 입력하면 숫자 그 자체를 얻을 
+것이다. Lisp에서 숫자를 평가하면 숫자 그 자체를 얻는다. --- 숫자는 기호와 다른다. 
+@code{+} 같은 기호로 시작하는 list를 평가한다면, 그 이름에 연결된 함수 정의에 있는 
+명령들을 실행함으로 얻은 값을 넘겨 받을 것이다. 기호 그 자체를 평가한다면 다음 장에서 
+보겠지만 다른 어떤 일이 생길 것이다. </Text>
+        </Document>
         <Document ID="6">
             <Title>List Processing</Title>
             <Text>
@@ -22420,73 +22448,6 @@ The task is easy: use @code{find-file-noselect} and @code{set-buffer}.</Text>
 * Summary::                     중요한 점들.
 * Error Message Exercises::
 @end menu</Text>
-        </Document>
-        <Document ID="149">
-            <Title>Evaluating inner lists</Title>
-            <Text>
-@node Evaluating Inner Lists,  , How the Interpreter Acts, Evaluation
-@comment  node-name,  next,  previous,  up
-@subsection Evaluating Inner Lists
-@cindex Inner list evaluation
-@cindex Evaluating inner lists
-
-If evaluation applies to a list that is inside another list, the outer
-list may use the value returned by the first evaluation as information
-when the outer list is evaluated.  This explains why inner expressions
-are evaluated first: the values they return are used by the outer
-expressions.
-
-@need 1250
-We can investigate this process by evaluating another addition example.
-Place your cursor after the following expression and type @kbd{C-x C-e}:
-
-@smallexample
-(+ 2 (+ 3 3))
-@end smallexample
-
-@noindent
-The number 8 will appear in the echo area.
-
-What happens is that the Lisp interpreter first evaluates the inner
-expression, @code{(+ 3 3)}, for which the value 6 is returned; then it
-evaluates the outer expression as if it were written @code{(+ 2 6)}, which
-returns the value 8.  Since there are no more enclosing expressions to
-evaluate, the interpreter prints that value in the echo area.
-
-Now it is easy to understand the name of the command invoked by the
-keystrokes @kbd{C-x C-e}: the name is @code{eval-last-sexp}.  The
-letters @code{sexp} are an abbreviation for `symbolic expression', and
-@code{eval} is an abbreviation for `evaluate'.  The command means
-`evaluate last symbolic expression'.
-
-As an experiment, you can try evaluating the expression by putting the
-cursor at the beginning of the next line immediately following the
-expression, or inside the expression.
-
-@need 800
-Here is another copy of the expression:
-
-@smallexample
-(+ 2 (+ 3 3))
-@end smallexample
-
-@noindent
-If you place the cursor at the beginning of the blank line that
-immediately follows the expression and type @kbd{C-x C-e}, you will
-still get the value 8 printed in the echo area.  Now try putting the
-cursor inside the expression.  If you put it right after the next to
-last parenthesis (so it appears to sit on top of the last parenthesis),
-you will get a 6 printed in the echo area!  This is because the command
-evaluates the expression @code{(+ 3 3)}.
-
-Now put the cursor immediately after a number.  Type @kbd{C-x C-e} and
-you will get the number itself.  In Lisp, if you evaluate a number, you
-get the number itself---this is how numbers differ from symbols.  If you
-evaluate a list starting with a symbol like @code{+}, you will get a
-value returned that is the result of the computer carrying out the
-instructions in the function definition attached to that name.  If a
-symbol by itself is evaluated, something different happens, as we will
-see in the next section.</Text>
         </Document>
         <Document ID="46">
             <Title>let</Title>
