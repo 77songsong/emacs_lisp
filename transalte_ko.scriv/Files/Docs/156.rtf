@@ -1,0 +1,101 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Wrong Type of Argument, message, Variable Number of Arguments, Arguments\
+@comment  node-name,  next,  previous,  up\
+@subsection Using the Wrong Type Object as an Argument\
+@cindex Wrong type of argument\
+@cindex Argument, wrong type of\
+\
+When a function is passed an argument of the wrong type, the Lisp\
+interpreter produces an error message.  For example, the @code\{+\}\
+function expects the values of its arguments to be numbers.  As an\
+experiment we can pass it the quoted symbol @code\{hello\} instead of a\
+number.  Position the cursor after the following expression and type\
+@kbd\{C-x C-e\}:\
+\
+@smallexample\
+(+ 2 'hello)\
+@end smallexample\
+\
+@noindent\
+When you do this you will generate an error message.  What has happened\
+is that @code\{+\} has tried to add the 2 to the value returned by\
+@code\{'hello\}, but the value returned by @code\{'hello\} is the symbol\
+@code\{hello\}, not a number.  Only numbers can be added.  So @code\{+\}\
+could not carry out its addition.\
+\
+@need 1250\
+In GNU Emacs version 22, you will create and enter a\
+@file\{*Backtrace*\} buffer that says:\
+\
+@noindent\
+@smallexample\
+@group\
+---------- Buffer: *Backtrace* ----------\
+Debugger entered--Lisp error:\
+         (wrong-type-argument number-or-marker-p hello)\
+  +(2 hello)\
+  eval((+ 2 (quote hello)))\
+  eval-last-sexp-1(nil)\
+  eval-last-sexp(nil)\
+  call-interactively(eval-last-sexp)\
+---------- Buffer: *Backtrace* ----------\
+@end group\
+@end smallexample\
+\
+@need 1250\
+As usual, the error message tries to be helpful and makes sense after you\
+learn how to read it.@footnote\{@code\{(quote hello)\} is an expansion of\
+the abbreviation @code\{'hello\}.\}\
+\
+The first part of the error message is straightforward; it says\
+@samp\{wrong type argument\}.  Next comes the mysterious jargon word\
+@w\{@samp\{number-or-marker-p\}\}.  This word is trying to tell you what\
+kind of argument the @code\{+\} expected.\
+\
+The symbol @code\{number-or-marker-p\} says that the Lisp interpreter is\
+trying to determine whether the information presented it (the value of\
+the argument) is a number or a marker (a special object representing a\
+buffer position).  What it does is test to see whether the @code\{+\} is\
+being given numbers to add.  It also tests to see whether the\
+argument is something called a marker, which is a specific feature of\
+Emacs Lisp.  (In Emacs, locations in a buffer are recorded as markers.\
+When the mark is set with the @kbd\{C-@@\} or @kbd\{C-@key\{SPC\}\} command,\
+its position is kept as a marker.  The mark can be considered a\
+number---the number of characters the location is from the beginning\
+of the buffer.)  In Emacs Lisp, @code\{+\} can be used to add the\
+numeric value of marker positions as numbers.\
+\
+The @samp\{p\} of @code\{number-or-marker-p\} is the embodiment of a\
+practice started in the early days of Lisp programming.  The @samp\{p\}\
+stands for `predicate'.  In the jargon used by the early Lisp\
+researchers, a predicate refers to a function to determine whether some\
+property is true or false.  So the @samp\{p\} tells us that\
+@code\{number-or-marker-p\} is the name of a function that determines\
+whether it is true or false that the argument supplied is a number or\
+a marker.  Other Lisp symbols that end in @samp\{p\} include @code\{zerop\},\
+a function that tests whether its argument has the value of zero, and\
+@code\{listp\}, a function that tests whether its argument is a list.\
+\
+Finally, the last part of the error message is the symbol @code\{hello\}.\
+This is the value of the argument that was passed to @code\{+\}.  If the\
+addition had been passed the correct type of object, the value passed\
+would have been a number, such as 37, rather than a symbol like\
+@code\{hello\}.  But then you would not have got the error message.\
+\
+@ignore\
+@need 1250\
+In GNU Emacs version 20 and before, the echo area displays an error\
+message that says:\
+\
+@smallexample\
+Wrong type argument:@: number-or-marker-p, hello\
+@end smallexample\
+\
+This says, in different words, the same as the top line of the\
+@file\{*Backtrace*\} buffer.\
+@end ignore}

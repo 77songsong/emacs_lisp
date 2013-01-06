@@ -541,17 +541,116 @@ GNU Emacs 22 버전에서 @file{*Backtrace*} 버퍼가 만들어진다.<br/>
 @cindex Arguments<br/>
 @cindex Passing information to functions<br/>
 <br/>
-To see how information is passed to functions, let's look again at<br/>
-our old standby, the addition of two plus two.  In Lisp, this is written<br/>
-as follows:<br/>
+정보가 함수로 전달되는 방법을 보기 위해 예전의 준비물인 2 더하기 2를 보자. Lisp에서 <br/>
+다음처럼 작성한다.<br/>
 <br/>
 @smallexample<br/>
 (+ 2 2)<br/>
 @end smallexample<br/>
 <br/>
-If you evaluate this expression, the number 4 will appear in your echo<br/>
-area.  What the Lisp interpreter does is add the numbers that ...</p>
+이 표현을 평가하면 숫자 4가 echo 영역에 나타날 것이다. Lisp 해석기는 @code{+} <br/>
+뒤에 숫자들을 더한다.<br/>
+<br/>
+@cindex @samp{argument} defined<br/>
+@code{+}가 더하는 숫자들은 함수 @code{+}의 @dfn{arguments}라 부른다. 이 <br/>
+숫자들은 함수에 @dfn{passed}되는 정보들이다.<br/>
+<br/>
+‘argument” 단어는 수학에서 사용된 방법에서 유래...</p>
 </li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>Arguments' Data Types</strong><br/><br/>
+@node Data types, Args as Variable or List, Arguments, Arguments<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@subsection Arguments' Data Types<br/>
+@cindex Data types<br/>
+@cindex Types of data<br/>
+@cindex Arguments' data types<br/>
+<br/>
+데이터의 타입은 사용하는 정보의 종류에 맞게 함수에 전달되어야 한다. @code{+}가 <br/>
+숫자들을 더하기 때문에 @code{+} 같은 함수의 인자들은 숫자 값들이어야 한다.<br/>
+다른 함수들은 인자에 맞게 다른 종류의 데이터를 사용한다.<br/>
+<br/>
+@need 1250<br/>
+@findex concat<br/>
+예를 들면 @code{concat} 함수는 둘 또는 그 이상의 문자열들을 연결하거나 하나로 <br/>
+만든다. 인자들은 문자열이다. 두 문자열 @code{abc}, @code{def}를 연결 시켜 단일 <br/>
+문자열 @code{abcdef}를 ...</p>
+</li>
+<li>
+<p class="binderItem"><strong>An Argument as the Value of a Variable or List</strong><br/><br/>
+@node Args as Variable or List, Variable Number of Arguments, Data types, Arguments<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@subsection An Argument as the Value of a Variable or List<br/>
+<br/>
+인자는 평가될 때 값을 넘겨주는 기호가 될 수 있다. 예를 들면 @code{fill-column} <br/>
+기호는 평가될 때 숫자를 넘긴다. 이 숫자는 추가로 사용될 수 있다.<br/>
+<br/>
+@need 1250<br/>
+다음 표현 뒤에 커서를 위치한 후, @kbd{C-x C-e}를 입력해라.<br/>
+<br/>
+@smallexample<br/>
+(+ 2 fill-column)<br/>
+@end smallexample<br/>
+<br/>
+@noindent<br/>
+값은 @code{fill-column}을 평가한 것에 2가 더해진 숫자가 될 것이다. 나의 경우 <br/>
+@code{fill-column}이 72이기 때문에 74이다.<br/>
+<br/>
+앞에서 본 것처럼 인...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Variable Number of Arguments</strong><br/><br/>
+@node Variable Number of Arguments, Wrong Type of Argument, Args as Variable or List, Arguments<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@subsection Variable Number of Arguments<br/>
+@cindex Variable number of arguments<br/>
+@cindex Arguments, variable number of<br/>
+<br/>
+@code{concat}, @code{+}, @code{*} 같은 함수들은 원하는 개수의 인자를 받는다. <br/>
+( @code{*}은 곱하기를 위한 기호이다. ) 보통 다음 표현들의 각각을 평가하는 것으로 볼 <br/>
+수 있다. echo 영역에 `로 평가된다.`로 읽을 수 있는 @samp{@result{}} 뒤에 있는 <br/>
+것이 echo 영역에 출력되는 것을 볼 수 있다.<br/>
+<br/>
+@need 1250<br/>
+첫 번째로 함수는 인자를 받지 않는다.<br/>
+<br/>
+@smalle...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Using the Wrong Type Object as an Argument</strong><br/><br/>
+@node Wrong Type of Argument, message, Variable Number of Arguments, Arguments<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@subsection Using the Wrong Type Object as an Argument<br/>
+@cindex Wrong type of argument<br/>
+@cindex Argument, wrong type of<br/>
+<br/>
+When a function is passed an argument of the wrong type, the Lisp<br/>
+interpreter produces an error message.  For example, the @code{+}<br/>
+function expects the values of its arguments to be numbers.  As an<br/>
+experiment we can pass it the quoted symbol @code{hello} in...</p>
+</li>
+<li>
+<p class="binderItem"><strong>The message Function</strong><br/><br/>
+@node message,  , Wrong Type of Argument, Arguments<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@subsection The @code{message} Function<br/>
+@findex message<br/>
+<br/>
+Like @code{+}, the @code{message} function takes a variable number of<br/>
+arguments.  It is used to send messages to the user and is so useful<br/>
+that we will describe it here.<br/>
+<br/>
+@need 1250<br/>
+A message is printed in the echo area.  For example, you can print a<br/>
+message in your echo area by evaluating the following list:<br/>
+<br/>
+@smallexample<br/>
+(message "This messag...</p>
+</li>
+</ul>
+<hr/>
 <li>
 <p class="binderItem"><strong>Setting the Value of a Variable</strong><br/><br/>
 @node set & setq, Summary, Arguments, List 처리하기<br/>

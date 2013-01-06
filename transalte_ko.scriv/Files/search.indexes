@@ -19034,42 +19034,32 @@ void:@: this}. 기호는 ( @samp{this} 단어 ) 컴퓨터가 수행할 수 있�
 @cindex Arguments
 @cindex Passing information to functions
 
-To see how information is passed to functions, let's look again at
-our old standby, the addition of two plus two.  In Lisp, this is written
-as follows:
+정보가 함수로 전달되는 방법을 보기 위해 예전의 준비물인 2 더하기 2를 보자. Lisp에서 
+다음처럼 작성한다.
 
 @smallexample
 (+ 2 2)
 @end smallexample
 
-If you evaluate this expression, the number 4 will appear in your echo
-area.  What the Lisp interpreter does is add the numbers that follow
-the @code{+}.
+이 표현을 평가하면 숫자 4가 echo 영역에 나타날 것이다. Lisp 해석기는 @code{+} 
+뒤에 숫자들을 더한다.
 
 @cindex @samp{argument} defined
-The numbers added by @code{+} are called the @dfn{arguments} of the
-function @code{+}.  These numbers are the information that is given to
-or @dfn{passed} to the function.
+@code{+}가 더하는 숫자들은 함수 @code{+}의 @dfn{arguments}라 부른다. 이 
+숫자들은 함수에 @dfn{passed}되는 정보들이다.
 
-The word `argument' comes from the way it is used in mathematics and
-does not refer to a disputation between two people; instead it refers to
-the information presented to the function, in this case, to the
-@code{+}.  In Lisp, the arguments to a function are the atoms or lists
-that follow the function.  The values returned by the evaluation of
-these atoms or lists are passed to the function.  Different functions
-require different numbers of arguments; some functions require none at
-all.@footnote{It is curious to track the path by which the word `argument'
-came to have two different meanings, one in mathematics and the other in
-everyday English.  According to the @cite{Oxford English Dictionary},
-the word derives from the Latin for @samp{to make clear, prove}; thus it
-came to mean, by one thread of derivation, `the evidence offered as
-proof', which is to say, `the information offered', which led to its
-meaning in Lisp.  But in the other thread of derivation, it came to mean
-`to assert in a manner against which others may make counter
-assertions', which led to the meaning of the word as a disputation.
-(Note here that the English word has two different definitions attached
-to it at the same time.  By contrast, in Emacs Lisp, a symbol cannot
-have two different function definitions at the same time.)}
+‘argument” 단어는 수학에서 사용된 방법에서 유래되었다. 그리고 두 사람 사이의 분쟁을 
+의미하는 것이 아니다.; 대신 이 경우에 함수 @code{+}에 넘겨지는 정보를 가리킨다. 
+Lisp에서 함수에 인자들은 함수 뒤에 오는 atom 또는 list 이다. 이 atom 또는 list의 
+평가에 의해서 넘겨지는 값들은 함수로 전달된다. 다른 함수들은 다른 개수의 인자들을 
+요구한다.; 어떤 함수는 아무 것도 요구하지 않는다.@footnote{‘argument’ 단어가 
+수학에서 의미, 일상 영어에서의 의미가 서로 다른 것에 대한 흔적을 찾는 것은 특이하다. 
+@cite{Oxford English Dictionary}에 따르면, 이 단어는 @samp{분명하게 하다, 
+증명하다}라는 Latin어에서 유래되었다.; 그래서 한 어원의 실을 따라가면 `증명을 하기 
+위해 제시되는 증거`이고 여기서 Lisp에서는 `제공되는 정보`로 되었다. 그러나 다른 
+어원의 실을 따라가면 `반대 주장에 대해서 주장하는 것`에서 분쟁같은 단어의 의미로 
+되었다. (여기서 영어 단어는 동시에 두 가지 다른 정의를 가진다. 반면에 Emac 
+Lisp에서는 기호는 동시에 두 개의 다른 함수 정의를 가질 수 없다. )}
 
 @menu
 * Data types::                  Types of data passed to a function.
@@ -19080,358 +19070,7 @@ have two different function definitions at the same time.)}
 * Wrong Type of Argument::      Passing an argument of the wrong type
                                   to a function.
 * message::                     A useful function for sending messages.
-@end menu
-
-@node Data types, Args as Variable or List, Arguments, Arguments
-@comment  node-name,  next,  previous,  up
-@subsection Arguments' Data Types
-@cindex Data types
-@cindex Types of data
-@cindex Arguments' data types
-
-The type of data that should be passed to a function depends on what
-kind of information it uses.  The arguments to a function such as
-@code{+} must have values that are numbers, since @code{+} adds numbers.
-Other functions use different kinds of data for their arguments.
-
-@need 1250
-@findex concat
-For example, the @code{concat} function links together or unites two or
-more strings of text to produce a string.  The arguments are strings.
-Concatenating the two character strings @code{abc}, @code{def} produces
-the single string @code{abcdef}.  This can be seen by evaluating the
-following:
-
-@smallexample
-(concat "abc" "def")
-@end smallexample
-
-@noindent
-The value produced by evaluating this expression is @code{"abcdef"}.
-
-A function such as @code{substring} uses both a string and numbers as
-arguments.  The function returns a part of the string, a substring of
-the first argument.  This function takes three arguments.  Its first
-argument is the string of characters, the second and third arguments are
-numbers that indicate the beginning and end of the substring.  The
-numbers are a count of the number of characters (including spaces and
-punctuations) from the beginning of the string.
-
-@need 800
-For example, if you evaluate the following:
-
-@smallexample
-(substring "The quick brown fox jumped." 16 19)
-@end smallexample
-
-@noindent
-you will see @code{"fox"} appear in the echo area.  The arguments are the
-string and the two numbers.
-
-Note that the string passed to @code{substring} is a single atom even
-though it is made up of several words separated by spaces.  Lisp counts
-everything between the two quotation marks as part of the string,
-including the spaces.  You can think of the @code{substring} function as
-a kind of `atom smasher' since it takes an otherwise indivisible atom
-and extracts a part.  However, @code{substring} is only able to extract
-a substring from an argument that is a string, not from another type of
-atom such as a number or symbol.
-
-@node Args as Variable or List, Variable Number of Arguments, Data types, Arguments
-@comment  node-name,  next,  previous,  up
-@subsection An Argument as the Value of a Variable or List
-
-An argument can be a symbol that returns a value when it is evaluated.
-For example, when the symbol @code{fill-column} by itself is evaluated,
-it returns a number.  This number can be used in an addition.
-
-@need 1250
-Position the cursor after the following expression and type @kbd{C-x
-C-e}:
-
-@smallexample
-(+ 2 fill-column)
-@end smallexample
-
-@noindent
-The value will be a number two more than what you get by evaluating
-@code{fill-column} alone.  For me, this is 74, because my value of
-@code{fill-column} is 72.
-
-As we have just seen, an argument can be a symbol that returns a value
-when evaluated.  In addition, an argument can be a list that returns a
-value when it is evaluated.  For example, in the following expression,
-the arguments to the function @code{concat} are the strings
-@w{@code{"The "}} and @w{@code{" red foxes."}} and the list
-@code{(number-to-string (+ 2 fill-column))}.
-
-@c For GNU Emacs 22, need number-to-string
-@smallexample
-(concat "The " (number-to-string (+ 2 fill-column)) " red foxes.")
-@end smallexample
-
-@noindent
-If you evaluate this expression---and if, as with my Emacs,
-@code{fill-column} evaluates to 72---@code{"The 74 red foxes."} will
-appear in the echo area.  (Note that you must put spaces after the
-word @samp{The} and before the word @samp{red} so they will appear in
-the final string.  The function @code{number-to-string} converts the
-integer that the addition function returns to a string.
-@code{number-to-string} is also known as @code{int-to-string}.)
-
-@node Variable Number of Arguments, Wrong Type of Argument, Args as Variable or List, Arguments
-@comment  node-name,  next,  previous,  up
-@subsection Variable Number of Arguments
-@cindex Variable number of arguments
-@cindex Arguments, variable number of
-
-Some functions, such as @code{concat}, @code{+} or @code{*}, take any
-number of arguments.  (The @code{*} is the symbol for multiplication.)
-This can be seen by evaluating each of the following expressions in
-the usual way.  What you will see in the echo area is printed in this
-text after @samp{@result{}}, which you may read as `evaluates to'.
-
-@need 1250
-In the first set, the functions have no arguments:
-
-@smallexample
-@group
-(+)       @result{} 0
-
-(*)       @result{} 1
-@end group
-@end smallexample
-
-@need 1250
-In this set, the functions have one argument each:
-
-@smallexample
-@group
-(+ 3)     @result{} 3
-
-(* 3)     @result{} 3
-@end group
-@end smallexample
-
-@need 1250
-In this set, the functions have three arguments each:
-
-@smallexample
-@group
-(+ 3 4 5) @result{} 12
-
-(* 3 4 5) @result{} 60
-@end group
-@end smallexample
-
-@node Wrong Type of Argument, message, Variable Number of Arguments, Arguments
-@comment  node-name,  next,  previous,  up
-@subsection Using the Wrong Type Object as an Argument
-@cindex Wrong type of argument
-@cindex Argument, wrong type of
-
-When a function is passed an argument of the wrong type, the Lisp
-interpreter produces an error message.  For example, the @code{+}
-function expects the values of its arguments to be numbers.  As an
-experiment we can pass it the quoted symbol @code{hello} instead of a
-number.  Position the cursor after the following expression and type
-@kbd{C-x C-e}:
-
-@smallexample
-(+ 2 'hello)
-@end smallexample
-
-@noindent
-When you do this you will generate an error message.  What has happened
-is that @code{+} has tried to add the 2 to the value returned by
-@code{'hello}, but the value returned by @code{'hello} is the symbol
-@code{hello}, not a number.  Only numbers can be added.  So @code{+}
-could not carry out its addition.
-
-@need 1250
-In GNU Emacs version 22, you will create and enter a
-@file{*Backtrace*} buffer that says:
-
-@noindent
-@smallexample
-@group
----------- Buffer: *Backtrace* ----------
-Debugger entered--Lisp error:
-         (wrong-type-argument number-or-marker-p hello)
-  +(2 hello)
-  eval((+ 2 (quote hello)))
-  eval-last-sexp-1(nil)
-  eval-last-sexp(nil)
-  call-interactively(eval-last-sexp)
----------- Buffer: *Backtrace* ----------
-@end group
-@end smallexample
-
-@need 1250
-As usual, the error message tries to be helpful and makes sense after you
-learn how to read it.@footnote{@code{(quote hello)} is an expansion of
-the abbreviation @code{'hello}.}
-
-The first part of the error message is straightforward; it says
-@samp{wrong type argument}.  Next comes the mysterious jargon word
-@w{@samp{number-or-marker-p}}.  This word is trying to tell you what
-kind of argument the @code{+} expected.
-
-The symbol @code{number-or-marker-p} says that the Lisp interpreter is
-trying to determine whether the information presented it (the value of
-the argument) is a number or a marker (a special object representing a
-buffer position).  What it does is test to see whether the @code{+} is
-being given numbers to add.  It also tests to see whether the
-argument is something called a marker, which is a specific feature of
-Emacs Lisp.  (In Emacs, locations in a buffer are recorded as markers.
-When the mark is set with the @kbd{C-@@} or @kbd{C-@key{SPC}} command,
-its position is kept as a marker.  The mark can be considered a
-number---the number of characters the location is from the beginning
-of the buffer.)  In Emacs Lisp, @code{+} can be used to add the
-numeric value of marker positions as numbers.
-
-The @samp{p} of @code{number-or-marker-p} is the embodiment of a
-practice started in the early days of Lisp programming.  The @samp{p}
-stands for `predicate'.  In the jargon used by the early Lisp
-researchers, a predicate refers to a function to determine whether some
-property is true or false.  So the @samp{p} tells us that
-@code{number-or-marker-p} is the name of a function that determines
-whether it is true or false that the argument supplied is a number or
-a marker.  Other Lisp symbols that end in @samp{p} include @code{zerop},
-a function that tests whether its argument has the value of zero, and
-@code{listp}, a function that tests whether its argument is a list.
-
-Finally, the last part of the error message is the symbol @code{hello}.
-This is the value of the argument that was passed to @code{+}.  If the
-addition had been passed the correct type of object, the value passed
-would have been a number, such as 37, rather than a symbol like
-@code{hello}.  But then you would not have got the error message.
-
-@ignore
-@need 1250
-In GNU Emacs version 20 and before, the echo area displays an error
-message that says:
-
-@smallexample
-Wrong type argument:@: number-or-marker-p, hello
-@end smallexample
-
-This says, in different words, the same as the top line of the
-@file{*Backtrace*} buffer.
-@end ignore
-
-@node message,  , Wrong Type of Argument, Arguments
-@comment  node-name,  next,  previous,  up
-@subsection The @code{message} Function
-@findex message
-
-Like @code{+}, the @code{message} function takes a variable number of
-arguments.  It is used to send messages to the user and is so useful
-that we will describe it here.
-
-@need 1250
-A message is printed in the echo area.  For example, you can print a
-message in your echo area by evaluating the following list:
-
-@smallexample
-(message "This message appears in the echo area!")
-@end smallexample
-
-The whole string between double quotation marks is a single argument
-and is printed @i{in toto}.  (Note that in this example, the message
-itself will appear in the echo area within double quotes; that is
-because you see the value returned by the @code{message} function.  In
-most uses of @code{message} in programs that you write, the text will
-be printed in the echo area as a side-effect, without the quotes.
-@xref{multiply-by-seven in detail, , @code{multiply-by-seven} in
-detail}, for an example of this.)
-
-However, if there is a @samp{%s} in the quoted string of characters, the
-@code{message} function does not print the @samp{%s} as such, but looks
-to the argument that follows the string.  It evaluates the second
-argument and prints the value at the location in the string where the
-@samp{%s} is.
-
-@need 1250
-You can see this by positioning the cursor after the following
-expression and typing @kbd{C-x C-e}:
-
-@smallexample
-(message "The name of this buffer is: %s." (buffer-name))
-@end smallexample
-
-@noindent
-In Info, @code{"The name of this buffer is: *info*."} will appear in the
-echo area.  The function @code{buffer-name} returns the name of the
-buffer as a string, which the @code{message} function inserts in place
-of @code{%s}.
-
-To print a value as an integer, use @samp{%d} in the same way as
-@samp{%s}.  For example, to print a message in the echo area that
-states the value of the @code{fill-column}, evaluate the following:
-
-@smallexample
-(message "The value of fill-column is %d." fill-column)
-@end smallexample
-
-@noindent
-On my system, when I evaluate this list, @code{"The value of
-fill-column is 72."} appears in my echo area@footnote{Actually, you
-can use @code{%s} to print a number.  It is non-specific.  @code{%d}
-prints only the part of a number left of a decimal point, and not
-anything that is not a number.}.
-
-If there is more than one @samp{%s} in the quoted string, the value of
-the first argument following the quoted string is printed at the
-location of the first @samp{%s} and the value of the second argument is
-printed at the location of the second @samp{%s}, and so on.
-
-@need 1250
-For example, if you evaluate the following,
-
-@smallexample
-@group
-(message "There are %d %s in the office!"
-         (- fill-column 14) "pink elephants")
-@end group
-@end smallexample
-
-@noindent
-a rather whimsical message will appear in your echo area.  On my system
-it says, @code{"There are 58 pink elephants in the office!"}.
-
-The expression @code{(- fill-column 14)} is evaluated and the resulting
-number is inserted in place of the @samp{%d}; and the string in double
-quotes, @code{"pink elephants"}, is treated as a single argument and
-inserted in place of the @samp{%s}.  (That is to say, a string between
-double quotes evaluates to itself, like a number.)
-
-Finally, here is a somewhat complex example that not only illustrates
-the computation of a number, but also shows how you can use an
-expression within an expression to generate the text that is substituted
-for @samp{%s}:
-
-@smallexample
-@group
-(message "He saw %d %s"
-         (- fill-column 32)
-         (concat "red "
-                 (substring
-                  "The quick brown foxes jumped." 16 21)
-                 " leaping."))
-@end group
-@end smallexample
-
-In this example, @code{message} has three arguments: the string,
-@code{"He saw %d %s"}, the expression, @code{(- fill-column 32)}, and
-the expression beginning with the function @code{concat}.  The value
-resulting from the evaluation of @code{(- fill-column 32)} is inserted
-in place of the @samp{%d}; and the value returned by the expression
-beginning with @code{concat} is inserted in place of the @samp{%s}.
-
-When your fill column is 70 and you evaluate the expression, the
-message @code{"He saw 38 red foxes leaping."} appears in your echo
-area.</Text>
+@end menu</Text>
         </Document>
         <Document ID="28">
             <Title>Symbol Names and Function Definition</Title>
@@ -20017,6 +19656,41 @@ Here is the full regular expression:
 Find a file with which you are working and move towards its middle.
 Find its buffer name, file name, length, and your position in the file.</Text>
         </Document>
+        <Document ID="150">
+            <Title>fill-column Example</Title>
+            <Text>
+@node fill-column Example, Void Function, Variables, Variables
+@ifnottex
+@unnumberedsubsec @code{fill-column}, an Example Variable
+@end ifnottex
+
+@findex fill-column, @r{an example variable}
+@cindex Example variable, @code{fill-column}
+@cindex Variable, example of, @code{fill-column}
+변수 @code{fill-column}은 값을 가지고 있는 기호를 보여준다.: 모든 Emacs 
+버퍼에서 이 기호는 어떤 값으로 설정되어 있다. 보통 72 또는 70이나 때로는 다른 값일 
+수 있다. 이 기호의 값을 알기 위해서 이 기호를 평가한다. GNU Emacs의 info로 이 
+문서를 읽고 있다면, 이 기호 뒤에 커서를 이동한 후 @kbd{C-x C-e}를 입력하는 것으로 
+이 기호를 평가할 수 있다.
+
+@smallexample
+fill-column
+@end smallexample
+
+@noindent
+@kbd{C-x C-e}를 입력하면 Emacs는 echo 영역에 숫자 72를 출력한다. 내가 이 
+문서를 쓸 당시 나를 위해 설정한 @code{fill-column}의 값이다. 이 값은 다를 수 있다. 
+변수로 넘겨진 값은 함수의 명령을 실행하여 넘겨진 값과 바로 같은 방식으로 출력된다. 
+Lisp 해석기의 관점으로 보면 값이 넘겨지는 것은 값이 넘겨지는 것이다. What kind of 
+expression it came from ceases to matter once the value is known.
+
+기호는 어떤 값을 가질 수 있다. 전문 용어를 사용하면 변수에 값을 @dfn{bind} 한다.: 
+72같은 숫자; @code{“such as this”} 같은 문자열; @code{(spruce pine oak)}
+같은 list; 심지어 변수를 함수에 bind 할 수 있다.
+
+기호는 다른 방식으로 값에 bind 될 수 있다. 이 것과 관련된 정보는 @xref{set &amp; setq, ,
+Setting the Value of a Variable} 참조하라.</Text>
+        </Document>
         <Document ID="36">
             <Title>Buffer Names</Title>
             <Text>
@@ -20169,41 +19843,6 @@ compiled} 코드라 불리는 특수하게 처리되는 코드. Byte compiled �
 설명은 @xref{Byte Compilation, , Byte Compilation, elisp, The GNU Emacs 
 Lisp Reference Manual} 에 있다.
 </Text>
-        </Document>
-        <Document ID="150">
-            <Title>fill-column Example</Title>
-            <Text>
-@node fill-column Example, Void Function, Variables, Variables
-@ifnottex
-@unnumberedsubsec @code{fill-column}, an Example Variable
-@end ifnottex
-
-@findex fill-column, @r{an example variable}
-@cindex Example variable, @code{fill-column}
-@cindex Variable, example of, @code{fill-column}
-변수 @code{fill-column}은 값을 가지고 있는 기호를 보여준다.: 모든 Emacs 
-버퍼에서 이 기호는 어떤 값으로 설정되어 있다. 보통 72 또는 70이나 때로는 다른 값일 
-수 있다. 이 기호의 값을 알기 위해서 이 기호를 평가한다. GNU Emacs의 info로 이 
-문서를 읽고 있다면, 이 기호 뒤에 커서를 이동한 후 @kbd{C-x C-e}를 입력하는 것으로 
-이 기호를 평가할 수 있다.
-
-@smallexample
-fill-column
-@end smallexample
-
-@noindent
-@kbd{C-x C-e}를 입력하면 Emacs는 echo 영역에 숫자 72를 출력한다. 내가 이 
-문서를 쓸 당시 나를 위해 설정한 @code{fill-column}의 값이다. 이 값은 다를 수 있다. 
-변수로 넘겨진 값은 함수의 명령을 실행하여 넘겨진 값과 바로 같은 방식으로 출력된다. 
-Lisp 해석기의 관점으로 보면 값이 넘겨지는 것은 값이 넘겨지는 것이다. What kind of 
-expression it came from ceases to matter once the value is known.
-
-기호는 어떤 값을 가질 수 있다. 전문 용어를 사용하면 변수에 값을 @dfn{bind} 한다.: 
-72같은 숫자; @code{“such as this”} 같은 문자열; @code{(spruce pine oak)}
-같은 list; 심지어 변수를 함수에 bind 할 수 있다.
-
-기호는 다른 방식으로 값에 bind 될 수 있다. 이 것과 관련된 정보는 @xref{set &amp; setq, ,
-Setting the Value of a Variable} 참조하라.</Text>
         </Document>
         <Document ID="41">
             <Title>The defun Special Form</Title>
@@ -20768,6 +20407,58 @@ In summary, this is how you write code in Emacs Lisp: you write a
 function; install it; test it; and then make fixes or enhancements and
 install it again.</Text>
         </Document>
+        <Document ID="151">
+            <Title>Error Message for a Symbol Wihout function</Title>
+            <Text>
+@node Void Function, Void Variable, fill-column Example, Variables
+@comment  node-name,  next,  previous,  up
+@subsection Error Message for a Symbol Without a Function
+@cindex Symbol without function error
+@cindex Error for symbol without function
+
+변수로의 값을 얻기 위해 @code{fill-column}을 평가 할 때, 이 단어 주변의 괄호가 
+없었다. 이 것은 함수 이름으로 사용하는 것을 생각하지 않았기 때문이다.
+
+만약 @code{fill-column}이 list의 하나 뿐인 요소라면, Lisp 해석기는 이 기호에 연결
+된 함수 정의를 찾으려고 할 것이다. 그러나 @code{fill-column}은 어떤 함수 정의도 
+가지고 있지 않다. 이 기호를 평가하는 것을 시도해보자.:
+
+@smallexample
+(fill-column)
+@end smallexample
+
+@need 1250
+@noindent
+GNU Emacs 22 버전에서는 @file{*Backtrace*} 버퍼를 생성할 것이다.
+
+@smallexample
+@group
+---------- Buffer: *Backtrace* ----------
+Debugger entered--Lisp error: (void-function fill-column)
+  (fill-column)
+  eval((fill-column))
+  eval-last-sexp-1(nil)
+  eval-last-sexp(nil)
+  call-interactively(eval-last-sexp)
+---------- Buffer: *Backtrace* ----------
+@end group
+@end smallexample
+
+@noindent
+( 기억해라. 디버거를 종료하고 디버거 윈도우를 날리기 위해서 @file{*Backtrace*} 버퍼에서 @kbd{q}를 입력하라. )
+
+@ignore
+@need 800
+GNU Emacs 20 버전 이하에서는 에러 메시지가 나타날 것이다.
+
+@smallexample
+Symbol's function definition is void:@: fill-column
+@end smallexample
+
+@noindent
+( 이메시지는 커서를 옮기거나 다른 키를 입력하는 순간 사라진다. )
+@end ignore</Text>
+        </Document>
         <Document ID="38">
             <Title>Switching Buffers</Title>
             <Text>
@@ -20891,58 +20582,6 @@ or her.</Text>
 
 그렇지 않으면 해석기는 왼쪽에서 오른쪽으로, 한 표현에서 그 다음으로 처리한다.
 </Text>
-        </Document>
-        <Document ID="151">
-            <Title>Error Message for a Symbol Wihout function</Title>
-            <Text>
-@node Void Function, Void Variable, fill-column Example, Variables
-@comment  node-name,  next,  previous,  up
-@subsection Error Message for a Symbol Without a Function
-@cindex Symbol without function error
-@cindex Error for symbol without function
-
-변수로의 값을 얻기 위해 @code{fill-column}을 평가 할 때, 이 단어 주변의 괄호가 
-없었다. 이 것은 함수 이름으로 사용하는 것을 생각하지 않았기 때문이다.
-
-만약 @code{fill-column}이 list의 하나 뿐인 요소라면, Lisp 해석기는 이 기호에 연결
-된 함수 정의를 찾으려고 할 것이다. 그러나 @code{fill-column}은 어떤 함수 정의도 
-가지고 있지 않다. 이 기호를 평가하는 것을 시도해보자.:
-
-@smallexample
-(fill-column)
-@end smallexample
-
-@need 1250
-@noindent
-GNU Emacs 22 버전에서는 @file{*Backtrace*} 버퍼를 생성할 것이다.
-
-@smallexample
-@group
----------- Buffer: *Backtrace* ----------
-Debugger entered--Lisp error: (void-function fill-column)
-  (fill-column)
-  eval((fill-column))
-  eval-last-sexp-1(nil)
-  eval-last-sexp(nil)
-  call-interactively(eval-last-sexp)
----------- Buffer: *Backtrace* ----------
-@end group
-@end smallexample
-
-@noindent
-( 기억해라. 디버거를 종료하고 디버거 윈도우를 날리기 위해서 @file{*Backtrace*} 버퍼에서 @kbd{q}를 입력하라. )
-
-@ignore
-@need 800
-GNU Emacs 20 버전 이하에서는 에러 메시지가 나타날 것이다.
-
-@smallexample
-Symbol's function definition is void:@: fill-column
-@end smallexample
-
-@noindent
-( 이메시지는 커서를 옮기거나 다른 키를 입력하는 순간 사라진다. )
-@end ignore</Text>
         </Document>
         <Document ID="43">
             <Title>Make a Function interactive</Title>
@@ -21227,31 +20866,63 @@ switched back and forth to some other buffer, such as the
 
 Finding a file is a new process that we have not yet discussed.</Text>
         </Document>
-        <Document ID="148">
-            <Title>How the Lisp interpreter acts</Title>
+        <Document ID="152">
+            <Title>Error Message for a Symbol Without a Value</Title>
             <Text>
-@node How the Interpreter Acts, Evaluating Inner Lists, Evaluation, Evaluation
-@ifnottex
-@unnumberedsubsec How the Lisp Interpreter Acts
-@end ifnottex
+@node Void Variable,  , Void Function, Variables
+@comment  node-name,  next,  previous,  up
+@subsection Error Message for a Symbol Without a Value
+@cindex Symbol without value error
+@cindex Error for symbol without value
 
-@cindex @samp{returned value} explained.
-표현을 평가한 후에 Lisp 해석기는 함수 정의에 명령들을 수행하여 얻은 값을 
-@dfn{return}하거나 아마도 함수 수행을 포기하고 에러 메시지를 출력할 것이다. 
-(   말하자면 그 자체가 다른 함수로 넘겨지거나, ‘무한 반복’이라 하는 것으로 영원히 계속 
-반복할지도 모른다. 이런 동작들은 드물다.; 그리고 그것들을 무시할 수 있다. ) 대다수의 
-경우 해석기는 값을 넘겨준다.
+bind된 값이 없는 기호를 평가하려고 한다면 에러 메시지를 만날 것이다. 2 더하기 2를 
+실험하는 것으로 볼 수 있다. 다음 표현에서 커서를 @code{+} 와 첫 숫자 2 사이에 놓고 
+@kbd{C-x C-e}를 입력한다.
 
-@cindex @samp{side effect} defined
-해석기가 값을 넘겨주는 동시에, 커서를 옮기거나 파일을 복사하는 것같은 다른 일을 할 
-수도 있다.; 이런 다른 종류의 행동을 @dfn{side effect}라고 한다. 결과를 출력하는 
-것처럼 사람들이 생각하는 행동들은 중요하고 Lisp 해석기에는 종종 “side effects”이다. 
-이 용어는 이상하게 들릴 수 있다. 그러나 side effects를 사용하는 것을 배우는 것이 
-매우 쉬운 것으로 밝혀졌다.
+@smallexample
+(+ 2 2)
+@end smallexample
 
-요약하면, 가장 흔하게 기호 표현을 평가하는 것은 Lisp 해석기가 값을 넘겨주고 아마도 
-side effect을 수행한다.; 또는 에러를 발생한다.
-</Text>
+@need 1500
+@noindent
+GNU Emacs 22 버전에서 @file{*Backtrace*} 버퍼가 만들어진다.
+
+@smallexample
+@group
+---------- Buffer: *Backtrace* ----------
+Debugger entered--Lisp error: (void-variable +)
+  eval(+)
+  eval-last-sexp-1(nil)
+  eval-last-sexp(nil)
+  call-interactively(eval-last-sexp)
+---------- Buffer: *Backtrace* ----------
+@end group
+@end smallexample
+
+@noindent
+( 디버거를 들어간 다른 때 처럼 @file{*Backtrace*} 버퍼에서 @kbd{q}를 입력함으로 빠져나올 수 있다. )
+
+이 @samp{Debugger entered--Lisp error: (void-function this)}에 있던 첫 에러 
+메시지와는 backtrace는 다르다. 이 경우 함수는 변수로서 값을 가지고 있지 않다.; 다른 
+에러 메시지에서 함수는 ( ‘this’ 단어 ) 정의를 가지고 있지 않았다.
+
+@code{+}의 실험에서 @code{+}를 평가하는 Lisp 해석기는 함수 정의 대신에 변수의 
+값을 찾고자 했다. 커서를 List의 닫는 괄호가 아닌 기호 바로 옆에 놓았다. 결과적으로 
+Lisp 해석기는 커서 바로 앞의 기호를 평가했다. 이 경우에는 @code{+} 그 자체이다.
+
+@code{+}는 단지 함수 정의이지 bind된 값이 없기 때문에 에러 메시지는 변수로서 그 기호의 값이 void라는 것을 알려준다.
+
+@ignore
+@need 800
+GNU Emacs 20 버전 이하에서는 다음과 같은 에러 메시지가 출력된다.
+
+@example
+Symbol's value as variable is void:@: +
+@end example
+
+@noindent
+이 의미는 GNU 22 버전과 동일하다.
+@end ignore</Text>
         </Document>
         <Document ID="44">
             <Title>Different Options for interactive</Title>
@@ -21335,63 +21006,31 @@ for an example.  @xref{Using Interactive, , Using @code{Interactive},
 elisp, The GNU Emacs Lisp Reference Manual}, for a more complete
 explanation about this technique.</Text>
         </Document>
-        <Document ID="152">
-            <Title>Error Message for a Symbol Without a Value</Title>
+        <Document ID="148">
+            <Title>How the Lisp interpreter acts</Title>
             <Text>
-@node Void Variable,  , Void Function, Variables
-@comment  node-name,  next,  previous,  up
-@subsection Error Message for a Symbol Without a Value
-@cindex Symbol without value error
-@cindex Error for symbol without value
+@node How the Interpreter Acts, Evaluating Inner Lists, Evaluation, Evaluation
+@ifnottex
+@unnumberedsubsec How the Lisp Interpreter Acts
+@end ifnottex
 
-bind된 값이 없는 기호를 평가하려고 한다면 에러 메시지를 만날 것이다. 2 더하기 2를 
-실험하는 것으로 볼 수 있다. 다음 표현에서 커서를 @code{+} 와 첫 숫자 2 사이에 놓고 
-@kbd{C-x C-e}를 입력한다.
+@cindex @samp{returned value} explained.
+표현을 평가한 후에 Lisp 해석기는 함수 정의에 명령들을 수행하여 얻은 값을 
+@dfn{return}하거나 아마도 함수 수행을 포기하고 에러 메시지를 출력할 것이다. 
+(   말하자면 그 자체가 다른 함수로 넘겨지거나, ‘무한 반복’이라 하는 것으로 영원히 계속 
+반복할지도 모른다. 이런 동작들은 드물다.; 그리고 그것들을 무시할 수 있다. ) 대다수의 
+경우 해석기는 값을 넘겨준다.
 
-@smallexample
-(+ 2 2)
-@end smallexample
+@cindex @samp{side effect} defined
+해석기가 값을 넘겨주는 동시에, 커서를 옮기거나 파일을 복사하는 것같은 다른 일을 할 
+수도 있다.; 이런 다른 종류의 행동을 @dfn{side effect}라고 한다. 결과를 출력하는 
+것처럼 사람들이 생각하는 행동들은 중요하고 Lisp 해석기에는 종종 “side effects”이다. 
+이 용어는 이상하게 들릴 수 있다. 그러나 side effects를 사용하는 것을 배우는 것이 
+매우 쉬운 것으로 밝혀졌다.
 
-@need 1500
-@noindent
-GNU Emacs 22 버전에서 @file{*Backtrace*} 버퍼가 만들어진다.
-
-@smallexample
-@group
----------- Buffer: *Backtrace* ----------
-Debugger entered--Lisp error: (void-variable +)
-  eval(+)
-  eval-last-sexp-1(nil)
-  eval-last-sexp(nil)
-  call-interactively(eval-last-sexp)
----------- Buffer: *Backtrace* ----------
-@end group
-@end smallexample
-
-@noindent
-( 디버거를 들어간 다른 때 처럼 @file{*Backtrace*} 버퍼에서 @kbd{q}를 입력함으로 빠져나올 수 있다. )
-
-이 @samp{Debugger entered--Lisp error: (void-function this)}에 있던 첫 에러 
-메시지와는 backtrace는 다르다. 이 경우 함수는 변수로서 값을 가지고 있지 않다.; 다른 
-에러 메시지에서 함수는 ( ‘this’ 단어 ) 정의를 가지고 있지 않았다.
-
-@code{+}의 실험에서 @code{+}를 평가하는 Lisp 해석기는 함수 정의 대신에 변수의 
-값을 찾고자 했다. 커서를 List의 닫는 괄호가 아닌 기호 바로 옆에 놓았다. 결과적으로 
-Lisp 해석기는 커서 바로 앞의 기호를 평가했다. 이 경우에는 @code{+} 그 자체이다.
-
-@code{+}는 단지 함수 정의이지 bind된 값이 없기 때문에 에러 메시지는 변수로서 그 기호의 값이 void라는 것을 알려준다.
-
-@ignore
-@need 800
-GNU Emacs 20 버전 이하에서는 다음과 같은 에러 메시지가 출력된다.
-
-@example
-Symbol's value as variable is void:@: +
-@end example
-
-@noindent
-이 의미는 GNU 22 버전과 동일하다.
-@end ignore</Text>
+요약하면, 가장 흔하게 기호 표현을 평가하는 것은 Lisp 해석기가 값을 넘겨주고 아마도 
+side effect을 수행한다.; 또는 에러를 발생한다.
+</Text>
         </Document>
         <Document ID="45">
             <Title>Install Code Permanently</Title>
@@ -22872,6 +22511,56 @@ next few sections are important in their own right.  A study of these
 functions makes clear the distinction between buffers and files, how to
 switch to a buffer, and how to determine a location within it.</Text>
         </Document>
+        <Document ID="153">
+            <Title>Arguments' Data Types</Title>
+            <Text>
+@node Data types, Args as Variable or List, Arguments, Arguments
+@comment  node-name,  next,  previous,  up
+@subsection Arguments' Data Types
+@cindex Data types
+@cindex Types of data
+@cindex Arguments' data types
+
+데이터의 타입은 사용하는 정보의 종류에 맞게 함수에 전달되어야 한다. @code{+}가 
+숫자들을 더하기 때문에 @code{+} 같은 함수의 인자들은 숫자 값들이어야 한다.
+다른 함수들은 인자에 맞게 다른 종류의 데이터를 사용한다.
+
+@need 1250
+@findex concat
+예를 들면 @code{concat} 함수는 둘 또는 그 이상의 문자열들을 연결하거나 하나로 
+만든다. 인자들은 문자열이다. 두 문자열 @code{abc}, @code{def}를 연결 시켜 단일 
+문자열 @code{abcdef}를 만든다. 다음을 평가 함으로 결과를 볼 수 있다.:
+
+@smallexample
+(concat "abc" "def")
+@end smallexample
+
+@noindent
+이 표현을 평가하면 @code{“abcdef”} 값이 만들어진다.
+
+@code{substring} 같은 함수는 문자열과 숫자를 모두를 인자로 받는다. 이 함수는 첫 
+인자의 부분 문자열로 문자열의 일부분을 넘겨준다. 이 함수는 3개의 인자를 받는다. 첫 
+인자는 문자열이고 두 번째와 세 번째는 부분 문자열의 시작과 끝을 의미하는 숫자이다. 
+숫자들은 문자열의 시작부터( 공백과 구두점들을 포함한 ) 문자의 개수이다.
+
+@need 800
+예제로 다음을 평가한다면:
+
+@smallexample
+(substring "The quick brown fox jumped." 16 19)
+@end smallexample
+
+@noindent
+echo 영역에 @code{“fox”}이 나타날 것이다. 인자들은 문자열과 2 개의 숫자이다.
+
+@code{substring}에 전달되는 문자열은 공백에 의해서 구분되는 여러 단어로 
+구성되었지만 단일 atom 이다. Lisp은 두 따옴표 기호 사이에 모든 것을 공백을 포함해서 
+문자열의 일부분으로 계산한다. 개별 atom을 받아서 일부분을 추출하기 때문에 
+@code{substring} 함수를 `atom 분쇄기`의 종류로 생각할 수 도 있다. 그러나 
+@code{substring}은 숫자나 기호같은 atom의 종류가 아닌 문자열 인자로 부터 단지 
+부분 문자열을 빼는 것만 가능하다.
+</Text>
+        </Document>
         <Document ID="8">
             <Title>How To Write  Function Definition</Title>
             <Text>
@@ -23835,6 +23524,45 @@ Write a function that tests whether the current value of
 and if so, prints an appropriate message.
 @end itemize</Text>
         </Document>
+        <Document ID="154">
+            <Title>An Argument as the Value of a Variable or List</Title>
+            <Text>
+@node Args as Variable or List, Variable Number of Arguments, Data types, Arguments
+@comment  node-name,  next,  previous,  up
+@subsection An Argument as the Value of a Variable or List
+
+인자는 평가될 때 값을 넘겨주는 기호가 될 수 있다. 예를 들면 @code{fill-column} 
+기호는 평가될 때 숫자를 넘긴다. 이 숫자는 추가로 사용될 수 있다.
+
+@need 1250
+다음 표현 뒤에 커서를 위치한 후, @kbd{C-x C-e}를 입력해라.
+
+@smallexample
+(+ 2 fill-column)
+@end smallexample
+
+@noindent
+값은 @code{fill-column}을 평가한 것에 2가 더해진 숫자가 될 것이다. 나의 경우 
+@code{fill-column}이 72이기 때문에 74이다.
+
+앞에서 본 것처럼 인자는 평가 시 값을 넘겨주는 기호가 될 수 있다. 게다가 인자는 평가 시 
+값을 넘겨주는 list가 될 수 있다. 예를 들면 다음 표현에서 @code{concat} 함수의 
+인자는 문자열 @w{@code{“The”}}와 @w{@code{“ red foxex.”}} 이고, 
+@code{(number-to-string(+ 2 fill-column))} list이다.
+
+@c For GNU Emacs 22, need number-to-string
+@smallexample
+(concat "The " (number-to-string (+ 2 fill-column)) " red foxes.")
+@end smallexample
+
+@noindent
+이 표현을 평가하면—내 Emacs에서는 @code{fill-column}은 72 이다.—
+@code{“The 74 red foxes.”}이 echo 영역에 나타날 것이다. ( @samp{The} 단어 
+뒤와 @samp{red} 앞에 공백을 넣어야 한다. @code{number-to-string} 함수는 
+숫자를 문자열로 변환하여 넘겨준다. @code{number-to-string}은 
+@code{int-to-string}으로도 알려졌다.
+</Text>
+        </Document>
         <Document ID="111">
             <Title>The recursive-graph-body-print Function</Title>
             <Text>
@@ -24266,6 +23994,53 @@ In @cite{The GNU Emacs Manual}, you will see sentences such as ``The
 @kbd{C-h p} command lets you search the standard Emacs Lisp libraries
 by topic keywords.''</Text>
         </Document>
+        <Document ID="155">
+            <Title>Variable Number of Arguments</Title>
+            <Text>
+@node Variable Number of Arguments, Wrong Type of Argument, Args as Variable or List, Arguments
+@comment  node-name,  next,  previous,  up
+@subsection Variable Number of Arguments
+@cindex Variable number of arguments
+@cindex Arguments, variable number of
+
+@code{concat}, @code{+}, @code{*} 같은 함수들은 원하는 개수의 인자를 받는다. 
+( @code{*}은 곱하기를 위한 기호이다. ) 보통 다음 표현들의 각각을 평가하는 것으로 볼 
+수 있다. echo 영역에 `로 평가된다.`로 읽을 수 있는 @samp{@result{}} 뒤에 있는 
+것이 echo 영역에 출력되는 것을 볼 수 있다.
+
+@need 1250
+첫 번째로 함수는 인자를 받지 않는다.
+
+@smallexample
+@group
+(+)       @result{} 0
+
+(*)       @result{} 1
+@end group
+@end smallexample
+
+@need 1250
+이 예제에서 함수들은 각 1개의 인자를 받는다.
+
+@smallexample
+@group
+(+ 3)     @result{} 3
+
+(* 3)     @result{} 3
+@end group
+@end smallexample
+
+@need 1250
+다음 예에서 함수들은 각 3개의 인자를 받는다.
+
+@smallexample
+@group
+(+ 3 4 5) @result{} 12
+
+(* 3 4 5) @result{} 60
+@end group
+@end smallexample</Text>
+        </Document>
         <Document ID="54">
             <Title>A Simplified beginning-of-buffer Definition</Title>
             <Text>
@@ -24648,6 +24423,105 @@ The @code{recursive-lengths-list-many-files} function produces the
 output we want.
 
 The next step is to prepare the data in the list for display in a graph.</Text>
+        </Document>
+        <Document ID="156">
+            <Title>Using the Wrong Type Object as an Argument</Title>
+            <Text>
+@node Wrong Type of Argument, message, Variable Number of Arguments, Arguments
+@comment  node-name,  next,  previous,  up
+@subsection Using the Wrong Type Object as an Argument
+@cindex Wrong type of argument
+@cindex Argument, wrong type of
+
+When a function is passed an argument of the wrong type, the Lisp
+interpreter produces an error message.  For example, the @code{+}
+function expects the values of its arguments to be numbers.  As an
+experiment we can pass it the quoted symbol @code{hello} instead of a
+number.  Position the cursor after the following expression and type
+@kbd{C-x C-e}:
+
+@smallexample
+(+ 2 'hello)
+@end smallexample
+
+@noindent
+When you do this you will generate an error message.  What has happened
+is that @code{+} has tried to add the 2 to the value returned by
+@code{'hello}, but the value returned by @code{'hello} is the symbol
+@code{hello}, not a number.  Only numbers can be added.  So @code{+}
+could not carry out its addition.
+
+@need 1250
+In GNU Emacs version 22, you will create and enter a
+@file{*Backtrace*} buffer that says:
+
+@noindent
+@smallexample
+@group
+---------- Buffer: *Backtrace* ----------
+Debugger entered--Lisp error:
+         (wrong-type-argument number-or-marker-p hello)
+  +(2 hello)
+  eval((+ 2 (quote hello)))
+  eval-last-sexp-1(nil)
+  eval-last-sexp(nil)
+  call-interactively(eval-last-sexp)
+---------- Buffer: *Backtrace* ----------
+@end group
+@end smallexample
+
+@need 1250
+As usual, the error message tries to be helpful and makes sense after you
+learn how to read it.@footnote{@code{(quote hello)} is an expansion of
+the abbreviation @code{'hello}.}
+
+The first part of the error message is straightforward; it says
+@samp{wrong type argument}.  Next comes the mysterious jargon word
+@w{@samp{number-or-marker-p}}.  This word is trying to tell you what
+kind of argument the @code{+} expected.
+
+The symbol @code{number-or-marker-p} says that the Lisp interpreter is
+trying to determine whether the information presented it (the value of
+the argument) is a number or a marker (a special object representing a
+buffer position).  What it does is test to see whether the @code{+} is
+being given numbers to add.  It also tests to see whether the
+argument is something called a marker, which is a specific feature of
+Emacs Lisp.  (In Emacs, locations in a buffer are recorded as markers.
+When the mark is set with the @kbd{C-@@} or @kbd{C-@key{SPC}} command,
+its position is kept as a marker.  The mark can be considered a
+number---the number of characters the location is from the beginning
+of the buffer.)  In Emacs Lisp, @code{+} can be used to add the
+numeric value of marker positions as numbers.
+
+The @samp{p} of @code{number-or-marker-p} is the embodiment of a
+practice started in the early days of Lisp programming.  The @samp{p}
+stands for `predicate'.  In the jargon used by the early Lisp
+researchers, a predicate refers to a function to determine whether some
+property is true or false.  So the @samp{p} tells us that
+@code{number-or-marker-p} is the name of a function that determines
+whether it is true or false that the argument supplied is a number or
+a marker.  Other Lisp symbols that end in @samp{p} include @code{zerop},
+a function that tests whether its argument has the value of zero, and
+@code{listp}, a function that tests whether its argument is a list.
+
+Finally, the last part of the error message is the symbol @code{hello}.
+This is the value of the argument that was passed to @code{+}.  If the
+addition had been passed the correct type of object, the value passed
+would have been a number, such as 37, rather than a symbol like
+@code{hello}.  But then you would not have got the error message.
+
+@ignore
+@need 1250
+In GNU Emacs version 20 and before, the echo area displays an error
+message that says:
+
+@smallexample
+Wrong type argument:@: number-or-marker-p, hello
+@end smallexample
+
+This says, in different words, the same as the top line of the
+@file{*Backtrace*} buffer.
+@end ignore</Text>
         </Document>
         <Document ID="56">
             <Title>The Definition of append-to-buffer</Title>
@@ -26778,6 +26652,122 @@ argument' is simply a cons cell, then the command puts you at the
 beginning of the second line @dots{}  I don't know whether this is
 intended or whether no one has dealt with the code to avoid this
 happening.</Text>
+        </Document>
+        <Document ID="157">
+            <Title>The message Function</Title>
+            <Text>
+@node message,  , Wrong Type of Argument, Arguments
+@comment  node-name,  next,  previous,  up
+@subsection The @code{message} Function
+@findex message
+
+Like @code{+}, the @code{message} function takes a variable number of
+arguments.  It is used to send messages to the user and is so useful
+that we will describe it here.
+
+@need 1250
+A message is printed in the echo area.  For example, you can print a
+message in your echo area by evaluating the following list:
+
+@smallexample
+(message "This message appears in the echo area!")
+@end smallexample
+
+The whole string between double quotation marks is a single argument
+and is printed @i{in toto}.  (Note that in this example, the message
+itself will appear in the echo area within double quotes; that is
+because you see the value returned by the @code{message} function.  In
+most uses of @code{message} in programs that you write, the text will
+be printed in the echo area as a side-effect, without the quotes.
+@xref{multiply-by-seven in detail, , @code{multiply-by-seven} in
+detail}, for an example of this.)
+
+However, if there is a @samp{%s} in the quoted string of characters, the
+@code{message} function does not print the @samp{%s} as such, but looks
+to the argument that follows the string.  It evaluates the second
+argument and prints the value at the location in the string where the
+@samp{%s} is.
+
+@need 1250
+You can see this by positioning the cursor after the following
+expression and typing @kbd{C-x C-e}:
+
+@smallexample
+(message "The name of this buffer is: %s." (buffer-name))
+@end smallexample
+
+@noindent
+In Info, @code{"The name of this buffer is: *info*."} will appear in the
+echo area.  The function @code{buffer-name} returns the name of the
+buffer as a string, which the @code{message} function inserts in place
+of @code{%s}.
+
+To print a value as an integer, use @samp{%d} in the same way as
+@samp{%s}.  For example, to print a message in the echo area that
+states the value of the @code{fill-column}, evaluate the following:
+
+@smallexample
+(message "The value of fill-column is %d." fill-column)
+@end smallexample
+
+@noindent
+On my system, when I evaluate this list, @code{"The value of
+fill-column is 72."} appears in my echo area@footnote{Actually, you
+can use @code{%s} to print a number.  It is non-specific.  @code{%d}
+prints only the part of a number left of a decimal point, and not
+anything that is not a number.}.
+
+If there is more than one @samp{%s} in the quoted string, the value of
+the first argument following the quoted string is printed at the
+location of the first @samp{%s} and the value of the second argument is
+printed at the location of the second @samp{%s}, and so on.
+
+@need 1250
+For example, if you evaluate the following,
+
+@smallexample
+@group
+(message "There are %d %s in the office!"
+         (- fill-column 14) "pink elephants")
+@end group
+@end smallexample
+
+@noindent
+a rather whimsical message will appear in your echo area.  On my system
+it says, @code{"There are 58 pink elephants in the office!"}.
+
+The expression @code{(- fill-column 14)} is evaluated and the resulting
+number is inserted in place of the @samp{%d}; and the string in double
+quotes, @code{"pink elephants"}, is treated as a single argument and
+inserted in place of the @samp{%s}.  (That is to say, a string between
+double quotes evaluates to itself, like a number.)
+
+Finally, here is a somewhat complex example that not only illustrates
+the computation of a number, but also shows how you can use an
+expression within an expression to generate the text that is substituted
+for @samp{%s}:
+
+@smallexample
+@group
+(message "He saw %d %s"
+         (- fill-column 32)
+         (concat "red "
+                 (substring
+                  "The quick brown foxes jumped." 16 21)
+                 " leaping."))
+@end group
+@end smallexample
+
+In this example, @code{message} has three arguments: the string,
+@code{"He saw %d %s"}, the expression, @code{(- fill-column 32)}, and
+the expression beginning with the function @code{concat}.  The value
+resulting from the evaluation of @code{(- fill-column 32)} is inserted
+in place of the @samp{%d}; and the value returned by the expression
+beginning with @code{concat} is inserted in place of the @samp{%s}.
+
+When your fill column is 70 and you evaluate the expression, the
+message @code{"He saw 38 red foxes leaping."} appears in your echo
+area.</Text>
         </Document>
         <Document ID="58">
             <Title>Exercises</Title>
