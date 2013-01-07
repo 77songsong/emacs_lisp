@@ -626,10 +626,17 @@ GNU Emacs 22 버전에서 @file{*Backtrace*} 버퍼가 만들어진다.<br/>
 @cindex Wrong type of argument<br/>
 @cindex Argument, wrong type of<br/>
 <br/>
-When a function is passed an argument of the wrong type, the Lisp<br/>
-interpreter produces an error message.  For example, the @code{+}<br/>
-function expects the values of its arguments to be numbers.  As an<br/>
-experiment we can pass it the quoted symbol @code{hello} in...</p>
+함수에 잘못된 타입의 인자가 넘겨지면 Lisp 해석기는 에러 메시지를 출력한다. 예를 들면 <br/>
+@code{+} 함수는 인자들의 값으로 숫자를 기대한다. 실험처럼 숫자 대신 따옴표로 <br/>
+시작하는 @code{hello}를 넘겨볼 수 있다. 다음 표현 뒤에 커서를 이동한 후 <br/>
+@kbd{C-x C-e}를 입력해보자.<br/>
+<br/>
+@smallexample<br/>
+(+ 2 'hello)<br/>
+@end smallexample<br/>
+<br/>
+@noindent<br/>
+그러면 에러 메시지를 볼 것이다. @code{+}는 ...</p>
 </li>
 <li>
 <p class="binderItem"><strong>The message Function</strong><br/><br/>

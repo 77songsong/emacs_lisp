@@ -10,27 +10,23 @@
 @cindex Wrong type of argument\
 @cindex Argument, wrong type of\
 \
-When a function is passed an argument of the wrong type, the Lisp\
-interpreter produces an error message.  For example, the @code\{+\}\
-function expects the values of its arguments to be numbers.  As an\
-experiment we can pass it the quoted symbol @code\{hello\} instead of a\
-number.  Position the cursor after the following expression and type\
-@kbd\{C-x C-e\}:\
+\'c7\'d4\'bc\'f6\'bf\'a1 \'c0\'df\'b8\'f8\'b5\'c8 \'c5\'b8\'c0\'d4\'c0\'c7 \'c0\'ce\'c0\'da\'b0\'a1 \'b3\'d1\'b0\'dc\'c1\'f6\'b8\'e9 Lisp \'c7\'d8\'bc\'ae\'b1\'e2\'b4\'c2 \'bf\'a1\'b7\'af \'b8\'de\'bd\'c3\'c1\'f6\'b8\'a6 \'c3\'e2\'b7\'c2\'c7\'d1\'b4\'d9. \'bf\'b9\'b8\'a6 \'b5\'e9\'b8\'e9 \
+@code\{+\} \'c7\'d4\'bc\'f6\'b4\'c2 \'c0\'ce\'c0\'da\'b5\'e9\'c0\'c7 \'b0\'aa\'c0\'b8\'b7\'ce \'bc\'fd\'c0\'da\'b8\'a6 \'b1\'e2\'b4\'eb\'c7\'d1\'b4\'d9. \'bd\'c7\'c7\'e8\'c3\'b3\'b7\'b3 \'bc\'fd\'c0\'da \'b4\'eb\'bd\'c5 \'b5\'fb\'bf\'c8\'c7\'a5\'b7\'ce \
+\'bd\'c3\'c0\'db\'c7\'cf\'b4\'c2 @code\{hello\}\'b8\'a6 \'b3\'d1\'b0\'dc\'ba\'bc \'bc\'f6 \'c0\'d6\'b4\'d9. \'b4\'d9\'c0\'bd \'c7\'a5\'c7\'f6 \'b5\'da\'bf\'a1 \'c4\'bf\'bc\'ad\'b8\'a6 \'c0\'cc\'b5\'bf\'c7\'d1 \'c8\'c4 \
+@kbd\{C-x C-e\}\'b8\'a6 \'c0\'d4\'b7\'c2\'c7\'d8\'ba\'b8\'c0\'da.\
 \
 @smallexample\
 (+ 2 'hello)\
 @end smallexample\
 \
 @noindent\
-When you do this you will generate an error message.  What has happened\
-is that @code\{+\} has tried to add the 2 to the value returned by\
-@code\{'hello\}, but the value returned by @code\{'hello\} is the symbol\
-@code\{hello\}, not a number.  Only numbers can be added.  So @code\{+\}\
-could not carry out its addition.\
+\'b1\'d7\'b7\'af\'b8\'e9 \'bf\'a1\'b7\'af \'b8\'de\'bd\'c3\'c1\'f6\'b8\'a6 \'ba\'bc \'b0\'cd\'c0\'cc\'b4\'d9. @code\{+\}\'b4\'c2 \'bc\'fd\'c0\'da 2\'b8\'a6 @code\{\'a1\'aehello\}\'bf\'a1 \'c0\'c7\'c7\'d8\'bc\'ad \
+\'b3\'d1\'b0\'dc\'c1\'f6\'b4\'c2 \'b0\'aa\'b0\'fa \'b4\'f5\'c7\'cf\'b7\'c1\'b0\'ed \'c7\'df\'c0\'b8\'b3\'aa, @code\{\'a1\'aehello\}\'b0\'a1 \'b3\'d1\'b0\'dc\'c1\'d6\'b4\'c2 \'b0\'aa\'c0\'ba \'bc\'fd\'c0\'da\'b0\'a1 \'be\'c6\'b4\'d1 \
+@code\{hello\} \'b1\'e2\'c8\'a3\'c0\'cc\'b4\'d9. \'bf\'c0\'c1\'f7 \'bc\'fd\'c0\'da\'b5\'e9\'b8\'b8 \'b4\'f5\'c7\'d2 \'bc\'f6 \'c0\'d6\'b4\'d9. \'b1\'d7\'b7\'a1\'bc\'ad @code\{+\}\'b4\'c2 \'b4\'f5\'c7\'cf\'b1\'e2\'b8\'a6 \
+\'bc\'f6\'c7\'e0\'c7\'d2 \'bc\'f6 \'be\'f8\'be\'fa\'b4\'d9.\
 \
 @need 1250\
-In GNU Emacs version 22, you will create and enter a\
-@file\{*Backtrace*\} buffer that says:\
+GNU Emacs 22 \'b9\'f6\'c0\'fc\'bf\'a1\'bc\'ad\'b4\'c2 @file\{*Backtrace*\} \'b9\'f6\'c6\'db\'bf\'a1 \'b4\'d9\'c0\'bd\'b0\'fa \'b0\'b0\'c0\'cc \'b3\'aa\'c5\'b8\'b3\'ad\'b4\'d9.:\
 \
 @noindent\
 @smallexample\
@@ -48,54 +44,42 @@ Debugger entered--Lisp error:\
 @end smallexample\
 \
 @need 1250\
-As usual, the error message tries to be helpful and makes sense after you\
-learn how to read it.@footnote\{@code\{(quote hello)\} is an expansion of\
-the abbreviation @code\{'hello\}.\}\
+\'b4\'c3 \'b1\'d7\'b7\'b8\'b5\'ed\'c0\'cc \'bf\'a1\'b7\'af \'b8\'de\'bd\'c3\'c1\'f6\'b8\'a6 \'c0\'d0\'b4\'c2 \'b9\'e6\'b9\'fd\'c0\'bb \'b9\'e8\'bf\'ee \'c8\'c4 \'bf\'a1\'b7\'af \'b8\'de\'bd\'c3\'c1\'f6\'b4\'c2 \'b5\'b5\'bf\'f2\'c0\'bb \'c1\'d6\'b7\'c1\'b0\'ed \'b3\'eb\'b7\'c2\'c7\'cf\'b0\'ed \
+\'c0\'cc\'c7\'d8\'bd\'c3\'c5\'b0\'b7\'c1\'b0\'ed \'c7\'d1\'b4\'d9.@footnote\{@code\{(quote hello)\}\'b4\'c2 \'be\'e0\'be\'ee @code\{\'a1\'aehello\}\'c0\'c7 \
+\'c8\'ae\'c0\'e5\'c0\'cc\'b4\'d9.\}\
 \
-The first part of the error message is straightforward; it says\
-@samp\{wrong type argument\}.  Next comes the mysterious jargon word\
-@w\{@samp\{number-or-marker-p\}\}.  This word is trying to tell you what\
-kind of argument the @code\{+\} expected.\
+\'bf\'a1\'b7\'af \'b8\'de\'bd\'c3\'c1\'f6\'c0\'c7 \'c3\'b9 \'ba\'ce\'ba\'d0\'c0\'ba \'b0\'a3\'b4\'dc\'c7\'cf\'b4\'d9.; @samp\{\'c0\'df\'b8\'f8\'b5\'c8 \'c0\'ce\'c0\'da\}\'b8\'a6 \'b8\'bb\'c7\'d1\'b4\'d9. \'b4\'d9\'c0\'bd\'c0\'ba \'c0\'cc\'c7\'d8\'c7\'cf\'b1\'e2 \
+\'c8\'fb\'b5\'e7 \'c0\'fc\'b9\'ae \'b4\'dc\'be\'ee @w\{@samp\{number-or-marker-p\}\}\'b0\'a1 \'bf\'c2\'b4\'d9. \'c0\'cc \'b8\'bb\'c0\'ba @code\{+\}\'b0\'a1 \
+\'b1\'e2\'b4\'eb\'c7\'cf\'b4\'c2 \'c0\'ce\'c0\'da\'c0\'c7 \'c1\'be\'b7\'f9\'b0\'a1 \'b9\'ab\'be\'f9\'c0\'ce\'c1\'f6 \'b8\'bb\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'cc\'b4\'d9.\
 \
-The symbol @code\{number-or-marker-p\} says that the Lisp interpreter is\
-trying to determine whether the information presented it (the value of\
-the argument) is a number or a marker (a special object representing a\
-buffer position).  What it does is test to see whether the @code\{+\} is\
-being given numbers to add.  It also tests to see whether the\
-argument is something called a marker, which is a specific feature of\
-Emacs Lisp.  (In Emacs, locations in a buffer are recorded as markers.\
-When the mark is set with the @kbd\{C-@@\} or @kbd\{C-@key\{SPC\}\} command,\
-its position is kept as a marker.  The mark can be considered a\
-number---the number of characters the location is from the beginning\
-of the buffer.)  In Emacs Lisp, @code\{+\} can be used to add the\
-numeric value of marker positions as numbers.\
+\'b1\'e2\'c8\'a3 @code\{number-or-maker-p\}\'b4\'c2 Lisp \'c7\'d8\'bc\'ae\'b1\'e2\'b0\'a1 \'c1\'a4\'ba\'b8\'b0\'a1 \'c7\'a5\'c7\'f6\'c7\'cf\'b0\'ed\'c0\'da \'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'cc\
+( \'c0\'ce\'c0\'da\'c0\'c7 \'b0\'aa ) \'bc\'fd\'c0\'da\'c0\'ce\'c1\'f6 marker( \'b9\'f6\'c6\'db \'c0\'a7\'c4\'a1\'b8\'a6 \'b3\'aa\'c5\'b8\'b3\'bb\'b4\'c2 \'c6\'af\'ba\'b0\'c7\'d1 \'b0\'b4\'c3\'bc ) \'c0\'ce\'c1\'f6 \'b0\'e1\'c1\'a4\'c7\'cf\'b0\'ed \'b3\'eb\'b7\'c2\
+\'c7\'cf\'b4\'c2 \'c1\'df\'c0\'cc\'b6\'f3\'b4\'c2 \'b0\'cd\'c0\'bb \'b8\'bb\'c7\'d1\'b4\'d9. \'c0\'cc\'b4\'c2 \'b4\'f5\'c7\'d2 \'bc\'fd\'c0\'da\'b0\'a1 @code\{+\}\'bf\'a1 \'c1\'d6\'be\'ee\'c1\'b3\'b4\'c2\'c1\'f6 \'c8\'ae\'c0\'ce\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'cc\'b4\'d9.  \
+\'b6\'c7\'c7\'d1 \'c0\'cc\'b4\'c2 \'c0\'ce\'c0\'da\'b0\'a1 Emacs Lisp\'c0\'c7 \'c6\'af\'ba\'b0\'c7\'d1 \'c6\'af\'c2\'a1\'c0\'ce marker\'b6\'f3 \'ba\'ce\'b8\'a3\'b4\'c2 \'b0\'cd\'c0\'ce\'c1\'f6\'b5\'b5 \'b0\'cb\'bb\'e7\'c7\'d1\'b4\'d9. \
+( Emacs\'bf\'a1\'bc\'ad \'b9\'f6\'c6\'db\'c0\'c7 \'c0\'a7\'c4\'a1\'b4\'c2 marker\'b7\'ce\'bc\'ad \'b1\'e2\'b7\'cf\'b5\'c8\'b4\'d9. @kbd\{C-@@\} \'b6\'c7\'b4\'c2 @kbd\{C-\
+@key\{SPC\}\} \'b8\'ed\'b7\'c9\'c0\'b8\'b7\'ce mark\'b0\'a1 \'bc\'b3\'c1\'a4\'b5\'c9 \'b6\'a7, \'b1\'d7 \'c0\'a7\'c4\'a1\'b4\'c2 marker\'b7\'ce \'ba\'b8\'b0\'fc\'b5\'c8\'b4\'d9.  mark\'b4\'c2 \
+\'bc\'fd\'c0\'da\'b7\'ce \'b0\'a3\'c1\'d6\'b5\'c8\'b4\'d9. \uc0\u8212 \'c0\'a7\'c4\'a1\'b4\'c2 \'b9\'f6\'c6\'db\'c0\'c7 \'bd\'c3\'c0\'db\'ba\'ce\'c5\'cd \'b9\'ae\'c0\'da\'b5\'e9\'c0\'c7 \'b0\'b3\'bc\'f6\'c0\'cc\'b4\'d9. ) Emacs Lisp\'bf\'a1\'bc\'ad \
+@code\{+\}\'b4\'c2 \'bc\'fd\'c0\'da\'b7\'ce\'bc\'ad marker \'c0\'a7\'c4\'a1\'c0\'c7 \'bc\'fd\'c0\'da \'b0\'aa\'c0\'bb \'b4\'f5\'c7\'d2 \'bc\'f6 \'c0\'d6\'b4\'d9.\
 \
-The @samp\{p\} of @code\{number-or-marker-p\} is the embodiment of a\
-practice started in the early days of Lisp programming.  The @samp\{p\}\
-stands for `predicate'.  In the jargon used by the early Lisp\
-researchers, a predicate refers to a function to determine whether some\
-property is true or false.  So the @samp\{p\} tells us that\
-@code\{number-or-marker-p\} is the name of a function that determines\
-whether it is true or false that the argument supplied is a number or\
-a marker.  Other Lisp symbols that end in @samp\{p\} include @code\{zerop\},\
-a function that tests whether its argument has the value of zero, and\
-@code\{listp\}, a function that tests whether its argument is a list.\
+@code\{number-or-marker-p\}\'c0\'c7 @samp\{p\}\'b4\'c2 Lisp \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a1\'b9\'d6\'c0\'c7 \'c3\'ca\'c3\'a2\'b1\'e2\'bf\'a1 \'bd\'c3\'c0\'db\'b5\'c8 \
+\'c0\'fc\'c7\'fc\'c0\'cc\'b4\'d9.  @samp\{p\}\'b4\'c2 \'a1\'aepredicate\'a1\'af\'b8\'a6 \'b3\'aa\'c5\'b8\'b3\'bd\'b4\'d9. \'c3\'ca\'b1\'e2 Lisp \'bf\'ac\'b1\'b8\'c0\'da\'b5\'e9\'c0\'cc \'bb\'e7\'bf\'eb\'c7\'d1 \
+\'bf\'eb\'be\'ee\'bf\'a1\'bc\'ad predicate\'b4\'c2 \'be\'ee\'b6\'b2 \'bc\'d3\'bc\'ba\'c0\'cc \'c2\'fc \'b6\'c7\'b4\'c2 \'b0\'c5\'c1\'fe\'c0\'ce\'c1\'f6 \'c6\'c7\'b4\'dc\'c7\'cf\'b4\'c2 \'c7\'d4\'bc\'f6\'b8\'a6 \'b0\'a1\'b8\'ae\'c5\'b2\'b4\'d9. \'b1\'d7\'b7\'a1\'bc\'ad \
+@samp\{p\}\'b4\'c2 @code\{number-or-maker-p\}\'b0\'a1 \'c1\'a6\'b0\'f8\'b5\'c7\'b4\'c2 \'c0\'ce\'c0\'da\'b0\'a1 \'bc\'fd\'c0\'da \'b6\'c7\'b4\'c2 marker\
+\'c0\'ce\'c1\'f6 \'c6\'c7\'b4\'dc\'c7\'cf\'bf\'a9 \'c2\'fc \'b6\'c7\'b4\'c2 \'b0\'c5\'c1\'fe\'c0\'bb \'be\'cb\'b7\'c1\'c1\'d6\'b4\'c2 \'c7\'d4\'bc\'f6\'c0\'c7 \'c0\'cc\'b8\'a7\'c0\'cc\'b6\'f3\'b4\'c2 \'b0\'cd\'c0\'bb \'b8\'bb\'c7\'d1\'b4\'d9. @samp\{p\}\'b7\'ce \
+\'b3\'a1\'b3\'aa\'b4\'c2 \'b4\'d9\'b8\'a5 Lisp \'b1\'e2\'c8\'a3\'b5\'e9\'b7\'ce \'c0\'ce\'c0\'da\'b0\'a1 0\'c0\'c7 \'b0\'aa\'c0\'bb \'b0\'a1\'c1\'f6\'b4\'c2\'c1\'f6 \'c8\'ae\'c0\'ce\'c7\'cf\'b4\'c2 @code\{zerop\}\'bf\'cd \
+\'c0\'ce\'c0\'da\'b0\'a1 list\'c0\'ce\'c1\'f6 \'b0\'cb\'bb\'e7\'c7\'cf\'b4\'c2 @code\{listp\}\'b0\'a1 \'c0\'d6\'b4\'d9.\
 \
-Finally, the last part of the error message is the symbol @code\{hello\}.\
-This is the value of the argument that was passed to @code\{+\}.  If the\
-addition had been passed the correct type of object, the value passed\
-would have been a number, such as 37, rather than a symbol like\
-@code\{hello\}.  But then you would not have got the error message.\
+\'b8\'b6\'c1\'f6\'b8\'b7\'c0\'b8\'b7\'ce \'bf\'a1\'b7\'af \'b8\'de\'bd\'c3\'c1\'f6\'c0\'c7 \'b8\'b6\'c1\'f6\'b8\'b7 \'ba\'ce\'ba\'d0\'c0\'ba \'b1\'e2\'c8\'a3 @code\{hello\}\'c0\'cc\'b4\'d9. @code\{+\}\'bf\'a1 \
+\'c0\'fc\'b4\'de\'b5\'c7\'b4\'c2 \'c0\'ce\'c0\'da\'c0\'c7 \'b0\'aa\'c0\'cc\'b4\'d9. \'b0\'b4\'c3\'bc\'c0\'c7 \'bf\'c3\'b9\'d9\'b8\'a5 \'c5\'b8\'c0\'d4\'c0\'cc \'c0\'fc\'b4\'de\'b5\'c7\'be\'fa\'b4\'d9\'b8\'e9 @code\{hello\} \'b0\'b0\'c0\'ba \'b1\'e2\'c8\'a3\'b0\'a1 \
+\'be\'c6\'b4\'d1 37\'b0\'b0\'c0\'ba \'b0\'aa\'c0\'ba \'bc\'fd\'c0\'da\'bf\'b4\'c0\'bb \'b0\'cd\'c0\'cc\'b4\'d9. \'b1\'d7\'b7\'a8\'c0\'b8\'b8\'e9 \'bf\'a1\'b7\'af \'b8\'de\'bd\'c3\'c1\'f6\'b8\'a6 \'b9\'de\'c1\'f6 \'be\'ca\'be\'d2\'c0\'bb \'b0\'cd\'c0\'cc\'b4\'d9.\
 \
 @ignore\
 @need 1250\
-In GNU Emacs version 20 and before, the echo area displays an error\
-message that says:\
+GNU Emacs 20 \'b9\'f6\'c0\'fc \'c0\'cc\'c7\'cf\'bf\'a1\'bc\'ad echo \'bf\'b5\'bf\'aa\'bf\'a1 \'b4\'d9\'c0\'bd\'b0\'fa \'b0\'b0\'c0\'ba \'bf\'a1\'b7\'af \'b8\'de\'bd\'c3\'c1\'f6\'b0\'a1 \'c3\'e2\'b7\'c2\'b5\'c9 \'b0\'cd\'c0\'cc\'b4\'d9.:\
 \
 @smallexample\
 Wrong type argument:@: number-or-marker-p, hello\
 @end smallexample\
 \
-This says, in different words, the same as the top line of the\
-@file\{*Backtrace*\} buffer.\
+\'b4\'d9\'b8\'a5 \'b4\'dc\'be\'ee\'b7\'ce \'b3\'aa\'c5\'b8\'b3\'aa\'c1\'f6\'b8\'b8 \'c0\'a7\'c0\'c7 @file\{*Backtrace*\} \'b9\'f6\'c6\'db\'bf\'a1 \'c0\'d6\'b4\'c2 \'b0\'cd\'b0\'fa \'b0\'b0\'c0\'ba \'c0\'c7\'b9\'cc\'c0\'cc\'b4\'d9.\
 @end ignore}

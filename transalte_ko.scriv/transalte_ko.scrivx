@@ -140,7 +140,7 @@
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>0,0</TextSelection>
+                                <TextSelection>136,74</TextSelection>
                             </TextSettings>
                             <Children>
                                 <BinderItem ID="141" Type="Text" Created="2012-11-10 23:58:28 +0900" Modified="2012-11-11 00:56:25 +0900">
@@ -151,7 +151,7 @@
                                         <NotesTextSelection>0,0</NotesTextSelection>
                                     </MetaData>
                                     <TextSettings>
-                                        <TextSelection>695,0</TextSelection>
+                                        <TextSelection>617,76</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
                                 <BinderItem ID="144" Type="Text" Created="2012-11-11 00:00:05 +0900" Modified="2012-11-13 02:02:30 +0900">
@@ -162,7 +162,7 @@
                                         <NotesTextSelection>0,0</NotesTextSelection>
                                     </MetaData>
                                     <TextSettings>
-                                        <TextSelection>1,61</TextSelection>
+                                        <TextSelection>2305,51</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
                                 <BinderItem ID="142" Type="Text" Created="2012-11-10 23:59:44 +0900" Modified="2012-11-14 01:11:09 +0900">
@@ -378,14 +378,14 @@
                                         <TextSelection>444,0</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
-                                <BinderItem ID="156" Type="Text" Created="2013-01-07 00:54:15 +0900" Modified="2013-01-07 00:54:37 +0900">
+                                <BinderItem ID="156" Type="Text" Created="2013-01-07 00:54:15 +0900" Modified="2013-01-08 01:26:12 +0900">
                                     <Title>Using the Wrong Type Object as an Argument</Title>
                                     <MetaData>
                                         <IncludeInCompile>Yes</IncludeInCompile>
                                         <NotesTextSelection>0,0</NotesTextSelection>
                                     </MetaData>
                                     <TextSettings>
-                                        <TextSelection>3491,0</TextSelection>
+                                        <TextSelection>813,0</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
                                 <BinderItem ID="157" Type="Text" Created="2013-01-07 00:54:35 +0900" Modified="2013-01-07 00:54:41 +0900">
@@ -1591,7 +1591,7 @@
                         <NotesTextSelection>0,0</NotesTextSelection>
                     </MetaData>
                     <TextSettings>
-                        <TextSelection>0,0</TextSelection>
+                        <TextSelection>1154,0</TextSelection>
                     </TextSettings>
                 </BinderItem>
                 <BinderItem ID="133" Type="Text" Created="2012-11-09 13:51:15 +0900" Modified="2012-11-11 00:56:25 +0900">
@@ -1683,7 +1683,7 @@
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2012-11-09 00:23:48 +0900" IgnoreDeadline="Yes">0</DraftTarget>
         <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" ResetType="Midnight" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="-328" Characters="-2675" Date="2013-01-07 00:52:49 +0900"></PreviousSession>
+        <PreviousSession Words="-199" Characters="-1468" Date="2013-01-08 00:25:47 +0900"></PreviousSession>
     </ProjectTargets>
     <PrintSettings PaperSize="595.289978,841.890015" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="iso-a4" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
 </ScrivenerProject>

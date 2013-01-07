@@ -22003,6 +22003,56 @@ our own expression.
 
 The task is easy: use @code{find-file-noselect} and @code{set-buffer}.</Text>
         </Document>
+        <Document ID="153">
+            <Title>Arguments' Data Types</Title>
+            <Text>
+@node Data types, Args as Variable or List, Arguments, Arguments
+@comment  node-name,  next,  previous,  up
+@subsection Arguments' Data Types
+@cindex Data types
+@cindex Types of data
+@cindex Arguments' data types
+
+데이터의 타입은 사용하는 정보의 종류에 맞게 함수에 전달되어야 한다. @code{+}가 
+숫자들을 더하기 때문에 @code{+} 같은 함수의 인자들은 숫자 값들이어야 한다.
+다른 함수들은 인자에 맞게 다른 종류의 데이터를 사용한다.
+
+@need 1250
+@findex concat
+예를 들면 @code{concat} 함수는 둘 또는 그 이상의 문자열들을 연결하거나 하나로 
+만든다. 인자들은 문자열이다. 두 문자열 @code{abc}, @code{def}를 연결 시켜 단일 
+문자열 @code{abcdef}를 만든다. 다음을 평가 함으로 결과를 볼 수 있다.:
+
+@smallexample
+(concat "abc" "def")
+@end smallexample
+
+@noindent
+이 표현을 평가하면 @code{“abcdef”} 값이 만들어진다.
+
+@code{substring} 같은 함수는 문자열과 숫자를 모두를 인자로 받는다. 이 함수는 첫 
+인자의 부분 문자열로 문자열의 일부분을 넘겨준다. 이 함수는 3개의 인자를 받는다. 첫 
+인자는 문자열이고 두 번째와 세 번째는 부분 문자열의 시작과 끝을 의미하는 숫자이다. 
+숫자들은 문자열의 시작부터( 공백과 구두점들을 포함한 ) 문자의 개수이다.
+
+@need 800
+예제로 다음을 평가한다면:
+
+@smallexample
+(substring "The quick brown fox jumped." 16 19)
+@end smallexample
+
+@noindent
+echo 영역에 @code{“fox”}이 나타날 것이다. 인자들은 문자열과 2 개의 숫자이다.
+
+@code{substring}에 전달되는 문자열은 공백에 의해서 구분되는 여러 단어로 
+구성되었지만 단일 atom 이다. Lisp은 두 따옴표 기호 사이에 모든 것을 공백을 포함해서 
+문자열의 일부분으로 계산한다. 개별 atom을 받아서 일부분을 추출하기 때문에 
+@code{substring} 함수를 `atom 분쇄기`의 종류로 생각할 수 도 있다. 그러나 
+@code{substring}은 숫자나 기호같은 atom의 종류가 아닌 문자열 인자로 부터 단지 
+부분 문자열을 빼는 것만 가능하다.
+</Text>
+        </Document>
         <Document ID="149">
             <Title>Evaluating inner lists</Title>
             <Text>
@@ -22057,36 +22107,6 @@ expression’의 약어이다. 그리고 @code{eval}은 ‘evaluate’의 약어
 @code{+} 같은 기호로 시작하는 list를 평가한다면, 그 이름에 연결된 함수 정의에 있는 
 명령들을 실행함으로 얻은 값을 넘겨 받을 것이다. 기호 그 자체를 평가한다면 다음 장에서 
 보겠지만 다른 어떤 일이 생길 것이다. </Text>
-        </Document>
-        <Document ID="6">
-            <Title>List Processing</Title>
-            <Text>
-@node List 처리하기, Practicing Evaluation, 서문, Top
-@comment  node-name,  next,  previous,  up
-@chapter List 처리하기
-
-특별한 지식이 없는 사람들에게는 Lisp은 이상한 프로그래밍 언어로 보인다. Lisp 코드 어디나
-괄호들이 보인다. 몇몇 사람들은 심지어 이름이 ‘Lots of Isolated Silly Parentheses’을 
-나타낸다고 한다. 그러나, 이것은 틀렸다. Lisp은 LISt Processing을 나타내고, 괄호 사이에
-@emph{list}를(그리고 list의 list) 넣어서 다루는 프로그래밍 언어이다. 괄호는 리스트의 경계를
-표시한다. 때로는 작은 따옴표 또는 인용 기호 @samp{‘} @footnote{ 작은 따옴표 또는 인용
-기호는 @code{quote} 함수의 약어다.; 지금 함수들에 대해서 몰라도 된다.; 함수들은 
-@ref{에러 만들기, , 에러 메시지 만들기}.에 정의 되어 있다. } 뒤에 list가 
-위치한다. List는 Lisp의 근본이다.
-
-@menu
-* Lisp에서 List::                list는 무엇인가?
-* 프로그램 실행하기::               Lisp에서 list는 실행할 준비가 된 프로그램이다.
-* 에러 만들기::               에러 메시지 만들기.
-* 이름과 정의::         기호 이름들과 함수 정의들.
-* Lisp Interpreter::            Lisp 해석기가 하는 일.
-* Evaluation::                  프로그램 실행.
-* Variables::                   변수로부터 값을 넘겨 받기.
-* Arguments::                   함수에 정보 넘기기.
-* set &amp; setq::                  변수에 값 설정하기.
-* Summary::                     중요한 점들.
-* Error Message Exercises::
-@end menu</Text>
         </Document>
         <Document ID="46">
             <Title>let</Title>
@@ -22312,6 +22332,36 @@ number is printed in the message using a @samp{%d} rather than a
 @samp{%s}.)  The four variables as a group are put into a list to
 delimit them from the body of the @code{let}.</Text>
         </Document>
+        <Document ID="6">
+            <Title>List Processing</Title>
+            <Text>
+@node List 처리하기, Practicing Evaluation, 서문, Top
+@comment  node-name,  next,  previous,  up
+@chapter List 처리하기
+
+특별한 지식이 없는 사람들에게는 Lisp은 이상한 프로그래밍 언어로 보인다. Lisp 코드 어디나
+괄호들이 보인다. 몇몇 사람들은 심지어 이름이 ‘Lots of Isolated Silly Parentheses’을 
+나타낸다고 한다. 그러나, 이것은 틀렸다. Lisp은 LISt Processing을 나타내고, 괄호 사이에
+@emph{list}를(그리고 list의 list) 넣어서 다루는 프로그래밍 언어이다. 괄호는 리스트의 경계를
+표시한다. 때로는 작은 따옴표 또는 인용 기호 @samp{‘} @footnote{ 작은 따옴표 또는 인용
+기호는 @code{quote} 함수의 약어다.; 지금 함수들에 대해서 몰라도 된다.; 함수들은 
+@ref{에러 만들기, , 에러 메시지 만들기}.에 정의 되어 있다. } 뒤에 list가 
+위치한다. List는 Lisp의 근본이다.
+
+@menu
+* Lisp에서 List::                list는 무엇인가?
+* 프로그램 실행하기::               Lisp에서 list는 실행할 준비가 된 프로그램이다.
+* 에러 만들기::               에러 메시지 만들기.
+* 이름과 정의::         기호 이름들과 함수 정의들.
+* Lisp Interpreter::            Lisp 해석기가 하는 일.
+* Evaluation::                  프로그램 실행.
+* Variables::                   변수로부터 값을 넘겨 받기.
+* Arguments::                   함수에 정보 넘기기.
+* set &amp; setq::                  변수에 값 설정하기.
+* Summary::                     중요한 점들.
+* Error Message Exercises::
+@end menu</Text>
+        </Document>
         <Document ID="50">
             <Title>save-excursion</Title>
             <Text>
@@ -22510,56 +22560,6 @@ Besides being used for practicing evaluation, the functions shown in the
 next few sections are important in their own right.  A study of these
 functions makes clear the distinction between buffers and files, how to
 switch to a buffer, and how to determine a location within it.</Text>
-        </Document>
-        <Document ID="153">
-            <Title>Arguments' Data Types</Title>
-            <Text>
-@node Data types, Args as Variable or List, Arguments, Arguments
-@comment  node-name,  next,  previous,  up
-@subsection Arguments' Data Types
-@cindex Data types
-@cindex Types of data
-@cindex Arguments' data types
-
-데이터의 타입은 사용하는 정보의 종류에 맞게 함수에 전달되어야 한다. @code{+}가 
-숫자들을 더하기 때문에 @code{+} 같은 함수의 인자들은 숫자 값들이어야 한다.
-다른 함수들은 인자에 맞게 다른 종류의 데이터를 사용한다.
-
-@need 1250
-@findex concat
-예를 들면 @code{concat} 함수는 둘 또는 그 이상의 문자열들을 연결하거나 하나로 
-만든다. 인자들은 문자열이다. 두 문자열 @code{abc}, @code{def}를 연결 시켜 단일 
-문자열 @code{abcdef}를 만든다. 다음을 평가 함으로 결과를 볼 수 있다.:
-
-@smallexample
-(concat "abc" "def")
-@end smallexample
-
-@noindent
-이 표현을 평가하면 @code{“abcdef”} 값이 만들어진다.
-
-@code{substring} 같은 함수는 문자열과 숫자를 모두를 인자로 받는다. 이 함수는 첫 
-인자의 부분 문자열로 문자열의 일부분을 넘겨준다. 이 함수는 3개의 인자를 받는다. 첫 
-인자는 문자열이고 두 번째와 세 번째는 부분 문자열의 시작과 끝을 의미하는 숫자이다. 
-숫자들은 문자열의 시작부터( 공백과 구두점들을 포함한 ) 문자의 개수이다.
-
-@need 800
-예제로 다음을 평가한다면:
-
-@smallexample
-(substring "The quick brown fox jumped." 16 19)
-@end smallexample
-
-@noindent
-echo 영역에 @code{“fox”}이 나타날 것이다. 인자들은 문자열과 2 개의 숫자이다.
-
-@code{substring}에 전달되는 문자열은 공백에 의해서 구분되는 여러 단어로 
-구성되었지만 단일 atom 이다. Lisp은 두 따옴표 기호 사이에 모든 것을 공백을 포함해서 
-문자열의 일부분으로 계산한다. 개별 atom을 받아서 일부분을 추출하기 때문에 
-@code{substring} 함수를 `atom 분쇄기`의 종류로 생각할 수 도 있다. 그러나 
-@code{substring}은 숫자나 기호같은 atom의 종류가 아닌 문자열 인자로 부터 단지 
-부분 문자열을 빼는 것만 가능하다.
-</Text>
         </Document>
         <Document ID="8">
             <Title>How To Write  Function Definition</Title>
@@ -24433,27 +24433,23 @@ The next step is to prepare the data in the list for display in a graph.</Text>
 @cindex Wrong type of argument
 @cindex Argument, wrong type of
 
-When a function is passed an argument of the wrong type, the Lisp
-interpreter produces an error message.  For example, the @code{+}
-function expects the values of its arguments to be numbers.  As an
-experiment we can pass it the quoted symbol @code{hello} instead of a
-number.  Position the cursor after the following expression and type
-@kbd{C-x C-e}:
+함수에 잘못된 타입의 인자가 넘겨지면 Lisp 해석기는 에러 메시지를 출력한다. 예를 들면 
+@code{+} 함수는 인자들의 값으로 숫자를 기대한다. 실험처럼 숫자 대신 따옴표로 
+시작하는 @code{hello}를 넘겨볼 수 있다. 다음 표현 뒤에 커서를 이동한 후 
+@kbd{C-x C-e}를 입력해보자.
 
 @smallexample
 (+ 2 'hello)
 @end smallexample
 
 @noindent
-When you do this you will generate an error message.  What has happened
-is that @code{+} has tried to add the 2 to the value returned by
-@code{'hello}, but the value returned by @code{'hello} is the symbol
-@code{hello}, not a number.  Only numbers can be added.  So @code{+}
-could not carry out its addition.
+그러면 에러 메시지를 볼 것이다. @code{+}는 숫자 2를 @code{‘hello}에 의해서 
+넘겨지는 값과 더하려고 했으나, @code{‘hello}가 넘겨주는 값은 숫자가 아닌 
+@code{hello} 기호이다. 오직 숫자들만 더할 수 있다. 그래서 @code{+}는 더하기를 
+수행할 수 없었다.
 
 @need 1250
-In GNU Emacs version 22, you will create and enter a
-@file{*Backtrace*} buffer that says:
+GNU Emacs 22 버전에서는 @file{*Backtrace*} 버퍼에 다음과 같이 나타난다.:
 
 @noindent
 @smallexample
@@ -24471,56 +24467,44 @@ Debugger entered--Lisp error:
 @end smallexample
 
 @need 1250
-As usual, the error message tries to be helpful and makes sense after you
-learn how to read it.@footnote{@code{(quote hello)} is an expansion of
-the abbreviation @code{'hello}.}
+늘 그렇듯이 에러 메시지를 읽는 방법을 배운 후 에러 메시지는 도움을 주려고 노력하고 
+이해시키려고 한다.@footnote{@code{(quote hello)}는 약어 @code{‘hello}의 
+확장이다.}
 
-The first part of the error message is straightforward; it says
-@samp{wrong type argument}.  Next comes the mysterious jargon word
-@w{@samp{number-or-marker-p}}.  This word is trying to tell you what
-kind of argument the @code{+} expected.
+에러 메시지의 첫 부분은 간단하다.; @samp{잘못된 인자}를 말한다. 다음은 이해하기 
+힘든 전문 단어 @w{@samp{number-or-marker-p}}가 온다. 이 말은 @code{+}가 
+기대하는 인자의 종류가 무엇인지 말하는 것이다.
 
-The symbol @code{number-or-marker-p} says that the Lisp interpreter is
-trying to determine whether the information presented it (the value of
-the argument) is a number or a marker (a special object representing a
-buffer position).  What it does is test to see whether the @code{+} is
-being given numbers to add.  It also tests to see whether the
-argument is something called a marker, which is a specific feature of
-Emacs Lisp.  (In Emacs, locations in a buffer are recorded as markers.
-When the mark is set with the @kbd{C-@@} or @kbd{C-@key{SPC}} command,
-its position is kept as a marker.  The mark can be considered a
-number---the number of characters the location is from the beginning
-of the buffer.)  In Emacs Lisp, @code{+} can be used to add the
-numeric value of marker positions as numbers.
+기호 @code{number-or-maker-p}는 Lisp 해석기가 정보가 표현하고자 하는 것이
+( 인자의 값 ) 숫자인지 marker( 버퍼 위치를 나타내는 특별한 객체 ) 인지 결정하고 노력
+하는 중이라는 것을 말한다. 이는 더할 숫자가 @code{+}에 주어졌는지 확인하는 것이다.  
+또한 이는 인자가 Emacs Lisp의 특별한 특징인 marker라 부르는 것인지도 검사한다. 
+( Emacs에서 버퍼의 위치는 marker로서 기록된다. @kbd{C-@@} 또는 @kbd{C-
+@key{SPC}} 명령으로 mark가 설정될 때, 그 위치는 marker로 보관된다.  mark는 
+숫자로 간주된다. —위치는 버퍼의 시작부터 문자들의 개수이다. ) Emacs Lisp에서 
+@code{+}는 숫자로서 marker 위치의 숫자 값을 더할 수 있다.
 
-The @samp{p} of @code{number-or-marker-p} is the embodiment of a
-practice started in the early days of Lisp programming.  The @samp{p}
-stands for `predicate'.  In the jargon used by the early Lisp
-researchers, a predicate refers to a function to determine whether some
-property is true or false.  So the @samp{p} tells us that
-@code{number-or-marker-p} is the name of a function that determines
-whether it is true or false that the argument supplied is a number or
-a marker.  Other Lisp symbols that end in @samp{p} include @code{zerop},
-a function that tests whether its argument has the value of zero, and
-@code{listp}, a function that tests whether its argument is a list.
+@code{number-or-marker-p}의 @samp{p}는 Lisp 프로그래밍의 초창기에 시작된 
+전형이다.  @samp{p}는 ‘predicate’를 나타낸다. 초기 Lisp 연구자들이 사용한 
+용어에서 predicate는 어떤 속성이 참 또는 거짓인지 판단하는 함수를 가리킨다. 그래서 
+@samp{p}는 @code{number-or-maker-p}가 제공되는 인자가 숫자 또는 marker
+인지 판단하여 참 또는 거짓을 알려주는 함수의 이름이라는 것을 말한다. @samp{p}로 
+끝나는 다른 Lisp 기호들로 인자가 0의 값을 가지는지 확인하는 @code{zerop}와 
+인자가 list인지 검사하는 @code{listp}가 있다.
 
-Finally, the last part of the error message is the symbol @code{hello}.
-This is the value of the argument that was passed to @code{+}.  If the
-addition had been passed the correct type of object, the value passed
-would have been a number, such as 37, rather than a symbol like
-@code{hello}.  But then you would not have got the error message.
+마지막으로 에러 메시지의 마지막 부분은 기호 @code{hello}이다. @code{+}에 
+전달되는 인자의 값이다. 객체의 올바른 타입이 전달되었다면 @code{hello} 같은 기호가 
+아닌 37같은 값은 숫자였을 것이다. 그랬으면 에러 메시지를 받지 않았을 것이다.
 
 @ignore
 @need 1250
-In GNU Emacs version 20 and before, the echo area displays an error
-message that says:
+GNU Emacs 20 버전 이하에서 echo 영역에 다음과 같은 에러 메시지가 출력될 것이다.:
 
 @smallexample
 Wrong type argument:@: number-or-marker-p, hello
 @end smallexample
 
-This says, in different words, the same as the top line of the
-@file{*Backtrace*} buffer.
+다른 단어로 나타나지만 위의 @file{*Backtrace*} 버퍼에 있는 것과 같은 의미이다.
 @end ignore</Text>
         </Document>
         <Document ID="56">
