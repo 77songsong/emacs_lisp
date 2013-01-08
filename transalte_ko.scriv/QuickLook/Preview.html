@@ -645,16 +645,19 @@ GNU Emacs 22 버전에서 @file{*Backtrace*} 버퍼가 만들어진다.<br/>
 @subsection The @code{message} Function<br/>
 @findex message<br/>
 <br/>
-Like @code{+}, the @code{message} function takes a variable number of<br/>
-arguments.  It is used to send messages to the user and is so useful<br/>
-that we will describe it here.<br/>
+@code{+} 같이 @code{message} 함수는 여러 개의 인자를 받는다. 사용자에게 <br/>
+메시지를 보낼 때 사용되고 앞으로 설명할 것처럼 꽤 유용하다.<br/>
 <br/>
 @need 1250<br/>
-A message is printed in the echo area.  For example, you can print a<br/>
-message in your echo area by evaluating the following list:<br/>
+메시지는 echo 영역에 출력된다. 예를 들면 다음을 평가하면 echo 영역에 메시지를 출력<br/>
+할 수 있다.<br/>
 <br/>
 @smallexample<br/>
-(message "This messag...</p>
+(message "This message appears in the echo area!")<br/>
+@end smallexample<br/>
+<br/>
+큰따옴표 사이에 모든 문자열은 하나의 인자이고 @i{in toto} 출력된다. ( 이 예제에서 <br/>
+메시지 자체는 echo 영역에 큰따옴표와 같이 나타날 것이다.; @code{messag...</p>
 </li>
 </ul>
 <hr/>

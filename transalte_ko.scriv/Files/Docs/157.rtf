@@ -9,69 +9,55 @@
 @subsection The @code\{message\} Function\
 @findex message\
 \
-Like @code\{+\}, the @code\{message\} function takes a variable number of\
-arguments.  It is used to send messages to the user and is so useful\
-that we will describe it here.\
+@code\{+\} \'b0\'b0\'c0\'cc @code\{message\} \'c7\'d4\'bc\'f6\'b4\'c2 \'bf\'a9\'b7\'af \'b0\'b3\'c0\'c7 \'c0\'ce\'c0\'da\'b8\'a6 \'b9\'de\'b4\'c2\'b4\'d9. \'bb\'e7\'bf\'eb\'c0\'da\'bf\'a1\'b0\'d4 \
+\'b8\'de\'bd\'c3\'c1\'f6\'b8\'a6 \'ba\'b8\'b3\'be \'b6\'a7 \'bb\'e7\'bf\'eb\'b5\'c7\'b0\'ed \'be\'d5\'c0\'b8\'b7\'ce \'bc\'b3\'b8\'ed\'c7\'d2 \'b0\'cd\'c3\'b3\'b7\'b3 \'b2\'cf \'c0\'af\'bf\'eb\'c7\'cf\'b4\'d9.\
 \
 @need 1250\
-A message is printed in the echo area.  For example, you can print a\
-message in your echo area by evaluating the following list:\
+\'b8\'de\'bd\'c3\'c1\'f6\'b4\'c2 echo \'bf\'b5\'bf\'aa\'bf\'a1 \'c3\'e2\'b7\'c2\'b5\'c8\'b4\'d9. \'bf\'b9\'b8\'a6 \'b5\'e9\'b8\'e9 \'b4\'d9\'c0\'bd\'c0\'bb \'c6\'f2\'b0\'a1\'c7\'cf\'b8\'e9 echo \'bf\'b5\'bf\'aa\'bf\'a1 \'b8\'de\'bd\'c3\'c1\'f6\'b8\'a6 \'c3\'e2\'b7\'c2\
+\'c7\'d2 \'bc\'f6 \'c0\'d6\'b4\'d9.\
 \
 @smallexample\
 (message "This message appears in the echo area!")\
 @end smallexample\
 \
-The whole string between double quotation marks is a single argument\
-and is printed @i\{in toto\}.  (Note that in this example, the message\
-itself will appear in the echo area within double quotes; that is\
-because you see the value returned by the @code\{message\} function.  In\
-most uses of @code\{message\} in programs that you write, the text will\
-be printed in the echo area as a side-effect, without the quotes.\
-@xref\{multiply-by-seven in detail, , @code\{multiply-by-seven\} in\
-detail\}, for an example of this.)\
+\'c5\'ab\'b5\'fb\'bf\'c8\'c7\'a5 \'bb\'e7\'c0\'cc\'bf\'a1 \'b8\'f0\'b5\'e7 \'b9\'ae\'c0\'da\'bf\'ad\'c0\'ba \'c7\'cf\'b3\'aa\'c0\'c7 \'c0\'ce\'c0\'da\'c0\'cc\'b0\'ed @i\{in toto\} \'c3\'e2\'b7\'c2\'b5\'c8\'b4\'d9. ( \'c0\'cc \'bf\'b9\'c1\'a6\'bf\'a1\'bc\'ad \
+\'b8\'de\'bd\'c3\'c1\'f6 \'c0\'da\'c3\'bc\'b4\'c2 echo \'bf\'b5\'bf\'aa\'bf\'a1 \'c5\'ab\'b5\'fb\'bf\'c8\'c7\'a5\'bf\'cd \'b0\'b0\'c0\'cc \'b3\'aa\'c5\'b8\'b3\'af \'b0\'cd\'c0\'cc\'b4\'d9.; @code\{message\} \
+\'c7\'d4\'bc\'f6\'bf\'a1\'bc\'ad \'b3\'d1\'b0\'dc \'b9\'de\'c0\'ba \'b0\'aa\'c0\'cc\'b1\'e2 \'b6\'a7\'b9\'ae\'c0\'cc\'b4\'d9. \'c0\'db\'bc\'ba\'c7\'d1 \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a5\'bf\'a1\'bc\'ad @code\{message\}\'c0\'c7 \
+\'b4\'eb\'ba\'ce\'ba\'d0\'c0\'c7 \'bf\'eb\'b5\'b5\'b7\'ce \'ba\'ce\'c0\'db\'bf\'eb\'c0\'b8\'b7\'ce echo \'bf\'b5\'bf\'aa\'bf\'a1 \'b5\'fb\'bf\'c8\'c7\'a5 \'be\'f8\'c0\'cc \'b1\'db\'c0\'cc \'c3\'e2\'b7\'c2\'b5\'c9 \'b0\'cd\'c0\'cc\'b4\'d9. \
+@xref\{multiply-by-seven in detail, , @code\{multiply-by-seven\} in detail\}, \
+\'c0\'cc \'b0\'cd\'bf\'a1 \'b4\'eb\'c7\'d1 \'bf\'b9 )\
 \
-However, if there is a @samp\{%s\} in the quoted string of characters, the\
-@code\{message\} function does not print the @samp\{%s\} as such, but looks\
-to the argument that follows the string.  It evaluates the second\
-argument and prints the value at the location in the string where the\
-@samp\{%s\} is.\
+\'b1\'d7\'b7\'af\'b3\'aa, \'b5\'fb\'bf\'c8\'c7\'a5 \'be\'c8\'c0\'c7 \'b9\'ae\'c0\'da\'bf\'ad\'bf\'a1 @samp\{%s\}\'b0\'a1 \'c0\'d6\'b4\'d9\'b8\'e9 @code\{message\} \'c7\'d4\'bc\'f6\'b4\'c2 \
+@samp\{%s\}\'b8\'a6 \'c3\'e2\'b7\'c2\'c7\'cf\'c1\'f6 \'be\'ca\'b4\'c2\'b4\'d9. \'b4\'eb\'bd\'c5 \'b9\'ae\'c0\'da\'bf\'ad \'b5\'da\'bf\'a1 \'bf\'c0\'b4\'c2 \'c0\'ce\'c0\'da\'b8\'a6 \'ba\'bb\'b4\'d9. \'b5\'ce \'b9\'f8\'c2\'b0 \'c0\'ce\'c0\'da\'b8\'a6\
+\'c6\'f2\'b0\'a1\'c7\'cf\'b0\'ed @samp\{%s\} \'c0\'a7\'c4\'a1\'bf\'a1 \'b1\'d7 \'b0\'aa\'c0\'bb \'c3\'e2\'b7\'c2\'c7\'d1\'b4\'d9.\
 \
 @need 1250\
-You can see this by positioning the cursor after the following\
-expression and typing @kbd\{C-x C-e\}:\
+\'b4\'d9\'c0\'bd \'c7\'a5\'c7\'f6 \'b5\'da\'bf\'a1 \'c4\'bf\'bc\'ad\'b8\'a6 \'bf\'c5\'b1\'e4 \'c8\'c4, @kbd\{C-x C-e\}\'b8\'a6 \'c0\'d4\'b7\'c2\'c7\'cf\'b6\'f3.\
 \
 @smallexample\
 (message "The name of this buffer is: %s." (buffer-name))\
 @end smallexample\
 \
 @noindent\
-In Info, @code\{"The name of this buffer is: *info*."\} will appear in the\
-echo area.  The function @code\{buffer-name\} returns the name of the\
-buffer as a string, which the @code\{message\} function inserts in place\
-of @code\{%s\}.\
+Info\'bf\'a1\'bc\'ad\'b4\'c2 @code\{\'a1\'b0The name of this buffer is : *info*.\'a1\'b1\}\'c0\'cc echo \'bf\'b5\'bf\'aa\'bf\'a1 \'b3\'aa\'c5\'b8\'b3\'af \
+\'b0\'cd\'c0\'cc\'b4\'d9. @code\{buffer-name\} \'c7\'d4\'bc\'f6\'b4\'c2 \'b9\'ae\'c0\'da\'bf\'ad\'b7\'ce \'c7\'f6\'c0\'e7 \'b9\'f6\'c6\'db \'c0\'cc\'b8\'a7\'c0\'bb  \'b3\'d1\'b0\'dc\'c1\'d6\'b0\'ed \
+@code\{message\} \'c7\'d4\'bc\'f6\'b4\'c2 \'c0\'cc \'b0\'aa\'c0\'bb @code\{%s\} \'c0\'a7\'c4\'a1\'bf\'a1 \'bb\'f0\'c0\'d4\'c7\'d1\'b4\'d9.\
 \
-To print a value as an integer, use @samp\{%d\} in the same way as\
-@samp\{%s\}.  For example, to print a message in the echo area that\
-states the value of the @code\{fill-column\}, evaluate the following:\
+\'bc\'fd\'c0\'da\'b7\'ce \'b0\'aa\'c0\'bb \'c3\'e2\'b7\'c2\'c7\'cf\'b1\'e2 \'c0\'a7\'c7\'d8\'bc\'ad\'b4\'c2 @samp\{%s\}\'bf\'cd \'b0\'b0\'c0\'ba \'b9\'e6\'b9\'fd\'c0\'b8\'b7\'ce @samp\{%d\}\'b8\'a6 \'bb\'e7\'bf\'eb\'c7\'cf\'b6\'f3. \'bf\'b9\'b8\'a6 \'b5\'e9\'b8\'e9 echo \'bf\'b5\'bf\'aa\'bf\'a1 @code\{fill-column\} \'b0\'aa\'c0\'bb \'b8\'de\'bd\'c3\'c1\'f6\'bf\'a1 \'c3\'e2\'b7\'c2\'c7\'cf\'b7\'c1\'b8\'e9 \'b4\'d9\'c0\'bd\'c0\'bb \'c6\'f2\'b0\'a1\'c7\'cf\'b6\'f3.:\
 \
 @smallexample\
 (message "The value of fill-column is %d." fill-column)\
 @end smallexample\
 \
 @noindent\
-On my system, when I evaluate this list, @code\{"The value of\
-fill-column is 72."\} appears in my echo area@footnote\{Actually, you\
-can use @code\{%s\} to print a number.  It is non-specific.  @code\{%d\}\
-prints only the part of a number left of a decimal point, and not\
-anything that is not a number.\}.\
+\'b3\'bb \'bd\'c3\'bd\'ba\'c5\'db\'bf\'a1\'bc\'ad \'bc\'f6\'c7\'e0\'c7\'d8\'ba\'b8\'b8\'e9 @code\{\'a1\'b0The value of fill-column is 72.\'a1\'b1\}\'c0\'cc echo \'bf\'b5\'bf\'aa\'bf\'a1 \'b3\'aa\'c5\'b8\'b3\'ad\'b4\'d9.@footnote\{\'bd\'c7\'c1\'a6\'b7\'ce \'bc\'fd\'c0\'da\'b8\'a6 \'c3\'e2\'b7\'c2\'c7\'cf\'b1\'e2 \'c0\'a7\'c7\'d8 @code\{%s\}\'b8\'a6 \'bb\'e7\'bf\'eb\'c7\'d2 \'bc\'f6 \'c0\'d6\'b4\'d9. \'c0\'cf\'b9\'dd\'c0\'fb\'c0\'cc\'c1\'f6\'b4\'c2 \'be\'ca\'b4\'d9. @code\{%d\}\'b4\'c2 \'bc\'d2\'bc\'fd\'c1\'a1\'c0\'c7 \'bf\'de\'c2\'ca \'ba\'ce\'ba\'d0\'c0\'bb \'c3\'e2\'b7\'c2\'c7\'cf\'b0\'ed \'bc\'fd\'c0\'da\'b0\'a1 \'be\'c6\'b4\'d1 \'b0\'cd\'c0\'ba \'c3\'e2\'b7\'c2\'c7\'cf\'c1\'f6 \'be\'ca\'b4\'c2\'b4\'d9.\} \
 \
-If there is more than one @samp\{%s\} in the quoted string, the value of\
-the first argument following the quoted string is printed at the\
-location of the first @samp\{%s\} and the value of the second argument is\
-printed at the location of the second @samp\{%s\}, and so on.\
+\'b8\'b8\'be\'e0\'bf\'a1 \'b5\'fb\'bf\'c8\'c7\'a5\'b7\'ce \'b9\'ad\'c0\'ce \'b9\'ae\'c0\'da\'bf\'ad\'bf\'a1 \'c7\'cf\'b3\'aa \'c0\'cc\'bb\'f3\'c0\'c7 @samp\{%s\}\'b0\'a1 \'c0\'d6\'b4\'d9\'b8\'e9 \'b5\'fb\'bf\'c8\'c7\'a5\'b7\'ce \'b9\'ad\'c0\'ce \
+\'b9\'ae\'c0\'da\'bf\'ad \'b4\'d9\'c0\'bd\'c0\'c7 \'c3\'b9 \'b9\'f8\'c2\'b0 \'c0\'ce\'c0\'da\'c0\'c7 \'b0\'aa\'c0\'ba \'c3\'b9 \'b9\'f8\'c2\'b0 @samp\{%s\}\'c0\'c7 \'c0\'a7\'c4\'a1\'bf\'a1 \'c3\'e2\'b7\'c2\'b5\'c7\'b0\'ed \'b5\'ce \'b9\'f8\'c2\'b0 \
+\'c0\'ce\'c0\'da\'c0\'c7 \'b0\'aa\'c0\'ba \'b5\'ce \'b9\'f8\'c2\'b0 @samp\{%s\}\'c0\'c7 \'c0\'a7\'c4\'a1\'bf\'a1 \'c3\'e2\'b7\'c2\'b5\'c8\'b4\'d9.\
 \
 @need 1250\
-For example, if you evaluate the following,\
+\'bf\'b9\'b8\'a6 \'c0\'a7\'c7\'d8\'bc\'ad \'b4\'d9\'c0\'bd\'c0\'bb \'c6\'f2\'b0\'a1\'c7\'d8\'ba\'b8\'b8\'e9\
 \
 @smallexample\
 @group\
@@ -81,19 +67,16 @@ For example, if you evaluate the following,\
 @end smallexample\
 \
 @noindent\
-a rather whimsical message will appear in your echo area.  On my system\
-it says, @code\{"There are 58 pink elephants in the office!"\}.\
+\'b4\'d9\'bc\'d2 \'b1\'e2\'b9\'df\'c7\'d1 \'b8\'de\'bd\'c3\'c1\'f6\'b0\'a1 echo \'bf\'b5\'bf\'aa\'bf\'a1 \'b3\'aa\'c5\'b8\'b3\'af \'b0\'cd\'c0\'cc\'b4\'d9. \'b3\'bb \'bd\'c3\'bd\'ba\'c5\'db\'bf\'a1\'bc\'ad\'b4\'c2 @code\{\'a1\'b0There a\
+re 58 pink elephants in the office!\'a1\'b1\}\'b0\'a1 \'b3\'aa\'c5\'b8\'b3\'ad\'b4\'d9.\
 \
-The expression @code\{(- fill-column 14)\} is evaluated and the resulting\
-number is inserted in place of the @samp\{%d\}; and the string in double\
-quotes, @code\{"pink elephants"\}, is treated as a single argument and\
-inserted in place of the @samp\{%s\}.  (That is to say, a string between\
-double quotes evaluates to itself, like a number.)\
+\'c7\'a5\'c7\'f6 @code\{(- fill-column 14)\}\'c0\'ba \'c6\'f2\'b0\'a1\'b5\'c7\'b0\'ed \'b0\'e1\'b0\'fa \'bc\'fd\'c0\'da\'b4\'c2 @samp\{%d\} \'c0\'a7\'c4\'a1\'bf\'a1 \
+\'bb\'f0\'c0\'d4\'b5\'c8\'b4\'d9.; \'c5\'ab\'b5\'fb\'bf\'c8\'c7\'a5\'b7\'ce \'b9\'ad\'c0\'ce \'b9\'ae\'c0\'da\'bf\'ad @code\{\'a1\'b0pink elephants\'a1\'b1\}\'c0\'ba \'b4\'dc\'c0\'cf \'c0\'ce\'c0\'da\'b7\'ce \'b4\'d9\'b7\'ef\'c1\'f6\'b0\'ed \
+@samp\{%s\} \'c0\'a7\'c4\'a1\'bf\'a1 \'bb\'f0\'c0\'d4\'b5\'c8\'b4\'d9. ( \'c5\'ab\'b5\'fb\'bf\'c8\'c7\'a5\'b7\'ce \'b9\'ad\'c0\'ce \'b9\'ae\'c0\'da\'bf\'ad\'c0\'ba \'bc\'fd\'c0\'da\'bf\'cd \'b0\'b0\'c0\'cc \'b1\'d7 \'c0\'da\'c3\'bc\'b7\'ce \
+\'c6\'f2\'b0\'a1\'b5\'c8\'b4\'d9. )\
 \
-Finally, here is a somewhat complex example that not only illustrates\
-the computation of a number, but also shows how you can use an\
-expression within an expression to generate the text that is substituted\
-for @samp\{%s\}:\
+\'b8\'b6\'c1\'f6\'b8\'b7\'c0\'b8\'b7\'ce \'b4\'dc\'c1\'f6 \'bc\'fd\'c0\'da\'c0\'c7 \'b0\'e8\'bb\'ea\'c0\'cc \'be\'c6\'b4\'d1 \'bf\'a9\'b1\'e2 \'ba\'b9\'c0\'e2\'c7\'d1 \'bf\'b9\'c1\'a6\'b0\'a1 \'c0\'d6\'b4\'d9.\'b1\'d7\'b8\'ae\'b0\'ed @samp\{%s\}\'b0\'a1 \
+\'b4\'eb\'c3\'bc\'b5\'c8 \'b1\'db\'c0\'bb \'b8\'b8\'b5\'e9\'be\'ee \'b3\'bb\'b4\'c2 \'c7\'a5\'c7\'f6\'c0\'bb \'b0\'a1\'c1\'f8 \'c7\'a5\'c7\'f6\'c0\'bb \'bb\'e7\'bf\'eb\'c7\'cf\'b4\'c2 \'b9\'e6\'b9\'fd\'b5\'b5 \'ba\'b8\'bf\'a9\'c1\'d8\'b4\'d9.\
 \
 @smallexample\
 @group\
@@ -106,13 +89,12 @@ for @samp\{%s\}:\
 @end group\
 @end smallexample\
 \
-In this example, @code\{message\} has three arguments: the string,\
-@code\{"He saw %d %s"\}, the expression, @code\{(- fill-column 32)\}, and\
-the expression beginning with the function @code\{concat\}.  The value\
-resulting from the evaluation of @code\{(- fill-column 32)\} is inserted\
-in place of the @samp\{%d\}; and the value returned by the expression\
-beginning with @code\{concat\} is inserted in place of the @samp\{%s\}.\
+\'c0\'cc \'bf\'b9\'c1\'a6\'bf\'a1\'bc\'ad @code\{message\}\'b4\'c2 3\'b0\'b3\'c0\'c7 \'c0\'ce\'c0\'da\'b8\'a6 \'b0\'a1\'c1\'f8\'b4\'d9.; @code\{\'a1\'b0He saw %d %s\'a1\'b1\} \
+\'b9\'ae\'c0\'da\'bf\'ad, \'c7\'a5\'c7\'f6\'bd\'c4 @code\{(- fill-column 32)\}  \'b1\'d7\'b8\'ae\'b0\'ed @code\{concat\} \'c7\'d4\'bc\'f6\'b7\'ce \
+\'bd\'c3\'c0\'db\'c7\'cf\'b4\'c2 \'c7\'a5\'c7\'f6\'bd\'c4\'c0\'cc\'b4\'d9. @code\{(- fill-column 32)\}\'c0\'c7 \'c6\'f2\'b0\'a1\'c0\'c7 \'b0\'e1\'b0\'fa \'b0\'aa\'c0\'ba @samp\{%d\} \
+\'c0\'a7\'c4\'a1\'bf\'a1 \'bb\'f0\'c0\'d4\'b5\'c8\'b4\'d9.; \'b1\'d7\'b8\'ae\'b0\'ed @code\{concat\}\'b7\'ce \'bd\'c3\'c0\'db\'c7\'cf\'b4\'c2 \'c7\'a5\'c7\'f6\'bd\'c4\'c0\'c7 \'b0\'e1\'b0\'fa \'b0\'aa\'c0\'ba \
+@samp\{%s\} \'c0\'a7\'c4\'a1\'bf\'a1 \'bb\'f0\'c0\'d4\'b5\'c8\'b4\'d9.\
 \
-When your fill column is 70 and you evaluate the expression, the\
-message @code\{"He saw 38 red foxes leaping."\} appears in your echo\
-area.}
+fill-column\'c0\'cc 70\'c0\'cc\'b0\'ed \'c7\'a5\'c7\'f6\'bd\'c4\'c0\'bb \'c6\'f2\'b0\'a1\'c7\'cf\'b8\'e9 \'b8\'de\'bd\'c3\'c1\'f6 @code\{\'a1\'b0He saw 38 red foxes \
+leaping.\'a1\'b1\}\'b0\'a1 echo \'bf\'b5\'bf\'aa\'bf\'a1 \'b3\'aa\'c5\'b8\'b3\'af \'b0\'cd\'c0\'cc\'b4\'d9.\
+}

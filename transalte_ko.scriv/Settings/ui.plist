@@ -13,7 +13,7 @@
 			<key>MediaSettings</key>
 			<dict>
 				<key>PDFPage</key>
-				<integer>29</integer>
+				<integer>30</integer>
 			</dict>
 			<key>PDFScale</key>
 			<real>1.6193512678146362</real>
@@ -44,8 +44,12 @@
 			</array>
 			<key>TextSettings</key>
 			<dict>
+				<key>hasMultiplePages</key>
+				<false/>
 				<key>textScale</key>
 				<integer>100</integer>
+				<key>usesFacingPages</key>
+				<false/>
 			</dict>
 			<key>WindowFrame</key>
 			<string>831 872 475 531 0 0 2560 1418 </string>
@@ -62,7 +66,7 @@
 	<false/>
 	<key>binderSelection</key>
 	<array>
-		<integer>22</integer>
+		<integer>20</integer>
 	</array>
 	<key>binderSplitFrames</key>
 	<array>
@@ -75,7 +79,6 @@
 		<integer>5</integer>
 		<integer>6</integer>
 		<integer>25</integer>
-		<integer>31</integer>
 		<integer>32</integer>
 		<integer>7</integer>
 		<integer>8</integer>
@@ -174,7 +177,7 @@
 	<real>227</real>
 	<key>mainDocumentEditor.binderDocuments</key>
 	<array>
-		<integer>156</integer>
+		<integer>157</integer>
 	</array>
 	<key>mainDocumentEditor.currentEditorViewMode</key>
 	<integer>0</integer>
@@ -203,7 +206,7 @@
 	<key>mainDocumentEditor.navigationHistory</key>
 	<dict>
 		<key>CurrentIndex</key>
-		<integer>843</integer>
+		<integer>848</integer>
 		<key>NavigationHistoryArray</key>
 		<array>
 			<dict>
@@ -7048,6 +7051,46 @@
 				<key>ViewMode</key>
 				<integer>0</integer>
 			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>157</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>145</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>157</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>140</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>157</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
 		</array>
 	</dict>
 	<key>mainDocumentEditor.outlinerColumnsState</key>
@@ -7118,9 +7161,9 @@
 		<integer>32</integer>
 	</array>
 	<key>mainDocumentEditor.scrollRect</key>
-	<string>{{0, 279}, {555, 771}}</string>
+	<string>{{0, 379}, {555, 771}}</string>
 	<key>mainDocumentEditor.selectedRanges</key>
-	<string>{813, 0}</string>
+	<string>{853, 0}</string>
 	<key>mainDocumentEditor.textEditorState</key>
 	<dict>
 		<key>hasMultiplePages</key>
