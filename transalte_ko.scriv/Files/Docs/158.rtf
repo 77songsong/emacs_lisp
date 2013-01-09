@@ -1,0 +1,62 @@
+{\rtf1\ansi\ansicpg949\cocoartf1187\cocoasubrtf340
+{\fonttbl\f0\fnil\fcharset129 AppleSDGothicNeo-Regular;}
+{\colortbl;\red255\green255\blue255;}
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
+
+\f0\fs28 \cf0 \
+@node Using set, Using setq, set & setq, set & setq\
+@comment  node-name,  next,  previous,  up\
+@subsection Using @code\{set\}\
+@findex set\
+\
+To set the value of the symbol @code\{flowers\} to the list @code\{'(rose\
+violet daisy buttercup)\}, evaluate the following expression by\
+positioning the cursor after the expression and typing @kbd\{C-x C-e\}.\
+\
+@smallexample\
+(set 'flowers '(rose violet daisy buttercup))\
+@end smallexample\
+\
+@noindent\
+The list @code\{(rose violet daisy buttercup)\} will appear in the echo\
+area.  This is what is @emph\{returned\} by the @code\{set\} function.  As a\
+side effect, the symbol @code\{flowers\} is bound to the list; that is,\
+the symbol @code\{flowers\}, which can be viewed as a variable, is given\
+the list as its value.  (This process, by the way, illustrates how a\
+side effect to the Lisp interpreter, setting the value, can be the\
+primary effect that we humans are interested in.  This is because every\
+Lisp function must return a value if it does not get an error, but it\
+will only have a side effect if it is designed to have one.)\
+\
+After evaluating the @code\{set\} expression, you can evaluate the symbol\
+@code\{flowers\} and it will return the value you just set.  Here is the\
+symbol.  Place your cursor after it and type @kbd\{C-x C-e\}.\
+\
+@smallexample\
+flowers\
+@end smallexample\
+\
+@noindent\
+When you evaluate @code\{flowers\}, the list\
+@code\{(rose violet daisy buttercup)\} appears in the echo area.\
+\
+Incidentally, if you evaluate @code\{'flowers\}, the variable with a quote\
+in front of it, what you will see in the echo area is the symbol itself,\
+@code\{flowers\}.  Here is the quoted symbol, so you can try this:\
+\
+@smallexample\
+'flowers\
+@end smallexample\
+\
+Note also, that when you use @code\{set\}, you need to quote both\
+arguments to @code\{set\}, unless you want them evaluated.  Since we do\
+not want either argument evaluated, neither the variable\
+@code\{flowers\} nor the list @code\{(rose violet daisy buttercup)\}, both\
+are quoted.  (When you use @code\{set\} without quoting its first\
+argument, the first argument is evaluated before anything else is\
+done.  If you did this and @code\{flowers\} did not have a value\
+already, you would get an error message that the @samp\{Symbol's value\
+as variable is void\}; on the other hand, if @code\{flowers\} did return\
+a value after it was evaluated, the @code\{set\} would attempt to set\
+the value that was returned.  There are situations where this is the\
+right thing for the function to do; but such situations are rare.)}

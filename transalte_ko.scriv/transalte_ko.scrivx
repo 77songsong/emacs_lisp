@@ -400,15 +400,47 @@
                                 </BinderItem>
                             </Children>
                         </BinderItem>
-                        <BinderItem ID="33" Type="Text" Created="2012-11-09 00:48:45 +0900" Modified="2012-11-11 00:56:25 +0900">
+                        <BinderItem ID="33" Type="Text" Created="2012-11-09 00:48:45 +0900" Modified="2013-01-10 01:13:59 +0900">
                             <Title>Setting the Value of a Variable</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>7765,0</TextSelection>
+                                <TextSelection>458,0</TextSelection>
                             </TextSettings>
+                            <Children>
+                                <BinderItem ID="158" Type="Text" Created="2013-01-10 00:20:23 +0900" Modified="2013-01-10 00:20:46 +0900">
+                                    <Title>Using set</Title>
+                                    <MetaData>
+                                        <IncludeInCompile>Yes</IncludeInCompile>
+                                        <NotesTextSelection>0,0</NotesTextSelection>
+                                    </MetaData>
+                                    <TextSettings>
+                                        <TextSelection>2470,0</TextSelection>
+                                    </TextSettings>
+                                </BinderItem>
+                                <BinderItem ID="159" Type="Text" Created="2013-01-10 00:20:44 +0900" Modified="2013-01-10 00:21:09 +0900">
+                                    <Title>Using setq</Title>
+                                    <MetaData>
+                                        <IncludeInCompile>Yes</IncludeInCompile>
+                                        <NotesTextSelection>0,0</NotesTextSelection>
+                                    </MetaData>
+                                    <TextSettings>
+                                        <TextSelection>2366,0</TextSelection>
+                                    </TextSettings>
+                                </BinderItem>
+                                <BinderItem ID="160" Type="Text" Created="2013-01-10 00:20:57 +0900" Modified="2013-01-10 00:21:09 +0900">
+                                    <Title>Counting</Title>
+                                    <MetaData>
+                                        <IncludeInCompile>Yes</IncludeInCompile>
+                                        <NotesTextSelection>0,0</NotesTextSelection>
+                                    </MetaData>
+                                    <TextSettings>
+                                        <TextSelection>352,0</TextSelection>
+                                    </TextSettings>
+                                </BinderItem>
+                            </Children>
                         </BinderItem>
                         <BinderItem ID="34" Type="Text" Created="2012-11-09 00:48:51 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Summary</Title>
@@ -1683,7 +1715,7 @@
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2012-11-09 00:23:48 +0900" IgnoreDeadline="Yes">0</DraftTarget>
         <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" ResetType="Midnight" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="-210" Characters="-1568" Date="2013-01-09 00:44:57 +0900"></PreviousSession>
+        <PreviousSession Words="-20" Characters="-166" Date="2013-01-10 00:20:01 +0900"></PreviousSession>
     </ProjectTargets>
     <PrintSettings PaperSize="595.289978,841.890015" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="iso-a4" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
 </ScrivenerProject>

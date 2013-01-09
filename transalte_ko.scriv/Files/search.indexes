@@ -19195,184 +19195,18 @@ Lisp에서 구두점과 공백 문자들을 포함한 모든 큰 따옴표로 �
 @cindex Setting value of variable
 
 @cindex @samp{bind} defined
-There are several ways by which a variable can be given a value.  One of
-the ways is to use either the function @code{set} or the function
-@code{setq}.  Another way is to use @code{let} (@pxref{let}).  (The
-jargon for this process is to @dfn{bind} a variable to a value.)
+변수의 값을 변경하는 것은 여러가지 방법이 있다. 이 방법 중의 하나는 @code{set} 함수 
+또는 @code{setq} 함수를 사용하는 것이다. @code{let}(@pxref{let})를 사용하는 
+다른 방법도 있다. ( 이런 과정을 변수에 값을 @dfn{bind}한다고 한다. )
 
-The following sections not only describe how @code{set} and @code{setq}
-work but also illustrate how arguments are passed.
+다음 절들은 @code{set}과 @code{setq}가 동작하는 것 뿐만 아니라 인자들이 
+전달되는 방식도 설명한다.
 
 @menu
 * Using set::                  Setting values.
 * Using setq::                 Setting a quoted value.
 * Counting::                   Using @code{setq} to count.
-@end menu
-
-@node Using set, Using setq, set &amp; setq, set &amp; setq
-@comment  node-name,  next,  previous,  up
-@subsection Using @code{set}
-@findex set
-
-To set the value of the symbol @code{flowers} to the list @code{'(rose
-violet daisy buttercup)}, evaluate the following expression by
-positioning the cursor after the expression and typing @kbd{C-x C-e}.
-
-@smallexample
-(set 'flowers '(rose violet daisy buttercup))
-@end smallexample
-
-@noindent
-The list @code{(rose violet daisy buttercup)} will appear in the echo
-area.  This is what is @emph{returned} by the @code{set} function.  As a
-side effect, the symbol @code{flowers} is bound to the list; that is,
-the symbol @code{flowers}, which can be viewed as a variable, is given
-the list as its value.  (This process, by the way, illustrates how a
-side effect to the Lisp interpreter, setting the value, can be the
-primary effect that we humans are interested in.  This is because every
-Lisp function must return a value if it does not get an error, but it
-will only have a side effect if it is designed to have one.)
-
-After evaluating the @code{set} expression, you can evaluate the symbol
-@code{flowers} and it will return the value you just set.  Here is the
-symbol.  Place your cursor after it and type @kbd{C-x C-e}.
-
-@smallexample
-flowers
-@end smallexample
-
-@noindent
-When you evaluate @code{flowers}, the list
-@code{(rose violet daisy buttercup)} appears in the echo area.
-
-Incidentally, if you evaluate @code{'flowers}, the variable with a quote
-in front of it, what you will see in the echo area is the symbol itself,
-@code{flowers}.  Here is the quoted symbol, so you can try this:
-
-@smallexample
-'flowers
-@end smallexample
-
-Note also, that when you use @code{set}, you need to quote both
-arguments to @code{set}, unless you want them evaluated.  Since we do
-not want either argument evaluated, neither the variable
-@code{flowers} nor the list @code{(rose violet daisy buttercup)}, both
-are quoted.  (When you use @code{set} without quoting its first
-argument, the first argument is evaluated before anything else is
-done.  If you did this and @code{flowers} did not have a value
-already, you would get an error message that the @samp{Symbol's value
-as variable is void}; on the other hand, if @code{flowers} did return
-a value after it was evaluated, the @code{set} would attempt to set
-the value that was returned.  There are situations where this is the
-right thing for the function to do; but such situations are rare.)
-
-@node Using setq, Counting, Using set, set &amp; setq
-@comment  node-name,  next,  previous,  up
-@subsection Using @code{setq}
-@findex setq
-
-As a practical matter, you almost always quote the first argument to
-@code{set}.  The combination of @code{set} and a quoted first argument
-is so common that it has its own name: the special form @code{setq}.
-This special form is just like @code{set} except that the first argument
-is quoted automatically, so you don't need to type the quote mark
-yourself.  Also, as an added convenience, @code{setq} permits you to set
-several different variables to different values, all in one expression.
-
-To set the value of the variable @code{carnivores} to the list
-@code{'(lion tiger leopard)} using @code{setq}, the following expression
-is used:
-
-@smallexample
-(setq carnivores '(lion tiger leopard))
-@end smallexample
-
-@noindent
-This is exactly the same as using @code{set} except the first argument
-is automatically quoted by @code{setq}.  (The @samp{q} in @code{setq}
-means @code{quote}.)
-
-@need 1250
-With @code{set}, the expression would look like this:
-
-@smallexample
-(set 'carnivores '(lion tiger leopard))
-@end smallexample
-
-Also, @code{setq} can be used to assign different values to
-different variables.  The first argument is bound to the value
-of the second argument, the third argument is bound to the value of the
-fourth argument, and so on.  For example, you could use the following to
-assign a list of trees to the symbol @code{trees} and a list of herbivores
-to the symbol @code{herbivores}:
-
-@smallexample
-@group
-(setq trees '(pine fir oak maple)
-      herbivores '(gazelle antelope zebra))
-@end group
-@end smallexample
-
-@noindent
-(The expression could just as well have been on one line, but it might
-not have fit on a page; and humans find it easier to read nicely
-formatted lists.)
-
-Although I have been using the term `assign', there is another way of
-thinking about the workings of @code{set} and @code{setq}; and that is to
-say that @code{set} and @code{setq} make the symbol @emph{point} to the
-list.  This latter way of thinking is very common and in forthcoming
-chapters we shall come upon at least one symbol that has `pointer' as
-part of its name.  The name is chosen because the symbol has a value,
-specifically a list, attached to it; or, expressed another way,
-the symbol is set to ``point'' to the list.
-
-@node Counting,  , Using setq, set &amp; setq
-@comment  node-name,  next,  previous,  up
-@subsection Counting
-@cindex Counting
-
-Here is an example that shows how to use @code{setq} in a counter.  You
-might use this to count how many times a part of your program repeats
-itself.  First set a variable to zero; then add one to the number each
-time the program repeats itself.  To do this, you need a variable that
-serves as a counter, and two expressions: an initial @code{setq}
-expression that sets the counter variable to zero; and a second
-@code{setq} expression that increments the counter each time it is
-evaluated.
-
-@smallexample
-@group
-(setq counter 0)                ; @r{Let's call this the initializer.}
-
-(setq counter (+ counter 1))    ; @r{This is the incrementer.}
-
-counter                         ; @r{This is the counter.}
-@end group
-@end smallexample
-
-@noindent
-(The text following the @samp{;} are comments.  @xref{Change a
-defun, , Change a Function Definition}.)
-
-If you evaluate the first of these expressions, the initializer,
-@code{(setq counter 0)}, and then evaluate the third expression,
-@code{counter}, the number @code{0} will appear in the echo area.  If
-you then evaluate the second expression, the incrementer, @code{(setq
-counter (+ counter 1))}, the counter will get the value 1.  So if you
-again evaluate @code{counter}, the number @code{1} will appear in the
-echo area.  Each time you evaluate the second expression, the value of
-the counter will be incremented.
-
-When you evaluate the incrementer, @code{(setq counter (+ counter 1))},
-the Lisp interpreter first evaluates the innermost list; this is the
-addition.  In order to evaluate this list, it must evaluate the variable
-@code{counter} and the number @code{1}.  When it evaluates the variable
-@code{counter}, it receives its current value.  It passes this value and
-the number @code{1} to the @code{+} which adds them together.  The sum
-is then returned as the value of the inner list and passed to the
-@code{setq} which sets the variable @code{counter} to this new value.
-Thus, the value of the variable, @code{counter}, is changed.</Text>
+@end menu</Text>
         </Document>
         <Document ID="29">
             <Title>The Lisp Interpreter</Title>
@@ -24507,6 +24341,56 @@ Wrong type argument:@: number-or-marker-p, hello
 다른 단어로 나타나지만 위의 @file{*Backtrace*} 버퍼에 있는 것과 같은 의미이다.
 @end ignore</Text>
         </Document>
+        <Document ID="160">
+            <Title>Counting</Title>
+            <Text>
+@node Counting,  , Using setq, set &amp; setq
+@comment  node-name,  next,  previous,  up
+@subsection Counting
+@cindex Counting
+
+Here is an example that shows how to use @code{setq} in a counter.  You
+might use this to count how many times a part of your program repeats
+itself.  First set a variable to zero; then add one to the number each
+time the program repeats itself.  To do this, you need a variable that
+serves as a counter, and two expressions: an initial @code{setq}
+expression that sets the counter variable to zero; and a second
+@code{setq} expression that increments the counter each time it is
+evaluated.
+
+@smallexample
+@group
+(setq counter 0)                ; @r{Let's call this the initializer.}
+
+(setq counter (+ counter 1))    ; @r{This is the incrementer.}
+
+counter                         ; @r{This is the counter.}
+@end group
+@end smallexample
+
+@noindent
+(The text following the @samp{;} are comments.  @xref{Change a
+defun, , Change a Function Definition}.)
+
+If you evaluate the first of these expressions, the initializer,
+@code{(setq counter 0)}, and then evaluate the third expression,
+@code{counter}, the number @code{0} will appear in the echo area.  If
+you then evaluate the second expression, the incrementer, @code{(setq
+counter (+ counter 1))}, the counter will get the value 1.  So if you
+again evaluate @code{counter}, the number @code{1} will appear in the
+echo area.  Each time you evaluate the second expression, the value of
+the counter will be incremented.
+
+When you evaluate the incrementer, @code{(setq counter (+ counter 1))},
+the Lisp interpreter first evaluates the innermost list; this is the
+addition.  In order to evaluate this list, it must evaluate the variable
+@code{counter} and the number @code{1}.  When it evaluates the variable
+@code{counter}, it receives its current value.  It passes this value and
+the number @code{1} to the @code{+} which adds them together.  The sum
+is then returned as the value of the inner list and passed to the
+@code{setq} which sets the variable @code{counter} to this new value.
+Thus, the value of the variable, @code{counter}, is changed.</Text>
+        </Document>
         <Document ID="56">
             <Title>The Definition of append-to-buffer</Title>
             <Text>
@@ -26971,6 +26855,66 @@ intent is that neither programs nor users should ever change a value
 set by @code{defconst}.  (You can change it; the value set is a
 variable; but please do not.)</Text>
         </Document>
+        <Document ID="158">
+            <Title>Using set</Title>
+            <Text>
+@node Using set, Using setq, set &amp; setq, set &amp; setq
+@comment  node-name,  next,  previous,  up
+@subsection Using @code{set}
+@findex set
+
+To set the value of the symbol @code{flowers} to the list @code{'(rose
+violet daisy buttercup)}, evaluate the following expression by
+positioning the cursor after the expression and typing @kbd{C-x C-e}.
+
+@smallexample
+(set 'flowers '(rose violet daisy buttercup))
+@end smallexample
+
+@noindent
+The list @code{(rose violet daisy buttercup)} will appear in the echo
+area.  This is what is @emph{returned} by the @code{set} function.  As a
+side effect, the symbol @code{flowers} is bound to the list; that is,
+the symbol @code{flowers}, which can be viewed as a variable, is given
+the list as its value.  (This process, by the way, illustrates how a
+side effect to the Lisp interpreter, setting the value, can be the
+primary effect that we humans are interested in.  This is because every
+Lisp function must return a value if it does not get an error, but it
+will only have a side effect if it is designed to have one.)
+
+After evaluating the @code{set} expression, you can evaluate the symbol
+@code{flowers} and it will return the value you just set.  Here is the
+symbol.  Place your cursor after it and type @kbd{C-x C-e}.
+
+@smallexample
+flowers
+@end smallexample
+
+@noindent
+When you evaluate @code{flowers}, the list
+@code{(rose violet daisy buttercup)} appears in the echo area.
+
+Incidentally, if you evaluate @code{'flowers}, the variable with a quote
+in front of it, what you will see in the echo area is the symbol itself,
+@code{flowers}.  Here is the quoted symbol, so you can try this:
+
+@smallexample
+'flowers
+@end smallexample
+
+Note also, that when you use @code{set}, you need to quote both
+arguments to @code{set}, unless you want them evaluated.  Since we do
+not want either argument evaluated, neither the variable
+@code{flowers} nor the list @code{(rose violet daisy buttercup)}, both
+are quoted.  (When you use @code{set} without quoting its first
+argument, the first argument is evaluated before anything else is
+done.  If you did this and @code{flowers} did not have a value
+already, you would get an error message that the @samp{Symbol's value
+as variable is void}; on the other hand, if @code{flowers} did return
+a value after it was evaluated, the @code{set} would attempt to set
+the value that was returned.  There are situations where this is the
+right thing for the function to do; but such situations are rare.)</Text>
+        </Document>
         <Document ID="59">
             <Title>The Definition of copy-to-buffer</Title>
             <Text>
@@ -27271,6 +27215,70 @@ Of course, you don't need to include comments like these in your
 @file{.emacs} file.  I included them in mine because I kept forgetting
 about Mode help or the conventions for comments---but I was able to
 remember to look here to remind myself.</Text>
+        </Document>
+        <Document ID="159">
+            <Title>Using setq</Title>
+            <Text>
+@node Using setq, Counting, Using set, set &amp; setq
+@comment  node-name,  next,  previous,  up
+@subsection Using @code{setq}
+@findex setq
+
+As a practical matter, you almost always quote the first argument to
+@code{set}.  The combination of @code{set} and a quoted first argument
+is so common that it has its own name: the special form @code{setq}.
+This special form is just like @code{set} except that the first argument
+is quoted automatically, so you don't need to type the quote mark
+yourself.  Also, as an added convenience, @code{setq} permits you to set
+several different variables to different values, all in one expression.
+
+To set the value of the variable @code{carnivores} to the list
+@code{'(lion tiger leopard)} using @code{setq}, the following expression
+is used:
+
+@smallexample
+(setq carnivores '(lion tiger leopard))
+@end smallexample
+
+@noindent
+This is exactly the same as using @code{set} except the first argument
+is automatically quoted by @code{setq}.  (The @samp{q} in @code{setq}
+means @code{quote}.)
+
+@need 1250
+With @code{set}, the expression would look like this:
+
+@smallexample
+(set 'carnivores '(lion tiger leopard))
+@end smallexample
+
+Also, @code{setq} can be used to assign different values to
+different variables.  The first argument is bound to the value
+of the second argument, the third argument is bound to the value of the
+fourth argument, and so on.  For example, you could use the following to
+assign a list of trees to the symbol @code{trees} and a list of herbivores
+to the symbol @code{herbivores}:
+
+@smallexample
+@group
+(setq trees '(pine fir oak maple)
+      herbivores '(gazelle antelope zebra))
+@end group
+@end smallexample
+
+@noindent
+(The expression could just as well have been on one line, but it might
+not have fit on a page; and humans find it easier to read nicely
+formatted lists.)
+
+Although I have been using the term `assign', there is another way of
+thinking about the workings of @code{set} and @code{setq}; and that is to
+say that @code{set} and @code{setq} make the symbol @emph{point} to the
+list.  This latter way of thinking is very common and in forthcoming
+chapters we shall come upon at least one symbol that has `pointer' as
+part of its name.  The name is chosen because the symbol has a value,
+specifically a list, attached to it; or, expressed another way,
+the symbol is set to ``point'' to the list.</Text>
         </Document>
         <Document ID="65">
             <Title>what-line</Title>

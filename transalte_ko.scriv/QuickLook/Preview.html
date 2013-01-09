@@ -670,12 +670,66 @@ GNU Emacs 22 버전에서 @file{*Backtrace*} 버퍼가 만들어진다.<br/>
 @cindex Setting value of variable<br/>
 <br/>
 @cindex @samp{bind} defined<br/>
-There are several ways by which a variable can be given a value.  One of<br/>
-the ways is to use either the function @code{set} or the function<br/>
-@code{setq}.  Another way is to use @code{let} (@pxref{let}).  (The<br/>
-jargon for this process is to @dfn{bind} a variable to a value.)<br/>
-...</p>
+변수의 값을 변경하는 것은 여러가지 방법이 있다. 이 방법 중의 하나는 @code{set} 함수 <br/>
+또는 @code{setq} 함수를 사용하는 것이다. @code{let}(@pxref{let})를 사용하는 <br/>
+다른 방법도 있다. ( 이런 과정을 변수에 값을 @dfn{bind}한다고 한다. )<br/>
+<br/>
+다음 절들은 @code{set}과 @code{setq}가 동작하는 것 뿐만 아니라 인자들이 <br/>
+전달되는 방식도 설명한다.<br/>
+<br/>
+@menu<br/>
+* Using set::                  Sett...</p>
 </li>
+<hr/>
+<ul>
+<li>
+<p class="binderItem"><strong>Using set</strong><br/><br/>
+@node Using set, Using setq, set & setq, set & setq<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@subsection Using @code{set}<br/>
+@findex set<br/>
+<br/>
+To set the value of the symbol @code{flowers} to the list @code{'(rose<br/>
+violet daisy buttercup)}, evaluate the following expression by<br/>
+positioning the cursor after the expression and typing @kbd{C-x C-e}.<br/>
+<br/>
+@smallexample<br/>
+(set 'flowers '(rose violet daisy buttercup))<br/>
+@end smallexample<br/>
+<br/>
+@noindent<br/>
+The list @code{(rose violet daisy buttercup)} will appear in the ech...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Using setq</strong><br/><br/>
+@node Using setq, Counting, Using set, set & setq<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@subsection Using @code{setq}<br/>
+@findex setq<br/>
+<br/>
+As a practical matter, you almost always quote the first argument to<br/>
+@code{set}.  The combination of @code{set} and a quoted first argument<br/>
+is so common that it has its own name: the special form @code{setq}.<br/>
+This special form is just like @code{set} except that the first argument<br/>
+is quoted automatically, so you don't need to type the quote mark<br/>
+yourself.  Als...</p>
+</li>
+<li>
+<p class="binderItem"><strong>Counting</strong><br/><br/>
+@node Counting,  , Using setq, set & setq<br/>
+@comment  node-name,  next,  previous,  up<br/>
+@subsection Counting<br/>
+@cindex Counting<br/>
+<br/>
+Here is an example that shows how to use @code{setq} in a counter.  You<br/>
+might use this to count how many times a part of your program repeats<br/>
+itself.  First set a variable to zero; then add one to the number each<br/>
+time the program repeats itself.  To do this, you need a variable that<br/>
+serves as a counter, and two expressions: an initial @code{setq}<br/>
+expression that sets the c...</p>
+</li>
+</ul>
+<hr/>
 <li>
 <p class="binderItem"><strong>Summary</strong><br/><br/>
 @node Summary, Error Message Exercises, set & setq, List 처리하기<br/>
