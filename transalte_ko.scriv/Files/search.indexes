@@ -19365,7 +19365,8 @@ list			list
 quote		인용구
 function		함수
 atom 		atom
-double quotation 큰따옴표</Text>
+double quotation 큰따옴표
+bind                     바인딩</Text>
         </Document>
         <Document ID="35">
             <Title>Excercises</Title>
@@ -26863,57 +26864,45 @@ variable; but please do not.)</Text>
 @subsection Using @code{set}
 @findex set
 
-To set the value of the symbol @code{flowers} to the list @code{'(rose
-violet daisy buttercup)}, evaluate the following expression by
-positioning the cursor after the expression and typing @kbd{C-x C-e}.
+기호 @code{flowers}의 값을 list @code{‘(rose violet daisy buttercup)}로 
+설정하기 위해 표현식 뒤에 커서를 놓고 @kbd{C-x C-e}를 입력해라.
 
 @smallexample
 (set 'flowers '(rose violet daisy buttercup))
 @end smallexample
 
 @noindent
-The list @code{(rose violet daisy buttercup)} will appear in the echo
-area.  This is what is @emph{returned} by the @code{set} function.  As a
-side effect, the symbol @code{flowers} is bound to the list; that is,
-the symbol @code{flowers}, which can be viewed as a variable, is given
-the list as its value.  (This process, by the way, illustrates how a
-side effect to the Lisp interpreter, setting the value, can be the
-primary effect that we humans are interested in.  This is because every
-Lisp function must return a value if it does not get an error, but it
-will only have a side effect if it is designed to have one.)
+@code{(rose violet daisy buttercup)} list가 echo 영역에 나타날 것이다. @code{set} 함수의 결과로 
+@emph{returned} 된 것이다. 추가 효과로 기호 @code{flowers}는 이 list에 바인딩 되었다.; 기호 
+@code{flowers}는 변수로서 볼 수 있고 list가 값이다. ( 그런데 이 과정은 값을 설정하는 해석기의 추가 
+효과가 사람들이 관심 있어 하는 주요 효과를 보게 될 수 있다는 것을 보여준다. 모든 Lisp 함수는 에러가 
+아니라면 값을 넘겨줘야 한다. 그러나 하나의 부수 효과를 가지게 설계되었다면 오직 하나의 부수 효과를 볼 
+것이다. )
 
-After evaluating the @code{set} expression, you can evaluate the symbol
-@code{flowers} and it will return the value you just set.  Here is the
-symbol.  Place your cursor after it and type @kbd{C-x C-e}.
+@code{set} 표현식을 평가한 후, 기호 @code{flowers}를 평가할 수 있다. 그리고 단지 설정한 값을 넘길 
+것이다. 여기 기호가 있다. 그 기호 뒤에 커서를 옮긴 후, @kbd{C-x C-e}를 입력해보라.
 
 @smallexample
 flowers
 @end smallexample
 
 @noindent
-When you evaluate @code{flowers}, the list
-@code{(rose violet daisy buttercup)} appears in the echo area.
+@code{flowers}를 평가할 때, list @code{(rose violet daisy buttercup)}는 echo 영역에 보일 것이다. 
 
-Incidentally, if you evaluate @code{'flowers}, the variable with a quote
-in front of it, what you will see in the echo area is the symbol itself,
-@code{flowers}.  Here is the quoted symbol, so you can try this:
+우연히 변수 앞에 작은 따옴표가 있는 @code{‘flowers}를 평가하면 echo 영역에 그 자체  기호 그 자체 
+@code{flowers}가 나타날 것이다. 여기 그 기호가 있고, 시험해볼 수 있다.
 
 @smallexample
 'flowers
 @end smallexample
 
-Note also, that when you use @code{set}, you need to quote both
-arguments to @code{set}, unless you want them evaluated.  Since we do
-not want either argument evaluated, neither the variable
-@code{flowers} nor the list @code{(rose violet daisy buttercup)}, both
-are quoted.  (When you use @code{set} without quoting its first
-argument, the first argument is evaluated before anything else is
-done.  If you did this and @code{flowers} did not have a value
-already, you would get an error message that the @samp{Symbol's value
-as variable is void}; on the other hand, if @code{flowers} did return
-a value after it was evaluated, the @code{set} would attempt to set
-the value that was returned.  There are situations where this is the
-right thing for the function to do; but such situations are rare.)</Text>
+@code{set}을 사용할 때, 두 인자가 평가되기를 원하지 않는다면 @code{set}에 두 인자들에 작은 따옴표가 
+필요하다. 인자가 평가되는 것을 원하지 않기 때문에 변수 @code{flowers} 와 list @code{(rose violet 
+daisy buttercup)}는 작은 따옴표가 붙어있다. ( 첫 인자에 작은 따옴표 없이 @code{set}을 사용할 때, 첫 
+인자가 먼저 평가된다. 만약 @code{flowers}가 값을 가지지 않은 상태에서 이렇게 한다면 
+@samp{Symbol’s value as variable is void}라는 에러 메시지를 볼 것이다.; 반면에 @code{flowers}가 
+평가된 후에 값을 넘겨준다면 @code{set}은 넘겨 받은 값에 설정하려고 할 것이다. 이 동작은 제대로 된 
+동작이다.; 그러나 매우 드문 상황이다. )</Text>
         </Document>
         <Document ID="59">
             <Title>The Definition of copy-to-buffer</Title>
