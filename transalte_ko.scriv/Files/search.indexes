@@ -18733,9 +18733,9 @@ Lisp에서 list는 이런 형태이다.; @code{'(rose violet daisy buttercup)}. 
         <Document ID="30">
             <Title>Evaluation</Title>
             <Text>
-@node Evaluation, Variables, Lisp Interpreter, List 처리하기
+@node 평가하기, Variables, Lisp Interpreter, List 처리하기
 @comment  node-name,  next,  previous,  up
-@section Evaluation
+@section 평가하기
 @cindex Evaluation
 
 Lisp 해석기가 표현에서 동작할 때, 그 행위를 위한 용어로 @dfn{evaluation}이라고 
@@ -18744,8 +18744,8 @@ Lisp 해석기가 표현에서 동작할 때, 그 행위를 위한 용어로 @df
 금액을 알아보다; 평가하다.’라는 일상 언어에서 사용하는 것에서 유래되었다.
 
 @menu
-* How the Interpreter Acts::    Returns and Side Effects...
-* Evaluating Inner Lists::      Lists within lists...
+* 해석기가 동작하는 방식::    Returns and Side Effects...
+* 내부 list 평가하기::      Lists within lists...
 @end menu</Text>
         </Document>
         <Document ID="26">
@@ -18830,7 +18830,7 @@ Lisp 대화 모드 또는 Emacs Lisp 모드의 GNU Emacs에서 Lisp 표현식을
         <Document ID="31">
             <Title>Variables</Title>
             <Text>
-@node Variables, Arguments, Evaluation, List 처리하기
+@node Variables, 인자들, 평가하기, List 처리하기
 @comment  node-name,  next,  previous,  up
 @section Variables
 @cindex Variables
@@ -19028,9 +19028,9 @@ void:@: this}. 기호는 ( @samp{this} 단어 ) 컴퓨터가 수행할 수 있�
         <Document ID="32">
             <Title>Arguments</Title>
             <Text>
-@node Arguments, set &amp; setq, Variables, List 처리하기
+@node 인자들, set &amp; setq, Variables, List 처리하기
 @comment  node-name,  next,  previous,  up
-@section Arguments
+@section 인자들
 @cindex Arguments
 @cindex Passing information to functions
 
@@ -19065,7 +19065,7 @@ Lisp에서는 기호는 동시에 두 개의 다른 함수 정의를 가질 수 
 * Data types::                  Types of data passed to a function.
 * Args as Variable or List::    An argument can be the value
                                   of a variable or list.
-* Variable Number of Arguments::  Some functions may take a
+* 여러 개의 인자들::  Some functions may take a
                                   variable number of arguments.
 * Wrong Type of Argument::      Passing an argument of the wrong type
                                   to a function.
@@ -19188,9 +19188,9 @@ Lisp에서 구두점과 공백 문자들을 포함한 모든 큰 따옴표로 �
         <Document ID="33">
             <Title>Setting the Value of a Variable</Title>
             <Text>
-@node set &amp; setq, Summary, Arguments, List 처리하기
+@node set &amp; setq, Summary, 인자들, List 처리하기
 @comment  node-name,  next,  previous,  up
-@section Setting the Value of a Variable
+@section 변수에 값 설정하기
 @cindex Variable, setting value
 @cindex Setting value of variable
 
@@ -19203,15 +19203,15 @@ Lisp에서 구두점과 공백 문자들을 포함한 모든 큰 따옴표로 �
 전달되는 방식도 설명한다.
 
 @menu
-* Using set::                  Setting values.
-* Using setq::                 Setting a quoted value.
-* Counting::                   Using @code{setq} to count.
+* set 사용하기::                  값 설정하기.
+* setq 사용하기::                 따옴표 붙은 값 설정하기.
+* 숫자 세기::                   숫자 세기에 @code{setq}를 사용하기.
 @end menu</Text>
         </Document>
         <Document ID="29">
             <Title>The Lisp Interpreter</Title>
             <Text>
-@node Lisp Interpreter, Evaluation, 이름과 정의, List 처리하기
+@node Lisp Interpreter, 평가하기, 이름과 정의, List 처리하기
 @comment  node-name,  next,  previous,  up
 @section Lisp 해석기
 @cindex Lisp interpreter, what it does
@@ -19357,7 +19357,7 @@ characters' brings us to the issue of syntax, which is worth a section
 of its own.</Text>
         </Document>
         <Document ID="145">
-            <Title>용어 정리</Title>
+            <Title>번역 용어 정리</Title>
             <Text>expression		표현식
 mode		모드
 evaluate		평가하다
@@ -19524,7 +19524,7 @@ expression it came from ceases to matter once the value is known.
 같은 list; 심지어 변수를 함수에 bind 할 수 있다.
 
 기호는 다른 방식으로 값에 bind 될 수 있다. 이 것과 관련된 정보는 @xref{set &amp; setq, ,
-Setting the Value of a Variable} 참조하라.</Text>
+변수에 값 설정하기} 참조하라.</Text>
         </Document>
         <Document ID="36">
             <Title>Buffer Names</Title>
@@ -20844,9 +20844,9 @@ explanation about this technique.</Text>
         <Document ID="148">
             <Title>How the Lisp interpreter acts</Title>
             <Text>
-@node How the Interpreter Acts, Evaluating Inner Lists, Evaluation, Evaluation
+@node 해석기가 동작하는 방식, 내부 list 평가하기, 평가하기, 평가하기
 @ifnottex
-@unnumberedsubsec How the Lisp Interpreter Acts
+@unnumberedsubsec Lisp 해석기가 동작하는 방식
 @end ifnottex
 
 @cindex @samp{returned value} explained.
@@ -21307,9 +21307,9 @@ List 처리하기
 * 에러 만들기::               에러 메시지 만들기.
 * 이름과 정의::         기호 이름들과 함수 정의들.
 * Lisp Interpreter::            Lisp 해석기가 하는 일.
-* Evaluation::                  프로그램 실행.
+* 평가하기::                  프로그램 실행.
 * Variables::                   변수로부터 값을 넘겨 받기.
-* Arguments::                   함수에 정보 넘기기.
+* 인자들::                   함수에 정보 넘기기.
 * set &amp; setq::                  변수에 값 설정하기.
 * Summary::                     중요한 점들.
 * Error Message Exercises::
@@ -21326,10 +21326,10 @@ Lisp 해석기
 * Complications::               Variables, Special forms, Lists within.
 * Byte Compiling::              Specially processing code for speed.
 
-Evaluation
+평가하기
 
-* How the Interpreter Acts::    Returns and Side Effects...
-* Evaluating Inner Lists::      Lists within lists...
+* 해석기가 동작하는 방식::    Returns and Side Effects...
+* 내부 list 평가하기::      Lists within lists...
 
 Variables
 
@@ -21338,22 +21338,22 @@ Variables
                                   without a function.
 * Void Variable::               The error message for a symbol without a value.
 
-Arguments
+인자들
 
 * Data types::                  Types of data passed to a function.
 * Args as Variable or List::    An argument can be the value
                                   of a variable or list.
-* Variable Number of Arguments::  Some functions may take a
+* 여러 개의 인자들::  Some functions may take a
                                   variable number of arguments.
 * Wrong Type of Argument::      Passing an argument of the wrong type
                                   to a function.
 * message::                     A useful function for sending messages.
 
-Setting the Value of a Variable
+변수에 값 설정하기
 
-* Using set::                  Setting values.
-* Using setq::                 Setting a quoted value.
-* Counting::                   Using @code{setq} to count.
+* set 사용하기::                  값 설정하기.
+* setq 사용하기::                 따옴표 붙은 값 설정하기.
+* 숫자 세기::                   숫자 세기에 @code{setq}를 사용하기.
 
 Practicing Evaluation
 
@@ -21841,9 +21841,9 @@ The task is easy: use @code{find-file-noselect} and @code{set-buffer}.</Text>
         <Document ID="153">
             <Title>Arguments' Data Types</Title>
             <Text>
-@node Data types, Args as Variable or List, Arguments, Arguments
+@node Data types, Args as Variable or List, 인자들, 인자들
 @comment  node-name,  next,  previous,  up
-@subsection Arguments' Data Types
+@subsection 인자의 데이터 타입
 @cindex Data types
 @cindex Types of data
 @cindex Arguments' data types
@@ -21891,9 +21891,9 @@ echo 영역에 @code{“fox”}이 나타날 것이다. 인자들은 문자열�
         <Document ID="149">
             <Title>Evaluating inner lists</Title>
             <Text>
-@node Evaluating Inner Lists,  , How the Interpreter Acts, Evaluation
+@node 내부 list 평가하기,  , 해석기가 동작하는 방식, 평가하기
 @comment  node-name,  next,  previous,  up
-@subsection Evaluating Inner Lists
+@subsection 내부 list 평가하기
 @cindex Inner list evaluation
 @cindex Evaluating inner lists
 
@@ -22189,9 +22189,9 @@ delimit them from the body of the @code{let}.</Text>
 * 에러 만들기::               에러 메시지 만들기.
 * 이름과 정의::         기호 이름들과 함수 정의들.
 * Lisp Interpreter::            Lisp 해석기가 하는 일.
-* Evaluation::                  프로그램 실행.
+* 평가하기::                  프로그램 실행.
 * Variables::                   변수로부터 값을 넘겨 받기.
-* Arguments::                   함수에 정보 넘기기.
+* 인자들::                   함수에 정보 넘기기.
 * set &amp; setq::                  변수에 값 설정하기.
 * Summary::                     중요한 점들.
 * Error Message Exercises::
@@ -23362,9 +23362,9 @@ and if so, prints an appropriate message.
         <Document ID="154">
             <Title>An Argument as the Value of a Variable or List</Title>
             <Text>
-@node Args as Variable or List, Variable Number of Arguments, Data types, Arguments
+@node Args as Variable or List, 여러 개의 인자들, Data types, Arguments
 @comment  node-name,  next,  previous,  up
-@subsection An Argument as the Value of a Variable or List
+@subsection 변수의 값 또는 list인 인자
 
 인자는 평가될 때 값을 넘겨주는 기호가 될 수 있다. 예를 들면 @code{fill-column} 
 기호는 평가될 때 숫자를 넘긴다. 이 숫자는 추가로 사용될 수 있다.
@@ -23832,9 +23832,9 @@ by topic keywords.''</Text>
         <Document ID="155">
             <Title>Variable Number of Arguments</Title>
             <Text>
-@node Variable Number of Arguments, Wrong Type of Argument, Args as Variable or List, Arguments
+@node 여러 개의 인자들, Wrong Type of Argument, Args as Variable or List, 인자들
 @comment  node-name,  next,  previous,  up
-@subsection Variable Number of Arguments
+@subsection 여러 개의 인자들
 @cindex Variable number of arguments
 @cindex Arguments, variable number of
 
@@ -24262,9 +24262,9 @@ The next step is to prepare the data in the list for display in a graph.</Text>
         <Document ID="156">
             <Title>Using the Wrong Type Object as an Argument</Title>
             <Text>
-@node Wrong Type of Argument, message, Variable Number of Arguments, Arguments
+@node Wrong Type of Argument, message, 여러 개의 인자들, 인자들
 @comment  node-name,  next,  previous,  up
-@subsection Using the Wrong Type Object as an Argument
+@subsection잘못된 타입의 인자를 사용하기
 @cindex Wrong type of argument
 @cindex Argument, wrong type of
 
@@ -24345,19 +24345,15 @@ Wrong type argument:@: number-or-marker-p, hello
         <Document ID="160">
             <Title>Counting</Title>
             <Text>
-@node Counting,  , Using setq, set &amp; setq
+@node 숫자 세기,  , setq 사용하기, set &amp; setq
 @comment  node-name,  next,  previous,  up
-@subsection Counting
+@subsection 숫자 세기
 @cindex Counting
 
-Here is an example that shows how to use @code{setq} in a counter.  You
-might use this to count how many times a part of your program repeats
-itself.  First set a variable to zero; then add one to the number each
-time the program repeats itself.  To do this, you need a variable that
-serves as a counter, and two expressions: an initial @code{setq}
-expression that sets the counter variable to zero; and a second
-@code{setq} expression that increments the counter each time it is
-evaluated.
+숫자 세는 것에서 @code{setq}를 사용하는 방법을 보여주는 예가 있다. 프로그램 일 부분이 몇 번 반복했는지 
+세기위해 사용할 수 있다. 처음에 변수에 0을 설정한다.; 프로그램이 반복할 때마다 매번 1을 더한다. 이것을 
+하기 위해서 숫자를 저장할 계수기 변수와 두 표현식이 필요하다.: 첫 번째 @code{setq} 표현식은 계수기 
+변수에 0을 설정한다.; 두 번째 @code{setq} 표현식은 평가될 때마다 계수기에 1을 증가시킨다.
 
 @smallexample
 @group
@@ -24370,27 +24366,18 @@ counter                         ; @r{This is the counter.}
 @end smallexample
 
 @noindent
-(The text following the @samp{;} are comments.  @xref{Change a
-defun, , Change a Function Definition}.)
+(@samp{;} 뒤에 오는 글은 주석이다. @xref{Change a defun, , Change a Function Definition}.)
 
-If you evaluate the first of these expressions, the initializer,
-@code{(setq counter 0)}, and then evaluate the third expression,
-@code{counter}, the number @code{0} will appear in the echo area.  If
-you then evaluate the second expression, the incrementer, @code{(setq
-counter (+ counter 1))}, the counter will get the value 1.  So if you
-again evaluate @code{counter}, the number @code{1} will appear in the
-echo area.  Each time you evaluate the second expression, the value of
-the counter will be incremented.
+첫 번째 표현식 @code{(setq counter 0)} 평가 후, 세 번째 표현식 @code{counter} 평가하면,  숫자 
+@code{0}이 echo 영역에 나타날 것이다. 이 때 두번째 표현식 @code{(setq counter (+ counter 1))}을 
+평가하면, counter는 값 1을 가질 것이다. @code{counter}를 다시 평가하면, 숫자 @code{1}이 echo 
+영역에 나타날 것이다. 두 번째 표현식을 수행할 때 마다 counter의 값은 증가할 것이다.
 
-When you evaluate the incrementer, @code{(setq counter (+ counter 1))},
-the Lisp interpreter first evaluates the innermost list; this is the
-addition.  In order to evaluate this list, it must evaluate the variable
-@code{counter} and the number @code{1}.  When it evaluates the variable
-@code{counter}, it receives its current value.  It passes this value and
-the number @code{1} to the @code{+} which adds them together.  The sum
-is then returned as the value of the inner list and passed to the
-@code{setq} which sets the variable @code{counter} to this new value.
-Thus, the value of the variable, @code{counter}, is changed.</Text>
+@code{(setq counter (+ counter 1))}을 평가할 때, Lisp 해석기는 가장 안쪽의 list를 먼저 평가한다.; 
+추가적으로 이 list를 평가하기 위해서는 변수 @code{counter}와 숫자 @code{1}을 평가해야 한다. 변수 
+@code{counter}를 평가하면 현재 값을 받는다. 이 값과 숫자 @code{1}을 두 값을 더하는 @code{+}에 
+전달한다. 안 쪽 list의 값으로 합이 전달되고 @code{setq}는 변수 @code{counter}에 이 새로운 값을 
+설정한다. 그래서 변수 @code{counter}의 값은 변경된다.</Text>
         </Document>
         <Document ID="56">
             <Title>The Definition of append-to-buffer</Title>
@@ -26525,9 +26512,9 @@ happening.</Text>
         <Document ID="157">
             <Title>The message Function</Title>
             <Text>
-@node message,  , Wrong Type of Argument, Arguments
+@node message,  , Wrong Type of Argument, 인자들
 @comment  node-name,  next,  previous,  up
-@subsection The @code{message} Function
+@subsection@code{message} 함수
 @findex message
 
 @code{+} 같이 @code{message} 함수는 여러 개의 인자를 받는다. 사용자에게 
@@ -26859,9 +26846,9 @@ variable; but please do not.)</Text>
         <Document ID="158">
             <Title>Using set</Title>
             <Text>
-@node Using set, Using setq, set &amp; setq, set &amp; setq
+@node set 사용하기, setq 사용하기, set &amp; setq, set &amp; setq
 @comment  node-name,  next,  previous,  up
-@subsection Using @code{set}
+@subsection @code{set} 사용하기
 @findex set
 
 기호 @code{flowers}의 값을 list @code{‘(rose violet daisy buttercup)}로 
@@ -27208,45 +27195,37 @@ remember to look here to remind myself.</Text>
         <Document ID="159">
             <Title>Using setq</Title>
             <Text>
-@node Using setq, Counting, Using set, set &amp; setq
+@node setq 사용하기, 숫자 세기, set 사용하기, set &amp; setq
 @comment  node-name,  next,  previous,  up
-@subsection Using @code{setq}
+@subsection @code{setq} 사용하기
 @findex setq
 
-As a practical matter, you almost always quote the first argument to
-@code{set}.  The combination of @code{set} and a quoted first argument
-is so common that it has its own name: the special form @code{setq}.
-This special form is just like @code{set} except that the first argument
-is quoted automatically, so you don't need to type the quote mark
-yourself.  Also, as an added convenience, @code{setq} permits you to set
-several different variables to different values, all in one expression.
+실제로 @code{set}의 첫 인자를 거의 항상 따옴표를 붙인다. @code{set} 과 따옴표가 붙은 첫 인자의 
+조합은 별도의 이름을 가질 정도로 일반적이다.: 특별한 형태의 @code{setq}. 이 특별한 형태는 첫 인자가
+자동으로 따옴표가 붙는 것을 제외하고는 @code{set}과 같다. 그래서 따옴표를 붙일 필요가 없다. 또한 추가된
+편리함으로 @code{setq}는 하나의 표현식에 여러 개의 변수들에 값들을 설정하는 것을 허용한다.
 
-To set the value of the variable @code{carnivores} to the list
-@code{'(lion tiger leopard)} using @code{setq}, the following expression
-is used:
+@code{setq}를 사용하여 @code{carnivores} 변수에 list @code{‘(lion tiger leopard)} 값을 
+설정하려면 다음 표현식이 사용된다.:
 
 @smallexample
 (setq carnivores '(lion tiger leopard))
 @end smallexample
 
 @noindent
-This is exactly the same as using @code{set} except the first argument
-is automatically quoted by @code{setq}.  (The @samp{q} in @code{setq}
-means @code{quote}.)
+@code{setq}에 의해서 첫 인자에 자동으로 따옴표가 붙는 것을 제외하면 @code{set}을 사용하는 것과 
+정확히 같다. ( @code{setq}에서 @samp{q}는 @code{quote}를 의미한다. )
 
 @need 1250
-With @code{set}, the expression would look like this:
+@code{set}에서는 다음같은 표현식으로 보일 것이다.
 
 @smallexample
 (set 'carnivores '(lion tiger leopard))
 @end smallexample
 
-Also, @code{setq} can be used to assign different values to
-different variables.  The first argument is bound to the value
-of the second argument, the third argument is bound to the value of the
-fourth argument, and so on.  For example, you could use the following to
-assign a list of trees to the symbol @code{trees} and a list of herbivores
-to the symbol @code{herbivores}:
+또한 @code{setq}는 다른 변수들에 다른 값들을 설정하는데 사용될 수 있다. 첫 인자는 두 번째 인자의 값이 
+바인딩 되고, 세 번째 인자는 네 번째 인자의 값이 바인딩 된다. 예를 들면 @code{trees} 기호에 나무들 list를 
+@code{herbivores} 기호에 초식 동물 list를 설정하기 위해 다음처럼 쓸 수 있다.
 
 @smallexample
 @group
@@ -27256,18 +27235,14 @@ to the symbol @code{herbivores}:
 @end smallexample
 
 @noindent
-(The expression could just as well have been on one line, but it might
-not have fit on a page; and humans find it easier to read nicely
-formatted lists.)
+(표현식은 한 줄에 쓰여질 수 있지만, 한 페이지에 맞지 않을 수 있다.; 잘 형식화된 list들은 읽는 것은 쉽다. )
 
-Although I have been using the term `assign', there is another way of
-thinking about the workings of @code{set} and @code{setq}; and that is to
-say that @code{set} and @code{setq} make the symbol @emph{point} to the
-list.  This latter way of thinking is very common and in forthcoming
-chapters we shall come upon at least one symbol that has `pointer' as
-part of its name.  The name is chosen because the symbol has a value,
-specifically a list, attached to it; or, expressed another way,
-the symbol is set to ``point'' to the list.</Text>
+`assign` 용어를 사용했지만, @code{set}과 @code{setq}의 동작에 대해서 다른 방식의 생각하는 방법이 
+있다.; @code{set}과 @code{setq}는 기호가 list를 @emph{가리키게} 만든다라고 말할 수 있다. 이 뒤의 
+방식은 매우 일반적이고 뒤의 장에서 적어도 그 이름의 일부분으로 `pointer`를 가지는 하나의 기호를 접할 
+것이다. 기호가 값, 특히 list를 가지고 이름에 붙기때문에 이름은 선택된다.; 또는 다른 방식으로 표현하면 
+기호에 list의 “point”가 설정된다.
+</Text>
         </Document>
         <Document ID="65">
             <Title>what-line</Title>
@@ -27546,7 +27521,7 @@ We are already familiar with @code{setq}.  It sets the following variable,
 @code{major-mode}, to the subsequent value, which is @code{text-mode}.
 The single quote mark before @code{text-mode} tells Emacs to deal directly
 with the @code{text-mode} symbol, not with whatever it might stand for.
-@xref{set &amp; setq, , Setting the Value of a Variable},
+@xref{set &amp; setq, , 변수에 값 설정하기},
 for a reminder of how @code{setq} works.
 The main point is that there is no difference between the procedure you
 use to set a value in your @file{.emacs} file and the procedure you use

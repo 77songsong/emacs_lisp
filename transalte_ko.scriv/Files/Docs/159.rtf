@@ -4,45 +4,37 @@
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
 
 \f0\fs28 \cf0 \
-@node Using setq, Counting, Using set, set & setq\
+@node setq \'bb\'e7\'bf\'eb\'c7\'cf\'b1\'e2, \'bc\'fd\'c0\'da \'bc\'bc\'b1\'e2, set \'bb\'e7\'bf\'eb\'c7\'cf\'b1\'e2, set & setq\
 @comment  node-name,  next,  previous,  up\
-@subsection Using @code\{setq\}\
+@subsection @code\{setq\} \'bb\'e7\'bf\'eb\'c7\'cf\'b1\'e2\
 @findex setq\
 \
-As a practical matter, you almost always quote the first argument to\
-@code\{set\}.  The combination of @code\{set\} and a quoted first argument\
-is so common that it has its own name: the special form @code\{setq\}.\
-This special form is just like @code\{set\} except that the first argument\
-is quoted automatically, so you don't need to type the quote mark\
-yourself.  Also, as an added convenience, @code\{setq\} permits you to set\
-several different variables to different values, all in one expression.\
+\'bd\'c7\'c1\'a6\'b7\'ce @code\{set\}\'c0\'c7 \'c3\'b9 \'c0\'ce\'c0\'da\'b8\'a6 \'b0\'c5\'c0\'c7 \'c7\'d7\'bb\'f3 \'b5\'fb\'bf\'c8\'c7\'a5\'b8\'a6 \'ba\'d9\'c0\'ce\'b4\'d9. @code\{set\} \'b0\'fa \'b5\'fb\'bf\'c8\'c7\'a5\'b0\'a1 \'ba\'d9\'c0\'ba \'c3\'b9 \'c0\'ce\'c0\'da\'c0\'c7 \
+\'c1\'b6\'c7\'d5\'c0\'ba \'ba\'b0\'b5\'b5\'c0\'c7 \'c0\'cc\'b8\'a7\'c0\'bb \'b0\'a1\'c1\'fa \'c1\'a4\'b5\'b5\'b7\'ce \'c0\'cf\'b9\'dd\'c0\'fb\'c0\'cc\'b4\'d9.: \'c6\'af\'ba\'b0\'c7\'d1 \'c7\'fc\'c5\'c2\'c0\'c7 @code\{setq\}. \'c0\'cc \'c6\'af\'ba\'b0\'c7\'d1 \'c7\'fc\'c5\'c2\'b4\'c2 \'c3\'b9 \'c0\'ce\'c0\'da\'b0\'a1\
+\'c0\'da\'b5\'bf\'c0\'b8\'b7\'ce \'b5\'fb\'bf\'c8\'c7\'a5\'b0\'a1 \'ba\'d9\'b4\'c2 \'b0\'cd\'c0\'bb \'c1\'a6\'bf\'dc\'c7\'cf\'b0\'ed\'b4\'c2 @code\{set\}\'b0\'fa \'b0\'b0\'b4\'d9. \'b1\'d7\'b7\'a1\'bc\'ad \'b5\'fb\'bf\'c8\'c7\'a5\'b8\'a6 \'ba\'d9\'c0\'cf \'c7\'ca\'bf\'e4\'b0\'a1 \'be\'f8\'b4\'d9. \'b6\'c7\'c7\'d1 \'c3\'df\'b0\'a1\'b5\'c8\
+\'c6\'ed\'b8\'ae\'c7\'d4\'c0\'b8\'b7\'ce @code\{setq\}\'b4\'c2 \'c7\'cf\'b3\'aa\'c0\'c7 \'c7\'a5\'c7\'f6\'bd\'c4\'bf\'a1 \'bf\'a9\'b7\'af \'b0\'b3\'c0\'c7 \'ba\'af\'bc\'f6\'b5\'e9\'bf\'a1 \'b0\'aa\'b5\'e9\'c0\'bb \'bc\'b3\'c1\'a4\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'bb \'c7\'e3\'bf\'eb\'c7\'d1\'b4\'d9.\
 \
-To set the value of the variable @code\{carnivores\} to the list\
-@code\{'(lion tiger leopard)\} using @code\{setq\}, the following expression\
-is used:\
+@code\{setq\}\'b8\'a6 \'bb\'e7\'bf\'eb\'c7\'cf\'bf\'a9 @code\{carnivores\} \'ba\'af\'bc\'f6\'bf\'a1 list @code\{\'a1\'ae(lion tiger leopard)\} \'b0\'aa\'c0\'bb \
+\'bc\'b3\'c1\'a4\'c7\'cf\'b7\'c1\'b8\'e9 \'b4\'d9\'c0\'bd \'c7\'a5\'c7\'f6\'bd\'c4\'c0\'cc \'bb\'e7\'bf\'eb\'b5\'c8\'b4\'d9.:\
 \
 @smallexample\
 (setq carnivores '(lion tiger leopard))\
 @end smallexample\
 \
 @noindent\
-This is exactly the same as using @code\{set\} except the first argument\
-is automatically quoted by @code\{setq\}.  (The @samp\{q\} in @code\{setq\}\
-means @code\{quote\}.)\
+@code\{setq\}\'bf\'a1 \'c0\'c7\'c7\'d8\'bc\'ad \'c3\'b9 \'c0\'ce\'c0\'da\'bf\'a1 \'c0\'da\'b5\'bf\'c0\'b8\'b7\'ce \'b5\'fb\'bf\'c8\'c7\'a5\'b0\'a1 \'ba\'d9\'b4\'c2 \'b0\'cd\'c0\'bb \'c1\'a6\'bf\'dc\'c7\'cf\'b8\'e9 @code\{set\}\'c0\'bb \'bb\'e7\'bf\'eb\'c7\'cf\'b4\'c2 \'b0\'cd\'b0\'fa \
+\'c1\'a4\'c8\'ae\'c8\'f7 \'b0\'b0\'b4\'d9. ( @code\{setq\}\'bf\'a1\'bc\'ad @samp\{q\}\'b4\'c2 @code\{quote\}\'b8\'a6 \'c0\'c7\'b9\'cc\'c7\'d1\'b4\'d9. )\
 \
 @need 1250\
-With @code\{set\}, the expression would look like this:\
+@code\{set\}\'bf\'a1\'bc\'ad\'b4\'c2 \'b4\'d9\'c0\'bd\'b0\'b0\'c0\'ba \'c7\'a5\'c7\'f6\'bd\'c4\'c0\'b8\'b7\'ce \'ba\'b8\'c0\'cf \'b0\'cd\'c0\'cc\'b4\'d9.\
 \
 @smallexample\
 (set 'carnivores '(lion tiger leopard))\
 @end smallexample\
 \
-Also, @code\{setq\} can be used to assign different values to\
-different variables.  The first argument is bound to the value\
-of the second argument, the third argument is bound to the value of the\
-fourth argument, and so on.  For example, you could use the following to\
-assign a list of trees to the symbol @code\{trees\} and a list of herbivores\
-to the symbol @code\{herbivores\}:\
+\'b6\'c7\'c7\'d1 @code\{setq\}\'b4\'c2 \'b4\'d9\'b8\'a5 \'ba\'af\'bc\'f6\'b5\'e9\'bf\'a1 \'b4\'d9\'b8\'a5 \'b0\'aa\'b5\'e9\'c0\'bb \'bc\'b3\'c1\'a4\'c7\'cf\'b4\'c2\'b5\'a5 \'bb\'e7\'bf\'eb\'b5\'c9 \'bc\'f6 \'c0\'d6\'b4\'d9. \'c3\'b9 \'c0\'ce\'c0\'da\'b4\'c2 \'b5\'ce \'b9\'f8\'c2\'b0 \'c0\'ce\'c0\'da\'c0\'c7 \'b0\'aa\'c0\'cc \
+\'b9\'d9\'c0\'ce\'b5\'f9 \'b5\'c7\'b0\'ed, \'bc\'bc \'b9\'f8\'c2\'b0 \'c0\'ce\'c0\'da\'b4\'c2 \'b3\'d7 \'b9\'f8\'c2\'b0 \'c0\'ce\'c0\'da\'c0\'c7 \'b0\'aa\'c0\'cc \'b9\'d9\'c0\'ce\'b5\'f9 \'b5\'c8\'b4\'d9. \'bf\'b9\'b8\'a6 \'b5\'e9\'b8\'e9 @code\{trees\} \'b1\'e2\'c8\'a3\'bf\'a1 \'b3\'aa\'b9\'ab\'b5\'e9 list\'b8\'a6 \
+@code\{herbivores\} \'b1\'e2\'c8\'a3\'bf\'a1 \'c3\'ca\'bd\'c4 \'b5\'bf\'b9\'b0 list\'b8\'a6 \'bc\'b3\'c1\'a4\'c7\'cf\'b1\'e2 \'c0\'a7\'c7\'d8 \'b4\'d9\'c0\'bd\'c3\'b3\'b7\'b3 \'be\'b5 \'bc\'f6 \'c0\'d6\'b4\'d9.\
 \
 @smallexample\
 @group\
@@ -52,15 +44,11 @@ to the symbol @code\{herbivores\}:\
 @end smallexample\
 \
 @noindent\
-(The expression could just as well have been on one line, but it might\
-not have fit on a page; and humans find it easier to read nicely\
-formatted lists.)\
+(\'c7\'a5\'c7\'f6\'bd\'c4\'c0\'ba \'c7\'d1 \'c1\'d9\'bf\'a1 \'be\'b2\'bf\'a9\'c1\'fa \'bc\'f6 \'c0\'d6\'c1\'f6\'b8\'b8, \'c7\'d1 \'c6\'e4\'c0\'cc\'c1\'f6\'bf\'a1 \'b8\'c2\'c1\'f6 \'be\'ca\'c0\'bb \'bc\'f6 \'c0\'d6\'b4\'d9.; \'c0\'df \'c7\'fc\'bd\'c4\'c8\'ad\'b5\'c8 list\'b5\'e9\'c0\'ba \'c0\'d0\'b4\'c2 \'b0\'cd\'c0\'ba \'bd\'b1\'b4\'d9. )\
 \
-Although I have been using the term `assign', there is another way of\
-thinking about the workings of @code\{set\} and @code\{setq\}; and that is to\
-say that @code\{set\} and @code\{setq\} make the symbol @emph\{point\} to the\
-list.  This latter way of thinking is very common and in forthcoming\
-chapters we shall come upon at least one symbol that has `pointer' as\
-part of its name.  The name is chosen because the symbol has a value,\
-specifically a list, attached to it; or, expressed another way,\
-the symbol is set to ``point'' to the list.}
+`assign` \'bf\'eb\'be\'ee\'b8\'a6 \'bb\'e7\'bf\'eb\'c7\'df\'c1\'f6\'b8\'b8, @code\{set\}\'b0\'fa @code\{setq\}\'c0\'c7 \'b5\'bf\'c0\'db\'bf\'a1 \'b4\'eb\'c7\'d8\'bc\'ad \'b4\'d9\'b8\'a5 \'b9\'e6\'bd\'c4\'c0\'c7 \'bb\'fd\'b0\'a2\'c7\'cf\'b4\'c2 \'b9\'e6\'b9\'fd\'c0\'cc \
+\'c0\'d6\'b4\'d9.; @code\{set\}\'b0\'fa @code\{setq\}\'b4\'c2 \'b1\'e2\'c8\'a3\'b0\'a1 list\'b8\'a6 @emph\{\'b0\'a1\'b8\'ae\'c5\'b0\'b0\'d4\} \'b8\'b8\'b5\'e7\'b4\'d9\'b6\'f3\'b0\'ed \'b8\'bb\'c7\'d2 \'bc\'f6 \'c0\'d6\'b4\'d9. \'c0\'cc \'b5\'da\'c0\'c7 \
+\'b9\'e6\'bd\'c4\'c0\'ba \'b8\'c5\'bf\'ec \'c0\'cf\'b9\'dd\'c0\'fb\'c0\'cc\'b0\'ed \'b5\'da\'c0\'c7 \'c0\'e5\'bf\'a1\'bc\'ad \'c0\'fb\'be\'ee\'b5\'b5 \'b1\'d7 \'c0\'cc\'b8\'a7\'c0\'c7 \'c0\'cf\'ba\'ce\'ba\'d0\'c0\'b8\'b7\'ce `pointer`\'b8\'a6 \'b0\'a1\'c1\'f6\'b4\'c2 \'c7\'cf\'b3\'aa\'c0\'c7 \'b1\'e2\'c8\'a3\'b8\'a6 \'c1\'a2\'c7\'d2 \
+\'b0\'cd\'c0\'cc\'b4\'d9. \'b1\'e2\'c8\'a3\'b0\'a1 \'b0\'aa, \'c6\'af\'c8\'f7 list\'b8\'a6 \'b0\'a1\'c1\'f6\'b0\'ed \'c0\'cc\'b8\'a7\'bf\'a1 \'ba\'d9\'b1\'e2\'b6\'a7\'b9\'ae\'bf\'a1 \'c0\'cc\'b8\'a7\'c0\'ba \'bc\'b1\'c5\'c3\'b5\'c8\'b4\'d9.; \'b6\'c7\'b4\'c2 \'b4\'d9\'b8\'a5 \'b9\'e6\'bd\'c4\'c0\'b8\'b7\'ce \'c7\'a5\'c7\'f6\'c7\'cf\'b8\'e9 \
+\'b1\'e2\'c8\'a3\'bf\'a1 list\'c0\'c7 \'a1\'b0point\'a1\'b1\'b0\'a1 \'bc\'b3\'c1\'a4\'b5\'c8\'b4\'d9.\
+}

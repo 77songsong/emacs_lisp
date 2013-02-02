@@ -340,7 +340,7 @@ Lisp에서 하나의 명령들의 집합은 여러 이름들에 붙을 수...</p
 </li>
 <li>
 <p class="binderItem"><strong>The Lisp Interpreter</strong><br/><br/>
-@node Lisp Interpreter, Evaluation, 이름과 정의, List 처리하기<br/>
+@node Lisp Interpreter, 평가하기, 이름과 정의, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section Lisp 해석기<br/>
 @cindex Lisp interpreter, what it does<br/>
@@ -353,7 +353,7 @@ Lisp에서 하나의 명령들의 집합은 여러 이름들에 붙을 수...</p
 없다면 해석기는 에러 메시지를 출력한다.<br/>
 <br/>
 이 것이 Lisp이 동작하는 방식이다. 단순하다. 잠시 후에 볼 추가적인 복잡함이 있지만, <br/>
-이 것이 기본이다. 물론 Lisp 프...</p>
+이 것이 기본이다. 물론 Lisp 프로그램을 작...</p>
 </li>
 <hr/>
 <ul>
@@ -396,9 +396,9 @@ compiled} 코드라 불리는 특수하게 처리되는 코드. Byte compiled �
 <hr/>
 <li>
 <p class="binderItem"><strong>Evaluation</strong><br/><br/>
-@node Evaluation, Variables, Lisp Interpreter, List 처리하기<br/>
+@node 평가하기, Variables, Lisp Interpreter, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@section Evaluation<br/>
+@section 평가하기<br/>
 @cindex Evaluation<br/>
 <br/>
 Lisp 해석기가 표현에서 동작할 때, 그 행위를 위한 용어로 @dfn{evaluation}이라고 <br/>
@@ -407,17 +407,17 @@ Lisp 해석기가 표현에서 동작할 때, 그 행위를 위한 용어로 @df
 금액을 알아보다; 평가하다.’라는 일상 언어에서 사용하는 것에서 유래되었다.<br/>
 <br/>
 @menu<br/>
-* How the Interpreter Acts::    Returns and Side Effects...<br/>
-* Evaluating Inner Lists::      Lists within lists...<br/>
+* 해석기가 동작하는 방식::    Returns and Side Effects...<br/>
+* 내부 list 평가하기::      Lists within lists...<br/>
 @end menu</p>
 </li>
 <hr/>
 <ul>
 <li>
 <p class="binderItem"><strong>How the Lisp interpreter acts</strong><br/><br/>
-@node How the Interpreter Acts, Evaluating Inner Lists, Evaluation, Evaluation<br/>
+@node 해석기가 동작하는 방식, 내부 list 평가하기, 평가하기, 평가하기<br/>
 @ifnottex<br/>
-@unnumberedsubsec How the Lisp Interpreter Acts<br/>
+@unnumberedsubsec Lisp 해석기가 동작하는 방식<br/>
 @end ifnottex<br/>
 <br/>
 @cindex @samp{returned value} explained.<br/>
@@ -429,13 +429,13 @@ Lisp 해석기가 표현에서 동작할 때, 그 행위를 위한 용어로 @df
 <br/>
 @cindex @samp{side effect} defined<br/>
 해석기가 값을 넘겨주는 동시에, 커서를 옮기거나 파일을 복사하는 것같은 다른 일을 할 <br/>
-수도 ...</p>
+수도 있다.; 이런 다른 종류의 행동을 @dfn{side effect}라고 한다. 결과를...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Evaluating inner lists</strong><br/><br/>
-@node Evaluating Inner Lists,  , How the Interpreter Acts, Evaluation<br/>
+@node 내부 list 평가하기,  , 해석기가 동작하는 방식, 평가하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@subsection Evaluating Inner Lists<br/>
+@subsection 내부 list 평가하기<br/>
 @cindex Inner list evaluation<br/>
 @cindex Evaluating inner lists<br/>
 <br/>
@@ -452,13 +452,15 @@ Lisp 해석기가 표현에서 동작할 때, 그 행위를 위한 용어로 @df
 @end smallexample<br/>
 <br/>
 @noindent<br/>
-숫자 8이 echo 영역에 나타날 것이...</p>
+숫자 8이 echo 영역에 나타날 것이다.<br/>
+<br/>
+Lisp 해석기가 먼저 값 6을 넘겨주는 안쪽 표현 @code...</p>
 </li>
 </ul>
 <hr/>
 <li>
 <p class="binderItem"><strong>Variables</strong><br/><br/>
-@node Variables, Arguments, Evaluation, List 처리하기<br/>
+@node Variables, 인자들, 평가하기, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section Variables<br/>
 @cindex Variables<br/>
@@ -471,7 +473,7 @@ Emacs Lisp에서 기호는 기호에 연결된 함수 정의를 가질 수 있�
 <br/>
 기호는 동시에 함수 정의와 값을 가질 수 있다. 또는 둘 중 하나를 가질 수 있다. 이 둘은 <br/>
 다르다. 이름 Cambridge는 Massachusetts에 있는 도시를 나타낼 수도 있고 “대단한 <br/>
-프로그래밍 센터” 같...</p>
+프로그래밍 센터” 같이 이름에 있는 몇 가...</p>
 </li>
 <hr/>
 <ul>
@@ -535,9 +537,9 @@ GNU Emacs 22 버전에서 @file{*Backtrace*} 버퍼가 만들어진다.<br/>
 <hr/>
 <li>
 <p class="binderItem"><strong>Arguments</strong><br/><br/>
-@node Arguments, set & setq, Variables, List 처리하기<br/>
+@node 인자들, set & setq, Variables, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@section Arguments<br/>
+@section 인자들<br/>
 @cindex Arguments<br/>
 @cindex Passing information to functions<br/>
 <br/>
@@ -555,15 +557,15 @@ GNU Emacs 22 버전에서 @file{*Backtrace*} 버퍼가 만들어진다.<br/>
 @code{+}가 더하는 숫자들은 함수 @code{+}의 @dfn{arguments}라 부른다. 이 <br/>
 숫자들은 함수에 @dfn{passed}되는 정보들이다.<br/>
 <br/>
-‘argument” 단어는 수학에서 사용된 방법에서 유래...</p>
+‘argument” 단어는 수학에서 사용된 방법에서 유래되었다. 그리고 두 사...</p>
 </li>
 <hr/>
 <ul>
 <li>
 <p class="binderItem"><strong>Arguments' Data Types</strong><br/><br/>
-@node Data types, Args as Variable or List, Arguments, Arguments<br/>
+@node Data types, Args as Variable or List, 인자들, 인자들<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@subsection Arguments' Data Types<br/>
+@subsection 인자의 데이터 타입<br/>
 @cindex Data types<br/>
 @cindex Types of data<br/>
 @cindex Arguments' data types<br/>
@@ -576,13 +578,13 @@ GNU Emacs 22 버전에서 @file{*Backtrace*} 버퍼가 만들어진다.<br/>
 @findex concat<br/>
 예를 들면 @code{concat} 함수는 둘 또는 그 이상의 문자열들을 연결하거나 하나로 <br/>
 만든다. 인자들은 문자열이다. 두 문자열 @code{abc}, @code{def}를 연결 시켜 단일 <br/>
-문자열 @code{abcdef}를 ...</p>
+문자열 @code{abcdef}를 만든다. 다음을 평가 함으로 결과를 볼 수...</p>
 </li>
 <li>
 <p class="binderItem"><strong>An Argument as the Value of a Variable or List</strong><br/><br/>
-@node Args as Variable or List, Variable Number of Arguments, Data types, Arguments<br/>
+@node Args as Variable or List, 여러 개의 인자들, Data types, Arguments<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@subsection An Argument as the Value of a Variable or List<br/>
+@subsection 변수의 값 또는 list인 인자<br/>
 <br/>
 인자는 평가될 때 값을 넘겨주는 기호가 될 수 있다. 예를 들면 @code{fill-column} <br/>
 기호는 평가될 때 숫자를 넘긴다. 이 숫자는 추가로 사용될 수 있다.<br/>
@@ -598,13 +600,14 @@ GNU Emacs 22 버전에서 @file{*Backtrace*} 버퍼가 만들어진다.<br/>
 값은 @code{fill-column}을 평가한 것에 2가 더해진 숫자가 될 것이다. 나의 경우 <br/>
 @code{fill-column}이 72이기 때문에 74이다.<br/>
 <br/>
-앞에서 본 것처럼 인...</p>
+앞에서 본 것처럼 인자는 평가 시 값을 넘겨주는 기호가 될 수 있다. 게다가 인자는 평가 시 <br/>
+값을 넘겨주...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Variable Number of Arguments</strong><br/><br/>
-@node Variable Number of Arguments, Wrong Type of Argument, Args as Variable or List, Arguments<br/>
+@node 여러 개의 인자들, Wrong Type of Argument, Args as Variable or List, 인자들<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@subsection Variable Number of Arguments<br/>
+@subsection 여러 개의 인자들<br/>
 @cindex Variable number of arguments<br/>
 @cindex Arguments, variable number of<br/>
 <br/>
@@ -616,13 +619,17 @@ GNU Emacs 22 버전에서 @file{*Backtrace*} 버퍼가 만들어진다.<br/>
 @need 1250<br/>
 첫 번째로 함수는 인자를 받지 않는다.<br/>
 <br/>
-@smalle...</p>
+@smallexample<br/>
+@group<br/>
+(+)       @result{} 0<br/>
+<br/>
+(*)    ...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Using the Wrong Type Object as an Argument</strong><br/><br/>
-@node Wrong Type of Argument, message, Variable Number of Arguments, Arguments<br/>
+@node Wrong Type of Argument, message, 여러 개의 인자들, 인자들<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@subsection Using the Wrong Type Object as an Argument<br/>
+@subsection잘못된 타입의 인자를 사용하기<br/>
 @cindex Wrong type of argument<br/>
 @cindex Argument, wrong type of<br/>
 <br/>
@@ -636,13 +643,14 @@ GNU Emacs 22 버전에서 @file{*Backtrace*} 버퍼가 만들어진다.<br/>
 @end smallexample<br/>
 <br/>
 @noindent<br/>
-그러면 에러 메시지를 볼 것이다. @code{+}는 ...</p>
+그러면 에러 메시지를 볼 것이다. @code{+}는 숫자 2를 @code{‘hello}에 의해서 <br/>
+넘겨지는 값과 더하려고 했으나, @code{‘h...</p>
 </li>
 <li>
 <p class="binderItem"><strong>The message Function</strong><br/><br/>
-@node message,  , Wrong Type of Argument, Arguments<br/>
+@node message,  , Wrong Type of Argument, 인자들<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@subsection The @code{message} Function<br/>
+@subsection@code{message} 함수<br/>
 @findex message<br/>
 <br/>
 @code{+} 같이 @code{message} 함수는 여러 개의 인자를 받는다. 사용자에게 <br/>
@@ -657,15 +665,16 @@ GNU Emacs 22 버전에서 @file{*Backtrace*} 버퍼가 만들어진다.<br/>
 @end smallexample<br/>
 <br/>
 큰따옴표 사이에 모든 문자열은 하나의 인자이고 @i{in toto} 출력된다. ( 이 예제에서 <br/>
-메시지 자체는 echo 영역에 큰따옴표와 같이 나타날 것이다.; @code{messag...</p>
+메시지 자체는 echo 영역에 큰따옴표와 같이 나타날 것이다.; @code{message} <br/>
+함수에서 넘겨 받은 값이...</p>
 </li>
 </ul>
 <hr/>
 <li>
 <p class="binderItem"><strong>Setting the Value of a Variable</strong><br/><br/>
-@node set & setq, Summary, Arguments, List 처리하기<br/>
+@node set & setq, Summary, 인자들, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@section Setting the Value of a Variable<br/>
+@section 변수에 값 설정하기<br/>
 @cindex Variable, setting value<br/>
 @cindex Setting value of variable<br/>
 <br/>
@@ -678,15 +687,16 @@ GNU Emacs 22 버전에서 @file{*Backtrace*} 버퍼가 만들어진다.<br/>
 전달되는 방식도 설명한다.<br/>
 <br/>
 @menu<br/>
-* Using set::                  Sett...</p>
+* set 사용하기::                  값 설정하기.<br/>
+* setq 사용하기::           ...</p>
 </li>
 <hr/>
 <ul>
 <li>
 <p class="binderItem"><strong>Using set</strong><br/><br/>
-@node Using set, Using setq, set & setq, set & setq<br/>
+@node set 사용하기, setq 사용하기, set & setq, set & setq<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@subsection Using @code{set}<br/>
+@subsection @code{set} 사용하기<br/>
 @findex set<br/>
 <br/>
 기호 @code{flowers}의 값을 list @code{‘(rose violet daisy buttercup)}로 <br/>
@@ -699,35 +709,43 @@ GNU Emacs 22 버전에서 @file{*Backtrace*} 버퍼가 만들어진다.<br/>
 @noindent<br/>
 @code{(rose violet daisy buttercup)} list가 echo 영역에 나타날 것이다. @code{set} 함수의 결과로 <br/>
 @emph{returned} 된 것이다. 추가 효과로 기호 @code{flowers}는 이 list에 바인딩 되었다.; 기호 <br/>
-@code{flow...</p>
+@code{flowers...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Using setq</strong><br/><br/>
-@node Using setq, Counting, Using set, set & setq<br/>
+@node setq 사용하기, 숫자 세기, set 사용하기, set & setq<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@subsection Using @code{setq}<br/>
+@subsection @code{setq} 사용하기<br/>
 @findex setq<br/>
 <br/>
-As a practical matter, you almost always quote the first argument to<br/>
-@code{set}.  The combination of @code{set} and a quoted first argument<br/>
-is so common that it has its own name: the special form @code{setq}.<br/>
-This special form is just like @code{set} except that the first argument<br/>
-is quoted automatically, so you don't need to type the quote mark<br/>
-yourself.  Als...</p>
+실제로 @code{set}의 첫 인자를 거의 항상 따옴표를 붙인다. @code{set} 과 따옴표가 붙은 첫 인자의 <br/>
+조합은 별도의 이름을 가질 정도로 일반적이다.: 특별한 형태의 @code{setq}. 이 특별한 형태는 첫 인자가<br/>
+자동으로 따옴표가 붙는 것을 제외하고는 @code{set}과 같다. 그래서 따옴표를 붙일 필요가 없다. 또한 추가된<br/>
+편리함으로 @code{setq}는 하나의 표현식에 여러 개의 변수들에 값들을 설정하는 것을 허용한다.<br/>
+<br/>
+@code{setq}를 사용하여 @code{carnivores} 변수에 list @code{‘(lion tiger leopard)} 값을 <br/>
+설정하려면 다음 표현식이 사용된다.:<br/>
+<br/>
+@smallexample<br/>
+(...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Counting</strong><br/><br/>
-@node Counting,  , Using setq, set & setq<br/>
+@node 숫자 세기,  , setq 사용하기, set & setq<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@subsection Counting<br/>
+@subsection 숫자 세기<br/>
 @cindex Counting<br/>
 <br/>
-Here is an example that shows how to use @code{setq} in a counter.  You<br/>
-might use this to count how many times a part of your program repeats<br/>
-itself.  First set a variable to zero; then add one to the number each<br/>
-time the program repeats itself.  To do this, you need a variable that<br/>
-serves as a counter, and two expressions: an initial @code{setq}<br/>
-expression that sets the c...</p>
+숫자 세는 것에서 @code{setq}를 사용하는 방법을 보여주는 예가 있다. 프로그램 일 부분이 몇 번 반복했는지 <br/>
+세기위해 사용할 수 있다. 처음에 변수에 0을 설정한다.; 프로그램이 반복할 때마다 매번 1을 더한다. 이것을 <br/>
+하기 위해서 숫자를 저장할 계수기 변수와 두 표현식이 필요하다.: 첫 번째 @code{setq} 표현식은 계수기 <br/>
+변수에 0을 설정한다.; 두 번째 @code{setq} 표현식은 평가될 때마다 계수기에 1을 증가시킨다.<br/>
+<br/>
+@smallexample<br/>
+@group<br/>
+(setq counter 0)                ; @r{Let's call this the initializer.}<br/>
+<br/>
+(setq counter (+ counter 1))    ; @r...</p>
 </li>
 </ul>
 <hr/>

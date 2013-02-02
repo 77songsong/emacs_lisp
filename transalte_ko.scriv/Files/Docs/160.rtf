@@ -4,19 +4,15 @@
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
 
 \f0\fs28 \cf0 \
-@node Counting,  , Using setq, set & setq\
+@node \'bc\'fd\'c0\'da \'bc\'bc\'b1\'e2,  , setq \'bb\'e7\'bf\'eb\'c7\'cf\'b1\'e2, set & setq\
 @comment  node-name,  next,  previous,  up\
-@subsection Counting\
+@subsection \'bc\'fd\'c0\'da \'bc\'bc\'b1\'e2\
 @cindex Counting\
 \
-Here is an example that shows how to use @code\{setq\} in a counter.  You\
-might use this to count how many times a part of your program repeats\
-itself.  First set a variable to zero; then add one to the number each\
-time the program repeats itself.  To do this, you need a variable that\
-serves as a counter, and two expressions: an initial @code\{setq\}\
-expression that sets the counter variable to zero; and a second\
-@code\{setq\} expression that increments the counter each time it is\
-evaluated.\
+\'bc\'fd\'c0\'da \'bc\'bc\'b4\'c2 \'b0\'cd\'bf\'a1\'bc\'ad @code\{setq\}\'b8\'a6 \'bb\'e7\'bf\'eb\'c7\'cf\'b4\'c2 \'b9\'e6\'b9\'fd\'c0\'bb \'ba\'b8\'bf\'a9\'c1\'d6\'b4\'c2 \'bf\'b9\'b0\'a1 \'c0\'d6\'b4\'d9. \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a5 \'c0\'cf \'ba\'ce\'ba\'d0\'c0\'cc \'b8\'ee \'b9\'f8 \'b9\'dd\'ba\'b9\'c7\'df\'b4\'c2\'c1\'f6 \
+\'bc\'bc\'b1\'e2\'c0\'a7\'c7\'d8 \'bb\'e7\'bf\'eb\'c7\'d2 \'bc\'f6 \'c0\'d6\'b4\'d9. \'c3\'b3\'c0\'bd\'bf\'a1 \'ba\'af\'bc\'f6\'bf\'a1 0\'c0\'bb \'bc\'b3\'c1\'a4\'c7\'d1\'b4\'d9.; \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a5\'c0\'cc \'b9\'dd\'ba\'b9\'c7\'d2 \'b6\'a7\'b8\'b6\'b4\'d9 \'b8\'c5\'b9\'f8 1\'c0\'bb \'b4\'f5\'c7\'d1\'b4\'d9. \'c0\'cc\'b0\'cd\'c0\'bb \
+\'c7\'cf\'b1\'e2 \'c0\'a7\'c7\'d8\'bc\'ad \'bc\'fd\'c0\'da\'b8\'a6 \'c0\'fa\'c0\'e5\'c7\'d2 \'b0\'e8\'bc\'f6\'b1\'e2 \'ba\'af\'bc\'f6\'bf\'cd \'b5\'ce \'c7\'a5\'c7\'f6\'bd\'c4\'c0\'cc \'c7\'ca\'bf\'e4\'c7\'cf\'b4\'d9.: \'c3\'b9 \'b9\'f8\'c2\'b0 @code\{setq\} \'c7\'a5\'c7\'f6\'bd\'c4\'c0\'ba \'b0\'e8\'bc\'f6\'b1\'e2 \
+\'ba\'af\'bc\'f6\'bf\'a1 0\'c0\'bb \'bc\'b3\'c1\'a4\'c7\'d1\'b4\'d9.; \'b5\'ce \'b9\'f8\'c2\'b0 @code\{setq\} \'c7\'a5\'c7\'f6\'bd\'c4\'c0\'ba \'c6\'f2\'b0\'a1\'b5\'c9 \'b6\'a7\'b8\'b6\'b4\'d9 \'b0\'e8\'bc\'f6\'b1\'e2\'bf\'a1 1\'c0\'bb \'c1\'f5\'b0\'a1\'bd\'c3\'c5\'b2\'b4\'d9.\
 \
 @smallexample\
 @group\
@@ -29,24 +25,15 @@ counter                         ; @r\{This is the counter.\}\
 @end smallexample\
 \
 @noindent\
-(The text following the @samp\{;\} are comments.  @xref\{Change a\
-defun, , Change a Function Definition\}.)\
+(@samp\{;\} \'b5\'da\'bf\'a1 \'bf\'c0\'b4\'c2 \'b1\'db\'c0\'ba \'c1\'d6\'bc\'ae\'c0\'cc\'b4\'d9. @xref\{Change a defun, , Change a Function Definition\}.)\
 \
-If you evaluate the first of these expressions, the initializer,\
-@code\{(setq counter 0)\}, and then evaluate the third expression,\
-@code\{counter\}, the number @code\{0\} will appear in the echo area.  If\
-you then evaluate the second expression, the incrementer, @code\{(setq\
-counter (+ counter 1))\}, the counter will get the value 1.  So if you\
-again evaluate @code\{counter\}, the number @code\{1\} will appear in the\
-echo area.  Each time you evaluate the second expression, the value of\
-the counter will be incremented.\
+\'c3\'b9 \'b9\'f8\'c2\'b0 \'c7\'a5\'c7\'f6\'bd\'c4 @code\{(setq counter 0)\} \'c6\'f2\'b0\'a1 \'c8\'c4, \'bc\'bc \'b9\'f8\'c2\'b0 \'c7\'a5\'c7\'f6\'bd\'c4 @code\{counter\} \'c6\'f2\'b0\'a1\'c7\'cf\'b8\'e9,  \'bc\'fd\'c0\'da \
+@code\{0\}\'c0\'cc echo \'bf\'b5\'bf\'aa\'bf\'a1 \'b3\'aa\'c5\'b8\'b3\'af \'b0\'cd\'c0\'cc\'b4\'d9. \'c0\'cc \'b6\'a7 \'b5\'ce\'b9\'f8\'c2\'b0 \'c7\'a5\'c7\'f6\'bd\'c4 @code\{(setq counter (+ counter 1))\}\'c0\'bb \
+\'c6\'f2\'b0\'a1\'c7\'cf\'b8\'e9, counter\'b4\'c2 \'b0\'aa 1\'c0\'bb \'b0\'a1\'c1\'fa \'b0\'cd\'c0\'cc\'b4\'d9. @code\{counter\}\'b8\'a6 \'b4\'d9\'bd\'c3 \'c6\'f2\'b0\'a1\'c7\'cf\'b8\'e9, \'bc\'fd\'c0\'da @code\{1\}\'c0\'cc echo \
+\'bf\'b5\'bf\'aa\'bf\'a1 \'b3\'aa\'c5\'b8\'b3\'af \'b0\'cd\'c0\'cc\'b4\'d9. \'b5\'ce \'b9\'f8\'c2\'b0 \'c7\'a5\'c7\'f6\'bd\'c4\'c0\'bb \'bc\'f6\'c7\'e0\'c7\'d2 \'b6\'a7 \'b8\'b6\'b4\'d9 counter\'c0\'c7 \'b0\'aa\'c0\'ba \'c1\'f5\'b0\'a1\'c7\'d2 \'b0\'cd\'c0\'cc\'b4\'d9.\
 \
-When you evaluate the incrementer, @code\{(setq counter (+ counter 1))\},\
-the Lisp interpreter first evaluates the innermost list; this is the\
-addition.  In order to evaluate this list, it must evaluate the variable\
-@code\{counter\} and the number @code\{1\}.  When it evaluates the variable\
-@code\{counter\}, it receives its current value.  It passes this value and\
-the number @code\{1\} to the @code\{+\} which adds them together.  The sum\
-is then returned as the value of the inner list and passed to the\
-@code\{setq\} which sets the variable @code\{counter\} to this new value.\
-Thus, the value of the variable, @code\{counter\}, is changed.}
+@code\{(setq counter (+ counter 1))\}\'c0\'bb \'c6\'f2\'b0\'a1\'c7\'d2 \'b6\'a7, Lisp \'c7\'d8\'bc\'ae\'b1\'e2\'b4\'c2 \'b0\'a1\'c0\'e5 \'be\'c8\'c2\'ca\'c0\'c7 list\'b8\'a6 \'b8\'d5\'c0\'fa \'c6\'f2\'b0\'a1\'c7\'d1\'b4\'d9.; \
+\'c3\'df\'b0\'a1\'c0\'fb\'c0\'b8\'b7\'ce \'c0\'cc list\'b8\'a6 \'c6\'f2\'b0\'a1\'c7\'cf\'b1\'e2 \'c0\'a7\'c7\'d8\'bc\'ad\'b4\'c2 \'ba\'af\'bc\'f6 @code\{counter\}\'bf\'cd \'bc\'fd\'c0\'da @code\{1\}\'c0\'bb \'c6\'f2\'b0\'a1\'c7\'d8\'be\'df \'c7\'d1\'b4\'d9. \'ba\'af\'bc\'f6 \
+@code\{counter\}\'b8\'a6 \'c6\'f2\'b0\'a1\'c7\'cf\'b8\'e9 \'c7\'f6\'c0\'e7 \'b0\'aa\'c0\'bb \'b9\'de\'b4\'c2\'b4\'d9. \'c0\'cc \'b0\'aa\'b0\'fa \'bc\'fd\'c0\'da @code\{1\}\'c0\'bb \'b5\'ce \'b0\'aa\'c0\'bb \'b4\'f5\'c7\'cf\'b4\'c2 @code\{+\}\'bf\'a1 \
+\'c0\'fc\'b4\'de\'c7\'d1\'b4\'d9. \'be\'c8 \'c2\'ca list\'c0\'c7 \'b0\'aa\'c0\'b8\'b7\'ce \'c7\'d5\'c0\'cc \'c0\'fc\'b4\'de\'b5\'c7\'b0\'ed @code\{setq\}\'b4\'c2 \'ba\'af\'bc\'f6 @code\{counter\}\'bf\'a1 \'c0\'cc \'bb\'f5\'b7\'ce\'bf\'ee \'b0\'aa\'c0\'bb \
+\'bc\'b3\'c1\'a4\'c7\'d1\'b4\'d9. \'b1\'d7\'b7\'a1\'bc\'ad \'ba\'af\'bc\'f6 @code\{counter\}\'c0\'c7 \'b0\'aa\'c0\'ba \'ba\'af\'b0\'e6\'b5\'c8\'b4\'d9.}
