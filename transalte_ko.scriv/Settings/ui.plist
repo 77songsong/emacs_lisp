@@ -66,7 +66,7 @@
 	<false/>
 	<key>binderSelection</key>
 	<array>
-		<integer>16</integer>
+		<integer>17</integer>
 	</array>
 	<key>binderSplitFrames</key>
 	<array>
@@ -180,7 +180,7 @@
 	<real>227</real>
 	<key>mainDocumentEditor.binderDocuments</key>
 	<array>
-		<integer>34</integer>
+		<integer>35</integer>
 	</array>
 	<key>mainDocumentEditor.currentEditorViewMode</key>
 	<integer>0</integer>
@@ -209,7 +209,7 @@
 	<key>mainDocumentEditor.navigationHistory</key>
 	<dict>
 		<key>CurrentIndex</key>
-		<integer>923</integer>
+		<integer>930</integer>
 		<key>NavigationHistoryArray</key>
 		<array>
 			<dict>
@@ -7726,6 +7726,64 @@
 				<key>ViewMode</key>
 				<integer>0</integer>
 			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>145</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>34</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>35</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>34</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>AggregateSelection</key>
+				<string>{111648, 7}</string>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>0</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>1</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>34</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>35</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
 		</array>
 	</dict>
 	<key>mainDocumentEditor.outlinerColumnsState</key>
@@ -7753,10 +7811,12 @@
 	<key>mainDocumentEditor.scrollRect</key>
 	<string>{{0, 0}, {674, 771}}</string>
 	<key>mainDocumentEditor.selectedRanges</key>
-	<string>{0, 0}</string>
+	<string>{331, 7}</string>
 	<key>mainDocumentEditor.textEditorState</key>
 	<dict>
 		<key>hasMultiplePages</key>
+		<false/>
+		<key>isRulerVisible</key>
 		<false/>
 		<key>textScale</key>
 		<integer>100</integer>
@@ -7764,7 +7824,7 @@
 		<false/>
 	</dict>
 	<key>mainWindowFrame</key>
-	<string>1182 400 1171 865 0 0 2560 1418 </string>
+	<string>1342 525 1171 865 0 0 2560 1418 </string>
 	<key>searchResultsTable</key>
 	<dict>
 		<key>order</key>

@@ -672,7 +672,7 @@ GNU Emacs 22 버전에서 @file{*Backtrace*} 버퍼가 만들어진다.<br/>
 <hr/>
 <li>
 <p class="binderItem"><strong>Setting the Value of a Variable</strong><br/><br/>
-@node set & setq, Summary, 인자들, List 처리하기<br/>
+@node set & setq, 정리, 인자들, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section 변수에 값 설정하기<br/>
 @cindex Variable, setting value<br/>
@@ -688,7 +688,7 @@ GNU Emacs 22 버전에서 @file{*Backtrace*} 버퍼가 만들어진다.<br/>
 <br/>
 @menu<br/>
 * set 사용하기::                  값 설정하기.<br/>
-* setq 사용하기::           ...</p>
+* setq 사용하기::                ...</p>
 </li>
 <hr/>
 <ul>
@@ -751,48 +751,57 @@ GNU Emacs 22 버전에서 @file{*Backtrace*} 버퍼가 만들어진다.<br/>
 <hr/>
 <li>
 <p class="binderItem"><strong>Summary</strong><br/><br/>
-@node Summary, Error Message Exercises, set & setq, List 처리하기<br/>
+@node 정리, Error Message Exercises, set & setq, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@section Summary<br/>
+@section 정리<br/>
 <br/>
-Learning Lisp is like climbing a hill in which the first part is the<br/>
-steepest.  You have now climbed the most difficult part; what remains<br/>
-becomes easier as you progress onwards.<br/>
+Lisp을 배우는 것은 첫 부분이 가파른 언덕을 올라가는 것과 같다. 가장 어려운 부분에 올라갔다.; 남은 부분은 <br/>
+진행할수록 쉬울 것이다.<br/>
 <br/>
 @need 1000<br/>
-In summary,<br/>
+요약,<br/>
 <br/>
 @itemize @bullet<br/>
 <br/>
 @item<br/>
-Lisp programs are made up of expressions, which are lists or single atoms.<br/>
+Lisp 프로그램은 list또는 단일 atom들인 표현식들로 구성된다.<br/>
 <br/>
 @item<br/>
-Lists are made up of zero or more atoms or inner lists, separated ...</p>
+List는 공백 또는 괄호들에 둘러쌓임으로 구분되어지는 atom들 또는 내부 list로 구성된다. list는 비어있을 수 <br/>
+있다.<br/>
+<br/>
+@item<br/>
+Atom은 @code{foward-paragraph}같이 여러 문자 기호, @code{+}같이 단일 문자 기호, 이중 따옴표 <br/>
+사이에 있는 문자열, 또는 숫자들이다.<br/>
+<br/>
+@item<br/>
+숫자는 그 자체로 평가된다.<br/>
+<br/>
+@item<br/>
+이중 따옴표 사이에 있는 문자...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Excercises</strong><br/><br/>
-@node Error Message Exercises,  , Summary, List 처리하기<br/>
+@node Error Message Exercises,  , 정리, List 처리하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@section Exercises<br/>
+@section 연습문제<br/>
 <br/>
+몇 개의 간단한 예제들<br/>
 A few simple exercises:<br/>
 <br/>
 @itemize @bullet<br/>
 @item<br/>
-Generate an error message by evaluating an appropriate symbol that is<br/>
-not within parentheses.<br/>
+괄호가 없는 적절한 기호를 평가하여 에러 메시지를 생성해봐라.<br/>
 <br/>
 @item<br/>
-Generate an error message by evaluating an appropriate symbol that is<br/>
-between parentheses.<br/>
+괄호 사이에 있는 적절한 기호를 평가하여 에러 메시지를 생성해봐라.<br/>
 <br/>
 @item<br/>
-Create a counter that increments by two rather than one.<br/>
+1인 아닌 2씩 증가하는 카운터를 만들어보아라.<br/>
 <br/>
 @item<br/>
-Write an expression that prints a message in the echo area when<br/>
-evaluate...</p>
+평가될 때, echo 영역에 메시지를 출력하는 표현식을 작성하라.<br/>
+@end itemize</p>
 </li>
 </ul>
 <hr/>

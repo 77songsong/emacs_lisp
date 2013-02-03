@@ -16,7 +16,7 @@
                 </OutlinerExpandedState>
             </CorkboardAndOutliner>
             <Children>
-                <BinderItem ID="5" Type="Text" Created="2012-11-09 00:18:17 +0900" Modified="2013-02-02 19:34:11 +0900">
+                <BinderItem ID="5" Type="Text" Created="2012-11-09 00:18:17 +0900" Modified="2013-02-04 02:08:03 +0900">
                     <Title>An Introduction to Programming in Emacs Lisp</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -116,7 +116,7 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="6" Type="Text" Created="2012-11-09 00:32:02 +0900" Modified="2013-02-02 19:13:16 +0900">
+                <BinderItem ID="6" Type="Text" Created="2012-11-09 00:32:02 +0900" Modified="2013-02-04 02:08:03 +0900">
                     <Title>List Processing</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -400,7 +400,7 @@
                                 </BinderItem>
                             </Children>
                         </BinderItem>
-                        <BinderItem ID="33" Type="Text" Created="2012-11-09 00:48:45 +0900" Modified="2013-02-02 19:34:11 +0900">
+                        <BinderItem ID="33" Type="Text" Created="2012-11-09 00:48:45 +0900" Modified="2013-02-04 02:08:03 +0900">
                             <Title>Setting the Value of a Variable</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -442,24 +442,24 @@
                                 </BinderItem>
                             </Children>
                         </BinderItem>
-                        <BinderItem ID="34" Type="Text" Created="2012-11-09 00:48:51 +0900" Modified="2012-11-11 00:56:25 +0900">
+                        <BinderItem ID="34" Type="Text" Created="2012-11-09 00:48:51 +0900" Modified="2013-02-04 02:08:22 +0900">
                             <Title>Summary</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>0,0</TextSelection>
+                                <TextSelection>112,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="35" Type="Text" Created="2012-11-09 00:48:56 +0900" Modified="2012-11-11 00:56:25 +0900">
+                        <BinderItem ID="35" Type="Text" Created="2012-11-09 00:48:56 +0900" Modified="2013-02-04 02:14:43 +0900">
                             <Title>Excercises</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>426,0</TextSelection>
+                                <TextSelection>331,7</TextSelection>
                             </TextSettings>
                         </BinderItem>
                     </Children>
@@ -1715,7 +1715,7 @@
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2012-11-09 00:23:48 +0900" IgnoreDeadline="Yes">0</DraftTarget>
         <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" ResetType="Midnight" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="-212" Characters="-2240" Date="2013-02-02 18:22:37 +0900"></PreviousSession>
+        <PreviousSession Words="-109" Characters="-989" Date="2013-02-04 01:46:09 +0900"></PreviousSession>
     </ProjectTargets>
     <PrintSettings PaperSize="595.289978,841.890015" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="iso-a4" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
 </ScrivenerProject>

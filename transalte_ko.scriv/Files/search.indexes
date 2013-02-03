@@ -19188,7 +19188,7 @@ Lisp에서 구두점과 공백 문자들을 포함한 모든 큰 따옴표로 �
         <Document ID="33">
             <Title>Setting the Value of a Variable</Title>
             <Text>
-@node set &amp; setq, Summary, 인자들, List 처리하기
+@node set &amp; setq, 정리, 인자들, List 처리하기
 @comment  node-name,  next,  previous,  up
 @section 변수에 값 설정하기
 @cindex Variable, setting value
@@ -19236,67 +19236,60 @@ Lisp에서 구두점과 공백 문자들을 포함한 모든 큰 따옴표로 �
         <Document ID="34">
             <Title>Summary</Title>
             <Text>
-@node Summary, Error Message Exercises, set &amp; setq, List 처리하기
+@node 정리, Error Message Exercises, set &amp; setq, List 처리하기
 @comment  node-name,  next,  previous,  up
-@section Summary
+@section 정리
 
-Learning Lisp is like climbing a hill in which the first part is the
-steepest.  You have now climbed the most difficult part; what remains
-becomes easier as you progress onwards.
+Lisp을 배우는 것은 첫 부분이 가파른 언덕을 올라가는 것과 같다. 가장 어려운 부분에 올라갔다.; 남은 부분은 
+진행할수록 쉬울 것이다.
 
 @need 1000
-In summary,
+요약,
 
 @itemize @bullet
 
 @item
-Lisp programs are made up of expressions, which are lists or single atoms.
+Lisp 프로그램은 list또는 단일 atom들인 표현식들로 구성된다.
 
 @item
-Lists are made up of zero or more atoms or inner lists, separated by whitespace and
-surrounded by parentheses.  A list can be empty.
+List는 공백 또는 괄호들에 둘러쌓임으로 구분되어지는 atom들 또는 내부 list로 구성된다. list는 비어있을 수 
+있다.
 
 @item
-Atoms are multi-character symbols, like @code{forward-paragraph}, single
-character symbols like @code{+}, strings of characters between double
-quotation marks, or numbers.
+Atom은 @code{foward-paragraph}같이 여러 문자 기호, @code{+}같이 단일 문자 기호, 이중 따옴표 
+사이에 있는 문자열, 또는 숫자들이다.
 
 @item
-A number evaluates to itself.
+숫자는 그 자체로 평가된다.
 
 @item
-A string between double quotes also evaluates to itself.
+이중 따옴표 사이에 있는 문자열 또한 그 자체로 평가된다.
 
 @item
-When you evaluate a symbol by itself, its value is returned.
+기호 자체를 평가할 때, 그 값이 반환된다.
 
 @item
-When you evaluate a list, the Lisp interpreter looks at the first symbol
-in the list and then at the function definition bound to that symbol.
-Then the instructions in the function definition are carried out.
+list를 평가할 때, Lisp 해석기는 List의 첫 번째 기호를 살펴보고 기호에 함수 정의가 바인딩되었을 때, 그 함수 
+정의가 해석된다.
 
 @item
-A single quotation mark,
+단일 다옴표,
 @ifinfo
 '
 @end ifinfo
 @ifnotinfo
 @code{'}
 @end ifnotinfo
-, tells the Lisp interpreter that it should
-return the following expression as written, and not evaluate it as it
-would if the quote were not there.
+, 바로 뒤에 쓰여진 표현식을 따옴표가 없었을 때처럼 평가하는 것이 아닌 그대로 반환한다는 것을 Lisp 
+해석기에게 이야기 한다.
 
 @item
-Arguments are the information passed to a function.  The arguments to a
-function are computed by evaluating the rest of the elements of the list
-of which the function is the first element.
+인자들은 함수에 전달되는 정보이다. 함수에 전달되는 인자들은 List의 첫 요소는 함수이고 List의 나머지 
+요소들의 평가에 의해 계산된다.
 
 @item
-A function always returns a value when it is evaluated (unless it gets
-an error); in addition, it may also carry out some action called a
-``side effect''.  In many cases, a function's primary purpose is to
-create a side effect.
+함수는 항상 평가된 값을 넘겨준다. ( 에러를 받지 않는다면 ); 게다가 “side effect” 라고 이야기하는 어떤 
+행동을 수행할 수도 있다. 대부분의 경우에 함수의  주요 목적은 side effect를 생성하는 것이다.
 @end itemize</Text>
         </Document>
         <Document ID="101">
@@ -19371,27 +19364,25 @@ bind                     바인딩</Text>
         <Document ID="35">
             <Title>Excercises</Title>
             <Text>
-@node Error Message Exercises,  , Summary, List 처리하기
+@node Error Message Exercises,  , 정리, List 처리하기
 @comment  node-name,  next,  previous,  up
-@section Exercises
+@section 연습문제
 
+몇 개의 간단한 예제들
 A few simple exercises:
 
 @itemize @bullet
 @item
-Generate an error message by evaluating an appropriate symbol that is
-not within parentheses.
+괄호가 없는 적절한 기호를 평가하여 에러 메시지를 생성해봐라.
 
 @item
-Generate an error message by evaluating an appropriate symbol that is
-between parentheses.
+괄호 사이에 있는 적절한 기호를 평가하여 에러 메시지를 생성해봐라.
 
 @item
-Create a counter that increments by two rather than one.
+1인 아닌 2씩 증가하는 카운터를 만들어보아라.
 
 @item
-Write an expression that prints a message in the echo area when
-evaluated.
+평가될 때, echo 영역에 메시지를 출력하는 표현식을 작성하라.
 @end itemize</Text>
         </Document>
         <Document ID="102">
@@ -21311,7 +21302,7 @@ List 처리하기
 * Variables::                   변수로부터 값을 넘겨 받기.
 * 인자들::                   함수에 정보 넘기기.
 * set &amp; setq::                  변수에 값 설정하기.
-* Summary::                     중요한 점들.
+* 정리::                     중요한 점들.
 * Error Message Exercises::
 
 Lisp에서 List
@@ -22193,7 +22184,7 @@ delimit them from the body of the @code{let}.</Text>
 * Variables::                   변수로부터 값을 넘겨 받기.
 * 인자들::                   함수에 정보 넘기기.
 * set &amp; setq::                  변수에 값 설정하기.
-* Summary::                     중요한 점들.
+* 정리::                     중요한 점들.
 * Error Message Exercises::
 @end menu</Text>
         </Document>

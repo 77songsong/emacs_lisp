@@ -4,65 +4,58 @@
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
 
 \f0\fs28 \cf0 \
-@node Summary, Error Message Exercises, set & setq, List \'c3\'b3\'b8\'ae\'c7\'cf\'b1\'e2\
+@node \'c1\'a4\'b8\'ae, Error Message Exercises, set & setq, List \'c3\'b3\'b8\'ae\'c7\'cf\'b1\'e2\
 @comment  node-name,  next,  previous,  up\
-@section Summary\
+@section \'c1\'a4\'b8\'ae\
 \
-Learning Lisp is like climbing a hill in which the first part is the\
-steepest.  You have now climbed the most difficult part; what remains\
-becomes easier as you progress onwards.\
+Lisp\'c0\'bb \'b9\'e8\'bf\'ec\'b4\'c2 \'b0\'cd\'c0\'ba \'c3\'b9 \'ba\'ce\'ba\'d0\'c0\'cc \'b0\'a1\'c6\'c4\'b8\'a5 \'be\'f0\'b4\'f6\'c0\'bb \'bf\'c3\'b6\'f3\'b0\'a1\'b4\'c2 \'b0\'cd\'b0\'fa \'b0\'b0\'b4\'d9. \'b0\'a1\'c0\'e5 \'be\'ee\'b7\'c1\'bf\'ee \'ba\'ce\'ba\'d0\'bf\'a1 \'bf\'c3\'b6\'f3\'b0\'ac\'b4\'d9.; \'b3\'b2\'c0\'ba \'ba\'ce\'ba\'d0\'c0\'ba \
+\'c1\'f8\'c7\'e0\'c7\'d2\'bc\'f6\'b7\'cf \'bd\'ac\'bf\'ef \'b0\'cd\'c0\'cc\'b4\'d9.\
 \
 @need 1000\
-In summary,\
+\'bf\'e4\'be\'e0,\
 \
 @itemize @bullet\
 \
 @item\
-Lisp programs are made up of expressions, which are lists or single atoms.\
+Lisp \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a5\'c0\'ba list\'b6\'c7\'b4\'c2 \'b4\'dc\'c0\'cf atom\'b5\'e9\'c0\'ce \'c7\'a5\'c7\'f6\'bd\'c4\'b5\'e9\'b7\'ce \'b1\'b8\'bc\'ba\'b5\'c8\'b4\'d9.\
 \
 @item\
-Lists are made up of zero or more atoms or inner lists, separated by whitespace and\
-surrounded by parentheses.  A list can be empty.\
+List\'b4\'c2 \'b0\'f8\'b9\'e9 \'b6\'c7\'b4\'c2 \'b0\'fd\'c8\'a3\'b5\'e9\'bf\'a1 \'b5\'d1\'b7\'af\'bd\'d7\'c0\'d3\'c0\'b8\'b7\'ce \'b1\'b8\'ba\'d0\'b5\'c7\'be\'ee\'c1\'f6\'b4\'c2 atom\'b5\'e9 \'b6\'c7\'b4\'c2 \'b3\'bb\'ba\'ce list\'b7\'ce \'b1\'b8\'bc\'ba\'b5\'c8\'b4\'d9. list\'b4\'c2 \'ba\'f1\'be\'ee\'c0\'d6\'c0\'bb \'bc\'f6 \
+\'c0\'d6\'b4\'d9.\
 \
 @item\
-Atoms are multi-character symbols, like @code\{forward-paragraph\}, single\
-character symbols like @code\{+\}, strings of characters between double\
-quotation marks, or numbers.\
+Atom\'c0\'ba @code\{foward-paragraph\}\'b0\'b0\'c0\'cc \'bf\'a9\'b7\'af \'b9\'ae\'c0\'da \'b1\'e2\'c8\'a3, @code\{+\}\'b0\'b0\'c0\'cc \'b4\'dc\'c0\'cf \'b9\'ae\'c0\'da \'b1\'e2\'c8\'a3, \'c0\'cc\'c1\'df \'b5\'fb\'bf\'c8\'c7\'a5 \
+\'bb\'e7\'c0\'cc\'bf\'a1 \'c0\'d6\'b4\'c2 \'b9\'ae\'c0\'da\'bf\'ad, \'b6\'c7\'b4\'c2 \'bc\'fd\'c0\'da\'b5\'e9\'c0\'cc\'b4\'d9.\
 \
 @item\
-A number evaluates to itself.\
+\'bc\'fd\'c0\'da\'b4\'c2 \'b1\'d7 \'c0\'da\'c3\'bc\'b7\'ce \'c6\'f2\'b0\'a1\'b5\'c8\'b4\'d9.\
 \
 @item\
-A string between double quotes also evaluates to itself.\
+\'c0\'cc\'c1\'df \'b5\'fb\'bf\'c8\'c7\'a5 \'bb\'e7\'c0\'cc\'bf\'a1 \'c0\'d6\'b4\'c2 \'b9\'ae\'c0\'da\'bf\'ad \'b6\'c7\'c7\'d1 \'b1\'d7 \'c0\'da\'c3\'bc\'b7\'ce \'c6\'f2\'b0\'a1\'b5\'c8\'b4\'d9.\
 \
 @item\
-When you evaluate a symbol by itself, its value is returned.\
+\'b1\'e2\'c8\'a3 \'c0\'da\'c3\'bc\'b8\'a6 \'c6\'f2\'b0\'a1\'c7\'d2 \'b6\'a7, \'b1\'d7 \'b0\'aa\'c0\'cc \'b9\'dd\'c8\'af\'b5\'c8\'b4\'d9.\
 \
 @item\
-When you evaluate a list, the Lisp interpreter looks at the first symbol\
-in the list and then at the function definition bound to that symbol.\
-Then the instructions in the function definition are carried out.\
+list\'b8\'a6 \'c6\'f2\'b0\'a1\'c7\'d2 \'b6\'a7, Lisp \'c7\'d8\'bc\'ae\'b1\'e2\'b4\'c2 List\'c0\'c7 \'c3\'b9 \'b9\'f8\'c2\'b0 \'b1\'e2\'c8\'a3\'b8\'a6 \'bb\'ec\'c6\'ec\'ba\'b8\'b0\'ed \'b1\'e2\'c8\'a3\'bf\'a1 \'c7\'d4\'bc\'f6 \'c1\'a4\'c0\'c7\'b0\'a1 \'b9\'d9\'c0\'ce\'b5\'f9\'b5\'c7\'be\'fa\'c0\'bb \'b6\'a7, \'b1\'d7 \'c7\'d4\'bc\'f6 \
+\'c1\'a4\'c0\'c7\'b0\'a1 \'c7\'d8\'bc\'ae\'b5\'c8\'b4\'d9.\
 \
 @item\
-A single quotation mark,\
+\'b4\'dc\'c0\'cf \'b4\'d9\'bf\'c8\'c7\'a5,\
 @ifinfo\
 '\
 @end ifinfo\
 @ifnotinfo\
 @code\{'\}\
 @end ifnotinfo\
-, tells the Lisp interpreter that it should\
-return the following expression as written, and not evaluate it as it\
-would if the quote were not there.\
+, \'b9\'d9\'b7\'ce \'b5\'da\'bf\'a1 \'be\'b2\'bf\'a9\'c1\'f8 \'c7\'a5\'c7\'f6\'bd\'c4\'c0\'bb \'b5\'fb\'bf\'c8\'c7\'a5\'b0\'a1 \'be\'f8\'be\'fa\'c0\'bb \'b6\'a7\'c3\'b3\'b7\'b3 \'c6\'f2\'b0\'a1\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'cc \'be\'c6\'b4\'d1 \'b1\'d7\'b4\'eb\'b7\'ce \'b9\'dd\'c8\'af\'c7\'d1\'b4\'d9\'b4\'c2 \'b0\'cd\'c0\'bb Lisp \
+\'c7\'d8\'bc\'ae\'b1\'e2\'bf\'a1\'b0\'d4 \'c0\'cc\'be\'df\'b1\'e2 \'c7\'d1\'b4\'d9.\
 \
 @item\
-Arguments are the information passed to a function.  The arguments to a\
-function are computed by evaluating the rest of the elements of the list\
-of which the function is the first element.\
+\'c0\'ce\'c0\'da\'b5\'e9\'c0\'ba \'c7\'d4\'bc\'f6\'bf\'a1 \'c0\'fc\'b4\'de\'b5\'c7\'b4\'c2 \'c1\'a4\'ba\'b8\'c0\'cc\'b4\'d9. \'c7\'d4\'bc\'f6\'bf\'a1 \'c0\'fc\'b4\'de\'b5\'c7\'b4\'c2 \'c0\'ce\'c0\'da\'b5\'e9\'c0\'ba List\'c0\'c7 \'c3\'b9 \'bf\'e4\'bc\'d2\'b4\'c2 \'c7\'d4\'bc\'f6\'c0\'cc\'b0\'ed List\'c0\'c7 \'b3\'aa\'b8\'d3\'c1\'f6 \
+\'bf\'e4\'bc\'d2\'b5\'e9\'c0\'c7 \'c6\'f2\'b0\'a1\'bf\'a1 \'c0\'c7\'c7\'d8 \'b0\'e8\'bb\'ea\'b5\'c8\'b4\'d9.\
 \
 @item\
-A function always returns a value when it is evaluated (unless it gets\
-an error); in addition, it may also carry out some action called a\
-``side effect''.  In many cases, a function's primary purpose is to\
-create a side effect.\
+\'c7\'d4\'bc\'f6\'b4\'c2 \'c7\'d7\'bb\'f3 \'c6\'f2\'b0\'a1\'b5\'c8 \'b0\'aa\'c0\'bb \'b3\'d1\'b0\'dc\'c1\'d8\'b4\'d9. ( \'bf\'a1\'b7\'af\'b8\'a6 \'b9\'de\'c1\'f6 \'be\'ca\'b4\'c2\'b4\'d9\'b8\'e9 ); \'b0\'d4\'b4\'d9\'b0\'a1 \'a1\'b0side effect\'a1\'b1 \'b6\'f3\'b0\'ed \'c0\'cc\'be\'df\'b1\'e2\'c7\'cf\'b4\'c2 \'be\'ee\'b6\'b2 \
+\'c7\'e0\'b5\'bf\'c0\'bb \'bc\'f6\'c7\'e0\'c7\'d2 \'bc\'f6\'b5\'b5 \'c0\'d6\'b4\'d9. \'b4\'eb\'ba\'ce\'ba\'d0\'c0\'c7 \'b0\'e6\'bf\'ec\'bf\'a1 \'c7\'d4\'bc\'f6\'c0\'c7  \'c1\'d6\'bf\'e4 \'b8\'f1\'c0\'fb\'c0\'ba side effect\'b8\'a6 \'bb\'fd\'bc\'ba\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'cc\'b4\'d9.\
 @end itemize}
