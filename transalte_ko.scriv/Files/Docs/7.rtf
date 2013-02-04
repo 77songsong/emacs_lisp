@@ -4,20 +4,16 @@
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
 
 \f0\fs28 \cf0 \
-@node Practicing Evaluation, Writing Defuns, List \'c3\'b3\'b8\'ae\'c7\'cf\'b1\'e2, Top\
+@node \'c6\'f2\'b0\'a1 \'bf\'ac\'bd\'c0\'c7\'cf\'b1\'e2, Writing Defuns, List \'c3\'b3\'b8\'ae\'c7\'cf\'b1\'e2, Top\
 @comment  node-name,  next,  previous,  up\
-@chapter Practicing Evaluation\
+@chapter \'c6\'f2\'b0\'a1 \'bf\'ac\'bd\'c0\'c7\'cf\'b1\'e2\
 @cindex Practicing evaluation\
 @cindex Evaluation practice\
 \
-Before learning how to write a function definition in Emacs Lisp, it is\
-useful to spend a little time evaluating various expressions that have\
-already been written.  These expressions will be lists with the\
-functions as their first (and often only) element.  Since some of the\
-functions associated with buffers are both simple and interesting, we\
-will start with those.  In this section, we will evaluate a few of\
-these.  In another section, we will study the code of several other\
-buffer-related functions, to see how they were written.\
+Emacs Lisp\'c0\'b8\'b7\'ce \'c7\'d4\'bc\'f6 \'c1\'a4\'c0\'c7\'b8\'a6 \'c0\'db\'bc\'ba\'c7\'cf\'b4\'c2 \'b9\'e6\'b9\'fd\'c0\'bb \'b9\'e8\'bf\'ec\'b1\'e2 \'c0\'fc\'bf\'a1, \'c0\'cc\'b9\'cc \'c0\'db\'bc\'ba\'c7\'df\'b4\'f8 \'b4\'d9\'be\'e7\'c7\'d1 \'c7\'a5\'c7\'f6\'bd\'c4\'b5\'e9\'c0\'bb \'c6\'f2\'b0\'a1\'c7\'cf\'b4\'c2 \'b0\'cd\'bf\'a1 \
+\'be\'e0\'b0\'a3\'c0\'c7 \'bd\'c3\'b0\'a3\'c0\'bb \'bb\'e7\'bf\'eb\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'cc \'c0\'af\'bf\'eb\'c7\'cf\'b4\'d9. \'c0\'cc \'c7\'a5\'c7\'f6\'bd\'c4\'b5\'e9\'c0\'ba \'c3\'b9 \'bf\'e4\'bc\'d2\'b0\'a1 \'c7\'d4\'bc\'f6\'b7\'ce \'b5\'c8 list\'b5\'e9\'c0\'cf \'b0\'cd\'c0\'cc\'b4\'d9. \'b8\'ee\'b8\'ee \'c7\'d4\'bc\'f6\'b5\'e9\'c0\'ba \
+\'b0\'a3\'b4\'dc\'c7\'cf\'b0\'ed \'c8\'ef\'b9\'cc\'b7\'ce\'bf\'ee \'b9\'f6\'c6\'db\'bf\'cd \'bf\'ac\'b0\'fc\'b5\'c7\'be\'ee\'c0\'d6\'b4\'d9. \'c0\'cc \'b0\'cd\'b5\'e9\'c0\'bb \'b8\'d5\'c0\'fa \'ba\'bc \'b0\'cd\'c0\'cc\'b4\'d9. \'c0\'cc \'c0\'e5\'bf\'a1\'bc\'ad \'c0\'cc \'b0\'cd\'b5\'e9 \'c1\'df \'b8\'ee \'b0\'a1\'c1\'f6\'b8\'a6 \'c6\'f2\'b0\'a1\'c7\'d2 \
+\'b0\'cd\'c0\'cc\'b4\'d9. \'b4\'d9\'b8\'a5 \'c0\'e5\'bf\'a1\'bc\'ad \'b8\'ee \'b0\'b3\'c0\'c7 \'b4\'d9\'b8\'a5 \'b9\'f6\'c6\'db \'b0\'fc\'b7\'c3 \'c7\'d4\'bc\'f6\'b5\'e9\'c0\'c7 \'c4\'da\'b5\'e5\'b5\'e9\'c0\'cc \'be\'ee\'b6\'bb\'b0\'d4 \'c0\'db\'bc\'ba\'b5\'c7\'be\'fa\'b4\'c2\'c1\'f6 \'c7\'d0\'bd\'c0\'c7\'d2 \'b0\'cd\'c0\'cc\'b4\'d9.\
 \
 @menu\
 * How to Evaluate::            Typing editing commands or @kbd\{C-x C-e\}\
@@ -30,34 +26,26 @@ buffer-related functions, to see how they were written.\
 * Evaluation Exercise::\
 @end menu\
 \
-@node How to Evaluate, Buffer Names, Practicing Evaluation, Practicing Evaluation\
+@node How to Evaluate, Buffer Names, \'c6\'f2\'b0\'a1 \'bf\'ac\'bd\'c0\'c7\'cf\'b1\'e2, \'c6\'f2\'b0\'a1 \'bf\'ac\'bd\'c0\'c7\'cf\'b1\'e2\
 @ifnottex\
 @unnumberedsec How to Evaluate\
 @end ifnottex\
 \
-@i\{Whenever you give an editing command\} to Emacs Lisp, such as the\
-command to move the cursor or to scroll the screen, @i\{you are evaluating\
-an expression,\} the first element of which is a function.  @i\{This is\
-how Emacs works.\}\
+\'c4\'bf\'bc\'ad\'b8\'a6 \'bf\'f2\'c1\'f7\'c0\'cc\'b0\'c5\'b3\'aa, \'c8\'ad\'b8\'e9\'c0\'bb \'bd\'ba\'c5\'a9\'b7\'d1 \'c7\'cf\'b4\'c2 \'b8\'ed\'b7\'c9 \'b0\'b0\'c0\'cc Emacs Lisp\'bf\'a1 @i\{\'c6\'ed\'c1\'fd \'b8\'ed\'b7\'c9\'c0\'bb \'c0\'d4\'b7\'c2\'c7\'d2 \'b6\'a7\'b8\'b6\'b4\'d9\}, \'c3\'b9 \'bf\'e4\'bc\'d2\'b0\'a1 \
+\'c7\'d4\'bc\'f6\'c0\'ce @i\{\'c7\'a5\'c7\'f6\'bd\'c4\'c0\'bb \'c6\'f2\'b0\'a1\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'cc\'b4\'d9.\} @i\{Emacs\'b0\'a1 \'b5\'bf\'c0\'db\'c7\'cf\'b4\'c2 \'b9\'e6\'bd\'c4\'c0\'cc\'b4\'d9.\}\
 \
 @cindex @samp\{interactive function\} defined\
 @cindex @samp\{command\} defined\
-When you type keys, you cause the Lisp interpreter to evaluate an\
-expression and that is how you get your results.  Even typing plain text\
-involves evaluating an Emacs Lisp function, in this case, one that uses\
-@code\{self-insert-command\}, which simply inserts the character you\
-typed.  The functions you evaluate by typing keystrokes are called\
-@dfn\{interactive\} functions, or @dfn\{commands\}; how you make a function\
-interactive will be illustrated in the chapter on how to write function\
-definitions.  @xref\{Interactive, , Making a Function Interactive\}.\
+\'c5\'b0\'b8\'a6 \'c0\'d4\'b7\'c2\'c7\'d2 \'b6\'a7, Lisp \'c7\'d8\'bc\'ae\'b1\'e2\'b4\'c2 \'c7\'a5\'c7\'f6\'bd\'c4\'c0\'bb \'c6\'f2\'b0\'a1\'c7\'cf\'b0\'d4 \'b5\'c7\'b0\'ed \'b1\'d7 \'b0\'cd\'c0\'ba \'b0\'e1\'b0\'fa\'b8\'a6 \'be\'f2\'b4\'c2 \'b9\'e6\'b9\'fd\'c0\'cc\'b4\'d9. \'c6\'f2\'b9\'fc\'c7\'d1 \'b1\'db\'c0\'bb \
+\'c0\'d4\'b7\'c2\'c7\'cf\'b4\'f5\'b6\'f3\'b5\'b5 Emacs Lisp \'c7\'d4\'bc\'f6\'b8\'a6 \'c6\'f2\'b0\'a1\'c7\'cf\'b0\'d4 \'b5\'c8\'b4\'d9. \'c0\'cc \'b0\'e6\'bf\'ec\'bf\'a1 \'c0\'d4\'b7\'c2\'c7\'d1 \'b9\'ae\'c0\'da\'b8\'a6 \'b4\'dc\'bc\'f8\'c8\'f7 \'c3\'df\'b0\'a1\'c7\'cf\'b4\'c2 \
+@code\{self-insert-command\} \'b0\'a1 \'bb\'e7\'bf\'eb\'b5\'c8\'b4\'d9. \'c5\'b0 \'b5\'ce\'b5\'e5\'b8\'b2\'bf\'a1 \'c0\'c7\'c7\'d8\'bc\'ad \'c6\'f2\'b0\'a1\'c7\'cf\'b4\'c2 \'c7\'d4\'bc\'f6\'b4\'c2 @dfn\{\'b4\'eb\'c8\'ad\'c7\'fc\
+(interative)\} \'c7\'d4\'bc\'f6 \'b6\'c7\'b4\'c2 @dfn\{\'b8\'ed\'b7\'c9(commands)\}\'c0\'cc\'b6\'f3\'b0\'ed \'ba\'d2\'b8\'b0\'b4\'d9.; \'b4\'eb\'c8\'ad\'c7\'fc \'c7\'d4\'bc\'f6\'b8\'a6 \'b8\'b8\'b5\'e5\'b4\'c2 \'b9\'e6\'b9\'fd\'c0\'ba \'c0\'cc \'c0\'e5\'bf\'a1\'bc\'ad \
+\'c7\'d4\'bc\'f6 \'c1\'a4\'c0\'c7\'b8\'a6 \'c0\'db\'bc\'ba\'c7\'cf\'b4\'c2 \'b9\'e6\'b9\'fd\'bf\'a1\'bc\'ad \'bc\'b3\'b8\'ed\'c7\'d2 \'b0\'cd\'c0\'cc\'b4\'d9.  @xref\{Interactive, , Making a Function Interactive\}.\
 \
-In addition to typing keyboard commands, we have seen a second way to\
-evaluate an expression: by positioning the cursor after a list and\
-typing @kbd\{C-x C-e\}.  This is what we will do in the rest of this\
-section.  There are other ways to evaluate an expression as well; these\
-will be described as we come to them.\
+\'c5\'b0\'ba\'b8\'b5\'e5 \'b8\'ed\'b7\'c9\'c0\'bb \'c0\'d4\'b7\'c2\'c7\'cf\'b4\'c2 \'b0\'cd\'bf\'a1 \'c3\'df\'b0\'a1\'b7\'ce \'c7\'a5\'c7\'f6\'bd\'c4\'c0\'bb \'c6\'f2\'b0\'a1\'c7\'cf\'b4\'c2 \'b5\'ce \'b9\'f8\'c2\'b0 \'b9\'e6\'b9\'fd\'c0\'bb \'ba\'b8\'be\'d2\'b4\'d9.: list\'c0\'c7 \'b5\'da\'bf\'a1 \'c4\'bf\'bc\'ad\'b8\'a6 \'bf\'c5\'b1\'e4 \'c8\'c4, \
+@kbd\{C-x C-e\}\'b8\'a6 \'c0\'d4\'b7\'c2\'c7\'d1\'b4\'d9. \'c0\'cc \'c0\'e5\'c0\'c7 \'b3\'aa\'b8\'d3\'c1\'f6\'bf\'a1\'bc\'ad \'bb\'e7\'bf\'eb\'c7\'d2 \'b0\'cd\'c0\'cc\'b4\'d9. \'b6\'c7\'c7\'d1 \'c7\'a5\'c7\'f6\'bd\'c4\'c0\'bb \'c6\'f2\'b0\'a1\'c7\'cf\'b4\'c2 \'b4\'d9\'b8\'a5 \'b9\'e6\'b9\'fd\'b5\'e9\'b5\'b5 \
+\'c0\'d6\'b4\'d9.; \'c0\'cc \'b9\'e6\'b9\'fd\'b5\'e9\'c0\'ba \'b4\'d9\'bd\'c3 \'c1\'a2\'c7\'cf\'b0\'d4 \'b5\'c7\'b8\'e9 \'bc\'b3\'b8\'ed\'b5\'c9 \'b0\'cd\'c0\'cc\'b4\'d9.\
 \
-Besides being used for practicing evaluation, the functions shown in the\
-next few sections are important in their own right.  A study of these\
-functions makes clear the distinction between buffers and files, how to\
-switch to a buffer, and how to determine a location within it.}
+\'c6\'f2\'b0\'a1 \'bf\'ac\'bd\'c0\'c7\'cf\'b4\'c2 \'b0\'cd\'bf\'a1 \'b4\'f5\'ba\'d2\'be\'ee \'b4\'d9\'c0\'bd \'b8\'ee \'c0\'e5\'bf\'a1\'bc\'ad \'ba\'b8\'bf\'a9\'c1\'f6\'b4\'c2 \'c7\'d4\'bc\'f6\'b5\'e9\'c0\'ba \'b1\'d7 \'c0\'da\'c3\'bc\'b7\'ce\'b5\'b5 \'c1\'df\'bf\'e4\'c7\'cf\'b4\'d9. \'c0\'cc \'c7\'d4\'bc\'f6\'b5\'e9\'c0\'c7 \'c7\'d0\'bd\'c0\'c0\'ba \'b9\'f6\'c6\'db\'bf\'cd \
+\'c6\'c4\'c0\'cf \'b0\'a3\'c0\'c7 \'c2\'f7\'c0\'cc, \'c6\'db\'b9\'f6\'b8\'a6 \'b9\'d9\'b2\'d9\'b4\'c2 \'b9\'e6\'b9\'fd \'b1\'d7\'b8\'ae\'b0\'ed \'b1\'d7 \'be\'c8\'c0\'c7 \'c0\'a7\'c4\'a1\'b8\'a6 \'c1\'a4\'c7\'cf\'b4\'c2 \'b9\'e6\'b9\'fd\'b5\'e9\'c0\'bb \'b8\'ed\'c8\'ae\'c7\'cf\'b0\'d4 \'c7\'d1\'b4\'d9.\
+}

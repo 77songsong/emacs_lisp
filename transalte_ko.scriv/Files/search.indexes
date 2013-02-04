@@ -19244,7 +19244,7 @@ Lisp을 배우는 것은 첫 부분이 가파른 언덕을 올라가는 것과 �
 진행할수록 쉬울 것이다.
 
 @need 1000
-요약,
+요약하면,
 
 @itemize @bullet
 
@@ -19476,7 +19476,7 @@ Here is the full regular expression:
         <Document ID="40">
             <Title>Excercise</Title>
             <Text>
-@node Evaluation Exercise,  , Buffer Size &amp; Locations, Practicing Evaluation
+@node Evaluation Exercise,  , Buffer Size &amp; Locations, 평가 연습하기
 @section Exercise
 
 Find a file with which you are working and move towards its middle.
@@ -19520,7 +19520,7 @@ expression it came from ceases to matter once the value is known.
         <Document ID="36">
             <Title>Buffer Names</Title>
             <Text>
-@node Buffer Names, Getting Buffers, How to Evaluate, Practicing Evaluation
+@node Buffer Names, Getting Buffers, How to Evaluate, 평가 연습하기
 @comment  node-name,  next,  previous,  up
 @section Buffer Names
 @findex buffer-name
@@ -19849,7 +19849,7 @@ section.</Text>
         <Document ID="37">
             <Title>Getting Buffers</Title>
             <Text>
-@node Getting Buffers, Switching Buffers, Buffer Names, Practicing Evaluation
+@node Getting Buffers, Switching Buffers, Buffer Names, 평가 연습하기
 @comment  node-name,  next,  previous,  up
 @section Getting Buffers
 @findex current-buffer
@@ -20288,7 +20288,7 @@ Symbol's function definition is void:@: fill-column
         <Document ID="38">
             <Title>Switching Buffers</Title>
             <Text>
-@node Switching Buffers, Buffer Size &amp; Locations, Getting Buffers, Practicing Evaluation
+@node Switching Buffers, Buffer Size &amp; Locations, Getting Buffers, 평가 연습하기
 @comment  node-name,  next,  previous,  up
 @section Switching Buffers
 @findex switch-to-buffer
@@ -20566,7 +20566,7 @@ quotes.)</Text>
         <Document ID="39">
             <Title>Buffer Size and the Location of Point</Title>
             <Text>
-@node Buffer Size &amp; Locations, Evaluation Exercise, Switching Buffers, Practicing Evaluation
+@node Buffer Size &amp; Locations, Evaluation Exercise, Switching Buffers, 평가 연습하기
 @comment  node-name,  next,  previous,  up
 @section Buffer Size and the Location of Point
 @cindex Size of buffer
@@ -21253,7 +21253,7 @@ every node in every chapter.
 @menu
 * 서문::                     What to look for.
 * List 처리하기::             What is Lisp?
-* Practicing Evaluation::       Running several programs.
+* 평가 연습하기::       Running several programs.
 * Writing Defuns::              How to write function definitions.
 * Buffer Walk Through::         Exploring a few buffer-related functions.
 * More Complex::                A few, even more complex functions.
@@ -21346,7 +21346,7 @@ Variables
 * setq 사용하기::                 따옴표 붙은 값 설정하기.
 * 숫자 세기::                   숫자 세기에 @code{setq}를 사용하기.
 
-Practicing Evaluation
+평가 연습하기
 
 * How to Evaluate::            Typing editing commands or @kbd{C-x C-e}
                                  causes evaluation.
@@ -22161,7 +22161,7 @@ delimit them from the body of the @code{let}.</Text>
         <Document ID="6">
             <Title>List Processing</Title>
             <Text>
-@node List 처리하기, Practicing Evaluation, 서문, Top
+@node List 처리하기, 평가 연습하기, 서문, Top
 @comment  node-name,  next,  previous,  up
 @chapter List 처리하기
 
@@ -22329,20 +22329,16 @@ within the body of a @code{let} expression.  It looks like this:
         <Document ID="7">
             <Title>Practicing Evaluation</Title>
             <Text>
-@node Practicing Evaluation, Writing Defuns, List 처리하기, Top
+@node 평가 연습하기, Writing Defuns, List 처리하기, Top
 @comment  node-name,  next,  previous,  up
-@chapter Practicing Evaluation
+@chapter 평가 연습하기
 @cindex Practicing evaluation
 @cindex Evaluation practice
 
-Before learning how to write a function definition in Emacs Lisp, it is
-useful to spend a little time evaluating various expressions that have
-already been written.  These expressions will be lists with the
-functions as their first (and often only) element.  Since some of the
-functions associated with buffers are both simple and interesting, we
-will start with those.  In this section, we will evaluate a few of
-these.  In another section, we will study the code of several other
-buffer-related functions, to see how they were written.
+Emacs Lisp으로 함수 정의를 작성하는 방법을 배우기 전에, 이미 작성했던 다양한 표현식들을 평가하는 것에 
+약간의 시간을 사용하는 것이 유용하다. 이 표현식들은 첫 요소가 함수로 된 list들일 것이다. 몇몇 함수들은 
+간단하고 흥미로운 버퍼와 연관되어있다. 이 것들을 먼저 볼 것이다. 이 장에서 이 것들 중 몇 가지를 평가할 
+것이다. 다른 장에서 몇 개의 다른 버퍼 관련 함수들의 코드들이 어떻게 작성되었는지 학습할 것이다.
 
 @menu
 * How to Evaluate::            Typing editing commands or @kbd{C-x C-e}
@@ -22355,42 +22351,34 @@ buffer-related functions, to see how they were written.
 * Evaluation Exercise::
 @end menu
 
-@node How to Evaluate, Buffer Names, Practicing Evaluation, Practicing Evaluation
+@node How to Evaluate, Buffer Names, 평가 연습하기, 평가 연습하기
 @ifnottex
 @unnumberedsec How to Evaluate
 @end ifnottex
 
-@i{Whenever you give an editing command} to Emacs Lisp, such as the
-command to move the cursor or to scroll the screen, @i{you are evaluating
-an expression,} the first element of which is a function.  @i{This is
-how Emacs works.}
+커서를 움직이거나, 화면을 스크롤 하는 명령 같이 Emacs Lisp에 @i{편집 명령을 입력할 때마다}, 첫 요소가 
+함수인 @i{표현식을 평가하는 것이다.} @i{Emacs가 동작하는 방식이다.}
 
 @cindex @samp{interactive function} defined
 @cindex @samp{command} defined
-When you type keys, you cause the Lisp interpreter to evaluate an
-expression and that is how you get your results.  Even typing plain text
-involves evaluating an Emacs Lisp function, in this case, one that uses
-@code{self-insert-command}, which simply inserts the character you
-typed.  The functions you evaluate by typing keystrokes are called
-@dfn{interactive} functions, or @dfn{commands}; how you make a function
-interactive will be illustrated in the chapter on how to write function
-definitions.  @xref{Interactive, , Making a Function Interactive}.
+키를 입력할 때, Lisp 해석기는 표현식을 평가하게 되고 그 것은 결과를 얻는 방법이다. 평범한 글을 
+입력하더라도 Emacs Lisp 함수를 평가하게 된다. 이 경우에 입력한 문자를 단순히 추가하는 
+@code{self-insert-command} 가 사용된다. 키 두드림에 의해서 평가하는 함수는 @dfn{대화형
+(interative)} 함수 또는 @dfn{명령(commands)}이라고 불린다.; 대화형 함수를 만드는 방법은 이 장에서 
+함수 정의를 작성하는 방법에서 설명할 것이다.  @xref{Interactive, , Making a Function Interactive}.
 
-In addition to typing keyboard commands, we have seen a second way to
-evaluate an expression: by positioning the cursor after a list and
-typing @kbd{C-x C-e}.  This is what we will do in the rest of this
-section.  There are other ways to evaluate an expression as well; these
-will be described as we come to them.
+키보드 명령을 입력하는 것에 추가로 표현식을 평가하는 두 번째 방법을 보았다.: list의 뒤에 커서를 옮긴 후, 
+@kbd{C-x C-e}를 입력한다. 이 장의 나머지에서 사용할 것이다. 또한 표현식을 평가하는 다른 방법들도 
+있다.; 이 방법들은 다시 접하게 되면 설명될 것이다.
 
-Besides being used for practicing evaluation, the functions shown in the
-next few sections are important in their own right.  A study of these
-functions makes clear the distinction between buffers and files, how to
-switch to a buffer, and how to determine a location within it.</Text>
+평가 연습하는 것에 더불어 다음 몇 장에서 보여지는 함수들은 그 자체로도 중요하다. 이 함수들의 학습은 버퍼와 
+파일 간의 차이, 퍼버를 바꾸는 방법 그리고 그 안의 위치를 정하는 방법들을 명확하게 한다.
+</Text>
         </Document>
         <Document ID="8">
             <Title>How To Write  Function Definition</Title>
             <Text>
-@node Writing Defuns, Buffer Walk Through, Practicing Evaluation, Top
+@node Writing Defuns, Buffer Walk Through, 평가 연습하기, Top
 @comment  node-name,  next,  previous,  up
 @chapter How To Write Function Definitions
 @cindex Definition writing

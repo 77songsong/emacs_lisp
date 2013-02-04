@@ -160,7 +160,7 @@ Robert J. Chassell<br/>
 <hr/>
 <li>
 <p class="binderItem"><strong>List Processing</strong><br/><br/>
-@node List 처리하기, Practicing Evaluation, 서문, Top<br/>
+@node List 처리하기, 평가 연습하기, 서문, Top<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @chapter List 처리하기<br/>
 <br/>
@@ -170,7 +170,7 @@ Robert J. Chassell<br/>
 @emph{list}를(그리고 list의 list) 넣어서 다루는 프로그래밍 언어이다. 괄호는 리스트의 경계를<br/>
 표시한다. 때로는 작은 따옴표 또는 인용 기호 @samp{‘} @footnote{ 작은 따옴표 또는 인용<br/>
 기호는 @code{quote} 함수의 약어다.; 지금 함수들에 대해서 몰라도 된다.; 함수들은 <br/>
-@ref{에러 만들기, , 에러 메시지 만들기}.에 정의 되...</p>
+@ref{에러 만들기, , 에러 메시지 만들기}.에 정의 되어 있다. } 뒤에 lis...</p>
 </li>
 <hr/>
 <ul>
@@ -759,7 +759,7 @@ Lisp을 배우는 것은 첫 부분이 가파른 언덕을 올라가는 것과 �
 진행할수록 쉬울 것이다.<br/>
 <br/>
 @need 1000<br/>
-요약,<br/>
+요약하면,<br/>
 <br/>
 @itemize @bullet<br/>
 <br/>
@@ -778,7 +778,7 @@ Atom은 @code{foward-paragraph}같이 여러 문자 기호, @code{+}같이 단�
 숫자는 그 자체로 평가된다.<br/>
 <br/>
 @item<br/>
-이중 따옴표 사이에 있는 문자...</p>
+이중 따옴표 사이에 있는 ...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Excercises</strong><br/><br/>
@@ -807,23 +807,26 @@ A few simple exercises:<br/>
 <hr/>
 <li>
 <p class="binderItem"><strong>Practicing Evaluation</strong><br/><br/>
-@node Practicing Evaluation, Writing Defuns, List 처리하기, Top<br/>
+@node 평가 연습하기, Writing Defuns, List 처리하기, Top<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@chapter Practicing Evaluation<br/>
+@chapter 평가 연습하기<br/>
 @cindex Practicing evaluation<br/>
 @cindex Evaluation practice<br/>
 <br/>
-Before learning how to write a function definition in Emacs Lisp, it is<br/>
-useful to spend a little time evaluating various expressions that have<br/>
-already been written.  These expressions will be lists with the<br/>
-functions as their first (and often only) element.  Since some of the<br/>
-functions associated with buf...</p>
+Emacs Lisp으로 함수 정의를 작성하는 방법을 배우기 전에, 이미 작성했던 다양한 표현식들을 평가하는 것에 <br/>
+약간의 시간을 사용하는 것이 유용하다. 이 표현식들은 첫 요소가 함수로 된 list들일 것이다. 몇몇 함수들은 <br/>
+간단하고 흥미로운 버퍼와 연관되어있다. 이 것들을 먼저 볼 것이다. 이 장에서 이 것들 중 몇 가지를 평가할 <br/>
+것이다. 다른 장에서 몇 개의 다른 버퍼 관련 함수들의 코드들이 어떻게 작성되었는지 학습할 것이다.<br/>
+<br/>
+@menu<br/>
+* How to Evaluate::            Typing editing commands or @kbd{C-x C-e}<br/>
+          ...</p>
 </li>
 <hr/>
 <ul>
 <li>
 <p class="binderItem"><strong>Buffer Names</strong><br/><br/>
-@node Buffer Names, Getting Buffers, How to Evaluate, Practicing Evaluation<br/>
+@node Buffer Names, Getting Buffers, How to Evaluate, 평가 연습하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section Buffer Names<br/>
 @findex buffer-name<br/>
@@ -833,11 +836,11 @@ The two functions, @code{buffer-name} and @code{buffer-file-name}, show<br/>
 the difference between a file and a buffer.  When you evaluate the<br/>
 following expression, @code{(buffer-name)}, the name of the buffer<br/>
 appears in the echo area.  When you evaluate @code{(buffer-file-name)},<br/>
-the name of the file to which the ...</p>
+the name of the file to which the buffer refers ...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Getting Buffers</strong><br/><br/>
-@node Getting Buffers, Switching Buffers, Buffer Names, Practicing Evaluation<br/>
+@node Getting Buffers, Switching Buffers, Buffer Names, 평가 연습하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section Getting Buffers<br/>
 @findex current-buffer<br/>
@@ -849,11 +852,11 @@ to get the buffer @emph{itself}, a different function is needed: the<br/>
 @code{current-buffer} function.  If you use this function in code, what<br/>
 you get is the buffer itself.<br/>
 <br/>
-A name and the object or entity to which...</p>
+A name and the object or entity to which the name refe...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Switching Buffers</strong><br/><br/>
-@node Switching Buffers, Buffer Size & Locations, Getting Buffers, Practicing Evaluation<br/>
+@node Switching Buffers, Buffer Size & Locations, Getting Buffers, 평가 연습하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section Switching Buffers<br/>
 @findex switch-to-buffer<br/>
@@ -865,11 +868,11 @@ used as an argument to a function that requires one.  We can see this<br/>
 by using @code{other-buffer} and @code{switch-to-buffer} to switch to a<br/>
 different buffer.<br/>
 <br/>
-But first, a brief introduction t...</p>
+But first, a brief introduction to the @code{sw...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Buffer Size and the Location of Point</strong><br/><br/>
-@node Buffer Size & Locations, Evaluation Exercise, Switching Buffers, Practicing Evaluation<br/>
+@node Buffer Size & Locations, Evaluation Exercise, Switching Buffers, 평가 연습하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section Buffer Size and the Location of Point<br/>
 @cindex Size of buffer<br/>
@@ -882,11 +885,11 @@ Finally, let's look at several rather simple functions,<br/>
 @code{point-max}.  These give information about the size of a buffer and<br/>
 the location of point within it.<br/>
 <br/>
-The ...</p>
+The function @code...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Excercise</strong><br/><br/>
-@node Evaluation Exercise,  , Buffer Size & Locations, Practicing Evaluation<br/>
+@node Evaluation Exercise,  , Buffer Size & Locations, 평가 연습하기<br/>
 @section Exercise<br/>
 <br/>
 Find a file with which you are working and move towards its middle.<br/>
@@ -896,7 +899,7 @@ Find its buffer name, file name, length, and your position in the file.</p>
 <hr/>
 <li>
 <p class="binderItem"><strong>How To Write  Function Definition</strong><br/><br/>
-@node Writing Defuns, Buffer Walk Through, Practicing Evaluation, Top<br/>
+@node Writing Defuns, Buffer Walk Through, 평가 연습하기, Top<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @chapter How To Write Function Definitions<br/>
 @cindex Definition writing<br/>
@@ -906,7 +909,7 @@ Find its buffer name, file name, length, and your position in the file.</p>
 When the Lisp interpreter evaluates a list, it looks to see whether the<br/>
 first symbol on the list has a function definition attached to it; or,<br/>
 put another way, whether the symbol points to a function definition.  If<br/>
-it does, the computer car...</p>
+it does, the computer carries out the i...</p>
 </li>
 <hr/>
 <ul>
