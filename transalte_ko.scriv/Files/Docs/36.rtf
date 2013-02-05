@@ -10,29 +10,20 @@
 @findex buffer-name\
 @findex buffer-file-name\
 \
-The two functions, @code\{buffer-name\} and @code\{buffer-file-name\}, show\
-the difference between a file and a buffer.  When you evaluate the\
-following expression, @code\{(buffer-name)\}, the name of the buffer\
-appears in the echo area.  When you evaluate @code\{(buffer-file-name)\},\
-the name of the file to which the buffer refers appears in the echo\
-area.  Usually, the name returned by @code\{(buffer-name)\} is the same as\
-the name of the file to which it refers, and the name returned by\
-@code\{(buffer-file-name)\} is the full path-name of the file.\
+@code\{buffer-name\}\'b0\'fa @code\{buffer-file-name\} \'b5\'ce \'c7\'d4\'bc\'f6\'b4\'c2 \'c6\'c4\'c0\'cf\'b0\'fa \'b9\'f6\'c6\'db\'c0\'c7 \'b4\'d9\'b8\'a5 \'c1\'a1\'c0\'bb \'ba\'b8\'bf\'a9\'c1\'d8\'b4\'d9. \
+@code\{(buffer-name)\} \'c7\'a5\'c7\'f6\'bd\'c4\'c0\'bb \'c6\'f2\'b0\'a1\'c7\'cf\'b8\'e9 echo \'bf\'b5\'bf\'aa\'bf\'a1 \'b9\'f6\'c6\'db \'c0\'cc\'b8\'a7\'c0\'cc \'b3\'aa\'c5\'b8\'b3\'ad\'b4\'d9. \
+@code\{(buffer-file-name)\}\'c0\'bb \'c6\'f2\'b0\'a1\'c7\'cf\'b8\'e9, \'b9\'f6\'c6\'db\'b0\'a1 \'c2\'fc\'c1\'b6\'c7\'cf\'b0\'ed \'c0\'d6\'b4\'c2 \'c6\'c4\'c0\'cf \'c0\'cc\'b8\'a7\'c0\'cc echo \'bf\'b5\'bf\'aa\'bf\'a1 \'b3\'aa\'c5\'b8\'b3\'ad\'b4\'d9. \'ba\'b8\'c5\'eb \
+@code\{(buffer-name)\}\'bf\'a1\'bc\'ad \'b9\'de\'c0\'ba \'c0\'cc\'b8\'a7\'c0\'ba \'b9\'f6\'c6\'db\'b0\'a1 \'c2\'fc\'c1\'b6\'c7\'cf\'b0\'ed \'c0\'d6\'b4\'c2 \'c6\'c4\'c0\'cf\'c0\'c7 \'c0\'cc\'b8\'a7\'b0\'fa \'b5\'bf\'c0\'cf\'c7\'cf\'b4\'d9. \'b1\'d7\'b8\'ae\'b0\'ed \
+@code\{(buffer-file-name)\}\'bf\'a1\'bc\'ad \'b9\'de\'c0\'ba \'c0\'cc\'b8\'a7\'c0\'ba \'c6\'c4\'c0\'cf\'c0\'c7 \'c0\'fc\'c3\'bc \'b0\'e6\'b7\'ce \'c0\'cc\'b8\'a7\'c0\'cc\'b4\'d9.\
 \
-A file and a buffer are two different entities.  A file is information\
-recorded permanently in the computer (unless you delete it).  A buffer,\
-on the other hand, is information inside of Emacs that will vanish at\
-the end of the editing session (or when you kill the buffer).  Usually,\
-a buffer contains information that you have copied from a file; we say\
-the buffer is @dfn\{visiting\} that file.  This copy is what you work on\
-and modify.  Changes to the buffer do not change the file, until you\
-save the buffer.  When you save the buffer, the buffer is copied to the file\
-and is thus saved permanently.\
+\'c6\'c4\'c0\'cf\'b0\'fa \'b9\'f6\'c6\'db\'b4\'c2 \'b4\'d9\'b8\'a5 \'c1\'b8\'c0\'e7\'c0\'cc\'b4\'d9. \'c6\'c4\'c0\'cf\'c0\'ba \'c4\'c4\'c7\'bb\'c5\'cd\'bf\'a1 (\'c1\'f6\'bf\'ec\'c1\'f6 \'be\'ca\'b4\'c2\'b4\'d9\'b8\'e9)\'bf\'b5\'b1\'b8\'c0\'fb\'c0\'b8\'b7\'ce \'b1\'e2\'b7\'cf\'b5\'c8 \'c1\'a4\'ba\'b8\'c0\'cc\'b4\'d9. \'b9\'dd\'ba\'af\'bf\'a1 \'b9\'f6\'c6\'db\'b4\'c2 \
+\'c6\'ed\'c1\'fd \'bc\'bc\'bc\'c7\'c0\'c7 \'b3\'a1\'bf\'a1\'bc\'ad(\'b6\'c7\'b4\'c2 \'b9\'f6\'c6\'db\'b8\'a6 \'c1\'a6\'b0\'c5\'c7\'d2 \'b6\'a7) \'bb\'e7\'b6\'f3\'c1\'fa Emacs \'be\'c8\'c0\'c7 \'c1\'a4\'ba\'b8\'c0\'cc\'b4\'d9. \'ba\'b8\'c5\'eb \'b9\'f6\'c6\'db\'b4\'c2 \'c6\'c4\'c0\'cf\'b7\'ce\'ba\'ce\'c5\'cd \'ba\'b9\'bb\'e7\'c7\'d1 \
+\'c1\'a4\'ba\'b8\'b8\'a6 \'b0\'a1\'c1\'f6\'b0\'ed \'c0\'d6\'b4\'d9.; \'b9\'f6\'c6\'db\'b0\'a1 \'c6\'c4\'c0\'cf\'c0\'bb @dfn\{\'b9\'e6\'b9\'ae\'c7\'cf\'b0\'ed(visiting)\} \'c0\'d6\'b4\'d9\'b6\'f3\'b0\'ed \'b8\'bb\'c7\'d1\'b4\'d9. \'b9\'f6\'c6\'db\'b8\'a6 \'c0\'fa\'c0\'e5\'c7\'cf\'c1\'f6 \'be\'ca\'b4\'c2\'b4\'d9\'b8\'e9, \
+\'b9\'f6\'c6\'db\'c0\'c7 \'ba\'af\'b0\'e6\'c0\'ba \'c6\'c4\'c0\'cf\'c0\'bb \'ba\'af\'b0\'e6\'c7\'cf\'c1\'f6 \'be\'ca\'b4\'c2\'b4\'d9. \'b9\'f6\'c6\'db\'b8\'a6 \'c0\'fa\'c0\'e5\'c7\'d2 \'b6\'a7, \'b9\'f6\'c6\'db\'b0\'a1 \'c6\'c4\'c0\'cf\'b7\'ce \'ba\'b9\'bb\'e7\'b5\'c7\'b0\'ed \'bf\'b5\'b1\'b8\'c0\'fb\'c0\'b8\'b7\'ce \'c0\'fa\'c0\'e5\'b5\'c8\'b4\'d9.\
 \
 @need 1250\
-If you are reading this in Info inside of GNU Emacs, you can evaluate\
-each of the following expressions by positioning the cursor after it and\
-typing @kbd\{C-x C-e\}.\
+GNU Emacs\'c0\'c7 info\'bf\'a1\'bc\'ad \'c0\'cc \'b9\'ae\'bc\'ad\'b8\'a6 \'c0\'d0\'b0\'ed \'c0\'d6\'b4\'d9\'b8\'e9 \'b4\'d9\'c0\'bd \'c7\'a5\'c7\'f6\'bd\'c4\'b5\'e9\'c0\'c7 \'b3\'a1\'bf\'a1 \'c4\'bf\'bc\'ad\'b8\'a6 \'bf\'c5\'b1\'e4 \'c8\'c4, @kbd\{C-x C-e\}\'b8\'a6 \
+\'c0\'d4\'b7\'c2\'c7\'cf\'bf\'a9 \'c6\'f2\'b0\'a1\'c7\'d2 \'bc\'f6 \'c0\'d6\'b4\'d9.\
 \
 @example\
 @group\
@@ -43,24 +34,18 @@ typing @kbd\{C-x C-e\}.\
 @end example\
 \
 @noindent\
-When I do this in Info, the value returned by evaluating\
-@code\{(buffer-name)\} is @file\{"*info*"\}, and the value returned by\
-evaluating @code\{(buffer-file-name)\} is @file\{nil\}.\
+Info\'bf\'a1\'bc\'ad \'c0\'cc\'b0\'cd\'c0\'bb \'c7\'d2 \'b6\'a7, @code\{(buffer-name)\} \'c6\'f2\'b0\'a1\'c0\'c7 \'b0\'aa\'c0\'ba @file\{\'a1\'b0*info*\'a1\'b1\}\'c0\'cc\'b4\'d9. \'b1\'d7\'b8\'ae\'b0\'ed \
+@code\{(buffer-file-name)\}\'c0\'c7 \'b0\'e1\'b0\'fa \'b0\'aa\'c0\'ba @file\{nil\}\'c0\'cc\'b4\'d9.\
 \
-On the other hand, while I am writing this document, the value\
-returned by evaluating @code\{(buffer-name)\} is\
-@file\{"introduction.texinfo"\}, and the value returned by evaluating\
-@code\{(buffer-file-name)\} is\
-@file\{"/gnu/work/intro/introduction.texinfo"\}.\
+\'b9\'dd\'b8\'e9\'bf\'a1 \'c0\'cc \'b9\'ae\'bc\'ad\'b8\'a6 \'c0\'db\'bc\'ba\'c7\'cf\'b4\'c2 \'b5\'bf\'be\'c8 @code\{(buffer-name)\}\'c0\'c7 \'b0\'e1\'b0\'fa \'b0\'aa\'c0\'ba @file\{\'a1\'b0introduction.texinfo\'a1\'b1\} \'c0\'cc\'b0\'ed, \
+@code\{(buffer-file-name)\}\'c0\'c7 \'b0\'e1\'b0\'fa \'b0\'aa\'c0\'ba @file\{\'a1\'b0/gnu/work/intro/introduction.texinfo\'a1\'b1\} \'c0\'cc\'b4\'d9.\
 \
 @cindex @code\{nil\}, history of word\
-The former is the name of the buffer and the latter is the name of the\
-file.  In Info, the buffer name is @file\{"*info*"\}.  Info does not\
-point to any file, so the result of evaluating\
-@code\{(buffer-file-name)\} is @file\{nil\}.  The symbol @code\{nil\} is\
-from the Latin word for `nothing'; in this case, it means that the\
-buffer is not associated with any file.  (In Lisp, @code\{nil\} is also\
-used to mean `false' and is a synonym for the empty list, @code\{()\}.)\
+\
+\'c0\'fc\'c0\'da\'b4\'c2 \'b9\'f6\'c6\'db\'c0\'c7 \'c0\'cc\'b8\'a7\'c0\'cc\'b0\'ed, \'c8\'c4\'c0\'da\'b4\'c2 \'c6\'c4\'c0\'cf\'c0\'c7 \'c0\'cc\'b8\'a7\'c0\'cc\'b4\'d9. Info\'bf\'a1\'bc\'ad \'b9\'f6\'c6\'db \'c0\'cc\'b8\'a7\'c0\'ba @file\{\'a1\'b0*info*\'a1\'b1\}\'c0\'cc\'b4\'d9. Info\'b4\'c2 \'be\'ee\'b6\'b2 \
+\'c6\'c4\'c0\'cf\'b5\'b5 \'b0\'a1\'b8\'ae\'c5\'b0\'c1\'f6 \'be\'ca\'b4\'c2\'b4\'d9. \'b1\'d7\'b7\'a1\'bc\'ad @code\{(buffer-file-name)\}\'c0\'c7 \'b0\'e1\'b0\'fa\'b4\'c2 @file\{nil\}\'c0\'cc\'b4\'d9. \'b1\'e2\'c8\'a3 @code\{nil\}\'c0\'ba \
+\'a1\'ae\'be\'c6\'b9\'ab\'b0\'cd\'b5\'b5 \'be\'c6\'b4\'cf\'b4\'d9.\'a1\'af\'b6\'f3\'b4\'c2 \'b6\'f3\'c6\'be\'be\'ee\'bf\'a1\'bc\'ad \'c0\'af\'b7\'a1\'b5\'c6\'b4\'d9.; \'c0\'cc \'b0\'e6\'bf\'ec\'bf\'a1 \'b9\'f6\'c6\'db\'b4\'c2 \'be\'ee\'b6\'b2 \'c6\'c4\'c0\'cf\'b0\'fa\'b5\'b5 \'b0\'fc\'b7\'c3\'c0\'cc \'be\'f8\'b4\'d9\'b6\'f3\'b4\'c2 \'b0\'cd\'c0\'bb \'c0\'c7\'b9\'cc\'c7\'d1\'b4\'d9. \
+(Lisp\'bf\'a1\'bc\'ad @code\{nil\}\'c0\'ba \'a1\'aefalse\'a1\'af\'b8\'a6 \'c0\'c7\'b9\'cc\'c7\'cf\'b4\'c2\'b5\'a5 \'be\'b2\'bf\'a9\'c1\'f6\'b0\'ed \'ba\'f3 list @code\{()\} \'bf\'cd \'b5\'bf\'c0\'c7\'be\'ee\'c0\'cc\'b4\'d9. )\
 \
 When I am writing, the name of my buffer is\
 @file\{"introduction.texinfo"\}.  The name of the file to which it\

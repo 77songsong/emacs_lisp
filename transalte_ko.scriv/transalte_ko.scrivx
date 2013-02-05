@@ -477,24 +477,24 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="7" Type="Text" Created="2012-11-09 00:32:51 +0900" Modified="2013-02-05 01:57:15 +0900">
+                <BinderItem ID="7" Type="Text" Created="2012-11-09 00:32:51 +0900" Modified="2013-02-06 01:24:44 +0900">
                     <Title>Practicing Evaluation</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
                         <NotesTextSelection>0,0</NotesTextSelection>
                     </MetaData>
                     <TextSettings>
-                        <TextSelection>1798,0</TextSelection>
+                        <TextSelection>1117,0</TextSelection>
                     </TextSettings>
                     <Children>
-                        <BinderItem ID="36" Type="Text" Created="2012-11-09 11:11:12 +0900" Modified="2013-02-05 01:38:17 +0900">
+                        <BinderItem ID="36" Type="Text" Created="2012-11-09 11:11:12 +0900" Modified="2013-02-06 01:47:34 +0900">
                             <Title>Buffer Names</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>641,0</TextSelection>
+                                <TextSelection>1082,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
                         <BinderItem ID="37" Type="Text" Created="2012-11-09 11:11:25 +0900" Modified="2013-02-05 01:38:07 +0900">
@@ -1668,7 +1668,7 @@
                         <CurrentPDFPage>5</CurrentPDFPage>
                     </MediaSettings>
                 </BinderItem>
-                <BinderItem ID="145" Type="Text" Created="2012-11-14 00:47:14 +0900" Modified="2013-02-02 18:36:44 +0900">
+                <BinderItem ID="145" Type="Text" Created="2012-11-14 00:47:14 +0900" Modified="2013-02-06 01:32:02 +0900">
                     <Title>번역 용어 정리</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -1728,7 +1728,7 @@
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2012-11-09 00:23:48 +0900" IgnoreDeadline="Yes">0</DraftTarget>
         <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" ResetType="Midnight" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="-106" Characters="-1137" Date="2013-02-05 01:29:00 +0900"></PreviousSession>
+        <PreviousSession Words="-148" Characters="-1001" Date="2013-02-06 01:24:24 +0900"></PreviousSession>
     </ProjectTargets>
     <PrintSettings PaperSize="595.289978,841.890015" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="iso-a4" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
 </ScrivenerProject>

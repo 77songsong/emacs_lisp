@@ -832,11 +832,13 @@ Emacs Lisp으로 함수 정의를 작성하는 방법을 배우기 전에, 이�
 @findex buffer-name<br/>
 @findex buffer-file-name<br/>
 <br/>
-The two functions, @code{buffer-name} and @code{buffer-file-name}, show<br/>
-the difference between a file and a buffer.  When you evaluate the<br/>
-following expression, @code{(buffer-name)}, the name of the buffer<br/>
-appears in the echo area.  When you evaluate @code{(buffer-file-name)},<br/>
-the name of the file to which the buffer refers ...</p>
+@code{buffer-name}과 @code{buffer-file-name} 두 함수는 파일과 버퍼의 다른 점을 보여준다. <br/>
+@code{(buffer-name)} 표현식을 평가하면 echo 영역에 버퍼 이름이 나타난다. <br/>
+@code{(buffer-file-name)}을 평가하면, 버퍼가 참조하고 있는 파일 이름이 echo 영역에 나타난다. 보통 <br/>
+@code{(buffer-name)}에서 받은 이름은 버퍼가 참조하고 있는 파일의 이름과 동일하다. 그리고 <br/>
+@code{(buffer-file-name)}에서 받은 이름은 파일의 전체 경로 이름이다.<br/>
+<br/>
+파일과 버퍼는 다른 존재이다. ...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Getting Buffers</strong><br/><br/>
