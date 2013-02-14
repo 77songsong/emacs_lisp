@@ -19521,7 +19521,7 @@ expression it came from ceases to matter once the value is known.
         <Document ID="36">
             <Title>Buffer Names</Title>
             <Text>
-@node 버퍼 이름, Getting Buffers, How to Evaluate, 평가 연습하기
+@node 버퍼 이름, 버퍼 얻기, How to Evaluate, 평가 연습하기
 @comment  node-name,  next,  previous,  up
 @section 버퍼 이름
 @findex buffer-name
@@ -19814,74 +19814,58 @@ section.</Text>
         <Document ID="37">
             <Title>Getting Buffers</Title>
             <Text>
-@node Getting Buffers, Switching Buffers, 버퍼 이름, 평가 연습하기
+@node 버퍼 얻기, Switching Buffers, 버퍼 이름, 평가 연습하기
 @comment  node-name,  next,  previous,  up
-@section Getting Buffers
+@section 버퍼 얻기
 @findex current-buffer
 @findex other-buffer
 @cindex Getting a buffer
 
-The @code{buffer-name} function returns the @emph{name} of the buffer;
-to get the buffer @emph{itself}, a different function is needed: the
-@code{current-buffer} function.  If you use this function in code, what
-you get is the buffer itself.
+@code{buffer-name} 함수는 버퍼의 @emph{이름}을 반환한다.; 버퍼 @emph{그 자체}를 얻기 위해서는 
+다름 함수가 필요하다.: @code{current-buffer} 함수이다. 코드에서 이 함수를 사용한다면 버퍼 그 자체를 
+얻을 것이다. George와 이야기하는 것을 요청했을 때, 누군가 당신에게 @samp{G}, @samp{e}, 
+@samp{o}, @samp{r}, @samp{g}, @samp{e}가 쓰인 카드를 준다면 재미있을지 모르지만, 만족스럽지는 
+않을 것이다. 이름으로 불리는 사람과 이야기 하기를 원하지 이름과 이야기하는 것을 원하지 않는다. 이름과 
+이름이 참조하는 객체 또는 독립체는 서로 다르다. 독자는 독자의 이름이 아니다. 독자는 다른 이들로부터 
+이름으로 불리는 사람이다. 버퍼도 비슷하다.: scratch 버퍼의 이름은 @file{*scratch*}이다. 그러나 버퍼는 
+아니다. 버퍼 그 자체를 얻기 위해서는 @code{current-buffer} 같은 함수를 사용하는 것이 필요하다.
 
-A name and the object or entity to which the name refers are different
-from each other.  You are not your name.  You are a person to whom
-others refer by name.  If you ask to speak to George and someone hands you
-a card with the letters @samp{G}, @samp{e}, @samp{o}, @samp{r},
-@samp{g}, and @samp{e} written on it, you might be amused, but you would
-not be satisfied.  You do not want to speak to the name, but to the
-person to whom the name refers.  A buffer is similar: the name of the
-scratch buffer is @file{*scratch*}, but the name is not the buffer.  To
-get a buffer itself, you need to use a function such as
-@code{current-buffer}.
-
-However, there is a slight complication: if you evaluate
-@code{current-buffer} in an expression on its own, as we will do here,
-what you see is a printed representation of the name of the buffer
-without the contents of the buffer.  Emacs works this way for two
-reasons: the buffer may be thousands of lines long---too long to be
-conveniently displayed; and, another buffer may have the same contents
-but a different name, and it is important to distinguish between them.
+그러나 약간의 문제가 있다.: 여기서 할 수 있을 것이지만, 표현식에서 @code{current-buffer} 그 자체를 
+평가한다면 버퍼의 내용 없이 버퍼 이름의 출력 된 설명을 볼 것이다. Emacs는 두 가지 이유 때문에 이 
+방식으로 동작한다.: 버퍼는 수 천 줄 이상으로 길 수 있다. --- 알맞게 출력하기에 너무 길 수 있다.; 그리고 다른 
+버퍼는 이름은 다르지만 같은 내용을 가질 수 있다. 그리고 그 둘을 구분하는 것은 중요하다.
 
 @need 800
-Here is an expression containing the function:
+여기 함수를 포함하는 표현식이 있다.:
 
 @smallexample
 (current-buffer)
 @end smallexample
 
 @noindent
-If you evaluate this expression in Info in Emacs in the usual way,
-@file{#&lt;buffer *info*>} will appear in the echo area.  The special
-format indicates that the buffer itself is being returned, rather than
-just its name.
+Emacs의 Info에서 보통 방법으로 이 표현식을 평가한다면, @file{#&lt;buffer *info*>}가 echo 영역에 나타날 
+것이다. 특별한 형식은 버퍼의 이름이 아닌 버퍼 자체가 반환 된 것을 가리킨다.
 
-Incidentally, while you can type a number or symbol into a program, you
-cannot do that with the printed representation of a buffer: the only way
-to get a buffer itself is with a function such as @code{current-buffer}.
+부수적으로, 프로그램에 숫자 또는 기호를 입력할 수 있지만 버퍼의 출력 된 설명을 입력할 수 없다.: 버퍼 그 
+자체를 얻는 유일한 방법은 @code{current-buffer} 같은 함수를 통하는 방법 뿐이다.
 
-A related function is @code{other-buffer}.  This returns the most
-recently selected buffer other than the one you are in currently, not
-a printed representation of its name.  If you have recently switched
-back and forth from the @file{*scratch*} buffer, @code{other-buffer}
-will return that buffer.
+관련된 함수로 @code{other-buffer}가 있다. 이 함수는 현재 버퍼가 아닌 가장 최근에 선택되었던 버퍼를 
+넘겨준다. @file{*scratch*} 버퍼로부터 전환해왔었다면, @code{other-buffer}는 그 버퍼를 넘겨 줄 
+것이다.
 
 @need 800
-You can see this by evaluating the expression:
+표현식을 평가함으로 볼 수 있다.
 
 @smallexample
 (other-buffer)
 @end smallexample
 
 @noindent
-You should see @file{#&lt;buffer *scratch*>} appear in the echo area, or
-the name of whatever other buffer you switched back from most
-recently@footnote{Actually, by default, if the buffer from which you
-just switched is visible to you in another window, @code{other-buffer}
-will choose the most recent buffer that you cannot see; this is a
-subtlety that I often forget.}.</Text>
+echo 영역에 @file{#&lt;buffer *scratch*>} 또는 가장 최근에 전환했던 다른 버퍼의 이름을 볼 
+것이다.@footnote{ 실제로 최근에 전환했던 버퍼가 다른 창에서 보이고 있다면, 자동적으로 
+@code{other-buffer}는 볼 수 없는 버퍼 중 가장 최근에 전환했었던 버퍼를 선택할 것이다.; 이 것은 종종 
+잊어먹는 미묘함이다.}
+</Text>
         </Document>
         <Document ID="103">
             <Title>The count-words-in-defun Function</Title>
@@ -20253,7 +20237,7 @@ Symbol's function definition is void:@: fill-column
         <Document ID="38">
             <Title>Switching Buffers</Title>
             <Text>
-@node Switching Buffers, Buffer Size &amp; Locations, Getting Buffers, 평가 연습하기
+@node Switching Buffers, Buffer Size &amp; Locations, 버퍼 얻기, 평가 연습하기
 @comment  node-name,  next,  previous,  up
 @section Switching Buffers
 @findex switch-to-buffer
@@ -21316,7 +21300,7 @@ Variables
 * How to Evaluate::            Typing editing commands or @kbd{C-x C-e}
                                  causes evaluation.
 * 버퍼 이름::               Buffers and files are different.
-* Getting Buffers::            Getting a buffer itself, not merely its name.
+* 버퍼 얻기::            Getting a buffer itself, not merely its name.
 * Switching Buffers::          How to change to another buffer.
 * Buffer Size &amp; Locations::    Where point is located and the size of
                                the buffer.
@@ -22309,7 +22293,7 @@ Emacs Lisp으로 함수 정의를 작성하는 방법을 배우기 전에, 이�
 * How to Evaluate::            Typing editing commands or @kbd{C-x C-e}
                                  causes evaluation.
 * 버퍼 이름::               Buffers and files are different.
-* Getting Buffers::            Getting a buffer itself, not merely its name.
+* 버퍼 얻기::            Getting a buffer itself, not merely its name.
 * Switching Buffers::          How to change to another buffer.
 * Buffer Size &amp; Locations::    Where point is located and the size of
                                the buffer.

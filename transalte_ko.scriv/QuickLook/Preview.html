@@ -826,7 +826,7 @@ Emacs Lisp으로 함수 정의를 작성하는 방법을 배우기 전에, 이�
 <ul>
 <li>
 <p class="binderItem"><strong>Buffer Names</strong><br/><br/>
-@node 버퍼 이름, Getting Buffers, How to Evaluate, 평가 연습하기<br/>
+@node 버퍼 이름, 버퍼 얻기, How to Evaluate, 평가 연습하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section 버퍼 이름<br/>
 @findex buffer-name<br/>
@@ -838,27 +838,26 @@ Emacs Lisp으로 함수 정의를 작성하는 방법을 배우기 전에, 이�
 @code{(buffer-name)}에서 받은 이름은 버퍼가 참조하고 있는 파일의 이름과 동일하다. 그리고 <br/>
 @code{(buffer-file-name)}에서 받은 이름은 파일의 전체 경로 이름이다.<br/>
 <br/>
-파일과 버퍼는 다른 존재이다. 파일은 컴퓨터에 (지우지 ...</p>
+파일과 버퍼는 다른 존재이다. 파일은 컴퓨터에 (지우지 않는다면)영구적으로...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Getting Buffers</strong><br/><br/>
-@node Getting Buffers, Switching Buffers, 버퍼 이름, 평가 연습하기<br/>
+@node 버퍼 얻기, Switching Buffers, 버퍼 이름, 평가 연습하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@section Getting Buffers<br/>
+@section 버퍼 얻기<br/>
 @findex current-buffer<br/>
 @findex other-buffer<br/>
 @cindex Getting a buffer<br/>
 <br/>
-The @code{buffer-name} function returns the @emph{name} of the buffer;<br/>
-to get the buffer @emph{itself}, a different function is needed: the<br/>
-@code{current-buffer} function.  If you use this function in code, what<br/>
-you get is the buffer itself.<br/>
-<br/>
-A name and the object or entity to which the name refers are ...</p>
+@code{buffer-name} 함수는 버퍼의 @emph{이름}을 반환한다.; 버퍼 @emph{그 자체}를 얻기 위해서는 <br/>
+다름 함수가 필요하다.: @code{current-buffer} 함수이다. 코드에서 이 함수를 사용한다면 버퍼 그 자체를 <br/>
+얻을 것이다. George와 이야기하는 것을 요청했을 때, 누군가 당신에게 @samp{G}, @samp{e}, <br/>
+@samp{o}, @samp{r}, @samp{g}, @samp{e}가 쓰인 카드를 준다면 재미있을지 모르지만, 만족스럽지는 <br/>
+않을 것이다. 이름으로 불리는 사람과 이야기 하기를 원하지 이름과 이야기하는 것을 원하지 않...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Switching Buffers</strong><br/><br/>
-@node Switching Buffers, Buffer Size & Locations, Getting Buffers, 평가 연습하기<br/>
+@node Switching Buffers, Buffer Size & Locations, 버퍼 얻기, 평가 연습하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section Switching Buffers<br/>
 @findex switch-to-buffer<br/>
@@ -870,7 +869,7 @@ used as an argument to a function that requires one.  We can see this<br/>
 by using @code{other-buffer} and @code{switch-to-buffer} to switch to a<br/>
 different buffer.<br/>
 <br/>
-But first, a brief introduction to the @code{sw...</p>
+But first, a brief introduction to the @code{switch-to-bu...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Buffer Size and the Location of Point</strong><br/><br/>

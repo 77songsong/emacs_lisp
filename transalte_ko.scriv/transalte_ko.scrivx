@@ -16,7 +16,7 @@
                 </OutlinerExpandedState>
             </CorkboardAndOutliner>
             <Children>
-                <BinderItem ID="5" Type="Text" Created="2012-11-09 00:18:17 +0900" Modified="2013-02-14 00:16:44 +0900">
+                <BinderItem ID="5" Type="Text" Created="2012-11-09 00:18:17 +0900" Modified="2013-02-14 23:07:06 +0900">
                     <Title>An Introduction to Programming in Emacs Lisp</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -477,7 +477,7 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="7" Type="Text" Created="2012-11-09 00:32:51 +0900" Modified="2013-02-14 00:16:44 +0900">
+                <BinderItem ID="7" Type="Text" Created="2012-11-09 00:32:51 +0900" Modified="2013-02-14 23:07:06 +0900">
                     <Title>Practicing Evaluation</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -487,7 +487,7 @@
                         <TextSelection>1117,0</TextSelection>
                     </TextSettings>
                     <Children>
-                        <BinderItem ID="36" Type="Text" Created="2012-11-09 11:11:12 +0900" Modified="2013-02-14 00:16:44 +0900">
+                        <BinderItem ID="36" Type="Text" Created="2012-11-09 11:11:12 +0900" Modified="2013-02-14 23:07:06 +0900">
                             <Title>Buffer Names</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -497,17 +497,17 @@
                                 <TextSelection>115,12</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="37" Type="Text" Created="2012-11-09 11:11:25 +0900" Modified="2013-02-14 00:16:44 +0900">
+                        <BinderItem ID="37" Type="Text" Created="2012-11-09 11:11:25 +0900" Modified="2013-02-14 23:07:06 +0900">
                             <Title>Getting Buffers</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>0,0</TextSelection>
+                                <TextSelection>1732,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="38" Type="Text" Created="2012-11-09 11:11:38 +0900" Modified="2013-02-05 01:38:08 +0900">
+                        <BinderItem ID="38" Type="Text" Created="2012-11-09 11:11:38 +0900" Modified="2013-02-14 23:07:06 +0900">
                             <Title>Switching Buffers</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1728,7 +1728,7 @@
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2012-11-09 00:23:48 +0900" IgnoreDeadline="Yes">0</DraftTarget>
         <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" ResetType="Midnight" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="-102" Characters="-786" Date="2013-02-13 22:14:39 +0900"></PreviousSession>
+        <PreviousSession Words="-143" Characters="-1209" Date="2013-02-14 21:56:39 +0900"></PreviousSession>
     </ProjectTargets>
     <PrintSettings PaperSize="595.289978,841.890015" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="iso-a4" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
 </ScrivenerProject>

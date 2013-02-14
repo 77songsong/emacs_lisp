@@ -4,71 +4,55 @@
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
 
 \f0\fs28 \cf0 \
-@node Getting Buffers, Switching Buffers, \'b9\'f6\'c6\'db \'c0\'cc\'b8\'a7, \'c6\'f2\'b0\'a1 \'bf\'ac\'bd\'c0\'c7\'cf\'b1\'e2\
+@node \'b9\'f6\'c6\'db \'be\'f2\'b1\'e2, Switching Buffers, \'b9\'f6\'c6\'db \'c0\'cc\'b8\'a7, \'c6\'f2\'b0\'a1 \'bf\'ac\'bd\'c0\'c7\'cf\'b1\'e2\
 @comment  node-name,  next,  previous,  up\
-@section Getting Buffers\
+@section \'b9\'f6\'c6\'db \'be\'f2\'b1\'e2\
 @findex current-buffer\
 @findex other-buffer\
 @cindex Getting a buffer\
 \
-The @code\{buffer-name\} function returns the @emph\{name\} of the buffer;\
-to get the buffer @emph\{itself\}, a different function is needed: the\
-@code\{current-buffer\} function.  If you use this function in code, what\
-you get is the buffer itself.\
+@code\{buffer-name\} \'c7\'d4\'bc\'f6\'b4\'c2 \'b9\'f6\'c6\'db\'c0\'c7 @emph\{\'c0\'cc\'b8\'a7\}\'c0\'bb \'b9\'dd\'c8\'af\'c7\'d1\'b4\'d9.; \'b9\'f6\'c6\'db @emph\{\'b1\'d7 \'c0\'da\'c3\'bc\}\'b8\'a6 \'be\'f2\'b1\'e2 \'c0\'a7\'c7\'d8\'bc\'ad\'b4\'c2 \
+\'b4\'d9\'b8\'a7 \'c7\'d4\'bc\'f6\'b0\'a1 \'c7\'ca\'bf\'e4\'c7\'cf\'b4\'d9.: @code\{current-buffer\} \'c7\'d4\'bc\'f6\'c0\'cc\'b4\'d9. \'c4\'da\'b5\'e5\'bf\'a1\'bc\'ad \'c0\'cc \'c7\'d4\'bc\'f6\'b8\'a6 \'bb\'e7\'bf\'eb\'c7\'d1\'b4\'d9\'b8\'e9 \'b9\'f6\'c6\'db \'b1\'d7 \'c0\'da\'c3\'bc\'b8\'a6 \
+\'be\'f2\'c0\'bb \'b0\'cd\'c0\'cc\'b4\'d9. George\'bf\'cd \'c0\'cc\'be\'df\'b1\'e2\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'bb \'bf\'e4\'c3\'bb\'c7\'df\'c0\'bb \'b6\'a7, \'b4\'a9\'b1\'ba\'b0\'a1 \'b4\'e7\'bd\'c5\'bf\'a1\'b0\'d4 @samp\{G\}, @samp\{e\}, \
+@samp\{o\}, @samp\{r\}, @samp\{g\}, @samp\{e\}\'b0\'a1 \'be\'b2\'c0\'ce \'c4\'ab\'b5\'e5\'b8\'a6 \'c1\'d8\'b4\'d9\'b8\'e9 \'c0\'e7\'b9\'cc\'c0\'d6\'c0\'bb\'c1\'f6 \'b8\'f0\'b8\'a3\'c1\'f6\'b8\'b8, \'b8\'b8\'c1\'b7\'bd\'ba\'b7\'b4\'c1\'f6\'b4\'c2 \
+\'be\'ca\'c0\'bb \'b0\'cd\'c0\'cc\'b4\'d9. \'c0\'cc\'b8\'a7\'c0\'b8\'b7\'ce \'ba\'d2\'b8\'ae\'b4\'c2 \'bb\'e7\'b6\'f7\'b0\'fa \'c0\'cc\'be\'df\'b1\'e2 \'c7\'cf\'b1\'e2\'b8\'a6 \'bf\'f8\'c7\'cf\'c1\'f6 \'c0\'cc\'b8\'a7\'b0\'fa \'c0\'cc\'be\'df\'b1\'e2\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'bb \'bf\'f8\'c7\'cf\'c1\'f6 \'be\'ca\'b4\'c2\'b4\'d9. \'c0\'cc\'b8\'a7\'b0\'fa \
+\'c0\'cc\'b8\'a7\'c0\'cc \'c2\'fc\'c1\'b6\'c7\'cf\'b4\'c2 \'b0\'b4\'c3\'bc \'b6\'c7\'b4\'c2 \'b5\'b6\'b8\'b3\'c3\'bc\'b4\'c2 \'bc\'ad\'b7\'ce \'b4\'d9\'b8\'a3\'b4\'d9. \'b5\'b6\'c0\'da\'b4\'c2 \'b5\'b6\'c0\'da\'c0\'c7 \'c0\'cc\'b8\'a7\'c0\'cc \'be\'c6\'b4\'cf\'b4\'d9. \'b5\'b6\'c0\'da\'b4\'c2 \'b4\'d9\'b8\'a5 \'c0\'cc\'b5\'e9\'b7\'ce\'ba\'ce\'c5\'cd \
+\'c0\'cc\'b8\'a7\'c0\'b8\'b7\'ce \'ba\'d2\'b8\'ae\'b4\'c2 \'bb\'e7\'b6\'f7\'c0\'cc\'b4\'d9. \'b9\'f6\'c6\'db\'b5\'b5 \'ba\'f1\'bd\'c1\'c7\'cf\'b4\'d9.: scratch \'b9\'f6\'c6\'db\'c0\'c7 \'c0\'cc\'b8\'a7\'c0\'ba @file\{*scratch*\}\'c0\'cc\'b4\'d9. \'b1\'d7\'b7\'af\'b3\'aa \'b9\'f6\'c6\'db\'b4\'c2 \
+\'be\'c6\'b4\'cf\'b4\'d9. \'b9\'f6\'c6\'db \'b1\'d7 \'c0\'da\'c3\'bc\'b8\'a6 \'be\'f2\'b1\'e2 \'c0\'a7\'c7\'d8\'bc\'ad\'b4\'c2 @code\{current-buffer\} \'b0\'b0\'c0\'ba \'c7\'d4\'bc\'f6\'b8\'a6 \'bb\'e7\'bf\'eb\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'cc \'c7\'ca\'bf\'e4\'c7\'cf\'b4\'d9.\
 \
-A name and the object or entity to which the name refers are different\
-from each other.  You are not your name.  You are a person to whom\
-others refer by name.  If you ask to speak to George and someone hands you\
-a card with the letters @samp\{G\}, @samp\{e\}, @samp\{o\}, @samp\{r\},\
-@samp\{g\}, and @samp\{e\} written on it, you might be amused, but you would\
-not be satisfied.  You do not want to speak to the name, but to the\
-person to whom the name refers.  A buffer is similar: the name of the\
-scratch buffer is @file\{*scratch*\}, but the name is not the buffer.  To\
-get a buffer itself, you need to use a function such as\
-@code\{current-buffer\}.\
-\
-However, there is a slight complication: if you evaluate\
-@code\{current-buffer\} in an expression on its own, as we will do here,\
-what you see is a printed representation of the name of the buffer\
-without the contents of the buffer.  Emacs works this way for two\
-reasons: the buffer may be thousands of lines long---too long to be\
-conveniently displayed; and, another buffer may have the same contents\
-but a different name, and it is important to distinguish between them.\
+\'b1\'d7\'b7\'af\'b3\'aa \'be\'e0\'b0\'a3\'c0\'c7 \'b9\'ae\'c1\'a6\'b0\'a1 \'c0\'d6\'b4\'d9.: \'bf\'a9\'b1\'e2\'bc\'ad \'c7\'d2 \'bc\'f6 \'c0\'d6\'c0\'bb \'b0\'cd\'c0\'cc\'c1\'f6\'b8\'b8, \'c7\'a5\'c7\'f6\'bd\'c4\'bf\'a1\'bc\'ad @code\{current-buffer\} \'b1\'d7 \'c0\'da\'c3\'bc\'b8\'a6 \
+\'c6\'f2\'b0\'a1\'c7\'d1\'b4\'d9\'b8\'e9 \'b9\'f6\'c6\'db\'c0\'c7 \'b3\'bb\'bf\'eb \'be\'f8\'c0\'cc \'b9\'f6\'c6\'db \'c0\'cc\'b8\'a7\'c0\'c7 \'c3\'e2\'b7\'c2 \'b5\'c8 \'bc\'b3\'b8\'ed\'c0\'bb \'ba\'bc \'b0\'cd\'c0\'cc\'b4\'d9. Emacs\'b4\'c2 \'b5\'ce \'b0\'a1\'c1\'f6 \'c0\'cc\'c0\'af \'b6\'a7\'b9\'ae\'bf\'a1 \'c0\'cc \
+\'b9\'e6\'bd\'c4\'c0\'b8\'b7\'ce \'b5\'bf\'c0\'db\'c7\'d1\'b4\'d9.: \'b9\'f6\'c6\'db\'b4\'c2 \'bc\'f6 \'c3\'b5 \'c1\'d9 \'c0\'cc\'bb\'f3\'c0\'b8\'b7\'ce \'b1\'e6 \'bc\'f6 \'c0\'d6\'b4\'d9. --- \'be\'cb\'b8\'c2\'b0\'d4 \'c3\'e2\'b7\'c2\'c7\'cf\'b1\'e2\'bf\'a1 \'b3\'ca\'b9\'ab \'b1\'e6 \'bc\'f6 \'c0\'d6\'b4\'d9.; \'b1\'d7\'b8\'ae\'b0\'ed \'b4\'d9\'b8\'a5 \
+\'b9\'f6\'c6\'db\'b4\'c2 \'c0\'cc\'b8\'a7\'c0\'ba \'b4\'d9\'b8\'a3\'c1\'f6\'b8\'b8 \'b0\'b0\'c0\'ba \'b3\'bb\'bf\'eb\'c0\'bb \'b0\'a1\'c1\'fa \'bc\'f6 \'c0\'d6\'b4\'d9. \'b1\'d7\'b8\'ae\'b0\'ed \'b1\'d7 \'b5\'d1\'c0\'bb \'b1\'b8\'ba\'d0\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'ba \'c1\'df\'bf\'e4\'c7\'cf\'b4\'d9.\
 \
 @need 800\
-Here is an expression containing the function:\
+\'bf\'a9\'b1\'e2 \'c7\'d4\'bc\'f6\'b8\'a6 \'c6\'f7\'c7\'d4\'c7\'cf\'b4\'c2 \'c7\'a5\'c7\'f6\'bd\'c4\'c0\'cc \'c0\'d6\'b4\'d9.:\
 \
 @smallexample\
 (current-buffer)\
 @end smallexample\
 \
 @noindent\
-If you evaluate this expression in Info in Emacs in the usual way,\
-@file\{#<buffer *info*>\} will appear in the echo area.  The special\
-format indicates that the buffer itself is being returned, rather than\
-just its name.\
+Emacs\'c0\'c7 Info\'bf\'a1\'bc\'ad \'ba\'b8\'c5\'eb \'b9\'e6\'b9\'fd\'c0\'b8\'b7\'ce \'c0\'cc \'c7\'a5\'c7\'f6\'bd\'c4\'c0\'bb \'c6\'f2\'b0\'a1\'c7\'d1\'b4\'d9\'b8\'e9, @file\{#<buffer *info*>\}\'b0\'a1 echo \'bf\'b5\'bf\'aa\'bf\'a1 \'b3\'aa\'c5\'b8\'b3\'af \
+\'b0\'cd\'c0\'cc\'b4\'d9. \'c6\'af\'ba\'b0\'c7\'d1 \'c7\'fc\'bd\'c4\'c0\'ba \'b9\'f6\'c6\'db\'c0\'c7 \'c0\'cc\'b8\'a7\'c0\'cc \'be\'c6\'b4\'d1 \'b9\'f6\'c6\'db \'c0\'da\'c3\'bc\'b0\'a1 \'b9\'dd\'c8\'af \'b5\'c8 \'b0\'cd\'c0\'bb \'b0\'a1\'b8\'ae\'c5\'b2\'b4\'d9.\
 \
-Incidentally, while you can type a number or symbol into a program, you\
-cannot do that with the printed representation of a buffer: the only way\
-to get a buffer itself is with a function such as @code\{current-buffer\}.\
+\'ba\'ce\'bc\'f6\'c0\'fb\'c0\'b8\'b7\'ce, \'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a5\'bf\'a1 \'bc\'fd\'c0\'da \'b6\'c7\'b4\'c2 \'b1\'e2\'c8\'a3\'b8\'a6 \'c0\'d4\'b7\'c2\'c7\'d2 \'bc\'f6 \'c0\'d6\'c1\'f6\'b8\'b8 \'b9\'f6\'c6\'db\'c0\'c7 \'c3\'e2\'b7\'c2 \'b5\'c8 \'bc\'b3\'b8\'ed\'c0\'bb \'c0\'d4\'b7\'c2\'c7\'d2 \'bc\'f6 \'be\'f8\'b4\'d9.: \'b9\'f6\'c6\'db \'b1\'d7 \
+\'c0\'da\'c3\'bc\'b8\'a6 \'be\'f2\'b4\'c2 \'c0\'af\'c0\'cf\'c7\'d1 \'b9\'e6\'b9\'fd\'c0\'ba @code\{current-buffer\} \'b0\'b0\'c0\'ba \'c7\'d4\'bc\'f6\'b8\'a6 \'c5\'eb\'c7\'cf\'b4\'c2 \'b9\'e6\'b9\'fd \'bb\'d3\'c0\'cc\'b4\'d9.\
 \
-A related function is @code\{other-buffer\}.  This returns the most\
-recently selected buffer other than the one you are in currently, not\
-a printed representation of its name.  If you have recently switched\
-back and forth from the @file\{*scratch*\} buffer, @code\{other-buffer\}\
-will return that buffer.\
+\'b0\'fc\'b7\'c3\'b5\'c8 \'c7\'d4\'bc\'f6\'b7\'ce @code\{other-buffer\}\'b0\'a1 \'c0\'d6\'b4\'d9. \'c0\'cc \'c7\'d4\'bc\'f6\'b4\'c2 \'c7\'f6\'c0\'e7 \'b9\'f6\'c6\'db\'b0\'a1 \'be\'c6\'b4\'d1 \'b0\'a1\'c0\'e5 \'c3\'d6\'b1\'d9\'bf\'a1 \'bc\'b1\'c5\'c3\'b5\'c7\'be\'fa\'b4\'f8 \'b9\'f6\'c6\'db\'b8\'a6 \
+\'b3\'d1\'b0\'dc\'c1\'d8\'b4\'d9. @file\{*scratch*\} \'b9\'f6\'c6\'db\'b7\'ce\'ba\'ce\'c5\'cd \'c0\'fc\'c8\'af\'c7\'d8\'bf\'d4\'be\'fa\'b4\'d9\'b8\'e9, @code\{other-buffer\}\'b4\'c2 \'b1\'d7 \'b9\'f6\'c6\'db\'b8\'a6 \'b3\'d1\'b0\'dc \'c1\'d9 \
+\'b0\'cd\'c0\'cc\'b4\'d9.\
 \
 @need 800\
-You can see this by evaluating the expression:\
+\'c7\'a5\'c7\'f6\'bd\'c4\'c0\'bb \'c6\'f2\'b0\'a1\'c7\'d4\'c0\'b8\'b7\'ce \'ba\'bc \'bc\'f6 \'c0\'d6\'b4\'d9.\
 \
 @smallexample\
 (other-buffer)\
 @end smallexample\
 \
 @noindent\
-You should see @file\{#<buffer *scratch*>\} appear in the echo area, or\
-the name of whatever other buffer you switched back from most\
-recently@footnote\{Actually, by default, if the buffer from which you\
-just switched is visible to you in another window, @code\{other-buffer\}\
-will choose the most recent buffer that you cannot see; this is a\
-subtlety that I often forget.\}.}
+echo \'bf\'b5\'bf\'aa\'bf\'a1 @file\{#<buffer *scratch*>\} \'b6\'c7\'b4\'c2 \'b0\'a1\'c0\'e5 \'c3\'d6\'b1\'d9\'bf\'a1 \'c0\'fc\'c8\'af\'c7\'df\'b4\'f8 \'b4\'d9\'b8\'a5 \'b9\'f6\'c6\'db\'c0\'c7 \'c0\'cc\'b8\'a7\'c0\'bb \'ba\'bc \
+\'b0\'cd\'c0\'cc\'b4\'d9.@footnote\{ \'bd\'c7\'c1\'a6\'b7\'ce \'c3\'d6\'b1\'d9\'bf\'a1 \'c0\'fc\'c8\'af\'c7\'df\'b4\'f8 \'b9\'f6\'c6\'db\'b0\'a1 \'b4\'d9\'b8\'a5 \'c3\'a2\'bf\'a1\'bc\'ad \'ba\'b8\'c0\'cc\'b0\'ed \'c0\'d6\'b4\'d9\'b8\'e9, \'c0\'da\'b5\'bf\'c0\'fb\'c0\'b8\'b7\'ce \
+@code\{other-buffer\}\'b4\'c2 \'ba\'bc \'bc\'f6 \'be\'f8\'b4\'c2 \'b9\'f6\'c6\'db \'c1\'df \'b0\'a1\'c0\'e5 \'c3\'d6\'b1\'d9\'bf\'a1 \'c0\'fc\'c8\'af\'c7\'df\'be\'fa\'b4\'f8 \'b9\'f6\'c6\'db\'b8\'a6 \'bc\'b1\'c5\'c3\'c7\'d2 \'b0\'cd\'c0\'cc\'b4\'d9.; \'c0\'cc \'b0\'cd\'c0\'ba \'c1\'be\'c1\'be \
+\'c0\'d8\'be\'ee\'b8\'d4\'b4\'c2 \'b9\'cc\'b9\'a6\'c7\'d4\'c0\'cc\'b4\'d9.\}\
+}
