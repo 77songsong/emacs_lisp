@@ -842,7 +842,7 @@ Emacs Lisp으로 함수 정의를 작성하는 방법을 배우기 전에, 이�
 </li>
 <li>
 <p class="binderItem"><strong>Getting Buffers</strong><br/><br/>
-@node 버퍼 얻기, Switching Buffers, 버퍼 이름, 평가 연습하기<br/>
+@node 버퍼 얻기, 버퍼 변경하기, 버퍼 이름, 평가 연습하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section 버퍼 얻기<br/>
 @findex current-buffer<br/>
@@ -853,27 +853,28 @@ Emacs Lisp으로 함수 정의를 작성하는 방법을 배우기 전에, 이�
 다름 함수가 필요하다.: @code{current-buffer} 함수이다. 코드에서 이 함수를 사용한다면 버퍼 그 자체를 <br/>
 얻을 것이다. George와 이야기하는 것을 요청했을 때, 누군가 당신에게 @samp{G}, @samp{e}, <br/>
 @samp{o}, @samp{r}, @samp{g}, @samp{e}가 쓰인 카드를 준다면 재미있을지 모르지만, 만족스럽지는 <br/>
-않을 것이다. 이름으로 불리는 사람과 이야기 하기를 원하지 이름과 이야기하는 것을 원하지 않...</p>
+않을 것이다. 이름으로 불리는 사람과 이야기 하기를 원하지 이름과 이야기하는 것을 원하지 않는다. 이름과 <br/>
+이...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Switching Buffers</strong><br/><br/>
-@node Switching Buffers, Buffer Size & Locations, 버퍼 얻기, 평가 연습하기<br/>
+@node 버퍼 변경하기, Buffer Size & Locations, 버퍼 얻기, 평가 연습하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@section Switching Buffers<br/>
+@section 버퍼 변경하기<br/>
 @findex switch-to-buffer<br/>
 @findex set-buffer<br/>
 @cindex Switching to a buffer<br/>
 <br/>
-The @code{other-buffer} function actually provides a buffer when it is<br/>
-used as an argument to a function that requires one.  We can see this<br/>
-by using @code{other-buffer} and @code{switch-to-buffer} to switch to a<br/>
-different buffer.<br/>
+버퍼를 요구하는 함수의 인자로서 사용될 때 @code{other-buffer} 함수는 실제로 버퍼를 제공한다. 다른 <br/>
+버퍼로 변경하기 위해 @code{other-buffer}와 @code{swith-to-buffer}를 사용하는 것을 볼 수 있다.<br/>
 <br/>
-But first, a brief introduction to the @code{switch-to-bu...</p>
+그러나 먼저 @code{switch-to-buffer} 함수에 대한 짧은 소개. @code{(buffer-name)}을 평가하기 위해 <br/>
+Info에서 @file{*scratch*} 버퍼로 변경하고자 할 때, @kbd{C-x b}를 입력한 후, 미니 버퍼에서 변경하기를 <br/>
+원하는 버퍼의 이름을 물어보면 @f...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Buffer Size and the Location of Point</strong><br/><br/>
-@node Buffer Size & Locations, Evaluation Exercise, Switching Buffers, 평가 연습하기<br/>
+@node Buffer Size & Locations, Evaluation Exercise, 버퍼 변경하기, 평가 연습하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section Buffer Size and the Location of Point<br/>
 @cindex Size of buffer<br/>
@@ -886,7 +887,7 @@ Finally, let's look at several rather simple functions,<br/>
 @code{point-max}.  These give information about the size of a buffer and<br/>
 the location of point within it.<br/>
 <br/>
-The function @code...</p>
+The function @code{buffer-si...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Excercise</strong><br/><br/>
