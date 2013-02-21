@@ -19359,8 +19359,9 @@ quote		인용구
 function		함수
 atom 		atom
 double quotation 큰따옴표
-bind                     바인딩
-entity			존재</Text>
+bind                     	바인딩
+entity			존재
+point			지점</Text>
         </Document>
         <Document ID="35">
             <Title>Excercises</Title>
@@ -19477,11 +19478,11 @@ Here is the full regular expression:
         <Document ID="40">
             <Title>Excercise</Title>
             <Text>
-@node Evaluation Exercise,  , Buffer Size &amp; Locations, 평가 연습하기
-@section Exercise
+@node 연습문제 평가,  , 버퍼 크기와 위치, 평가 연습하기
+@section 연습문제
 
-Find a file with which you are working and move towards its middle.
-Find its buffer name, file name, length, and your position in the file.</Text>
+작업하고 있고 파일을 찾아서 중간 지점으로 이동하라.
+버퍼 이름, 파일 이름, 길이, 파일에서 현재 위치를 찾아라.</Text>
         </Document>
         <Document ID="150">
             <Title>fill-column Example</Title>
@@ -19551,20 +19552,20 @@ GNU Emacs의 info에서 이 문서를 읽고 있다면 다음 표현식들의 �
 @end example
 
 @noindent
-Info에서 이것을 할 때, @code{(buffer-name)} 평가의 값은 @file{“*info*”}이다. 그리고 
+Info에서 이것을 할 때, @code{(buffer-name)} 평가의 값은 @file{"*info*"}이다. 그리고 
 @code{(buffer-file-name)}의 결과 값은 @file{nil}이다.
 
-반면에 이 문서를 작성하는 동안 @code{(buffer-name)}의 결과 값은 @file{“introduction.texinfo”} 이고, 
-@code{(buffer-file-name)}의 결과 값은 @file{“/gnu/work/intro/introduction.texinfo”} 이다.
+반면에 이 문서를 작성하는 동안 @code{(buffer-name)}의 결과 값은 @file{"introduction.texinfo"} 이고,  
+@code{(buffer-file-name)}의 결과 값은 @file{"/gnu/work/intro/introduction.texinfo"} 이다.
 
 @cindex @code{nil}, history of word
 
-전자는 버퍼의 이름이고, 후자는 파일의 이름이다. Info에서 버퍼 이름은 @file{“*info*”}이다. Info는 어떤 
+전자는 버퍼의 이름이고, 후자는 파일의 이름이다. Info에서 버퍼 이름은 @file{"*info*"}이다. Info는 어떤 
 파일도 가리키지 않는다. 그래서 @code{(buffer-file-name)}의 결과는 @file{nil}이다. 기호 @code{nil}은 
 ‘아무것도 아니다.’는 라틴어에서 유래됐다.; 이 경우에 버퍼는 어떤 파일과도 관련이 없다는 것을 의미한다. 
 (Lisp에서 @code{nil}은 ‘false’를 의미하는데 쓰여지고 빈 list @code{()} 와 동의어이다. )
 
-이 글을 작성할 때, 버퍼의 이름은 @file{“indroduction.texinfo”}였다. 파일의 이름은 
+이 글을 작성할 때, 버퍼의 이름은 @file{"indroduction.texinfo"}였다. 파일의 이름은 
 @file{"/gnu/work/intro/introduction.texinfo"} 이었다.
 
 ( 표현식에서 괄호는 Lisp 해석기에게 @w{@code{buffer-name}}과 @w{@code{buffer-file-name}}을 
@@ -20237,7 +20238,7 @@ Symbol's function definition is void:@: fill-column
         <Document ID="38">
             <Title>Switching Buffers</Title>
             <Text>
-@node 버퍼 변경하기, Buffer Size &amp; Locations, 버퍼 얻기, 평가 연습하기
+@node 버퍼 변경하기, 버퍼 크기와 위치, 버퍼 얻기, 평가 연습하기
 @comment  node-name,  next,  previous,  up
 @section 버퍼 변경하기
 @findex switch-to-buffer
@@ -20488,73 +20489,59 @@ quotes.)</Text>
         <Document ID="39">
             <Title>Buffer Size and the Location of Point</Title>
             <Text>
-@node Buffer Size &amp; Locations, Evaluation Exercise, 버퍼 변경하기, 평가 연습하기
+@node 버퍼 크기와 위치, 연습문제 평가, 버퍼 변경하기, 평가 연습하기
 @comment  node-name,  next,  previous,  up
-@section Buffer Size and the Location of Point
+@section 버퍼 크기와 지점
 @cindex Size of buffer
 @cindex Buffer size
 @cindex Point location
 @cindex Location of point
 
-Finally, let's look at several rather simple functions,
-@code{buffer-size}, @code{point}, @code{point-min}, and
-@code{point-max}.  These give information about the size of a buffer and
-the location of point within it.
+마지막으로 몇 종류의 비교적 단순한 함수들을 살펴보자, @code{buffer-size}, @code{point}, 
+@code{point-min}, @code{point-max} 이다. 버퍼의 크기와 버퍼 안의 위치에 대한 정보를 준다.
 
-The function @code{buffer-size} tells you the size of the current
-buffer; that is, the function returns a count of the number of
-characters in the buffer.
+@code{buffer-size} 함수는 현재 버퍼의 크기를 알려준다.; 함수가 넘겨주는 크기는 버퍼 안의 문자들의 
+개수이다.
 
 @smallexample
 (buffer-size)
 @end smallexample
 
 @noindent
-You can evaluate this in the usual way, by positioning the
-cursor after the expression and typing @kbd{C-x C-e}.
+표현식 뒤에 커서를 이동 후, @kbd{C-x C-e}를 입력하는 보통 방법으로 평가할 수 있다.
 
 @cindex @samp{point} defined
-In Emacs, the current  position of the cursor is called @dfn{point}.
-The expression @code{(point)} returns a number that tells you where the
-cursor is located as a count of the number of characters from the
-beginning of the buffer up to point.
+Emacs에서 커서의 현재 위치를 @dfn{지점(point)}라고 한다. @code{(point)} 표현식은 버퍼의 시작 
+지점부터 문자의 개수로 표현되는 커서의 위치를 나타내는 숫자를 반환한다.
 
 @need 1250
-You can see the character count for point in this buffer by evaluating
-the following expression in the usual way:
+보통 방법으로 다음 표현식을 평가하면 현재 버퍼에서 위치를 문자 개수로 볼 수 있다.
 
 @smallexample
 (point)
 @end smallexample
 
 @noindent
-As I write this, the value of @code{point} is 65724.  The @code{point}
-function is frequently used in some of the examples later in this
-book.
+@code{point}의 값은 65724이다. @code{point} 함수는 이 책에서 뒤의 예제들에서 자주 사용된다.
 
 @need 1250
-The value of point depends, of course, on its location within the
-buffer.  If you evaluate point in this spot, the number will be larger:
+지점의 값은 물론 버퍼의 위치에 따라 다르다. 여기서 point 를 평가한다면 숫자는 더 클 것이다.:
 
 @smallexample
 (point)
 @end smallexample
 
 @noindent
-For me, the value of point in this location is 66043, which means that
-there are 319 characters (including spaces) between the two
-expressions.  (Doubtless, you will see different numbers, since I will
-have edited this since I first evaluated point.)
+이 위치에서 지점의 값은 66043이다. 이 값은 두 표현식 사이에 (공백을 포함해서) 319 개의 문자들이 있다는 
+것을 나타낸다. (처음 point를 평가한 후, 이 부분의 글을 수정했을 것이기에 분명히 다른 숫자를 볼 것이다.)
 
 @cindex @samp{narrowing} defined
-The function @code{point-min} is somewhat similar to @code{point}, but
-it returns the value of the minimum permissible value of point in the
-current buffer.  This is the number 1 unless @dfn{narrowing} is in
-effect.  (Narrowing is a mechanism whereby you can restrict yourself,
-or a program, to operations on just a part of a buffer.
-@xref{Narrowing &amp; Widening, , Narrowing and Widening}.)  Likewise, the
-function @code{point-max} returns the value of the maximum permissible
-value of point in the current buffer.</Text>
+@code{point-min} 함수는 @code{point}와 비슷하지만, 현재 버퍼에서 허용되는 지점의 가장 작은 값을 
+반환한다. 효과로 @dfn{줄이지(narrowing)} 않았다면 숫자 1일 것이다. ( 줄이기(narrowing)는 자신 또는 
+프로그램에 대해서 버퍼 일부분의 운영을 제한할 수 있는 방법이다. @xref{Narrowing &amp; Widening, , 
+Narrowing and Widening}.) 마찬가지로 @code{point-max} 함수도 현재 버퍼에서 허용되는 지점의 가장 
+큰 값을 반환한다.
+</Text>
         </Document>
         <Document ID="104">
             <Title>Count Several defuns Within a File</Title>
@@ -21275,9 +21262,9 @@ Variables
 * 버퍼 이름::               Buffers and files are different.
 * 버퍼 얻기::            Getting a buffer itself, not merely its name.
 * 버퍼 변경하기::          How to change to another buffer.
-* Buffer Size &amp; Locations::    Where point is located and the size of
+* 버퍼 크기와 위치::    Where point is located and the size of
                                the buffer.
-* Evaluation Exercise::
+* 연습문제 평가::
 
 How To Write Function Definitions
 
@@ -22268,9 +22255,9 @@ Emacs Lisp으로 함수 정의를 작성하는 방법을 배우기 전에, 이�
 * 버퍼 이름::               Buffers and files are different.
 * 버퍼 얻기::            Getting a buffer itself, not merely its name.
 * 버퍼 변경하기::          How to change to another buffer.
-* Buffer Size &amp; Locations::    Where point is located and the size of
+* 버퍼 크기와 위치::    Where point is located and the size of
                                the buffer.
-* Evaluation Exercise::
+* 연습문제 평가::
 @end menu
 
 @node How to Evaluate, 버퍼 이름, 평가 연습하기, 평가 연습하기

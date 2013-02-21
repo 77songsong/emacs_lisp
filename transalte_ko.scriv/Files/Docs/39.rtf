@@ -4,70 +4,56 @@
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\fi360\sl288\slmult1\pardirnatural
 
 \f0\fs28 \cf0 \
-@node Buffer Size & Locations, Evaluation Exercise, \'b9\'f6\'c6\'db \'ba\'af\'b0\'e6\'c7\'cf\'b1\'e2, \'c6\'f2\'b0\'a1 \'bf\'ac\'bd\'c0\'c7\'cf\'b1\'e2\
+@node \'b9\'f6\'c6\'db \'c5\'a9\'b1\'e2\'bf\'cd \'c0\'a7\'c4\'a1, \'bf\'ac\'bd\'c0\'b9\'ae\'c1\'a6 \'c6\'f2\'b0\'a1, \'b9\'f6\'c6\'db \'ba\'af\'b0\'e6\'c7\'cf\'b1\'e2, \'c6\'f2\'b0\'a1 \'bf\'ac\'bd\'c0\'c7\'cf\'b1\'e2\
 @comment  node-name,  next,  previous,  up\
-@section Buffer Size and the Location of Point\
+@section \'b9\'f6\'c6\'db \'c5\'a9\'b1\'e2\'bf\'cd \'c1\'f6\'c1\'a1\
 @cindex Size of buffer\
 @cindex Buffer size\
 @cindex Point location\
 @cindex Location of point\
 \
-Finally, let's look at several rather simple functions,\
-@code\{buffer-size\}, @code\{point\}, @code\{point-min\}, and\
-@code\{point-max\}.  These give information about the size of a buffer and\
-the location of point within it.\
+\'b8\'b6\'c1\'f6\'b8\'b7\'c0\'b8\'b7\'ce \'b8\'ee \'c1\'be\'b7\'f9\'c0\'c7 \'ba\'f1\'b1\'b3\'c0\'fb \'b4\'dc\'bc\'f8\'c7\'d1 \'c7\'d4\'bc\'f6\'b5\'e9\'c0\'bb \'bb\'ec\'c6\'ec\'ba\'b8\'c0\'da, @code\{buffer-size\}, @code\{point\}, \
+@code\{point-min\}, @code\{point-max\} \'c0\'cc\'b4\'d9. \'b9\'f6\'c6\'db\'c0\'c7 \'c5\'a9\'b1\'e2\'bf\'cd \'b9\'f6\'c6\'db \'be\'c8\'c0\'c7 \'c0\'a7\'c4\'a1\'bf\'a1 \'b4\'eb\'c7\'d1 \'c1\'a4\'ba\'b8\'b8\'a6 \'c1\'d8\'b4\'d9.\
 \
-The function @code\{buffer-size\} tells you the size of the current\
-buffer; that is, the function returns a count of the number of\
-characters in the buffer.\
+@code\{buffer-size\} \'c7\'d4\'bc\'f6\'b4\'c2 \'c7\'f6\'c0\'e7 \'b9\'f6\'c6\'db\'c0\'c7 \'c5\'a9\'b1\'e2\'b8\'a6 \'be\'cb\'b7\'c1\'c1\'d8\'b4\'d9.; \'c7\'d4\'bc\'f6\'b0\'a1 \'b3\'d1\'b0\'dc\'c1\'d6\'b4\'c2 \'c5\'a9\'b1\'e2\'b4\'c2 \'b9\'f6\'c6\'db \'be\'c8\'c0\'c7 \'b9\'ae\'c0\'da\'b5\'e9\'c0\'c7 \
+\'b0\'b3\'bc\'f6\'c0\'cc\'b4\'d9.\
 \
 @smallexample\
 (buffer-size)\
 @end smallexample\
 \
 @noindent\
-You can evaluate this in the usual way, by positioning the\
-cursor after the expression and typing @kbd\{C-x C-e\}.\
+\'c7\'a5\'c7\'f6\'bd\'c4 \'b5\'da\'bf\'a1 \'c4\'bf\'bc\'ad\'b8\'a6 \'c0\'cc\'b5\'bf \'c8\'c4, @kbd\{C-x C-e\}\'b8\'a6 \'c0\'d4\'b7\'c2\'c7\'cf\'b4\'c2 \'ba\'b8\'c5\'eb \'b9\'e6\'b9\'fd\'c0\'b8\'b7\'ce \'c6\'f2\'b0\'a1\'c7\'d2 \'bc\'f6 \'c0\'d6\'b4\'d9.\
 \
 @cindex @samp\{point\} defined\
-In Emacs, the current  position of the cursor is called @dfn\{point\}.\
-The expression @code\{(point)\} returns a number that tells you where the\
-cursor is located as a count of the number of characters from the\
-beginning of the buffer up to point.\
+Emacs\'bf\'a1\'bc\'ad \'c4\'bf\'bc\'ad\'c0\'c7 \'c7\'f6\'c0\'e7 \'c0\'a7\'c4\'a1\'b8\'a6 @dfn\{\'c1\'f6\'c1\'a1(point)\}\'b6\'f3\'b0\'ed \'c7\'d1\'b4\'d9. @code\{(point)\} \'c7\'a5\'c7\'f6\'bd\'c4\'c0\'ba \'b9\'f6\'c6\'db\'c0\'c7 \'bd\'c3\'c0\'db \
+\'c1\'f6\'c1\'a1\'ba\'ce\'c5\'cd \'b9\'ae\'c0\'da\'c0\'c7 \'b0\'b3\'bc\'f6\'b7\'ce \'c7\'a5\'c7\'f6\'b5\'c7\'b4\'c2 \'c4\'bf\'bc\'ad\'c0\'c7 \'c0\'a7\'c4\'a1\'b8\'a6 \'b3\'aa\'c5\'b8\'b3\'bb\'b4\'c2 \'bc\'fd\'c0\'da\'b8\'a6 \'b9\'dd\'c8\'af\'c7\'d1\'b4\'d9.\
 \
 @need 1250\
-You can see the character count for point in this buffer by evaluating\
-the following expression in the usual way:\
+\'ba\'b8\'c5\'eb \'b9\'e6\'b9\'fd\'c0\'b8\'b7\'ce \'b4\'d9\'c0\'bd \'c7\'a5\'c7\'f6\'bd\'c4\'c0\'bb \'c6\'f2\'b0\'a1\'c7\'cf\'b8\'e9 \'c7\'f6\'c0\'e7 \'b9\'f6\'c6\'db\'bf\'a1\'bc\'ad \'c0\'a7\'c4\'a1\'b8\'a6 \'b9\'ae\'c0\'da \'b0\'b3\'bc\'f6\'b7\'ce \'ba\'bc \'bc\'f6 \'c0\'d6\'b4\'d9.\
 \
 @smallexample\
 (point)\
 @end smallexample\
 \
 @noindent\
-As I write this, the value of @code\{point\} is 65724.  The @code\{point\}\
-function is frequently used in some of the examples later in this\
-book.\
+@code\{point\}\'c0\'c7 \'b0\'aa\'c0\'ba 65724\'c0\'cc\'b4\'d9. @code\{point\} \'c7\'d4\'bc\'f6\'b4\'c2 \'c0\'cc \'c3\'a5\'bf\'a1\'bc\'ad \'b5\'da\'c0\'c7 \'bf\'b9\'c1\'a6\'b5\'e9\'bf\'a1\'bc\'ad \'c0\'da\'c1\'d6 \'bb\'e7\'bf\'eb\'b5\'c8\'b4\'d9.\
 \
 @need 1250\
-The value of point depends, of course, on its location within the\
-buffer.  If you evaluate point in this spot, the number will be larger:\
+\'c1\'f6\'c1\'a1\'c0\'c7 \'b0\'aa\'c0\'ba \'b9\'b0\'b7\'d0 \'b9\'f6\'c6\'db\'c0\'c7 \'c0\'a7\'c4\'a1\'bf\'a1 \'b5\'fb\'b6\'f3 \'b4\'d9\'b8\'a3\'b4\'d9. \'bf\'a9\'b1\'e2\'bc\'ad point \'b8\'a6 \'c6\'f2\'b0\'a1\'c7\'d1\'b4\'d9\'b8\'e9 \'bc\'fd\'c0\'da\'b4\'c2 \'b4\'f5 \'c5\'ac \'b0\'cd\'c0\'cc\'b4\'d9.:\
 \
 @smallexample\
 (point)\
 @end smallexample\
 \
 @noindent\
-For me, the value of point in this location is 66043, which means that\
-there are 319 characters (including spaces) between the two\
-expressions.  (Doubtless, you will see different numbers, since I will\
-have edited this since I first evaluated point.)\
+\'c0\'cc \'c0\'a7\'c4\'a1\'bf\'a1\'bc\'ad \'c1\'f6\'c1\'a1\'c0\'c7 \'b0\'aa\'c0\'ba 66043\'c0\'cc\'b4\'d9. \'c0\'cc \'b0\'aa\'c0\'ba \'b5\'ce \'c7\'a5\'c7\'f6\'bd\'c4 \'bb\'e7\'c0\'cc\'bf\'a1 (\'b0\'f8\'b9\'e9\'c0\'bb \'c6\'f7\'c7\'d4\'c7\'d8\'bc\'ad) 319 \'b0\'b3\'c0\'c7 \'b9\'ae\'c0\'da\'b5\'e9\'c0\'cc \'c0\'d6\'b4\'d9\'b4\'c2 \
+\'b0\'cd\'c0\'bb \'b3\'aa\'c5\'b8\'b3\'bd\'b4\'d9. (\'c3\'b3\'c0\'bd point\'b8\'a6 \'c6\'f2\'b0\'a1\'c7\'d1 \'c8\'c4, \'c0\'cc \'ba\'ce\'ba\'d0\'c0\'c7 \'b1\'db\'c0\'bb \'bc\'f6\'c1\'a4\'c7\'df\'c0\'bb \'b0\'cd\'c0\'cc\'b1\'e2\'bf\'a1 \'ba\'d0\'b8\'ed\'c8\'f7 \'b4\'d9\'b8\'a5 \'bc\'fd\'c0\'da\'b8\'a6 \'ba\'bc \'b0\'cd\'c0\'cc\'b4\'d9.)\
 \
 @cindex @samp\{narrowing\} defined\
-The function @code\{point-min\} is somewhat similar to @code\{point\}, but\
-it returns the value of the minimum permissible value of point in the\
-current buffer.  This is the number 1 unless @dfn\{narrowing\} is in\
-effect.  (Narrowing is a mechanism whereby you can restrict yourself,\
-or a program, to operations on just a part of a buffer.\
-@xref\{Narrowing & Widening, , Narrowing and Widening\}.)  Likewise, the\
-function @code\{point-max\} returns the value of the maximum permissible\
-value of point in the current buffer.}
+@code\{point-min\} \'c7\'d4\'bc\'f6\'b4\'c2 @code\{point\}\'bf\'cd \'ba\'f1\'bd\'c1\'c7\'cf\'c1\'f6\'b8\'b8, \'c7\'f6\'c0\'e7 \'b9\'f6\'c6\'db\'bf\'a1\'bc\'ad \'c7\'e3\'bf\'eb\'b5\'c7\'b4\'c2 \'c1\'f6\'c1\'a1\'c0\'c7 \'b0\'a1\'c0\'e5 \'c0\'db\'c0\'ba \'b0\'aa\'c0\'bb \
+\'b9\'dd\'c8\'af\'c7\'d1\'b4\'d9. \'c8\'bf\'b0\'fa\'b7\'ce @dfn\{\'c1\'d9\'c0\'cc\'c1\'f6(narrowing)\} \'be\'ca\'be\'d2\'b4\'d9\'b8\'e9 \'bc\'fd\'c0\'da 1\'c0\'cf \'b0\'cd\'c0\'cc\'b4\'d9. ( \'c1\'d9\'c0\'cc\'b1\'e2(narrowing)\'b4\'c2 \'c0\'da\'bd\'c5 \'b6\'c7\'b4\'c2 \
+\'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a5\'bf\'a1 \'b4\'eb\'c7\'d8\'bc\'ad \'b9\'f6\'c6\'db \'c0\'cf\'ba\'ce\'ba\'d0\'c0\'c7 \'bf\'ee\'bf\'b5\'c0\'bb \'c1\'a6\'c7\'d1\'c7\'d2 \'bc\'f6 \'c0\'d6\'b4\'c2 \'b9\'e6\'b9\'fd\'c0\'cc\'b4\'d9. @xref\{Narrowing & Widening, , \
+Narrowing and Widening\}.) \'b8\'b6\'c2\'f9\'b0\'a1\'c1\'f6\'b7\'ce @code\{point-max\} \'c7\'d4\'bc\'f6\'b5\'b5 \'c7\'f6\'c0\'e7 \'b9\'f6\'c6\'db\'bf\'a1\'bc\'ad \'c7\'e3\'bf\'eb\'b5\'c7\'b4\'c2 \'c1\'f6\'c1\'a1\'c0\'c7 \'b0\'a1\'c0\'e5 \
+\'c5\'ab \'b0\'aa\'c0\'bb \'b9\'dd\'c8\'af\'c7\'d1\'b4\'d9.\
+}

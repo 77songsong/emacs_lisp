@@ -858,7 +858,7 @@ Emacs Lisp으로 함수 정의를 작성하는 방법을 배우기 전에, 이�
 </li>
 <li>
 <p class="binderItem"><strong>Switching Buffers</strong><br/><br/>
-@node 버퍼 변경하기, Buffer Size & Locations, 버퍼 얻기, 평가 연습하기<br/>
+@node 버퍼 변경하기, 버퍼 크기와 위치, 버퍼 얻기, 평가 연습하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
 @section 버퍼 변경하기<br/>
 @findex switch-to-buffer<br/>
@@ -870,32 +870,38 @@ Emacs Lisp으로 함수 정의를 작성하는 방법을 배우기 전에, 이�
 <br/>
 그러나 먼저 @code{switch-to-buffer} 함수에 대한 짧은 소개. @code{(buffer-name)}을 평가하기 위해 <br/>
 Info에서 @file{*scratch*} 버퍼로 변경하고자 할 때, @kbd{C-x b}를 입력한 후, 미니 버퍼에서 변경하기를 <br/>
-원하는 버퍼의 이름을 물어보면 @f...</p>
+원하는 버퍼의 이름을 물어보면 @file{*scratch*}...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Buffer Size and the Location of Point</strong><br/><br/>
-@node Buffer Size & Locations, Evaluation Exercise, 버퍼 변경하기, 평가 연습하기<br/>
+@node 버퍼 크기와 위치, 연습문제 평가, 버퍼 변경하기, 평가 연습하기<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@section Buffer Size and the Location of Point<br/>
+@section 버퍼 크기와 지점<br/>
 @cindex Size of buffer<br/>
 @cindex Buffer size<br/>
 @cindex Point location<br/>
 @cindex Location of point<br/>
 <br/>
-Finally, let's look at several rather simple functions,<br/>
-@code{buffer-size}, @code{point}, @code{point-min}, and<br/>
-@code{point-max}.  These give information about the size of a buffer and<br/>
-the location of point within it.<br/>
+마지막으로 몇 종류의 비교적 단순한 함수들을 살펴보자, @code{buffer-size}, @code{point}, <br/>
+@code{point-min}, @code{point-max} 이다. 버퍼의 크기와 버퍼 안의 위치에 대한 정보를 준다.<br/>
 <br/>
-The function @code{buffer-si...</p>
+@code{buffer-size} 함수는 현재 버퍼의 크기를 알려준다.; 함수가 넘겨주는 크기는 버퍼 안의 문자들의 <br/>
+개수이다.<br/>
+<br/>
+@smallexample<br/>
+(buffer-size)<br/>
+@end smallexample<br/>
+<br/>
+@noindent<br/>
+표현식 뒤에 커서를 이동 후, @kbd{C-x C-e}를 입력하는...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Excercise</strong><br/><br/>
-@node Evaluation Exercise,  , Buffer Size & Locations, 평가 연습하기<br/>
-@section Exercise<br/>
+@node 연습문제 평가,  , 버퍼 크기와 위치, 평가 연습하기<br/>
+@section 연습문제<br/>
 <br/>
-Find a file with which you are working and move towards its middle.<br/>
-Find its buffer name, file name, length, and your position in the file.</p>
+작업하고 있고 파일을 찾아서 중간 지점으로 이동하라.<br/>
+버퍼 이름, 파일 이름, 길이, 파일에서 현재 위치를 찾아라.</p>
 </li>
 </ul>
 <hr/>
