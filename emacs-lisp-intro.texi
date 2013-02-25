@@ -340,7 +340,7 @@ every node in every chapter.
 * 서문::                     What to look for.
 * List 처리하기::             What is Lisp?
 * 평가 연습하기::       Running several programs.
-* Writing Defuns::              How to write function definitions.
+* Writing Defuns::              함수 정의 작성 방법.
 * Buffer Walk Through::         Exploring a few buffer-related functions.
 * More Complex::                A few, even more complex functions.
 * Narrowing & Widening::        Restricting your and Emacs attention to
@@ -443,7 +443,7 @@ Variables
                                the buffer.
 * 연습문제 평가::
 
-How To Write Function Definitions
+함수 정의 작성 방법
 
 * Primitive Functions::
 * defun::                        The @code{defun} special form.
@@ -2698,18 +2698,14 @@ Narrowing and Widening}.) 마찬가지로 @code{point-max} 함수도 현재 버�
 
 @node Writing Defuns, Buffer Walk Through, 평가 연습하기, Top
 @comment  node-name,  next,  previous,  up
-@chapter How To Write Function Definitions
+@chapter 함수 정의 작성 방법
 @cindex Definition writing
 @cindex Function definition writing
 @cindex Writing a function definition
 
-When the Lisp interpreter evaluates a list, it looks to see whether the
-first symbol on the list has a function definition attached to it; or,
-put another way, whether the symbol points to a function definition.  If
-it does, the computer carries out the instructions in the definition.  A
-symbol that has a function definition is called, simply, a function
-(although, properly speaking, the definition is the function and the
-symbol refers to it.)
+Lisp 해석기가 list를 평가할 때, list의 첫 번째 기호에 연결된 함수 정의가 있는지 본다.; 또는 달리 말하면 
+기호가 함수 정의를 가리키는지. 만약 그렇다면 컴퓨터는 그 정의에 있는 명령들을 수행한다. 함수 정의를 가지고 
+있는 기호, 단순하게 함수는 호출된다.(정확히 이야기하지만 그 정의는 함수이고 기호는 함수를 가리킨다. )
 
 @menu
 * Primitive Functions::
@@ -2727,31 +2723,28 @@ symbol refers to it.)
 * defun Exercises::
 @end menu
 
+
+
 @node Primitive Functions, defun, Writing Defuns, Writing Defuns
 @ifnottex
-@unnumberedsec An Aside about Primitive Functions
+@unnumberedsec 원시 함수에 관한 이야기
 @end ifnottex
 @cindex Primitive functions
 @cindex Functions, primitive
 
 @cindex C language primitives
 @cindex Primitives written in C
-All functions are defined in terms of other functions, except for a few
-@dfn{primitive} functions that are written in the C programming
-language.  When you write functions' definitions, you will write them in
-Emacs Lisp and use other functions as your building blocks.  Some of the
-functions you will use will themselves be written in Emacs Lisp (perhaps
-by you) and some will be primitives written in C.  The primitive
-functions are used exactly like those written in Emacs Lisp and behave
-like them.  They are written in C so we can easily run GNU Emacs on any
-computer that has sufficient power and can run C.
+모든 함수들은 C 언어로 작성된 몇몇 @dfn{원시(primitive)} 함수들을 제외한 다른 함수들에 의해서 정의된다.  
+함수 정의를 작성할 때, Emacs Lisp으로 작성할 것이고 구성 요소로 다른 함수들을 사용할 것이다. 사용할 
+일부 함수들은 Emacs Lisp을 작성되었고, 일부는 C 언어로 작성된 원시 함수들이다. 원시 함수들은 Emacs 
+Lisp으로 작성된 함수들처럼 사용되고 그들과 똑같이 동작한다. C로 작성되었기에 충분한 성능을 가지고 
+C를 수행할 수 있는 어느 컴퓨터든지 GNU Emacs를 쉽게 수행할 수 있다.
 
-Let me re-emphasize this: when you write code in Emacs Lisp, you do not
-distinguish between the use of functions written in C and the use of
-functions written in Emacs Lisp.  The difference is irrelevant.  I
-mention the distinction only because it is interesting to know.  Indeed,
-unless you investigate, you won't know whether an already-written
-function is written in Emacs Lisp or C.
+다시 한번 강조해본다.: Emacs Lisp에서 코드를 작성할 때, C로 작성된 함수의 사용과 Emacs Lisp으로 
+작성된 함수를 구분할 필요가 없다. 그 차이는 아무 상관 없다. 단지 그 차이를 언급한 것은 아는 것이 흥미롭기 
+때문이다. 정말로 조사하지 않는다면, 이미 만들어진 함수가 Emacs Lisp 또는 C 둘 중 어떤 것으로 
+작성되었는지 알 수 없다.
+
 
 
 @node defun, Install, Primitive Functions, Writing Defuns
@@ -2761,53 +2754,41 @@ function is written in Emacs Lisp or C.
 @cindex Special form of @code{defun}
 
 @cindex @samp{function definition} defined
-In Lisp, a symbol such as @code{mark-whole-buffer} has code attached to
-it that tells the computer what to do when the function is called.
-This code is called the @dfn{function definition} and is created by
-evaluating a Lisp expression that starts with the symbol @code{defun}
-(which is an abbreviation for @emph{define function}).  Because
-@code{defun} does not evaluate its arguments in the usual way, it is
-called a @dfn{special form}.
+Lisp에서 @code{mark-whole-buffer} 같은 기호는 함수가 호출될 때 컴퓨터가 무엇을 해야 하는지 
+쓰여있는 연결된 코드를 가지고 있다. 이 코드는 @dfn{함수 정의(function definition)}이라고 하고 
+@code{defun}(@emph{함수 정의(define function)}을 나타낸다.) 기호로 시작하는 Lisp 표현식을 
+평가함으로 생성된다. @code{defun}은 보통 방법으로 그 인자들을 평가하지 않기 때문에 @dfn{특별한 형식
+(special form)}이라고 부른다.
 
-In subsequent sections, we will look at function definitions from the
-Emacs source code, such as @code{mark-whole-buffer}.  In this section,
-we will describe a simple function definition so you can see how it
-looks.  This function definition uses arithmetic because it makes for a
-simple example.  Some people dislike examples using arithmetic; however,
-if you are such a person, do not despair.  Hardly any of the code we
-will study in the remainder of this introduction involves arithmetic or
-mathematics.  The examples mostly involve text in one way or another.
+다음 절에서 Emacs 소스 코드에서 @code{mark-whole-buffer} 같은 함수 정의를 볼 것이다. 이 절에서는 
+이해할 수 있게 간단한 함수 정의를 설명할 것이다. 단순한 예제를 만들기 위해서 이 함수 정의는 수식을 
+사용한다. 어떤 이들은 수식을 사용한 예제를 싫어한다.; 그러나 독자가 그런 사람이라면 절망하지 말아라. 
+앞으로 학습할 이 소개의 나머지 부분의 코드는 수식이나 수학을 거의 포함하지 않을 것이다. 예제들은 대부분 
+한 가지 또는 다른 방법으로 글을 포함한다.
 
-A function definition has up to five parts following the word
+함수 정의는 다음 단어 뒤에 최대 다섯 부분을 가진다.
 @code{defun}:
 
 @enumerate
 @item
-The name of the symbol to which the function definition should be
-attached.
+함수 정의가 연관될 기호의 이름
 
 @item
-A list of the arguments that will be passed to the function.  If no
-arguments will be passed to the function, this is an empty list,
-@code{()}.
+함수에 전달될 인자들의 list. 함수에 전달될 인자가 없다면  빈 list @code{()}가 될 것이다.
 
 @item
-Documentation describing the function.  (Technically optional, but
-strongly recommended.)
+함수를 설명하는 문서. (기술적으로 선택 사항이지만, 강력하게 권장한다.)
 
 @item
-Optionally, an expression to make the function interactive so you can
-use it by typing @kbd{M-x} and then the name of the function; or by
-typing an appropriate key or keychord.
+선택 사항으로 함수를 대화형으로 만드는 표현식.  @kbd{M-x} 입력 후 함수의 이름을 입력하거나 적절한 키 
+입력으로 함수를 사용할 수 있다.
 
 @cindex @samp{body} defined
 @item
-The code that instructs the computer what to do: the @dfn{body} of the
-function definition.
+컴퓨터가 할 일을 알려주는 코드: 함수 정의의 @dfn{본체(body)}이다.
 @end enumerate
 
-It is helpful to think of the five parts of a function definition as
-being organized in a template, with slots for each part:
+함수 정의의 다섯 부분을 각 부분의 자리가 있는 견본으로 구성된 것으로 생각하는 것이 도움이 된다.
 
 @smallexample
 @group
@@ -2818,9 +2799,8 @@ being organized in a template, with slots for each part:
 @end group
 @end smallexample
 
-As an example, here is the code for a function that multiplies its
-argument by 7.  (This example is not interactive.  @xref{Interactive,
-, Making a Function Interactive}, for that information.)
+하나의 예제로 여기 인자에 7을 곱하는 함수를 위한 코드가 있다. (이 예제는 대화형이 아니다. 자세한 정보는 
+@xref{Interactive,, Making a Function Interactive} )
 
 @smallexample
 @group
@@ -2830,17 +2810,14 @@ argument by 7.  (This example is not interactive.  @xref{Interactive,
 @end group
 @end smallexample
 
-This definition begins with a parenthesis and the symbol @code{defun},
-followed by the name of the function.
+이 정의는 괄호와 기호 @code{defun}과 함수 이름으로 시작한다.
 
 @cindex @samp{argument list} defined
-The name of the function is followed by a list that contains the
-arguments that will be passed to the function.  This list is called
-the @dfn{argument list}.  In this example, the list has only one
-element, the symbol, @code{number}.  When the function is used, the
-symbol will be bound to the value that is used as the argument to the
-function.
+함수의 이름 뒤에는 함수에 전달될 인자들을 포함하는 list가 온다. 이 list는 @dfn{인자(argument) list}라고 
+한다. 이 예제에서 list는 기호 @code{number}로 하나의 요소만 있다. 함수가 사용될 때 함수의 인자로 
+사용되는 기호는 값에 바인딩 될 것이다.
 
+인자의 이름으로 단어 @code{number}를 선택하는 대신 다른 이름을 선택할 수 있다. 예를 들면 단어 @code{mutiplicand}를 선택할 수 있다. 어떤 종류의 값인지 말하기 때문에 단어 `number'를 선택했다.;
 Instead of choosing the word @code{number} for the name of the argument,
 I could have picked any other name.  For example, I could have chosen
 the word @code{multiplicand}.  I picked the word `number' because it

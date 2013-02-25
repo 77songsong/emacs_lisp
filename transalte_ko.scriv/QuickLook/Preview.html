@@ -909,18 +909,37 @@ Info에서 @file{*scratch*} 버퍼로 변경하고자 할 때, @kbd{C-x b}를 �
 <p class="binderItem"><strong>How To Write  Function Definition</strong><br/><br/>
 @node Writing Defuns, Buffer Walk Through, 평가 연습하기, Top<br/>
 @comment  node-name,  next,  previous,  up<br/>
-@chapter How To Write Function Definitions<br/>
+@chapter 함수 정의 작성 방법<br/>
 @cindex Definition writing<br/>
 @cindex Function definition writing<br/>
 @cindex Writing a function definition<br/>
 <br/>
-When the Lisp interpreter evaluates a list, it looks to see whether the<br/>
-first symbol on the list has a function definition attached to it; or,<br/>
-put another way, whether the symbol points to a function definition.  If<br/>
-it does, the computer carries out the i...</p>
+Lisp 해석기가 list를 평가할 때, list의 첫 번째 기호에 연결된 함수 정의가 있는지 본다.; 또는 달리 말하면 <br/>
+기호가 함수 정의를 가리키는지. 만약 그렇다면 컴퓨터는 그 정의에 있는 명령들을 수행한다. 함수 정의를 가지고 <br/>
+있는 기호, 단순하게 함수는 호출된다.(정확히 이야기하지만 그 정의는 함수이고 기호는 함수를 가리킨다. )<br/>
+<br/>
+@menu<br/>
+* Primitive Functions::<br/>
+* defun::                        The @code{defun} spec...</p>
 </li>
 <hr/>
 <ul>
+<li>
+<p class="binderItem"><strong>An aside about primitive functions</strong><br/>@node Primitive Functions, defun, Writing Defuns, Writing Defuns<br/>
+@ifnottex<br/>
+@unnumberedsec 원시 함수에 관한 이야기<br/>
+@end ifnottex<br/>
+@cindex Primitive functions<br/>
+@cindex Functions, primitive<br/>
+<br/>
+@cindex C language primitives<br/>
+@cindex Primitives written in C<br/>
+모든 함수들은 C 언어로 작성된 몇몇 @dfn{원시(primitive)} 함수들을 제외한 다른 함수들에 의해서 정의된다.  <br/>
+함수 정의를 작성할 때, Emacs Lisp으로 작성할 것이고 구성 요소로 다른 함수들을 사용할 것이다. 사용할 <br/>
+일부 함수들은 Emacs Lisp을 작성되었고, 일부는 C 언어로 작성된 원시 함수들이다. 원시 함수들은 Emacs <br/>
+Lisp으로 작성된 함수들처럼 사용되고 그들과 똑같이 동작한다. C로 작성되었기에 충분한 성능을 가지고 <br/>
+C를 ...</p>
+</li>
 <li>
 <p class="binderItem"><strong>The defun Special Form</strong><br/><br/>
 @node defun, Install, Primitive Functions, Writing Defuns<br/>
@@ -930,10 +949,10 @@ it does, the computer carries out the i...</p>
 @cindex Special form of @code{defun}<br/>
 <br/>
 @cindex @samp{function definition} defined<br/>
-In Lisp, a symbol such as @code{mark-whole-buffer} has code attached to<br/>
-it that tells the computer what to do when the function is called.<br/>
-This code is called the @dfn{function definition} and is created by<br/>
-evaluating a Lisp expression that starts with the symbol ...</p>
+Lisp에서 @code{mark-whole-buffer} 같은 기호는 함수가 호출될 때 컴퓨터가 무엇을 해야 하는지 <br/>
+쓰여있는 연결된 코드를 가지고 있다. 이 코드는 @dfn{함수 정의(function definition)}이라고 하고 <br/>
+@code{defun}(@emph{함수 정의(define function)}을 나타낸다.) 기호로 시작하는 Lisp 표현식을 <br/>
+평가함으로 생성된다. @code{defun}은 보통 방법으로 그 인자들을 평가하지 않기 때문에 @dfn{특별...</p>
 </li>
 <li>
 <p class="binderItem"><strong>Install a Function Definition</strong><br/><br/>

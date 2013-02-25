@@ -16,7 +16,7 @@
                 </OutlinerExpandedState>
             </CorkboardAndOutliner>
             <Children>
-                <BinderItem ID="5" Type="Text" Created="2012-11-09 00:18:17 +0900" Modified="2013-02-21 22:54:54 +0900">
+                <BinderItem ID="5" Type="Text" Created="2012-11-09 00:18:17 +0900" Modified="2013-02-26 00:57:59 +0900">
                     <Title>An Introduction to Programming in Emacs Lisp</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -126,7 +126,7 @@
                         <TextSelection>0,0</TextSelection>
                     </TextSettings>
                     <CorkboardAndOutliner>
-                        <SelectedSubdocumentIDs>34</SelectedSubdocumentIDs>
+                        <SelectedSubdocumentIDs></SelectedSubdocumentIDs>
                         <OutlinerExpandedState>
                             <ItemID>32</ItemID>
                             <ItemID>33</ItemID>
@@ -484,12 +484,16 @@
                         <NotesTextSelection>0,0</NotesTextSelection>
                     </MetaData>
                     <TextSettings>
-                        <TextSelection>1117,0</TextSelection>
+                        <TextSelection>0,0</TextSelection>
                     </TextSettings>
+                    <CorkboardAndOutliner>
+                        <SelectedSubdocumentIDs>36</SelectedSubdocumentIDs>
+                    </CorkboardAndOutliner>
                     <Children>
-                        <BinderItem ID="36" Type="Text" Created="2012-11-09 11:11:12 +0900" Modified="2013-02-21 23:10:20 +0900">
+                        <BinderItem ID="36" Type="Text" Created="2012-11-09 11:11:12 +0900" Modified="2013-02-26 00:49:27 +0900">
                             <Title>Buffer Names</Title>
                             <MetaData>
+                                <LabelID>2</LabelID>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
@@ -497,9 +501,10 @@
                                 <TextSelection>1004,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="37" Type="Text" Created="2012-11-09 11:11:25 +0900" Modified="2013-02-20 00:41:24 +0900">
+                        <BinderItem ID="37" Type="Text" Created="2012-11-09 11:11:25 +0900" Modified="2013-02-26 00:49:29 +0900">
                             <Title>Getting Buffers</Title>
                             <MetaData>
+                                <LabelID>2</LabelID>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
@@ -507,9 +512,10 @@
                                 <TextSelection>0,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="38" Type="Text" Created="2012-11-09 11:11:38 +0900" Modified="2013-02-21 22:51:49 +0900">
+                        <BinderItem ID="38" Type="Text" Created="2012-11-09 11:11:38 +0900" Modified="2013-02-26 00:49:31 +0900">
                             <Title>Switching Buffers</Title>
                             <MetaData>
+                                <LabelID>2</LabelID>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
@@ -517,9 +523,10 @@
                                 <TextSelection>705,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="39" Type="Text" Created="2012-11-09 11:11:46 +0900" Modified="2013-02-21 22:54:54 +0900">
+                        <BinderItem ID="39" Type="Text" Created="2012-11-09 11:11:46 +0900" Modified="2013-02-26 00:49:34 +0900">
                             <Title>Buffer Size and the Location of Point</Title>
                             <MetaData>
+                                <LabelID>2</LabelID>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
@@ -527,9 +534,10 @@
                                 <TextSelection>463,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="40" Type="Text" Created="2012-11-09 11:11:51 +0900" Modified="2013-02-21 22:54:54 +0900">
+                        <BinderItem ID="40" Type="Text" Created="2012-11-09 11:11:51 +0900" Modified="2013-02-26 00:49:36 +0900">
                             <Title>Excercise</Title>
                             <MetaData>
+                                <LabelID>2</LabelID>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
@@ -539,24 +547,34 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="8" Type="Text" Created="2012-11-09 00:33:37 +0900" Modified="2013-02-05 01:38:08 +0900">
+                <BinderItem ID="8" Type="Text" Created="2012-11-09 00:33:37 +0900" Modified="2013-02-26 00:57:59 +0900">
                     <Title>How To Write  Function Definition</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
                         <NotesTextSelection>0,0</NotesTextSelection>
                     </MetaData>
                     <TextSettings>
-                        <TextSelection>2691,0</TextSelection>
+                        <TextSelection>1140,0</TextSelection>
                     </TextSettings>
                     <Children>
-                        <BinderItem ID="41" Type="Text" Created="2012-11-09 11:13:54 +0900" Modified="2012-11-11 00:56:25 +0900">
+                        <BinderItem ID="162" Type="Text" Created="2013-02-26 00:56:28 +0900" Modified="2013-02-26 01:15:06 +0900">
+                            <Title>An aside about primitive functions</Title>
+                            <MetaData>
+                                <IncludeInCompile>Yes</IncludeInCompile>
+                                <NotesTextSelection>0,0</NotesTextSelection>
+                            </MetaData>
+                            <TextSettings>
+                                <TextSelection>90,34</TextSelection>
+                            </TextSettings>
+                        </BinderItem>
+                        <BinderItem ID="41" Type="Text" Created="2012-11-09 11:13:54 +0900" Modified="2013-02-26 01:49:50 +0900">
                             <Title>The defun Special Form</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>7768,0</TextSelection>
+                                <TextSelection>2094,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
                         <BinderItem ID="42" Type="Text" Created="2012-11-09 11:14:31 +0900" Modified="2012-11-11 00:56:25 +0900">
@@ -1665,7 +1683,7 @@
                         <NotesTextSelection>0,0</NotesTextSelection>
                     </MetaData>
                     <MediaSettings>
-                        <CurrentPDFPage>5</CurrentPDFPage>
+                        <CurrentPDFPage>0</CurrentPDFPage>
                     </MediaSettings>
                 </BinderItem>
                 <BinderItem ID="145" Type="Text" Created="2012-11-14 00:47:14 +0900" Modified="2013-02-21 22:31:47 +0900">
@@ -1685,6 +1703,18 @@
             <MetaData>
                 <IncludeInCompile>Yes</IncludeInCompile>
             </MetaData>
+            <Children>
+                <BinderItem ID="161" Type="Text" Created="2013-02-26 00:55:59 +0900" Modified="2013-02-26 00:55:59 +0900">
+                    <Title>Untitled</Title>
+                    <MetaData>
+                        <IncludeInCompile>Yes</IncludeInCompile>
+                        <NotesTextSelection>0,0</NotesTextSelection>
+                    </MetaData>
+                    <TextSettings>
+                        <TextSelection>0,0</TextSelection>
+                    </TextSettings>
+                </BinderItem>
+            </Children>
         </BinderItem>
     </Binder>
     <Collections>
@@ -1728,7 +1758,7 @@
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2012-11-09 00:23:48 +0900" IgnoreDeadline="Yes">0</DraftTarget>
         <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" ResetType="Midnight" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="-129" Characters="-1144" Date="2013-02-21 23:06:19 +0900"></PreviousSession>
+        <PreviousSession Words="-195" Characters="-1896" Date="2013-02-26 00:40:53 +0900"></PreviousSession>
     </ProjectTargets>
     <PrintSettings PaperSize="595.289978,841.890015" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="iso-a4" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
 </ScrivenerProject>
