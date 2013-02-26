@@ -567,14 +567,14 @@
                                 <TextSelection>90,34</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="41" Type="Text" Created="2012-11-09 11:13:54 +0900" Modified="2013-02-26 01:49:50 +0900">
+                        <BinderItem ID="41" Type="Text" Created="2012-11-09 11:13:54 +0900" Modified="2013-02-26 23:24:32 +0900">
                             <Title>The defun Special Form</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>2094,0</TextSelection>
+                                <TextSelection>4458,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
                         <BinderItem ID="42" Type="Text" Created="2012-11-09 11:14:31 +0900" Modified="2012-11-11 00:56:25 +0900">
@@ -584,7 +584,7 @@
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>4286,0</TextSelection>
+                                <TextSelection>3406,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
                         <BinderItem ID="43" Type="Text" Created="2012-11-09 11:14:37 +0900" Modified="2012-11-11 00:56:25 +0900">
@@ -1758,7 +1758,7 @@
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2012-11-09 00:23:48 +0900" IgnoreDeadline="Yes">0</DraftTarget>
         <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" ResetType="Midnight" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="-195" Characters="-1896" Date="2013-02-26 00:40:53 +0900"></PreviousSession>
+        <PreviousSession Words="-451" Characters="-3912" Date="2013-02-26 21:23:26 +0900"></PreviousSession>
     </ProjectTargets>
     <PrintSettings PaperSize="595.289978,841.890015" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="iso-a4" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
 </ScrivenerProject>

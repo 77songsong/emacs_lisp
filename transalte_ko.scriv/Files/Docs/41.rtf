@@ -74,30 +74,18 @@ Lisp\'bf\'a1\'bc\'ad @code\{mark-whole-buffer\} \'b0\'b0\'c0\'ba \'b1\'e2\'c8\'a
 \'c7\'d1\'b4\'d9. \'c0\'cc \'bf\'b9\'c1\'a6\'bf\'a1\'bc\'ad list\'b4\'c2 \'b1\'e2\'c8\'a3 @code\{number\}\'b7\'ce \'c7\'cf\'b3\'aa\'c0\'c7 \'bf\'e4\'bc\'d2\'b8\'b8 \'c0\'d6\'b4\'d9. \'c7\'d4\'bc\'f6\'b0\'a1 \'bb\'e7\'bf\'eb\'b5\'c9 \'b6\'a7 \'c7\'d4\'bc\'f6\'c0\'c7 \'c0\'ce\'c0\'da\'b7\'ce \
 \'bb\'e7\'bf\'eb\'b5\'c7\'b4\'c2 \'b1\'e2\'c8\'a3\'b4\'c2 \'b0\'aa\'bf\'a1 \'b9\'d9\'c0\'ce\'b5\'f9 \'b5\'c9 \'b0\'cd\'c0\'cc\'b4\'d9.\
 \
-\'c0\'ce\'c0\'da\'c0\'c7 \'c0\'cc\'b8\'a7\'c0\'b8\'b7\'ce \'b4\'dc\'be\'ee @code\{number\}\'b8\'a6 \'bc\'b1\'c5\'c3\'c7\'cf\'b4\'c2 \'b4\'eb\'bd\'c5 \'b4\'d9\'b8\'a5 \'c0\'cc\'b8\'a7\'c0\'bb \'bc\'b1\'c5\'c3\'c7\'d2 \'bc\'f6 \'c0\'d6\'b4\'d9. \'bf\'b9\'b8\'a6 \'b5\'e9\'b8\'e9 \'b4\'dc\'be\'ee @code\{mutiplicand\}\'b8\'a6 \'bc\'b1\'c5\'c3\'c7\'d2 \'bc\'f6 \'c0\'d6\'b4\'d9. \'be\'ee\'b6\'b2 \'c1\'be\'b7\'f9\'c0\'c7 \'b0\'aa\'c0\'ce\'c1\'f6 \'b8\'bb\'c7\'cf\'b1\'e2 \'b6\'a7\'b9\'ae\'bf\'a1 \'b4\'dc\'be\'ee `number'\'b8\'a6 \'bc\'b1\'c5\'c3\'c7\'df\'b4\'d9.;\
-Instead of choosing the word @code\{number\} for the name of the argument,\
-I could have picked any other name.  For example, I could have chosen\
-the word @code\{multiplicand\}.  I picked the word `number' because it\
-tells what kind of value is intended for this slot; but I could just as\
-well have chosen the word `multiplicand' to indicate the role that the\
-value placed in this slot will play in the workings of the function.  I\
-could have called it @code\{foogle\}, but that would have been a bad\
-choice because it would not tell humans what it means.  The choice of\
-name is up to the programmer and should be chosen to make the meaning of\
-the function clear.\
+\'c0\'ce\'c0\'da\'c0\'c7 \'c0\'cc\'b8\'a7\'c0\'b8\'b7\'ce \'b4\'dc\'be\'ee @code\{number\}\'b8\'a6 \'bc\'b1\'c5\'c3\'c7\'cf\'b4\'c2 \'b4\'eb\'bd\'c5 \'b4\'d9\'b8\'a5 \'c0\'cc\'b8\'a7\'c0\'bb \'bc\'b1\'c5\'c3\'c7\'d2 \'bc\'f6 \'c0\'d6\'b4\'d9. \'bf\'b9\'b8\'a6 \'b5\'e9\'b8\'e9 \'b4\'dc\'be\'ee \
+@code\{mutiplicand\}\'b8\'a6 \'bc\'b1\'c5\'c3\'c7\'d2 \'bc\'f6 \'c0\'d6\'b4\'d9. \'c0\'cc \'c0\'a7\'c4\'a1\'bf\'a1 \'be\'ee\'b6\'b2 \'c1\'be\'b7\'f9\'c0\'c7 \'b0\'aa\'c0\'ce\'c1\'f6 \'b8\'bb\'c7\'cf\'b1\'e2 \'b6\'a7\'b9\'ae\'bf\'a1 \'b4\'dc\'be\'ee `number'\'b8\'a6 \
+\'bc\'b1\'c5\'c3\'c7\'df\'b4\'d9.; \'b1\'d7\'b7\'af\'b3\'aa \'c7\'d4\'bc\'f6 \'b5\'bf\'c0\'db\'bf\'a1\'bc\'ad \'c0\'cc \'b0\'aa\'c0\'c7 \'bf\'aa\'c7\'d2\'c0\'bb \'b3\'aa\'c5\'b8\'b3\'bb\'b4\'c2 \'b4\'dc\'be\'ee `multiplicand' \'bf\'aa\'bd\'c3 \'bc\'b1\'c5\'c3\'c7\'d2 \'bc\'f6 \'c0\'d6\'b4\'d9. \'c0\'ce\'c0\'da\'b8\'a6 \
+@code\{foogle\}\'b7\'ce \'be\'b5 \'bc\'f6 \'b5\'b5 \'c0\'d6\'c0\'b8\'b3\'aa \'c0\'cc \'b0\'cd\'c0\'cc \'b9\'ab\'be\'f9\'c0\'bb \'c0\'c7\'b9\'cc\'c7\'cf\'b4\'c2\'c1\'f6 \'b8\'bb\'c7\'cf\'c1\'f6 \'be\'ca\'b1\'e2 \'b6\'a7\'b9\'ae\'bf\'a1 \'b3\'aa\'bb\'db \'bc\'b1\'c5\'c3\'c0\'cc\'b4\'d9. \'c0\'cc\'b8\'a7\'c0\'c7 \'bc\'b1\'c5\'c3\'c0\'ba \
+\'c7\'c1\'b7\'ce\'b1\'d7\'b7\'a1\'b8\'d3\'bf\'a1 \'b4\'de\'b7\'c1\'c0\'d6\'b0\'ed \'c7\'d4\'bc\'f6\'c0\'c7 \'c0\'c7\'b9\'cc\'b8\'a6 \'b8\'ed\'c8\'ae\'c7\'cf\'b0\'d4 \'b8\'b8\'b5\'e5\'b4\'c2 \'bc\'b1\'c5\'c3\'c0\'bb \'c7\'d8\'be\'df \'c7\'d1\'b4\'d9.\
 \
-Indeed, you can choose any name you wish for a symbol in an argument\
-list, even the name of a symbol used in some other function: the name\
-you use in an argument list is private to that particular definition.\
-In that definition, the name refers to a different entity than any use\
-of the same name outside the function definition.  Suppose you have a\
-nick-name `Shorty' in your family; when your family members refer to\
-`Shorty', they mean you.  But outside your family, in a movie, for\
-example, the name `Shorty' refers to someone else.  Because a name in an\
-argument list is private to the function definition, you can change the\
-value of such a symbol inside the body of a function without changing\
-its value outside the function.  The effect is similar to that produced\
-by a @code\{let\} expression.  (@xref\{let, , @code\{let\}\}.)\
+\'c1\'a4\'b8\'bb\'b7\'ce \'b4\'d9\'b8\'a5 \'c7\'d4\'bc\'f6\'bf\'a1\'bc\'ad \'bb\'e7\'bf\'eb\'b5\'c7\'b4\'c2 \'b1\'e2\'c8\'a3\'c0\'c7 \'c0\'cc\'b8\'a7\'c0\'cc\'b6\'f3\'b5\'b5 \'c0\'ce\'c0\'da list\'bf\'a1\'bc\'ad \'b1\'e2\'c8\'a3\'bf\'a1 \'b4\'eb\'c7\'d8\'bc\'ad \'bf\'f8\'c7\'cf\'b4\'c2 \'be\'ee\'b6\'b2 \'c0\'cc\'b8\'a7\'c0\'bb \'bc\'b1\'c5\'c3\'c7\'d2 \'bc\'f6 \'c0\'d6\'b4\'d9.: \
+\'c0\'ce\'c0\'da list\'bf\'a1 \'bb\'e7\'bf\'eb\'c7\'d1 \'c0\'cc\'b8\'a7\'c0\'ba \'b1\'d7 \'c6\'af\'c1\'a4 \'c1\'a4\'c0\'c7 \'be\'c8\'bf\'a1\'bc\'ad \'c0\'af\'c8\'bf\'c7\'cf\'b4\'d9. \'b1\'d7 \'c1\'a4\'c0\'c7\'bf\'a1\'bc\'ad \'c0\'cc\'b8\'a7\'c0\'ba \'c7\'d4\'bc\'f6 \'c1\'a4\'c0\'c7 \'b9\'db\'bf\'a1\'bc\'ad \'b0\'b0\'c0\'ba \'c0\'cc\'b8\'a7\'b0\'fa\'b4\'c2 \'b4\'d9\'b8\'a5 \
+\'b0\'b3\'c3\'bc\'b8\'a6 \'b0\'a1\'b8\'ae\'c5\'b2\'b4\'d9. \'b0\'a1\'c1\'b7\'bf\'a1\'bc\'ad `Shorty'\'b6\'f3\'b4\'c2 \'ba\'b0\'b8\'ed\'c0\'bb \'b0\'a1\'c1\'f6\'b0\'ed \'c0\'d6\'b4\'d9\'b0\'ed \'b0\'a1\'c1\'a4\'c7\'d8\'ba\'b8\'c0\'da.; \'b0\'a1\'c1\'b7\'b5\'e9\'bf\'a1\'bc\'ad `Shorty'\'b4\'c2 \'b4\'e7\'bd\'c5\'c0\'bb \
+\'c0\'c7\'b9\'cc\'c7\'d1\'b4\'d9. \'b1\'d7\'b7\'af\'b3\'aa \'b0\'a1\'c1\'b7 \'b9\'db\'bf\'a1\'bc\'ad \'c0\'cc\'b8\'a7 `Shorty'\'b4\'c2 \'b4\'d9\'b8\'a5 \'b4\'a9\'b1\'ba\'b0\'a1\'b8\'a6 \'c0\'c7\'b9\'cc\'c7\'d1\'b4\'d9. \'c0\'ce\'c0\'da list\'bf\'a1\'bc\'ad \'c0\'cc\'b8\'a7\'c0\'ba \'c7\'d4\'bc\'f6 \'c1\'a4\'c0\'c7 \'be\'c8\'bf\'a1\'bc\'ad\'b8\'b8 \
+\'c0\'af\'c8\'bf\'c7\'cf\'b1\'e2 \'b6\'a7\'b9\'ae\'bf\'a1 \'c7\'d4\'bc\'f6 \'b9\'db\'bf\'a1\'bc\'ad \'b1\'d7 \'b0\'aa\'c0\'c7 \'ba\'af\'c8\'ad \'be\'f8\'c0\'cc \'c7\'d4\'bc\'f6 \'b8\'f6\'c3\'bc \'be\'c8\'bf\'a1\'bc\'ad \'b1\'d7 \'b1\'e2\'c8\'a3\'c0\'c7 \'b0\'aa\'c0\'bb \'ba\'af\'b0\'e6\'c7\'d2 \'bc\'f6 \'c0\'d6\'b4\'d9. \'c0\'cc \'c8\'bf\'b0\'fa\'b4\'c2 \
+@code\{let\} \'c7\'a5\'c7\'f6\'bd\'c4\'c0\'cc \'b8\'b8\'b5\'e5\'b4\'c2 \'b0\'cd\'b0\'fa \'ba\'f1\'bd\'c1\'c7\'cf\'b4\'d9. (@xref\{let, , @code\{let\}\}.)\
 \
 @ignore\
 Note also that we discuss the word `number' in two different ways: as a\
@@ -114,49 +102,32 @@ we refer to this number by writing @var\{number\}.  In the function\
 itself, we refer to it by writing @code\{number\}.\
 @end ignore\
 \
-The argument list is followed by the documentation string that\
-describes the function.  This is what you see when you type\
-@w\{@kbd\{C-h f\}\} and the name of a function.  Incidentally, when you\
-write a documentation string like this, you should make the first line\
-a complete sentence since some commands, such as @code\{apropos\}, print\
-only the first line of a multi-line documentation string.  Also, you\
-should not indent the second line of a documentation string, if you\
-have one, because that looks odd when you use @kbd\{C-h f\}\
-(@code\{describe-function\}).  The documentation string is optional, but\
-it is so useful, it should be included in almost every function you\
-write.\
+\'c0\'ce\'c0\'da list \'b5\'da\'bf\'a1\'b4\'c2 \'c7\'d4\'bc\'f6\'b8\'a6 \'bc\'b3\'b8\'ed\'c7\'cf\'b4\'c2 \'b9\'ae\'bc\'ad\'c8\'ad\'b0\'a1 \'b5\'fb\'b6\'f3\'bf\'c2\'b4\'d9. @w\{@kbd\{C-h f\}\}\'bf\'cd \'c7\'d4\'bc\'f6 \'c0\'cc\'b8\'a7\'c0\'bb \'c0\'d4\'b7\'c2\'c7\'df\'c0\'bb \'b6\'a7, \'ba\'b8\'b4\'c2 \
+\'b3\'bb\'bf\'eb\'b5\'e9\'c0\'cc\'b4\'d9. \'ba\'ce\'b0\'a1\'c0\'fb\'c0\'b8\'b7\'ce @code\{apropos\} \'b0\'b0\'c0\'ba \'b8\'ed\'b7\'c9\'b5\'e9\'c0\'ba \'bf\'a9\'b7\'af \'c1\'d9\'c0\'c7 \'b9\'ae\'bc\'ad\'c8\'ad \'b9\'ae\'c0\'da\'bf\'ad \'c1\'df \'c3\'b9 \'c1\'d9\'b8\'b8 \'c3\'e2\'b7\'c2\'c7\'cf\'b1\'e2 \'b6\'a7\'b9\'ae\'bf\'a1 \'c0\'cc\
+ \'b0\'cd\'c3\'b3\'b7\'b3 \'b9\'ae\'bc\'ad\'b8\'a6 \'c0\'db\'bc\'ba\'c7\'d2 \'b6\'a7\'b4\'c2 \'c3\'b9 \'c1\'d9\'c0\'ba \'bf\'cf\'c0\'fc\'c7\'d1 \'b9\'ae\'c0\'e5\'c0\'b8\'b7\'ce \'b8\'b8\'b5\'e9\'be\'ee\'be\'df \'c7\'d1\'b4\'d9. \'b6\'c7\'c7\'d1 @kbd\{C-h f\}(\
+@code\{describe-function\})\'c0\'bb \'bb\'e7\'bf\'eb\'c7\'df\'c0\'bb \'b6\'a7, \'c0\'cc\'bb\'f3\'c7\'cf\'b0\'d4 \'ba\'b8\'c0\'cc\'b1\'e2 \'b6\'a7\'b9\'ae\'bf\'a1 \'b9\'ae\'bc\'ad\'c0\'c7 \'b5\'ce \'b9\'f8\'c2\'b0 \'c1\'d9\'c0\'ba \'b5\'e9\'bf\'a9\'be\'b2\'c1\'f6 \'b8\'bb\'be\'c6\'be\'df \'c7\'d1\'b4\'d9. \
+\'b9\'ae\'bc\'ad \'b9\'ae\'c0\'da\'bf\'ad\'c0\'ba \'bc\'b1\'c5\'c3 \'bb\'e7\'c7\'d7\'c0\'cc\'c1\'f6\'b8\'b8 \'b2\'cf \'c0\'af\'bf\'eb\'c7\'cf\'b4\'d9. \'c0\'db\'bc\'ba\'c7\'cf\'b4\'c2 \'b4\'eb\'ba\'ce\'ba\'d0\'c0\'c7 \'b8\'f0\'b5\'e7 \'c7\'d4\'bc\'f6\'bf\'a1 \'c6\'f7\'c7\'d4\'b5\'c7\'be\'ee\'be\'df \'c7\'d2 \'b0\'cd\'c0\'cc\'b4\'d9.\
 \
 @findex * @r\{(multiplication)\}\
-The third line of the example consists of the body of the function\
-definition.  (Most functions' definitions, of course, are longer than\
-this.)  In this function, the body is the list, @code\{(* 7 number)\}, which\
-says to multiply the value of @var\{number\} by 7.  (In Emacs Lisp,\
-@code\{*\} is the function for multiplication, just as @code\{+\} is the\
-function for addition.)\
+\'bf\'b9\'c1\'a6\'c0\'c7 3\'b9\'f8 \'c1\'d9\'c0\'ba \'c7\'d4\'bc\'f6 \'c1\'a4\'c0\'c7\'c0\'c7 \'b8\'f6\'c3\'bc\'b8\'a6 \'b1\'b8\'bc\'ba\'c7\'d1\'b4\'d9. (\'b9\'b0\'b7\'d0 \'b4\'eb\'ba\'ce\'ba\'d0\'c0\'c7 \'c7\'d4\'bc\'f6 \'c1\'a4\'c0\'c7\'b4\'c2 \'c0\'cc \'b0\'cd \'ba\'b8\'b4\'d9\'b4\'c2 \'b1\'e6\'b4\'d9.) \'c7\'d4\'bc\'f6\'bf\'a1\'bc\'ad \'b8\'f6\'c3\'bc\'b4\'c2 \
+list\'c0\'cc\'b4\'d9. @code\{(* 7 number)\}\'b4\'c2 7\'bf\'a1 @var\{number\}\'c0\'c7 \'b0\'aa\'c0\'bb \'b0\'f6\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'bb \'b3\'aa\'c5\'b8\'b3\'bd\'b4\'d9. (Emacs Lisp\'bf\'a1\'bc\'ad \
+@code\{+\}\'b0\'a1 \'b5\'a1\'bc\'c0\'c0\'bb \'c0\'a7\'c7\'d1 \'c7\'d4\'bc\'f6\'c0\'ce \'b0\'cd\'c3\'b3\'b7\'b3 @code\{*\}\'c0\'ba \'b0\'f6\'bc\'c0\'c0\'bb \'c0\'a7\'c7\'d1 \'c7\'d4\'bc\'f6\'c0\'cc\'b4\'d9.\
 \
-When you use the @code\{multiply-by-seven\} function, the argument\
-@code\{number\} evaluates to the actual number you want used.  Here is an\
-example that shows how @code\{multiply-by-seven\} is used; but don't try\
-to evaluate this yet!\
+@code\{multiply-by-seven\}\'c7\'d4\'bc\'f6\'b8\'a6 \'bb\'e7\'bf\'eb\'c7\'d2 \'b6\'a7, \'c0\'ce\'c0\'da @code\{number\}\'b4\'c2 \'bb\'e7\'bf\'eb\'c7\'cf\'b1\'e2\'b8\'a6 \'bf\'f8\'c7\'cf\'b4\'c2 \'bd\'c7\'c1\'a6 \'bc\'fd\'c0\'da\'b7\'ce \
+\'c6\'f2\'b0\'a1\'c7\'d1\'b4\'d9. \'bf\'a9\'b1\'e2 @code\{multiply-by-seven\}\'c0\'cc \'be\'ee\'b6\'bb\'b0\'d4 \'bb\'e7\'bf\'eb\'b5\'c7\'b4\'c2\'c1\'f6 \'bf\'b9\'c1\'a6\'b0\'a1 \'c0\'d6\'b4\'d9.; \'be\'c6\'c1\'f7 \'c6\'f2\'b0\'a1\'c7\'cf\'b7\'c1\'b0\'ed \'bd\'c3\'b5\'b5\'c7\'cf\'c1\'f6\'b4\'c2\
+\'b8\'b6\'b6\'f3!\
 \
 @smallexample\
 (multiply-by-seven 3)\
 @end smallexample\
 \
 @noindent\
-The symbol @code\{number\}, specified in the function definition in the\
-next section, is given or ``bound to'' the value 3 in the actual use of\
-the function.  Note that although @code\{number\} was inside parentheses\
-in the function definition, the argument passed to the\
-@code\{multiply-by-seven\} function is not in parentheses.  The\
-parentheses are written in the function definition so the computer can\
-figure out where the argument list ends and the rest of the function\
-definition begins.\
+\'b4\'d9\'c0\'bd \'c0\'fd\'c0\'c7 \'c7\'d4\'bc\'f6 \'c1\'a4\'c0\'c7\'bf\'a1\'bc\'ad \'b8\'ed\'bd\'c3\'b5\'c8 \'b1\'e2\'c8\'a3 @code\{number\}\'b4\'c2 \'c7\'d4\'bc\'f6\'c0\'c7 \'bd\'c7\'c1\'a6 \'bb\'e7\'bf\'eb \'bd\'c3 \'b0\'aa 3\'c0\'b8\'b7\'ce \'c1\'d6\'be\'ee\'c1\'f6\'b0\'c5\'b3\'aa `bound to'' \
+\'b5\'c8\'b4\'d9. @code\{number\}\'b4\'c2 \'c7\'d4\'bc\'f6 \'c1\'a4\'c0\'c7\'bf\'a1\'bc\'ad \'b0\'fd\'c8\'a3 \'be\'c8\'bf\'a1 \'c0\'d6\'c1\'f6\'b8\'b8, \'c0\'ce\'c0\'da\'b4\'c2 \'b0\'fd\'c8\'a3 \'be\'c8\'bf\'a1 \'c0\'d6\'c1\'f6 \'be\'ca\'c0\'ba \
+@code\{multiply-by-seven\} \'c7\'d4\'bc\'f6\'bf\'a1 \'c0\'fc\'b4\'de\'b5\'c9 \'bc\'f6 \'c0\'d6\'b4\'d9. \'b0\'fd\'c8\'a3\'b4\'c2 \'c7\'d4\'bc\'f6 \'c1\'a4\'c0\'c7 \'be\'c8\'bf\'a1 \'be\'b2\'bf\'b4\'b4\'d9. \'b1\'d7\'b7\'a1\'bc\'ad \'c4\'c4\'c7\'bb\'c5\'cd\'b4\'c2 \'c0\'ce\'c0\'da list\'b0\'a1 \
+\'b3\'a1\'b3\'aa\'b4\'c2 \'c0\'a7\'c4\'a1\'bf\'cd \'c7\'d4\'bc\'f6 \'c1\'a4\'c0\'c7\'c0\'c7 \'b3\'aa\'b8\'d3\'c1\'f6 \'ba\'ce\'ba\'d0\'c0\'c7 \'bd\'c3\'c0\'db \'c0\'a7\'c4\'a1\'b8\'a6 \'be\'cb \'bc\'f6 \'c0\'d6\'b4\'d9.\
 \
-If you evaluate this example, you are likely to get an error message.\
-(Go ahead, try it!)  This is because we have written the function\
-definition, but not yet told the computer about the definition---we have\
-not yet installed (or `loaded') the function definition in Emacs.\
-Installing a function is the process that tells the Lisp interpreter the\
-definition of the function.  Installation is described in the next\
-section.}
+\'c0\'cc \'bf\'b9\'c1\'a6\'b8\'a6 \'c6\'f2\'b0\'a1\'c7\'d1\'b4\'d9\'b8\'e9 \'bf\'a1\'b7\'af \'b8\'de\'bd\'c3\'c1\'f6\'b8\'a6 \'be\'f2\'c0\'bb \'b0\'cd\'c0\'cc\'b4\'d9.(\'be\'ee\'bc\'ad \'bd\'c3\'b5\'b5\'c7\'d8\'ba\'b8\'b6\'f3) \'c7\'d4\'bc\'f6 \'c1\'a4\'c0\'c7\'b8\'a6 \'c0\'db\'bc\'ba\'c7\'df\'c1\'f6\'b8\'b8 \'be\'c6\'c1\'f7 \'c0\'cc \'b0\'cd\'bf\'a1 \'b4\'eb\'c7\'d8\'bc\'ad \
+\'c4\'c4\'c7\'bb\'c5\'cd\'bf\'a1 \'b8\'bb\'c7\'cf\'c1\'f6 \'be\'ca\'be\'d2\'b1\'e2 \'b6\'a7\'b9\'ae\'c0\'cc\'b4\'d9. --- \'be\'c6\'c1\'f7 Emacs\'bf\'a1 \'c7\'d4\'bc\'f6 \'c1\'a4\'c0\'c7\'b8\'a6 \'bc\'b3\'c4\'a1 (\'b6\'c7\'b4\'c2 `loaded') \'c7\'cf\'c1\'f6 \'be\'ca\'be\'d2\'b4\'d9. \'c7\'d4\'bc\'f6\'b8\'a6 \
+\'bc\'b3\'c4\'a1\'c7\'cf\'b4\'c2 \'b0\'cd\'c0\'ba Lisp \'c7\'d8\'bc\'ae\'b1\'e2\'bf\'a1 \'c7\'d4\'bc\'f6 \'c1\'a4\'c0\'c7\'b8\'a6 \'b8\'bb\'c7\'cf\'b4\'c2 \'b0\'fa\'c1\'a4\'c0\'cc\'b4\'d9. \'b4\'d9\'c0\'bd \'c0\'fd\'bf\'a1\'bc\'ad \'bc\'b3\'c4\'a1\'b8\'a6 \'bc\'b3\'b8\'ed\'c7\'d2 \'b0\'cd\'c0\'cc\'b4\'d9.\
+}

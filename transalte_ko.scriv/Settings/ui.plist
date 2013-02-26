@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>MainWindowShowsFormatBar</key>
+	<false/>
 	<key>QRPanelSettings</key>
 	<dict>
 		<key>140</key>
@@ -26,7 +28,7 @@
 				<string>{{0, 273}, {475, 163}}</string>
 			</array>
 			<key>WindowFrame</key>
-			<string>59 44 812 784 0 0 2560 1418 </string>
+			<string>1741 632 812 784 0 0 2560 1418 </string>
 		</dict>
 		<key>145</key>
 		<dict>
@@ -70,8 +72,8 @@
 	</array>
 	<key>binderSplitFrames</key>
 	<array>
-		<string>{{0, 0}, {191, 843}}</string>
-		<string>{{192, 0}, {979, 843}}</string>
+		<string>{{0, 0}, {191, 1163}}</string>
+		<string>{{192, 0}, {1005, 1163}}</string>
 	</array>
 	<key>binderState</key>
 	<array>
@@ -113,7 +115,7 @@
 	<key>collectionsSplitFrames</key>
 	<array>
 		<string>{{0, 0}, {191, 101}}</string>
-		<string>{{0, 102}, {191, 718}}</string>
+		<string>{{0, 102}, {191, 1038}}</string>
 	</array>
 	<key>collectionsTabListIsCollapsed</key>
 	<false/>
@@ -168,8 +170,8 @@
 	<integer>0</integer>
 	<key>inspectorSplitFrames</key>
 	<array>
-		<string>{{0, 0}, {674, 817}}</string>
-		<string>{{675, 0}, {304, 817}}</string>
+		<string>{{0, 0}, {700, 1163}}</string>
+		<string>{{701, 0}, {304, 1163}}</string>
 	</array>
 	<key>inspectorSynopsisIsCollapsed</key>
 	<false/>
@@ -206,7 +208,7 @@
 	<key>mainDocumentEditor.navigationHistory</key>
 	<dict>
 		<key>CurrentIndex</key>
-		<integer>1000</integer>
+		<integer>1008</integer>
 		<key>NavigationHistoryArray</key>
 		<array>
 			<dict>
@@ -8359,6 +8361,70 @@
 				<key>ViewMode</key>
 				<integer>0</integer>
 			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>140</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>41</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>42</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>41</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>42</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>41</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>42</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>BinderDocIDs</key>
+				<array>
+					<integer>41</integer>
+				</array>
+				<key>ViewMode</key>
+				<integer>0</integer>
+			</dict>
 		</array>
 	</dict>
 	<key>mainDocumentEditor.outlinerColumnsState</key>
@@ -8368,15 +8434,60 @@
 			<string>title</string>
 			<string>label</string>
 			<string>status</string>
+			<string>createdDate</string>
+			<string>modifiedDate</string>
+			<string>words</string>
+			<string>characters</string>
+			<string>includeInExport</string>
+			<string>pageBreakBefore</string>
+			<string>compileAsIs</string>
+			<string>targetCount</string>
+			<string>targetCountType</string>
+			<string>progress</string>
+			<string>totalWords</string>
+			<string>totalCharacters</string>
+			<string>allKeywords</string>
+			<string>totalTargetCount</string>
+			<string>totalProgress</string>
 		</array>
 		<key>widths</key>
 		<dict>
+			<key>allKeywords</key>
+			<real>64</real>
+			<key>characters</key>
+			<real>46</real>
+			<key>compileAsIs</key>
+			<real>110.841796875</real>
+			<key>createdDate</key>
+			<real>53</real>
+			<key>includeInExport</key>
+			<real>20</real>
 			<key>label</key>
 			<real>179.83203125</real>
+			<key>modifiedDate</key>
+			<real>50</real>
+			<key>pageBreakBefore</key>
+			<real>66</real>
+			<key>progress</key>
+			<real>50.041019439697266</real>
 			<key>status</key>
 			<real>49</real>
+			<key>targetCount</key>
+			<real>50</real>
+			<key>targetCountType</key>
+			<real>50</real>
 			<key>title</key>
 			<real>380</real>
+			<key>totalCharacters</key>
+			<real>96</real>
+			<key>totalProgress</key>
+			<real>64</real>
+			<key>totalTargetCount</key>
+			<real>64</real>
+			<key>totalWords</key>
+			<real>72</real>
+			<key>words</key>
+			<real>40</real>
 		</dict>
 	</dict>
 	<key>mainDocumentEditor.outlinerState</key>
@@ -8385,9 +8496,9 @@
 		<integer>33</integer>
 	</array>
 	<key>mainDocumentEditor.scrollRect</key>
-	<string>{{0, 1147}, {674, 771}}</string>
+	<string>{{0, 1533.7981}, {700, 1117}}</string>
 	<key>mainDocumentEditor.selectedRanges</key>
-	<string>{2094, 0}</string>
+	<string>{4458, 0}</string>
 	<key>mainDocumentEditor.textEditorState</key>
 	<dict>
 		<key>hasMultiplePages</key>
@@ -8400,7 +8511,7 @@
 		<false/>
 	</dict>
 	<key>mainWindowFrame</key>
-	<string>105 506 1171 865 0 0 2560 1418 </string>
+	<string>594 165 1197 1185 0 0 2560 1418 </string>
 	<key>searchResultsTable</key>
 	<dict>
 		<key>order</key>

@@ -10207,30 +10207,18 @@ Lisp에서 @code{mark-whole-buffer} 같은 기호는 함수가 호출될 때 컴
 한다. 이 예제에서 list는 기호 @code{number}로 하나의 요소만 있다. 함수가 사용될 때 함수의 인자로 
 사용되는 기호는 값에 바인딩 될 것이다.
 
-인자의 이름으로 단어 @code{number}를 선택하는 대신 다른 이름을 선택할 수 있다. 예를 들면 단어 @code{mutiplicand}를 선택할 수 있다. 어떤 종류의 값인지 말하기 때문에 단어 `number'를 선택했다.;
-Instead of choosing the word @code{number} for the name of the argument,
-I could have picked any other name.  For example, I could have chosen
-the word @code{multiplicand}.  I picked the word `number' because it
-tells what kind of value is intended for this slot; but I could just as
-well have chosen the word `multiplicand' to indicate the role that the
-value placed in this slot will play in the workings of the function.  I
-could have called it @code{foogle}, but that would have been a bad
-choice because it would not tell humans what it means.  The choice of
-name is up to the programmer and should be chosen to make the meaning of
-the function clear.
+인자의 이름으로 단어 @code{number}를 선택하는 대신 다른 이름을 선택할 수 있다. 예를 들면 단어 
+@code{mutiplicand}를 선택할 수 있다. 이 위치에 어떤 종류의 값인지 말하기 때문에 단어 `number'를 
+선택했다.; 그러나 함수 동작에서 이 값의 역할을 나타내는 단어 `multiplicand' 역시 선택할 수 있다. 인자를 
+@code{foogle}로 쓸 수 도 있으나 이 것이 무엇을 의미하는지 말하지 않기 때문에 나쁜 선택이다. 이름의 선택은 
+프로그래머에 달려있고 함수의 의미를 명확하게 만드는 선택을 해야 한다.
 
-Indeed, you can choose any name you wish for a symbol in an argument
-list, even the name of a symbol used in some other function: the name
-you use in an argument list is private to that particular definition.
-In that definition, the name refers to a different entity than any use
-of the same name outside the function definition.  Suppose you have a
-nick-name `Shorty' in your family; when your family members refer to
-`Shorty', they mean you.  But outside your family, in a movie, for
-example, the name `Shorty' refers to someone else.  Because a name in an
-argument list is private to the function definition, you can change the
-value of such a symbol inside the body of a function without changing
-its value outside the function.  The effect is similar to that produced
-by a @code{let} expression.  (@xref{let, , @code{let}}.)
+정말로 다른 함수에서 사용되는 기호의 이름이라도 인자 list에서 기호에 대해서 원하는 어떤 이름을 선택할 수 있다.: 
+인자 list에 사용한 이름은 그 특정 정의 안에서 유효하다. 그 정의에서 이름은 함수 정의 밖에서 같은 이름과는 다른 
+개체를 가리킨다. 가족에서 `Shorty'라는 별명을 가지고 있다고 가정해보자.; 가족들에서 `Shorty'는 당신을 
+의미한다. 그러나 가족 밖에서 이름 `Shorty'는 다른 누군가를 의미한다. 인자 list에서 이름은 함수 정의 안에서만 
+유효하기 때문에 함수 밖에서 그 값의 변화 없이 함수 몸체 안에서 그 기호의 값을 변경할 수 있다. 이 효과는 
+@code{let} 표현식이 만드는 것과 비슷하다. (@xref{let, , @code{let}}.)
 
 @ignore
 Note also that we discuss the word `number' in two different ways: as a
@@ -10247,52 +10235,35 @@ we refer to this number by writing @var{number}.  In the function
 itself, we refer to it by writing @code{number}.
 @end ignore
 
-The argument list is followed by the documentation string that
-describes the function.  This is what you see when you type
-@w{@kbd{C-h f}} and the name of a function.  Incidentally, when you
-write a documentation string like this, you should make the first line
-a complete sentence since some commands, such as @code{apropos}, print
-only the first line of a multi-line documentation string.  Also, you
-should not indent the second line of a documentation string, if you
-have one, because that looks odd when you use @kbd{C-h f}
-(@code{describe-function}).  The documentation string is optional, but
-it is so useful, it should be included in almost every function you
-write.
+인자 list 뒤에는 함수를 설명하는 문서화가 따라온다. @w{@kbd{C-h f}}와 함수 이름을 입력했을 때, 보는 
+내용들이다. 부가적으로 @code{apropos} 같은 명령들은 여러 줄의 문서화 문자열 중 첫 줄만 출력하기 때문에 이
+ 것처럼 문서를 작성할 때는 첫 줄은 완전한 문장으로 만들어야 한다. 또한 @kbd{C-h f}(
+@code{describe-function})을 사용했을 때, 이상하게 보이기 때문에 문서의 두 번째 줄은 들여쓰지 말아야 한다. 
+문서 문자열은 선택 사항이지만 꽤 유용하다. 작성하는 대부분의 모든 함수에 포함되어야 할 것이다.
 
 @findex * @r{(multiplication)}
-The third line of the example consists of the body of the function
-definition.  (Most functions' definitions, of course, are longer than
-this.)  In this function, the body is the list, @code{(* 7 number)}, which
-says to multiply the value of @var{number} by 7.  (In Emacs Lisp,
-@code{*} is the function for multiplication, just as @code{+} is the
-function for addition.)
+예제의 3번 줄은 함수 정의의 몸체를 구성한다. (물론 대부분의 함수 정의는 이 것 보다는 길다.) 함수에서 몸체는 
+list이다. @code{(* 7 number)}는 7에 @var{number}의 값을 곱하는 것을 나타낸다. (Emacs Lisp에서 
+@code{+}가 덧셈을 위한 함수인 것처럼 @code{*}은 곱셈을 위한 함수이다.
 
-When you use the @code{multiply-by-seven} function, the argument
-@code{number} evaluates to the actual number you want used.  Here is an
-example that shows how @code{multiply-by-seven} is used; but don't try
-to evaluate this yet!
+@code{multiply-by-seven}함수를 사용할 때, 인자 @code{number}는 사용하기를 원하는 실제 숫자로 
+평가한다. 여기 @code{multiply-by-seven}이 어떻게 사용되는지 예제가 있다.; 아직 평가하려고 시도하지는
+마라!
 
 @smallexample
 (multiply-by-seven 3)
 @end smallexample
 
 @noindent
-The symbol @code{number}, specified in the function definition in the
-next section, is given or ``bound to'' the value 3 in the actual use of
-the function.  Note that although @code{number} was inside parentheses
-in the function definition, the argument passed to the
-@code{multiply-by-seven} function is not in parentheses.  The
-parentheses are written in the function definition so the computer can
-figure out where the argument list ends and the rest of the function
-definition begins.
+다음 절의 함수 정의에서 명시된 기호 @code{number}는 함수의 실제 사용 시 값 3으로 주어지거나 `bound to'' 
+된다. @code{number}는 함수 정의에서 괄호 안에 있지만, 인자는 괄호 안에 있지 않은 
+@code{multiply-by-seven} 함수에 전달될 수 있다. 괄호는 함수 정의 안에 쓰였다. 그래서 컴퓨터는 인자 list가 
+끝나는 위치와 함수 정의의 나머지 부분의 시작 위치를 알 수 있다.
 
-If you evaluate this example, you are likely to get an error message.
-(Go ahead, try it!)  This is because we have written the function
-definition, but not yet told the computer about the definition---we have
-not yet installed (or `loaded') the function definition in Emacs.
-Installing a function is the process that tells the Lisp interpreter the
-definition of the function.  Installation is described in the next
-section.</Text>
+이 예제를 평가한다면 에러 메시지를 얻을 것이다.(어서 시도해보라) 함수 정의를 작성했지만 아직 이 것에 대해서 
+컴퓨터에 말하지 않았기 때문이다. --- 아직 Emacs에 함수 정의를 설치 (또는 `loaded') 하지 않았다. 함수를 
+설치하는 것은 Lisp 해석기에 함수 정의를 말하는 과정이다. 다음 절에서 설치를 설명할 것이다.
+</Text>
         </Document>
         <Document ID="104">
             <Title>Count Several defuns Within a File</Title>
