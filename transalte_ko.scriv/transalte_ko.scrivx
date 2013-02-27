@@ -16,7 +16,7 @@
                 </OutlinerExpandedState>
             </CorkboardAndOutliner>
             <Children>
-                <BinderItem ID="5" Type="Text" Created="2012-11-09 00:18:17 +0900" Modified="2013-02-26 00:57:59 +0900">
+                <BinderItem ID="5" Type="Text" Created="2012-11-09 00:18:17 +0900" Modified="2013-02-27 23:29:53 +0900">
                     <Title>An Introduction to Programming in Emacs Lisp</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -440,7 +440,7 @@
                                         <TextSelection>120,0</TextSelection>
                                     </TextSettings>
                                 </BinderItem>
-                                <BinderItem ID="160" Type="Text" Created="2013-01-10 00:20:57 +0900" Modified="2013-02-05 01:30:27 +0900">
+                                <BinderItem ID="160" Type="Text" Created="2013-01-10 00:20:57 +0900" Modified="2013-02-27 23:30:58 +0900">
                                     <Title>Counting</Title>
                                     <MetaData>
                                         <LabelID>2</LabelID>
@@ -547,7 +547,7 @@
                         </BinderItem>
                     </Children>
                 </BinderItem>
-                <BinderItem ID="8" Type="Text" Created="2012-11-09 00:33:37 +0900" Modified="2013-02-26 00:57:59 +0900">
+                <BinderItem ID="8" Type="Text" Created="2012-11-09 00:33:37 +0900" Modified="2013-02-27 23:29:53 +0900">
                     <Title>How To Write  Function Definition</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -567,25 +567,37 @@
                                 <TextSelection>90,34</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="41" Type="Text" Created="2012-11-09 11:13:54 +0900" Modified="2013-02-26 23:24:32 +0900">
+                        <BinderItem ID="41" Type="Text" Created="2012-11-09 11:13:54 +0900" Modified="2013-02-27 23:28:55 +0900">
                             <Title>The defun Special Form</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>4458,0</TextSelection>
+                                <TextSelection>111,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="42" Type="Text" Created="2012-11-09 11:14:31 +0900" Modified="2012-11-11 00:56:25 +0900">
+                        <BinderItem ID="42" Type="Text" Created="2012-11-09 11:14:31 +0900" Modified="2013-02-27 23:30:36 +0900">
                             <Title>Install a Function Definition</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
                                 <NotesTextSelection>0,0</NotesTextSelection>
                             </MetaData>
                             <TextSettings>
-                                <TextSelection>3406,0</TextSelection>
+                                <TextSelection>1128,26</TextSelection>
                             </TextSettings>
+                            <Children>
+                                <BinderItem ID="163" Type="Text" Created="2013-02-27 22:57:01 +0900" Modified="2013-02-27 23:31:02 +0900">
+                                    <Title>Change a Function Definition</Title>
+                                    <MetaData>
+                                        <IncludeInCompile>Yes</IncludeInCompile>
+                                        <NotesTextSelection>0,0</NotesTextSelection>
+                                    </MetaData>
+                                    <TextSettings>
+                                        <TextSelection>113,28</TextSelection>
+                                    </TextSettings>
+                                </BinderItem>
+                            </Children>
                         </BinderItem>
                         <BinderItem ID="43" Type="Text" Created="2012-11-09 11:14:37 +0900" Modified="2012-11-11 00:56:25 +0900">
                             <Title>Make a Function interactive</Title>
@@ -617,7 +629,7 @@
                                 <TextSelection>0,0</TextSelection>
                             </TextSettings>
                         </BinderItem>
-                        <BinderItem ID="46" Type="Text" Created="2012-11-09 11:15:04 +0900" Modified="2012-11-11 00:56:25 +0900">
+                        <BinderItem ID="46" Type="Text" Created="2012-11-09 11:15:04 +0900" Modified="2013-02-27 23:29:10 +0900">
                             <Title>let</Title>
                             <MetaData>
                                 <IncludeInCompile>Yes</IncludeInCompile>
@@ -1627,7 +1639,7 @@
                         <TextSelection>8587,0</TextSelection>
                     </TextSettings>
                 </BinderItem>
-                <BinderItem ID="130" Type="Text" Created="2012-11-09 13:50:05 +0900" Modified="2012-11-11 00:56:25 +0900">
+                <BinderItem ID="130" Type="Text" Created="2012-11-09 13:50:05 +0900" Modified="2013-02-27 23:29:10 +0900">
                     <Title>Handling the Kill Ring</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -1637,7 +1649,7 @@
                         <TextSelection>0,0</TextSelection>
                     </TextSettings>
                 </BinderItem>
-                <BinderItem ID="131" Type="Text" Created="2012-11-09 13:51:05 +0900" Modified="2012-11-11 00:56:25 +0900">
+                <BinderItem ID="131" Type="Text" Created="2012-11-09 13:51:05 +0900" Modified="2013-02-27 23:29:10 +0900">
                     <Title>A Graph with Labelled Axes</Title>
                     <MetaData>
                         <IncludeInCompile>Yes</IncludeInCompile>
@@ -1758,7 +1770,7 @@
     <ProjectTargets Notify="No">
         <DraftTarget Type="Words" CountIncludedOnly="Yes" CurrentCompileGroupOnly="No" Deadline="2012-11-09 00:23:48 +0900" IgnoreDeadline="Yes">0</DraftTarget>
         <SessionTarget Type="Words" CountDraftOnly="Yes" AllowNegatives="Yes" ResetType="Midnight" DeterminedFromDeadline="No" WritingDays="" CanWriteOnDeadlineDate="No">0</SessionTarget>
-        <PreviousSession Words="-451" Characters="-3912" Date="2013-02-26 21:23:26 +0900"></PreviousSession>
+        <PreviousSession Words="-169" Characters="-1449" Date="2013-02-27 22:48:09 +0900"></PreviousSession>
     </ProjectTargets>
     <PrintSettings PaperSize="595.289978,841.890015" LeftMargin="72.0" RightMargin="72.0" TopMargin="90.0" BottomMargin="90.0" PaperType="iso-a4" Orientation="Portrait" HorizontalPagination="Clip" VerticalPagination="Auto" ScaleFactor="1.0" HorizontallyCentered="Yes" VerticallyCentered="Yes" Collates="Yes" PagesAcross="1" PagesDown="1"></PrintSettings>
 </ScrivenerProject>
